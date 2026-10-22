@@ -6,9 +6,9 @@ from frappe.utils import get_bench_path
 from pathlib import Path
 
 
-def sync_qfap_project_reports():
-    app_path = Path(frappe.get_app_path("qfap_adds"))
-    report_root = app_path / "qfap_adds" / "report"
+def sync_qorg_project_reports():
+    app_path = Path(frappe.get_app_path("qorg"))
+    report_root = app_path / "qorg" / "report"
     if not report_root.exists():
         return
     for folder in sorted(report_root.iterdir()):
