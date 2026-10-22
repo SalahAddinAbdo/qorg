@@ -105,7 +105,7 @@ async function employee_open_announcement_dialog(frm) {
 
     try {
         preview = await frappe.xcall(
-            "qfap_adds.qfap_adds.api.employee_announcement.send_new_employee_announcement",
+            "qorg.qorg.api.employee_announcement.send_new_employee_announcement",
             {
                 action: "preview",
                 employee: frm.doc.name
@@ -297,7 +297,7 @@ async function employee_open_announcement_dialog(frm) {
 
             try {
                 const result = await frappe.xcall(
-                    "qfap_adds.qfap_adds.api.employee_announcement.send_new_employee_announcement",
+                    "qorg.qorg.api.employee_announcement.send_new_employee_announcement",
                     {
                         action: "send",
                         employee: frm.doc.name,
