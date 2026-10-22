@@ -1,0 +1,248 @@
+{
+  "doctype": "DocType",
+  "search_fields": "mapping_key,signature_role_description,employee_signature_field",
+  "issingle": 0,
+  "is_virtual": 0,
+  "is_tree": 0,
+  "istable": 1,
+  "editable_grid": 1,
+  "track_changes": 0,
+  "module": "QFap Adds",
+  "autoname": "hash",
+  "naming_rule": "Random",
+  "title_field": "",
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "read_only": 0,
+  "in_create": 0,
+  "allow_copy": 0,
+  "allow_rename": 0,
+  "allow_import": 0,
+  "hide_toolbar": 0,
+  "track_seen": 0,
+  "max_attachments": 0,
+  "document_type": "Document",
+  "engine": "InnoDB",
+  "is_submittable": 0,
+  "show_name_in_global_search": 0,
+  "custom": 0,
+  "beta": 0,
+  "has_web_view": 0,
+  "allow_guest_to_view": 0,
+  "email_append_to": 0,
+  "show_title_field_in_link": 0,
+  "translated_doctype": 0,
+  "protect_attached_files": 0,
+  "is_calendar_and_gantt": 0,
+  "quick_entry": 0,
+  "grid_page_length": 50,
+  "rows_threshold_for_grid_search": 20,
+  "allow_bulk_edit": 0,
+  "track_views": 0,
+  "queue_in_background": 0,
+  "allow_events_in_timeline": 1,
+  "allow_auto_repeat": 0,
+  "make_attachments_public": 0,
+  "default_view": "List",
+  "force_re_route_to_default_view": 0,
+  "show_preview_popup": 0,
+  "index_web_pages_for_search": 0,
+  "row_format": "Dynamic",
+  "fields": [
+    {
+      "fieldname": "signature_role",
+      "label": "Signature Role",
+      "fieldtype": "Link",
+      "options": "Role",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "mapping_key",
+      "label": "Mapping Key",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 2,
+      "description": "Generated automatically from the selected Signature Role."
+    },
+    {
+      "fieldname": "signature_role_description",
+      "label": "Signature Role Description",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "columns": 2,
+      "description": "Optional display label used in the generated section and print format."
+    },
+    {
+      "fieldname": "column_break_role",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "auto_create_fields",
+      "label": "Auto Create Signature Fields",
+      "fieldtype": "Check",
+      "default": "1",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "enabled",
+      "label": "Enabled",
+      "fieldtype": "Check",
+      "default": "1",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "hide_generated_fields",
+      "label": "Hide Generated Fields",
+      "fieldtype": "Check",
+      "default": "0",
+      "in_list_view": 1,
+      "columns": 1,
+      "description": "Hides this signature section on the target form without deleting fields or historical values."
+    },
+    {
+      "fieldname": "field_mapping_section",
+      "label": "Field Mapping",
+      "fieldtype": "Section Break",
+      "collapsible": 1,
+      "depends_on": "eval:!doc.auto_create_fields"
+    },
+    {
+      "fieldname": "employee_signature_field",
+      "label": "Employee Signature Field",
+      "fieldtype": "Select",
+      "mandatory_depends_on": "eval:!doc.auto_create_fields",
+      "description": "Link field connected to Employee Signature. Generated automatically when Auto Create is enabled."
+    },
+    {
+      "fieldname": "employee_name_field",
+      "label": "Employee Name Field",
+      "fieldtype": "Select",
+      "mandatory_depends_on": "eval:!doc.auto_create_fields",
+      "description": "Data field used to preserve the employee name snapshot."
+    },
+    {
+      "fieldname": "column_break_manual_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "designation_field",
+      "label": "Designation Field",
+      "fieldtype": "Select",
+      "mandatory_depends_on": "eval:!doc.auto_create_fields"
+    },
+    {
+      "fieldname": "signature_date_field",
+      "label": "Signature Date Field",
+      "fieldtype": "Select",
+      "mandatory_depends_on": "eval:!doc.auto_create_fields"
+    },
+    {
+      "fieldname": "signature_notes_field",
+      "label": "Signature Notes Field",
+      "fieldtype": "Select",
+      "mandatory_depends_on": "eval:!doc.auto_create_fields",
+      "description": "Small Text field used to preserve formal notes beside the signature."
+    },
+    {
+      "fieldname": "column_break_manual_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "signature_image_field",
+      "label": "Signature Image Field",
+      "fieldtype": "Select",
+      "mandatory_depends_on": "eval:!doc.auto_create_fields"
+    },
+    {
+      "fieldname": "behavior_section",
+      "label": "Signature Behavior",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "signature_required",
+      "label": "Signature Required",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "allow_signature_replacement",
+      "label": "Allow Signature Replacement",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "column_break_behavior",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "print_as_manual_signature",
+      "label": "Print as Manual Signature",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "notes",
+      "label": "Notes",
+      "fieldtype": "Small Text"
+    },
+    {
+      "default": "1",
+      "description": "Creates and uses a persistent Signature Notes field. The previous note is loaded into the workflow action dialog.",
+      "fieldname": "include_signature_notes",
+      "fieldtype": "Check",
+      "label": "Include Signature Notes"
+    },
+    {
+      "default": "0",
+      "description": "Allows authorized users to edit this signature date after the target document is submitted.",
+      "fieldname": "allow_signature_date_edit_after_submit",
+      "fieldtype": "Check",
+      "label": "Allow Signature Date Edit After Submit"
+    },
+    {
+      "default": "0",
+      "description": "Excludes this signature from managed print formats without deleting saved signature values.",
+      "fieldname": "hide_signature_from_print",
+      "fieldtype": "Check",
+      "label": "Hide Signature from Print"
+    }
+  ],
+  "permissions": [],
+  "actions": [],
+  "links": [],
+  "states": [],
+  "name": "Employee Signature Mapping Row",
+  "field_order": [
+    "signature_role",
+    "mapping_key",
+    "signature_role_description",
+    "column_break_role",
+    "auto_create_fields",
+    "enabled",
+    "hide_generated_fields",
+    "field_mapping_section",
+    "employee_signature_field",
+    "employee_name_field",
+    "column_break_manual_1",
+    "designation_field",
+    "signature_date_field",
+    "signature_notes_field",
+    "column_break_manual_2",
+    "signature_image_field",
+    "behavior_section",
+    "signature_required",
+    "allow_signature_replacement",
+    "include_signature_notes",
+    "allow_signature_date_edit_after_submit",
+    "column_break_behavior",
+    "print_as_manual_signature",
+    "hide_signature_from_print",
+    "notes"
+  ]
+}
