@@ -36,7 +36,7 @@ def provision_active_workflows():
     if not frappe.db.exists("DocType", "Workflow"):
         return
 
-    from qfap_adds.qfap_adds.workflow.provisioning import (
+    from qorg.qorg.workflow.provisioning import (
         ensure_current_responsible_user,
     )
 
