@@ -1,5 +1,5 @@
 {
-  "app": "qfap_adds",
+  "app": "qorg",
   "docstatus": 0,
   "doctype": "Desktop Icon",
   "hidden": 0,
@@ -9,7 +9,7 @@
   "label": "Q Org",
   "link_to": "Q Org",
   "link_type": "Workspace Sidebar",
-  "logo_url": "/assets/qfap_adds/images/qfap_project_cycle.png",
+  "logo_url": "/assets/qorg/images/qorg_project_cycle.png",
   "name": "Q Org",
   "parent_icon": "",
   "restrict_removal": 1,
