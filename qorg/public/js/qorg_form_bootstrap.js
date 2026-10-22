@@ -1,14 +1,14 @@
-// QFap global form bootstrap.
+// Q Org global form bootstrap.
 // Accounting dimensions and workflow are detected and initialized independently.
 (() => {
-    if (window.__qfap_form_bootstrap_loaded) return;
-    window.__qfap_form_bootstrap_loaded = true;
+    if (window.__qorg_form_bootstrap_loaded) return;
+    window.__qorg_form_bootstrap_loaded = true;
 
     const PROJECT_FIELDS = ["project", "custom_project"];
     const BUDGET_FIELDS = ["budget_line", "custom_budget_line"];
     const STANDARD_DIMENSIONS = ["cost_center", "custom_cost_center"];
-    const DIMENSION_CONTROLLER = "/assets/qfap_adds/js/transaction_controller.js";
-    const WORKFLOW_CONTROLLER = "/assets/qfap_adds/js/document_workflow.js";
+    const DIMENSION_CONTROLLER = "/assets/qorg/js/transaction_controller.js";
+    const WORKFLOW_CONTROLLER = "/assets/qorg/js/document_workflow.js";
     let run_token = 0;
 
     const has_field = (meta, fieldname) =>
@@ -82,34 +82,34 @@
         // controller itself exits cleanly when no active workflow is configured.
         await require_asset(WORKFLOW_CONTROLLER);
         if (token !== run_token || window.cur_frm !== frm) return;
-        if (typeof window.qfap_initialize_document_workflow === "function") {
-            window.qfap_initialize_document_workflow(frm);
+        if (typeof window.qorg_initialize_document_workflow === "function") {
+            window.qorg_initialize_document_workflow(frm);
         }
 
         if (await form_has_dimensions(frm)) {
             await require_asset(DIMENSION_CONTROLLER);
             if (token !== run_token || window.cur_frm !== frm) return;
-            if (typeof window.qfap_initialize_transaction_controller === "function") {
-                await window.qfap_initialize_transaction_controller(frm);
+            if (typeof window.qorg_initialize_transaction_controller === "function") {
+                await window.qorg_initialize_transaction_controller(frm);
             }
         }
     }
 
     frappe.router.on("change", () => {
         initialize_current_form().catch((error) =>
-            console.error("QFap form bootstrap failed", error)
+            console.error("Q Org form bootstrap failed", error)
         );
     });
 
     $(document).on("form-refresh", () => {
         initialize_current_form().catch((error) =>
-            console.error("QFap form bootstrap failed", error)
+            console.error("Q Org form bootstrap failed", error)
         );
     });
 
     if (window.cur_frm) {
         initialize_current_form().catch((error) =>
-            console.error("QFap form bootstrap failed", error)
+            console.error("Q Org form bootstrap failed", error)
         );
     }
 })();
