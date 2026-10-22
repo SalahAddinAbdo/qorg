@@ -6,13 +6,13 @@ import re
 import frappe
 from frappe import _
 
-from qfap_adds.qfap_adds.task_management.scope import can_manage_employee, employee_for_user, supervisors
+from qorg.qorg.task_management.scope import can_manage_employee, employee_for_user, supervisors
 
-from qfap_adds.qfap_adds.task_management.settings import (
+from qorg.qorg.task_management.settings import (
     get_global_reopen_roles,
     get_settings,
 )
-from qfap_adds.qfap_adds.task_management.services import rebuild, rebuild_chain
+from qorg.qorg.task_management.services import rebuild, rebuild_chain
 
 def _supervisor_remark_to_plain_text(value):
     """Convert Quill/HTML content to safe, readable plain text."""
@@ -107,7 +107,7 @@ def save_supervisor_remark(task=None, remark=None):
     # and no client-supplied fieldname is accepted.
     doc.custom_supervisor_remarks = value
     doc.flags.ignore_permissions = True
-    doc.flags.qfap_supervisor_remark_only = True
+    doc.flags.qorg_supervisor_remark_only = True
     doc.save(ignore_permissions=True)
     doc.add_comment(
         "Info",
@@ -392,7 +392,7 @@ def reopen_task(task=None):
         frappe.throw(access.get("reason") or "You are not allowed to reopen this task.")
 
     doc = frappe.get_doc("Task", task)
-    doc.flags.qfap_reopen = True
+    doc.flags.qorg_reopen = True
     doc.status = "Open"
     if float(doc.progress or 0) >= 100:
         doc.progress = 0
