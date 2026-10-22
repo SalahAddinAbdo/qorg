@@ -7,7 +7,7 @@ function task_request_is_locked(frm) {
 frappe.ui.form.on("Task Assignment Request", {
   setup(frm) {
     frm.set_query("requested_assignee", () => ({ filters: { status: "Active" } }));
-    frappe.call({ method: "qfap_adds.qfap_adds.task_management.api.task_assignment_scope", callback: r => {
+    frappe.call({ method: "qorg.qorg.task_management.api.task_assignment_scope", callback: r => {
       frm.__working_hours_per_day = flt((r.message || {}).working_hours_per_day || 8);
       if (!task_request_is_locked(frm)) {
         calculate_request_schedule(frm, false);
