@@ -1,5 +1,5 @@
 frappe.treeview_settings["Budget Line"] = {
-    breadcrumb: "Q Org",
+    breadcrumb: "QOrg",
     title: __("Budget Lines"),
     root_label: __("Budget Lines"),
     get_tree_root: false,

@@ -1,7 +1,7 @@
 {
   "doctype": "DocType",
   "name": "Managed Task Share",
-  "module": "Q Org",
+  "module": "QOrg",
   "autoname": "hash",
   "track_changes": 1,
   "field_order": [

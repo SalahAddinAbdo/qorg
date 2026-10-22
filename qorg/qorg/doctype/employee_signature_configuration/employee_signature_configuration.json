@@ -6,7 +6,7 @@
   "autoname": "field:configuration_name",
   "title_field": "configuration_name",
   "allow_rename": 0,
-  "module": "Q Org",
+  "module": "QOrg",
   "is_submittable": 0,
   "istable": 0,
   "issingle": 0,

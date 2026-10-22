@@ -6,7 +6,7 @@
   "autoname": "format:{governorate} - {district_name}",
   "title_field": "district_name",
   "allow_rename": 1,
-  "module": "Q Org",
+  "module": "QOrg",
   "is_submittable": 0,
   "istable": 0,
   "issingle": 0,
