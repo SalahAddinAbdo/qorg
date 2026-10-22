@@ -10,6 +10,6 @@ def provision_fields(configuration):
         frappe.throw(_("You do not have permission to update this configuration."), frappe.PermissionError)
     doc = frappe.get_doc("Employee Signature Configuration", configuration)
     doc.run_method("validate")
-    from qfap_adds.qfap_adds.signatures.provisioning import provision_signature_fields
+    from qorg.qorg.signatures.provisioning import provision_signature_fields
     provision_signature_fields(doc)
     return {"created": True, "document_type": doc.document_type}
