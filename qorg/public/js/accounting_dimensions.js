@@ -1,22 +1,22 @@
-// QFap dynamic accounting-dimension controller.
+// Q Org dynamic accounting-dimension controller.
 (() => {
-    if (!window.cur_frm || cur_frm.__qfap_dimensions_loaded) return;
-    cur_frm.__qfap_dimensions_loaded = true;
+    if (!window.cur_frm || cur_frm.__qorg_dimensions_loaded) return;
+    cur_frm.__qorg_dimensions_loaded = true;
     const dt = cur_frm.doctype;
     const handlers = {
-        setup(frm) { qfap_setup_dimensions(frm); },
-        refresh(frm) { qfap_setup_dimensions(frm); },
-        validate(frm) { qfap_inherit_dimensions(frm); },
+        setup(frm) { qorg_setup_dimensions(frm); },
+        refresh(frm) { qorg_setup_dimensions(frm); },
+        validate(frm) { qorg_inherit_dimensions(frm); },
     };
     ["project", "custom_project"].forEach(fieldname => {
         if (frappe.meta.has_field(dt, fieldname)) handlers[fieldname] = frm => {
-            qfap_inherit_dimensions(frm);
-            qfap_setup_dimensions(frm);
+            qorg_inherit_dimensions(frm);
+            qorg_setup_dimensions(frm);
         };
     });
     frappe.ui.form.on(dt, handlers);
 
-    function qfap_setup_dimensions(frm) {
+    function qorg_setup_dimensions(frm) {
         (frm.meta.fields || []).filter(df => df.fieldtype === "Table" && df.options).forEach(df => {
             const grid = frm.fields_dict[df.fieldname]?.grid;
             if (!grid) return;
@@ -36,7 +36,7 @@
         };
     }
 
-    function qfap_inherit_dimensions(frm) {
+    function qorg_inherit_dimensions(frm) {
         const parentProject = frm.doc.project || frm.doc.custom_project || "";
         (frm.meta.fields || []).filter(df => df.fieldtype === "Table" && df.options).forEach(df => {
             (frm.doc[df.fieldname] || []).forEach(row => {
