@@ -134,7 +134,7 @@ def _upsert_print_format(name, doctype, html):
         "custom_format": 1,
         "disabled": 0,
         "html": html,
-        "module": "Q Org",
+        "module": "QOrg",
         "standard": "No",
     }
     if frappe.db.exists("Print Format", name):
