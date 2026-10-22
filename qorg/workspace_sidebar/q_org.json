@@ -1,5 +1,5 @@
 {
-  "app": "qfap_adds",
+  "app": "qorg",
   "docstatus": 0,
   "doctype": "Workspace Sidebar",
   "header_icon": "project",
@@ -226,7 +226,7 @@
       "type": "Link"
     }
   ],
-  "module": "QFap Adds",
+  "module": "Q Org",
   "name": "Q Org",
   "roles": [],
   "standard": 1,
