@@ -20,7 +20,7 @@ def validate_responsible_user(doc, method=None):
     # can still provide the field. New documents start unassigned unless a
     # trusted server process explicitly opts in.
     if doc.is_new():
-        if not getattr(doc.flags, "qfap_allow_initial_responsible_user", False):
+        if not getattr(doc.flags, "qorg_allow_initial_responsible_user", False):
             doc.set(RESPONSIBLE_FIELD, None)
         return
 
@@ -76,7 +76,7 @@ def _must_bypass(doc):
 
 
 def _has_active_workflow(doctype):
-    cache_key = "qfap_active_workflow::" + doctype
+    cache_key = "qorg_active_workflow::" + doctype
     cached = frappe.cache.get_value(cache_key)
     if cached is not None:
         return bool(cached)
