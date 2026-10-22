@@ -9,7 +9,7 @@ from qorg.qorg.project_management.workspace_integrations import (
     STANDARD_WORKSPACE_INTEGRATIONS,
 )
 
-APP_MODULE = "Q Org"
+APP_MODULE = "QOrg"
 SIDEBAR = "Q Org"
 DESKTOP_ICON = "Q Org"
 
