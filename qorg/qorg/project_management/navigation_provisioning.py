@@ -210,7 +210,7 @@ def _save_sidebar():
         items.append(row)
     values = {
         "title": SIDEBAR, "module": APP_MODULE, "standard": 1,
-        "app": "qfap_adds", "header_icon": "project", "items": items,
+        "app": "qorg", "header_icon": "project", "items": items,
     }
     if _exists("Workspace Sidebar", SIDEBAR):
         doc = frappe.get_doc("Workspace Sidebar", SIDEBAR)
@@ -225,8 +225,8 @@ def _save_icon():
     values = {
         "label": DESKTOP_ICON, "icon_type": "Link",
         "link_type": "Workspace Sidebar", "link_to": SIDEBAR, "sidebar": "",
-        "app": "qfap_adds", "icon": "project",
-        "logo_url": "/assets/qfap_adds/images/qfap_project_cycle.png",
+        "app": "qorg", "icon": "project",
+        "logo_url": "/assets/qorg/images/qorg_project_cycle.png",
         "hidden": 0, "standard": 1, "restrict_removal": 1,
         "idx": 50, "parent_icon": "",
     }
