@@ -2,10 +2,10 @@ from __future__ import annotations
 
 import frappe
 
-from qfap_adds.qfap_adds.task_management.scope import (
+from qorg.qorg.task_management.scope import (
     can_manage_employee, descendants, employee_for_user,
 )
-from qfap_adds.qfap_adds.task_management.settings import get_settings
+from qorg.qorg.task_management.settings import get_settings
 
 READ_TYPES = (None, "read", "select", "report", "print", "email")
 WRITE_TYPES = ("write", "create")
