@@ -69,7 +69,7 @@ function task_set_employee_queries(frm) {
 
 function task_load_assignment_scope(frm, target_employee, preserve_values) {
     return frappe.call({
-        method: "qfap_adds.qfap_adds.task_management.api.task_assignment_scope",
+        method: "qorg.qorg.task_management.api.task_assignment_scope",
         args: {
             target_employee: target_employee || frm.doc.custom_assign_to || ""
         },
@@ -119,7 +119,7 @@ function task_get_parent_options(frm) {
     }
 
     return frappe.call({
-        method: "qfap_adds.qfap_adds.task_management.api.task_project_workplan_parent_options",
+        method: "qorg.qorg.task_management.api.task_project_workplan_parent_options",
         args: {
             project: frm.doc.project,
             current_task: frm.is_new() ? "" : (frm.doc.name || "")
@@ -496,7 +496,7 @@ function task_set_completion_values(frm) {
 function task_add_reopen_button(frm) {
     if (frm.is_new() || cint(frm.doc.custom_task_locked || 0) !== 1) return;
     frappe.call({
-        method: "qfap_adds.qfap_adds.task_management.api.get_reopen_access",
+        method: "qorg.qorg.task_management.api.get_reopen_access",
         args: {task: frm.doc.name},
         callback: (response) => {
             const access = (response && response.message) || {};
@@ -505,7 +505,7 @@ function task_add_reopen_button(frm) {
                 __("Reopen Task"),
                 () => frappe.confirm(__("Reopen this completed task?"), () => {
                     frappe.call({
-                        method: "qfap_adds.qfap_adds.task_management.api.reopen_task",
+                        method: "qorg.qorg.task_management.api.reopen_task",
                         args: {task: frm.doc.name},
                         freeze: true,
                         callback: (r) => { if (!r.exc) frm.reload_doc(); }
@@ -537,7 +537,7 @@ function task_add_parent_unlock_button(frm) {
                 ),
                 () => {
                     frappe.call({
-                        method: "qfap_adds.qfap_adds.task_management.api.task_unlock_parent_summary",
+                        method: "qorg.qorg.task_management.api.task_unlock_parent_summary",
                         args: {task: frm.doc.name},
                         freeze: true,
                         callback: (response) => {
@@ -577,7 +577,7 @@ function task_add_complete_parent_button(frm) {
                 ),
                 () => {
                     frappe.call({
-                        method: "qfap_adds.qfap_adds.task_management.api.task_complete_parent_summary",
+                        method: "qorg.qorg.task_management.api.task_complete_parent_summary",
                         args: {task: frm.doc.name},
                         freeze: true,
                         freeze_message: __("Completing main task..."),
@@ -625,7 +625,7 @@ function task_add_supervisor_remark_button(frm) {
     if (frm.is_new() || cint(frm.doc.custom_project_workplan || 0)) return;
     if (frm.doc.custom_user_id && frm.doc.custom_user_id === frappe.session.user) return;
     frappe.call({
-        method: "qfap_adds.qfap_adds.task_management.api.get_supervisor_remark_access",
+        method: "qorg.qorg.task_management.api.get_supervisor_remark_access",
         args: {task: frm.doc.name},
         freeze: false,
         callback(response) {
@@ -657,7 +657,7 @@ function task_add_supervisor_remark_button(frm) {
                     primary_action_label: __("Save Remark"),
                     primary_action(values) {
                         frappe.call({
-                            method: "qfap_adds.qfap_adds.task_management.api.save_supervisor_remark",
+                            method: "qorg.qorg.task_management.api.save_supervisor_remark",
                             args: {task: frm.doc.name, remark: values.remark},
                             freeze: true,
                             freeze_message: __("Saving Supervisor Remark..."),
