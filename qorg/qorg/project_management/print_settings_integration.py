@@ -19,7 +19,7 @@ CUSTOM_FIELDS = {
             "fieldname": "qorg_rules",
             "label": "Managed Print Format Rules",
             "fieldtype": "Table",
-            "options": "QFAP Print Format Rule",
+            "options": "Managed Print Format Rule",
             "insert_after": "qorg_managed_formats_section",
             "description": "Create and manage Q Universal formats. Open a row to configure Audit Information and Attachments.",
             "is_system_generated": 1,
@@ -99,7 +99,7 @@ def provision_print_settings():
     _force_owned_field_definitions()
     _configure_rule_fields()
     frappe.clear_cache(doctype="Print Settings")
-    frappe.clear_cache(doctype="QFAP Print Format Rule")
+    frappe.clear_cache(doctype="Managed Print Format Rule")
 
 
 def _remove_obsolete_layout_fields():
@@ -132,7 +132,7 @@ def _force_owned_field_definitions():
             "hidden": int(definition.get("hidden") or 0),
             "default": definition.get("default") or "",
             "is_system_generated": 1,
-            "module": "QFap Adds",
+            "module": "Q Org",
         }
         frappe.db.set_value(
             "Custom Field", name, values, update_modified=False
@@ -140,8 +140,8 @@ def _force_owned_field_definitions():
 
 
 def _configure_rule_fields():
-    if not frappe.db.exists("DocType", "QFAP Print Format Rule"):
-        frappe.throw(_("QFAP Print Format Rule is not installed."))
+    if not frappe.db.exists("DocType", "Managed Print Format Rule"):
+        frappe.throw(_("Managed Print Format Rule is not installed."))
 
     properties = {
         "print_profile": {
@@ -175,7 +175,7 @@ def _configure_rule_fields():
     for fieldname, field_properties in properties.items():
         for property_name, value in field_properties.items():
             _set_property(
-                "QFAP Print Format Rule", fieldname, property_name, value
+                "Managed Print Format Rule", fieldname, property_name, value
             )
 
 
@@ -224,6 +224,6 @@ def validate_print_settings(doc, method=None):
 
 @frappe.whitelist()
 def apply_print_formats():
-    from qfap_adds.printing.provisioning import apply_print_format_settings
+    from qorg.printing.provisioning import apply_print_format_settings
 
     return apply_print_format_settings()
