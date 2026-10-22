@@ -2,10 +2,10 @@
 // Unified Workflow Handler for Frappe 16
 // Change only the DocType name when copying this script.
 // ============================================================
-window.qfap_initialize_document_workflow = function (frm) {
+window.qorg_initialize_document_workflow = function (frm) {
     frm = frm || window.cur_frm;
-    if (!frm || frm.__qfap_workflow_handler_registered) return;
-    frm.__qfap_workflow_handler_registered = true;
+    if (!frm || frm.__qorg_workflow_handler_registered) return;
+    frm.__qorg_workflow_handler_registered = true;
 
     frappe.ui.form.on(frm.doctype, {
         setup(current) {
@@ -28,7 +28,7 @@ window.qfap_initialize_document_workflow = function (frm) {
     }
 };
 
-window.qfap_initialize_document_workflow(window.cur_frm);
+window.qorg_initialize_document_workflow(window.cur_frm);
 
 // Clear responsibility copied from a source document. The server repeats this
 // protection for imports and API-created documents.
@@ -241,7 +241,7 @@ async function wf_get_signature_dialog_context(frm, transition) {
     }
     try {
         const result = await frappe.xcall(
-            "qfap_adds.qfap_adds.api.signatures.get_signature_dialog_context",
+            "qorg.qorg.api.signatures.get_signature_dialog_context",
             {
                 doctype: frm.doc.doctype,
                 document_name: frm.doc.name,
@@ -318,7 +318,7 @@ async function wf_apply_signature(frm, transition, signature_notes = "") {
         frappe.throw(__("Employee Signature Mapping is missing for action {0}.", [transition.action || ""]));
     }
 
-    const result = await frappe.xcall("qfap_adds.qfap_adds.api.signatures.apply_current_employee_signature", {
+    const result = await frappe.xcall("qorg.qorg.api.signatures.apply_current_employee_signature", {
         doctype: frm.doc.doctype,
         document_name: frm.doc.name,
         mapping_key,
