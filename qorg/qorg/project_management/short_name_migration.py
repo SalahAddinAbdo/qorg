@@ -22,7 +22,7 @@ def prepare_short_project_doctype_names():
     renaming standard DocTypes in that mode. These DocTypes originated as UI
     custom DocTypes and are being adopted by the app, so each existing legacy
     DocType is temporarily marked custom only for the rename operation, then
-    restored immediately as a standard DocType owned by QFap Adds.
+    restored immediately as a standard DocType owned by Q Org.
     """
     for old_name, new_name in RENAMES.items():
         old_exists = bool(frappe.db.exists("DocType", old_name))
@@ -60,7 +60,7 @@ def prepare_short_project_doctype_names():
                     old_name,
                     {
                         "custom": int(original.custom or 0),
-                        "module": original.module or "QFap Adds",
+                        "module": original.module or "Q Org",
                     },
                     update_modified=False,
                 )
@@ -69,7 +69,7 @@ def prepare_short_project_doctype_names():
         frappe.db.set_value(
             "DocType",
             new_name,
-            {"custom": 0, "module": "QFap Adds"},
+            {"custom": 0, "module": "Q Org"},
             update_modified=False,
         )
         frappe.clear_cache(doctype=new_name)
