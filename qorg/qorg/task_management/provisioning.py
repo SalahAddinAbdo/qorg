@@ -408,7 +408,7 @@ def provision_task_integration() -> None:
         "Task",
         "Task Management Settings",
         "Task Assignment Request",
-        "QFAP Managed Task Share",
+        "Managed Task Share",
         "Workflow",
     ):
         if frappe.db.exists("DocType", doctype):
