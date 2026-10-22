@@ -1,9 +1,9 @@
 from __future__ import annotations
 import frappe
-from qfap_adds.qfap_adds.project_management.services.project_reconciliation import reconcile_project
+from qorg.qorg.project_management.services.project_reconciliation import reconcile_project
 from frappe import _
 from frappe.utils import date_diff, nowdate
-from qfap_adds.qfap_adds.project_management.api import validate_project_team_employee
+from qorg.qorg.project_management.api import validate_project_team_employee
 
 def validate_issue(doc, method=None):
     project = doc.get("project") or doc.get("custom_project")
