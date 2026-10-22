@@ -4,12 +4,12 @@ import json
 
 import frappe
 
-from qfap_adds.qfap_adds.project_management.workspace_integrations import (
+from qorg.qorg.project_management.workspace_integrations import (
     MANAGED_CARD_PREFIX,
     STANDARD_WORKSPACE_INTEGRATIONS,
 )
 
-APP_MODULE = "QFap Adds"
+APP_MODULE = "Q Org"
 SIDEBAR = "Q Org"
 DESKTOP_ICON = "Q Org"
 
