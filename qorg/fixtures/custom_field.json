@@ -110,7 +110,7 @@
     "depends_on": "eval:doc.custom_assignment_required",
     "mandatory_depends_on": "eval:doc.custom_assignment_required",
     "default": "custom_current_responsible_user",
-    "description": "Automatically uses the QFap current responsible user field."
+    "description": "Automatically uses the QOrg current responsible user field."
   },
   {
     "doctype": "Custom Field",
