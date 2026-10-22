@@ -1,7 +1,7 @@
 {
   "doctype": "DocType",
   "name": "Task Management Role Row",
-  "module": "Q Org",
+  "module": "QOrg",
   "istable": 1,
   "editable_grid": 1,
   "field_order": [
