@@ -280,9 +280,28 @@ def _create_or_update_task_custom_fields() -> None:
             for key, value in item.items()
             if key not in ("doctype", "name", "dt")
         }
+        # Every Custom Field managed by QOrg must remain app-owned.
+        field_definition["is_system_generated"] = 1
+        field_definition["module"] = "QOrg"
         grouped_fields.setdefault(doctype, []).append(field_definition)
 
     create_custom_fields(grouped_fields, update=True)
+
+    # Adopt compatible existing fields and reconcile ownership metadata.
+    for item in _load_json("task_custom_fields.json"):
+        field_name = item.get("name") or f'{item["dt"]}-{item["fieldname"]}'
+        if not frappe.db.exists("Custom Field", field_name):
+            continue
+
+        frappe.db.set_value(
+            "Custom Field",
+            field_name,
+            {
+                "is_system_generated": 1,
+                "module": "QOrg",
+            },
+            update_modified=False,
+        )
 
 
 def _configure_task_properties() -> None:
@@ -408,7 +427,7 @@ def provision_task_integration() -> None:
         "Task",
         "Task Management Settings",
         "Task Assignment Request",
-        "Managed Task Share",
+        "QFAP Managed Task Share",
         "Workflow",
     ):
         if frappe.db.exists("DocType", doctype):
