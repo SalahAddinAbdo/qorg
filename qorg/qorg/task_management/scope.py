@@ -1,6 +1,6 @@
 from __future__ import annotations
 import frappe
-from qfap_adds.qfap_adds.task_management.settings import get_settings
+from qorg.qorg.task_management.settings import get_settings
 
 def employee_for_user(user=None):
     user=user or frappe.session.user
