@@ -1,5 +1,5 @@
 import frappe
-from qfap_adds.qfap_adds.task_management.reconciliation import reconcile_all
+from qorg.qorg.task_management.reconciliation import reconcile_all
 
 
 def execute():
