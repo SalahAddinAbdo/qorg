@@ -236,15 +236,15 @@ frappe.query_reports["Enhanced General Ledger"] = {
 
 erpnext.utils.add_dimensions("Enhanced General Ledger", 15);
 
-// ---- QFap Adds v1.3 enhancements; ERPNext accounting behavior remains authoritative. ----
+// ---- Q Org v1.3 enhancements; ERPNext accounting behavior remains authoritative. ----
 (() => {
   const reportName = "Enhanced General Ledger";
   const config = frappe.query_reports[reportName];
-  if (!config || config.__qfap_adds_v13_enhanced) return;
-  config.__qfap_adds_v13_enhanced = true;
+  if (!config || config.__qorg_v13_enhanced) return;
+  config.__qorg_v13_enhanced = true;
 
-  const methodBase = "qfap_adds.qfap_adds.report.enhanced_general_ledger.enhanced_general_ledger";
-  const analyticalFields = ["qfap_ledger_search", "qfap_min_amount", "qfap_max_amount", "qfap_exceptions_only"];
+  const methodBase = "qorg.qorg.report.enhanced_general_ledger.enhanced_general_ledger";
+  const analyticalFields = ["qorg_ledger_search", "qorg_min_amount", "qorg_max_amount", "qorg_exceptions_only"];
   const layoutOptions = [
     {label: __("Standard"), value: "Standard"},
     {label: __("Compact"), value: "Compact"},
@@ -254,12 +254,12 @@ erpnext.utils.add_dimensions("Enhanced General Ledger", 15);
   ];
 
   const qfapFilters = [
-    {fieldname:"qfap_view",label:__("Display Layout"),fieldtype:"Select",options:layoutOptions,default:"Standard",description:__("Changes column order and visibility only; it does not recalculate accounting groups."),on_change:()=>frappe.query_report.refresh()},
-    {fieldname:"qfap_ledger_search",label:__("Ledger Search"),fieldtype:"Data",description:__("Search vouchers, parties, projects, dimensions, invoice numbers, remarks, and audit flags")},
-    {fieldname:"qfap_min_amount",label:__("Minimum Amount"),fieldtype:"Currency"},
-    {fieldname:"qfap_max_amount",label:__("Maximum Amount"),fieldtype:"Currency"},
-    {fieldname:"qfap_exceptions_only",label:__("Audit Exceptions Only"),fieldtype:"Check",default:0},
-    {fieldname:"qfap_hide_empty_columns",label:__("Hide Empty Columns"),fieldtype:"Check",default:1},
+    {fieldname:"qorg_view",label:__("Display Layout"),fieldtype:"Select",options:layoutOptions,default:"Standard",description:__("Changes column order and visibility only; it does not recalculate accounting groups."),on_change:()=>frappe.query_report.refresh()},
+    {fieldname:"qorg_ledger_search",label:__("Ledger Search"),fieldtype:"Data",description:__("Search vouchers, parties, projects, dimensions, invoice numbers, remarks, and audit flags")},
+    {fieldname:"qorg_min_amount",label:__("Minimum Amount"),fieldtype:"Currency"},
+    {fieldname:"qorg_max_amount",label:__("Maximum Amount"),fieldtype:"Currency"},
+    {fieldname:"qorg_exceptions_only",label:__("Audit Exceptions Only"),fieldtype:"Check",default:0},
+    {fieldname:"qorg_hide_empty_columns",label:__("Hide Empty Columns"),fieldtype:"Check",default:1},
   ];
   const existing = new Set((config.filters || []).map(filter => filter.fieldname));
   qfapFilters.forEach(filter => { if (!existing.has(filter.fieldname)) config.filters.push(filter); });
@@ -270,18 +270,18 @@ erpnext.utils.add_dimensions("Enhanced General Ledger", 15);
   const originalFormatter = config.formatter;
   config.formatter = function(value,row,column,data,defaultFormatter) {
     let output = originalFormatter ? originalFormatter.call(this,value,row,column,data,defaultFormatter) : defaultFormatter(value,row,column,data);
-    if (data && data.qfap_dimension_group_header) {
+    if (data && data.qorg_dimension_group_header) {
       return `<span style="font-weight:700;color:var(--text-color);display:block;padding:5px 7px;background:var(--subtle-fg);border-radius:6px">${frappe.utils.escape_html(String(value || ""))}</span>`;
     }
-    if (data && column.qfap_link_doctype && column.qfap_code_field) {
-      const code = data[column.qfap_code_field];
+    if (data && column.qorg_link_doctype && column.qorg_code_field) {
+      const code = data[column.qorg_code_field];
       if (code) {
-        const title = data[column.qfap_title_field] || code;
-        const route = `/app/${frappe.router.slug(column.qfap_link_doctype)}/${encodeURIComponent(code)}`;
+        const title = data[column.qorg_title_field] || code;
+        const route = `/app/${frappe.router.slug(column.qorg_link_doctype)}/${encodeURIComponent(code)}`;
         output = `<a href="${route}" title="${frappe.utils.escape_html(String(title))}" class="qfap-dimension-link">${frappe.utils.escape_html(String(value || code))}</a>`;
       }
     }
-    if (data && column.fieldname === "qfap_audit_flags" && value) {
+    if (data && column.fieldname === "qorg_audit_flags" && value) {
       output = `<span class="indicator-pill orange" title="${frappe.utils.escape_html(String(value))}">${frappe.utils.escape_html(String(value))}</span>`;
     }
     return output;
@@ -299,9 +299,9 @@ erpnext.utils.add_dimensions("Enhanced General Ledger", 15);
   };
 
   async function initializeDimensions(report) {
-    const response = await frappe.call({method:`${methodBase}.get_qfap_dimension_config`});
+    const response = await frappe.call({method:`${methodBase}.get_qorg_dimension_config`});
     const dimensions = response.message || [];
-    report.qfap_dimensions = dimensions;
+    report.qorg_dimensions = dimensions;
     await waitForDimensionFilters(report, dimensions, 0);
     addDimensionLayouts(report, dimensions);
     addDimensionCategories(report, dimensions);
@@ -323,7 +323,7 @@ erpnext.utils.add_dimensions("Enhanced General Ledger", 15);
         options.push({label: __(`${d.label} Focus`), value:`Dimension::${d.fieldname}`});
       }
     });
-    const filter = report.get_filter("qfap_view");
+    const filter = report.get_filter("qorg_view");
     if (filter) { filter.df.options = options; filter.refresh(); }
   }
 
@@ -415,7 +415,7 @@ erpnext.utils.add_dimensions("Enhanced General Ledger", 15);
     frappe.confirm(
       __("Analytical filters require an ungrouped ledger. Clear Categorize by and continue?"),
       () => { report.set_filter_value("categorize_by", ""); report.refresh(); },
-      () => report.set_filter_value(changedField, changedField === "qfap_exceptions_only" ? 0 : "")
+      () => report.set_filter_value(changedField, changedField === "qorg_exceptions_only" ? 0 : "")
     );
   }
 
@@ -430,11 +430,11 @@ erpnext.utils.add_dimensions("Enhanced General Ledger", 15);
   }
 
   function clearAnalytical(report) {
-    analyticalFields.forEach(fieldname => report.set_filter_value(fieldname, fieldname === "qfap_exceptions_only" ? 0 : ""));
+    analyticalFields.forEach(fieldname => report.set_filter_value(fieldname, fieldname === "qorg_exceptions_only" ? 0 : ""));
   }
 
   function setLayout(report, value) {
-    report.set_filter_value("qfap_view", value);
+    report.set_filter_value("qorg_view", value);
     if (value === "Audit") {
       ["include_dimensions","show_remarks","show_amount_in_company_currency"].forEach(fieldname => {if(report.get_filter(fieldname)) report.set_filter_value(fieldname,1);});
     } else if ((value === "Project" || String(value).startsWith("Dimension::")) && report.get_filter("include_dimensions")) {
@@ -444,7 +444,7 @@ erpnext.utils.add_dimensions("Enhanced General Ledger", 15);
   }
 
   function resetQfap(report) {
-    const values={qfap_view:"Standard",qfap_ledger_search:"",qfap_min_amount:"",qfap_max_amount:"",qfap_exceptions_only:0,qfap_hide_empty_columns:1};
+    const values={qorg_view:"Standard",qorg_ledger_search:"",qorg_min_amount:"",qorg_max_amount:"",qorg_exceptions_only:0,qorg_hide_empty_columns:1};
     Object.entries(values).forEach(([fieldname,value]) => {if(report.get_filter(fieldname)) report.set_filter_value(fieldname,value);});
     report.refresh();
   }

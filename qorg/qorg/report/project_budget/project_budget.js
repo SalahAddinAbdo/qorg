@@ -31,8 +31,8 @@ frappe.query_reports["Project Budget"]={filters:[
 {fieldname:"over_budget_only",label:__("Over Budget Only"),fieldtype:"Check",default:0}
 ],formatter(value,row,column,data,df){value=df(value,row,column,data);if(!data)return value;if(column.fieldname==="financial_status"){const m={"Over Budget":"red","Unbudgeted Expense":"red","Under Utilized":"orange","Fully Utilized":"blue","Within Budget":"green"};return `<span class="indicator-pill ${m[data.financial_status]||"gray"}">${value}</span>`;}if(["utilization_percentage","line_utilization"].includes(column.fieldname)){const n=parseFloat(data[column.fieldname]||0),t=parseFloat(frappe.query_report.get_filter_value("under_utilized_threshold")||70),c=n>100?"#c62828":n<t?"#f9a825":"#2e7d32";return `<span style="color:${c};font-weight:600">${value}</span>`;}if(["available_balance","line_balance"].includes(column.fieldname)&&parseFloat(data[column.fieldname]||0)<0)return `<span style="color:#c62828;font-weight:600">${value}</span>`;if(column.fieldname==="budget_attention"&&data.budget_attention)return `<span style="color:#b42318;font-weight:600">${value}</span>`;if(["sector_allocation_status","partner_allocation_status"].includes(column.fieldname)){const c=String(data[column.fieldname]||"").includes("Over")?"red":String(data[column.fieldname]||"").includes("Fully")?"green":"orange";return `<span class="indicator-pill ${c}">${value}</span>`;}if(["funding_coverage","sector_allocation_percentage","partner_allocation_percentage"].includes(column.fieldname)){const n=parseFloat(data[column.fieldname]||0),c=n>100?"#c62828":n>=90?"#2e7d32":n>=70?"#f9a825":"#c62828";return `<span style="color:${c};font-weight:600">${value}</span>`;}return value;},onload(report){ppb_toggle_asset_filter(report);["Executive Budget","Donor Budget","Budget Tree","Sector Allocation","Partner Allocation","Change Analysis","Full"].forEach(v=>report.page.add_inner_button(__(v),()=>{report.set_filter_value("view_mode",v);report.refresh();},__("Views")));report.page.add_inner_button(__("Reset Filters"),()=>{["project","project_manager","project_stage","donor","sector","implementing_partner","company","currency"].forEach(f=>report.set_filter_value(f,[]));report.set_filter_value("view_mode","Executive Budget");report.set_filter_value("donor_display_mode","Primary");report.set_filter_value("sector_display_mode","Primary");report.set_filter_value("partner_display_mode","All");report.set_filter_value("chart_by","Allocation Status");report.set_filter_value("attention_only",0);report.set_filter_value("over_budget_only",0);report.set_filter_value("under_utilized_threshold",70);report.set_filter_value("include_asset_expenses",0);report.set_filter_value("asset_accounts",[]);report.set_filter_value("from_date","");report.set_filter_value("to_date","");ppb_toggle_asset_filter(report);report.refresh();});const st=document.createElement("style");st.textContent=`.query-report .report-summary{gap:12px}.query-report .report-summary .summary-item{min-width:145px;padding:12px 16px;border:1px solid var(--border-color);border-radius:10px;background:var(--card-bg)}.query-report .chart-container{border:1px solid var(--border-color);border-radius:12px;padding:12px;margin-top:8px;background:var(--card-bg)}.query-report .datatable{border-radius:10px;overflow:hidden;border:1px solid var(--border-color)}.dt-cell__content{white-space:normal!important;line-height:1.35}`;document.head.appendChild(st);}};
 
-// QFAP KPI card refinement. Column freezing is native through sticky: true.
-;(function qfap_kpi_card_refinement(){
+// Q Org KPI card refinement. Column freezing is native through sticky: true.
+;(function qorg_kpi_card_refinement(){
  const STYLE_ID="qfap-kpi-card-refinement-v282";
  if(document.getElementById(STYLE_ID)) return;
  const style=document.createElement("style");
@@ -47,10 +47,10 @@ frappe.query_reports["Project Budget"]={filters:[
 })();
 
 
-// QFAP Link title display v2.8.4.
-;(function qfap_link_title_display(){
+// Q Org Link title display v2.8.4.
+;(function qorg_link_title_display(){
  const config=frappe.query_reports["Project Budget"];
- if(!config||config.__qfap_link_titles_wrapped) return;
+ if(!config||config.__qorg_link_titles_wrapped) return;
  const original=config.formatter;
  config.formatter=function(value,row,column,data,default_formatter){
   let rendered=original?original.call(this,value,row,column,data,default_formatter):default_formatter(value,row,column,data);
@@ -62,10 +62,10 @@ frappe.query_reports["Project Budget"]={filters:[
   }
   return rendered;
  };
- config.__qfap_link_titles_wrapped=true;
+ config.__qorg_link_titles_wrapped=true;
 })();
 
-;(function qfap_link_title_style(){
+;(function qorg_link_title_style(){
  const id="qfap-link-title-style-v284";if(document.getElementById(id))return;
  const s=document.createElement("style");s.id=id;s.textContent=`.query-report .qfap-link-title{display:inline;color:var(--text-muted,#6b7280);font-size:11px;line-height:1.25;white-space:normal}.query-report .qfap-link-title-separator{color:var(--text-muted,#6b7280)}`;document.head.appendChild(s);
 })();

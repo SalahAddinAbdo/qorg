@@ -27,8 +27,8 @@ def execute(filters=None):
     _enrich_link_dimensions(columns, data, dimensions)
     _add_audit_flags(columns, data, dimensions)
     data, subset_active = _apply_analytical_filters(data, filters)
-    _apply_view(columns, filters.get("qfap_view") or "Standard")
-    if filters.get("qfap_hide_empty_columns"):
+    _apply_view(columns, filters.get("qorg_view") or "Standard")
+    if filters.get("qorg_hide_empty_columns"):
         _hide_empty_optional_columns(columns, data)
     report_summary = _build_audit_summary(data, report_summary, dimensions)
     message = _build_message(message, subset_active)
@@ -37,7 +37,7 @@ def execute(filters=None):
 
 def _validate_analytical_filters(filters):
     active = any(filters.get(f) for f in (
-        "qfap_ledger_search", "qfap_min_amount", "qfap_max_amount", "qfap_exceptions_only"
+        "qorg_ledger_search", "qorg_min_amount", "qorg_max_amount", "qorg_exceptions_only"
     ))
     if active and filters.get("categorize_by"):
         frappe.throw(_("QFap analytical filters cannot be combined with Categorize by. Clear Categorize by, then run the audit subset."))
@@ -70,8 +70,8 @@ def _enrich_link_dimensions(columns, data, dimensions):
             continue
         values = sorted({r.get(spec.fieldname) for r in data if r.get(spec.fieldname)})
         title_map = _get_title_map(spec.document_type, values, spec.preferred_title_field)
-        code_field = f"qfap_{spec.fieldname}_code"
-        title_field = f"qfap_{spec.fieldname}_title"
+        code_field = f"qorg_{spec.fieldname}_code"
+        title_field = f"qorg_{spec.fieldname}_title"
         for row in data:
             code = row.get(spec.fieldname)
             if not code:
@@ -81,8 +81,8 @@ def _enrich_link_dimensions(columns, data, dimensions):
             row[spec.fieldname] = f"{code} - {title}" if title and title != code else code
         column.update({
             "label": _(spec.label), "fieldtype": "Data", "width": spec.width,
-            "qfap_link_doctype": spec.document_type, "qfap_code_field": code_field,
-            "qfap_title_field": title_field,
+            "qorg_link_doctype": spec.document_type, "qorg_code_field": code_field,
+            "qorg_title_field": title_field,
         })
 
 
@@ -125,16 +125,16 @@ def _add_audit_flags(columns, data, dimensions):
                 flags.append(_("Opening Entry"))
             if not flt(row.get("debit")) and not flt(row.get("credit")):
                 flags.append(_("Zero Debit and Credit"))
-        row["qfap_audit_flags"] = " | ".join(flags)
-        row["qfap_audit_flag_count"] = len(flags)
-    if not any(c.get("fieldname") == "qfap_audit_flags" for c in columns):
-        columns.append({"label": _("Audit Flags"), "fieldname": "qfap_audit_flags", "fieldtype": "Data", "width": 260, "hidden": 1})
+        row["qorg_audit_flags"] = " | ".join(flags)
+        row["qorg_audit_flag_count"] = len(flags)
+    if not any(c.get("fieldname") == "qorg_audit_flags" for c in columns):
+        columns.append({"label": _("Audit Flags"), "fieldname": "qorg_audit_flags", "fieldtype": "Data", "width": 260, "hidden": 1})
 
 
 def _apply_analytical_filters(data, filters):
-    search = (filters.get("qfap_ledger_search") or "").strip().lower()
-    min_raw, max_raw = filters.get("qfap_min_amount"), filters.get("qfap_max_amount")
-    exceptions_only = bool(filters.get("qfap_exceptions_only"))
+    search = (filters.get("qorg_ledger_search") or "").strip().lower()
+    min_raw, max_raw = filters.get("qorg_min_amount"), filters.get("qorg_max_amount")
+    exceptions_only = bool(filters.get("qorg_exceptions_only"))
     active = bool(search or min_raw not in (None, "") or max_raw not in (None, "") or exceptions_only)
     if not active:
         return data, False
@@ -149,7 +149,7 @@ def _apply_analytical_filters(data, filters):
             continue
         if maximum is not None and amount > maximum:
             continue
-        if exceptions_only and not row.get("qfap_audit_flag_count"):
+        if exceptions_only and not row.get("qorg_audit_flag_count"):
             continue
         if search and search not in _search_text(row):
             continue
@@ -159,7 +159,7 @@ def _apply_analytical_filters(data, filters):
 
 def _search_text(row):
     important = {"gl_entry", "account", "party_type", "party", "party_name", "voucher_type", "voucher_subtype", "voucher_no", "against", "against_voucher_type", "against_voucher", "bill_no", "remarks", "project", "cost_center"}
-    return " ".join(str(v or "") for k, v in row.items() if k.startswith("qfap_") or k in important).lower()
+    return " ".join(str(v or "") for k, v in row.items() if k.startswith("qorg_") or k in important).lower()
 
 
 def _apply_view(columns, view):
@@ -179,9 +179,9 @@ def _apply_view(columns, view):
         fieldname = column.get("fieldname")
         if view == "Compact":
             column["hidden"] = 0 if fieldname in compact else 1
-        elif view == "Audit" and fieldname in {"qfap_audit_flags", "gl_entry", "remarks"}:
+        elif view == "Audit" and fieldname in {"qorg_audit_flags", "gl_entry", "remarks"}:
             column["hidden"] = 0
-        elif focus_field and fieldname == "qfap_audit_flags":
+        elif focus_field and fieldname == "qorg_audit_flags":
             column["hidden"] = 0
     if focus_field:
         order = {fieldname: index for index, fieldname in enumerate(focus_order)}
@@ -201,10 +201,10 @@ def _build_audit_summary(data, existing, dimensions):
     details = [r for r in data if _is_detail_row(r)]
     vouchers = {(r.get("voucher_type"), r.get("voucher_no")) for r in details if r.get("voucher_no")}
     accounts = {r.get("account") for r in details if r.get("account")}
-    projects = {r.get("qfap_project_code") for r in details if r.get("qfap_project_code")}
-    missing_project = sum(1 for r in details if not r.get("qfap_project_code"))
-    missing_cc = sum(1 for r in details if not r.get("qfap_cost_center_code"))
-    exceptions = sum(1 for r in details if r.get("qfap_audit_flag_count"))
+    projects = {r.get("qorg_project_code") for r in details if r.get("qorg_project_code")}
+    missing_project = sum(1 for r in details if not r.get("qorg_project_code"))
+    missing_cc = sum(1 for r in details if not r.get("qorg_cost_center_code"))
+    exceptions = sum(1 for r in details if r.get("qorg_audit_flag_count"))
     summary = list(existing or []) + [
         {"value": len(details), "label": _("GL Entries"), "datatype": "Int", "indicator": "blue"},
         {"value": len(vouchers), "label": _("Vouchers"), "datatype": "Int", "indicator": "blue"},
@@ -313,7 +313,7 @@ def _execute_dimension_categorization(filters, dimensions, fieldname):
         local_filters["include_dimensions"] = 1
         local_filters[fieldname] = [value]
         for key in list(local_filters.keys()):
-            if str(key).startswith("qfap_"):
+            if str(key).startswith("qorg_"):
                 local_filters.pop(key, None)
 
         result = list(general_ledger.execute(local_filters) or ([], []))
@@ -334,7 +334,7 @@ def _execute_dimension_categorization(filters, dimensions, fieldname):
         grouped_data.append({
             "account": f"{dimension.label or fieldname}: {value}" + (f" - {title}" if title and title != value else ""),
             fieldname: value,
-            "qfap_dimension_group_header": 1,
+            "qorg_dimension_group_header": 1,
         })
         grouped_data.extend(rows)
         grouped_data.append({})
@@ -345,8 +345,8 @@ def _execute_dimension_categorization(filters, dimensions, fieldname):
         grouped_data.append(
             {
                 "account": _("Grand Total for All Groups"),
-                "qfap_dimension_group_header": 1,
-                "qfap_grand_total_header": 1,
+                "qorg_dimension_group_header": 1,
+                "qorg_grand_total_header": 1,
             }
         )
         grouped_data.extend(grand_total_rows)
@@ -363,7 +363,7 @@ def _get_grand_total_rows(filters):
     total_filters = frappe._dict(filters.copy())
     total_filters["categorize_by"] = ""
     for key in list(total_filters.keys()):
-        if str(key).startswith("qfap_"):
+        if str(key).startswith("qorg_"):
             total_filters.pop(key, None)
 
     result = list(general_ledger.execute(total_filters) or ([], []))
@@ -464,7 +464,7 @@ def _get_dimension_value_title(document_type, name):
 
 
 @frappe.whitelist()
-def get_qfap_dimension_config():
+def get_qorg_dimension_config():
     result = []
     for dimension in _get_active_dimensions():
         meta = frappe.get_meta(dimension.document_type)

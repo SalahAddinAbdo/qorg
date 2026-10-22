@@ -20,8 +20,8 @@ function pill(v,c){return `<span class="indicator-pill ${c}">${frappe.utils.esca
 function ctx(f,t){const q=(t||"").toLowerCase(),vals=[];(frappe.query_report.data||[]).forEach(r=>String(r[f]||"").split(",").forEach(i=>{const v=i.trim();if(v&&!vals.includes(v)&&(!q||v.toLowerCase().includes(q)))vals.push(v);}));vals.sort((a,b)=>a.localeCompare(b));return vals.map(v=>({value:v,description:desc(f,v)}));}
 function desc(f,v){let c=0,ps=[];(frappe.query_report.data||[]).forEach(r=>{if(String(r[f]||"").split(",").map(i=>i.trim()).includes(v)){c++;if(r.project&&!ps.includes(r.project))ps.push(r.project);}});return `${c} record${c===1?"":"s"}${ps.length?" • "+ps.slice(0,3).join(" • "):""}${ps.length>3?" • +"+(ps.length-3)+" more":""}`;}
 
-// QFAP KPI card refinement. Column freezing is native through sticky: true.
-;(function qfap_kpi_card_refinement(){
+// Q Org KPI card refinement. Column freezing is native through sticky: true.
+;(function qorg_kpi_card_refinement(){
  const STYLE_ID="qfap-kpi-card-refinement-v282";
  if(document.getElementById(STYLE_ID)) return;
  const style=document.createElement("style");
@@ -36,10 +36,10 @@ function desc(f,v){let c=0,ps=[];(frappe.query_report.data||[]).forEach(r=>{if(S
 })();
 
 
-// QFAP Link title display v2.8.4.
-;(function qfap_link_title_display(){
+// Q Org Link title display v2.8.4.
+;(function qorg_link_title_display(){
  const config=frappe.query_reports["Compliance Assurance"];
- if(!config||config.__qfap_link_titles_wrapped) return;
+ if(!config||config.__qorg_link_titles_wrapped) return;
  const original=config.formatter;
  config.formatter=function(value,row,column,data,default_formatter){
   let rendered=original?original.call(this,value,row,column,data,default_formatter):default_formatter(value,row,column,data);
@@ -51,10 +51,10 @@ function desc(f,v){let c=0,ps=[];(frappe.query_report.data||[]).forEach(r=>{if(S
   }
   return rendered;
  };
- config.__qfap_link_titles_wrapped=true;
+ config.__qorg_link_titles_wrapped=true;
 })();
 
-;(function qfap_link_title_style(){
+;(function qorg_link_title_style(){
  const id="qfap-link-title-style-v284";if(document.getElementById(id))return;
  const s=document.createElement("style");s.id=id;s.textContent=`.query-report .qfap-link-title{display:inline;color:var(--text-muted,#6b7280);font-size:11px;line-height:1.25;white-space:normal}.query-report .qfap-link-title-separator{color:var(--text-muted,#6b7280)}`;document.head.appendChild(s);
 })();

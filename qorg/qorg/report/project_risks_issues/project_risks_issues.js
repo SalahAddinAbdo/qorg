@@ -20,7 +20,7 @@ onload(report){report.page.add_inner_button(__("Reset Filters"),()=>{(report.fil
 
 
 
-// QFAP application report refinement layer
+// Q Org application report refinement layer
 (function(){
     const report=frappe.query_report;
     const add_css=()=>{
@@ -48,8 +48,8 @@ onload(report){report.page.add_inner_button(__("Reset Filters"),()=>{(report.fil
     if(report && report.columns){
         (report.columns||[]).forEach(col=>{
             const key=String(col.fieldname||"");
-            if(/status|health|level|readiness|quality/.test(key) && !col.__qfap_formatter){
-                const original=col.formatter; col.formatter=(value,row,column,data,default_formatter)=>format_status(value); col.__qfap_formatter=1;
+            if(/status|health|level|readiness|quality/.test(key) && !col.__qorg_formatter){
+                const original=col.formatter; col.formatter=(value,row,column,data,default_formatter)=>format_status(value); col.__qorg_formatter=1;
             }
         });
     }

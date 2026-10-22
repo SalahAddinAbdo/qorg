@@ -1,5 +1,5 @@
 from __future__ import annotations
-from qfap_adds.qfap_adds.project_management.report_link_titles import finalize_report_result
+from qorg.qorg.project_management.report_link_titles import finalize_report_result
 import re
 import frappe
 from frappe import _

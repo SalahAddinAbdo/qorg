@@ -10,8 +10,8 @@ frappe.query_reports["Budget Versus Actual"]={tree:true,name_field:"budget_line"
 formatter(value,row,column,data,df){value=df(value,row,column,data);if(!data)return value;if(data.is_account_row&&column.fieldname==="budget_line")return"";if(column.fieldname==="variance"){const n=Number(data.variance||0);return`<span style="color:${n<0?'#c62828':'#2e7d32'};font-weight:600">${value}</span>`;}if(column.fieldname==="performance_status"){const m={"Over Budget":"red","Unbudgeted Expense":"red","Under Utilized":"orange","Fully Utilized":"blue","Within Budget":"green"};return`<span class="indicator-pill ${m[data.performance_status]||'gray'}">${value}</span>`;}return value;},
 onload(report){bva_toggle_asset_filter(report);report.page.add_inner_button(__("Reset Filters"),()=>{["project","from_date","to_date"].forEach(x=>report.set_filter_value(x,""));report.set_filter_value("accounts",[]);report.set_filter_value("asset_accounts",[]);report.set_filter_value("include_asset_expenses",0);report.set_filter_value("under_utilized_threshold",70);report.set_filter_value("show_account_details",1);report.refresh();});}}
 
-// QFAP KPI card refinement. Column freezing is native through sticky: true.
-;(function qfap_kpi_card_refinement(){
+// Q Org KPI card refinement. Column freezing is native through sticky: true.
+;(function qorg_kpi_card_refinement(){
  const STYLE_ID="qfap-kpi-card-refinement-v282";
  if(document.getElementById(STYLE_ID)) return;
  const style=document.createElement("style");
@@ -26,10 +26,10 @@ onload(report){bva_toggle_asset_filter(report);report.page.add_inner_button(__("
 })();
 
 
-// QFAP Link title display v2.8.4.
-;(function qfap_link_title_display(){
+// Q Org Link title display v2.8.4.
+;(function qorg_link_title_display(){
  const config=frappe.query_reports["Budget Versus Actual"];
- if(!config||config.__qfap_link_titles_wrapped) return;
+ if(!config||config.__qorg_link_titles_wrapped) return;
  const original=config.formatter;
  config.formatter=function(value,row,column,data,default_formatter){
   let rendered=original?original.call(this,value,row,column,data,default_formatter):default_formatter(value,row,column,data);
@@ -41,10 +41,10 @@ onload(report){bva_toggle_asset_filter(report);report.page.add_inner_button(__("
   }
   return rendered;
  };
- config.__qfap_link_titles_wrapped=true;
+ config.__qorg_link_titles_wrapped=true;
 })();
 
-;(function qfap_link_title_style(){
+;(function qorg_link_title_style(){
  const id="qfap-link-title-style-v284";if(document.getElementById(id))return;
  const s=document.createElement("style");s.id=id;s.textContent=`.query-report .qfap-link-title{display:inline;color:var(--text-muted,#6b7280);font-size:11px;line-height:1.25;white-space:normal}.query-report .qfap-link-title-separator{color:var(--text-muted,#6b7280)}`;document.head.appendChild(s);
 })();

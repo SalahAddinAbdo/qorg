@@ -18,8 +18,8 @@ frappe.query_reports["Project Risks and Issues"]={filters:[
 formatter(value,row,column,data,default_formatter){let v=default_formatter(value,row,column,data);if(!data)return v;const s=String(value||"");if(["inherent_level","residual_level","issue_severity","current_level","monitoring_status","attention","exposure_trend"].includes(column.fieldname)){const c=["Critical","Critical Attention","Worsened"].includes(s)?"red":["High","Overdue","Review Required","Unchanged"].includes(s)?"orange":["Low","Resolved","No Immediate Issue","Improved"].includes(s)?"green":"blue";return `<span class="indicator-pill ${c}">${frappe.utils.escape_html(s)}</span>`;}if(column.fieldname==="quality_flags"&&s)return `<span style="color:#b42318;font-weight:600">${v}</span>`;return v;},
 onload(report){report.page.add_inner_button(__("Reset Filters"),()=>{(report.filters||[]).forEach(f=>f.set_value(f.df.fieldname==="view"?"Executive Assurance":(f.df.fieldtype==="Check"?0:null)));report.refresh();});const st=document.createElement("style");st.textContent='.query-report .dt-cell__content{white-space:normal!important;line-height:1.35}.query-report .datatable{border:1px solid var(--border-color);border-radius:10px;overflow:hidden}';document.head.appendChild(st);}}
 
-// QFAP KPI card refinement. Column freezing is native through sticky: true.
-;(function qfap_kpi_card_refinement(){
+// Q Org KPI card refinement. Column freezing is native through sticky: true.
+;(function qorg_kpi_card_refinement(){
  const STYLE_ID="qfap-kpi-card-refinement-v282";
  if(document.getElementById(STYLE_ID)) return;
  const style=document.createElement("style");
@@ -34,10 +34,10 @@ onload(report){report.page.add_inner_button(__("Reset Filters"),()=>{(report.fil
 })();
 
 
-// QFAP Link title display v2.8.4.
-;(function qfap_link_title_display(){
+// Q Org Link title display v2.8.4.
+;(function qorg_link_title_display(){
  const config=frappe.query_reports["Project Risks and Issues"];
- if(!config||config.__qfap_link_titles_wrapped) return;
+ if(!config||config.__qorg_link_titles_wrapped) return;
  const original=config.formatter;
  config.formatter=function(value,row,column,data,default_formatter){
   let rendered=original?original.call(this,value,row,column,data,default_formatter):default_formatter(value,row,column,data);
@@ -49,10 +49,10 @@ onload(report){report.page.add_inner_button(__("Reset Filters"),()=>{(report.fil
   }
   return rendered;
  };
- config.__qfap_link_titles_wrapped=true;
+ config.__qorg_link_titles_wrapped=true;
 })();
 
-;(function qfap_link_title_style(){
+;(function qorg_link_title_style(){
  const id="qfap-link-title-style-v284";if(document.getElementById(id))return;
  const s=document.createElement("style");s.id=id;s.textContent=`.query-report .qfap-link-title{display:inline;color:var(--text-muted,#6b7280);font-size:11px;line-height:1.25;white-space:normal}.query-report .qfap-link-title-separator{color:var(--text-muted,#6b7280)}`;document.head.appendChild(s);
 })();

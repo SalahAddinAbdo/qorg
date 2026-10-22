@@ -97,8 +97,8 @@ frappe.query_reports["Project Portfolio Overview"]={
  onload(report){report.page.add_inner_button(__("Executive"),()=>{report.set_filter_value("view_mode","Executive");report.refresh();},__("Views"));report.page.add_inner_button(__("Donor"),()=>{report.set_filter_value("view_mode","Donor");report.refresh();},__("Views"));report.page.add_inner_button(__("Operations"),()=>{report.set_filter_value("view_mode","Operations");report.refresh();},__("Views"));report.page.add_inner_button(__("Full"),()=>{report.set_filter_value("view_mode","Full");report.refresh();},__("Views"));report.page.add_inner_button(__("Reset Filters"),()=>{["project","project_manager","project_stage","project_health","donor","sector","implementing_partner","governorate","district","funding_status","implementation_modality","company","project_currency"].forEach(f=>report.set_filter_value(f,[]));["from_date","to_date"].forEach(f=>report.set_filter_value(f,""));report.set_filter_value("view_mode","Executive");report.set_filter_value("donor_display_mode","Primary");report.set_filter_value("sector_display_mode","Primary");report.set_filter_value("partner_display_mode","All");report.set_filter_value("location_display_mode","Primary");report.set_filter_value("chart_by","Stage");report.set_filter_value("active_only",1);report.set_filter_value("attention_only",0);report.set_filter_value("include_closed",0);report.refresh();});const style=document.createElement("style");style.textContent=`.query-report .report-summary{gap:12px}.query-report .report-summary .summary-item{min-width:145px;padding:12px 16px;border:1px solid var(--border-color);border-radius:10px;background:var(--card-bg)}.query-report .chart-container{border:1px solid var(--border-color);border-radius:12px;padding:12px;margin-top:8px;background:var(--card-bg)}.query-report .datatable{border-radius:10px;overflow:hidden;border:1px solid var(--border-color)}.dt-cell__content{white-space:normal!important;line-height:1.35}.awesomplete>ul>li small,.multiselect-list .dropdown-menu small{display:block;white-space:normal;color:var(--text-muted);line-height:1.35;margin-top:2px}`;document.head.appendChild(style);}
 };
 
-// QFAP KPI card refinement. Column freezing is native through sticky: true.
-;(function qfap_kpi_card_refinement(){
+// Q Org KPI card refinement. Column freezing is native through sticky: true.
+;(function qorg_kpi_card_refinement(){
  const STYLE_ID="qfap-kpi-card-refinement-v282";
  if(document.getElementById(STYLE_ID)) return;
  const style=document.createElement("style");
@@ -113,10 +113,10 @@ frappe.query_reports["Project Portfolio Overview"]={
 })();
 
 
-// QFAP Link title display v2.8.4.
-;(function qfap_link_title_display(){
+// Q Org Link title display v2.8.4.
+;(function qorg_link_title_display(){
  const config=frappe.query_reports["Project Portfolio Overview"];
- if(!config||config.__qfap_link_titles_wrapped) return;
+ if(!config||config.__qorg_link_titles_wrapped) return;
  const original=config.formatter;
  config.formatter=function(value,row,column,data,default_formatter){
   let rendered=original?original.call(this,value,row,column,data,default_formatter):default_formatter(value,row,column,data);
@@ -128,10 +128,10 @@ frappe.query_reports["Project Portfolio Overview"]={
   }
   return rendered;
  };
- config.__qfap_link_titles_wrapped=true;
+ config.__qorg_link_titles_wrapped=true;
 })();
 
-;(function qfap_link_title_style(){
+;(function qorg_link_title_style(){
  const id="qfap-link-title-style-v284";if(document.getElementById(id))return;
  const s=document.createElement("style");s.id=id;s.textContent=`.query-report .qfap-link-title{display:inline;color:var(--text-muted,#6b7280);font-size:11px;line-height:1.25;white-space:normal}.query-report .qfap-link-title-separator{color:var(--text-muted,#6b7280)}`;document.head.appendChild(s);
 })();
