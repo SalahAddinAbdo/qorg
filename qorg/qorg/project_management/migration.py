@@ -14,8 +14,8 @@ def prepare_standard_project_doctypes():
         updates = {}
         if int(values.custom or 0):
             updates["custom"] = 0
-        if values.module != "QFap Adds":
-            updates["module"] = "QFap Adds"
+        if values.module != "Q Org":
+            updates["module"] = "Q Org"
         if updates:
             frappe.db.set_value("DocType", doctype, updates, update_modified=False)
     frappe.clear_cache()
