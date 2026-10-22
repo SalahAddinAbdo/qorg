@@ -1,9 +1,9 @@
-// QFap adaptive Project, Budget Line, and accounting-dimension controller.
-// Loaded by qfap_form_bootstrap.js only for forms that contain relevant fields.
-window.qfap_initialize_transaction_controller = async function (frm) {
+// Q Org adaptive Project, Budget Line, and accounting-dimension controller.
+// Loaded by qorg_form_bootstrap.js only for forms that contain relevant fields.
+window.qorg_initialize_transaction_controller = async function (frm) {
     frm = frm || window.cur_frm;
-    if (!frm || frm.doctype === "Budget Line" || frm.__qfap_dimensions_v119_loaded) return;
-    frm.__qfap_dimensions_v119_loaded = true;
+    if (!frm || frm.doctype === "Budget Line" || frm.__qorg_dimensions_v119_loaded) return;
+    frm.__qorg_dimensions_v119_loaded = true;
 
     const PROJECT_FIELDS = ["project", "custom_project"];
     const BUDGET_FIELDS = ["budget_line", "custom_budget_line"];
@@ -119,8 +119,8 @@ window.qfap_initialize_transaction_controller = async function (frm) {
     }
 
     function register_parent_dimension_events() {
-        if (frm.__qfap_parent_dimension_events_v118) return;
-        frm.__qfap_parent_dimension_events_v118 = true;
+        if (frm.__qorg_parent_dimension_events_v118) return;
+        frm.__qorg_parent_dimension_events_v118 = true;
         const dynamic_handlers = {};
 
         [...dimension_fields].forEach((fieldname) => {
@@ -136,8 +136,8 @@ window.qfap_initialize_transaction_controller = async function (frm) {
     }
 
     function register_child_events() {
-        if (frm.__qfap_child_dimension_events_v118) return;
-        frm.__qfap_child_dimension_events_v118 = true;
+        if (frm.__qorg_child_dimension_events_v118) return;
+        frm.__qorg_child_dimension_events_v118 = true;
 
         table_fields().forEach((table) => {
             const child_meta = frappe.get_meta(table.options);
@@ -151,8 +151,8 @@ window.qfap_initialize_transaction_controller = async function (frm) {
             if (project_field) {
                 child_handlers[project_field] = async (current, cdt, cdn) => {
                     const row = locals[cdt]?.[cdn];
-                    if (!row || row.__qfap_project_event_running) return;
-                    row.__qfap_project_event_running = true;
+                    if (!row || row.__qorg_project_event_running) return;
+                    row.__qorg_project_event_running = true;
                     try {
                         const budget_field = first_budget_field(child_meta);
                         // A changed or removed project invalidates the previous budget choice.
@@ -161,7 +161,7 @@ window.qfap_initialize_transaction_controller = async function (frm) {
                         }
                         configure_budget_queries();
                     } finally {
-                        delete row.__qfap_project_event_running;
+                        delete row.__qorg_project_event_running;
                     }
                 };
             }
@@ -378,7 +378,7 @@ window.qfap_initialize_transaction_controller = async function (frm) {
     function budget_query(owner_meta, budget_field, project) {
         // Budget Lines are intentionally unavailable until a Project is selected.
         if (!project) {
-            return { filters: { name: "__qfap_project_required__" } };
+            return { filters: { name: "__qorg_project_required__" } };
         }
         const budget_doctype =
             docfield(owner_meta, budget_field)?.options || "Budget Line";
@@ -440,7 +440,7 @@ window.qfap_initialize_transaction_controller = async function (frm) {
             );
             return response?.message?.[budget_project] === project;
         } catch (error) {
-            console.error("QFap Budget Line validation failed", error);
+            console.error("Q Org Budget Line validation failed", error);
             return false;
         }
     }
