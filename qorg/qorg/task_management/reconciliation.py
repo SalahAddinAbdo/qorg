@@ -3,8 +3,8 @@ from __future__ import annotations
 import importlib
 import json, frappe
 from frappe.utils import now
-from qfap_adds.qfap_adds.task_management.services import rebuild_chain
-from qfap_adds.qfap_adds.task_management.services import sync
+from qorg.qorg.task_management.services import rebuild_chain
+from qorg.qorg.task_management.services import sync
 
 def reconcile_all(dry_run=True,task=None,project=None,company=None,batch_size=200):
     filters={}
@@ -27,7 +27,7 @@ def reconcile_all(dry_run=True,task=None,project=None,company=None,batch_size=20
 # Installation and integration diagnostics
 def task_integration_health():
     required_doctypes = [
-        "Task Management Settings", "Task Assignment Request", "QFAP Managed Task Share",
+        "Task Management Settings", "Task Assignment Request", "Managed Task Share",
         "Task Management Role Row", "Task Summary Recipient",
     ]
     doctypes = {name: bool(frappe.db.exists("DocType", name)) for name in required_doctypes}
@@ -37,7 +37,7 @@ def task_integration_health():
     legacy_client = frappe.get_all("Client Script", filters={"enabled": 1, "dt": "Task"}, pluck="name") if frappe.db.exists("DocType", "Client Script") else []
     report_import = True
     try:
-        importlib.import_module("qfap_adds.qfap_adds.report.employees_task_tracker.employees_task_tracker")
+        importlib.import_module("qorg.qorg.report.employees_task_tracker.employees_task_tracker")
     except Exception:
         report_import = False
     result = {
