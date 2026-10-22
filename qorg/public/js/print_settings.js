@@ -13,7 +13,7 @@ frappe.ui.form.on("Print Settings", {
 
     qorg_apply_formats(frm) {
         frappe.call({
-            method: "qfap_adds.qfap_adds.project_management.print_settings_integration.apply_print_formats",
+            method: "qorg.qorg.project_management.print_settings_integration.apply_print_formats",
             freeze: true,
             freeze_message: __("Applying managed print formats..."),
             callback() {
