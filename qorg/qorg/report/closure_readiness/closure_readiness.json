@@ -5,7 +5,7 @@
  "ref_doctype": "Project Closure",
  "report_type": "Script Report",
  "is_standard": "Yes",
- "module": "Q Org",
+ "module": "QOrg",
  "disabled": 0,
  "prepared_report": 0,
  "roles": [
