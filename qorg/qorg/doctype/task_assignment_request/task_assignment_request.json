@@ -1,0 +1,351 @@
+{
+  "doctype": "DocType",
+  "name": "Task Assignment Request",
+  "module": "QFap Adds",
+  "autoname": "naming_series:",
+  "title_field": "subject",
+  "search_fields": "subject,requested_assignee,project,created_task",
+  "track_changes": 1,
+  "allow_rename": 0,
+  "field_order": [
+    "request_details",
+    "request_type",
+    "naming_series",
+    "workflow_state",
+    "layout_v2_column_break_1",
+    "requested_by_user",
+    "requested_by_employee",
+    "layout_v2_column_break_2",
+    "requested_on",
+    "task_data",
+    "subject",
+    "requested_assignee",
+    "company",
+    "layout_v2_column_break_3",
+    "project",
+    "task_type",
+    "priority",
+    "layout_v2_column_break_4",
+    "parent_task",
+    "exp_start_date",
+    "exp_end_date",
+    "layout_v2_section_break_5",
+    "expected_days",
+    "expected_time",
+    "layout_v2_section_break_6",
+    "description",
+    "layout_v2_section_break_7",
+    "request_reason",
+    "decision",
+    "decision_by",
+    "layout_v2_column_break_8",
+    "decision_on",
+    "layout_v2_column_break_9",
+    "application_status",
+    "created_task",
+    "layout_v2_section_break_10",
+    "decision_remarks",
+    "layout_v2_section_break_11",
+    "application_error",
+    "application_fingerprint",
+    "duplicate_key"
+  ],
+  "fields": [
+    {
+      "fieldname": "request_details",
+      "label": "Request Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "request_type",
+      "label": "Request Type",
+      "fieldtype": "Select",
+      "options": "Assign New Task",
+      "default": "Assign New Task",
+      "read_only": 1
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "TAR-.YYYY.-.#####",
+      "default": "TAR-.YYYY.-.#####",
+      "reqd": 1,
+      "no_copy": 1,
+      "description": "Series used to generate the Task Assignment Request ID."
+    },
+    {
+      "fieldname": "workflow_state",
+      "label": "Workflow State",
+      "fieldtype": "Link",
+      "options": "Workflow State",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "requested_by_user",
+      "label": "Requested By User",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "requested_by_employee",
+      "label": "Requested By Employee",
+      "fieldtype": "Link",
+      "options": "Employee",
+      "read_only": 1
+    },
+    {
+      "fieldname": "requested_on",
+      "label": "Requested On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "task_data",
+      "label": "Task to Create",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "subject",
+      "label": "Task Subject",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "description": "Enter a clear title for the Task that will be created after approval."
+    },
+    {
+      "fieldname": "description",
+      "label": "Description",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "requested_assignee",
+      "label": "Employee",
+      "fieldtype": "Link",
+      "options": "Employee",
+      "reqd": 1,
+      "description": "Select the Employee who will receive the approved Task."
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project",
+      "reqd": 1,
+      "description": "Project to which the approved Task will belong."
+    },
+    {
+      "fieldname": "parent_task",
+      "label": "Main Task",
+      "fieldtype": "Link",
+      "options": "Task"
+    },
+    {
+      "fieldname": "priority",
+      "label": "Priority",
+      "fieldtype": "Select",
+      "options": "Low\nMedium\nHigh\nUrgent",
+      "default": "Medium",
+      "reqd": 1,
+      "description": "Priority assigned to the new Task."
+    },
+    {
+      "fieldname": "exp_start_date",
+      "label": "Expected Start Date",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "description": "Planned start date for the new Task."
+    },
+    {
+      "fieldname": "exp_end_date",
+      "label": "Expected End Date",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "description": "Planned end date. It cannot be before the start date."
+    },
+    {
+      "fieldname": "expected_time",
+      "label": "Expected Hours",
+      "fieldtype": "Float",
+      "non_negative": 1,
+      "reqd": 1,
+      "description": "Proposed automatically from the date range and remains editable before submission."
+    },
+    {
+      "fieldname": "request_reason",
+      "label": "Request Reason",
+      "fieldtype": "Small Text",
+      "reqd": 1,
+      "description": "Explain why this Task assignment requires supervisor approval."
+    },
+    {
+      "fieldname": "decision",
+      "label": "Decision and Application",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "decision_by",
+      "label": "Decision By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "decision_on",
+      "label": "Decision On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "decision_remarks",
+      "label": "Decision Remarks",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "created_task",
+      "label": "Created Task",
+      "fieldtype": "Link",
+      "options": "Task",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "application_status",
+      "label": "Application Status",
+      "fieldtype": "Select",
+      "options": "Not Applied\nApplied\nFailed",
+      "default": "Not Applied",
+      "read_only": 1
+    },
+    {
+      "fieldname": "application_error",
+      "label": "Application Error",
+      "fieldtype": "Long Text",
+      "read_only": 1
+    },
+    {
+      "fieldname": "application_fingerprint",
+      "label": "Application Fingerprint",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "hidden": 1,
+      "unique": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "duplicate_key",
+      "label": "Duplicate Key",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "hidden": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "fetch_from": "requested_assignee.company",
+      "fetch_if_empty": 1,
+      "description": "Company for the new Task. It is fetched from the selected Employee when available."
+    },
+    {
+      "fieldname": "task_type",
+      "label": "Task Type",
+      "fieldtype": "Link",
+      "options": "Task Type",
+      "reqd": 1,
+      "description": "Select the Task Type required by the Task form."
+    },
+    {
+      "fieldname": "expected_days",
+      "label": "Expected Days",
+      "fieldtype": "Float",
+      "read_only": 1,
+      "non_negative": 1,
+      "description": "Calculated automatically from the inclusive expected date range."
+    },
+    {
+      "fieldname": "layout_v2_column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "layout_v2_column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "layout_v2_column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "layout_v2_column_break_4",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "layout_v2_section_break_5",
+      "fieldtype": "Section Break",
+      "label": "Task Schedule"
+    },
+    {
+      "fieldname": "layout_v2_section_break_6",
+      "fieldtype": "Section Break",
+      "label": "Task Description"
+    },
+    {
+      "fieldname": "layout_v2_section_break_7",
+      "fieldtype": "Section Break",
+      "label": "Request Justification"
+    },
+    {
+      "fieldname": "layout_v2_column_break_8",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "layout_v2_column_break_9",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "layout_v2_section_break_10",
+      "fieldtype": "Section Break",
+      "label": "Decision Remarks"
+    },
+    {
+      "fieldname": "layout_v2_section_break_11",
+      "fieldtype": "Section Break",
+      "label": "Application Error",
+      "depends_on": "eval:doc.application_error"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Employee",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "email": 1,
+      "print": 1
+    },
+    {
+      "role": "Task Management Administrator",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "print": 1,
+      "share": 1
+    },
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "print": 1,
+      "share": 1
+    }
+  ]
+}
