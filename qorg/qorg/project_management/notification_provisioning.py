@@ -32,7 +32,7 @@ SETTINGS_HELP = [
 
 
 def _ensure_template(key, label, doctype, description):
-    name="QFAP - "+label
+    name="QOrg - "+label
     if frappe.db.exists("Notification",name):
         return name
     meta=frappe.get_meta("Notification")
