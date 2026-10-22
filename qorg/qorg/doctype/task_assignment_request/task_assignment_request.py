@@ -7,9 +7,9 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import date_diff, flt, getdate, now
 
-from qfap_adds.qfap_adds.task_management.scope import can_manage_employee, employee_for_user
-from qfap_adds.qfap_adds.task_management.services import validate_period, validate_request_duplicate, validate_task_tree
-from qfap_adds.qfap_adds.task_management.settings import get_settings
+from qorg.qorg.task_management.scope import can_manage_employee, employee_for_user
+from qorg.qorg.task_management.services import validate_period, validate_request_duplicate, validate_task_tree
+from qorg.qorg.task_management.settings import get_settings
 
 DECISION_STATES = ("Approved", "Rejected")
 LOCKED_STATES = ("Approved", "Rejected", "Applied", "Application Failed")

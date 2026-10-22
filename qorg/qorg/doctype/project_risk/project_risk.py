@@ -3,10 +3,10 @@ import frappe
 from frappe import _
 from frappe.model.document import Document
 from frappe.utils import add_months, add_days, flt, nowdate
-from qfap_adds.qfap_adds.project_management.settings import get_project_cycle_settings
-from qfap_adds.qfap_adds.project_management.services.common import numeric_rating, validate_project_link, validate_team_employee
-from qfap_adds.qfap_adds.project_management.services.project_summary import rebuild_project_summary
-from qfap_adds.qfap_adds.project_management.services.project_reconciliation import reconcile_document_projects, reconcile_deleted_document, reconcile_project
+from qorg.qorg.project_management.settings import get_project_cycle_settings
+from qorg.qorg.project_management.services.common import numeric_rating, validate_project_link, validate_team_employee
+from qorg.qorg.project_management.services.project_summary import rebuild_project_summary
+from qorg.qorg.project_management.services.project_reconciliation import reconcile_document_projects, reconcile_deleted_document, reconcile_project
 class ProjectRisk(Document):
     def before_insert(self):
         self.assessment_date=self.assessment_date or nowdate()

@@ -3,9 +3,9 @@ import frappe
 from frappe import _
 from frappe.model.document import Document
 from frappe.utils import flt
-from qfap_adds.qfap_adds.project_management.api import validate_project_team_employee
+from qorg.qorg.project_management.api import validate_project_team_employee
 
-from qfap_adds.qfap_adds.project_management.services.project_reconciliation import reconcile_document_projects, reconcile_deleted_document, reconcile_project
+from qorg.qorg.project_management.services.project_reconciliation import reconcile_document_projects, reconcile_deleted_document, reconcile_project
 class ProjectIndicator(Document):
     def autoname(self):
         self._set_code()

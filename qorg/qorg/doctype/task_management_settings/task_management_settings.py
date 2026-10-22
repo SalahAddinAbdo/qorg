@@ -67,7 +67,7 @@ class TaskManagementSettings(Document):
         if not self.summary_schedule_enabled:
             self.summary_next_send_on = None
             return
-        from qfap_adds.qfap_adds.task_management.scheduler import get_next_send_datetime
+        from qorg.qorg.task_management.scheduler import get_next_send_datetime
         self.summary_next_send_on = get_next_send_datetime(self)
 
 

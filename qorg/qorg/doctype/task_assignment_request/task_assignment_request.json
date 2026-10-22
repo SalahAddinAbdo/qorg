@@ -1,7 +1,7 @@
 {
   "doctype": "DocType",
   "name": "Task Assignment Request",
-  "module": "QFap Adds",
+  "module": "Q Org",
   "autoname": "naming_series:",
   "title_field": "subject",
   "search_fields": "subject,requested_assignee,project,created_task",

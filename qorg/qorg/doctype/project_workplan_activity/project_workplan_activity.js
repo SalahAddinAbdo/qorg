@@ -66,7 +66,7 @@ async function load_project_team_employees(frm) {
     if (!frm.doc.project) return;
 
     const response = await frappe.call({
-        method: "qfap_adds.qfap_adds.project_management.api.get_project_team_employees",
+        method: "qorg.qorg.project_management.api.get_project_team_employees",
         args: {project: frm.doc.project},
         freeze: false
     });
