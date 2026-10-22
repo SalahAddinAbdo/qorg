@@ -3,9 +3,9 @@ from __future__ import annotations
 import frappe
 from frappe.utils import date_diff, flt, getdate, nowdate
 
-from qfap_adds.qfap_adds.task_management.scope import can_manage_employee, employee_for_user
-from qfap_adds.qfap_adds.task_management.services import rebuild_chain, sync, validate_period, validate_task_tree
-from qfap_adds.qfap_adds.task_management.settings import get_settings
+from qorg.qorg.task_management.scope import can_manage_employee, employee_for_user
+from qorg.qorg.task_management.services import rebuild_chain, sync, validate_period, validate_task_tree
+from qorg.qorg.task_management.settings import get_settings
 
 PROTECTED_FIELDS = (
     "status", "project", "subject", "type", "priority", "custom_assign_to",
@@ -19,7 +19,7 @@ def _validate_completed_lock(doc):
     if doc.is_new():
         return
     old = doc.get_doc_before_save()
-    if not old or not int(old.get("custom_task_locked") or 0) or getattr(doc.flags, "qfap_reopen", False):
+    if not old or not int(old.get("custom_task_locked") or 0) or getattr(doc.flags, "qorg_reopen", False):
         return
     changed = [field for field in PROTECTED_FIELDS if str(old.get(field) or "") != str(doc.get(field) or "")]
     if changed:
