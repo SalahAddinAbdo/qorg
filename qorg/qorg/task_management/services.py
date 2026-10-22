@@ -6,8 +6,8 @@ import frappe
 from frappe.share import add, remove
 from frappe.utils import date_diff, flt, getdate, now
 
-from qfap_adds.qfap_adds.task_management.scope import supervisors
-from qfap_adds.qfap_adds.task_management.settings import get_settings
+from qorg.qorg.task_management.scope import supervisors
+from qorg.qorg.task_management.settings import get_settings
 
 OPEN_REQUEST_STATES = ["Draft", "Pending Approval", "Approved", "Application Failed"]
 
@@ -180,7 +180,7 @@ def sync(task):
         return
     wanted = _desired(task)
     trackers = frappe.get_all(
-        "QFAP Managed Task Share", filters={"task": task.name, "active": 1},
+        "Managed Task Share", filters={"task": task.name, "active": 1},
         fields=["name", "user", "docshare"], limit_page_length=10000,
     )
     tracked = {row.user: row for row in trackers}
@@ -190,7 +190,7 @@ def sync(task):
             if tracker.docshare and frappe.db.exists("DocShare", tracker.docshare):
                 # Managed shares are always read-only. Manual shares remain untouched.
                 frappe.db.set_value("DocShare", tracker.docshare, "write", 0, update_modified=False)
-            frappe.db.set_value("QFAP Managed Task Share", tracker.name, "last_reconciled_on", now(), update_modified=False)
+            frappe.db.set_value("Managed Task Share", tracker.name, "last_reconciled_on", now(), update_modified=False)
             continue
         manual_share = frappe.db.get_value("DocShare", {"share_doctype": "Task", "share_name": task.name, "user": user}, "name")
         if manual_share and int(settings.protect_manual_shares or 0):
@@ -199,7 +199,7 @@ def sync(task):
             add("Task", task.name, user, read=1, write=0, share=0, notify=0)
         share_name = frappe.db.get_value("DocShare", {"share_doctype": "Task", "share_name": task.name, "user": user}, "name")
         frappe.get_doc({
-            "doctype": "QFAP Managed Task Share", "task": task.name, "user": user,
+            "doctype": "Managed Task Share", "task": task.name, "user": user,
             "employee": employee, "reason": reason, "docshare": share_name,
             "active": 1, "last_reconciled_on": now(),
         }).insert(ignore_permissions=True)
@@ -212,4 +212,4 @@ def sync(task):
             current = frappe.db.get_value("DocShare", row.docshare, ["share_doctype", "share_name", "user"], as_dict=True)
             if current and current.share_doctype == "Task" and current.share_name == task.name and current.user == row.user:
                 remove("Task", task.name, row.user)
-        frappe.db.set_value("QFAP Managed Task Share", row.name, "active", 0, update_modified=False)
+        frappe.db.set_value("Managed Task Share", row.name, "active", 0, update_modified=False)
