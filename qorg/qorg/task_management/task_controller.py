@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from qfap_adds.qfap_adds.task_management.services import validate_period
-from qfap_adds.qfap_adds.task_management.settings import get_settings
+from qorg.qorg.task_management.services import validate_period
+from qorg.qorg.task_management.settings import get_settings
 
 
 class TaskProjectPeriodPolicyMixin:
