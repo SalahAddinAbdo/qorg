@@ -5,7 +5,7 @@ frappe.ui.form.on("Task Management Settings", {
     frm.add_custom_button(__("Preview Task Summary"), () => open_summary_dialog(frm, "preview"), __("Task Summary"));
     frm.add_custom_button(__("Send Test Email"), () => open_summary_dialog(frm, "test"), __("Task Summary"));
     frm.add_custom_button(__("Send Task Summary Now"), () => {
-      frappe.confirm(__("Send the Task summary now using the current settings?"), () => frappe.call({method:"qfap_adds.qfap_adds.task_management.scheduler.send_task_summary_now",freeze:true,callback:() => frm.reload_doc()}));
+      frappe.confirm(__("Send the Task summary now using the current settings?"), () => frappe.call({method:"qorg.qorg.task_management.scheduler.send_task_summary_now",freeze:true,callback:() => frm.reload_doc()}));
     }, __("Task Summary"));
   },
   summary_schedule_enabled(frm) { frm.trigger("toggle_schedule_fields"); },
@@ -26,7 +26,7 @@ function open_summary_dialog(frm, mode) {
   ];
   if (mode==="test") fields.push({fieldname:"recipient",label:__("Test Recipient"),fieldtype:"Data",options:"Email",reqd:1});
   const dialog=new frappe.ui.Dialog({title:mode==="preview"?__("Preview Task Summary"):__("Send Test Email"),fields,primary_action_label:mode==="preview"?__("Preview"):__("Send"),primary_action(values){
-    const method=mode==="preview"?"qfap_adds.qfap_adds.task_management.scheduler.preview_task_summary":"qfap_adds.qfap_adds.task_management.scheduler.send_test_summary";
+    const method=mode==="preview"?"qorg.qorg.task_management.scheduler.preview_task_summary":"qorg.qorg.task_management.scheduler.send_test_summary";
     frappe.call({method,args:values,freeze:true,callback:r=>{
       if (mode==="preview") {
         const preview=new frappe.ui.Dialog({title:__("Task Summary Preview"),size:"extra-large",fields:[{fieldname:"html",fieldtype:"HTML"}]});
