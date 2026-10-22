@@ -111,11 +111,11 @@ def _read_template(profile):
 
 def _profile_header(rule):
     values = {
-        "qfap_include_letter_head": cint(rule.include_letter_head),
-        "qfap_include_workflow_status": cint(rule.include_workflow_status),
-        "qfap_include_signatures": cint(rule.include_signatures),
-        "qfap_include_audit_information": cint(rule.include_audit_information),
-        "qfap_include_attachments": cint(rule.include_attachments),
+        "qorg_include_letter_head": cint(rule.include_letter_head),
+        "qorg_include_workflow_status": cint(rule.include_workflow_status),
+        "qorg_include_signatures": cint(rule.include_signatures),
+        "qorg_include_audit_information": cint(rule.include_audit_information),
+        "qorg_include_attachments": cint(rule.include_attachments),
     }
     lines = ["{# Managed by Q Org Print Settings. Do not edit this generated copy. #}"]
     for key, value in values.items():
@@ -134,7 +134,7 @@ def _upsert_print_format(name, doctype, html):
         "custom_format": 1,
         "disabled": 0,
         "html": html,
-        "module": "QFap Adds",
+        "module": "Q Org",
         "standard": "No",
     }
     if frappe.db.exists("Print Format", name):
