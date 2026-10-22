@@ -1,11 +1,11 @@
-app_name = "qfap_adds"
+app_name = "qorg"
 app_title = "Q Org"
 app_publisher = "Q Org"
 app_description = "Audit-focused extensions for ERPNext"
 app_email = ""
-app_license = "MIT"
+app_license = "GPL-3.0"
 
-app_logo_url = "/assets/qfap_adds/images/qfap_project_cycle.png"
+app_logo_url = "/assets/qorg/images/qorg_project_cycle.png"
 app_home = "/desk/q-management-hub"
 
 add_to_apps_screen = [{
@@ -19,12 +19,12 @@ add_to_apps_screen = [{
 required_apps = ["erpnext"]
 
 app_include_js = [
-    "/assets/qfap_adds/js/qfap_form_bootstrap.js",
+    "/assets/qorg/js/qorg_form_bootstrap.js",
 ]
 
 extend_doctype_class = {
     "Task": [
-        "qfap_adds.qfap_adds.task_management.task_controller.TaskProjectPeriodPolicyMixin"
+        "qorg.qorg.task_management.task_controller.TaskProjectPeriodPolicyMixin"
     ],
 }
 
@@ -40,33 +40,33 @@ doctype_js = {
 
 doc_events = {
     "Print Settings": {
-        "validate": "qfap_adds.qfap_adds.project_management.print_settings_integration.validate_print_settings",
+        "validate": "qorg.qorg.project_management.print_settings_integration.validate_print_settings",
         
     },
     "Project Risk": {
         "on_update": (
-            "qfap_adds.qfap_adds.project_management.notification_engine."
+            "qorg.qorg.project_management.notification_engine."
             "process_project_notification_on_update"
         )
     },
     "Task": {
-        "before_validate": "qfap_adds.qfap_adds.task_management.events.before_validate",
-        "on_update": "qfap_adds.qfap_adds.task_management.events.on_update",
-        "after_delete": "qfap_adds.qfap_adds.task_management.events.after_delete",
+        "before_validate": "qorg.qorg.task_management.events.before_validate",
+        "on_update": "qorg.qorg.task_management.events.on_update",
+        "after_delete": "qorg.qorg.task_management.events.after_delete",
     },
     "Workflow": {
         "validate": (
-            "qfap_adds.qfap_adds.workflow.provisioning."
+            "qorg.qorg.workflow.provisioning."
             "validate_workflow_configuration"
         ),
         "on_update": (
-            "qfap_adds.qfap_adds.workflow.provisioning."
+            "qorg.qorg.workflow.provisioning."
             "ensure_current_responsible_user"
         ),
     },
     "*": {
         "validate": (
-            "qfap_adds.qfap_adds.workflow.permissions."
+            "qorg.qorg.workflow.permissions."
             "validate_responsible_user"
         ),
     },
@@ -102,54 +102,54 @@ fixtures = [
 ]
 
 before_migrate = [
-    "qfap_adds.qfap_adds.project_management.identity_migration.prepare_q_org_identity",
-    "qfap_adds.qfap_adds.project_management.workspace_migration.prepare_q_management_hub",
+    "qorg.qorg.project_management.identity_migration.prepare_q_org_identity",
+    "qorg.qorg.project_management.workspace_migration.prepare_q_management_hub",
 ]
 
 after_install = [
-    "qfap_adds.qfap_adds.project_management.print_settings_integration.provision_print_settings",
-    "qfap_adds.qfap_adds.install.after_install",
-    "qfap_adds.qfap_adds.task_management.provisioning.provision_task_integration",
-    "qfap_adds.qfap_adds.project_management.provisioning.provision_project_management",
-    "qfap_adds.qfap_adds.project_management.workflow_provisioning.provision_project_workflows",
-    "qfap_adds.qfap_adds.project_management.notification_provisioning.provision_project_notifications",
-    "qfap_adds.qfap_adds.project_management.navigation_provisioning.provision_q_org_navigation",
+    "qorg.qorg.project_management.print_settings_integration.provision_print_settings",
+    "qorg.qorg.install.after_install",
+    "qorg.qorg.task_management.provisioning.provision_task_integration",
+    "qorg.qorg.project_management.provisioning.provision_project_management",
+    "qorg.qorg.project_management.workflow_provisioning.provision_project_workflows",
+    "qorg.qorg.project_management.notification_provisioning.provision_project_notifications",
+    "qorg.qorg.project_management.navigation_provisioning.provision_q_org_navigation",
 ]
 
 after_migrate = [
-    "qfap_adds.qfap_adds.project_management.print_settings_integration.provision_print_settings",
-    "qfap_adds.qfap_adds.install.after_migrate",
-    "qfap_adds.printing.provisioning.provision_universal_print_formats",
-    "qfap_adds.qfap_adds.project_management.print_settings_cleanup.remove_legacy_print_settings",
-    "qfap_adds.qfap_adds.task_management.provisioning.provision_task_integration",
-    "qfap_adds.qfap_adds.project_management.provisioning.provision_project_management",
-    "qfap_adds.qfap_adds.project_management.workflow_provisioning.provision_project_workflows",
-    "qfap_adds.qfap_adds.project_management.notification_provisioning.provision_project_notifications",
-    "qfap_adds.qfap_adds.project_management.navigation_provisioning.provision_q_org_navigation",
+    "qorg.qorg.project_management.print_settings_integration.provision_print_settings",
+    "qorg.qorg.install.after_migrate",
+    "qorg.printing.provisioning.provision_universal_print_formats",
+    "qorg.qorg.project_management.print_settings_cleanup.remove_legacy_print_settings",
+    "qorg.qorg.task_management.provisioning.provision_task_integration",
+    "qorg.qorg.project_management.provisioning.provision_project_management",
+    "qorg.qorg.project_management.workflow_provisioning.provision_project_workflows",
+    "qorg.qorg.project_management.notification_provisioning.provision_project_notifications",
+    "qorg.qorg.project_management.navigation_provisioning.provision_q_org_navigation",
 ]
 
 scheduler_events = {
     "daily": [
-        "qfap_adds.qfap_adds.project_management.notification_engine.run_daily_project_notifications",
-        "qfap_adds.qfap_adds.project_management.integrity_jobs.run_daily_project_reconciliation",
+        "qorg.qorg.project_management.notification_engine.run_daily_project_notifications",
+        "qorg.qorg.project_management.integrity_jobs.run_daily_project_reconciliation",
     ],
     "cron": {
         "*/15 * * * *": [
-            "qfap_adds.qfap_adds.task_management.scheduler.run_scheduled_task_summary"
+            "qorg.qorg.task_management.scheduler.run_scheduled_task_summary"
         ]
     },
 }
 
 permission_query_conditions = {
-    "Task": "qfap_adds.qfap_adds.task_management.permissions.task_query_condition",
+    "Task": "qorg.qorg.task_management.permissions.task_query_condition",
     "Task Assignment Request": (
-        "qfap_adds.qfap_adds.task_management.permissions.request_query_condition"
+        "qorg.qorg.task_management.permissions.request_query_condition"
     ),
 }
 
 has_permission = {
-    "Task": "qfap_adds.qfap_adds.task_management.permissions.has_task_permission",
+    "Task": "qorg.qorg.task_management.permissions.has_task_permission",
     "Task Assignment Request": (
-        "qfap_adds.qfap_adds.task_management.permissions.has_request_permission"
+        "qorg.qorg.task_management.permissions.has_request_permission"
     ),
 }
