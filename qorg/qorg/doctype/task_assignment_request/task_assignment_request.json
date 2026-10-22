@@ -11,7 +11,6 @@
     "request_details",
     "request_type",
     "naming_series",
-    "workflow_state",
     "layout_v2_column_break_1",
     "requested_by_user",
     "requested_by_employee",
@@ -73,14 +72,6 @@
       "reqd": 1,
       "no_copy": 1,
       "description": "Series used to generate the Task Assignment Request ID."
-    },
-    {
-      "fieldname": "workflow_state",
-      "label": "Workflow State",
-      "fieldtype": "Link",
-      "options": "Workflow State",
-      "read_only": 1,
-      "no_copy": 1
     },
     {
       "fieldname": "requested_by_user",
