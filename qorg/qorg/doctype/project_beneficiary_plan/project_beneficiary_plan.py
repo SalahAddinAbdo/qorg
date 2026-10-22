@@ -3,8 +3,8 @@ import frappe
 from frappe import _
 from frappe.model.document import Document
 from frappe.utils import flt, nowdate
-from qfap_adds.qfap_adds.project_management.services.common import unique_child_rows
-from qfap_adds.qfap_adds.project_management.services.project_reconciliation import reconcile_document_projects, reconcile_deleted_document, reconcile_project
+from qorg.qorg.project_management.services.common import unique_child_rows
+from qorg.qorg.project_management.services.project_reconciliation import reconcile_document_projects, reconcile_deleted_document, reconcile_project
 class ProjectBeneficiaryPlan(Document):
     def validate(self):
         unique_child_rows(self,"beneficiary_breakdown",("governorate","district","beneficiary_type","gender","age_group","disability_status"),"Beneficiary Breakdown")

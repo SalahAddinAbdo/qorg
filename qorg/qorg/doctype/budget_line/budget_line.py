@@ -6,7 +6,7 @@ from frappe.utils import flt
 from frappe.utils.nestedset import NestedSet
 
 
-from qfap_adds.qfap_adds.project_management.services.project_reconciliation import reconcile_document_projects, reconcile_deleted_document, reconcile_project
+from qorg.qorg.project_management.services.project_reconciliation import reconcile_document_projects, reconcile_deleted_document, reconcile_project
 class BudgetLine(NestedSet):
     nsm_parent_field = "parent_budget_line"
 

@@ -3,7 +3,7 @@ import frappe
 from frappe import _
 from frappe.model.document import Document
 from frappe.utils import flt
-from qfap_adds.qfap_adds.project_management.services.project_reconciliation import reconcile_document_projects, reconcile_deleted_document, reconcile_project
+from qorg.qorg.project_management.services.project_reconciliation import reconcile_document_projects, reconcile_deleted_document, reconcile_project
 class IndicatorTargetPlan(Document):
     def validate(self):
         indicator=frappe.db.get_value("Project Indicator",self.indicator,["project","status","life_of_project_target"],as_dict=True)

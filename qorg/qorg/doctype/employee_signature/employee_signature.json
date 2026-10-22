@@ -7,7 +7,7 @@
   "istable": 0,
   "editable_grid": 1,
   "track_changes": 0,
-  "module": "QFap Adds",
+  "module": "Q Org",
   "autoname": "format: {full_name}",
   "naming_rule": "Expression (old style)",
   "title_field": "full_name",

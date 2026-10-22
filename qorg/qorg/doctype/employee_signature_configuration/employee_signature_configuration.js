@@ -7,7 +7,7 @@ frappe.ui.form.on("Employee Signature Configuration", {
         frm.add_custom_button(__("Provision Signature Fields"), async () => {
             if (frm.is_new() || frm.is_dirty()) await frm.save();
             await frappe.call({
-                method: "qfap_adds.qfap_adds.api.signature_configuration.provision_fields",
+                method: "qorg.qorg.api.signature_configuration.provision_fields",
                 args: { configuration: frm.doc.name },
                 freeze: true,
                 freeze_message: __("Creating and arranging signature fields..."),

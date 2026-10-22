@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from frappe.model.document import Document
-from qfap_adds.qfap_adds.signatures.provisioning import validate_configuration, provision_signature_fields
+from qorg.qorg.signatures.provisioning import validate_configuration, provision_signature_fields
 
 
 class EmployeeSignatureConfiguration(Document):

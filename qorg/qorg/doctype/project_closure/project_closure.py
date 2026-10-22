@@ -3,10 +3,10 @@ import frappe
 from frappe import _
 from frappe.model.document import Document
 from frappe.utils import flt, nowdate
-from qfap_adds.qfap_adds.project_management.settings import get_project_cycle_settings
-from qfap_adds.qfap_adds.project_management.services.readiness import assess as assess_closure
-from qfap_adds.qfap_adds.project_management.services.common import average_ratings, validate_dates, validate_team_employee, unique_child_rows
-from qfap_adds.qfap_adds.project_management.services.project_reconciliation import reconcile_document_projects, reconcile_deleted_document, reconcile_project
+from qorg.qorg.project_management.settings import get_project_cycle_settings
+from qorg.qorg.project_management.services.readiness import assess as assess_closure
+from qorg.qorg.project_management.services.common import average_ratings, validate_dates, validate_team_employee, unique_child_rows
+from qorg.qorg.project_management.services.project_reconciliation import reconcile_document_projects, reconcile_deleted_document, reconcile_project
 class ProjectClosure(Document):
     def validate(self):
         validate_dates(self.planned_closure_date,self.actual_closure_date,"Planned Closure Date","Actual Closure Date")
