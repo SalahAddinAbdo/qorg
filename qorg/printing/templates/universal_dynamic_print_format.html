@@ -1,9 +1,9 @@
-{# QFAP PRINT PROFILE RUNTIME OPTIONS #}
-{% set qfap_include_letter_head = qfap_include_letter_head if qfap_include_letter_head is defined else true %}
-{% set qfap_include_workflow_status = qfap_include_workflow_status if qfap_include_workflow_status is defined else true %}
-{% set qfap_include_signatures = qfap_include_signatures if qfap_include_signatures is defined else true %}
-{% set qfap_include_audit_information = qfap_include_audit_information if qfap_include_audit_information is defined else false %}
-{% set qfap_include_attachments = qfap_include_attachments if qfap_include_attachments is defined else true %}
+{# Q ORG PRINT PROFILE RUNTIME OPTIONS #}
+{% set qorg_include_letter_head = qorg_include_letter_head if qorg_include_letter_head is defined else true %}
+{% set qorg_include_workflow_status = qorg_include_workflow_status if qorg_include_workflow_status is defined else true %}
+{% set qorg_include_signatures = qorg_include_signatures if qorg_include_signatures is defined else true %}
+{% set qorg_include_audit_information = qorg_include_audit_information if qorg_include_audit_information is defined else false %}
+{% set qorg_include_attachments = qorg_include_attachments if qorg_include_attachments is defined else true %}
 
 {# =========================================================
    UNIVERSAL DYNAMIC PRINT FORMAT
@@ -24,7 +24,7 @@
 {% set lang = frappe.form_dict.get('_lang') or frappe.local.lang or 'en' %}
 {% set rtl_languages = ['العربية', 'اردو', 'پارسی', 'ar', 'ur', 'fa'] %}
 {% set direction = 'rtl' if lang in rtl_languages else 'ltr' %}
-{% set header_status = (doc.get('workflow_state') or doc.get('status') or '') if qfap_include_workflow_status else '' %}
+{% set header_status = (doc.get('workflow_state') or doc.get('status') or '') if qorg_include_workflow_status else '' %}
 
 {# =========================================================
    DOCUMENT METADATA
@@ -118,7 +118,7 @@
     'Employee Signature Configuration',
     filters={'document_type': doc.doctype, 'enabled': 1},
     fields=['name'], order_by='modified desc', page_length=1
-) if qfap_include_signatures else [] %}
+) if qorg_include_signatures else [] %}
 {% set signature_configuration_name = signature_configuration_list[0].name if signature_configuration_list else '' %}
 {% set signature_configuration_doc = frappe.get_doc('Employee Signature Configuration', signature_configuration_name) if signature_configuration_name else none %}
 {% set configured_all_manual = signature_configuration_doc and signature_configuration_doc.get('print_all_signatures_as_manual') == 1 %}
@@ -321,7 +321,7 @@
 </style>
 
 <div class="print-page page-break first-print-page">
-{% if qfap_include_letter_head and not no_letterhead and letter_head %}
+{% if qorg_include_letter_head and not no_letterhead and letter_head %}
     {% if print_settings and print_settings.repeat_header_footer %}
         <div id="header-html" class="hidden-pdf letter-head-container"><div class="letter-head">{{ letter_head }}</div></div>
     {% else %}
@@ -363,7 +363,7 @@
                 and not is_employee_signature_link
                 and not is_signature_control_field
                 and has_value
-                and (qfap_include_attachments or df.fieldtype not in ['Attach', 'Attach Image', 'Image'])
+                and (qorg_include_attachments or df.fieldtype not in ['Attach', 'Attach Image', 'Image'])
             %}
                 {% set visible.fields = visible.fields + [df] %}
             {% endif %}
@@ -410,7 +410,7 @@
                                     and cdf.fieldname not in ['page_break', 'custom_page_break']
                                     and cdf.fieldtype not in excluded_fieldtypes
                                     and cdf.fieldtype != 'Table'
-                                    and (qfap_include_attachments or cdf.fieldtype not in ['Attach', 'Attach Image', 'Image'])
+                                    and (qorg_include_attachments or cdf.fieldtype not in ['Attach', 'Attach Image', 'Image'])
                                 %}
                                     {% set column_state = namespace(has_data=false, has_nonzero=false) %}
                                     {% for child_row in child_rows %}
@@ -462,7 +462,7 @@
                             </div>
 
                             <div class="print-page page-break">
-                                {% if qfap_include_letter_head and not no_letterhead and letter_head %}
+                                {% if qorg_include_letter_head and not no_letterhead and letter_head %}
                                     <div class="hidden-pdf letter-head-container"><div class="letter-head">{{ letter_head }}</div></div>
                                 {% endif %}
 
@@ -513,7 +513,7 @@
     {% endfor %}
 
 
-{% if qfap_include_audit_information %}
+{% if qorg_include_audit_information %}
 <div class="section avoid-page-break audit-information">
     <div class="section-title">{{ _('Audit Information') }}</div>
     <div class="field-grid-responsive">
@@ -525,7 +525,7 @@
 </div>
 {% endif %}
 
-{% if qfap_include_signatures and (printable_signature_rows.rows or not signature_configuration_doc) %}
+{% if qorg_include_signatures and (printable_signature_rows.rows or not signature_configuration_doc) %}
     <div class="section avoid-page-break">
         <div class="section-title">{{ _('Signatures') }}</div>
         <table class="signature-table"><tbody>
@@ -560,7 +560,7 @@
 {% endif %}
 
 <div id="footer-html" class="visible-pdf universal-footer">
-    <div class="letter-head-footer">{% if qfap_include_letter_head and not no_letterhead and footer %}{{ footer }}{% endif %}</div>
+    <div class="letter-head-footer">{% if qorg_include_letter_head and not no_letterhead and footer %}{{ footer }}{% endif %}</div>
     <p class="text-center small page-number visible-pdf"></p>
 </div>
 </div>
