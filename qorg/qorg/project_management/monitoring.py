@@ -1,6 +1,6 @@
 from __future__ import annotations
 import frappe
-from qfap_adds.qfap_adds.project_management.services.project_reconciliation import reconcile_project
+from qorg.qorg.project_management.services.project_reconciliation import reconcile_project
 from frappe.utils import date_diff, nowdate
 
 def run_daily_project_monitoring():
