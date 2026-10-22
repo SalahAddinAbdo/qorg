@@ -7,7 +7,7 @@ import frappe
 from frappe import _
 from frappe.utils import add_days, add_months, flt, get_datetime, get_first_day, get_last_day, getdate, now, now_datetime, today
 
-from qfap_adds.qfap_adds.task_management.settings import get_additional_recipient_emails, get_settings
+from qorg.qorg.task_management.settings import get_additional_recipient_emails, get_settings
 
 WEEKDAYS = {"Monday": 0, "Tuesday": 1, "Wednesday": 2, "Thursday": 3, "Friday": 4, "Saturday": 5, "Sunday": 6}
 
