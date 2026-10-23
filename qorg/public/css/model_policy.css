@@ -1,1 +1,5 @@
-.qorg-action-hidden{display:none!important;visibility:hidden!important;pointer-events:none!important;}
+.qorg-action-hidden {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
