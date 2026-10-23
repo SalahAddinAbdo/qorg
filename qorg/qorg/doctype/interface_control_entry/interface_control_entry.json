@@ -7,28 +7,125 @@
   "custom": 0,
   "doctype": "DocType",
   "engine": "InnoDB",
-  "field_order": ["component_type", "component_name", "component_label", "app_name", "module_name", "reference_doctype", "current_visibility", "requested_visibility", "risk_level", "roles_summary", "change_reason", "last_synchronized_on", "scan_fingerprint"],
+  "field_order": [
+    "component_type",
+    "component_name",
+    "component_label",
+    "app_name",
+    "module_name",
+    "reference_doctype",
+    "current_visibility",
+    "requested_visibility",
+    "risk_level",
+    "roles_summary",
+    "allowed_roles",
+    "change_reason",
+    "last_synchronized_on",
+    "scan_fingerprint"
+  ],
   "fields": [
-    {"fieldname":"component_type","label":"Type","fieldtype":"Select","options":"Report\nPage\nWorkspace\nDashboard\nNumber Card\nWeb Form\nWeb Page","read_only":1,"in_list_view":1},
-    {"fieldname":"component_name","label":"Component","fieldtype":"Data","read_only":1,"in_list_view":1},
-    {"fieldname":"component_label","label":"Label","fieldtype":"Data","read_only":1},
-    {"fieldname":"app_name","label":"App","fieldtype":"Data","read_only":1,"in_list_view":1},
-    {"fieldname":"module_name","label":"Module","fieldtype":"Data","read_only":1},
-    {"fieldname":"reference_doctype","label":"Reference DocType","fieldtype":"Link","options":"DocType","read_only":1},
-    {"fieldname":"current_visibility","label":"Current Visibility","fieldtype":"Select","options":"Visible\nHidden from Navigation\nRestricted\nDisabled\nDeprecated","read_only":1,"in_list_view":1},
-    {"fieldname":"requested_visibility","label":"Requested Visibility","fieldtype":"Select","options":"Visible\nHidden from Navigation\nRestricted\nDisabled\nDeprecated","default":"Visible","in_list_view":1},
-    {"fieldname":"risk_level","label":"Risk","fieldtype":"Select","options":"Low\nMedium\nHigh\nBlocked","read_only":1,"in_list_view":1},
-    {"fieldname":"roles_summary","label":"Roles","fieldtype":"Small Text","read_only":1},
-    {"fieldname":"change_reason","label":"Change Reason","fieldtype":"Small Text"},
-    {"fieldname":"last_synchronized_on","label":"Last Synchronized On","fieldtype":"Datetime","read_only":1},
-    {"fieldname":"scan_fingerprint","label":"Fingerprint","fieldtype":"Data","hidden":1,"read_only":1}
+    {
+      "fieldname": "component_type",
+      "label": "Type",
+      "fieldtype": "Select",
+      "options": "Report\nPage\nWorkspace\nDashboard\nNumber Card\nWeb Form\nWeb Page",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "component_name",
+      "label": "Component",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "component_label",
+      "label": "Label",
+      "fieldtype": "Data",
+      "read_only": 1
+    },
+    {
+      "fieldname": "app_name",
+      "label": "App",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "module_name",
+      "label": "Module",
+      "fieldtype": "Data",
+      "read_only": 1
+    },
+    {
+      "fieldname": "reference_doctype",
+      "label": "Reference DocType",
+      "fieldtype": "Link",
+      "options": "DocType",
+      "read_only": 1
+    },
+    {
+      "fieldname": "current_visibility",
+      "label": "Current Visibility",
+      "fieldtype": "Select",
+      "options": "Visible\nHidden from Navigation\nRestricted\nDisabled\nDeprecated",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "requested_visibility",
+      "label": "Requested Visibility",
+      "fieldtype": "Select",
+      "options": "Visible\nHidden from Navigation\nRestricted\nDisabled\nDeprecated",
+      "default": "Visible",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "risk_level",
+      "label": "Risk",
+      "fieldtype": "Select",
+      "options": "Low\nMedium\nHigh\nBlocked",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "roles_summary",
+      "label": "Roles",
+      "fieldtype": "Small Text",
+      "read_only": 1
+    },
+    {
+      "fieldname": "allowed_roles",
+      "label": "Allowed Roles for Restricted",
+      "fieldtype": "Small Text",
+      "description": "Comma-separated role names. Leave blank to deny all non-Administrator users."
+    },
+    {
+      "fieldname": "change_reason",
+      "label": "Change Reason",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "last_synchronized_on",
+      "label": "Last Synchronized On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "scan_fingerprint",
+      "label": "Fingerprint",
+      "fieldtype": "Data",
+      "hidden": 1,
+      "read_only": 1
+    }
   ],
   "grid_page_length": 50,
   "index_web_pages_for_search": 0,
   "istable": 1,
   "editable_grid": 1,
   "links": [],
-  "modified": "2026-10-23 13:55:00.000000",
+  "modified": "2026-10-23 14:20:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "Interface Control Entry",
