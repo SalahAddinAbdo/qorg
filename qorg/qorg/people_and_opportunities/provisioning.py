@@ -25,8 +25,26 @@ def _ensure_masters():
     rows=(("Employment","Employment",1),("Volunteering","Volunteering",2),("Internship","Internship",3),("Consultancy","Consultancy",4),("Other","Other",5))
     for name,behavior,order in rows:
         if not frappe.db.exists("External Opportunity Type",name): frappe.get_doc({"doctype":"External Opportunity Type","type_name":name,"behavior_code":behavior,"display_order":order,"enabled":1,"allow_publication":1,"allow_external_application":1}).insert(ignore_permissions=True)
-    for name,is_group,parent in (("General Volunteering",1,None),("Community Service",0,"General Volunteering"),("Technical Support",0,"General Volunteering"),("Field Operations",0,"General Volunteering")):
-        if not frappe.db.exists("Volunteer Category",name): frappe.get_doc({"doctype":"Volunteer Category","category_name":name,"is_group":is_group,"parent_volunteer_category":parent,"enabled":1}).insert(ignore_permissions=True)
+    categories = (
+        ("General Volunteering", 1, None),
+        ("Community Service", 0, "General Volunteering"),
+        ("Technical Support", 0, "General Volunteering"),
+        ("Field Operations", 0, "General Volunteering"),
+    )
+    for name, is_group, parent in categories:
+        if frappe.db.exists("Volunteer Category", name):
+            continue
+        category = frappe.get_doc(
+            {
+                "doctype": "Volunteer Category",
+                "category_name": name,
+                "is_group": is_group,
+                "parent_volunteer_category": parent,
+                "enabled": 1,
+            }
+        )
+        category.flags.ignore_permissions = True
+        category.insert()
 
 def _ensure_print_format():
     name="External Person CV"
