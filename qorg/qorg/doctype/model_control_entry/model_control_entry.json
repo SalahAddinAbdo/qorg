@@ -95,7 +95,7 @@
       "fieldname": "current_action_policy",
       "label": "Current Action Policy",
       "fieldtype": "Select",
-      "options": "Standard\nDisable Write Actions\nView Only",
+      "options": "Standard\nView Only",
       "default": "Standard",
       "read_only": 1,
       "in_list_view": 1
@@ -104,7 +104,7 @@
       "fieldname": "requested_action_policy",
       "label": "Requested Action Policy",
       "fieldtype": "Select",
-      "options": "Standard\nDisable Write Actions\nView Only",
+      "options": "Standard\nView Only",
       "default": "Standard",
       "in_list_view": 1
     },
@@ -162,13 +162,13 @@
     },
     {
       "fieldname": "allow_comments",
-      "label": "Allow Comments",
+      "label": "Allow Add Comment",
       "fieldtype": "Check",
       "default": "1"
     },
     {
       "fieldname": "allow_attachments",
-      "label": "Allow Attachments",
+      "label": "Allow Add Attachment",
       "fieldtype": "Check",
       "default": "1"
     },
@@ -196,7 +196,7 @@
   "istable": 1,
   "editable_grid": 1,
   "links": [],
-  "modified": "2026-10-23 11:25:00.000000",
+  "modified": "2026-10-23 12:00:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "Model Control Entry",

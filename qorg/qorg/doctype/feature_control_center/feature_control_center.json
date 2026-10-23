@@ -9,19 +9,27 @@
   "document_type": "",
   "engine": "InnoDB",
   "field_order": [
+    "tab_overview",
     "overview_section",
     "configuration_version",
     "last_synchronized_on",
     "last_synchronized_by",
     "pending_change_count",
+    "model_count",
+    "interface_count",
+    "active_policy_count",
     "tab_packages",
     "site_features",
     "tab_models",
     "models",
+    "tab_interface",
+    "interface_components",
     "tab_audit",
     "audit_results",
     "last_preview",
-    "last_apply_summary"
+    "last_apply_summary",
+    "tab_applied",
+    "applied_configuration"
   ],
   "fields": [
     {
@@ -98,6 +106,51 @@
       "label": "Last Apply Summary",
       "fieldtype": "Small Text",
       "read_only": 1
+    },
+    {
+      "fieldname": "tab_overview",
+      "label": "Overview",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "model_count",
+      "label": "Document Models",
+      "fieldtype": "Int",
+      "read_only": 1
+    },
+    {
+      "fieldname": "interface_count",
+      "label": "Interface Components",
+      "fieldtype": "Int",
+      "read_only": 1
+    },
+    {
+      "fieldname": "active_policy_count",
+      "label": "Active Policies",
+      "fieldtype": "Int",
+      "read_only": 1
+    },
+    {
+      "fieldname": "tab_interface",
+      "label": "Interface Components",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "interface_components",
+      "label": "Interface Components",
+      "fieldtype": "Table",
+      "options": "Interface Control Entry"
+    },
+    {
+      "fieldname": "tab_applied",
+      "label": "Applied Configuration",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "applied_configuration",
+      "label": "Applied Configuration",
+      "fieldtype": "Long Text",
+      "read_only": 1
     }
   ],
   "grid_page_length": 50,
@@ -106,7 +159,7 @@
   "issingle": 1,
   "istable": 0,
   "links": [],
-  "modified": "2026-10-23 10:12:00.000000",
+  "modified": "2026-10-23 12:00:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "Feature Control Center",
