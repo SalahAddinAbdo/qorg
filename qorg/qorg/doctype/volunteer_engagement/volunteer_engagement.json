@@ -1,0 +1,243 @@
+{
+  "actions": [],
+  "allow_import": 1,
+  "allow_rename": 0,
+  "autoname": "naming_series:",
+  "creation": "2026-10-23 21:00:00.000000",
+  "custom": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "overview_tab",
+    "identity_section",
+    "naming_series",
+    "volunteer_profile",
+    "external_opportunity",
+    "identity_col_2",
+    "company",
+    "project",
+    "status",
+    "identity_col_3",
+    "coordinator",
+    "role_title",
+    "volunteer_category",
+    "period_section",
+    "start_date",
+    "end_date",
+    "expected_hours_per_week",
+    "period_col_2",
+    "total_logged_hours",
+    "completion_date",
+    "source_application",
+    "scope_section",
+    "responsibilities",
+    "deliverables",
+    "completion_notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "overview_tab",
+      "label": "Overview",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "identity_section",
+      "label": "Engagement",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "VE-.YYYY.-.#####",
+      "default": "VE-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "volunteer_profile",
+      "label": "Volunteer Profile",
+      "fieldtype": "Link",
+      "options": "Volunteer Profile",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "external_opportunity",
+      "label": "External Opportunity",
+      "fieldtype": "Link",
+      "options": "External Opportunity",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "identity_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project"
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nActive\nSuspended\nCompleted\nWithdrawn\nCancelled",
+      "default": "Draft",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "identity_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "coordinator",
+      "label": "Coordinator",
+      "fieldtype": "Link",
+      "options": "User"
+    },
+    {
+      "fieldname": "role_title",
+      "label": "Role Title",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "period_section",
+      "label": "Period and Commitment",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "start_date",
+      "label": "Start Date",
+      "fieldtype": "Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "end_date",
+      "label": "End Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "expected_hours_per_week",
+      "label": "Expected Hours per Week",
+      "fieldtype": "Float",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "period_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "total_logged_hours",
+      "label": "Total Logged Hours",
+      "fieldtype": "Float",
+      "read_only": 1
+    },
+    {
+      "fieldname": "completion_date",
+      "label": "Completion Date",
+      "fieldtype": "Date",
+      "read_only": 1
+    },
+    {
+      "fieldname": "source_application",
+      "label": "Source Application",
+      "fieldtype": "Link",
+      "options": "Volunteer Application",
+      "read_only": 1
+    },
+    {
+      "fieldname": "scope_section",
+      "label": "Scope",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "responsibilities",
+      "label": "Responsibilities",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "deliverables",
+      "label": "Expected Deliverables",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "completion_notes",
+      "label": "Completion Notes",
+      "fieldtype": "Text Editor",
+      "depends_on": "eval:doc.status=='Completed'"
+    },
+    {
+      "fieldname": "volunteer_category",
+      "label": "Volunteer Category",
+      "fieldtype": "Link",
+      "options": "Volunteer Category"
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 0,
+  "links": [],
+  "modified": "2026-10-23 21:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "Volunteer Engagement",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "Volunteer Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Volunteer Coordinator",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1,
+      "email": 1
+    },
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    }
+  ],
+  "quick_entry": 0,
+  "row_format": "Dynamic",
+  "search_fields": "volunteer_profile,role_title,company,project,status",
+  "show_name_in_global_search": 1,
+  "show_title_field_in_link": 1,
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "role_title",
+  "track_changes": 1
+}

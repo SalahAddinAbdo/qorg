@@ -1,0 +1,74 @@
+{
+  "actions": [],
+  "allow_import": 0,
+  "allow_rename": 0,
+  "autoname": "hash",
+  "creation": "2026-10-23 18:00:00.000000",
+  "custom": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "question",
+    "answer_type",
+    "options",
+    "is_mandatory",
+    "weight",
+    "display_order"
+  ],
+  "fields": [
+    {
+      "fieldname": "question",
+      "label": "Question",
+      "fieldtype": "Small Text",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "answer_type",
+      "label": "Answer Type",
+      "fieldtype": "Select",
+      "options": "Short Text\nLong Text\nYes/No\nSelect\nNumber\nDate\nAttachment",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "options",
+      "label": "Options",
+      "fieldtype": "Small Text",
+      "description": "One option per line for Select questions"
+    },
+    {
+      "fieldname": "is_mandatory",
+      "label": "Mandatory",
+      "fieldtype": "Check",
+      "default": "1",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "weight",
+      "label": "Weight",
+      "fieldtype": "Float",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "display_order",
+      "label": "Order",
+      "fieldtype": "Int"
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 0,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-10-23 18:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "Opportunity Screening Question",
+  "owner": "Administrator",
+  "permissions": [],
+  "row_format": "Dynamic",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 0
+}

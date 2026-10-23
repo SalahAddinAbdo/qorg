@@ -1,0 +1,68 @@
+{
+  "actions": [],
+  "allow_import": 0,
+  "allow_rename": 0,
+  "autoname": "hash",
+  "creation": "2026-10-23 18:00:00.000000",
+  "custom": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "organization",
+    "role",
+    "from_date",
+    "to_date",
+    "hours",
+    "details"
+  ],
+  "fields": [
+    {
+      "fieldname": "organization",
+      "label": "Organization",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "role",
+      "label": "Role / Field",
+      "fieldtype": "Data",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "from_date",
+      "label": "From Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "to_date",
+      "label": "To Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "hours",
+      "label": "Approximate Hours",
+      "fieldtype": "Float"
+    },
+    {
+      "fieldname": "details",
+      "label": "Responsibilities and Contribution",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 0,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-10-23 18:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "External Person Volunteer Experience",
+  "owner": "Administrator",
+  "permissions": [],
+  "row_format": "Dynamic",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 0
+}

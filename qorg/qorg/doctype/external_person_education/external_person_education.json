@@ -1,0 +1,90 @@
+{
+  "actions": [],
+  "allow_import": 0,
+  "allow_rename": 0,
+  "autoname": "hash",
+  "creation": "2026-10-23 18:00:00.000000",
+  "custom": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "qualification",
+    "field_of_study",
+    "institution",
+    "country",
+    "start_year",
+    "graduation_year",
+    "grade",
+    "is_highest",
+    "description"
+  ],
+  "fields": [
+    {
+      "fieldname": "qualification",
+      "label": "Qualification",
+      "fieldtype": "Link",
+      "reqd": 1,
+      "in_list_view": 1,
+      "options": "Person Qualification"
+    },
+    {
+      "fieldname": "field_of_study",
+      "label": "Field of Study",
+      "fieldtype": "Data",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "institution",
+      "label": "Institution",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "country",
+      "label": "Country",
+      "fieldtype": "Link",
+      "options": "Country"
+    },
+    {
+      "fieldname": "start_year",
+      "label": "Start Year",
+      "fieldtype": "Int"
+    },
+    {
+      "fieldname": "graduation_year",
+      "label": "Graduation Year",
+      "fieldtype": "Int"
+    },
+    {
+      "fieldname": "grade",
+      "label": "Grade / GPA",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "is_highest",
+      "label": "Highest Qualification",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "description",
+      "label": "Details",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 0,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-10-23 18:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "External Person Education",
+  "owner": "Administrator",
+  "permissions": [],
+  "row_format": "Dynamic",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 0
+}

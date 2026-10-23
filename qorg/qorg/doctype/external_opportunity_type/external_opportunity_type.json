@@ -1,0 +1,136 @@
+{
+  "actions": [],
+  "allow_import": 1,
+  "allow_rename": 1,
+  "autoname": "field:type_name",
+  "creation": "2026-10-23 22:15:00.000000",
+  "custom": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "identity_section",
+    "type_name",
+    "behavior_code",
+    "type_col_2",
+    "enabled",
+    "display_order",
+    "type_col_3",
+    "allow_publication",
+    "allow_external_application",
+    "description_section",
+    "description"
+  ],
+  "fields": [
+    {
+      "fieldname": "identity_section",
+      "label": "Opportunity Type",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "type_name",
+      "label": "Type Name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "behavior_code",
+      "label": "Behavior",
+      "fieldtype": "Select",
+      "options": "Employment\nVolunteering\nInternship\nConsultancy\nOther",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "type_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "enabled",
+      "label": "Enabled",
+      "fieldtype": "Check",
+      "default": "1",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "display_order",
+      "label": "Display Order",
+      "fieldtype": "Int"
+    },
+    {
+      "fieldname": "type_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "allow_publication",
+      "label": "Allow Publication",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "allow_external_application",
+      "label": "Allow External Application",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "description_section",
+      "label": "Description",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "description",
+      "label": "Description",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 0,
+  "links": [],
+  "modified": "2026-10-23 22:15:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "External Opportunity Type",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "Opportunity Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "Volunteer Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1
+    },
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1
+    }
+  ],
+  "quick_entry": 1,
+  "row_format": "Dynamic",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "title_field": "type_name",
+  "show_title_field_in_link": 1,
+  "search_fields": "type_name,behavior_code"
+}

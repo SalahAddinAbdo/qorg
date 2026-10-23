@@ -1,0 +1,539 @@
+{
+  "actions": [],
+  "allow_import": 1,
+  "allow_rename": 0,
+  "autoname": "naming_series:",
+  "creation": "2026-10-23 18:00:00.000000",
+  "custom": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "overview_tab",
+    "identity_section",
+    "naming_series",
+    "full_name",
+    "name_in_arabic",
+    "person_status",
+    "identity_col",
+    "first_name",
+    "middle_name",
+    "identity_col_3",
+    "last_name",
+    "image",
+    "contact_section",
+    "primary_email",
+    "secondary_email",
+    "mobile_no",
+    "alternative_mobile_no",
+    "contact_col_3",
+    "contact_col",
+    "contact",
+    "address",
+    "preferred_language",
+    "preferred_contact_method",
+    "official_section",
+    "identification_type",
+    "identification_number",
+    "identification_country",
+    "date_of_birth",
+    "official_col_3",
+    "official_col",
+    "nationality",
+    "gender",
+    "marital_status",
+    "profile_tab",
+    "summary_section",
+    "professional_title",
+    "professional_summary",
+    "career_objective",
+    "years_of_experience",
+    "education",
+    "experience",
+    "training",
+    "languages",
+    "skills",
+    "volunteer_experience",
+    "references",
+    "documents_section",
+    "resume",
+    "portfolio_url",
+    "linkedin_url",
+    "documents_col",
+    "profile_completion",
+    "last_profile_update",
+    "privacy_tab",
+    "privacy_section",
+    "source",
+    "privacy_consent",
+    "privacy_consent_on",
+    "privacy_consent_source",
+    "data_retention_until",
+    "privacy_col_3",
+    "privacy_col",
+    "user",
+    "employee",
+    "volunteer",
+    "merged_into",
+    "source_reference_doctype",
+    "source_reference_name"
+  ],
+  "fields": [
+    {
+      "fieldname": "overview_tab",
+      "label": "Overview",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "identity_section",
+      "label": "Identity",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "EP-.YYYY.-.#####",
+      "default": "EP-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "full_name",
+      "label": "Full Name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_global_search": 1
+    },
+    {
+      "fieldname": "name_in_arabic",
+      "label": "Name in Arabic",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "person_status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Active\nInactive\nDeceased\nDo Not Contact\nMerged",
+      "default": "Active",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "identity_col",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "first_name",
+      "label": "First Name",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "middle_name",
+      "label": "Middle Name",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "last_name",
+      "label": "Last Name",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "image",
+      "label": "Photo",
+      "fieldtype": "Attach Image"
+    },
+    {
+      "fieldname": "contact_section",
+      "label": "Contact",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "primary_email",
+      "label": "Primary Email",
+      "fieldtype": "Data",
+      "options": "Email",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "secondary_email",
+      "label": "Secondary Email",
+      "fieldtype": "Data",
+      "options": "Email"
+    },
+    {
+      "fieldname": "mobile_no",
+      "label": "Mobile Number",
+      "fieldtype": "Data",
+      "options": "Phone",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "alternative_mobile_no",
+      "label": "Alternative Mobile",
+      "fieldtype": "Data",
+      "options": "Phone"
+    },
+    {
+      "fieldname": "contact_col",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "contact",
+      "label": "Contact",
+      "fieldtype": "Link",
+      "options": "Contact"
+    },
+    {
+      "fieldname": "address",
+      "label": "Address",
+      "fieldtype": "Link",
+      "options": "Address"
+    },
+    {
+      "fieldname": "preferred_language",
+      "label": "Preferred Language",
+      "fieldtype": "Link",
+      "options": "Language"
+    },
+    {
+      "fieldname": "preferred_contact_method",
+      "label": "Preferred Contact Method",
+      "fieldtype": "Select",
+      "options": "Email\nMobile\nPortal",
+      "default": "Email"
+    },
+    {
+      "fieldname": "official_section",
+      "label": "Official Identity",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "identification_type",
+      "label": "Identification Type",
+      "fieldtype": "Select",
+      "options": "National ID\nPassport\nOther"
+    },
+    {
+      "fieldname": "identification_number",
+      "label": "Identification Number",
+      "fieldtype": "Data",
+      "permlevel": 1
+    },
+    {
+      "fieldname": "identification_country",
+      "label": "Identification Country",
+      "fieldtype": "Link",
+      "options": "Country",
+      "permlevel": 1
+    },
+    {
+      "fieldname": "date_of_birth",
+      "label": "Date of Birth",
+      "fieldtype": "Date",
+      "permlevel": 1
+    },
+    {
+      "fieldname": "official_col",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "nationality",
+      "label": "Nationality",
+      "fieldtype": "Link",
+      "options": "Country",
+      "permlevel": 1
+    },
+    {
+      "fieldname": "gender",
+      "label": "Gender",
+      "fieldtype": "Link",
+      "options": "Gender",
+      "permlevel": 1
+    },
+    {
+      "fieldname": "marital_status",
+      "label": "Marital Status",
+      "fieldtype": "Select",
+      "options": "Single\nMarried\nDivorced\nWidowed",
+      "permlevel": 1
+    },
+    {
+      "fieldname": "profile_tab",
+      "label": "Professional Profile",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "summary_section",
+      "label": "Profile Summary",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "professional_title",
+      "label": "Professional Title",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "professional_summary",
+      "label": "Professional Summary",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "career_objective",
+      "label": "Career Objective",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "years_of_experience",
+      "label": "Years of Experience",
+      "fieldtype": "Float",
+      "read_only": 1
+    },
+    {
+      "fieldname": "education",
+      "label": "Education",
+      "fieldtype": "Table",
+      "options": "External Person Education"
+    },
+    {
+      "fieldname": "experience",
+      "label": "Work Experience",
+      "fieldtype": "Table",
+      "options": "External Person Experience"
+    },
+    {
+      "fieldname": "training",
+      "label": "Training and Certifications",
+      "fieldtype": "Table",
+      "options": "External Person Training"
+    },
+    {
+      "fieldname": "languages",
+      "label": "Languages",
+      "fieldtype": "Table",
+      "options": "External Person Language"
+    },
+    {
+      "fieldname": "skills",
+      "label": "Skills",
+      "fieldtype": "Table",
+      "options": "External Person Skill"
+    },
+    {
+      "fieldname": "volunteer_experience",
+      "label": "Volunteering Experience",
+      "fieldtype": "Table",
+      "options": "External Person Volunteer Experience"
+    },
+    {
+      "fieldname": "references",
+      "label": "Professional References",
+      "fieldtype": "Table",
+      "options": "External Person Reference"
+    },
+    {
+      "fieldname": "documents_section",
+      "label": "Documents and Links",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "resume",
+      "label": "Existing Resume",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "portfolio_url",
+      "label": "Portfolio URL",
+      "fieldtype": "Data",
+      "options": "URL"
+    },
+    {
+      "fieldname": "linkedin_url",
+      "label": "LinkedIn URL",
+      "fieldtype": "Data",
+      "options": "URL"
+    },
+    {
+      "fieldname": "documents_col",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "profile_completion",
+      "label": "Profile Completion %",
+      "fieldtype": "Percent",
+      "read_only": 1
+    },
+    {
+      "fieldname": "last_profile_update",
+      "label": "Last Profile Update",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "privacy_tab",
+      "label": "Privacy and Links",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "privacy_section",
+      "label": "Privacy",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "source",
+      "label": "Source",
+      "fieldtype": "Select",
+      "options": "Job Application\nVolunteer Application\nPortal Registration\nManual Entry\nEmployee Referral\nImport\nMigration\nOther",
+      "default": "Manual Entry"
+    },
+    {
+      "fieldname": "privacy_consent",
+      "label": "Privacy Consent",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "privacy_consent_on",
+      "label": "Consent On",
+      "fieldtype": "Datetime"
+    },
+    {
+      "fieldname": "privacy_consent_source",
+      "label": "Consent Source",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "data_retention_until",
+      "label": "Retain Until",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "privacy_col",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "user",
+      "label": "Portal User",
+      "fieldtype": "Link",
+      "options": "User"
+    },
+    {
+      "fieldname": "employee",
+      "label": "Employee",
+      "fieldtype": "Link",
+      "options": "Employee",
+      "read_only": 1
+    },
+    {
+      "fieldname": "volunteer",
+      "label": "Volunteer Profile",
+      "fieldtype": "Link",
+      "options": "Volunteer Profile",
+      "read_only": 1
+    },
+    {
+      "fieldname": "merged_into",
+      "label": "Merged Into",
+      "fieldtype": "Link",
+      "options": "External Person",
+      "read_only": 1
+    },
+    {
+      "fieldname": "source_reference_doctype",
+      "label": "Source Type",
+      "fieldtype": "Link",
+      "options": "DocType",
+      "read_only": 1
+    },
+    {
+      "fieldname": "source_reference_name",
+      "label": "Source Reference",
+      "fieldtype": "Dynamic Link",
+      "options": "source_reference_doctype",
+      "read_only": 1
+    },
+    {
+      "fieldname": "identity_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "contact_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "official_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "privacy_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-10-23 21:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "External Person",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "Opportunity Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Opportunity Manager",
+      "permlevel": 1,
+      "read": 1,
+      "write": 1,
+      "create": 1
+    },
+    {
+      "role": "System Manager",
+      "permlevel": 1,
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ],
+  "row_format": "Dynamic",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "quick_entry": 0,
+  "show_name_in_global_search": 1,
+  "title_field": "full_name",
+  "show_title_field_in_link": 1,
+  "search_fields": "full_name,name_in_arabic,primary_email,mobile_no,identification_number",
+  "image_field": "image"
+}

@@ -1,0 +1,424 @@
+{
+  "actions": [],
+  "allow_import": 1,
+  "allow_rename": 0,
+  "autoname": "naming_series:",
+  "creation": "2026-10-23 18:00:00.000000",
+  "custom": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "overview_tab",
+    "reference_section",
+    "naming_series",
+    "external_person",
+    "external_opportunity",
+    "company",
+    "reference_col",
+    "application_date",
+    "reference_col_3",
+    "application_source",
+    "status",
+    "snapshot_section",
+    "applicant_name",
+    "email",
+    "snapshot_col_2",
+    "mobile_no",
+    "snapshot_col_3",
+    "current_location",
+    "availability_section",
+    "availability_start_date",
+    "availability_end_date",
+    "hours_per_week",
+    "preferred_work_arrangement",
+    "motivation",
+    "relevant_experience",
+    "documents_section",
+    "resume",
+    "cover_letter",
+    "identification_document",
+    "additional_document",
+    "answers_tab",
+    "screening_answers",
+    "screening_section",
+    "screening_status",
+    "screening_score",
+    "screening_remarks",
+    "assigned_reviewer",
+    "decision_section",
+    "final_decision",
+    "decision_date",
+    "decision_by",
+    "decision_remarks",
+    "result_section",
+    "volunteer",
+    "volunteer_engagement",
+    "job_applicant"
+  ],
+  "fields": [
+    {
+      "fieldname": "overview_tab",
+      "label": "Overview",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "reference_section",
+      "label": "Application",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "VA-.YYYY.-.#####",
+      "default": "VA-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "external_person",
+      "label": "External Person",
+      "fieldtype": "Link",
+      "options": "External Person",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "external_opportunity",
+      "label": "External Opportunity",
+      "fieldtype": "Link",
+      "options": "External Opportunity",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "read_only": 1
+    },
+    {
+      "fieldname": "reference_col",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "application_date",
+      "label": "Application Date",
+      "fieldtype": "Date",
+      "default": "Today",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "application_source",
+      "label": "Source",
+      "fieldtype": "Select",
+      "options": "Portal\nManual Entry\nReferral\nMigration\nOther",
+      "default": "Manual Entry"
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nSubmitted\nUnder Screening\nShortlisted\nAssessment Scheduled\nUnder Review\nApproved\nRejected\nWithdrawn\nConverted\nClosed",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "snapshot_section",
+      "label": "Applicant Snapshot",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "applicant_name",
+      "label": "Applicant Name",
+      "fieldtype": "Data",
+      "read_only": 1
+    },
+    {
+      "fieldname": "email",
+      "label": "Email",
+      "fieldtype": "Data",
+      "options": "Email",
+      "read_only": 1
+    },
+    {
+      "fieldname": "mobile_no",
+      "label": "Mobile Number",
+      "fieldtype": "Data",
+      "options": "Phone",
+      "read_only": 1
+    },
+    {
+      "fieldname": "current_location",
+      "label": "Current Location",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "availability_section",
+      "label": "Availability and Motivation",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "availability_start_date",
+      "label": "Available From",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "availability_end_date",
+      "label": "Available Until",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "hours_per_week",
+      "label": "Hours per Week",
+      "fieldtype": "Float",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "preferred_work_arrangement",
+      "label": "Preferred Arrangement",
+      "fieldtype": "Select",
+      "options": "On-site\nRemote\nHybrid\nField Based"
+    },
+    {
+      "fieldname": "motivation",
+      "label": "Motivation",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "relevant_experience",
+      "label": "Relevant Experience",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "documents_section",
+      "label": "Documents",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "resume",
+      "label": "Resume",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "cover_letter",
+      "label": "Cover Letter",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "identification_document",
+      "label": "Identification Document",
+      "fieldtype": "Attach",
+      "permlevel": 1
+    },
+    {
+      "fieldname": "additional_document",
+      "label": "Additional Document",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "answers_tab",
+      "label": "Screening",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "screening_answers",
+      "label": "Screening Answers",
+      "fieldtype": "Table",
+      "options": "Opportunity Screening Answer"
+    },
+    {
+      "fieldname": "screening_section",
+      "label": "Review",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "screening_status",
+      "label": "Screening Status",
+      "fieldtype": "Select",
+      "options": "Not Started\nIn Progress\nCompleted",
+      "default": "Not Started",
+      "permlevel": 2
+    },
+    {
+      "fieldname": "screening_score",
+      "label": "Screening Score",
+      "fieldtype": "Float",
+      "read_only": 1,
+      "permlevel": 2
+    },
+    {
+      "fieldname": "screening_remarks",
+      "label": "Screening Remarks",
+      "fieldtype": "Text Editor",
+      "permlevel": 2
+    },
+    {
+      "fieldname": "assigned_reviewer",
+      "label": "Assigned Reviewer",
+      "fieldtype": "Link",
+      "options": "User",
+      "permlevel": 2
+    },
+    {
+      "fieldname": "decision_section",
+      "label": "Decision",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "final_decision",
+      "label": "Final Decision",
+      "fieldtype": "Select",
+      "options": "\nApproved\nRejected\nWaitlisted",
+      "read_only": 1,
+      "permlevel": 2
+    },
+    {
+      "fieldname": "decision_date",
+      "label": "Decision Date",
+      "fieldtype": "Date",
+      "read_only": 1,
+      "permlevel": 2
+    },
+    {
+      "fieldname": "decision_by",
+      "label": "Decision By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1,
+      "permlevel": 2
+    },
+    {
+      "fieldname": "decision_remarks",
+      "label": "Decision Remarks",
+      "fieldtype": "Text Editor",
+      "permlevel": 2
+    },
+    {
+      "fieldname": "result_section",
+      "label": "Result Links",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "volunteer",
+      "label": "Volunteer Profile",
+      "fieldtype": "Link",
+      "options": "Volunteer Profile",
+      "read_only": 1
+    },
+    {
+      "fieldname": "volunteer_engagement",
+      "label": "Volunteer Engagement",
+      "fieldtype": "Link",
+      "read_only": 1,
+      "options": "Volunteer Engagement"
+    },
+    {
+      "fieldname": "job_applicant",
+      "label": "Job Applicant",
+      "fieldtype": "Link",
+      "options": "Job Applicant",
+      "read_only": 1
+    },
+    {
+      "fieldname": "reference_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "snapshot_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "snapshot_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-10-23 21:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "Volunteer Application",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "Volunteer Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Volunteer Coordinator",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1,
+      "email": 1
+    },
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Volunteer Manager",
+      "permlevel": 1,
+      "read": 1,
+      "write": 1,
+      "create": 1
+    },
+    {
+      "role": "Volunteer Manager",
+      "permlevel": 2,
+      "read": 1,
+      "write": 1,
+      "create": 1
+    },
+    {
+      "role": "System Manager",
+      "permlevel": 1,
+      "read": 1,
+      "write": 1,
+      "create": 1
+    },
+    {
+      "role": "System Manager",
+      "permlevel": 2,
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ],
+  "row_format": "Dynamic",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "quick_entry": 0,
+  "show_name_in_global_search": 1,
+  "title_field": "applicant_name",
+  "show_title_field_in_link": 1,
+  "search_fields": "applicant_name,email,mobile_no,external_opportunity,status"
+}

@@ -1,0 +1,86 @@
+{
+  "actions": [],
+  "allow_import": 0,
+  "allow_rename": 0,
+  "autoname": "hash",
+  "creation": "2026-10-23 18:00:00.000000",
+  "custom": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "organization",
+    "job_title",
+    "country",
+    "location",
+    "from_date",
+    "to_date",
+    "currently_working",
+    "responsibilities"
+  ],
+  "fields": [
+    {
+      "fieldname": "organization",
+      "label": "Organization",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "job_title",
+      "label": "Job Title",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "country",
+      "label": "Country",
+      "fieldtype": "Link",
+      "options": "Country"
+    },
+    {
+      "fieldname": "location",
+      "label": "Location",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "from_date",
+      "label": "From Date",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "to_date",
+      "label": "To Date",
+      "fieldtype": "Date",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "currently_working",
+      "label": "Currently Working",
+      "fieldtype": "Check",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "responsibilities",
+      "label": "Responsibilities and Achievements",
+      "fieldtype": "Text Editor"
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 0,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-10-23 18:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "External Person Experience",
+  "owner": "Administrator",
+  "permissions": [],
+  "row_format": "Dynamic",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 0
+}

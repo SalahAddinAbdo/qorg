@@ -1,0 +1,159 @@
+{
+  "actions": [],
+  "allow_import": 0,
+  "allow_rename": 0,
+  "autoname": "",
+  "creation": "2026-10-23 20:00:00.000000",
+  "custom": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "profile_section",
+    "default_cv_print_format",
+    "profile_minimum_completion",
+    "allow_profile_web_update",
+    "profile_column_2",
+    "default_data_retention_days",
+    "match_by_email",
+    "match_by_mobile",
+    "match_by_official_id",
+    "opportunity_section",
+    "closing_reminder_days",
+    "require_opportunity_approval",
+    "opportunity_column_2",
+    "allow_public_opportunity_listing",
+    "allow_guest_opportunity_view",
+    "portal_section",
+    "privacy_notice",
+    "portal_terms"
+  ],
+  "fields": [
+    {
+      "fieldname": "profile_section",
+      "label": "Profile and CV",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "default_cv_print_format",
+      "label": "Default CV Print Format",
+      "fieldtype": "Link",
+      "options": "Print Format",
+      "default": "External Person CV"
+    },
+    {
+      "fieldname": "profile_minimum_completion",
+      "label": "Minimum Profile Completion %",
+      "fieldtype": "Percent",
+      "default": "60"
+    },
+    {
+      "fieldname": "allow_profile_web_update",
+      "label": "Allow Web Profile Update",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "profile_column_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "default_data_retention_days",
+      "label": "Default Data Retention Days",
+      "fieldtype": "Int",
+      "default": "730",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "match_by_email",
+      "label": "Match People by Email",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "match_by_mobile",
+      "label": "Match People by Mobile",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "match_by_official_id",
+      "label": "Match People by Official ID",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "opportunity_section",
+      "label": "Opportunities",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "closing_reminder_days",
+      "label": "Closing Reminder Days",
+      "fieldtype": "Int",
+      "default": "3",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "require_opportunity_approval",
+      "label": "Require Approval Before Publication",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "opportunity_column_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "allow_public_opportunity_listing",
+      "label": "Allow Public Opportunity Listing",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "allow_guest_opportunity_view",
+      "label": "Allow Guest Opportunity View",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "portal_section",
+      "label": "Portal and Privacy",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "privacy_notice",
+      "label": "Privacy Notice",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "portal_terms",
+      "label": "Portal Terms and Conditions",
+      "fieldtype": "Text Editor"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 1,
+  "links": [],
+  "modified": "2026-10-23 20:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "People and Opportunities Settings",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "Opportunity Manager",
+      "read": 1,
+      "write": 1
+    },
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1
+    }
+  ],
+  "quick_entry": 0,
+  "states": [],
+  "track_changes": 1
+}

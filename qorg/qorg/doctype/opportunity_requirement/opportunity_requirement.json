@@ -1,0 +1,72 @@
+{
+  "actions": [],
+  "allow_import": 0,
+  "allow_rename": 0,
+  "autoname": "hash",
+  "creation": "2026-10-23 18:00:00.000000",
+  "custom": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "requirement_type",
+    "requirement",
+    "is_mandatory",
+    "minimum_value",
+    "maximum_value",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "requirement_type",
+      "label": "Type",
+      "fieldtype": "Select",
+      "options": "Education\nExperience\nSkill\nLanguage\nCertification\nAvailability\nOther",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "requirement",
+      "label": "Requirement",
+      "fieldtype": "Small Text",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "is_mandatory",
+      "label": "Mandatory",
+      "fieldtype": "Check",
+      "default": "1",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "minimum_value",
+      "label": "Minimum",
+      "fieldtype": "Float"
+    },
+    {
+      "fieldname": "maximum_value",
+      "label": "Maximum",
+      "fieldtype": "Float"
+    },
+    {
+      "fieldname": "notes",
+      "label": "Notes",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 0,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-10-23 18:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "Opportunity Requirement",
+  "owner": "Administrator",
+  "permissions": [],
+  "row_format": "Dynamic",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 0
+}

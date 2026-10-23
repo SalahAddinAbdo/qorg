@@ -1,0 +1,270 @@
+{
+  "actions": [],
+  "allow_import": 1,
+  "allow_rename": 0,
+  "autoname": "naming_series:",
+  "creation": "2026-10-23 21:00:00.000000",
+  "custom": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "overview_tab",
+    "identity_section",
+    "naming_series",
+    "external_person",
+    "status",
+    "identity_col_2",
+    "company",
+    "volunteer_category",
+    "identity_col_3",
+    "registration_date",
+    "coordinator",
+    "availability_section",
+    "available_from",
+    "available_until",
+    "hours_per_week",
+    "availability_col_2",
+    "preferred_arrangement",
+    "preferred_locations",
+    "availability_col_3",
+    "onboarding_date",
+    "end_date",
+    "qualification_tab",
+    "primary_skills",
+    "volunteering_interests",
+    "notes",
+    "links_tab",
+    "source_section",
+    "source_application",
+    "active_engagement_count",
+    "completed_engagement_count"
+  ],
+  "fields": [
+    {
+      "fieldname": "overview_tab",
+      "label": "Overview",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "identity_section",
+      "label": "Volunteer Profile",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "VP-.YYYY.-.#####",
+      "default": "VP-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "external_person",
+      "label": "External Person",
+      "fieldtype": "Link",
+      "options": "External Person",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Active\nInactive\nSuspended\nClosed",
+      "default": "Active",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "identity_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "volunteer_category",
+      "label": "Volunteer Category",
+      "fieldtype": "Link",
+      "options": "Volunteer Category"
+    },
+    {
+      "fieldname": "identity_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "registration_date",
+      "label": "Registration Date",
+      "fieldtype": "Date",
+      "default": "Today",
+      "reqd": 1
+    },
+    {
+      "fieldname": "coordinator",
+      "label": "Coordinator",
+      "fieldtype": "Link",
+      "options": "User"
+    },
+    {
+      "fieldname": "availability_section",
+      "label": "Availability",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "available_from",
+      "label": "Available From",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "available_until",
+      "label": "Available Until",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "hours_per_week",
+      "label": "Hours per Week",
+      "fieldtype": "Float",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "availability_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "preferred_arrangement",
+      "label": "Preferred Arrangement",
+      "fieldtype": "Select",
+      "options": "On-site\nRemote\nHybrid\nField Based"
+    },
+    {
+      "fieldname": "preferred_locations",
+      "label": "Preferred Locations",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "availability_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "onboarding_date",
+      "label": "Onboarding Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "end_date",
+      "label": "End Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "qualification_tab",
+      "label": "Qualifications",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "primary_skills",
+      "label": "Primary Skills",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "volunteering_interests",
+      "label": "Volunteering Interests",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "notes",
+      "label": "Notes",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "links_tab",
+      "label": "Links",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "source_section",
+      "label": "Source",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "source_application",
+      "label": "Source Application",
+      "fieldtype": "Link",
+      "options": "Volunteer Application",
+      "read_only": 1
+    },
+    {
+      "fieldname": "active_engagement_count",
+      "label": "Active Engagements",
+      "fieldtype": "Int",
+      "read_only": 1
+    },
+    {
+      "fieldname": "completed_engagement_count",
+      "label": "Completed Engagements",
+      "fieldtype": "Int",
+      "read_only": 1
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 0,
+  "links": [],
+  "modified": "2026-10-23 21:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "Volunteer Profile",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "Volunteer Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Volunteer Coordinator",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1,
+      "email": 1
+    },
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    }
+  ],
+  "quick_entry": 0,
+  "row_format": "Dynamic",
+  "search_fields": "external_person,company,status,coordinator",
+  "show_name_in_global_search": 1,
+  "show_title_field_in_link": 1,
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "title_field": "external_person",
+  "track_changes": 1
+}

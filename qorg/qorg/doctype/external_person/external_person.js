@@ -1,0 +1,1 @@
+frappe.ui.form.on("External Person", {refresh(frm) {if (!frm.is_new()) {frm.add_custom_button(__("Print CV"), () => frappe.set_route("print", frm.doctype, frm.doc.name), __("Profile"));frm.add_custom_button(__("Open Web Profile"), () => window.open(`/external-profile?person=${encodeURIComponent(frm.doc.name)}`, "_blank"), __("Profile"));}}});
