@@ -129,3 +129,10 @@ def audit_company_settings(settings_name: str):
 def get_model_policy(document_type: str):
     from qorg.qorg.enterprise_foundation.policy_enforcement import get_model_policy as _get_policy
     return {"document_type": document_type, "policy": _get_policy(document_type)}
+
+
+@frappe.whitelist()
+def resolve_company_feature(company: str, feature_key: str):
+    require_administrator()
+    from qorg.qorg.enterprise_foundation.features import resolve_feature_state
+    return resolve_feature_state(company, feature_key)
