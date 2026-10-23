@@ -1,0 +1,9 @@
+.qorg-policy-hidden {
+    display: none !important;
+    pointer-events: none !important;
+}
+body.qorg-model-write-blocked .grid-add-row,
+body.qorg-model-write-blocked .page-actions .btn-primary,
+body.qorg-model-write-blocked .standard-actions .btn-primary {
+    display: none !important;
+}
