@@ -76,35 +76,33 @@ def _transitions(states, roles):
 
 
 def provision_project_workflows():
-    # The field is created before Workflow insertion, including DocTypes whose original JSON omitted it.
-    custom={}
+    # Create the workflow state field before Workflow insertion, including
+    # application DocTypes whose original JSON omitted it.
+    custom = {}
     for dt in WORKFLOWS:
-        if not frappe.db.exists("DocType",dt):
+        if not frappe.db.exists("DocType", dt):
             continue
         if not frappe.get_meta(dt).has_field("workflow_state"):
-            custom.setdefault(dt,[]).append({
-                "fieldname":"workflow_state","label":"Workflow State","fieldtype":"Link",
-                "options":"Workflow State","read_only":1,"allow_on_submit":1,
-                "insert_after":"amended_from" if frappe.get_meta(dt).has_field("amended_from") else None,
+            custom.setdefault(dt, []).append({
+                "fieldname": "workflow_state",
+                "label": "Workflow State",
+                "fieldtype": "Link",
+                "options": "Workflow State",
+                "read_only": 1,
+                "allow_on_submit": 1,
+                "insert_after": "amended_from" if frappe.get_meta(dt).has_field("amended_from") else None,
             })
-    if custom: create_custom_fields(custom,update=True)
+    if custom:
+        create_custom_fields(custom, update=True)
 
-    for state in sorted({x for spec in WORKFLOWS.values() for x in spec["states"]}): _ensure_state(state)
-    for action in ACTIONS: _ensure_action(action)
-    mappings=_role_map()
-    for dt,spec in WORKFLOWS.items():
-        if not frappe.db.exists("DocType",dt): continue
-        name=dt
-        if frappe.db.exists("Workflow", {"workflow_name":name}):
-            continue  # preserve administrator changes
-        roles=mappings.get(dt) or {"owner":"System Manager","reviewer":"System Manager","approver":"System Manager"}
-        states=[]
-        for state in spec["states"]:
-            role=roles["owner"] if state in ("Draft","Rejected") else (roles["reviewer"] if state in ("Submitted","Under Review") else roles["approver"])
-            states.append({"state":state,"doc_status":0,"allow_edit":role})
-        frappe.get_doc({
-            "doctype":"Workflow","workflow_name":name,"document_type":dt,
-            "is_active":1,"workflow_state_field":"workflow_state","send_email_alert":0,
-            "states":states,"transitions":_transitions(spec["states"],roles),
-        }).insert(ignore_permissions=True)
-    frappe.clear_cache()
+    from qorg.qorg.enterprise_foundation.project_workflow_upgrade import upgrade_project_workflows
+
+    return upgrade_project_workflows(
+        workflows=WORKFLOWS,
+        actions=ACTIONS,
+        ensure_state=_ensure_state,
+        ensure_action=_ensure_action,
+        role_map=_role_map,
+        transitions=_transitions,
+        version="1.0.0",
+    )
