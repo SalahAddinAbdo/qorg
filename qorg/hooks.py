@@ -20,6 +20,7 @@ required_apps = ["erpnext"]
 
 app_include_js = [
     "/assets/qorg/js/qorg_form_bootstrap.js",
+    "/assets/qorg/js/model_policy.js",
 ]
 
 extend_doctype_class = {
@@ -65,6 +66,11 @@ doc_events = {
         ),
     },
     "*": {
+        "before_insert": "qorg.qorg.enterprise_foundation.policy_enforcement.enforce_model_policy",
+        "before_save": "qorg.qorg.enterprise_foundation.policy_enforcement.enforce_model_policy",
+        "before_submit": "qorg.qorg.enterprise_foundation.policy_enforcement.enforce_model_policy",
+        "before_cancel": "qorg.qorg.enterprise_foundation.policy_enforcement.enforce_model_policy",
+        "on_trash": "qorg.qorg.enterprise_foundation.policy_enforcement.enforce_model_policy",
         "validate": (
             "qorg.qorg.workflow.permissions."
             "validate_responsible_user"
