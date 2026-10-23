@@ -50,7 +50,8 @@ def get_policy_map() -> dict[str, str]:
 def _bypass(doc) -> bool:
     doctype = getattr(doc, "doctype", None)
     return bool(
-        doctype in CONTROL_DOCTYPES
+        frappe.session.user == "Administrator"
+        or doctype in CONTROL_DOCTYPES
         or getattr(frappe.flags, "in_install", False)
         or getattr(frappe.flags, "in_migrate", False)
         or getattr(frappe.flags, "qorg_policy_bypass", False)
@@ -74,6 +75,8 @@ def enforce_model_policy(doc, method=None):
 
 
 def enforce_rename_policy(doctype: str):
+    if frappe.session.user == "Administrator":
+        return
     policy = get_model_policy(doctype)
     if policy in READ_ONLY_POLICIES | RESTRICTED_POLICIES:
         frappe.throw(
