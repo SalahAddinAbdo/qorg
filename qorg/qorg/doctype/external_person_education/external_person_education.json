@@ -3,7 +3,7 @@
   "allow_import": 0,
   "allow_rename": 0,
   "autoname": "hash",
-  "creation": "2026-10-23 18:00:00.000000",
+  "creation": "2026-10-23 22:45:00.000000",
   "custom": 0,
   "doctype": "DocType",
   "engine": "InnoDB",
@@ -16,67 +16,107 @@
     "graduation_year",
     "grade",
     "is_highest",
-    "description"
+    "description",
+    "page_break"
   ],
   "fields": [
     {
       "fieldname": "qualification",
       "label": "Qualification",
       "fieldtype": "Link",
+      "options": "Person Qualification",
       "reqd": 1,
+      "allow_on_submit": 1,
+      "print_hide": 0,
       "in_list_view": 1,
-      "options": "Person Qualification"
+      "columns": 2
     },
     {
       "fieldname": "field_of_study",
       "label": "Field of Study",
       "fieldtype": "Data",
-      "in_list_view": 1
+      "allow_on_submit": 1,
+      "print_hide": 0,
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "institution",
       "label": "Institution",
       "fieldtype": "Data",
       "reqd": 1,
-      "in_list_view": 1
+      "allow_on_submit": 1,
+      "print_hide": 0,
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "country",
       "label": "Country",
       "fieldtype": "Link",
-      "options": "Country"
+      "options": "Country",
+      "allow_on_submit": 1,
+      "print_hide": 0,
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "start_year",
       "label": "Start Year",
-      "fieldtype": "Int"
+      "fieldtype": "Int",
+      "allow_on_submit": 1,
+      "print_hide": 0,
+      "in_list_view": 0
     },
     {
       "fieldname": "graduation_year",
       "label": "Graduation Year",
-      "fieldtype": "Int"
+      "fieldtype": "Int",
+      "allow_on_submit": 1,
+      "print_hide": 0,
+      "in_list_view": 1
     },
     {
       "fieldname": "grade",
       "label": "Grade / GPA",
-      "fieldtype": "Data"
+      "fieldtype": "Data",
+      "allow_on_submit": 1,
+      "print_hide": 0,
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "is_highest",
       "label": "Highest Qualification",
-      "fieldtype": "Check"
+      "fieldtype": "Check",
+      "allow_on_submit": 1,
+      "print_hide": 0,
+      "in_list_view": 1
     },
     {
       "fieldname": "description",
       "label": "Details",
-      "fieldtype": "Small Text"
+      "fieldtype": "Small Text",
+      "allow_on_submit": 1,
+      "print_hide": 0,
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "page_break",
+      "label": "Page Break",
+      "fieldtype": "Check",
+      "default": "0",
+      "in_list_view": 1,
+      "allow_on_submit": 1,
+      "print_hide": 1,
+      "columns": 1
     }
   ],
   "grid_page_length": 50,
   "index_web_pages_for_search": 0,
   "istable": 1,
   "links": [],
-  "modified": "2026-10-23 18:00:00.000000",
+  "modified": "2026-10-23 22:45:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "External Person Education",

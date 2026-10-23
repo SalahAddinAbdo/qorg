@@ -1,9 +1,9 @@
 {
   "actions": [],
   "allow_import": 1,
-  "allow_rename": 0,
+  "allow_rename": 1,
   "autoname": "naming_series:",
-  "creation": "2026-10-23 21:00:00.000000",
+  "creation": "2026-10-23 22:45:00.000000",
   "custom": 0,
   "doctype": "DocType",
   "engine": "InnoDB",
@@ -12,9 +12,9 @@
     "identity_section",
     "naming_series",
     "external_person",
-    "status",
-    "identity_col_2",
     "company",
+    "identity_col_2",
+    "status",
     "volunteer_category",
     "identity_col_3",
     "registration_date",
@@ -30,13 +30,17 @@
     "onboarding_date",
     "end_date",
     "qualification_tab",
+    "qualification_section",
     "primary_skills",
+    "qualification_col_2",
     "volunteering_interests",
+    "notes_section",
     "notes",
     "links_tab",
     "source_section",
     "source_application",
     "active_engagement_count",
+    "source_col_2",
     "completed_engagement_count"
   ],
   "fields": [
@@ -67,11 +71,10 @@
       "in_list_view": 1
     },
     {
-      "fieldname": "status",
-      "label": "Status",
-      "fieldtype": "Select",
-      "options": "Active\nInactive\nSuspended\nClosed",
-      "default": "Active",
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
       "reqd": 1,
       "in_list_view": 1
     },
@@ -81,10 +84,11 @@
       "fieldtype": "Column Break"
     },
     {
-      "fieldname": "company",
-      "label": "Company",
-      "fieldtype": "Link",
-      "options": "Company",
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Active\nInactive\nSuspended\nClosed",
+      "default": "Active",
       "reqd": 1,
       "in_list_view": 1
     },
@@ -110,7 +114,8 @@
       "fieldname": "coordinator",
       "label": "Coordinator",
       "fieldtype": "Link",
-      "options": "User"
+      "options": "User",
+      "reqd": 1
     },
     {
       "fieldname": "availability_section",
@@ -170,14 +175,29 @@
       "fieldtype": "Tab Break"
     },
     {
+      "fieldname": "qualification_section",
+      "label": "Qualifications and Interests",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "primary_skills",
       "label": "Primary Skills",
       "fieldtype": "Small Text"
     },
     {
+      "fieldname": "qualification_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "volunteering_interests",
       "label": "Volunteering Interests",
       "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "notes_section",
+      "label": "Notes",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "notes",
@@ -208,6 +228,11 @@
       "read_only": 1
     },
     {
+      "fieldname": "source_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "completed_engagement_count",
       "label": "Completed Engagements",
       "fieldtype": "Int",
@@ -216,8 +241,9 @@
   ],
   "grid_page_length": 50,
   "index_web_pages_for_search": 0,
+  "istable": 0,
   "links": [],
-  "modified": "2026-10-23 21:00:00.000000",
+  "modified": "2026-10-23 22:45:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "Volunteer Profile",
@@ -257,14 +283,14 @@
       "share": 1
     }
   ],
-  "quick_entry": 0,
   "row_format": "Dynamic",
-  "search_fields": "external_person,company,status,coordinator",
-  "show_name_in_global_search": 1,
-  "show_title_field_in_link": 1,
   "sort_field": "modified",
   "sort_order": "DESC",
   "states": [],
+  "track_changes": 1,
+  "quick_entry": 0,
+  "show_name_in_global_search": 1,
   "title_field": "external_person",
-  "track_changes": 1
+  "show_title_field_in_link": 1,
+  "search_fields": "external_person,company,status,coordinator"
 }

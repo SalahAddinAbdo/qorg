@@ -1,9 +1,9 @@
 {
   "actions": [],
   "allow_import": 1,
-  "allow_rename": 0,
+  "allow_rename": 1,
   "autoname": "naming_series:",
-  "creation": "2026-10-23 18:00:00.000000",
+  "creation": "2026-10-23 22:45:00.000000",
   "custom": 0,
   "doctype": "DocType",
   "engine": "InnoDB",
@@ -13,61 +13,75 @@
     "naming_series",
     "opportunity_title",
     "opportunity_type",
-    "status",
-    "identity_col",
+    "identity_col_2",
     "company",
-    "identity_col_3",
-    "job_opening",
     "department",
     "designation",
+    "identity_col_3",
+    "status",
+    "job_opening",
     "project",
     "ownership_section",
     "responsible_employee",
     "recruitment_owner",
+    "ownership_col_2",
     "volunteer_coordinator",
     "publication_tab",
     "dates_section",
     "opening_date",
     "closing_date",
     "publish_on_website",
-    "route",
-    "dates_col",
+    "dates_col_2",
     "published_on",
     "is_featured",
-    "dates_col_3",
     "application_limit",
+    "dates_col_3",
     "expected_start_date",
     "expected_end_date",
+    "duration_text",
     "description_section",
     "summary",
+    "description_col_2",
     "description",
+    "responsibility_section",
     "responsibilities",
+    "responsibility_col_2",
     "qualifications",
+    "selection_section",
     "selection_process",
+    "selection_col_2",
     "application_instructions",
     "nature_section",
     "employment_type",
     "work_arrangement",
-    "duration_text",
+    "nature_col_2",
     "minimum_age",
     "maximum_age",
     "requirements_tab",
+    "locations_page_break",
+    "locations_section",
     "locations",
+    "requirements_page_break",
+    "requirements_section",
     "requirements",
+    "questions_page_break",
+    "questions_section",
     "screening_questions",
     "application_tab",
+    "application_settings_section",
     "allow_external_applications",
     "allow_internal_applications",
     "allow_multiple_applications",
+    "application_col_2",
     "require_portal_account",
-    "app_col_3",
-    "app_col",
     "require_resume",
     "require_cover_letter",
+    "application_col_3",
     "require_identification",
     "stats_section",
     "application_count",
     "shortlisted_count",
+    "stats_col_2",
     "accepted_count",
     "rejected_count"
   ],
@@ -106,16 +120,7 @@
       "in_list_view": 1
     },
     {
-      "fieldname": "status",
-      "label": "Status",
-      "fieldtype": "Select",
-      "options": "Draft\nUnder Review\nApproved\nPublished\nClosed\nArchived\nRejected",
-      "default": "Draft",
-      "read_only": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "identity_col",
+      "fieldname": "identity_col_2",
       "label": "",
       "fieldtype": "Column Break"
     },
@@ -128,12 +133,6 @@
       "in_list_view": 1
     },
     {
-      "fieldname": "job_opening",
-      "label": "Job Opening",
-      "fieldtype": "Link",
-      "options": "Job Opening"
-    },
-    {
       "fieldname": "department",
       "label": "Department",
       "fieldtype": "Link",
@@ -144,6 +143,26 @@
       "label": "Designation",
       "fieldtype": "Link",
       "options": "Designation"
+    },
+    {
+      "fieldname": "identity_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nUnder Review\nApproved\nPublished\nClosed\nArchived\nRejected",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "job_opening",
+      "label": "Job Opening",
+      "fieldtype": "Link",
+      "options": "Job Opening"
     },
     {
       "fieldname": "project",
@@ -167,6 +186,11 @@
       "label": "Recruitment Owner",
       "fieldtype": "Link",
       "options": "User"
+    },
+    {
+      "fieldname": "ownership_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "volunteer_coordinator",
@@ -202,12 +226,7 @@
       "fieldtype": "Check"
     },
     {
-      "fieldname": "route",
-      "label": "Route",
-      "fieldtype": "Data"
-    },
-    {
-      "fieldname": "dates_col",
+      "fieldname": "dates_col_2",
       "label": "",
       "fieldtype": "Column Break"
     },
@@ -229,6 +248,11 @@
       "non_negative": 1
     },
     {
+      "fieldname": "dates_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "expected_start_date",
       "label": "Expected Start Date",
       "fieldtype": "Date"
@@ -237,6 +261,11 @@
       "fieldname": "expected_end_date",
       "label": "Expected End Date",
       "fieldtype": "Date"
+    },
+    {
+      "fieldname": "duration_text",
+      "label": "Duration",
+      "fieldtype": "Data"
     },
     {
       "fieldname": "description_section",
@@ -250,10 +279,20 @@
       "reqd": 1
     },
     {
+      "fieldname": "description_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "description",
       "label": "Description",
       "fieldtype": "Text Editor",
       "reqd": 1
+    },
+    {
+      "fieldname": "responsibility_section",
+      "label": "Responsibilities and Qualifications",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "responsibilities",
@@ -261,14 +300,29 @@
       "fieldtype": "Text Editor"
     },
     {
+      "fieldname": "responsibility_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "qualifications",
       "label": "Qualifications",
       "fieldtype": "Text Editor"
     },
     {
+      "fieldname": "selection_section",
+      "label": "Selection and Application",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "selection_process",
       "label": "Selection Process",
       "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "selection_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "application_instructions",
@@ -293,9 +347,9 @@
       "options": "On-site\nRemote\nHybrid\nField Based\nMultiple Locations"
     },
     {
-      "fieldname": "duration_text",
-      "label": "Duration",
-      "fieldtype": "Data"
+      "fieldname": "nature_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "minimum_age",
@@ -315,16 +369,46 @@
       "fieldtype": "Tab Break"
     },
     {
+      "fieldname": "locations_page_break",
+      "label": "",
+      "fieldtype": "Page Break"
+    },
+    {
+      "fieldname": "locations_section",
+      "label": "Locations",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "locations",
       "label": "Locations",
       "fieldtype": "Table",
       "options": "Opportunity Location"
     },
     {
+      "fieldname": "requirements_page_break",
+      "label": "",
+      "fieldtype": "Page Break"
+    },
+    {
+      "fieldname": "requirements_section",
+      "label": "Requirements",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "requirements",
       "label": "Requirements",
       "fieldtype": "Table",
       "options": "Opportunity Requirement"
+    },
+    {
+      "fieldname": "questions_page_break",
+      "label": "",
+      "fieldtype": "Page Break"
+    },
+    {
+      "fieldname": "questions_section",
+      "label": "Screening Questions",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "screening_questions",
@@ -336,6 +420,11 @@
       "fieldname": "application_tab",
       "label": "Application Settings",
       "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "application_settings_section",
+      "label": "Application Settings",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "allow_external_applications",
@@ -354,15 +443,15 @@
       "fieldtype": "Check"
     },
     {
+      "fieldname": "application_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "require_portal_account",
       "label": "Require Portal Account",
       "fieldtype": "Check",
       "default": "1"
-    },
-    {
-      "fieldname": "app_col",
-      "label": "",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "require_resume",
@@ -374,6 +463,11 @@
       "fieldname": "require_cover_letter",
       "label": "Require Cover Letter",
       "fieldtype": "Check"
+    },
+    {
+      "fieldname": "application_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "require_identification",
@@ -398,6 +492,11 @@
       "read_only": 1
     },
     {
+      "fieldname": "stats_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "accepted_count",
       "label": "Accepted",
       "fieldtype": "Int",
@@ -408,28 +507,13 @@
       "label": "Rejected",
       "fieldtype": "Int",
       "read_only": 1
-    },
-    {
-      "fieldname": "identity_col_3",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "dates_col_3",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "app_col_3",
-      "label": "",
-      "fieldtype": "Column Break"
     }
   ],
   "grid_page_length": 50,
   "index_web_pages_for_search": 0,
   "istable": 0,
   "links": [],
-  "modified": "2026-10-23 20:00:00.000000",
+  "modified": "2026-10-23 22:45:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "External Opportunity",

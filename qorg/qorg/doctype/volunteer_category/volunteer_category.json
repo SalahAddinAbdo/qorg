@@ -3,19 +3,21 @@
   "allow_import": 1,
   "allow_rename": 1,
   "autoname": "field:category_name",
-  "creation": "2026-10-23 22:15:00.000000",
+  "creation": "2026-10-23 22:45:00.000000",
   "custom": 0,
   "doctype": "DocType",
   "engine": "InnoDB",
   "field_order": [
     "category_name",
     "parent_volunteer_category",
+    "category_col_2",
     "is_group",
     "enabled",
-    "description",
     "lft",
     "rgt",
-    "old_parent"
+    "old_parent",
+    "description_section",
+    "description"
   ],
   "fields": [
     {
@@ -33,6 +35,11 @@
       "options": "Volunteer Category"
     },
     {
+      "fieldname": "category_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "is_group",
       "label": "Is Group",
       "fieldtype": "Check",
@@ -43,11 +50,6 @@
       "label": "Enabled",
       "fieldtype": "Check",
       "default": "1"
-    },
-    {
-      "fieldname": "description",
-      "label": "Description",
-      "fieldtype": "Small Text"
     },
     {
       "fieldname": "lft",
@@ -69,26 +71,28 @@
       "fieldtype": "Data",
       "hidden": 1,
       "read_only": 1
+    },
+    {
+      "fieldname": "description_section",
+      "label": "Description",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "description",
+      "label": "Description",
+      "fieldtype": "Small Text"
     }
   ],
   "grid_page_length": 50,
   "index_web_pages_for_search": 0,
+  "istable": 0,
   "links": [],
-  "modified": "2026-10-23 20:55:00.000000",
+  "modified": "2026-10-23 22:45:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "Volunteer Category",
   "owner": "Administrator",
   "permissions": [
-    {
-      "role": "Opportunity Manager",
-      "read": 1,
-      "write": 1,
-      "create": 1,
-      "delete": 1,
-      "report": 1,
-      "export": 1
-    },
     {
       "role": "Volunteer Manager",
       "read": 1,
@@ -96,7 +100,19 @@
       "create": 1,
       "delete": 1,
       "report": 1,
-      "export": 1
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Volunteer Coordinator",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1,
+      "email": 1
     },
     {
       "role": "System Manager",
@@ -105,15 +121,19 @@
       "create": 1,
       "delete": 1,
       "report": 1,
-      "export": 1
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
     }
   ],
-  "quick_entry": 1,
   "row_format": "Dynamic",
   "sort_field": "modified",
   "sort_order": "DESC",
   "states": [],
   "track_changes": 1,
+  "quick_entry": 0,
+  "show_name_in_global_search": 1,
   "title_field": "category_name",
   "show_title_field_in_link": 1,
   "search_fields": "category_name",

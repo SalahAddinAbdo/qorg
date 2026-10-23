@@ -3,7 +3,7 @@
   "allow_import": 0,
   "allow_rename": 0,
   "autoname": "hash",
-  "creation": "2026-10-23 18:00:00.000000",
+  "creation": "2026-10-23 22:45:00.000000",
   "custom": 0,
   "doctype": "DocType",
   "engine": "InnoDB",
@@ -15,7 +15,8 @@
     "end_date",
     "certificate_number",
     "certificate",
-    "details"
+    "details",
+    "page_break"
   ],
   "fields": [
     {
@@ -23,51 +24,88 @@
       "label": "Course / Certification",
       "fieldtype": "Data",
       "reqd": 1,
-      "in_list_view": 1
+      "allow_on_submit": 1,
+      "print_hide": 0,
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "provider",
       "label": "Provider",
       "fieldtype": "Data",
-      "in_list_view": 1
+      "allow_on_submit": 1,
+      "print_hide": 0,
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "country",
       "label": "Country",
       "fieldtype": "Link",
-      "options": "Country"
+      "options": "Country",
+      "allow_on_submit": 1,
+      "print_hide": 0,
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "start_date",
       "label": "Start Date",
-      "fieldtype": "Date"
+      "fieldtype": "Date",
+      "allow_on_submit": 1,
+      "print_hide": 0,
+      "in_list_view": 1
     },
     {
       "fieldname": "end_date",
       "label": "End Date",
-      "fieldtype": "Date"
+      "fieldtype": "Date",
+      "allow_on_submit": 1,
+      "print_hide": 0,
+      "in_list_view": 1
     },
     {
       "fieldname": "certificate_number",
       "label": "Certificate Number",
-      "fieldtype": "Data"
+      "fieldtype": "Data",
+      "allow_on_submit": 1,
+      "print_hide": 0,
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "certificate",
       "label": "Certificate",
-      "fieldtype": "Attach"
+      "fieldtype": "Attach",
+      "allow_on_submit": 1,
+      "print_hide": 0,
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "details",
       "label": "Details",
-      "fieldtype": "Small Text"
+      "fieldtype": "Small Text",
+      "allow_on_submit": 1,
+      "print_hide": 0,
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "page_break",
+      "label": "Page Break",
+      "fieldtype": "Check",
+      "default": "0",
+      "in_list_view": 1,
+      "allow_on_submit": 1,
+      "print_hide": 1,
+      "columns": 1
     }
   ],
   "grid_page_length": 50,
   "index_web_pages_for_search": 0,
   "istable": 1,
   "links": [],
-  "modified": "2026-10-23 18:00:00.000000",
+  "modified": "2026-10-23 22:45:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "External Person Training",

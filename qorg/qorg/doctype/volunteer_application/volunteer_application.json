@@ -1,9 +1,9 @@
 {
   "actions": [],
   "allow_import": 1,
-  "allow_rename": 0,
+  "allow_rename": 1,
   "autoname": "naming_series:",
-  "creation": "2026-10-23 18:00:00.000000",
+  "creation": "2026-10-23 22:45:00.000000",
   "custom": 0,
   "doctype": "DocType",
   "engine": "InnoDB",
@@ -13,8 +13,8 @@
     "naming_series",
     "external_person",
     "external_opportunity",
+    "reference_col_2",
     "company",
-    "reference_col",
     "application_date",
     "reference_col_3",
     "application_source",
@@ -24,35 +24,43 @@
     "email",
     "snapshot_col_2",
     "mobile_no",
-    "snapshot_col_3",
     "current_location",
     "availability_section",
     "availability_start_date",
     "availability_end_date",
     "hours_per_week",
+    "availability_col_2",
     "preferred_work_arrangement",
+    "motivation_section",
     "motivation",
+    "motivation_col_2",
     "relevant_experience",
     "documents_section",
     "resume",
     "cover_letter",
+    "documents_col_2",
     "identification_document",
     "additional_document",
     "answers_tab",
+    "answers_page_break",
+    "answers_section",
     "screening_answers",
     "screening_section",
     "screening_status",
     "screening_score",
-    "screening_remarks",
+    "screening_col_2",
     "assigned_reviewer",
+    "screening_remarks",
     "decision_section",
     "final_decision",
     "decision_date",
+    "decision_col_2",
     "decision_by",
     "decision_remarks",
     "result_section",
     "volunteer",
     "volunteer_engagement",
+    "result_col_2",
     "job_applicant"
   ],
   "fields": [
@@ -91,16 +99,16 @@
       "in_list_view": 1
     },
     {
+      "fieldname": "reference_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "company",
       "label": "Company",
       "fieldtype": "Link",
       "options": "Company",
       "read_only": 1
-    },
-    {
-      "fieldname": "reference_col",
-      "label": "",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "application_date",
@@ -111,11 +119,17 @@
       "in_list_view": 1
     },
     {
+      "fieldname": "reference_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "application_source",
       "label": "Source",
       "fieldtype": "Select",
       "options": "Portal\nManual Entry\nReferral\nMigration\nOther",
-      "default": "Manual Entry"
+      "default": "Manual Entry",
+      "reqd": 1
     },
     {
       "fieldname": "status",
@@ -145,6 +159,11 @@
       "read_only": 1
     },
     {
+      "fieldname": "snapshot_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "mobile_no",
       "label": "Mobile Number",
       "fieldtype": "Data",
@@ -158,7 +177,7 @@
     },
     {
       "fieldname": "availability_section",
-      "label": "Availability and Motivation",
+      "label": "Availability",
       "fieldtype": "Section Break"
     },
     {
@@ -178,15 +197,31 @@
       "non_negative": 1
     },
     {
+      "fieldname": "availability_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "preferred_work_arrangement",
       "label": "Preferred Arrangement",
       "fieldtype": "Select",
       "options": "On-site\nRemote\nHybrid\nField Based"
     },
     {
+      "fieldname": "motivation_section",
+      "label": "Motivation and Experience",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "motivation",
       "label": "Motivation",
-      "fieldtype": "Text Editor"
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "motivation_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "relevant_experience",
@@ -201,12 +236,18 @@
     {
       "fieldname": "resume",
       "label": "Resume",
-      "fieldtype": "Attach"
+      "fieldtype": "Attach",
+      "mandatory_depends_on": "eval:doc.status!=\"Draft\""
     },
     {
       "fieldname": "cover_letter",
       "label": "Cover Letter",
       "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "documents_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "identification_document",
@@ -223,6 +264,16 @@
       "fieldname": "answers_tab",
       "label": "Screening",
       "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "answers_page_break",
+      "label": "",
+      "fieldtype": "Page Break"
+    },
+    {
+      "fieldname": "answers_section",
+      "label": "Screening Answers",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "screening_answers",
@@ -251,16 +302,21 @@
       "permlevel": 2
     },
     {
-      "fieldname": "screening_remarks",
-      "label": "Screening Remarks",
-      "fieldtype": "Text Editor",
-      "permlevel": 2
+      "fieldname": "screening_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "assigned_reviewer",
       "label": "Assigned Reviewer",
       "fieldtype": "Link",
       "options": "User",
+      "permlevel": 2
+    },
+    {
+      "fieldname": "screening_remarks",
+      "label": "Screening Remarks",
+      "fieldtype": "Text Editor",
       "permlevel": 2
     },
     {
@@ -282,6 +338,11 @@
       "fieldtype": "Date",
       "read_only": 1,
       "permlevel": 2
+    },
+    {
+      "fieldname": "decision_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "decision_by",
@@ -313,8 +374,13 @@
       "fieldname": "volunteer_engagement",
       "label": "Volunteer Engagement",
       "fieldtype": "Link",
-      "read_only": 1,
-      "options": "Volunteer Engagement"
+      "options": "Volunteer Engagement",
+      "read_only": 1
+    },
+    {
+      "fieldname": "result_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "job_applicant",
@@ -322,28 +388,13 @@
       "fieldtype": "Link",
       "options": "Job Applicant",
       "read_only": 1
-    },
-    {
-      "fieldname": "reference_col_3",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "snapshot_col_2",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "snapshot_col_3",
-      "label": "",
-      "fieldtype": "Column Break"
     }
   ],
   "grid_page_length": 50,
   "index_web_pages_for_search": 0,
   "istable": 0,
   "links": [],
-  "modified": "2026-10-23 21:00:00.000000",
+  "modified": "2026-10-23 22:45:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "Volunteer Application",
@@ -381,34 +432,6 @@
       "print": 1,
       "email": 1,
       "share": 1
-    },
-    {
-      "role": "Volunteer Manager",
-      "permlevel": 1,
-      "read": 1,
-      "write": 1,
-      "create": 1
-    },
-    {
-      "role": "Volunteer Manager",
-      "permlevel": 2,
-      "read": 1,
-      "write": 1,
-      "create": 1
-    },
-    {
-      "role": "System Manager",
-      "permlevel": 1,
-      "read": 1,
-      "write": 1,
-      "create": 1
-    },
-    {
-      "role": "System Manager",
-      "permlevel": 2,
-      "read": 1,
-      "write": 1,
-      "create": 1
     }
   ],
   "row_format": "Dynamic",
