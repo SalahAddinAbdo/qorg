@@ -12,7 +12,10 @@
     "parent_volunteer_category",
     "is_group",
     "enabled",
-    "description"
+    "description",
+    "lft",
+    "rgt",
+    "old_parent"
   ],
   "fields": [
     {
@@ -45,12 +48,33 @@
       "fieldname": "description",
       "label": "Description",
       "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "lft",
+      "label": "Left",
+      "fieldtype": "Int",
+      "hidden": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "rgt",
+      "label": "Right",
+      "fieldtype": "Int",
+      "hidden": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "old_parent",
+      "label": "Old Parent",
+      "fieldtype": "Data",
+      "hidden": 1,
+      "read_only": 1
     }
   ],
   "grid_page_length": 50,
   "index_web_pages_for_search": 0,
   "links": [],
-  "modified": "2026-10-23 22:15:00.000000",
+  "modified": "2026-10-23 20:55:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "Volunteer Category",
