@@ -94,6 +94,11 @@ def apply_model_changes():
     doc.flags.ignore_permissions = True
     doc.save()
     frappe.clear_cache()
+    frappe.publish_realtime(
+        "qorg_model_policy_changed",
+        {"changed": applied},
+        after_commit=True,
+    )
     return {"applied": applied}
 
 
@@ -136,3 +141,9 @@ def resolve_company_feature(company: str, feature_key: str):
     require_administrator()
     from qorg.qorg.enterprise_foundation.features import resolve_feature_state
     return resolve_feature_state(company, feature_key)
+
+
+@frappe.whitelist()
+def get_model_policies():
+    from qorg.qorg.enterprise_foundation.policy_enforcement import get_policy_map
+    return get_policy_map()
