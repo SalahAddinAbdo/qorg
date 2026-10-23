@@ -69,7 +69,7 @@ doc_events = {
         "before_validate": ["qorg.qorg.people_and_opportunities.integrations.sync_job_applicant_person", "qorg.qorg.recruitment_extensions.events.applicant_validate"],
         "on_update": "qorg.qorg.people_and_opportunities.integrations.sync_job_applicant_person",
     },
-    "Interview Round": {"validate": "qorg.qorg.recruitment_extensions.events.round_validate"},
+    "Interview Type": {"validate": "qorg.qorg.recruitment_extensions.events.interview_type_validate"},
     "Interview Feedback": {
         "before_validate": "qorg.qorg.recruitment_extensions.events.feedback_validate",
         "on_submit": "qorg.qorg.recruitment_extensions.events.feedback_submit",
