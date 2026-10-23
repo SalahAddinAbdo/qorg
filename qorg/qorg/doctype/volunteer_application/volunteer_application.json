@@ -42,7 +42,6 @@
     "identification_document",
     "additional_document",
     "answers_tab",
-    "answers_page_break",
     "answers_section",
     "screening_answers",
     "screening_section",
@@ -266,11 +265,6 @@
       "fieldtype": "Tab Break"
     },
     {
-      "fieldname": "answers_page_break",
-      "label": "",
-      "fieldtype": "Page Break"
-    },
-    {
       "fieldname": "answers_section",
       "label": "Screening Answers",
       "fieldtype": "Section Break"
@@ -394,7 +388,7 @@
   "index_web_pages_for_search": 0,
   "istable": 0,
   "links": [],
-  "modified": "2026-10-23 22:45:00.000000",
+  "modified": "2026-10-23 22:55:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "Volunteer Application",

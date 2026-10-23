@@ -58,13 +58,10 @@
     "minimum_age",
     "maximum_age",
     "requirements_tab",
-    "locations_page_break",
     "locations_section",
     "locations",
-    "requirements_page_break",
     "requirements_section",
     "requirements",
-    "questions_page_break",
     "questions_section",
     "screening_questions",
     "application_tab",
@@ -369,11 +366,6 @@
       "fieldtype": "Tab Break"
     },
     {
-      "fieldname": "locations_page_break",
-      "label": "",
-      "fieldtype": "Page Break"
-    },
-    {
       "fieldname": "locations_section",
       "label": "Locations",
       "fieldtype": "Section Break"
@@ -385,11 +377,6 @@
       "options": "Opportunity Location"
     },
     {
-      "fieldname": "requirements_page_break",
-      "label": "",
-      "fieldtype": "Page Break"
-    },
-    {
       "fieldname": "requirements_section",
       "label": "Requirements",
       "fieldtype": "Section Break"
@@ -399,11 +386,6 @@
       "label": "Requirements",
       "fieldtype": "Table",
       "options": "Opportunity Requirement"
-    },
-    {
-      "fieldname": "questions_page_break",
-      "label": "",
-      "fieldtype": "Page Break"
     },
     {
       "fieldname": "questions_section",
@@ -513,7 +495,7 @@
   "index_web_pages_for_search": 0,
   "istable": 0,
   "links": [],
-  "modified": "2026-10-23 22:45:00.000000",
+  "modified": "2026-10-23 22:55:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "External Opportunity",
