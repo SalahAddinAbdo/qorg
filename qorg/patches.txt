@@ -6,4 +6,4 @@ qorg.qorg.patches.v3_0.normalize_legacy_tasks
 qorg.qorg.patches.v3_0.rebuild_task_rollups
 qorg.qorg.patches.v3_0.reconcile_task_shares
 qorg.qorg.patches.v3_0_2.migrate_task_management_settings
-qorg.qorg.recruitment_extensions.migration.execute
+qorg.qorg.recruitment_extensions.migration
