@@ -1,0 +1,110 @@
+{
+  "actions": [],
+  "allow_import": 0,
+  "allow_rename": 0,
+  "autoname": "field:component_key",
+  "creation": "",
+  "custom": 0,
+  "doctype": "DocType",
+  "document_type": "",
+  "engine": "InnoDB",
+  "field_order": [
+    "component_type",
+    "component_key",
+    "managed_version",
+    "applied_fingerprint",
+    "last_seen_fingerprint",
+    "management_status",
+    "last_checked_on",
+    "details"
+  ],
+  "fields": [
+    {
+      "fieldname": "component_type",
+      "label": "Component Type",
+      "fieldtype": "Select",
+      "options": "Workflow\nNotification\nEmail Template\nReport\nWorkspace\nOther",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "component_key",
+      "label": "Component Key",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "unique": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "managed_version",
+      "label": "Managed Version",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "applied_fingerprint",
+      "label": "Applied Fingerprint",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "last_seen_fingerprint",
+      "label": "Last Seen Fingerprint",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "management_status",
+      "label": "Management Status",
+      "fieldtype": "Select",
+      "options": "Managed\nAdministrator Modified\nConflict\nMissing",
+      "default": "Managed",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "last_checked_on",
+      "label": "Last Checked On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "details",
+      "label": "Details",
+      "fieldtype": "JSON"
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 0,
+  "is_submittable": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "Managed Configuration State",
+  "naming_rule": "",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 0,
+      "email": 0,
+      "export": 0,
+      "print": 0,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 0,
+      "write": 0
+    }
+  ],
+  "row_format": "Dynamic",
+  "rows_threshold_for_grid_search": 20,
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "title_field": "component_key",
+  "search_fields": "component_key,component_type,management_status"
+}

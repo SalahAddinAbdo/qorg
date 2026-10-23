@@ -1,0 +1,182 @@
+{
+  "actions": [],
+  "allow_import": 0,
+  "allow_rename": 0,
+  "autoname": "naming_series:",
+  "creation": "",
+  "custom": 0,
+  "doctype": "DocType",
+  "document_type": "",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "company",
+    "operating_mode",
+    "enabled",
+    "features_section",
+    "features",
+    "attendance_section",
+    "mobile_attendance_mode",
+    "require_geolocation",
+    "allow_off_site_checkin",
+    "review_off_site_checkin",
+    "minimum_gps_accuracy",
+    "show_daily_activity",
+    "home_screen_shortcut",
+    "audit_section",
+    "configuration_version",
+    "last_audited_on",
+    "last_audit_summary"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Series",
+      "fieldtype": "Select",
+      "options": "CFS-.#####",
+      "default": "CFS-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "unique": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "operating_mode",
+      "label": "Operating Mode",
+      "fieldtype": "Select",
+      "options": "Standard Only\nExtensions\nFull Portal / Extended Cycle",
+      "default": "Standard Only",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "enabled",
+      "label": "Enabled",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "features_section",
+      "label": "Feature Packages",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "features",
+      "label": "Features",
+      "fieldtype": "Table",
+      "options": "Feature Configuration"
+    },
+    {
+      "fieldname": "attendance_section",
+      "label": "Quick Attendance",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "mobile_attendance_mode",
+      "label": "Mobile Attendance Mode",
+      "fieldtype": "Select",
+      "options": "Disabled\nQuick Attendance\nGeofenced Attendance\nField Attendance\nKiosk",
+      "default": "Disabled"
+    },
+    {
+      "fieldname": "require_geolocation",
+      "label": "Require Geolocation",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "allow_off_site_checkin",
+      "label": "Allow Off-Site Check-in",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "review_off_site_checkin",
+      "label": "Review Off-Site Check-in",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "minimum_gps_accuracy",
+      "label": "Minimum GPS Accuracy (Meters)",
+      "fieldtype": "Float",
+      "non_negative": 1,
+      "default": "100"
+    },
+    {
+      "fieldname": "show_daily_activity",
+      "label": "Show Daily Activity",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "home_screen_shortcut",
+      "label": "Enable Home Screen Shortcut",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "audit_section",
+      "label": "Audit",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "configuration_version",
+      "label": "Configuration Version",
+      "fieldtype": "Data",
+      "read_only": 1
+    },
+    {
+      "fieldname": "last_audited_on",
+      "label": "Last Audited On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "last_audit_summary",
+      "label": "Last Audit Summary",
+      "fieldtype": "Small Text",
+      "read_only": 1
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 0,
+  "is_submittable": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "Company Feature Settings",
+  "naming_rule": "",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 0,
+      "email": 0,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 0,
+      "write": 1
+    }
+  ],
+  "row_format": "Dynamic",
+  "rows_threshold_for_grid_search": 20,
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "title_field": "company",
+  "search_fields": "company,operating_mode"
+}

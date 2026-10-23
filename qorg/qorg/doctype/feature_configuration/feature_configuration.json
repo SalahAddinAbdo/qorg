@@ -1,0 +1,101 @@
+{
+  "actions": [],
+  "allow_import": 0,
+  "allow_rename": 0,
+  "autoname": "",
+  "creation": "",
+  "custom": 0,
+  "doctype": "DocType",
+  "document_type": "",
+  "engine": "InnoDB",
+  "field_order": [
+    "feature_key",
+    "feature_label",
+    "enabled",
+    "operating_mode",
+    "effective_from",
+    "effective_to",
+    "configuration",
+    "notes",
+    "managed_version"
+  ],
+  "fields": [
+    {
+      "fieldname": "feature_key",
+      "label": "Feature Key",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "feature_label",
+      "label": "Feature",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "enabled",
+      "label": "Enabled",
+      "fieldtype": "Check",
+      "default": "0",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "operating_mode",
+      "label": "Operating Mode",
+      "fieldtype": "Select",
+      "options": "Inherit\nStandard Only\nExtensions\nFull Portal / Extended Cycle",
+      "default": "Inherit",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "effective_from",
+      "label": "Effective From",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "effective_to",
+      "label": "Effective To",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "configuration",
+      "label": "Configuration",
+      "fieldtype": "JSON"
+    },
+    {
+      "fieldname": "notes",
+      "label": "Notes",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "managed_version",
+      "label": "Managed Version",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "hidden": 1
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 0,
+  "is_submittable": 0,
+  "issingle": 0,
+  "istable": 1,
+  "links": [],
+  "modified": "",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "Feature Configuration",
+  "naming_rule": "",
+  "owner": "Administrator",
+  "permissions": [],
+  "row_format": "Dynamic",
+  "rows_threshold_for_grid_search": 20,
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 0,
+  "editable_grid": 1
+}

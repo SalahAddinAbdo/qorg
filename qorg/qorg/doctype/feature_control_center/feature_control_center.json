@@ -1,0 +1,123 @@
+{
+  "actions": [],
+  "allow_import": 0,
+  "allow_rename": 0,
+  "autoname": "",
+  "creation": "",
+  "custom": 0,
+  "doctype": "DocType",
+  "document_type": "",
+  "engine": "InnoDB",
+  "field_order": [
+    "overview_section",
+    "configuration_version",
+    "last_synchronized_on",
+    "last_synchronized_by",
+    "pending_change_count",
+    "tab_packages",
+    "site_features",
+    "tab_models",
+    "models",
+    "tab_audit",
+    "audit_results",
+    "last_preview",
+    "last_apply_summary"
+  ],
+  "fields": [
+    {
+      "fieldname": "overview_section",
+      "label": "Control Center",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "configuration_version",
+      "label": "Configuration Version",
+      "fieldtype": "Data",
+      "read_only": 1
+    },
+    {
+      "fieldname": "last_synchronized_on",
+      "label": "Last Synchronized On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "last_synchronized_by",
+      "label": "Last Synchronized By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "pending_change_count",
+      "label": "Pending Changes",
+      "fieldtype": "Int",
+      "read_only": 1
+    },
+    {
+      "fieldname": "tab_packages",
+      "label": "Feature Packages",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "site_features",
+      "label": "Site Feature Defaults",
+      "fieldtype": "Table",
+      "options": "Feature Configuration"
+    },
+    {
+      "fieldname": "tab_models",
+      "label": "Advanced Model Control",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "models",
+      "label": "Models",
+      "fieldtype": "Table",
+      "options": "Model Control Entry"
+    },
+    {
+      "fieldname": "tab_audit",
+      "label": "Audit Results",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "audit_results",
+      "label": "Audit Results",
+      "fieldtype": "Table",
+      "options": "Configuration Audit Result"
+    },
+    {
+      "fieldname": "last_preview",
+      "label": "Last Preview",
+      "fieldtype": "JSON",
+      "read_only": 1
+    },
+    {
+      "fieldname": "last_apply_summary",
+      "label": "Last Apply Summary",
+      "fieldtype": "Small Text",
+      "read_only": 1
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 0,
+  "is_submittable": 0,
+  "issingle": 1,
+  "istable": 0,
+  "links": [],
+  "modified": "",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "Feature Control Center",
+  "naming_rule": "",
+  "owner": "Administrator",
+  "permissions": [],
+  "row_format": "Dynamic",
+  "rows_threshold_for_grid_search": 20,
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "hide_toolbar": 0
+}
