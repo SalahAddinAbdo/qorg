@@ -1,0 +1,1 @@
+frappe.ui.form.on("Employee Onboarding",{refresh(frm){if(frm.is_new())return;frm.dashboard.add_indicator(__("Program Completion: {0}%",[frm.doc.qorg_completion_percent||0]),(frm.doc.qorg_completion_percent||0)>=100?"green":"orange");}});
