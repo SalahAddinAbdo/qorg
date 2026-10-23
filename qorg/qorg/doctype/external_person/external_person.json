@@ -26,9 +26,10 @@
     "mobile_no",
     "contact_col_2",
     "alternative_mobile_no",
+    "current_location",
     "preferred_contact_method",
-    "preferred_language",
     "contact_col_3",
+    "preferred_language",
     "contact",
     "address",
     "official_section",
@@ -38,16 +39,25 @@
     "official_col_2",
     "date_of_birth",
     "nationality",
+    "marital_status",
     "official_col_3",
     "gender",
-    "marital_status",
+    "data_retention_until",
     "profile_tab",
     "summary_section",
     "professional_title",
-    "professional_summary",
-    "summary_col_2",
-    "career_objective",
     "years_of_experience",
+    "summary_col_2",
+    "availability_status",
+    "profile_completion",
+    "last_profile_update",
+    "professional_summary_section",
+    "professional_summary",
+    "career_objective_section",
+    "career_objective",
+    "expertise_section",
+    "sectors_of_expertise",
+    "key_achievements",
     "education_section",
     "education",
     "experience_section",
@@ -67,8 +77,6 @@
     "portfolio_url",
     "documents_col_2",
     "linkedin_url",
-    "profile_completion",
-    "last_profile_update",
     "privacy_tab",
     "privacy_section",
     "source",
@@ -76,12 +84,10 @@
     "privacy_consent_on",
     "privacy_col_2",
     "privacy_consent_source",
-    "data_retention_until",
-    "privacy_col_3",
     "user",
     "employee",
-    "volunteer",
     "links_section",
+    "volunteer",
     "merged_into",
     "source_reference_doctype",
     "links_col_2",
@@ -111,7 +117,6 @@
       "label": "Full Name",
       "fieldtype": "Data",
       "reqd": 1,
-      "in_list_view": 1,
       "in_global_search": 1
     },
     {
@@ -151,7 +156,9 @@
       "options": "Active\nInactive\nDeceased\nDo Not Contact\nMerged",
       "default": "Active",
       "reqd": 1,
-      "in_list_view": 1
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
     },
     {
       "fieldname": "image",
@@ -168,8 +175,9 @@
       "label": "Primary Email",
       "fieldtype": "Data",
       "options": "Email",
+      "mandatory_depends_on": "eval:!doc.mobile_no",
       "in_list_view": 1,
-      "mandatory_depends_on": "eval:!doc.mobile_no"
+      "in_preview": 1
     },
     {
       "fieldname": "secondary_email",
@@ -182,7 +190,8 @@
       "label": "Mobile Number",
       "fieldtype": "Data",
       "options": "Phone",
-      "in_list_view": 1
+      "in_list_view": 1,
+      "in_preview": 1
     },
     {
       "fieldname": "contact_col_2",
@@ -196,6 +205,12 @@
       "options": "Phone"
     },
     {
+      "fieldname": "current_location",
+      "label": "Current Location",
+      "fieldtype": "Data",
+      "in_global_search": 1
+    },
+    {
       "fieldname": "preferred_contact_method",
       "label": "Preferred Contact Method",
       "fieldtype": "Select",
@@ -203,15 +218,15 @@
       "default": "Email"
     },
     {
+      "fieldname": "contact_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "preferred_language",
       "label": "Preferred Language",
       "fieldtype": "Link",
       "options": "Language"
-    },
-    {
-      "fieldname": "contact_col_3",
-      "label": "",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "contact",
@@ -265,6 +280,14 @@
       "label": "Nationality",
       "fieldtype": "Link",
       "options": "Country",
+      "permlevel": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "marital_status",
+      "label": "Marital Status",
+      "fieldtype": "Select",
+      "options": "Single\nMarried\nDivorced\nWidowed",
       "permlevel": 1
     },
     {
@@ -280,11 +303,9 @@
       "permlevel": 1
     },
     {
-      "fieldname": "marital_status",
-      "label": "Marital Status",
-      "fieldtype": "Select",
-      "options": "Single\nMarried\nDivorced\nWidowed",
-      "permlevel": 1
+      "fieldname": "data_retention_until",
+      "label": "Retain Until",
+      "fieldtype": "Date"
     },
     {
       "fieldname": "profile_tab",
@@ -303,10 +324,10 @@
       "reqd": 1
     },
     {
-      "fieldname": "professional_summary",
-      "label": "Professional Summary",
-      "fieldtype": "Text Editor",
-      "reqd": 1
+      "fieldname": "years_of_experience",
+      "label": "Years of Experience",
+      "fieldtype": "Float",
+      "read_only": 1
     },
     {
       "fieldname": "summary_col_2",
@@ -314,15 +335,60 @@
       "fieldtype": "Column Break"
     },
     {
+      "fieldname": "availability_status",
+      "label": "Availability Status",
+      "fieldtype": "Select",
+      "options": "Available\nOpen to Opportunities\nNot Available",
+      "default": "Open to Opportunities",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "profile_completion",
+      "label": "Profile Completion %",
+      "fieldtype": "Percent",
+      "read_only": 1
+    },
+    {
+      "fieldname": "last_profile_update",
+      "label": "Last Profile Update",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "professional_summary_section",
+      "label": "Professional Summary",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "professional_summary",
+      "label": "Professional Summary",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "career_objective_section",
+      "label": "Career Objective",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "career_objective",
       "label": "Career Objective",
       "fieldtype": "Text Editor"
     },
     {
-      "fieldname": "years_of_experience",
-      "label": "Years of Experience",
-      "fieldtype": "Float",
-      "read_only": 1
+      "fieldname": "expertise_section",
+      "label": "Expertise and Availability",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "sectors_of_expertise",
+      "label": "Sectors / Areas of Expertise",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "key_achievements",
+      "label": "Key Achievements",
+      "fieldtype": "Text Editor"
     },
     {
       "fieldname": "education_section",
@@ -429,18 +495,6 @@
       "options": "URL"
     },
     {
-      "fieldname": "profile_completion",
-      "label": "Profile Completion %",
-      "fieldtype": "Percent",
-      "read_only": 1
-    },
-    {
-      "fieldname": "last_profile_update",
-      "label": "Last Profile Update",
-      "fieldtype": "Datetime",
-      "read_only": 1
-    },
-    {
       "fieldname": "privacy_tab",
       "label": "Privacy and Links",
       "fieldtype": "Tab Break"
@@ -456,7 +510,8 @@
       "fieldtype": "Select",
       "options": "Job Application\nVolunteer Application\nPortal Registration\nManual Entry\nEmployee Referral\nImport\nMigration\nOther",
       "default": "Manual Entry",
-      "reqd": 1
+      "reqd": 1,
+      "in_standard_filter": 1
     },
     {
       "fieldname": "privacy_consent",
@@ -481,16 +536,6 @@
       "fieldtype": "Data"
     },
     {
-      "fieldname": "data_retention_until",
-      "label": "Retain Until",
-      "fieldtype": "Date"
-    },
-    {
-      "fieldname": "privacy_col_3",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
       "fieldname": "user",
       "label": "Portal User",
       "fieldtype": "Link",
@@ -504,16 +549,16 @@
       "read_only": 1
     },
     {
+      "fieldname": "links_section",
+      "label": "System Links",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "volunteer",
       "label": "Volunteer Profile",
       "fieldtype": "Link",
       "options": "Volunteer Profile",
       "read_only": 1
-    },
-    {
-      "fieldname": "links_section",
-      "label": "System Links",
-      "fieldtype": "Section Break"
     },
     {
       "fieldname": "merged_into",
@@ -546,7 +591,7 @@
   "index_web_pages_for_search": 0,
   "istable": 0,
   "links": [],
-  "modified": "2026-10-23 22:55:00.000000",
+  "modified": "2026-10-23 23:30:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "External Person",
@@ -586,6 +631,6 @@
   "show_name_in_global_search": 1,
   "title_field": "full_name",
   "show_title_field_in_link": 1,
-  "search_fields": "full_name,name_in_arabic,primary_email,mobile_no,identification_number",
+  "search_fields": "full_name,name_in_arabic,professional_title,current_location,primary_email,mobile_no,identification_number",
   "image_field": "image"
 }

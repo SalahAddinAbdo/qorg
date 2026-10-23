@@ -16,9 +16,11 @@
     "identity_col_2",
     "status",
     "volunteer_category",
-    "identity_col_3",
     "registration_date",
+    "identity_col_3",
     "coordinator",
+    "onboarding_date",
+    "end_date",
     "availability_section",
     "available_from",
     "available_until",
@@ -26,22 +28,24 @@
     "availability_col_2",
     "preferred_arrangement",
     "preferred_locations",
-    "availability_col_3",
-    "onboarding_date",
-    "end_date",
+    "emergency_section",
+    "emergency_contact_name",
+    "emergency_contact_mobile",
+    "compliance_section",
+    "code_of_conduct_acknowledged",
+    "safeguarding_acknowledged",
+    "source_section",
+    "source_application",
+    "active_engagement_count",
+    "source_col_2",
+    "completed_engagement_count",
     "qualification_tab",
     "qualification_section",
     "primary_skills",
     "qualification_col_2",
     "volunteering_interests",
     "notes_section",
-    "notes",
-    "links_tab",
-    "source_section",
-    "source_application",
-    "active_engagement_count",
-    "source_col_2",
-    "completed_engagement_count"
+    "notes"
   ],
   "fields": [
     {
@@ -67,16 +71,14 @@
       "label": "External Person",
       "fieldtype": "Link",
       "options": "External Person",
-      "reqd": 1,
-      "in_list_view": 1
+      "reqd": 1
     },
     {
       "fieldname": "company",
       "label": "Company",
       "fieldtype": "Link",
       "options": "Company",
-      "reqd": 1,
-      "in_list_view": 1
+      "reqd": 1
     },
     {
       "fieldname": "identity_col_2",
@@ -89,19 +91,16 @@
       "fieldtype": "Select",
       "options": "Active\nInactive\nSuspended\nClosed",
       "default": "Active",
-      "reqd": 1,
-      "in_list_view": 1
+      "reqd": 1
     },
     {
       "fieldname": "volunteer_category",
       "label": "Volunteer Category",
       "fieldtype": "Link",
-      "options": "Volunteer Category"
-    },
-    {
-      "fieldname": "identity_col_3",
-      "label": "",
-      "fieldtype": "Column Break"
+      "options": "Volunteer Category",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
     },
     {
       "fieldname": "registration_date",
@@ -111,11 +110,26 @@
       "reqd": 1
     },
     {
+      "fieldname": "identity_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "coordinator",
       "label": "Coordinator",
       "fieldtype": "Link",
       "options": "User",
       "reqd": 1
+    },
+    {
+      "fieldname": "onboarding_date",
+      "label": "Onboarding Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "end_date",
+      "label": "End Date",
+      "fieldtype": "Date"
     },
     {
       "fieldname": "availability_section",
@@ -155,19 +169,64 @@
       "fieldtype": "Small Text"
     },
     {
-      "fieldname": "availability_col_3",
+      "fieldname": "emergency_section",
+      "label": "Emergency Contact",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "emergency_contact_name",
+      "label": "Emergency Contact Name",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "emergency_contact_mobile",
+      "label": "Emergency Contact Mobile",
+      "fieldtype": "Data",
+      "options": "Phone"
+    },
+    {
+      "fieldname": "compliance_section",
+      "label": "Compliance",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "code_of_conduct_acknowledged",
+      "label": "Code of Conduct Acknowledged",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "safeguarding_acknowledged",
+      "label": "Safeguarding Requirements Acknowledged",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "source_section",
+      "label": "Source",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "source_application",
+      "label": "Source Application",
+      "fieldtype": "Link",
+      "options": "Volunteer Application",
+      "read_only": 1
+    },
+    {
+      "fieldname": "active_engagement_count",
+      "label": "Active Engagements",
+      "fieldtype": "Int",
+      "read_only": 1
+    },
+    {
+      "fieldname": "source_col_2",
       "label": "",
       "fieldtype": "Column Break"
     },
     {
-      "fieldname": "onboarding_date",
-      "label": "Onboarding Date",
-      "fieldtype": "Date"
-    },
-    {
-      "fieldname": "end_date",
-      "label": "End Date",
-      "fieldtype": "Date"
+      "fieldname": "completed_engagement_count",
+      "label": "Completed Engagements",
+      "fieldtype": "Int",
+      "read_only": 1
     },
     {
       "fieldname": "qualification_tab",
@@ -203,47 +262,13 @@
       "fieldname": "notes",
       "label": "Notes",
       "fieldtype": "Text Editor"
-    },
-    {
-      "fieldname": "links_tab",
-      "label": "Links",
-      "fieldtype": "Tab Break"
-    },
-    {
-      "fieldname": "source_section",
-      "label": "Source",
-      "fieldtype": "Section Break"
-    },
-    {
-      "fieldname": "source_application",
-      "label": "Source Application",
-      "fieldtype": "Link",
-      "options": "Volunteer Application",
-      "read_only": 1
-    },
-    {
-      "fieldname": "active_engagement_count",
-      "label": "Active Engagements",
-      "fieldtype": "Int",
-      "read_only": 1
-    },
-    {
-      "fieldname": "source_col_2",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "completed_engagement_count",
-      "label": "Completed Engagements",
-      "fieldtype": "Int",
-      "read_only": 1
     }
   ],
   "grid_page_length": 50,
   "index_web_pages_for_search": 0,
   "istable": 0,
   "links": [],
-  "modified": "2026-10-23 22:45:00.000000",
+  "modified": "2026-10-23 23:30:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "Volunteer Profile",
@@ -292,5 +317,5 @@
   "show_name_in_global_search": 1,
   "title_field": "external_person",
   "show_title_field_in_link": 1,
-  "search_fields": "external_person,company,status,coordinator"
+  "search_fields": "external_person,company,status,volunteer_category,coordinator"
 }

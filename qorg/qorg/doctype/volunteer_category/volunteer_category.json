@@ -25,14 +25,16 @@
       "label": "Category Name",
       "fieldtype": "Data",
       "reqd": 1,
-      "in_list_view": 1,
-      "unique": 1
+      "unique": 1,
+      "in_list_view": 1
     },
     {
       "fieldname": "parent_volunteer_category",
       "label": "Parent Volunteer Category",
       "fieldtype": "Link",
-      "options": "Volunteer Category"
+      "options": "Volunteer Category",
+      "in_list_view": 1,
+      "in_standard_filter": 1
     },
     {
       "fieldname": "category_col_2",
@@ -43,13 +45,16 @@
       "fieldname": "is_group",
       "label": "Is Group",
       "fieldtype": "Check",
-      "in_list_view": 1
+      "in_list_view": 1,
+      "in_standard_filter": 1
     },
     {
       "fieldname": "enabled",
       "label": "Enabled",
       "fieldtype": "Check",
-      "default": "1"
+      "default": "1",
+      "in_list_view": 1,
+      "in_standard_filter": 1
     },
     {
       "fieldname": "lft",
@@ -87,7 +92,7 @@
   "index_web_pages_for_search": 0,
   "istable": 0,
   "links": [],
-  "modified": "2026-10-23 22:45:00.000000",
+  "modified": "2026-10-23 23:30:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "Volunteer Category",

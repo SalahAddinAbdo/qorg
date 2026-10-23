@@ -26,23 +26,22 @@
     "recruitment_owner",
     "ownership_col_2",
     "volunteer_coordinator",
+    "work_arrangement",
     "publication_tab",
     "dates_section",
     "opening_date",
     "closing_date",
-    "publish_on_website",
-    "dates_col_2",
-    "published_on",
-    "is_featured",
-    "application_limit",
-    "dates_col_3",
     "expected_start_date",
+    "dates_col_2",
     "expected_end_date",
     "duration_text",
+    "application_limit",
+    "dates_col_3",
+    "publish_on_website",
+    "published_on",
+    "is_featured",
     "description_section",
     "summary",
-    "description_col_2",
-    "description",
     "responsibility_section",
     "responsibilities",
     "responsibility_col_2",
@@ -51,11 +50,12 @@
     "selection_process",
     "selection_col_2",
     "application_instructions",
+    "description_full_section",
+    "description",
     "nature_section",
     "employment_type",
-    "work_arrangement",
-    "nature_col_2",
     "minimum_age",
+    "nature_col_2",
     "maximum_age",
     "requirements_tab",
     "locations_section",
@@ -105,16 +105,14 @@
       "fieldname": "opportunity_title",
       "label": "Opportunity Title",
       "fieldtype": "Data",
-      "reqd": 1,
-      "in_list_view": 1
+      "reqd": 1
     },
     {
       "fieldname": "opportunity_type",
       "label": "Opportunity Type",
       "fieldtype": "Link",
       "options": "External Opportunity Type",
-      "reqd": 1,
-      "in_list_view": 1
+      "reqd": 1
     },
     {
       "fieldname": "identity_col_2",
@@ -126,14 +124,14 @@
       "label": "Company",
       "fieldtype": "Link",
       "options": "Company",
-      "reqd": 1,
-      "in_list_view": 1
+      "reqd": 1
     },
     {
       "fieldname": "department",
       "label": "Department",
       "fieldtype": "Link",
-      "options": "Department"
+      "options": "Department",
+      "in_standard_filter": 1
     },
     {
       "fieldname": "designation",
@@ -153,7 +151,9 @@
       "options": "Draft\nUnder Review\nApproved\nPublished\nClosed\nArchived\nRejected",
       "default": "Draft",
       "read_only": 1,
-      "in_list_view": 1
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
     },
     {
       "fieldname": "job_opening",
@@ -176,7 +176,8 @@
       "fieldname": "responsible_employee",
       "label": "Responsible Employee",
       "fieldtype": "Link",
-      "options": "Employee"
+      "options": "Employee",
+      "in_standard_filter": 1
     },
     {
       "fieldname": "recruitment_owner",
@@ -194,6 +195,12 @@
       "label": "Volunteer Coordinator",
       "fieldtype": "Link",
       "options": "User"
+    },
+    {
+      "fieldname": "work_arrangement",
+      "label": "Work Arrangement",
+      "fieldtype": "Select",
+      "options": "On-site\nRemote\nHybrid\nField Based\nMultiple Locations"
     },
     {
       "fieldname": "publication_tab",
@@ -218,9 +225,9 @@
       "reqd": 1
     },
     {
-      "fieldname": "publish_on_website",
-      "label": "Publish on Website",
-      "fieldtype": "Check"
+      "fieldname": "expected_start_date",
+      "label": "Expected Start Date",
+      "fieldtype": "Date"
     },
     {
       "fieldname": "dates_col_2",
@@ -228,15 +235,14 @@
       "fieldtype": "Column Break"
     },
     {
-      "fieldname": "published_on",
-      "label": "Published On",
-      "fieldtype": "Datetime",
-      "read_only": 1
+      "fieldname": "expected_end_date",
+      "label": "Expected End Date",
+      "fieldtype": "Date"
     },
     {
-      "fieldname": "is_featured",
-      "label": "Featured",
-      "fieldtype": "Check"
+      "fieldname": "duration_text",
+      "label": "Duration",
+      "fieldtype": "Data"
     },
     {
       "fieldname": "application_limit",
@@ -250,19 +256,20 @@
       "fieldtype": "Column Break"
     },
     {
-      "fieldname": "expected_start_date",
-      "label": "Expected Start Date",
-      "fieldtype": "Date"
+      "fieldname": "publish_on_website",
+      "label": "Publish on Website",
+      "fieldtype": "Check"
     },
     {
-      "fieldname": "expected_end_date",
-      "label": "Expected End Date",
-      "fieldtype": "Date"
+      "fieldname": "published_on",
+      "label": "Published On",
+      "fieldtype": "Datetime",
+      "read_only": 1
     },
     {
-      "fieldname": "duration_text",
-      "label": "Duration",
-      "fieldtype": "Data"
+      "fieldname": "is_featured",
+      "label": "Featured",
+      "fieldtype": "Check"
     },
     {
       "fieldname": "description_section",
@@ -273,17 +280,6 @@
       "fieldname": "summary",
       "label": "Summary",
       "fieldtype": "Small Text",
-      "reqd": 1
-    },
-    {
-      "fieldname": "description_col_2",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "description",
-      "label": "Description",
-      "fieldtype": "Text Editor",
       "reqd": 1
     },
     {
@@ -327,6 +323,17 @@
       "fieldtype": "Text Editor"
     },
     {
+      "fieldname": "description_full_section",
+      "label": "Full Description",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "description",
+      "label": "Description",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
       "fieldname": "nature_section",
       "label": "Nature",
       "fieldtype": "Section Break"
@@ -338,21 +345,15 @@
       "options": "Employment Type"
     },
     {
-      "fieldname": "work_arrangement",
-      "label": "Work Arrangement",
-      "fieldtype": "Select",
-      "options": "On-site\nRemote\nHybrid\nField Based\nMultiple Locations"
+      "fieldname": "minimum_age",
+      "label": "Minimum Age",
+      "fieldtype": "Int",
+      "non_negative": 1
     },
     {
       "fieldname": "nature_col_2",
       "label": "",
       "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "minimum_age",
-      "label": "Minimum Age",
-      "fieldtype": "Int",
-      "non_negative": 1
     },
     {
       "fieldname": "maximum_age",
@@ -465,7 +466,8 @@
       "fieldname": "application_count",
       "label": "Applications",
       "fieldtype": "Int",
-      "read_only": 1
+      "read_only": 1,
+      "in_list_view": 1
     },
     {
       "fieldname": "shortlisted_count",
@@ -495,7 +497,7 @@
   "index_web_pages_for_search": 0,
   "istable": 0,
   "links": [],
-  "modified": "2026-10-23 22:55:00.000000",
+  "modified": "2026-10-23 23:30:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "External Opportunity",
@@ -535,5 +537,5 @@
   "show_name_in_global_search": 1,
   "title_field": "opportunity_title",
   "show_title_field_in_link": 1,
-  "search_fields": "opportunity_title,opportunity_type,company,status"
+  "search_fields": "opportunity_title,opportunity_type,company,department,designation,status"
 }

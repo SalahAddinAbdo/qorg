@@ -31,8 +31,8 @@
       "label": "Type Name",
       "fieldtype": "Data",
       "reqd": 1,
-      "in_list_view": 1,
-      "unique": 1
+      "unique": 1,
+      "in_list_view": 1
     },
     {
       "fieldname": "behavior_code",
@@ -40,7 +40,8 @@
       "fieldtype": "Select",
       "options": "Employment\nVolunteering\nInternship\nConsultancy\nOther",
       "reqd": 1,
-      "in_list_view": 1
+      "in_list_view": 1,
+      "in_standard_filter": 1
     },
     {
       "fieldname": "type_col_2",
@@ -52,12 +53,14 @@
       "label": "Enabled",
       "fieldtype": "Check",
       "default": "1",
-      "in_list_view": 1
+      "in_list_view": 1,
+      "in_standard_filter": 1
     },
     {
       "fieldname": "display_order",
       "label": "Display Order",
-      "fieldtype": "Int"
+      "fieldtype": "Int",
+      "in_list_view": 1
     },
     {
       "fieldname": "type_col_3",
@@ -91,7 +94,7 @@
   "index_web_pages_for_search": 0,
   "istable": 0,
   "links": [],
-  "modified": "2026-10-23 22:45:00.000000",
+  "modified": "2026-10-23 23:30:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "External Opportunity Type",

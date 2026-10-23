@@ -16,19 +16,21 @@
     "identity_col_2",
     "company",
     "project",
-    "status",
     "identity_col_3",
+    "status",
     "coordinator",
-    "role_title",
     "volunteer_category",
-    "period_section",
+    "role_section",
+    "role_title",
+    "source_application",
+    "role_col_2",
     "start_date",
     "end_date",
+    "period_section",
     "expected_hours_per_week",
-    "period_col_2",
     "total_logged_hours",
+    "period_col_2",
     "completion_date",
-    "source_application",
     "scope_section",
     "responsibilities",
     "scope_col_2",
@@ -60,15 +62,13 @@
       "label": "Volunteer Profile",
       "fieldtype": "Link",
       "options": "Volunteer Profile",
-      "reqd": 1,
-      "in_list_view": 1
+      "reqd": 1
     },
     {
       "fieldname": "external_opportunity",
       "label": "External Opportunity",
       "fieldtype": "Link",
-      "options": "External Opportunity",
-      "in_list_view": 1
+      "options": "External Opportunity"
     },
     {
       "fieldname": "identity_col_2",
@@ -80,14 +80,21 @@
       "label": "Company",
       "fieldtype": "Link",
       "options": "Company",
-      "reqd": 1,
-      "in_list_view": 1
+      "reqd": 1
     },
     {
       "fieldname": "project",
       "label": "Project",
       "fieldtype": "Link",
-      "options": "Project"
+      "options": "Project",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "identity_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "status",
@@ -95,13 +102,7 @@
       "fieldtype": "Select",
       "options": "Draft\nActive\nSuspended\nCompleted\nWithdrawn\nCancelled",
       "default": "Draft",
-      "reqd": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "identity_col_3",
-      "label": "",
-      "fieldtype": "Column Break"
+      "reqd": 1
     },
     {
       "fieldname": "coordinator",
@@ -111,21 +112,34 @@
       "reqd": 1
     },
     {
+      "fieldname": "volunteer_category",
+      "label": "Volunteer Category",
+      "fieldtype": "Link",
+      "options": "Volunteer Category",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "role_section",
+      "label": "Role and Period",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "role_title",
       "label": "Role Title",
       "fieldtype": "Data",
       "reqd": 1
     },
     {
-      "fieldname": "volunteer_category",
-      "label": "Volunteer Category",
+      "fieldname": "source_application",
+      "label": "Source Application",
       "fieldtype": "Link",
-      "options": "Volunteer Category"
+      "options": "Volunteer Application",
+      "read_only": 1
     },
     {
-      "fieldname": "period_section",
-      "label": "Period and Commitment",
-      "fieldtype": "Section Break"
+      "fieldname": "role_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "start_date",
@@ -139,15 +153,15 @@
       "fieldtype": "Date"
     },
     {
+      "fieldname": "period_section",
+      "label": "Period and Commitment",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "expected_hours_per_week",
       "label": "Expected Hours per Week",
       "fieldtype": "Float",
       "non_negative": 1
-    },
-    {
-      "fieldname": "period_col_2",
-      "label": "",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "total_logged_hours",
@@ -156,16 +170,14 @@
       "read_only": 1
     },
     {
+      "fieldname": "period_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "completion_date",
       "label": "Completion Date",
       "fieldtype": "Date",
-      "read_only": 1
-    },
-    {
-      "fieldname": "source_application",
-      "label": "Source Application",
-      "fieldtype": "Link",
-      "options": "Volunteer Application",
       "read_only": 1
     },
     {
@@ -205,7 +217,7 @@
   "index_web_pages_for_search": 0,
   "istable": 0,
   "links": [],
-  "modified": "2026-10-23 22:45:00.000000",
+  "modified": "2026-10-23 23:30:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "Volunteer Engagement",
@@ -254,5 +266,5 @@
   "show_name_in_global_search": 1,
   "title_field": "role_title",
   "show_title_field_in_link": 1,
-  "search_fields": "volunteer_profile,role_title,company,project,status"
+  "search_fields": "volunteer_profile,role_title,company,project,status,coordinator"
 }

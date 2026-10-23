@@ -16,9 +16,10 @@
     "reference_col_2",
     "company",
     "application_date",
-    "reference_col_3",
     "application_source",
+    "reference_col_3",
     "status",
+    "assigned_reviewer",
     "snapshot_section",
     "applicant_name",
     "email",
@@ -31,6 +32,7 @@
     "hours_per_week",
     "availability_col_2",
     "preferred_work_arrangement",
+    "areas_of_interest",
     "motivation_section",
     "motivation",
     "motivation_col_2",
@@ -41,6 +43,9 @@
     "documents_col_2",
     "identification_document",
     "additional_document",
+    "declaration_section",
+    "information_certified",
+    "consent_to_screening",
     "answers_tab",
     "answers_section",
     "screening_answers",
@@ -48,7 +53,6 @@
     "screening_status",
     "screening_score",
     "screening_col_2",
-    "assigned_reviewer",
     "screening_remarks",
     "decision_section",
     "final_decision",
@@ -86,16 +90,14 @@
       "label": "External Person",
       "fieldtype": "Link",
       "options": "External Person",
-      "reqd": 1,
-      "in_list_view": 1
+      "reqd": 1
     },
     {
       "fieldname": "external_opportunity",
       "label": "External Opportunity",
       "fieldtype": "Link",
       "options": "External Opportunity",
-      "reqd": 1,
-      "in_list_view": 1
+      "reqd": 1
     },
     {
       "fieldname": "reference_col_2",
@@ -107,20 +109,15 @@
       "label": "Company",
       "fieldtype": "Link",
       "options": "Company",
-      "read_only": 1
+      "read_only": 1,
+      "in_standard_filter": 1
     },
     {
       "fieldname": "application_date",
       "label": "Application Date",
       "fieldtype": "Date",
       "default": "Today",
-      "reqd": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "reference_col_3",
-      "label": "",
-      "fieldtype": "Column Break"
+      "reqd": 1
     },
     {
       "fieldname": "application_source",
@@ -131,13 +128,29 @@
       "reqd": 1
     },
     {
+      "fieldname": "reference_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "status",
       "label": "Status",
       "fieldtype": "Select",
       "options": "Draft\nSubmitted\nUnder Screening\nShortlisted\nAssessment Scheduled\nUnder Review\nApproved\nRejected\nWithdrawn\nConverted\nClosed",
       "default": "Draft",
       "read_only": 1,
-      "in_list_view": 1
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "assigned_reviewer",
+      "label": "Assigned Reviewer",
+      "fieldtype": "Link",
+      "options": "User",
+      "permlevel": 2,
+      "in_list_view": 1,
+      "in_standard_filter": 1
     },
     {
       "fieldname": "snapshot_section",
@@ -148,14 +161,17 @@
       "fieldname": "applicant_name",
       "label": "Applicant Name",
       "fieldtype": "Data",
-      "read_only": 1
+      "read_only": 1,
+      "in_list_view": 1,
+      "in_preview": 1
     },
     {
       "fieldname": "email",
       "label": "Email",
       "fieldtype": "Data",
       "options": "Email",
-      "read_only": 1
+      "read_only": 1,
+      "in_preview": 1
     },
     {
       "fieldname": "snapshot_col_2",
@@ -167,7 +183,8 @@
       "label": "Mobile Number",
       "fieldtype": "Data",
       "options": "Phone",
-      "read_only": 1
+      "read_only": 1,
+      "in_preview": 1
     },
     {
       "fieldname": "current_location",
@@ -205,6 +222,11 @@
       "label": "Preferred Arrangement",
       "fieldtype": "Select",
       "options": "On-site\nRemote\nHybrid\nField Based"
+    },
+    {
+      "fieldname": "areas_of_interest",
+      "label": "Areas of Interest",
+      "fieldtype": "Small Text"
     },
     {
       "fieldname": "motivation_section",
@@ -260,6 +282,23 @@
       "fieldtype": "Attach"
     },
     {
+      "fieldname": "declaration_section",
+      "label": "Applicant Declaration",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "information_certified",
+      "label": "Information is Complete and Accurate",
+      "fieldtype": "Check",
+      "mandatory_depends_on": "eval:doc.status!=\"Draft\""
+    },
+    {
+      "fieldname": "consent_to_screening",
+      "label": "Consent to Screening and Verification",
+      "fieldtype": "Check",
+      "mandatory_depends_on": "eval:doc.status!=\"Draft\""
+    },
+    {
       "fieldname": "answers_tab",
       "label": "Screening",
       "fieldtype": "Tab Break"
@@ -299,13 +338,6 @@
       "fieldname": "screening_col_2",
       "label": "",
       "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "assigned_reviewer",
-      "label": "Assigned Reviewer",
-      "fieldtype": "Link",
-      "options": "User",
-      "permlevel": 2
     },
     {
       "fieldname": "screening_remarks",
@@ -388,7 +420,7 @@
   "index_web_pages_for_search": 0,
   "istable": 0,
   "links": [],
-  "modified": "2026-10-23 22:55:00.000000",
+  "modified": "2026-10-23 23:30:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "Volunteer Application",
@@ -437,5 +469,5 @@
   "show_name_in_global_search": 1,
   "title_field": "applicant_name",
   "show_title_field_in_link": 1,
-  "search_fields": "applicant_name,email,mobile_no,external_opportunity,status"
+  "search_fields": "applicant_name,email,mobile_no,external_person,external_opportunity,status"
 }
