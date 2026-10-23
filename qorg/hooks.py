@@ -41,7 +41,7 @@ doctype_js = {
 doc_events = {
     "Print Settings": {
         "validate": "qorg.qorg.project_management.print_settings_integration.validate_print_settings",
-        
+
     },
     "Project Risk": {
         "on_update": (
@@ -113,6 +113,7 @@ after_install = [
     "qorg.qorg.project_management.provisioning.provision_project_management",
     "qorg.qorg.project_management.workflow_provisioning.provision_project_workflows",
     "qorg.qorg.project_management.notification_provisioning.provision_project_notifications",
+    "qorg.qorg.enterprise_foundation.provisioning.provision_enterprise_foundation",
     "qorg.qorg.project_management.navigation_provisioning.provision_q_org_navigation",
 ]
 
@@ -125,6 +126,7 @@ after_migrate = [
     "qorg.qorg.project_management.provisioning.provision_project_management",
     "qorg.qorg.project_management.workflow_provisioning.provision_project_workflows",
     "qorg.qorg.project_management.notification_provisioning.provision_project_notifications",
+    "qorg.qorg.enterprise_foundation.provisioning.provision_enterprise_foundation",
     "qorg.qorg.project_management.navigation_provisioning.provision_q_org_navigation",
 ]
 
@@ -148,6 +150,8 @@ permission_query_conditions = {
 }
 
 has_permission = {
+    "Feature Control Center": "qorg.qorg.enterprise_foundation.permissions.feature_control_center_has_permission",
+    "Managed Configuration State": "qorg.qorg.enterprise_foundation.permissions.managed_state_has_permission",
     "Task": "qorg.qorg.task_management.permissions.has_task_permission",
     "Task Assignment Request": (
         "qorg.qorg.task_management.permissions.has_request_permission"
