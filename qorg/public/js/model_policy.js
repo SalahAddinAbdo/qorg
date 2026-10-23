@@ -91,6 +91,11 @@
     }
 
     function applyPolicy() {
+        if (frappe.session.user === "Administrator") {
+            document.body.classList.remove("qorg-model-write-blocked");
+            document.body.removeAttribute("data-qorg-model-policy");
+            return;
+        }
         if (state.applying) return;
         state.applying = true;
         try {
@@ -114,6 +119,7 @@
     }
 
     function blockMutation(event) {
+        if (frappe.session.user === "Administrator") return;
         const { doctype, policy } = currentPolicy();
         if (!doctype || !isProtected(policy)) return;
         const target = event.target.closest("button, a, .dropdown-item");
