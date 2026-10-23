@@ -7,6 +7,7 @@ import frappe
 from frappe.utils import now_datetime
 
 from qorg.qorg.enterprise_foundation.constants import CRITICAL_DOCTYPES
+from qorg.qorg.enterprise_foundation.model_policy_engine import active_native_policies
 
 
 def _app_owner(module: str) -> str:
@@ -52,6 +53,7 @@ def scan_models() -> list[dict]:
     report_types = set(frappe.get_all("Report", pluck="ref_doctype"))
     workflow_types = set(frappe.get_all("Workflow", filters={"is_active": 1}, pluck="document_type"))
     result = []
+    applied_policies = active_native_policies()
     synchronized = now_datetime()
     for row in rows:
         app = _app_owner(row.module)
@@ -65,8 +67,8 @@ def scan_models() -> list[dict]:
             "module_name": row.module,
             "model_kind": kind,
             "ownership_type": _ownership(app, row.custom),
-            "current_policy": "Enabled",
-            "requested_policy": "Enabled",
+            "current_policy": applied_policies.get(row.name, "Enabled"),
+            "requested_policy": applied_policies.get(row.name, "Enabled"),
             "risk_level": _risk(row.name, app, kind, count),
             "record_count": count,
             "incoming_links": incoming,

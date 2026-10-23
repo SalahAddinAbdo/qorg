@@ -71,7 +71,7 @@ def preview_model_changes():
     return changes
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def apply_model_changes():
     doc = _center()
     preview = _build_model_changes(doc)
@@ -79,25 +79,28 @@ def apply_model_changes():
     if blocked:
         frappe.throw("Blocked or critical model changes must be removed before applying.")
 
+    from qorg.qorg.enterprise_foundation.model_policy_engine import (
+        active_native_policies,
+        apply_model_policy,
+    )
+
     applied = []
     for row in doc.models or []:
         if row.current_policy == row.requested_policy:
             continue
         if not row.change_reason:
             frappe.throw(f"Change reason is required for {row.document_type}.")
-        row.current_policy = row.requested_policy
+        effective = apply_model_policy(row.document_type, row.requested_policy)
+        row.current_policy = effective
+        row.requested_policy = effective
         applied.append(row.document_type)
 
-    active = [
-        row.document_type
-        for row in doc.models or []
-        if row.current_policy and row.current_policy != "Enabled"
-    ]
+    active = active_native_policies()
     doc.last_preview = json.dumps(preview, default=str, indent=2)
     doc.pending_change_count = 0
     doc.last_apply_summary = (
         f"Applied {len(applied)} policy changes. "
-        f"Active non-enabled model policies: {len(active)}."
+        f"Active native permission policies: {len(active)}."
     )
     doc.flags.ignore_permissions = True
     doc.save()
