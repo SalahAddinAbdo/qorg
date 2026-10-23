@@ -3,10 +3,9 @@
   "allow_import": 0,
   "allow_rename": 0,
   "autoname": "",
-  "creation": "2026-10-23 09:55:00.000000",
+  "creation": "2026-10-23 11:25:00.000000",
   "custom": 0,
   "doctype": "DocType",
-  "document_type": "",
   "engine": "InnoDB",
   "field_order": [
     "document_type",
@@ -17,12 +16,18 @@
     "ownership_type",
     "current_policy",
     "requested_policy",
+    "current_action_policy",
+    "requested_action_policy",
     "risk_level",
     "record_count",
     "incoming_links",
     "has_workflow",
     "has_reports",
     "has_workspace_links",
+    "allow_print",
+    "allow_email",
+    "allow_comments",
+    "allow_attachments",
     "change_reason",
     "last_synchronized_on",
     "scan_fingerprint"
@@ -72,7 +77,7 @@
     },
     {
       "fieldname": "current_policy",
-      "label": "Current Policy",
+      "label": "Current Access Policy",
       "fieldtype": "Select",
       "options": "Enabled\nHidden from Navigation\nRestricted\nRead Only\nFeature Disabled\nDeprecated",
       "read_only": 1,
@@ -80,10 +85,27 @@
     },
     {
       "fieldname": "requested_policy",
-      "label": "Requested Policy",
+      "label": "Requested Access Policy",
       "fieldtype": "Select",
       "options": "Enabled\nHidden from Navigation\nRestricted\nRead Only\nFeature Disabled\nDeprecated",
       "default": "Enabled",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "current_action_policy",
+      "label": "Current Action Policy",
+      "fieldtype": "Select",
+      "options": "Standard\nDisable Write Actions\nView Only",
+      "default": "Standard",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "requested_action_policy",
+      "label": "Requested Action Policy",
+      "fieldtype": "Select",
+      "options": "Standard\nDisable Write Actions\nView Only",
+      "default": "Standard",
       "in_list_view": 1
     },
     {
@@ -127,6 +149,30 @@
       "read_only": 1
     },
     {
+      "fieldname": "allow_print",
+      "label": "Allow Print",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "allow_email",
+      "label": "Allow Email",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "allow_comments",
+      "label": "Allow Comments",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "allow_attachments",
+      "label": "Allow Attachments",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
       "fieldname": "change_reason",
       "label": "Change Reason",
       "fieldtype": "Small Text"
@@ -147,22 +193,18 @@
   ],
   "grid_page_length": 50,
   "index_web_pages_for_search": 0,
-  "is_submittable": 0,
-  "issingle": 0,
   "istable": 1,
+  "editable_grid": 1,
   "links": [],
-  "modified": "2026-10-23 09:55:00.000000",
+  "modified": "2026-10-23 11:25:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "Model Control Entry",
-  "naming_rule": "",
   "owner": "Administrator",
   "permissions": [],
   "row_format": "Dynamic",
-  "rows_threshold_for_grid_search": 20,
   "sort_field": "modified",
   "sort_order": "DESC",
   "states": [],
-  "track_changes": 0,
-  "editable_grid": 1
+  "track_changes": 0
 }
