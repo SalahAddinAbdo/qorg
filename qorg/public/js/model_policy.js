@@ -1,128 +1,43 @@
 (() => {
-    "use strict";
+    if (window.__qorg_model_policy_loaded) return;
+    window.__qorg_model_policy_loaded = true;
+    let action_policies = { ...(frappe.boot.qorg_action_policies || {}) };
 
-    const VERSION = "1.3.4";
-    if (window.qorgModelPolicyVersion === VERSION) return;
-    window.qorgModelPolicyVersion = VERSION;
-
-    if (frappe.session.user === "Administrator") return;
-
-    let policies = { ...(frappe.boot.qorg_action_policies || {}) };
-    let timer = null;
-    let observer = null;
-
-    const slug = (value) => (value || "")
-        .toString()
-        .toLowerCase()
-        .replace(/[_\s]+/g, "-")
-        .replace(/[^a-z0-9-]/g, "")
-        .replace(/-+/g, "-")
-        .replace(/^-|-$/g, "");
-
-    function routeDoctype() {
-        const route = (frappe.get_route() || []).map(slug);
-        return Object.keys(policies).find((doctype) => route.includes(slug(doctype))) || null;
+    async function reload_policies() {
+        const response = await frappe.call({method:"qorg.qorg.enterprise_foundation.api.get_action_policies", silent:true});
+        action_policies = response.message || {};
+        frappe.boot.qorg_action_policies = action_policies;
     }
 
-    function currentDoctype() {
-        if (window.cur_frm?.doctype && policies[window.cur_frm.doctype]) return window.cur_frm.doctype;
-        if (window.cur_list?.doctype && policies[window.cur_list.doctype]) return window.cur_list.doctype;
-        return routeDoctype();
+    function hide_add_controls(frm, config) {
+        const wrapper = $(frm.page?.wrapper || frm.wrapper);
+        if (!config.allow_comments) wrapper.find(".comment-box").hide();
+        else wrapper.find(".comment-box").show();
+        const attachment_add = wrapper.find(".add-attachment, .attachment-btn, [data-label='Add Attachment']");
+        if (!config.allow_attachments) attachment_add.hide(); else attachment_add.show();
     }
 
-    function currentPolicy() {
-        return policies[currentDoctype()] || { policy: "Standard" };
-    }
+    window.qorg_apply_model_policy = async function(frm) {
+        frm = frm || window.cur_frm;
+        if (!frm?.doctype || frappe.session.user === "Administrator") return;
+        if (!Object.prototype.hasOwnProperty.call(action_policies, frm.doctype)) await reload_policies();
+        const config = action_policies[frm.doctype];
+        if (!config || config.policy !== "View Only") return;
+        // Native Custom DocPerm protects data. This runs after all Q Org workflow
+        // and dimension controllers, and only removes form action surfaces.
+        frm.clear_custom_buttons?.();
+        frm.page?.clear_primary_action?.();
+        frm.page?.clear_secondary_action?.();
+        frm.page?.clear_actions_menu?.();
+        frm.page?.clear_inner_toolbar?.();
+        if (!config.allow_print) frm.page?.menu?.find("[data-label='Print'], [data-label='Print View']").closest("li").hide();
+        if (!config.allow_email) frm.page?.menu?.find("[data-label='Email'], [data-label='New Email']").closest("li").hide();
+        hide_add_controls(frm, config);
+        frm.__qorg_model_policy_applied = true;
+    };
 
-    function hide(element) {
-        if (!element) return;
-        element.classList.add("qorg-action-hidden-v134");
-        element.setAttribute("aria-hidden", "true");
-        element.setAttribute("tabindex", "-1");
-    }
-
-    function hideAll(selector) {
-        document.querySelectorAll(selector).forEach(hide);
-    }
-
-    function restoreManagedElements() {
-        document.querySelectorAll(".qorg-action-hidden-v134").forEach((element) => {
-            element.classList.remove("qorg-action-hidden-v134");
-            element.removeAttribute("aria-hidden");
-            element.removeAttribute("tabindex");
-        });
-    }
-
-    function applyPolicy() {
-        restoreManagedElements();
-        const policy = currentPolicy();
-        if (!["Disable Write Actions", "View Only"].includes(policy.policy)) return;
-
-        // Native Custom DocPerm is authoritative for data writes. This script only
-        // controls visible action surfaces and never calls Form.disable_save().
-        hideAll(
-            ".page-head .primary-action, .page-actions .btn-primary, " +
-            ".standard-actions .btn-primary, .grid-add-row, " +
-            ".tree-toolbar .btn-primary, .tree-node-toolbar .btn-primary, " +
-            ".tree-actions .btn-primary, .new-node, .add-child"
-        );
-
-        if (policy.policy === "View Only") {
-            hideAll(
-                ".custom-actions, .inner-toolbar, .inner-group-button, " +
-                ".actions-btn-group, .menu-btn-group, .workflow-button-group, " +
-                ".page-actions .btn, .standard-actions .btn, " +
-                ".page-head .dropdown, .page-head .btn-group"
-            );
-        }
-
-        if (!Number(policy.allow_print)) {
-            hideAll(".print-btn, [data-label='Print'], [data-label='Print View'], [title='Print']");
-        }
-        if (!Number(policy.allow_email)) {
-            hideAll("[data-label='Email'], [data-label='New Email'], .new-email");
-        }
-        if (!Number(policy.allow_comments)) {
-            hideAll(
-                ".comment-box, .new-comment, .comment-input, .timeline-comment-box, " +
-                ".form-comments, .comment-form, .comment-section"
-            );
-        }
-        if (!Number(policy.allow_attachments)) {
-            hideAll(
-                ".attachments, .attachment-row, .form-attachments, .attachment-btn, " +
-                "[data-label='Attachments'], .sidebar-section.attachments"
-            );
-        }
-    }
-
-    function scheduleApply() {
-        if (timer) clearTimeout(timer);
-        timer = setTimeout(() => {
-            applyPolicy();
-            requestAnimationFrame(applyPolicy);
-            [100, 300, 700, 1500].forEach((delay) => setTimeout(applyPolicy, delay));
-        }, 20);
-    }
-
-    async function refreshPolicies() {
-        const response = await frappe.call({
-            method: "qorg.qorg.enterprise_foundation.api.get_action_policies",
-            silent: true,
-        });
-        policies = response.message || {};
-        frappe.boot.qorg_action_policies = policies;
-        scheduleApply();
-    }
-
-    frappe.realtime.on("qorg_model_policy_changed", refreshPolicies);
-    frappe.router.on("change", () => refreshPolicies().catch(scheduleApply));
-    $(document).on("page-change form-refresh list-rendered after_ajax", scheduleApply);
-
-    $(document).ready(() => {
-        observer = new MutationObserver(scheduleApply);
-        observer.observe(document.body, { childList: true, subtree: true });
-        refreshPolicies().catch(scheduleApply);
-        console.info(`[QOrg] model policy client ${VERSION} loaded`);
+    frappe.realtime.on("qorg_model_policy_changed", async () => {
+        await reload_policies();
+        if (window.cur_frm) window.qorg_apply_model_policy(window.cur_frm);
     });
 })();

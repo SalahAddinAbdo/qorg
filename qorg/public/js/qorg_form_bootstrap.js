@@ -93,6 +93,11 @@
                 await window.qorg_initialize_transaction_controller(frm);
             }
         }
+
+        // Apply managed model policy last, after workflow and dimension controllers.
+        if (typeof window.qorg_apply_model_policy === "function") {
+            await window.qorg_apply_model_policy(frm);
+        }
     }
 
     frappe.router.on("change", () => {
