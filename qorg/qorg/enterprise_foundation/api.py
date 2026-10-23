@@ -88,18 +88,26 @@ def apply_model_changes():
         row.current_policy = row.requested_policy
         applied.append(row.document_type)
 
+    active = [
+        row.document_type
+        for row in doc.models or []
+        if row.current_policy and row.current_policy != "Enabled"
+    ]
     doc.last_preview = json.dumps(preview, default=str, indent=2)
     doc.pending_change_count = 0
-    doc.last_apply_summary = f"Applied {len(applied)} managed model policies."
+    doc.last_apply_summary = (
+        f"Applied {len(applied)} policy changes. "
+        f"Active non-enabled model policies: {len(active)}."
+    )
     doc.flags.ignore_permissions = True
     doc.save()
     frappe.clear_cache()
     frappe.publish_realtime(
         "qorg_model_policy_changed",
-        {"changed": applied},
+        {"changed": applied, "active": active},
         after_commit=True,
     )
-    return {"applied": applied}
+    return {"applied": applied, "active": active}
 
 
 @frappe.whitelist()
