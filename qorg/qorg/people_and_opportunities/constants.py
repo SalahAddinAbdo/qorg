@@ -1,0 +1,3 @@
+EXTERNAL_PEOPLE_FEATURE="external_people"
+PUBLIC_OPPORTUNITIES_FEATURE="public_opportunities"
+EXTENDED_RECRUITMENT_FEATURE="extended_recruitment"

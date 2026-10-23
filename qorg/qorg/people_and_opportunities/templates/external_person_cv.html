@@ -1,0 +1,10 @@
+<div class="qorg-cv">
+  <div class="text-center"><h1>{{ doc.full_name }}</h1>{% if doc.name_in_arabic %}<h2>{{ doc.name_in_arabic }}</h2>{% endif %}{% if doc.professional_title %}<h4>{{ doc.professional_title }}</h4>{% endif %}<p>{{ doc.primary_email or '' }}{% if doc.mobile_no %} | {{ doc.mobile_no }}{% endif %}{% if doc.linkedin_url %} | {{ doc.linkedin_url }}{% endif %}</p></div>
+  {% if doc.professional_summary %}<h3>Professional Summary</h3>{{ doc.professional_summary }}{% endif %}
+  {% if doc.education %}<h3>Education</h3>{% for row in doc.education %}<div class="mb-2"><strong>{{ row.qualification }}</strong>{% if row.field_of_study %}, {{ row.field_of_study }}{% endif %}<br>{{ row.institution }}{% if row.graduation_year %} | {{ row.graduation_year }}{% endif %}{% if row.grade %} | {{ row.grade }}{% endif %}</div>{% endfor %}{% endif %}
+  {% if doc.experience %}<h3>Professional Experience</h3>{% for row in doc.experience %}<div class="mb-3"><strong>{{ row.job_title }}</strong> | {{ row.organization }}<br><small>{{ row.from_date }} - {{ row.to_date or 'Present' }}</small>{{ row.responsibilities or '' }}</div>{% endfor %}{% endif %}
+  {% if doc.training %}<h3>Training and Certifications</h3>{% for row in doc.training %}<div><strong>{{ row.course_title }}</strong>{% if row.provider %} | {{ row.provider }}{% endif %}{% if row.end_date %} | {{ row.end_date }}{% endif %}</div>{% endfor %}{% endif %}
+  {% if doc.skills %}<h3>Skills</h3><p>{% for row in doc.skills %}{{ row.skill }}{% if row.proficiency %} ({{ row.proficiency }}){% endif %}{% if not loop.last %}, {% endif %}{% endfor %}</p>{% endif %}
+  {% if doc.languages %}<h3>Languages</h3><p>{% for row in doc.languages %}{{ row.language }}{% if row.speaking %} - {{ row.speaking }}{% endif %}{% if not loop.last %}; {% endif %}{% endfor %}</p>{% endif %}
+  {% if doc.volunteer_experience %}<h3>Volunteering</h3>{% for row in doc.volunteer_experience %}<div><strong>{{ row.role or '' }}</strong>{% if row.organization %} | {{ row.organization }}{% endif %}</div>{% endfor %}{% endif %}
+</div>

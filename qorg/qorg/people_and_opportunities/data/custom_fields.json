@@ -1,0 +1,27 @@
+[
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_external_opportunity",
+    "label": "External Opportunity",
+    "fieldtype": "Link",
+    "options": "External Opportunity",
+    "insert_after": "job_title",
+    "read_only": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_external_person",
+    "label": "External Person",
+    "fieldtype": "Link",
+    "options": "External Person",
+    "insert_after": "applicant_name"
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_external_opportunity",
+    "label": "External Opportunity",
+    "fieldtype": "Link",
+    "options": "External Opportunity",
+    "insert_after": "job_title"
+  }
+]
