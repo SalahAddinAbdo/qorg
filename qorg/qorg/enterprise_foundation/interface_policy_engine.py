@@ -6,6 +6,8 @@ import json
 import frappe
 from frappe.utils import has_common, now_datetime
 
+from qorg.qorg.enterprise_foundation.constants import CONFIGURATION_VERSION
+
 INTERFACE_PREFIX = "Interface Policy::"
 DENY_ROLE = "QOrg Disabled Component"
 CUSTOM_ROLE_TYPES = {"Report": "report", "Page": "page"}
@@ -75,6 +77,7 @@ def _save_state(
     }
     state.component_type = "Other"
     state.component_key = key
+    state.managed_version = CONFIGURATION_VERSION
     state.management_status = "Managed"
     state.last_checked_on = now_datetime()
     state.last_seen_fingerprint = visibility
