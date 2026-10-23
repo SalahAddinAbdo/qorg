@@ -18,10 +18,22 @@ add_to_apps_screen = [{
 
 required_apps = ["erpnext"]
 
+extend_bootinfo = "qorg.qorg.enterprise_foundation.boot.extend_bootinfo"
+
 app_include_js = [
     "/assets/qorg/js/qorg_form_bootstrap.js",
     "/assets/qorg/js/model_policy.js",
 ]
+
+app_include_css = [
+    "/assets/qorg/css/model_policy.css",
+]
+
+override_whitelisted_methods = {
+    "frappe.model.rename_doc.update_document_title": (
+        "qorg.qorg.enterprise_foundation.overrides.update_document_title"
+    ),
+}
 
 extend_doctype_class = {
     "Task": [
@@ -70,6 +82,7 @@ doc_events = {
         "before_save": "qorg.qorg.enterprise_foundation.policy_enforcement.enforce_model_policy",
         "before_submit": "qorg.qorg.enterprise_foundation.policy_enforcement.enforce_model_policy",
         "before_cancel": "qorg.qorg.enterprise_foundation.policy_enforcement.enforce_model_policy",
+        "before_update_after_submit": "qorg.qorg.enterprise_foundation.policy_enforcement.enforce_model_policy",
         "on_trash": "qorg.qorg.enterprise_foundation.policy_enforcement.enforce_model_policy",
         "validate": (
             "qorg.qorg.workflow.permissions."
