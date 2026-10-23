@@ -3,8 +3,7 @@
 
     let policies = { ...(frappe.boot.qorg_action_policies || {}) };
     let observer = null;
-    let applying = false;
-    let utilityRestore = false;
+    let scheduled = null;
 
     const scrub = (value) => (value || "")
         .toString()
@@ -15,38 +14,40 @@
         .replace(/^-|-$/g, "");
 
     function routeDoctype() {
-        const route = frappe.get_route() || [];
-        const routeParts = route.map(scrub);
-        return Object.keys(policies).find((doctype) => routeParts.includes(scrub(doctype))) || null;
+        const parts = (frappe.get_route() || []).map(scrub);
+        return Object.keys(policies).find((doctype) => parts.includes(scrub(doctype))) || null;
     }
 
     function currentDoctype() {
-        if (window.cur_frm?.doctype && policies[window.cur_frm.doctype]) return window.cur_frm.doctype;
-        if (window.cur_list?.doctype && policies[window.cur_list.doctype]) return window.cur_list.doctype;
+        if (window.cur_frm?.doctype && policies[window.cur_frm.doctype]) {
+            return window.cur_frm.doctype;
+        }
+        if (window.cur_list?.doctype && policies[window.cur_list.doctype]) {
+            return window.cur_list.doctype;
+        }
         return routeDoctype();
     }
 
-    function currentConfig() {
+    function config() {
         return policies[currentDoctype()] || { policy: "Standard" };
     }
 
-    function isViewOnly() {
-        return currentConfig().policy === "View Only";
+    function blocksWrites(value) {
+        return ["Disable Write Actions", "View Only"].includes(value?.policy);
     }
 
-    function blocksWriteActions() {
-        return ["Disable Write Actions", "View Only"].includes(currentConfig().policy);
+    function hide(element) {
+        if (!element) return;
+        element.classList.add("qorg-action-hidden");
+        element.setAttribute("aria-hidden", "true");
+        element.setAttribute("tabindex", "-1");
     }
 
-    function hide(selector) {
-        document.querySelectorAll(selector).forEach((element) => {
-            element.classList.add("qorg-action-hidden");
-            element.setAttribute("aria-hidden", "true");
-            element.setAttribute("tabindex", "-1");
-        });
+    function hideAll(selector, root = document) {
+        root.querySelectorAll(selector).forEach(hide);
     }
 
-    function clearOld() {
+    function clearManagedHidden() {
         document.querySelectorAll(".qorg-action-hidden").forEach((element) => {
             element.classList.remove("qorg-action-hidden");
             element.removeAttribute("aria-hidden");
@@ -54,131 +55,137 @@
         });
     }
 
-    function restoreUtilities(frm, config) {
-        if (!frm || utilityRestore) return;
-        utilityRestore = true;
-        try {
-            if (config.allow_print) {
-                frm.page.add_menu_item(__("Print"), () => frm.print_doc(), true);
-            }
-            if (config.allow_email && typeof frm.email_doc === "function") {
-                frm.page.add_menu_item(__("Email"), () => frm.email_doc(), true);
-            }
-        } finally {
-            utilityRestore = false;
-        }
+    function formIsReady(frm) {
+        return Boolean(
+            frm &&
+            frm.doc &&
+            frm.page &&
+            frm.page.wrapper &&
+            frm.toolbar &&
+            frm.dashboard
+        );
     }
 
-    function enforceForm(config) {
-        const frm = window.cur_frm;
-        if (!frm) return;
+    function applyFormPolicy(frm, value) {
+        if (!formIsReady(frm)) return false;
 
-        frm.disable_save();
-        frm.set_read_only();
+        // Do not call disable_save before Form setup is complete. Native DocPerm
+        // already blocks writes; this layer only controls action surfaces.
+        frm.set_read_only?.();
         frm.clear_custom_buttons?.();
         frm.page.clear_primary_action?.();
         frm.page.clear_secondary_action?.();
         frm.page.clear_actions_menu?.();
         frm.page.clear_inner_toolbar?.();
 
-        if (config.policy === "View Only") {
+        if (value.policy === "View Only") {
             frm.page.clear_menu?.();
-            restoreUtilities(frm, config);
         }
+        return true;
     }
 
-    function enforceListOrTree(config) {
+    function applyPagePolicy(value) {
         const page = window.cur_list?.page || window.cur_tree?.page;
-        page?.clear_primary_action?.();
-        page?.clear_secondary_action?.();
-        page?.clear_actions_menu?.();
-        if (config.policy === "View Only") {
-            page?.clear_inner_toolbar?.();
-            page?.clear_menu?.();
+        if (!page?.wrapper) return;
+
+        page.clear_primary_action?.();
+        page.clear_secondary_action?.();
+        page.clear_actions_menu?.();
+        if (value.policy === "View Only") {
+            page.clear_inner_toolbar?.();
+            page.clear_menu?.();
         }
     }
 
-    function enforceDom(config) {
-        hide(
-            ".page-head .primary-action, .page-head .btn-primary, " +
-            ".page-actions .btn-primary, .standard-actions .btn-primary, " +
-            ".grid-add-row, .tree-toolbar .btn-primary, .tree-node-toolbar .btn-primary, " +
-            ".tree-actions .btn-primary, .new-node, .add-child"
+    function applyDomPolicy(value) {
+        hideAll(
+            ".page-head .primary-action, " +
+            ".page-head .btn-primary, " +
+            ".page-actions .btn-primary, " +
+            ".standard-actions .btn-primary, " +
+            ".grid-add-row, " +
+            ".tree-toolbar .btn-primary, " +
+            ".tree-node-toolbar .btn-primary, " +
+            ".tree-actions .btn-primary, " +
+            ".new-node, .add-child"
         );
 
-        if (config.policy === "View Only") {
-            hide(
-                ".custom-actions, .inner-toolbar, .inner-group-button, " +
-                ".actions-btn-group, .menu-btn-group, .page-actions .btn, " +
-                ".standard-actions .btn, .workflow-button-group"
+        if (value.policy === "View Only") {
+            hideAll(
+                ".custom-actions, " +
+                ".inner-toolbar, " +
+                ".inner-group-button, " +
+                ".actions-btn-group, " +
+                ".menu-btn-group, " +
+                ".workflow-button-group, " +
+                ".page-actions .btn, " +
+                ".standard-actions .btn"
             );
         }
-        if (!config.allow_comments) {
-            hide(".comment-box, .new-comment, .comment-input, [data-fieldname='comments']");
+
+        if (!value.allow_print) {
+            hideAll(".print-btn, [data-label='Print'], [data-label='Print View']");
+            hideAll(".form-sidebar .print-icon, .form-sidebar .octicon-print");
         }
-        if (!config.allow_attachments) {
-            hide(".attachments, .attachment-row, .form-attachments, [data-label='Attachments']");
+        if (!value.allow_email) {
+            hideAll("[data-label='Email'], [data-label='New Email'], .new-email");
+        }
+        if (!value.allow_comments) {
+            hideAll(
+                ".comment-box, .new-comment, .comment-input, " +
+                ".timeline-comment-box, .form-comments, .comment-form, " +
+                "[data-fieldname='comments']"
+            );
+        }
+        if (!value.allow_attachments) {
+            hideAll(
+                ".attachments, .attachment-row, .form-attachments, " +
+                ".attachment-btn, [data-label='Attachments']"
+            );
         }
     }
 
     function applyPolicy() {
-        if (applying) return;
-        applying = true;
-        try {
-            clearOld();
-            const config = currentConfig();
-            if (!blocksWriteActions()) return;
-            enforceForm(config);
-            enforceListOrTree(config);
-            enforceDom(config);
-        } finally {
-            applying = false;
-        }
+        clearManagedHidden();
+        const value = config();
+        if (!blocksWrites(value)) return;
+
+        applyFormPolicy(window.cur_frm, value);
+        applyPagePolicy(value);
+        applyDomPolicy(value);
     }
 
-    function schedule() {
-        applyPolicy();
-        requestAnimationFrame(applyPolicy);
-        [50, 150, 400, 800, 1500, 2500].forEach((delay) => setTimeout(applyPolicy, delay));
+    function scheduleApply() {
+        if (scheduled) clearTimeout(scheduled);
+        scheduled = setTimeout(() => {
+            applyPolicy();
+            requestAnimationFrame(applyPolicy);
+            [100, 300, 700, 1400].forEach((delay) => setTimeout(applyPolicy, delay));
+        }, 25);
     }
 
     async function reloadPolicies() {
-        const result = await frappe.call({
+        const response = await frappe.call({
             method: "qorg.qorg.enterprise_foundation.api.get_action_policies",
             silent: true,
         });
-        policies = result.message || {};
+        policies = response.message || {};
         frappe.boot.qorg_action_policies = policies;
-        schedule();
-    }
-
-    // Prevent late form scripts from re-adding action surfaces after policy enforcement.
-    const Page = frappe.ui?.Page;
-    if (Page?.prototype && !Page.prototype.__qorg_policy_patched) {
-        Page.prototype.__qorg_policy_patched = true;
-        ["set_primary_action", "set_secondary_action", "add_inner_button", "add_action_item"].forEach((method) => {
-            const original = Page.prototype[method];
-            if (typeof original !== "function") return;
-            Page.prototype[method] = function (...args) {
-                if (!utilityRestore && blocksWriteActions()) return null;
-                return original.apply(this, args);
-            };
-        });
-        ["add_menu_item"].forEach((method) => {
-            const original = Page.prototype[method];
-            if (typeof original !== "function") return;
-            Page.prototype[method] = function (...args) {
-                if (!utilityRestore && isViewOnly()) return null;
-                return original.apply(this, args);
-            };
-        });
+        scheduleApply();
     }
 
     frappe.realtime.on("qorg_model_policy_changed", reloadPolicies);
-    frappe.router.on("change", () => reloadPolicies().catch(schedule));
-    $(document).on("page-change form-refresh list-rendered", schedule);
+    frappe.router.on("change", () => reloadPolicies().catch(scheduleApply));
+    $(document).on(
+        "page-change form-refresh list-rendered form-load after_ajax",
+        scheduleApply
+    );
 
-    observer = new MutationObserver(() => applyPolicy());
-    observer.observe(document.body, { childList: true, subtree: true });
-    reloadPolicies().catch(schedule);
+    // Observe only after the initial page is ready. Do not monkey-patch Page methods;
+    // doing that during toolbar construction corrupts Frappe's own lifecycle.
+    $(document).ready(() => {
+        observer = new MutationObserver(scheduleApply);
+        observer.observe(document.body, { childList: true, subtree: true });
+        reloadPolicies().catch(scheduleApply);
+    });
 })();
