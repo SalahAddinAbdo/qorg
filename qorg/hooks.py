@@ -42,7 +42,12 @@ extend_doctype_class = {
 }
 
 doctype_js = {
+    "Interview Type": "public/js/interview_type.js",
+    "Interview Feedback": "public/js/interview_feedback.js",
     "Job Applicant": "public/js/job_applicant_recruitment.js",
+    "Job Offer": "public/js/job_offer_recruitment.js",
+    "Appointment Letter": "public/js/appointment_letter_recruitment.js",
+    "Employee Onboarding": "public/js/employee_onboarding_recruitment.js",
     "Task Assignment Request": "public/js/task_assignment_request.js",
     "Task": "public/js/task.js",
     "Employee": "public/js/employee_announcement.js",
@@ -53,44 +58,56 @@ doctype_js = {
 }
 
 doc_events = {
-    "External Person": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete"},
-    "External Opportunity": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete"},
-    "Volunteer Profile": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete"},
-    "External Opportunity Type": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_master_delete"},
-    "Person Qualification": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_master_delete"},
-    "Volunteer Category": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_master_delete"},
+    "External Person": {
+        "on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete"
+    },
+    "External Opportunity": {
+        "on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete"
+    },
+    "Volunteer Profile": {
+        "on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete"
+    },
+    "External Opportunity Type": {
+        "on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_master_delete"
+    },
+    "Person Qualification": {
+        "on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_master_delete"
+    },
+    "Volunteer Category": {
+        "on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_master_delete"
+    },
     "Job Opening": {
         "validate": [
             "qorg.qorg.people_and_opportunities.integrations.validate_job_opening",
-            "qorg.qorg.recruitment_extensions.events.opening_validate",
+            "qorg.qorg.recruitment_extensions.events.validate_job_opening",
         ],
     },
     "Job Applicant": {
-        "before_validate": ["qorg.qorg.people_and_opportunities.integrations.sync_job_applicant_person", "qorg.qorg.recruitment_extensions.events.applicant_validate"],
+        "before_validate": [
+            "qorg.qorg.people_and_opportunities.integrations.sync_job_applicant_person",
+            "qorg.qorg.recruitment_extensions.events.validate_job_applicant",
+        ],
         "on_update": "qorg.qorg.people_and_opportunities.integrations.sync_job_applicant_person",
     },
-    "Interview Type": {"validate": "qorg.qorg.recruitment_extensions.events.interview_type_validate"},
+    "Interview Type": {
+        "validate": "qorg.qorg.recruitment_extensions.events.validate_interview_type"
+    },
+    "Interview": {
+        "validate": "qorg.qorg.recruitment_extensions.events.validate_interview",
+        "on_cancel": "qorg.qorg.recruitment_extensions.events.interview_cancelled",
+        "after_delete": "qorg.qorg.recruitment_extensions.events.interview_deleted",
+    },
     "Interview Feedback": {
-        "before_validate": "qorg.qorg.recruitment_extensions.events.feedback_validate",
-        "on_submit": "qorg.qorg.recruitment_extensions.events.feedback_submit",
-        "on_cancel": "qorg.qorg.recruitment_extensions.events.feedback_cancel",
+        "before_validate": "qorg.qorg.recruitment_extensions.events.validate_feedback",
+        "on_submit": "qorg.qorg.recruitment_extensions.events.feedback_submitted",
+        "on_cancel": "qorg.qorg.recruitment_extensions.events.feedback_cancelled",
+        "after_delete": "qorg.qorg.recruitment_extensions.events.feedback_deleted",
     },
-    "Interview": {"validate": "qorg.qorg.recruitment_extensions.events.interview_validate"},
-    "Job Offer": {
-        "before_validate": "qorg.qorg.recruitment_extensions.events.offer_before_validate",
-        "on_update": "qorg.qorg.recruitment_extensions.events.offer_on_update",
-    },
-    "Appointment Letter": {
-        "validate": "qorg.qorg.recruitment_extensions.events.appointment_validate",
-        "on_update": "qorg.qorg.recruitment_extensions.events.appointment_on_update",
-    },
-    "Employee": {
-        "validate": "qorg.qorg.recruitment_extensions.events.employee_validate",
-        "after_insert": "qorg.qorg.recruitment_extensions.events.employee_after_insert",
+    "Employee Onboarding": {
+        "validate": "qorg.qorg.recruitment_extensions.onboarding.validate_onboarding"
     },
     "Print Settings": {
         "validate": "qorg.qorg.project_management.print_settings_integration.validate_print_settings",
-
     },
     "Project Risk": {
         "on_update": (
