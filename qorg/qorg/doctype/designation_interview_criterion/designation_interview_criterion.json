@@ -1,0 +1,127 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "autoname": "hash",
+  "creation": "2026-10-23 23:50:00.000000",
+  "custom": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "index_web_pages_for_search": 0,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-10-23 23:50:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "owner": "Administrator",
+  "permissions": [],
+  "states": [],
+  "track_changes": 0,
+  "name": "Designation Interview Criterion",
+  "field_order": [
+    "sequence",
+    "competency_area",
+    "question_task",
+    "applicable_assessment_type",
+    "assessment_method",
+    "default_weight",
+    "passing_score",
+    "is_mandatory",
+    "low_score_anchor",
+    "mid_score_anchor",
+    "high_score_anchor",
+    "instructions",
+    "page_break"
+  ],
+  "fields": [
+    {
+      "fieldname": "sequence",
+      "label": "Sequence",
+      "fieldtype": "Int",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "competency_area",
+      "label": "Competency / Area",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "question_task",
+      "label": "Question / Task",
+      "fieldtype": "Small Text",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 3
+    },
+    {
+      "fieldname": "applicable_assessment_type",
+      "label": "Applicable Assessment Type",
+      "fieldtype": "Select",
+      "options": "All\nStructured Interview\nTechnical Interview\nWritten Test\nPractical Test\nCase Study\nPresentation\nReference Check\nOther",
+      "default": "All",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "assessment_method",
+      "label": "Assessment Method",
+      "fieldtype": "Select",
+      "options": "Question\nWritten Answer\nPractical Demonstration\nCase Analysis\nPresentation\nDocument Review\nOther",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "default_weight",
+      "label": "Default Weight %",
+      "fieldtype": "Percent",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "passing_score",
+      "label": "Passing Score %",
+      "fieldtype": "Percent",
+      "default": "60"
+    },
+    {
+      "fieldname": "is_mandatory",
+      "label": "Mandatory",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "low_score_anchor",
+      "label": "Low Score Anchor",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "mid_score_anchor",
+      "label": "Mid Score Anchor",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "high_score_anchor",
+      "label": "High Score Anchor",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "instructions",
+      "label": "Instructions",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "page_break",
+      "label": "Page Break",
+      "fieldtype": "Check",
+      "default": "0",
+      "allow_on_submit": 1,
+      "print_hide": 1
+    }
+  ]
+}

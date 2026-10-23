@@ -1,15 +1,20 @@
-from qorg.qorg.recruitment_extensions.services import *
-def applicant_validate(doc,method=None):validate_job_applicant(doc)
-def opening_validate(doc,method=None):validate_assessment_plan(doc)
-def interview_type_validate(doc,method=None):validate_interview_type(doc)
-def interview_validate(doc,method=None):validate_interview(doc)
-def feedback_validate(doc,method=None):validate_feedback(doc)
-def feedback_submit(doc,method=None):update_interview_score(doc.interview)
-def feedback_cancel(doc,method=None):update_interview_score(doc.interview)
-def offer_before_validate(doc,method=None):default_offer_validity(doc);validate_job_offer(doc)
-def offer_on_update(doc,method=None):update_applicant_offer_state(doc)
-def appointment_validate(doc,method=None):sync_appointment_state(doc)
-def appointment_on_update(doc,method=None):
-    if doc.qorg_job_applicant:frappe.db.set_value("Job Applicant",doc.qorg_job_applicant,{"qorg_selection_status":"Appointment Issued","qorg_next_action":"Create employee"},update_modified=False)
-def employee_validate(doc,method=None):sync_employee_trace(doc)
-def employee_after_insert(doc,method=None):after_employee_insert(doc)
+from . import services
+
+def validate_job_opening(doc, method=None): services.validate_weights(doc)
+def validate_interview_type(doc, method=None): services.validate_interview_type(doc)
+def validate_job_applicant(doc, method=None): services.sync_screening_criteria(doc); services.validate_final_decision(doc)
+def validate_interview(doc, method=None): services.configure_interview(doc)
+def validate_feedback(doc, method=None): services.copy_feedback_criteria(doc); services.calculate_feedback(doc, require_evidence=bool(doc.docstatus))
+def feedback_submitted(doc, method=None): services.recalculate_interview(doc.interview)
+def feedback_cancelled(doc, method=None): services.recalculate_interview(doc.interview)
+def feedback_deleted(doc, method=None):
+    if doc.interview: services.recalculate_interview(doc.interview)
+def interview_cancelled(doc, method=None):
+    if doc.job_applicant: services.recalculate_applicant(doc.job_applicant)
+def interview_deleted(doc, method=None):
+    if doc.job_applicant: services.recalculate_applicant(doc.job_applicant)
+def propagate_context(doc, method=None):
+    for field in ("job_applicant","job_offer","appointment_letter"):
+        if doc.get(field):
+            dt={"job_applicant":"Job Applicant","job_offer":"Job Offer","appointment_letter":"Appointment Letter"}[field]
+            if __import__('frappe').db.exists(dt,doc.get(field)): services.copy_context(__import__('frappe').get_doc(dt,doc.get(field)),doc); break

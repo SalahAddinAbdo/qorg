@@ -1,0 +1,7 @@
+{
+  "doctype": "Email Template",
+  "name": "Recruitment - Appointment Letter Issued - Bilingual",
+  "subject": "Appointment letter | خطاب التعيين",
+  "use_html": 1,
+  "response_html": "<div style=\"font-family:Arial,sans-serif;background:{{ light or '#f6f8fa' }};padding:18px\"><div style=\"max-width:720px;margin:auto;border:1px solid {{ border or '#dfe3e8' }};background:#fff\"><div style=\"background:{{ header or '#176b87' }};color:#fff;padding:16px;text-align:center\"><strong>{{ company or '' }}</strong></div><div style=\"padding:20px\"><div dir=\"rtl\">مرحبًا،<br>يرجى مراجعة تفاصيل {{ reference_label or 'الإجراء' }} والتأكيد بالرد على هذه الرسالة عند الحاجة.</div><hr><div dir=\"ltr\">Hello,<br>Please review the {{ reference_label or 'action' }} details and confirm by replying to this message when required.</div>{% if additional_message %}<div style=\"margin-top:16px;padding:12px;background:{{ light or '#f6f8fa' }}\">{{ additional_message }}</div>{% endif %}</div></div></div>"
+}

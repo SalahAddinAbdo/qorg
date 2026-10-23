@@ -17,6 +17,7 @@
     "is_mandatory",
     "default_mode",
     "duration_minutes",
+    "maximum_attempts",
     "instructions",
     "page_break"
   ],
@@ -56,7 +57,9 @@
       "options": "Interview Type",
       "in_list_view": 1,
       "columns": 2,
-      "allow_on_submit": 1
+      "allow_on_submit": 1,
+      "reqd": 1,
+      "description": "Reusable assessment template containing questions, criteria, and instructions."
     },
     {
       "fieldname": "weight",
@@ -65,7 +68,8 @@
       "reqd": 1,
       "in_list_view": 1,
       "columns": 1,
-      "allow_on_submit": 1
+      "allow_on_submit": 1,
+      "description": "Contribution of this stage to the total assessment score. Stage weights must total 100%."
     },
     {
       "fieldname": "passing_score",
@@ -74,7 +78,8 @@
       "reqd": 1,
       "in_list_view": 1,
       "columns": 1,
-      "allow_on_submit": 1
+      "allow_on_submit": 1,
+      "description": "Minimum score required to pass this stage."
     },
     {
       "fieldname": "is_mandatory",
@@ -99,6 +104,13 @@
       "fieldname": "duration_minutes",
       "label": "Duration (Minutes)",
       "fieldtype": "Int",
+      "allow_on_submit": 1
+    },
+    {
+      "fieldname": "maximum_attempts",
+      "label": "Maximum Attempts",
+      "fieldtype": "Int",
+      "default": "1",
       "allow_on_submit": 1
     },
     {

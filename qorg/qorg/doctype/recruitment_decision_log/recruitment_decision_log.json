@@ -1,98 +1,106 @@
 {
   "actions": [],
-  "allow_import": 0,
   "allow_rename": 0,
   "autoname": "hash",
-  "creation": "2026-10-23 23:30:00.000000",
+  "creation": "2026-10-23 23:50:00.000000",
   "custom": 0,
   "doctype": "DocType",
   "engine": "InnoDB",
+  "index_web_pages_for_search": 0,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-10-23 23:50:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "owner": "Administrator",
+  "permissions": [],
+  "states": [],
+  "track_changes": 0,
+  "name": "Recruitment Decision Log",
   "field_order": [
+    "previous_decision",
     "decision",
     "decision_date",
     "decision_by",
     "screening_score",
-    "interview_score",
+    "assessment_score",
     "overall_score",
     "rank",
-    "remarks",
+    "rationale",
     "reopened",
     "page_break"
   ],
   "fields": [
     {
+      "fieldname": "previous_decision",
+      "label": "Previous Decision",
+      "fieldtype": "Data",
+      "read_only": 1
+    },
+    {
       "fieldname": "decision",
-      "label": "Decision",
-      "fieldtype": "Select",
-      "options": "Selected\nReserve / Waitlisted\nRejected\nWithdrawn\nNo Show\nDisqualified\nCancelled",
-      "reqd": 1,
+      "label": "New Decision",
+      "fieldtype": "Data",
+      "read_only": 1,
       "in_list_view": 1,
-      "columns": 2,
-      "allow_on_submit": 1
+      "columns": 2
     },
     {
       "fieldname": "decision_date",
       "label": "Decision Date",
-      "fieldtype": "Date",
-      "reqd": 1,
+      "fieldtype": "Datetime",
+      "read_only": 1,
       "in_list_view": 1,
-      "columns": 1,
-      "allow_on_submit": 1
+      "columns": 2
     },
     {
       "fieldname": "decision_by",
       "label": "Decision By",
       "fieldtype": "Link",
       "options": "User",
-      "reqd": 1,
+      "read_only": 1,
       "in_list_view": 1,
-      "columns": 2,
-      "allow_on_submit": 1
+      "columns": 2
     },
     {
       "fieldname": "screening_score",
-      "label": "Screening Score",
-      "fieldtype": "Float",
-      "in_list_view": 1,
-      "columns": 1,
-      "allow_on_submit": 1
+      "label": "Screening Score %",
+      "fieldtype": "Percent",
+      "read_only": 1
     },
     {
-      "fieldname": "interview_score",
-      "label": "Interview Score",
-      "fieldtype": "Float",
-      "in_list_view": 1,
-      "columns": 1,
-      "allow_on_submit": 1
+      "fieldname": "assessment_score",
+      "label": "Assessment Score %",
+      "fieldtype": "Percent",
+      "read_only": 1
     },
     {
       "fieldname": "overall_score",
-      "label": "Overall Score",
-      "fieldtype": "Float",
+      "label": "Overall Score %",
+      "fieldtype": "Percent",
+      "read_only": 1,
       "in_list_view": 1,
-      "columns": 1,
-      "allow_on_submit": 1
+      "columns": 1
     },
     {
       "fieldname": "rank",
-      "label": "Rank",
+      "label": "Priority",
       "fieldtype": "Int",
+      "read_only": 1,
       "in_list_view": 1,
-      "columns": 1,
-      "allow_on_submit": 1
+      "columns": 1
     },
     {
-      "fieldname": "remarks",
+      "fieldname": "rationale",
       "label": "Evidence-based Rationale",
       "fieldtype": "Small Text",
-      "reqd": 1,
-      "allow_on_submit": 1
+      "read_only": 1
     },
     {
       "fieldname": "reopened",
       "label": "Reopened",
       "fieldtype": "Check",
-      "allow_on_submit": 1
+      "read_only": 1
     },
     {
       "fieldname": "page_break",
@@ -102,20 +110,5 @@
       "allow_on_submit": 1,
       "print_hide": 1
     }
-  ],
-  "grid_page_length": 50,
-  "index_web_pages_for_search": 0,
-  "istable": 1,
-  "links": [],
-  "modified": "2026-10-23 23:30:00.000000",
-  "modified_by": "Administrator",
-  "module": "QOrg",
-  "name": "Recruitment Decision Log",
-  "owner": "Administrator",
-  "permissions": [],
-  "row_format": "Dynamic",
-  "sort_field": "modified",
-  "sort_order": "DESC",
-  "states": [],
-  "track_changes": 0
+  ]
 }
