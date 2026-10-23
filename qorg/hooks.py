@@ -52,6 +52,14 @@ doctype_js = {
 }
 
 doc_events = {
+    "Comment": {
+        "before_insert": "qorg.qorg.enterprise_foundation.policy_enforcement.enforce_comment_policy",
+        "on_trash": "qorg.qorg.enterprise_foundation.policy_enforcement.enforce_comment_policy",
+    },
+    "File": {
+        "before_insert": "qorg.qorg.enterprise_foundation.policy_enforcement.enforce_file_policy",
+        "on_trash": "qorg.qorg.enterprise_foundation.policy_enforcement.enforce_file_policy",
+    },
     "Print Settings": {
         "validate": "qorg.qorg.project_management.print_settings_integration.validate_print_settings",
 
