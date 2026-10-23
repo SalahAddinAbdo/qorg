@@ -43,36 +43,58 @@ def audit_control_center():
     return {"findings":len(doc.audit_results)}
 
 
+def _build_model_changes(doc):
+    changes = []
+    for row in doc.models or []:
+        if row.current_policy == row.requested_policy:
+            continue
+        allowed = row.document_type not in CRITICAL_DOCTYPES and row.risk_level != "Blocked"
+        changes.append({
+            "document_type": row.document_type,
+            "from": row.current_policy,
+            "to": row.requested_policy,
+            "allowed": allowed,
+            "risk": row.risk_level,
+            "reason": row.change_reason,
+        })
+    return changes
+
+
 @frappe.whitelist()
 def preview_model_changes():
-    doc=_center(); changes=[]
-    for row in doc.models or []:
-        if row.current_policy == row.requested_policy: continue
-        allowed=row.document_type not in CRITICAL_DOCTYPES and row.risk_level != "Blocked"
-        changes.append({"document_type":row.document_type,"from":row.current_policy,"to":row.requested_policy,"allowed":allowed,"risk":row.risk_level,"reason":row.change_reason})
-    doc.last_preview=json.dumps(changes, default=str, indent=2)
-    doc.pending_change_count=len(changes)
-    doc.flags.ignore_permissions=True; doc.save()
+    doc = _center()
+    changes = _build_model_changes(doc)
+    doc.last_preview = json.dumps(changes, default=str, indent=2)
+    doc.pending_change_count = len(changes)
+    doc.flags.ignore_permissions = True
+    doc.save()
     return changes
 
 
 @frappe.whitelist()
 def apply_model_changes():
-    doc=_center(); preview=preview_model_changes(); blocked=[x for x in preview if not x["allowed"]]
-    if blocked: frappe.throw("Blocked or critical model changes must be removed before applying.")
-    applied=[]
+    doc = _center()
+    preview = _build_model_changes(doc)
+    blocked = [change for change in preview if not change["allowed"]]
+    if blocked:
+        frappe.throw("Blocked or critical model changes must be removed before applying.")
+
+    applied = []
     for row in doc.models or []:
-        if row.current_policy == row.requested_policy: continue
-        if not row.change_reason: frappe.throw(f"Change reason is required for {row.document_type}.")
-        # Safe v1 scope: persist policy and use it for managed navigation/features.
-        # Core Role Permission rows are never deleted automatically.
-        row.current_policy=row.requested_policy
+        if row.current_policy == row.requested_policy:
+            continue
+        if not row.change_reason:
+            frappe.throw(f"Change reason is required for {row.document_type}.")
+        row.current_policy = row.requested_policy
         applied.append(row.document_type)
-    doc.pending_change_count=0
-    doc.last_apply_summary=f"Applied {len(applied)} managed model policies."
-    doc.flags.ignore_permissions=True; doc.save()
+
+    doc.last_preview = json.dumps(preview, default=str, indent=2)
+    doc.pending_change_count = 0
+    doc.last_apply_summary = f"Applied {len(applied)} managed model policies."
+    doc.flags.ignore_permissions = True
+    doc.save()
     frappe.clear_cache()
-    return {"applied":applied}
+    return {"applied": applied}
 
 
 @frappe.whitelist()
@@ -101,3 +123,9 @@ def audit_company_settings(settings_name: str):
     doc.last_audit_summary = "\n".join(issues) if issues else "No configuration issues detected."
     doc.flags.ignore_permissions=True; doc.save()
     return {"issues":issues}
+
+
+@frappe.whitelist()
+def get_model_policy(document_type: str):
+    from qorg.qorg.enterprise_foundation.policy_enforcement import get_model_policy as _get_policy
+    return {"document_type": document_type, "policy": _get_policy(document_type)}
