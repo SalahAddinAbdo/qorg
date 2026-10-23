@@ -16,7 +16,7 @@ add_to_apps_screen = [{
     "sequence_id": 5,
 }]
 
-required_apps = ["erpnext"]
+required_apps = ["erpnext", "hrms"]
 
 extend_bootinfo = "qorg.qorg.enterprise_foundation.boot.extend_bootinfo"
 
@@ -32,12 +32,6 @@ app_include_css = [
 override_whitelisted_methods = {
     "frappe.model.rename_doc.update_document_title": (
         "qorg.qorg.enterprise_foundation.overrides.update_document_title"
-    ),
-    "frappe.desk.query_report.get_report_doc": (
-        "qorg.qorg.enterprise_foundation.interface_overrides.get_report_doc"
-    ),
-    "frappe.desk.query_report.run": (
-        "qorg.qorg.enterprise_foundation.interface_overrides.run"
     ),
 }
 
@@ -58,6 +52,19 @@ doctype_js = {
 }
 
 doc_events = {
+    "External Person": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete"},
+    "External Opportunity": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete"},
+    "Volunteer Profile": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete"},
+    "External Opportunity Type": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_master_delete"},
+    "Person Qualification": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_master_delete"},
+    "Volunteer Category": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_master_delete"},
+    "Job Opening": {
+        "validate": "qorg.qorg.people_and_opportunities.integrations.validate_job_opening",
+    },
+    "Job Applicant": {
+        "before_validate": "qorg.qorg.people_and_opportunities.integrations.sync_job_applicant_person",
+        "on_update": "qorg.qorg.people_and_opportunities.integrations.sync_job_applicant_person",
+    },
     "Print Settings": {
         "validate": "qorg.qorg.project_management.print_settings_integration.validate_print_settings",
 
@@ -132,6 +139,7 @@ before_migrate = [
 ]
 
 after_install = [
+    "qorg.qorg.people_and_opportunities.provisioning.provision_people_opportunities_core",
     "qorg.qorg.project_management.print_settings_integration.provision_print_settings",
     "qorg.qorg.install.after_install",
     "qorg.qorg.task_management.provisioning.provision_task_integration",
@@ -143,6 +151,7 @@ after_install = [
 ]
 
 after_migrate = [
+    "qorg.qorg.people_and_opportunities.provisioning.provision_people_opportunities_core",
     "qorg.qorg.project_management.print_settings_integration.provision_print_settings",
     "qorg.qorg.install.after_migrate",
     "qorg.printing.provisioning.provision_universal_print_formats",
