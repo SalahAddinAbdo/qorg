@@ -11,7 +11,7 @@
     "sequence",
     "stage_name",
     "assessment_type",
-    "interview_round",
+    "interview_type",
     "weight",
     "passing_score",
     "is_mandatory",
@@ -50,10 +50,10 @@
       "allow_on_submit": 1
     },
     {
-      "fieldname": "interview_round",
-      "label": "Interview Round",
+      "fieldname": "interview_type",
+      "label": "Interview Type",
       "fieldtype": "Link",
-      "options": "Interview Round",
+      "options": "Interview Type",
       "in_list_view": 1,
       "columns": 2,
       "allow_on_submit": 1

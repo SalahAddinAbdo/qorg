@@ -1,6 +1,6 @@
 import frappe
 OWNED=("Applicant Screening Criterion","Recruitment Decision Log","Recruitment Assessment Stage","Interview Evaluation Criterion","Interview Criterion Score")
-STANDARD=("Job Requisition","Job Opening","Job Applicant","Interview Round","Interview","Interview Feedback","Job Offer","Appointment Letter","Employee","Employee Onboarding","External Person","External Opportunity")
+STANDARD=("Job Requisition","Job Opening","Job Applicant","Interview Type","Interview","Interview Feedback","Job Offer","Appointment Letter","Employee","Employee Onboarding","External Person","External Opportunity")
 @frappe.whitelist()
 def audit():
     if frappe.session.user!="Administrator":frappe.throw("Administrator is required.",frappe.PermissionError)

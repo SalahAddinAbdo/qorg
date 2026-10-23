@@ -1,7 +1,7 @@
 from qorg.qorg.recruitment_extensions.services import *
 def applicant_validate(doc,method=None):validate_job_applicant(doc)
 def opening_validate(doc,method=None):validate_assessment_plan(doc)
-def round_validate(doc,method=None):validate_round(doc)
+def interview_type_validate(doc,method=None):validate_interview_type(doc)
 def interview_validate(doc,method=None):validate_interview(doc)
 def feedback_validate(doc,method=None):validate_feedback(doc)
 def feedback_submit(doc,method=None):update_interview_score(doc.interview)

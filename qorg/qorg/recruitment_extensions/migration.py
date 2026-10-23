@@ -4,7 +4,7 @@ from qorg.qorg.people_and_opportunities.services.people import get_or_create_ext
 LEGACY_ALIASES={"custom_external_person":"qorg_external_person","custom_external_opportunity":"qorg_external_opportunity","custom_screening_status":"qorg_screening_status","custom_final_decision":"qorg_final_decision"}
 def execute():
     from qorg.qorg.recruitment_extensions.provisioning import provision_recruitment_extensions
-    provision_recruitment_extensions();reconcile_existing_recruitment();adopt_legacy_values();reconcile_selection_queue()
+    provision_recruitment_extensions();migrate_interview_round_extensions();reconcile_existing_recruitment();adopt_legacy_values();reconcile_selection_queue()
 def reconcile_existing_recruitment():
     if not frappe.db.exists("Custom Field","Job Applicant-qorg_external_person"):return
     meta=frappe.get_meta("Job Applicant");email="email_id" if meta.has_field("email_id") else "email";phone="phone_number" if meta.has_field("phone_number") else "mobile_number"
@@ -26,3 +26,23 @@ def reconcile_selection_queue():
     for row in frappe.get_all("Job Applicant",filters={"qorg_final_decision":["is","set"],"qorg_selection_status":["is","not set"]},fields=["name","qorg_final_decision","qorg_rank"],limit_page_length=0):
         status="Primary Candidate" if row.qorg_final_decision=="Selected" and int(row.qorg_rank or 0)==1 else "Reserve Candidate" if row.qorg_final_decision in {"Selected","Reserve / Waitlisted"} else "Closed"
         frappe.db.set_value("Job Applicant",row.name,{"qorg_selection_priority":row.qorg_rank,"qorg_selection_status":status},update_modified=False)
+
+
+def migrate_interview_round_extensions():
+    """Copy QOrg-owned legacy values to Interview Type without deleting source data."""
+    if not frappe.db.exists("DocType","Interview Type") or not frappe.db.exists("DocType","Interview Round"):
+        return
+    target_meta=frappe.get_meta("Interview Type")
+    source_meta=frappe.get_meta("Interview Round")
+    fields=("qorg_weight","qorg_passing_score","qorg_is_mandatory","qorg_assessment_type","qorg_instructions")
+    usable=[field for field in fields if target_meta.has_field(field) and source_meta.has_field(field)]
+    if not usable:
+        return
+    for name in frappe.get_all("Interview Round",pluck="name",limit_page_length=0):
+        if not frappe.db.exists("Interview Type",name):
+            continue
+        source=frappe.db.get_value("Interview Round",name,usable,as_dict=True) or {}
+        target=frappe.db.get_value("Interview Type",name,usable,as_dict=True) or {}
+        values={field:source.get(field) for field in usable if source.get(field) not in (None,"") and target.get(field) in (None,"")}
+        if values:
+            frappe.db.set_value("Interview Type",name,values,update_modified=False)

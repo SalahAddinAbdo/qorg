@@ -7,6 +7,20 @@ FINAL_DECISIONS={"Selected","Reserve / Waitlisted","Rejected","Withdrawn","No Sh
 ACTIVE_OFFER_STATES={"Draft","Issued","Accepted"}
 TERMINAL_OFFER_STATES={"Rejected","Expired","Withdrawn"}
 
+def interview_type_field():
+    meta=frappe.get_meta("Interview")
+    if meta.has_field("interview_type"):
+        return "interview_type"
+    if meta.has_field("interview_round"):
+        return "interview_round"
+    frappe.throw("Interview has no Interview Type field. Complete the HRMS v16 migration first.")
+
+def get_interview_type(interview_or_doc):
+    fieldname=interview_type_field()
+    if isinstance(interview_or_doc,str):
+        return frappe.db.get_value("Interview",interview_or_doc,fieldname)
+    return interview_or_doc.get(fieldname)
+
 def company_of_applicant(doc):
     opening=getattr(doc,"job_title",None)
     return frappe.db.get_value("Job Opening",opening,"company") if opening else None
@@ -18,11 +32,11 @@ def validate_assessment_plan(doc):
     for row in doc.qorg_assessment_plan or []:
         if row.sequence in seen:frappe.throw("Assessment stage sequence must be unique.")
         seen.add(row.sequence);stage_weight+=flt(row.weight)
-        if row.assessment_type in {"Structured Interview","Technical Interview"} and not row.interview_round:frappe.throw("Interview Round is required for interview stages.")
+        if row.assessment_type in {"Structured Interview","Technical Interview"} and not row.interview_type:frappe.throw("Interview Type is required for interview stages.")
         if not 0<=flt(row.passing_score)<=100:frappe.throw("Stage Passing Score must be between 0 and 100.")
     if doc.qorg_assessment_plan and abs(stage_weight-100)>0.01:frappe.throw("Assessment stage weights must total 100%.")
 
-def validate_round(doc):
+def validate_interview_type(doc):
     total=0;seen=set()
     for row in doc.qorg_evaluation_criteria or []:
         if row.sequence in seen:frappe.throw("Evaluation criterion sequence must be unique.")
@@ -49,9 +63,9 @@ def validate_job_applicant(doc):
     if mandatory_failed and doc.qorg_screening_status in {"Eligible","Shortlisted"}:frappe.throw("Mandatory screening criteria are not met.")
 
 def apply_interview_stage_defaults(doc):
-    if not doc.job_applicant or not doc.interview_round:return
+    if not doc.job_applicant or not get_interview_type(doc):return
     opening=frappe.db.get_value("Job Applicant",doc.job_applicant,"job_title")
-    stage=frappe.db.get_value("Recruitment Assessment Stage",{"parent":opening,"parenttype":"Job Opening","parentfield":"qorg_assessment_plan","interview_round":doc.interview_round},["sequence","assessment_type","passing_score","default_mode"],as_dict=True)
+    stage=frappe.db.get_value("Recruitment Assessment Stage",{"parent":opening,"parenttype":"Job Opening","parentfield":"qorg_assessment_plan","interview_type":get_interview_type(doc)},["sequence","assessment_type","passing_score","default_mode"],as_dict=True)
     if stage:
         doc.qorg_stage_sequence=stage.sequence;doc.qorg_assessment_type=stage.assessment_type;doc.qorg_passing_score=stage.passing_score
         if not doc.qorg_mode:doc.qorg_mode=stage.default_mode
@@ -64,14 +78,14 @@ def validate_interview(doc):
 
 def populate_feedback_criteria(doc):
     if not doc.interview or doc.qorg_criterion_scores:return
-    round_name=frappe.db.get_value("Interview",doc.interview,"interview_round")
-    rows=frappe.get_all("Interview Evaluation Criterion",filters={"parent":round_name,"parenttype":"Interview Round","parentfield":"qorg_evaluation_criteria"},fields=["name","competency","question","weight","maximum_score"],order_by="idx")
-    if not rows:frappe.throw("The Interview Round has no structured evaluation criteria.")
+    type_name=get_interview_type(doc.interview)
+    rows=frappe.get_all("Interview Evaluation Criterion",filters={"parent":type_name,"parenttype":"Interview Type","parentfield":"qorg_evaluation_criteria"},fields=["name","competency","question","weight","maximum_score"],order_by="idx")
+    if not rows:frappe.throw("The Interview Type has no structured evaluation criteria.")
     for row in rows:doc.append("qorg_criterion_scores",{"criterion_reference":row.name,"competency":row.competency,"question":row.question,"weight":row.weight,"maximum_score":row.maximum_score})
 
 def validate_feedback(doc):
     populate_feedback_criteria(doc);weighted=weight_total=0.0
-    interview=frappe.db.get_value("Interview",doc.interview,["qorg_attendance_status","interview_round"],as_dict=True)
+    interview=frappe.db.get_value("Interview",doc.interview,["qorg_attendance_status",interview_type_field()],as_dict=True)
     if interview and interview.qorg_attendance_status!="Attended":frappe.throw("Feedback can only be submitted for an attended interview.")
     for row in doc.qorg_criterion_scores or []:
         if flt(row.score)<0 or flt(row.score)>flt(row.maximum_score):frappe.throw(f"Score for {row.competency} must be between 0 and {row.maximum_score}.")
@@ -86,12 +100,12 @@ def update_interview_score(interview):
 
 def mandatory_stage_status(applicant):
     opening=frappe.db.get_value("Job Applicant",applicant,"job_title")
-    plan=frappe.get_all("Recruitment Assessment Stage",filters={"parent":opening,"parenttype":"Job Opening","parentfield":"qorg_assessment_plan","is_mandatory":1},fields=["stage_name","interview_round","passing_score","assessment_type","weight"],order_by="sequence")
+    plan=frappe.get_all("Recruitment Assessment Stage",filters={"parent":opening,"parenttype":"Job Opening","parentfield":"qorg_assessment_plan","is_mandatory":1},fields=["stage_name","interview_type","passing_score","assessment_type","weight"],order_by="sequence")
     missing=[];failed=[];completed=[]
     for stage in plan:
-        if not stage.interview_round:
+        if not stage.interview_type:
             missing.append(stage.stage_name);continue
-        row=frappe.db.get_value("Interview",{"job_applicant":applicant,"interview_round":stage.interview_round},["name","qorg_attendance_status","qorg_final_score"],as_dict=True)
+        row=frappe.db.get_value("Interview",{"job_applicant":applicant,interview_type_field():stage.interview_type},["name","qorg_attendance_status","qorg_final_score"],as_dict=True)
         if not row or row.qorg_attendance_status!="Attended":missing.append(stage.stage_name)
         elif flt(row.qorg_final_score)<flt(stage.passing_score):failed.append(stage.stage_name)
         else:completed.append(stage.stage_name)
@@ -99,13 +113,13 @@ def mandatory_stage_status(applicant):
 
 def interview_scores(applicant):
     opening=frappe.db.get_value("Job Applicant",applicant,"job_title")
-    stages=frappe.get_all("Recruitment Assessment Stage",filters={"parent":opening,"parenttype":"Job Opening","parentfield":"qorg_assessment_plan"},fields=["stage_name","interview_round","weight","is_mandatory","passing_score"],order_by="sequence")
+    stages=frappe.get_all("Recruitment Assessment Stage",filters={"parent":opening,"parenttype":"Job Opening","parentfield":"qorg_assessment_plan"},fields=["stage_name","interview_type","weight","is_mandatory","passing_score"],order_by="sequence")
     weighted=weight_total=0.0;missing=[];failed=[]
     for stage in stages:
-        if not stage.interview_round:
+        if not stage.interview_type:
             if stage.is_mandatory:missing.append(stage.stage_name)
             continue
-        row=frappe.db.get_value("Interview",{"job_applicant":applicant,"interview_round":stage.interview_round},["name","qorg_attendance_status","qorg_final_score"],as_dict=True)
+        row=frappe.db.get_value("Interview",{"job_applicant":applicant,interview_type_field():stage.interview_type},["name","qorg_attendance_status","qorg_final_score"],as_dict=True)
         if not row or row.qorg_attendance_status!="Attended":
             if stage.is_mandatory:missing.append(stage.stage_name)
             continue

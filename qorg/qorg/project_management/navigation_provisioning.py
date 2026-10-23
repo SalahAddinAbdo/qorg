@@ -28,7 +28,7 @@ WORKSPACE_GROUPS = {
     ],
     "People & Recruitment": [
         ("People and Opportunities", "DocType", ["External Person", "External Opportunity", "Job Opening", "Job Applicant"]),
-        ("Interviews and Decisions", "DocType", ["Interview Round", "Interview", "Interview Feedback", "Job Offer", "Appointment Letter"]),
+        ("Interviews and Decisions", "DocType", ["Interview Type", "Interview", "Interview Feedback", "Job Offer", "Appointment Letter"]),
         ("Employee Conversion", "DocType", ["Employee", "Employee Onboarding"]),
         ("Recruitment Reports", "Report", ["Recruitment Pipeline", "Applicant Screening and Aging", "Interview Progress", "Offer and Appointment Tracking", "Candidate Selection Queue", "Recruitment Cycle Performance"]),
     ],
