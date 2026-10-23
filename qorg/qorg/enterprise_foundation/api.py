@@ -11,6 +11,10 @@ from qorg.qorg.enterprise_foundation.audit import (
 )
 from qorg.qorg.enterprise_foundation.constants import CONFIGURATION_VERSION, CRITICAL_DOCTYPES
 from qorg.qorg.enterprise_foundation.model_registry import scan_models
+from qorg.qorg.enterprise_foundation.model_policy_engine import (
+    active_action_policies,
+    active_native_policies,
+)
 from qorg.qorg.enterprise_foundation.permissions import require_administrator
 
 
@@ -41,7 +45,19 @@ def synchronize_models():
     doc.last_synchronized_on = now_datetime()
     doc.last_synchronized_by = frappe.session.user
     doc.configuration_version = CONFIGURATION_VERSION
-    doc.pending_change_count = sum(1 for row in doc.models if _row_changed(row))
+    from qorg.qorg.enterprise_foundation.interface_registry import scan_interface_components
+    old_interface = {(r.component_type, r.component_name): r for r in (doc.interface_components or [])}
+    doc.set("interface_components", [])
+    for item in scan_interface_components():
+        old = old_interface.get((item["component_type"], item["component_name"]))
+        if old:
+            item["requested_visibility"] = old.requested_visibility or item["current_visibility"]
+            item["change_reason"] = old.change_reason
+        doc.append("interface_components", item)
+    doc.model_count = len(doc.models)
+    doc.interface_count = len(doc.interface_components)
+    doc.active_policy_count = len(active_native_policies()) + len(active_action_policies())
+    doc.pending_change_count = sum(1 for row in doc.models if _row_changed(row)) + sum(1 for row in doc.interface_components if row.current_visibility != row.requested_visibility)
     doc.flags.ignore_permissions = True
     doc.save()
     return {"models": len(doc.models), "pending": doc.pending_change_count}
@@ -148,7 +164,7 @@ def apply_model_changes():
             frappe.throw(f"Change reason is required for {row.document_type}.")
 
         if access_changed:
-            row.current_policy = apply_model_policy(row.document_type, row.requested_policy)
+            row.current_policy = apply_model_policy(row.document_type, row.requested_policy, row.allow_print, row.allow_email)
             row.requested_policy = row.current_policy
 
         if action_changed:
