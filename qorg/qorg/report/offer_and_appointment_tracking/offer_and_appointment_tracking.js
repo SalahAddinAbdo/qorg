@@ -1,0 +1,1 @@
+frappe.query_reports["Offer and Appointment Tracking"]={filters:[]};

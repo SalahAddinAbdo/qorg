@@ -1,0 +1,1 @@
+frappe.query_reports["Applicant Screening and Aging"]={filters:[]};

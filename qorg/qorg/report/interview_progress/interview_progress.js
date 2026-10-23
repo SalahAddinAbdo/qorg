@@ -1,0 +1,1 @@
+frappe.query_reports["Interview Progress"]={filters:[]};

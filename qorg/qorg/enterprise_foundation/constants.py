@@ -1,5 +1,5 @@
 from __future__ import annotations
-CONFIGURATION_VERSION = "2.0.1"
+CONFIGURATION_VERSION = "2.1.0"
 OPERATING_MODES = ("Standard Only", "Extensions", "Full Portal / Extended Cycle")
 MODEL_POLICIES = ("Enabled", "Hidden from Navigation", "Restricted", "Read Only", "Feature Disabled", "Deprecated")
 FEATURES = (

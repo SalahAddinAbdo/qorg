@@ -15,6 +15,8 @@ DESKTOP_ICON = "Q Org"
 
 WORKSPACE_GROUPS = {
     "Q Management Hub": [
+        ("People & Recruitment", "DocType", ["External Person", "External Opportunity", "Job Applicant", "Interview", "Job Offer"]),
+        ("Recruitment Reports", "Report", ["Recruitment Pipeline", "Applicant Screening and Aging", "Interview Progress", "Offer and Appointment Tracking", "Candidate Selection Queue", "Recruitment Cycle Performance"]),
         ("Priority Documents", "DocType", [
             "Project", "Task", "Project Progress Update", "Project Risk",
             "Project Change Request",
@@ -23,6 +25,12 @@ WORKSPACE_GROUPS = {
             "Project Portfolio Overview", "Budget Versus Actual",
             "Employees Task Tracker",
         ]),
+    ],
+    "People & Recruitment": [
+        ("People and Opportunities", "DocType", ["External Person", "External Opportunity", "Job Opening", "Job Applicant"]),
+        ("Interviews and Decisions", "DocType", ["Interview Round", "Interview", "Interview Feedback", "Job Offer", "Appointment Letter"]),
+        ("Employee Conversion", "DocType", ["Employee", "Employee Onboarding"]),
+        ("Recruitment Reports", "Report", ["Recruitment Pipeline", "Applicant Screening and Aging", "Interview Progress", "Offer and Appointment Tracking", "Candidate Selection Queue", "Recruitment Cycle Performance"]),
     ],
     "Projects & Tasks": [
         ("Project Setup & Planning", "DocType", [
@@ -82,6 +90,7 @@ WORKSPACE_GROUPS = {
 
 SIDEBAR_DEFINITIONS = [
     ("Q Management Hub", "Workspace", "Q Management Hub", "home"),
+    ("People & Recruitment", "Workspace", "People & Recruitment", "users"),
     ("Projects & Tasks", "Workspace", "Projects & Tasks", "folder-normal"),
     ("Workflow & Documents", "Workspace", "Workflow & Documents", "workflow"),
     ("Master Data", "Workspace", "Master Data", "folder-normal"),

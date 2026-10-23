@@ -1,0 +1,15 @@
+from qorg.qorg.recruitment_extensions.services import *
+def applicant_validate(doc,method=None):validate_job_applicant(doc)
+def opening_validate(doc,method=None):validate_assessment_plan(doc)
+def round_validate(doc,method=None):validate_round(doc)
+def interview_validate(doc,method=None):validate_interview(doc)
+def feedback_validate(doc,method=None):validate_feedback(doc)
+def feedback_submit(doc,method=None):update_interview_score(doc.interview)
+def feedback_cancel(doc,method=None):update_interview_score(doc.interview)
+def offer_before_validate(doc,method=None):default_offer_validity(doc);validate_job_offer(doc)
+def offer_on_update(doc,method=None):update_applicant_offer_state(doc)
+def appointment_validate(doc,method=None):sync_appointment_state(doc)
+def appointment_on_update(doc,method=None):
+    if doc.qorg_job_applicant:frappe.db.set_value("Job Applicant",doc.qorg_job_applicant,{"qorg_selection_status":"Appointment Issued","qorg_next_action":"Create employee"},update_modified=False)
+def employee_validate(doc,method=None):sync_employee_trace(doc)
+def employee_after_insert(doc,method=None):after_employee_insert(doc)

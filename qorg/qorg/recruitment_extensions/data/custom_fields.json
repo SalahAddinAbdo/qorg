@@ -1,0 +1,656 @@
+[
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_recruitment_section",
+    "label": "Recruitment Context",
+    "fieldtype": "Section Break",
+    "insert_after": "reason_for_requesting"
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_project",
+    "label": "Project",
+    "fieldtype": "Link",
+    "options": "Project",
+    "insert_after": "qorg_recruitment_section",
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_funding_source",
+    "label": "Funding Source",
+    "fieldtype": "Data",
+    "insert_after": "qorg_project"
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_required_by",
+    "label": "Required By",
+    "fieldtype": "Date",
+    "insert_after": "qorg_funding_source",
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_external_opportunity",
+    "label": "External Opportunity",
+    "fieldtype": "Link",
+    "options": "External Opportunity",
+    "insert_after": "job_title",
+    "read_only": 1,
+    "in_list_view": 1,
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_requisition",
+    "label": "Job Requisition",
+    "fieldtype": "Link",
+    "options": "Job Requisition",
+    "insert_after": "qorg_external_opportunity",
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_screening_section",
+    "label": "Screening Defaults",
+    "fieldtype": "Section Break",
+    "insert_after": "description"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_minimum_screening_score",
+    "label": "Minimum Screening Score",
+    "fieldtype": "Float",
+    "insert_after": "qorg_screening_section"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_minimum_interview_score",
+    "label": "Minimum Interview Score",
+    "fieldtype": "Float",
+    "insert_after": "qorg_minimum_screening_score"
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_external_person",
+    "label": "External Person",
+    "fieldtype": "Link",
+    "options": "External Person",
+    "insert_after": "applicant_name",
+    "in_list_view": 1,
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_external_opportunity",
+    "label": "External Opportunity",
+    "fieldtype": "Link",
+    "options": "External Opportunity",
+    "insert_after": "job_title",
+    "in_list_view": 1,
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_screening_section",
+    "label": "Screening",
+    "fieldtype": "Section Break",
+    "insert_after": "status"
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_screening_status",
+    "label": "Screening Status",
+    "fieldtype": "Select",
+    "options": "Not Started\nIn Progress\nEligible\nShortlisted\nNot Eligible",
+    "default": "Not Started",
+    "insert_after": "qorg_screening_section",
+    "in_list_view": 1,
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_screening_reviewer",
+    "label": "Screening Reviewer",
+    "fieldtype": "Link",
+    "options": "User",
+    "insert_after": "qorg_screening_status",
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_screening_score",
+    "label": "Screening Score",
+    "fieldtype": "Float",
+    "insert_after": "qorg_screening_reviewer",
+    "read_only": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_screening_criteria",
+    "label": "Screening Criteria",
+    "fieldtype": "Table",
+    "options": "Applicant Screening Criterion",
+    "insert_after": "qorg_screening_score"
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_screening_remarks",
+    "label": "Screening Remarks",
+    "fieldtype": "Text Editor",
+    "insert_after": "qorg_screening_criteria",
+    "permlevel": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_decision_section",
+    "label": "Final Decision",
+    "fieldtype": "Section Break",
+    "insert_after": "qorg_screening_remarks"
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_final_decision",
+    "label": "Final Decision",
+    "fieldtype": "Select",
+    "options": "\nSelected\nReserve / Waitlisted\nRejected\nWithdrawn\nNo Show\nDisqualified\nCancelled",
+    "insert_after": "qorg_decision_section",
+    "read_only": 1,
+    "in_list_view": 1,
+    "in_standard_filter": 1,
+    "permlevel": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_overall_score",
+    "label": "Overall Score",
+    "fieldtype": "Float",
+    "insert_after": "qorg_final_decision",
+    "read_only": 1,
+    "permlevel": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_rank",
+    "label": "Rank",
+    "fieldtype": "Int",
+    "insert_after": "qorg_overall_score",
+    "read_only": 1,
+    "permlevel": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_decision_log",
+    "label": "Decision History",
+    "fieldtype": "Table",
+    "options": "Recruitment Decision Log",
+    "insert_after": "qorg_rank",
+    "read_only": 1,
+    "permlevel": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_job_offer",
+    "label": "Job Offer",
+    "fieldtype": "Link",
+    "options": "Job Offer",
+    "insert_after": "qorg_decision_log",
+    "read_only": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_employee",
+    "label": "Employee",
+    "fieldtype": "Link",
+    "options": "Employee",
+    "insert_after": "qorg_job_offer",
+    "read_only": 1
+  },
+  {
+    "dt": "Interview Round",
+    "fieldname": "qorg_evaluation_section",
+    "label": "Evaluation Control",
+    "fieldtype": "Section Break",
+    "insert_after": "interview_type"
+  },
+  {
+    "dt": "Interview Round",
+    "fieldname": "qorg_sequence",
+    "label": "Sequence",
+    "fieldtype": "Int",
+    "insert_after": "qorg_evaluation_section",
+    "in_list_view": 1
+  },
+  {
+    "dt": "Interview Round",
+    "fieldname": "qorg_weight",
+    "label": "Weight %",
+    "fieldtype": "Percent",
+    "insert_after": "qorg_sequence"
+  },
+  {
+    "dt": "Interview Round",
+    "fieldname": "qorg_passing_score",
+    "label": "Passing Score %",
+    "fieldtype": "Percent",
+    "insert_after": "qorg_weight"
+  },
+  {
+    "dt": "Interview Round",
+    "fieldname": "qorg_is_mandatory",
+    "label": "Mandatory Round",
+    "fieldtype": "Check",
+    "default": "1",
+    "insert_after": "qorg_passing_score"
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_control_section",
+    "label": "Interview Control",
+    "fieldtype": "Section Break",
+    "insert_after": "status"
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_attendance_status",
+    "label": "Attendance",
+    "fieldtype": "Select",
+    "options": "Scheduled\nAttended\nNo Show\nCancelled",
+    "default": "Scheduled",
+    "insert_after": "qorg_control_section",
+    "in_list_view": 1,
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_reschedule_count",
+    "label": "Reschedule Count",
+    "fieldtype": "Int",
+    "insert_after": "qorg_attendance_status",
+    "read_only": 1
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_final_score",
+    "label": "Final Score",
+    "fieldtype": "Float",
+    "insert_after": "qorg_reschedule_count",
+    "read_only": 1
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_applicant",
+    "label": "Job Applicant",
+    "fieldtype": "Link",
+    "options": "Job Applicant",
+    "insert_after": "job_applicant",
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_offer_control_section",
+    "label": "Offer Control",
+    "fieldtype": "Section Break",
+    "insert_after": "offer_date"
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_valid_until",
+    "label": "Valid Until",
+    "fieldtype": "Date",
+    "insert_after": "qorg_offer_control_section",
+    "in_list_view": 1,
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_response_status",
+    "label": "Response Status",
+    "fieldtype": "Select",
+    "options": "Draft\nIssued\nAccepted\nRejected\nExpired\nWithdrawn",
+    "default": "Draft",
+    "insert_after": "qorg_valid_until",
+    "in_list_view": 1,
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_response_date",
+    "label": "Response Date",
+    "fieldtype": "Date",
+    "insert_after": "qorg_response_status",
+    "read_only": 1
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_response_remarks",
+    "label": "Response Remarks",
+    "fieldtype": "Small Text",
+    "insert_after": "qorg_response_date"
+  },
+  {
+    "dt": "Appointment Letter",
+    "fieldname": "qorg_job_offer",
+    "label": "Job Offer",
+    "fieldtype": "Link",
+    "options": "Job Offer",
+    "insert_after": "job_applicant",
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Appointment Letter",
+    "fieldname": "qorg_external_person",
+    "label": "External Person",
+    "fieldtype": "Link",
+    "options": "External Person",
+    "insert_after": "qorg_job_offer",
+    "read_only": 1
+  },
+  {
+    "dt": "Employee",
+    "fieldname": "qorg_external_person",
+    "label": "External Person",
+    "fieldtype": "Link",
+    "options": "External Person",
+    "insert_after": "employee_name",
+    "read_only": 1,
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Employee",
+    "fieldname": "qorg_job_applicant",
+    "label": "Job Applicant",
+    "fieldtype": "Link",
+    "options": "Job Applicant",
+    "insert_after": "qorg_external_person",
+    "read_only": 1
+  },
+  {
+    "dt": "Employee Onboarding",
+    "fieldname": "qorg_job_applicant",
+    "label": "Job Applicant",
+    "fieldtype": "Link",
+    "options": "Job Applicant",
+    "insert_after": "employee",
+    "read_only": 1
+  },
+  {
+    "dt": "Employee Onboarding",
+    "fieldname": "qorg_job_offer",
+    "label": "Job Offer",
+    "fieldtype": "Link",
+    "options": "Job Offer",
+    "insert_after": "qorg_job_applicant",
+    "read_only": 1
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_assessment_plan_section",
+    "label": "Assessment Plan",
+    "fieldtype": "Section Break",
+    "insert_after": "qorg_minimum_interview_score"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_screening_weight",
+    "label": "Screening Weight %",
+    "fieldtype": "Percent",
+    "insert_after": "qorg_assessment_plan_section",
+    "default": "20"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_interview_weight",
+    "label": "Interview / Assessment Weight %",
+    "fieldtype": "Percent",
+    "insert_after": "qorg_screening_weight",
+    "default": "80"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_assessment_plan",
+    "label": "Assessment Plan",
+    "fieldtype": "Table",
+    "insert_after": "qorg_interview_weight",
+    "options": "Recruitment Assessment Stage"
+  },
+  {
+    "dt": "Interview Round",
+    "fieldname": "qorg_assessment_type",
+    "label": "Assessment Type",
+    "fieldtype": "Select",
+    "insert_after": "qorg_is_mandatory",
+    "options": "Structured Interview\nTechnical Interview\nWritten Test\nPractical Test\nCase Study\nPresentation\nReference Check\nOther",
+    "default": "Structured Interview",
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Interview Round",
+    "fieldname": "qorg_evaluation_criteria",
+    "label": "Evaluation Criteria",
+    "fieldtype": "Table",
+    "insert_after": "qorg_assessment_type",
+    "options": "Interview Evaluation Criterion"
+  },
+  {
+    "dt": "Interview Round",
+    "fieldname": "qorg_instructions",
+    "label": "Instructions",
+    "fieldtype": "Text Editor",
+    "insert_after": "qorg_evaluation_criteria"
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_mode",
+    "label": "Interview Mode",
+    "fieldtype": "Select",
+    "insert_after": "qorg_attendance_status",
+    "options": "In Person\nOnline\nHybrid",
+    "default": "In Person",
+    "in_list_view": 1,
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_venue",
+    "label": "Venue",
+    "fieldtype": "Data",
+    "insert_after": "qorg_mode",
+    "depends_on": "eval:doc.qorg_mode!=\"Online\""
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_meeting_url",
+    "label": "Meeting URL",
+    "fieldtype": "Data",
+    "insert_after": "qorg_venue",
+    "depends_on": "eval:doc.qorg_mode!=\"In Person\""
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_online_platform",
+    "label": "Online Platform",
+    "fieldtype": "Select",
+    "insert_after": "qorg_meeting_url",
+    "options": "Microsoft Teams\nZoom\nGoogle Meet\nOther",
+    "depends_on": "eval:doc.qorg_mode!=\"In Person\""
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_assessment_type",
+    "label": "Assessment Type",
+    "fieldtype": "Select",
+    "insert_after": "qorg_online_platform",
+    "options": "Structured Interview\nTechnical Interview\nWritten Test\nPractical Test\nCase Study\nPresentation\nReference Check\nOther"
+  },
+  {
+    "dt": "Interview Feedback",
+    "fieldname": "qorg_scoring_section",
+    "label": "Structured Evaluation",
+    "fieldtype": "Section Break",
+    "insert_after": "result"
+  },
+  {
+    "dt": "Interview Feedback",
+    "fieldname": "qorg_criterion_scores",
+    "label": "Criterion Scores",
+    "fieldtype": "Table",
+    "insert_after": "qorg_scoring_section",
+    "options": "Interview Criterion Score"
+  },
+  {
+    "dt": "Interview Feedback",
+    "fieldname": "qorg_weighted_score",
+    "label": "Weighted Score %",
+    "fieldtype": "Percent",
+    "insert_after": "qorg_criterion_scores",
+    "read_only": 1,
+    "in_list_view": 1
+  },
+  {
+    "dt": "Interview Feedback",
+    "fieldname": "qorg_strengths",
+    "label": "Evidence-based Strengths",
+    "fieldtype": "Small Text",
+    "insert_after": "qorg_weighted_score"
+  },
+  {
+    "dt": "Interview Feedback",
+    "fieldname": "qorg_risks",
+    "label": "Risks / Development Areas",
+    "fieldtype": "Small Text",
+    "insert_after": "qorg_strengths"
+  },
+  {
+    "dt": "Interview Feedback",
+    "fieldname": "qorg_recommendation",
+    "label": "Recommendation",
+    "fieldtype": "Select",
+    "insert_after": "qorg_risks",
+    "options": "Strong Hire\nHire\nReserve\nNo Hire",
+    "reqd": 1,
+    "in_list_view": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_interview_score",
+    "label": "Interview / Assessment Score",
+    "fieldtype": "Float",
+    "insert_after": "qorg_overall_score",
+    "read_only": 1,
+    "permlevel": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_selection_priority",
+    "label": "Selection Priority",
+    "fieldtype": "Int",
+    "insert_after": "qorg_rank",
+    "read_only": 1,
+    "permlevel": 1,
+    "in_list_view": 1,
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_selection_status",
+    "label": "Selection Status",
+    "fieldtype": "Select",
+    "insert_after": "qorg_selection_priority",
+    "options": "\nPending Decision\nPrimary Candidate\nReserve Candidate\nOffer In Preparation\nOffer Issued\nOffer Accepted\nOffer Declined\nOffer Expired\nAppointment Issued\nEmployee Created\nClosed",
+    "read_only": 1,
+    "permlevel": 1,
+    "in_list_view": 1,
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_selected_on",
+    "label": "Selected On",
+    "fieldtype": "Datetime",
+    "insert_after": "qorg_selection_status",
+    "read_only": 1,
+    "permlevel": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_next_action",
+    "label": "Next Action",
+    "fieldtype": "Data",
+    "insert_after": "qorg_selected_on",
+    "read_only": 1,
+    "permlevel": 1,
+    "in_list_view": 1
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_selection_priority",
+    "label": "Selection Priority",
+    "fieldtype": "Int",
+    "insert_after": "qorg_applicant",
+    "read_only": 1
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_previous_offer",
+    "label": "Previous Offer",
+    "fieldtype": "Link",
+    "insert_after": "qorg_selection_priority",
+    "options": "Job Offer",
+    "read_only": 1
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_next_candidate",
+    "label": "Next Candidate",
+    "fieldtype": "Link",
+    "insert_after": "qorg_previous_offer",
+    "options": "Job Applicant",
+    "read_only": 1
+  },
+  {
+    "dt": "Appointment Letter",
+    "fieldname": "qorg_job_applicant",
+    "label": "Job Applicant",
+    "fieldtype": "Link",
+    "insert_after": "qorg_job_offer",
+    "options": "Job Applicant",
+    "read_only": 1,
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Employee",
+    "fieldname": "qorg_job_offer",
+    "label": "Job Offer",
+    "fieldtype": "Link",
+    "insert_after": "qorg_job_applicant",
+    "options": "Job Offer",
+    "read_only": 1
+  },
+  {
+    "dt": "Employee",
+    "fieldname": "qorg_appointment_letter",
+    "label": "Appointment Letter",
+    "fieldtype": "Link",
+    "insert_after": "qorg_job_offer",
+    "options": "Appointment Letter",
+    "read_only": 1
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_stage_sequence",
+    "label": "Assessment Stage Sequence",
+    "fieldtype": "Int",
+    "insert_after": "qorg_assessment_type",
+    "read_only": 1
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_passing_score",
+    "label": "Passing Score %",
+    "fieldtype": "Percent",
+    "insert_after": "qorg_stage_sequence",
+    "read_only": 1
+  }
+]

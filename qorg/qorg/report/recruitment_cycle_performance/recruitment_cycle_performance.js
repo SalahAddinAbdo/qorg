@@ -1,0 +1,1 @@
+frappe.query_reports["Recruitment Cycle Performance"]={filters:[{fieldname:"job_title",label:__("Job Opening"),fieldtype:"Link",options:"Job Opening"}]};
