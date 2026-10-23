@@ -3,108 +3,133 @@
   "allow_import": 0,
   "allow_rename": 0,
   "autoname": "field:component_key",
-  "creation": "2026-10-23 09:55:00.000000",
+  "creation": "2026-10-23 14:45:00.000000",
   "custom": 0,
   "doctype": "DocType",
-  "document_type": "",
   "engine": "InnoDB",
   "field_order": [
-    "component_type",
+    "identity_section",
     "component_key",
+    "component_type",
+    "column_break_identity",
     "managed_version",
+    "management_status",
+    "state_section",
     "applied_fingerprint",
     "last_seen_fingerprint",
-    "management_status",
+    "column_break_state",
     "last_checked_on",
+    "details_section",
     "details"
   ],
   "fields": [
     {
-      "fieldname": "component_type",
-      "label": "Component Type",
-      "fieldtype": "Select",
-      "options": "Workflow\nNotification\nEmail Template\nReport\nWorkspace\nOther",
-      "reqd": 1,
-      "in_list_view": 1
+      "fieldname": "identity_section",
+      "fieldtype": "Section Break",
+      "label": "Managed Component"
     },
     {
       "fieldname": "component_key",
+      "fieldtype": "Data",
+      "in_list_view": 1,
       "label": "Component Key",
-      "fieldtype": "Data",
+      "read_only": 1,
       "reqd": 1,
-      "unique": 1,
-      "in_list_view": 1
+      "search_index": 1,
+      "unique": 1
     },
     {
-      "fieldname": "managed_version",
-      "label": "Managed Version",
-      "fieldtype": "Data",
-      "reqd": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "applied_fingerprint",
-      "label": "Applied Fingerprint",
-      "fieldtype": "Data",
+      "fieldname": "component_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Component Type",
+      "options": "Workflow\nModel Policy\nModel Action Policy\nInterface Policy\nFeature Configuration\nOther",
+      "read_only": 1,
       "reqd": 1
     },
     {
-      "fieldname": "last_seen_fingerprint",
-      "label": "Last Seen Fingerprint",
-      "fieldtype": "Data"
+      "fieldname": "column_break_identity",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "managed_version",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Managed Version",
+      "read_only": 1,
+      "reqd": 1
     },
     {
       "fieldname": "management_status",
-      "label": "Management Status",
       "fieldtype": "Select",
-      "options": "Managed\nAdministrator Modified\nConflict\nMissing",
-      "default": "Managed",
-      "in_list_view": 1
+      "in_list_view": 1,
+      "label": "Management Status",
+      "options": "Managed\nAdministrator Modified\nAdopted\nConflict\nMissing\nRestored",
+      "read_only": 1,
+      "reqd": 1
     },
     {
-      "fieldname": "last_checked_on",
-      "label": "Last Checked On",
-      "fieldtype": "Datetime",
+      "fieldname": "state_section",
+      "fieldtype": "Section Break",
+      "label": "State and Integrity"
+    },
+    {
+      "fieldname": "applied_fingerprint",
+      "fieldtype": "Data",
+      "label": "Applied Fingerprint",
       "read_only": 1
     },
     {
+      "fieldname": "last_seen_fingerprint",
+      "fieldtype": "Data",
+      "label": "Last Seen Fingerprint",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_state",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "last_checked_on",
+      "fieldtype": "Datetime",
+      "in_list_view": 1,
+      "label": "Last Checked On",
+      "read_only": 1
+    },
+    {
+      "fieldname": "details_section",
+      "fieldtype": "Section Break",
+      "label": "Technical Details"
+    },
+    {
       "fieldname": "details",
+      "fieldtype": "Code",
       "label": "Details",
-      "fieldtype": "JSON"
+      "options": "JSON",
+      "read_only": 1
     }
   ],
   "grid_page_length": 50,
   "index_web_pages_for_search": 0,
-  "is_submittable": 0,
-  "issingle": 0,
-  "istable": 0,
   "links": [],
-  "modified": "2026-10-23 09:55:00.000000",
+  "modified": "2026-10-23 14:45:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "Managed Configuration State",
-  "naming_rule": "",
   "owner": "Administrator",
   "permissions": [
     {
-      "create": 1,
-      "delete": 0,
-      "email": 0,
-      "export": 0,
-      "print": 0,
+      "export": 1,
       "read": 1,
       "report": 1,
-      "role": "System Manager",
-      "share": 0,
-      "write": 0
+      "role": "System Manager"
     }
   ],
+  "quick_entry": 0,
   "row_format": "Dynamic",
-  "rows_threshold_for_grid_search": 20,
-  "sort_field": "modified",
+  "search_fields": "component_key,component_type,management_status,managed_version",
+  "sort_field": "last_checked_on",
   "sort_order": "DESC",
   "states": [],
-  "track_changes": 1,
-  "title_field": "component_key",
-  "search_fields": "component_key,component_type,management_status"
+  "track_changes": 0
 }
