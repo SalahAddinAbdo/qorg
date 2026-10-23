@@ -11,6 +11,7 @@
   "field_order": [
     "feature_key",
     "feature_label",
+    "feature_state",
     "enabled",
     "operating_mode",
     "effective_from",
@@ -36,11 +37,22 @@
       "in_list_view": 1
     },
     {
+      "fieldname": "feature_state",
+      "label": "Feature State",
+      "fieldtype": "Select",
+      "options": "Inherit\nEnabled\nDisabled",
+      "default": "Inherit",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
       "fieldname": "enabled",
-      "label": "Enabled",
+      "label": "Legacy Enabled",
       "fieldtype": "Check",
       "default": "0",
-      "in_list_view": 1
+      "in_list_view": 1,
+      "hidden": 1,
+      "read_only": 1
     },
     {
       "fieldname": "operating_mode",
@@ -84,7 +96,7 @@
   "issingle": 0,
   "istable": 1,
   "links": [],
-  "modified": "2026-10-23 09:55:00.000000",
+  "modified": "2026-10-23 10:55:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "name": "Feature Configuration",
