@@ -42,6 +42,10 @@ extend_doctype_class = {
 }
 
 doctype_js = {
+    "Interview": "public/js/interview_recruitment.js",
+    "Work Commencement Notice": "public/js/work_commencement_notice.js",
+    "Job Opening": "public/js/job_opening_recruitment.js",
+    "Job Requisition": "public/js/job_requisition_recruitment.js",
     "HR Settings": "public/js/hr_settings_recruitment.js",
     "Designation": "public/js/designation_recruitment.js",
     "Interview Type": "public/js/interview_type.js",
@@ -57,6 +61,8 @@ doctype_js = {
 }
 
 doc_events = {
+    "Job Requisition": {"validate": "qorg.qorg.recruitment_extensions.events.validate_job_requisition_extension"},
+
     "Designation": {"validate": [
         "qorg.qorg.recruitment_extensions.events.designation_validate",
         "qorg.qorg.recruitment_extensions.validation.validate_designation",
