@@ -1,0 +1,1 @@
+frappe.ui.form.on("Job Opening",{qorg_funding_source(frm){frm.toggle_reqd("qorg_funding_details",["Grant / Donor Funding","Shared Funding","Other"].includes(frm.doc.qorg_funding_source));}});

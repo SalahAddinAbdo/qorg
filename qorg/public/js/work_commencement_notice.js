@@ -1,0 +1,5 @@
+frappe.ui.form.on("Work Commencement Notice",{refresh(frm){if(frm.doc.docstatus===0&&frm.doc.status!=="Commenced")frm.add_custom_button(__("Confirm Commencement"),()=>{frm.set_value("status","Commenced");frm.set_value("actual_commencement_date",frappe.datetime.get_today());frm.set_value("supervisor_confirmed_by",frappe.session.user);frm.set_value("supervisor_confirmation_date",frappe.datetime.now_datetime());frm.save();});}});
+frappe.ui.form.on("Work Commencement Notice", {refresh(frm) {
+  if(frm.is_new() || !frappe.user.has_role(["HR Manager","Recruitment Manager"])) return;
+  frm.add_custom_button(__("Notify Internal Stakeholders"),()=>frappe.prompt([{fieldname:"users_json",label:__("Additional Users JSON"),fieldtype:"Small Text",default:"[]"},{fieldname:"force",label:__("Send Again"),fieldtype:"Check",default:0}],v=>frappe.call({method:"qorg.qorg.recruitment_extensions.api.notify_commencement_stakeholders",args:{notice:frm.doc.name,template:"Recruitment - Work Commencement Internal Notice - Bilingual",...v},freeze:true,callback:()=>frm.reload_doc()})),__("Communications"));
+}});

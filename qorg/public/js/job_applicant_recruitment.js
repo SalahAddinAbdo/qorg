@@ -18,3 +18,10 @@ frappe.ui.form.on("Job Applicant", {
     }
   }
 });
+
+frappe.ui.form.on("Job Applicant", {refresh(frm) {
+  if(frm.is_new() || !frappe.user.has_role(["HR Manager","Recruitment Manager"])) return;
+  const map={"Rejected":["Application Not Selected","Recruitment - Application Not Selected - Bilingual"],"Reserve / Waitlisted":["Reserve Notice","Recruitment - Reserve Candidate - Bilingual"]};
+  const config=map[frm.doc.qorg_final_decision];if(!config)return;
+  frm.add_custom_button(__(config[0]),()=>frappe.prompt([{fieldname:"primary_recipient",label:__("Primary Recipient"),fieldtype:"Data",default:frm.doc.email_id,reqd:1},{fieldname:"force",label:__("Send Again"),fieldtype:"Check",default:0}],v=>frappe.call({method:"qorg.qorg.recruitment_extensions.api.send_applicant_notification",args:{applicant:frm.doc.name,notification_type:config[0],template:config[1],...v},freeze:true,callback:r=>frappe.msgprint(__("Notification sent. Log: {0}",[r.message.log]))})),__("Communications"));
+}});
