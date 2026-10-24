@@ -62,11 +62,20 @@
   {
     "dt": "Job Opening",
     "fieldname": "qorg_recruitment_plan_tab",
+    "label": "Recruitment Plan",
+    "fieldtype": "Tab Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_offer_issue_target_date"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_screening_assessment_section",
     "label": "Screening and Assessment Plan",
     "fieldtype": "Section Break",
     "module": "QOrg",
     "is_system_generated": 1,
-    "insert_after": "qorg_offer_issue_target_date"
+    "insert_after": "qorg_recruitment_plan_tab"
   },
   {
     "dt": "Job Opening",
@@ -99,7 +108,7 @@
     "is_system_generated": 1,
     "default": "20",
     "description": "Contribution of screening to the overall recruitment score.",
-    "insert_after": "qorg_recruitment_plan_tab"
+    "insert_after": "qorg_screening_assessment_section"
   },
   {
     "dt": "Job Opening",
