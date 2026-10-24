@@ -13,80 +13,20 @@ APP_MODULE = "QOrg"
 SIDEBAR = "Q Org"
 DESKTOP_ICON = "Q Org"
 
-WORKSPACE_GROUPS = {
-    "Q Management Hub": [
-        ("People & Recruitment", "DocType", ["External Person", "External Opportunity", "Job Applicant", "Interview", "Job Offer"]),
-        ("Recruitment Reports", "Report", ["Recruitment Pipeline", "Applicant Screening and Aging", "Interview Progress", "Offer and Appointment Tracking", "Candidate Selection Queue", "Recruitment Cycle Performance"]),
-        ("Priority Documents", "DocType", [
-            "Project", "Task", "Project Progress Update", "Project Risk",
-            "Project Change Request",
-        ]),
-        ("Priority Reports", "Report", [
-            "Project Portfolio Overview", "Budget Versus Actual",
-            "Employees Task Tracker",
-        ]),
-    ],
-    "People & Recruitment": [
-        ("People and Opportunities", "DocType", ["External Person", "External Opportunity", "Job Opening", "Job Applicant"]),
-        ("Interviews and Decisions", "DocType", ["Interview Type", "Interview", "Interview Feedback", "Job Offer", "Appointment Letter"]),
-        ("Employee Conversion", "DocType", ["Employee", "Employee Onboarding"]),
-        ("Recruitment Reports", "Report", ["Recruitment Pipeline", "Applicant Screening and Aging", "Interview Progress", "Offer and Appointment Tracking", "Candidate Selection Queue", "Recruitment Cycle Performance"]),
-    ],
-    "Projects & Tasks": [
-        ("Project Setup & Planning", "DocType", [
-            "Project", "Project Result", "Project Indicator", "Indicator Target Plan",
-            "Project Workplan Activity", "Budget Line",
-        ]),
-        ("Monitoring & Control", "DocType", [
-            "Project Progress Update", "Project Risk", "Issue",
-            "Project Change Request", "Project Compliance Deliverable",
-            "Project Beneficiary Plan", "Project Closure",
-        ]),
-        ("Task Management", "DocType", ["Task", "Task Assignment Request"]),
-        ("Performance Reports", "Report", [
-            "Project Portfolio Overview", "Project Progress", "Indicator Performance",
-            "Beneficiary Reach", "Project Data Quality",
-        ]),
-        ("Control & Assurance Reports", "Report", [
-            "Project Risks and Issues", "Compliance Assurance", "Change Control",
-            "Closure Readiness",
-        ]),
-        ("Financial & Task Reports", "Report", [
-            "Project Budget", "Budget Versus Actual", "Employees Task Tracker",
-        ]),
-        ("Project & Task Settings", "DocType", [
-            "Projects Settings", "Task Management Settings",
-        ]),
-    ],
-    "Workflow & Documents": [
-        ("Workflow Configuration", "DocType", [
-            "Workflow", "Workflow State", "Workflow Action Master",
-        ]),
-        ("Signatures", "DocType", [
-            "Employee Signature", "Employee Signature Configuration",
-        ]),
-        ("Printing", "DocType", ["Print Settings", "Print Format", "Letter Head"]),
-        ("Templates & Notifications", "DocType", ["Email Template", "Notification"]),
-    ],
-    "Master Data": [
-        ("Organizations", "DocType", ["Donor", "Donor Type", "Partner"]),
-        ("Geographic Data", "DocType", ["Governorate", "District"]),
-    ],
-    "Reports & Analytics": [
-        ("Executive & Performance", "Report", [
-            "Project Portfolio Overview", "Project Progress", "Indicator Performance",
-            "Project Data Quality",
-        ]),
-        ("Risk, Compliance & Change", "Report", [
-            "Project Risks and Issues", "Compliance Assurance", "Change Control",
-            "Closure Readiness",
-        ]),
-        ("Financial & Beneficiaries", "Report", [
-            "Project Budget", "Budget Versus Actual", "Beneficiary Reach",
-        ]),
-        ("Task Reports", "Report", ["Employees Task Tracker"]),
-    ],
-}
+STANDARD_QORG_WORKSPACES = (
+    "Q Management Hub",
+    "People & Recruitment",
+    "Projects & Tasks",
+    "Workflow & Documents",
+    "Master Data",
+    "Reports & Analytics",
+)
+
+NAVIGATION_PROVIDERS = (
+    "qorg.qorg.people_and_opportunities.navigation.WORKSPACE_CONTRIBUTIONS",
+    "qorg.qorg.recruitment_extensions.navigation.WORKSPACE_CONTRIBUTIONS",
+    "qorg.qorg.project_management.navigation.WORKSPACE_CONTRIBUTIONS",
+)
 
 SIDEBAR_DEFINITIONS = [
     ("Q Management Hub", "Workspace", "Q Management Hub", "home"),
@@ -107,6 +47,60 @@ SIDEBAR_DEFINITIONS = [
     ("Task Settings", "DocType", "Task Management Settings", "setting-gear"),
     ("Print Settings", "DocType", "Print Settings", "printer"),
 ]
+
+
+def _get_workspace_groups():
+    """Merge package-owned navigation contributions without duplicating cards or links."""
+    merged = {name: [] for name in STANDARD_QORG_WORKSPACES}
+
+    for provider_path in NAVIGATION_PROVIDERS:
+        try:
+            contributions = frappe.get_attr(provider_path) or {}
+        except Exception:
+            frappe.log_error(
+                title="QOrg Navigation Provider Error",
+                message=frappe.get_traceback(),
+            )
+            continue
+
+        for workspace_name, groups in contributions.items():
+            merged.setdefault(workspace_name, [])
+            merged[workspace_name].extend(groups or [])
+
+    normalized = {}
+    for workspace_name, groups in merged.items():
+        card_order = []
+        card_map = {}
+
+        for label, link_type, items in groups:
+            key = (label, link_type)
+            if key not in card_map:
+                card_order.append(key)
+                card_map[key] = []
+
+            for item in items or ():
+                if item not in card_map[key]:
+                    card_map[key].append(item)
+
+        normalized[workspace_name] = [
+            (label, link_type, card_map[(label, link_type)])
+            for label, link_type in card_order
+        ]
+
+    return normalized
+
+
+def _audit_standard_workspace_shells():
+    missing = [name for name in STANDARD_QORG_WORKSPACES if not _exists("Workspace", name)]
+    if missing:
+        frappe.log_error(
+            title="Missing QOrg Standard Workspaces",
+            message=(
+                "The following standard QOrg workspace shells were not synchronized "
+                "from app files: " + "; ".join(missing)
+            ),
+        )
+    return missing
 
 
 def _exists(doctype, name):
@@ -171,6 +165,17 @@ def _content(title, shortcuts, card_labels):
 
 
 def _save_workspace(name, groups):
+    """Populate a standard workspace shell with dynamic, package-contributed content."""
+    if not _exists("Workspace", name):
+        frappe.log_error(
+            title="Missing QOrg Standard Workspace",
+            message=(
+                f"Workspace {name} was not synchronized from the standard workspace "
+                "JSON files bundled with qorg. Dynamic content was not created."
+            ),
+        )
+        return
+
     supported = {"DocType", "Report", "Page", "Dashboard", "URL"}
     normalized = []
     for label, link_type, items in groups:
@@ -183,25 +188,44 @@ def _save_workspace(name, groups):
     shortcuts = []
     for _, link_type, items in normalized:
         for item in items:
-            shortcuts.append(_shortcut(item, link_type, "Green" if link_type == "Report" else "Blue"))
+            shortcuts.append(
+                _shortcut(
+                    item,
+                    link_type,
+                    "Green" if link_type == "Report" else "Blue",
+                )
+            )
             if len(shortcuts) == 8:
                 break
         if len(shortcuts) == 8:
             break
 
+    doc = frappe.get_doc("Workspace", name)
     values = {
-        "title": name, "label": name, "module": APP_MODULE,
-        "type": "Workspace", "public": 1, "is_hidden": 0, "icon": "project",
-        "content": _content(name, shortcuts, [label for label, _, _ in normalized]),
-        "shortcuts": shortcuts, "links": _workspace_link_rows(normalized),
+        "title": name,
+        "label": name,
+        "module": APP_MODULE,
+        "type": "Workspace",
+        "public": 1,
+        "is_hidden": 0,
+        "icon": "project",
+        "content": _content(
+            name,
+            shortcuts,
+            [label for label, _, _ in normalized],
+        ),
+        "shortcuts": shortcuts,
+        "links": _workspace_link_rows(normalized),
     }
-    if _exists("Workspace", name):
-        doc = frappe.get_doc("Workspace", name)
-        for key, value in values.items():
+
+    changed = False
+    for key, value in values.items():
+        if doc.get(key) != value:
             doc.set(key, value)
+            changed = True
+
+    if changed:
         doc.save(ignore_permissions=True)
-    else:
-        frappe.get_doc({"doctype": "Workspace", "name": name, **values}).insert(ignore_permissions=True)
 
 
 def _save_sidebar():
@@ -358,8 +382,11 @@ def _integrate_standard_workspaces():
 
 
 def provision_q_org_navigation():
-    for name, groups in WORKSPACE_GROUPS.items():
+    _audit_standard_workspace_shells()
+
+    for name, groups in _get_workspace_groups().items():
         _save_workspace(name, groups)
+
     _save_sidebar()
     _save_icon()
     _integrate_standard_workspaces()

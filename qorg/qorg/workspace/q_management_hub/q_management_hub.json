@@ -6,7 +6,7 @@
   "doctype": "Workspace",
   "for_user": "",
   "hide_custom": 0,
-  "icon": "project",
+  "icon": "home",
   "idx": 0,
   "is_hidden": 0,
   "label": "Q Management Hub",
@@ -18,7 +18,7 @@
   "public": 1,
   "quick_lists": [],
   "roles": [],
-  "sequence_id": 5.0,
+  "sequence_id": 1.0,
   "shortcuts": [],
   "title": "Q Management Hub",
   "type": "Workspace"
