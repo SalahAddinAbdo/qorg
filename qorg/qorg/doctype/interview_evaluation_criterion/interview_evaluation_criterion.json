@@ -2,14 +2,14 @@
   "actions": [],
   "allow_rename": 0,
   "autoname": "hash",
-  "creation": "2026-10-23 23:50:00.000000",
+  "creation": "2026-10-24 00:20:00.000000",
   "custom": 0,
   "doctype": "DocType",
   "engine": "InnoDB",
   "index_web_pages_for_search": 0,
   "istable": 1,
   "links": [],
-  "modified": "2026-10-23 23:50:00.000000",
+  "modified": "2026-10-24 00:20:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "owner": "Administrator",
@@ -17,27 +17,11 @@
   "states": [],
   "track_changes": 0,
   "name": "Interview Evaluation Criterion",
-  "field_order": [
-    "source_designation_criterion",
-    "sequence",
-    "competency_area",
-    "question_task",
-    "assessment_method",
-    "weight",
-    "passing_score",
-    "is_mandatory",
-    "low_score_anchor",
-    "mid_score_anchor",
-    "high_score_anchor",
-    "instructions",
-    "page_break"
-  ],
   "fields": [
     {
-      "fieldname": "source_designation_criterion",
-      "label": "Source Designation Criterion",
-      "fieldtype": "Data",
-      "hidden": 1
+      "fieldname": "identity_section",
+      "label": "Criterion Identity",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "sequence",
@@ -56,12 +40,9 @@
       "columns": 2
     },
     {
-      "fieldname": "question_task",
-      "label": "Question / Task",
-      "fieldtype": "Small Text",
-      "reqd": 1,
-      "in_list_view": 1,
-      "columns": 3
+      "fieldname": "identity_cb",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "assessment_method",
@@ -71,6 +52,30 @@
       "reqd": 1,
       "in_list_view": 1,
       "columns": 2
+    },
+    {
+      "fieldname": "is_mandatory",
+      "label": "Mandatory",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "question_section",
+      "label": "Question / Task",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "question_task",
+      "label": "Question / Task",
+      "fieldtype": "Small Text",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 3
+    },
+    {
+      "fieldname": "scoring_section",
+      "label": "Scoring",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "weight",
@@ -89,10 +94,22 @@
       "columns": 1
     },
     {
-      "fieldname": "is_mandatory",
-      "label": "Mandatory",
+      "fieldname": "scoring_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "page_break",
+      "label": "Page Break",
       "fieldtype": "Check",
-      "default": "1"
+      "default": "0",
+      "allow_on_submit": 1,
+      "print_hide": 1
+    },
+    {
+      "fieldname": "anchors_section",
+      "label": "Scoring Anchors",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "low_score_anchor",
@@ -105,9 +122,19 @@
       "fieldtype": "Small Text"
     },
     {
+      "fieldname": "anchors_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "high_score_anchor",
       "label": "High Score Anchor",
       "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "instructions_section",
+      "label": "Instructions",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "instructions",
@@ -115,12 +142,33 @@
       "fieldtype": "Small Text"
     },
     {
-      "fieldname": "page_break",
-      "label": "Page Break",
-      "fieldtype": "Check",
-      "default": "0",
-      "allow_on_submit": 1,
-      "print_hide": 1
+      "fieldname": "source_designation_criterion",
+      "label": "Source Designation Criterion",
+      "fieldtype": "Data",
+      "hidden": 1
     }
+  ],
+  "field_order": [
+    "identity_section",
+    "sequence",
+    "competency_area",
+    "identity_cb",
+    "assessment_method",
+    "is_mandatory",
+    "question_section",
+    "question_task",
+    "scoring_section",
+    "weight",
+    "passing_score",
+    "scoring_cb",
+    "page_break",
+    "anchors_section",
+    "low_score_anchor",
+    "mid_score_anchor",
+    "anchors_cb",
+    "high_score_anchor",
+    "instructions_section",
+    "instructions",
+    "source_designation_criterion"
   ]
 }

@@ -2,14 +2,14 @@
   "actions": [],
   "allow_rename": 0,
   "autoname": "hash",
-  "creation": "2026-10-23 23:50:00.000000",
+  "creation": "2026-10-24 00:20:00.000000",
   "custom": 0,
   "doctype": "DocType",
   "engine": "InnoDB",
   "index_web_pages_for_search": 0,
   "istable": 1,
   "links": [],
-  "modified": "2026-10-23 23:50:00.000000",
+  "modified": "2026-10-24 00:20:00.000000",
   "modified_by": "Administrator",
   "module": "QOrg",
   "owner": "Administrator",
@@ -17,27 +17,11 @@
   "states": [],
   "track_changes": 0,
   "name": "Interview Criterion Score",
-  "field_order": [
-    "criterion_reference",
-    "sequence",
-    "competency_area",
-    "question_task",
-    "weight",
-    "passing_score",
-    "is_mandatory",
-    "score_percent",
-    "weighted_score",
-    "result",
-    "evidence_notes",
-    "evidence_attachment",
-    "page_break"
-  ],
   "fields": [
     {
-      "fieldname": "criterion_reference",
-      "label": "Criterion Reference",
-      "fieldtype": "Data",
-      "hidden": 1
+      "fieldname": "criterion_section",
+      "label": "Criterion",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "sequence",
@@ -56,12 +40,9 @@
       "columns": 2
     },
     {
-      "fieldname": "question_task",
-      "label": "Question / Task",
-      "fieldtype": "Small Text",
-      "read_only": 1,
-      "in_list_view": 1,
-      "columns": 3
+      "fieldname": "criterion_cb",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "weight",
@@ -78,10 +59,22 @@
       "read_only": 1
     },
     {
-      "fieldname": "is_mandatory",
-      "label": "Mandatory",
-      "fieldtype": "Check",
-      "read_only": 1
+      "fieldname": "question_section",
+      "label": "Question / Task",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "question_task",
+      "label": "Question / Task",
+      "fieldtype": "Small Text",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 3
+    },
+    {
+      "fieldname": "score_section",
+      "label": "Score and Result",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "score_percent",
@@ -101,6 +94,11 @@
       "columns": 1
     },
     {
+      "fieldname": "score_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "result",
       "label": "Result",
       "fieldtype": "Select",
@@ -108,11 +106,27 @@
       "read_only": 1
     },
     {
+      "fieldname": "is_mandatory",
+      "label": "Mandatory",
+      "fieldtype": "Check",
+      "read_only": 1
+    },
+    {
+      "fieldname": "evidence_section",
+      "label": "Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "evidence_notes",
       "label": "Evidence Notes",
       "fieldtype": "Small Text",
       "reqd": 1,
       "description": "Record objective evidence supporting the score."
+    },
+    {
+      "fieldname": "evidence_cb",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "evidence_attachment",
@@ -126,6 +140,34 @@
       "default": "0",
       "allow_on_submit": 1,
       "print_hide": 1
+    },
+    {
+      "fieldname": "criterion_reference",
+      "label": "Criterion Reference",
+      "fieldtype": "Data",
+      "hidden": 1
     }
+  ],
+  "field_order": [
+    "criterion_section",
+    "sequence",
+    "competency_area",
+    "criterion_cb",
+    "weight",
+    "passing_score",
+    "question_section",
+    "question_task",
+    "score_section",
+    "score_percent",
+    "weighted_score",
+    "score_cb",
+    "result",
+    "is_mandatory",
+    "evidence_section",
+    "evidence_notes",
+    "evidence_cb",
+    "evidence_attachment",
+    "page_break",
+    "criterion_reference"
   ]
 }
