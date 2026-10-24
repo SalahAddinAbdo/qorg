@@ -1,0 +1,30 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "autoname": "hash",
+  "custom": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "index_web_pages_for_search": 0,
+  "istable": 1,
+  "links": [],
+  "module": "QOrg",
+  "name": "HR Settings Recruitment User",
+  "permissions": [],
+  "states": [],
+  "track_changes": 0,
+  "field_order": [
+    "user"
+  ],
+  "fields": [
+    {
+      "fieldname": "user",
+      "label": "User",
+      "fieldtype": "Link",
+      "options": "User",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 4
+    }
+  ]
+}

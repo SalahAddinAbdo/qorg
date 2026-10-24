@@ -1,0 +1,29 @@
+[
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_valid_until",
+    "label": "Valid Until",
+    "fieldtype": "Date",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "allow_on_submit": 1
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_response_date",
+    "label": "Response Date",
+    "fieldtype": "Date",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "allow_on_submit": 1
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_response_remarks",
+    "label": "Response Remarks",
+    "fieldtype": "Small Text",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "allow_on_submit": 1
+  }
+]

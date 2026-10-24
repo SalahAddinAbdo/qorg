@@ -1,0 +1,328 @@
+[
+  {
+    "fieldname": "qorg_recruitment_defaults_tab",
+    "label": "QOrg Recruitment",
+    "fieldtype": "Tab Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "fieldname": "qorg_recruitment_scoring_section",
+    "label": "Scoring Defaults",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "fieldname": "qorg_default_screening_weight",
+    "label": "Default Screening Weight %",
+    "fieldtype": "Percent",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "20",
+    "description": "Default contribution of screening to the overall recruitment score."
+  },
+  {
+    "fieldname": "qorg_default_assessment_weight",
+    "label": "Default Assessment Weight %",
+    "fieldtype": "Percent",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "80",
+    "description": "Default contribution of interviews, tests, and assessments. The two defaults must total 100%."
+  },
+  {
+    "fieldname": "qorg_recruitment_scoring_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "fieldname": "qorg_default_criterion_passing_score",
+    "label": "Default Criterion Passing Score %",
+    "fieldtype": "Percent",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "60"
+  },
+  {
+    "fieldname": "qorg_default_stage_passing_score",
+    "label": "Default Assessment Stage Passing Score %",
+    "fieldtype": "Percent",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "60"
+  },
+  {
+    "fieldname": "qorg_interview_defaults_section",
+    "label": "Interview Defaults",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "fieldname": "qorg_default_interview_mode",
+    "label": "Default Interview Mode",
+    "fieldtype": "Select",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "In Person\nOnline\nHybrid",
+    "default": "In Person"
+  },
+  {
+    "fieldname": "qorg_default_interview_duration",
+    "label": "Default Interview Duration (Minutes)",
+    "fieldtype": "Int",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "60"
+  },
+  {
+    "fieldname": "qorg_default_required_feedback_count",
+    "label": "Default Required Feedback Count",
+    "fieldtype": "Int",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1"
+  },
+  {
+    "fieldname": "qorg_interview_defaults_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "fieldname": "qorg_require_evidence_notes",
+    "label": "Require Evidence Notes",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1"
+  },
+  {
+    "fieldname": "qorg_offer_defaults_section",
+    "label": "Offer and Candidate Queue",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "fieldname": "qorg_default_offer_validity_days",
+    "label": "Default Offer Validity Days",
+    "fieldtype": "Int",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "7"
+  },
+  {
+    "fieldname": "qorg_automatically_expire_offers",
+    "label": "Automatically Mark Expired Offers",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1"
+  },
+  {
+    "fieldname": "qorg_allow_multiple_active_offers",
+    "label": "Allow Multiple Active Offers per Job Opening",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "0"
+  },
+  {
+    "fieldname": "qorg_offer_defaults_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "fieldname": "qorg_candidate_priority_limit",
+    "label": "Default Candidate Priority Limit",
+    "fieldtype": "Int",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "3"
+  },
+  {
+    "fieldname": "qorg_require_unique_priority",
+    "label": "Require Unique Selection Priority",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1"
+  },
+  {
+    "fieldname": "qorg_decision_governance_section",
+    "label": "Final Decision Governance",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "fieldname": "qorg_require_rejection_reason",
+    "label": "Require Rejection Reason",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1"
+  },
+  {
+    "fieldname": "qorg_decision_governance_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "fieldname": "qorg_require_decision_rationale",
+    "label": "Require Evidence-based Decision Rationale",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1"
+  },
+  {
+    "fieldname": "qorg_lock_decision_after_offer",
+    "label": "Lock Decision after Job Offer",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1"
+  },
+  {
+    "fieldname": "qorg_notification_defaults_section",
+    "label": "Notification Defaults",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "fieldname": "qorg_enable_applicant_notifications",
+    "label": "Enable Applicant Notifications",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1"
+  },
+  {
+    "fieldname": "qorg_enable_interviewer_notifications",
+    "label": "Enable Interviewer Notifications",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1"
+  },
+  {
+    "fieldname": "qorg_enable_recruitment_team_notifications",
+    "label": "Enable Recruitment Team Notifications",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1"
+  },
+  {
+    "fieldname": "qorg_send_confirmation_copy_sender",
+    "label": "Send Confirmation Copy to Sender",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1"
+  },
+  {
+    "fieldname": "qorg_notifications_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "fieldname": "qorg_require_recipient_confirmation",
+    "label": "Require Recipient Confirmation when Applicable",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1"
+  },
+  {
+    "fieldname": "qorg_use_company_branding",
+    "label": "Use Company Branding",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1"
+  },
+  {
+    "fieldname": "qorg_default_recruitment_cc_users",
+    "label": "Default CC Users",
+    "fieldtype": "Table MultiSelect",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "HR Settings Recruitment User"
+  },
+  {
+    "fieldname": "qorg_default_recruitment_additional_users",
+    "label": "Default Additional Notification Users",
+    "fieldtype": "Table MultiSelect",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "HR Settings Recruitment User"
+  },
+  {
+    "fieldname": "qorg_onboarding_defaults_section",
+    "label": "Onboarding Defaults",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "fieldname": "qorg_default_onboarding_duration_days",
+    "label": "Default Onboarding Duration Days",
+    "fieldtype": "Int",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "30"
+  },
+  {
+    "fieldname": "qorg_require_mandatory_onboarding",
+    "label": "Require Mandatory Activities Completion",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1"
+  },
+  {
+    "fieldname": "qorg_require_mandatory_activity_evidence",
+    "label": "Require Evidence for Mandatory Activities",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "0"
+  },
+  {
+    "fieldname": "qorg_onboarding_defaults_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "fieldname": "qorg_require_activity_verification",
+    "label": "Require Activity Verification",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1"
+  },
+  {
+    "fieldname": "qorg_allow_assigned_user_reopen",
+    "label": "Allow Assigned User to Reopen Activity",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "0"
+  }
+]
