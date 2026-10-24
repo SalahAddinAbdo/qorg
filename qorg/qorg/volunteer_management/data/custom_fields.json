@@ -1,0 +1,313 @@
+[
+  {
+    "dt": "External Opportunity",
+    "fieldname": "qorg_participation_section",
+    "label": "Volunteer and Internship Details",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "External Opportunity",
+    "fieldname": "qorg_participation_type",
+    "label": "Participation Type",
+    "fieldtype": "Select",
+    "options": "Volunteer\nIntern\nVolunteer or Intern",
+    "default": "Volunteer",
+    "in_list_view": 1,
+    "in_standard_filter": 1,
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "External Opportunity",
+    "fieldname": "qorg_number_of_positions",
+    "label": "Number of Positions",
+    "fieldtype": "Int",
+    "default": "1",
+    "in_list_view": 1,
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "External Opportunity",
+    "fieldname": "qorg_minimum_age",
+    "label": "Minimum Age",
+    "fieldtype": "Int",
+    "default": "18",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "External Opportunity",
+    "fieldname": "qorg_participation_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "External Opportunity",
+    "fieldname": "qorg_supervisor",
+    "label": "Default Supervisor",
+    "fieldtype": "Link",
+    "options": "Employee",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "External Opportunity",
+    "fieldname": "qorg_expected_hours",
+    "label": "Expected Total Hours",
+    "fieldtype": "Float",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "External Opportunity",
+    "fieldname": "qorg_stipend_policy",
+    "label": "Stipend / Allowance Policy",
+    "fieldtype": "Select",
+    "options": "Unpaid\nStipend\nTransport Allowance\nMeal Allowance\nMultiple Allowances\nOther",
+    "default": "Unpaid",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "External Opportunity",
+    "fieldname": "qorg_require_background_check",
+    "label": "Require Background Check",
+    "fieldtype": "Check",
+    "default": "0",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "External Opportunity",
+    "fieldname": "qorg_require_safeguarding_clearance",
+    "label": "Require Safeguarding Clearance",
+    "fieldtype": "Check",
+    "default": "1",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "External Opportunity",
+    "fieldname": "qorg_screening_section",
+    "label": "Screening and Assessment",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "External Opportunity",
+    "fieldname": "qorg_screening_weight",
+    "label": "Screening Weight %",
+    "fieldtype": "Percent",
+    "default": "20",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "External Opportunity",
+    "fieldname": "qorg_assessment_weight",
+    "label": "Assessment Weight %",
+    "fieldtype": "Percent",
+    "default": "80",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "External Opportunity",
+    "fieldname": "qorg_screening_criteria",
+    "label": "Screening Criteria",
+    "fieldtype": "Table",
+    "options": "Participation Screening Criterion",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "External Opportunity",
+    "fieldname": "qorg_assessment_plan",
+    "label": "Assessment Plan",
+    "fieldtype": "Table",
+    "options": "Participation Assessment Stage",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_management_tab",
+    "label": "Volunteer and Internship Management",
+    "fieldtype": "Tab Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_general_section",
+    "label": "General Controls",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_default_type",
+    "label": "Default Participation Type",
+    "fieldtype": "Select",
+    "options": "Volunteer\nIntern",
+    "default": "Volunteer",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_minimum_age",
+    "label": "Default Minimum Age",
+    "fieldtype": "Int",
+    "default": "18",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_require_agreement",
+    "label": "Require Participation Agreement",
+    "fieldtype": "Check",
+    "default": "1",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_general_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_require_code",
+    "label": "Require Code of Conduct",
+    "fieldtype": "Check",
+    "default": "1",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_require_safeguarding",
+    "label": "Require Safeguarding Acknowledgement",
+    "fieldtype": "Check",
+    "default": "1",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_block_pending_clearance",
+    "label": "Prevent Activation with Pending Clearance",
+    "fieldtype": "Check",
+    "default": "1",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_hours_section",
+    "label": "Hours and Verification",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_max_daily_hours",
+    "label": "Maximum Hours per Day",
+    "fieldtype": "Float",
+    "default": "8",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_max_weekly_hours",
+    "label": "Maximum Hours per Week",
+    "fieldtype": "Float",
+    "default": "40",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_require_evidence",
+    "label": "Require Service Log Evidence",
+    "fieldtype": "Check",
+    "default": "0",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_hours_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_require_supervisor_verification",
+    "label": "Require Supervisor Verification",
+    "fieldtype": "Check",
+    "default": "1",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_allow_overachievement",
+    "label": "Allow Hours above Expected Total",
+    "fieldtype": "Check",
+    "default": "1",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_intern_section",
+    "label": "Internship Controls",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_require_learning_objectives",
+    "label": "Require Learning Objectives",
+    "fieldtype": "Check",
+    "default": "1",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_require_midterm",
+    "label": "Require Midterm Evaluation",
+    "fieldtype": "Check",
+    "default": "1",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_require_final",
+    "label": "Require Final Evaluation",
+    "fieldtype": "Check",
+    "default": "1",
+    "module": "QOrg",
+    "is_system_generated": 1
+  }
+]

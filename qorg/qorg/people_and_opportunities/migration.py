@@ -22,3 +22,4 @@ def migrate_hr_database(dry_run: int = 1, limit: int = 0):
                 person=get_or_create_external_person(values,"Migration","HR Database",name); result["created"]+=1
         except Exception as exc: result["errors"].append({"source":name,"error":str(exc)})
     return result
+

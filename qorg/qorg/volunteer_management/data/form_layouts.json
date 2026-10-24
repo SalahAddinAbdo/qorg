@@ -1,0 +1,41 @@
+{
+  "External Opportunity": [
+    "qorg_participation_section",
+    "qorg_participation_type",
+    "qorg_number_of_positions",
+    "qorg_minimum_age",
+    "qorg_participation_cb",
+    "qorg_supervisor",
+    "qorg_expected_hours",
+    "qorg_stipend_policy",
+    "qorg_require_background_check",
+    "qorg_require_safeguarding_clearance",
+    "qorg_screening_section",
+    "qorg_screening_weight",
+    "qorg_assessment_weight",
+    "qorg_screening_criteria",
+    "qorg_assessment_plan"
+  ],
+  "HR Settings": [
+    "qorg_participation_management_tab",
+    "qorg_participation_general_section",
+    "qorg_participation_default_type",
+    "qorg_participation_minimum_age",
+    "qorg_participation_require_agreement",
+    "qorg_participation_general_cb",
+    "qorg_participation_require_code",
+    "qorg_participation_require_safeguarding",
+    "qorg_participation_block_pending_clearance",
+    "qorg_participation_hours_section",
+    "qorg_participation_max_daily_hours",
+    "qorg_participation_max_weekly_hours",
+    "qorg_participation_require_evidence",
+    "qorg_participation_hours_cb",
+    "qorg_participation_require_supervisor_verification",
+    "qorg_participation_allow_overachievement",
+    "qorg_participation_intern_section",
+    "qorg_participation_require_learning_objectives",
+    "qorg_participation_require_midterm",
+    "qorg_participation_require_final"
+  ]
+}

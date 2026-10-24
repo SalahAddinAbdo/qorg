@@ -1,0 +1,7 @@
+{
+  "doctype": "Email Template",
+  "name": "Participation - Assessment Invitation - Bilingual",
+  "subject": "Assessment invitation | دعوة تقييم",
+  "use_html": 1,
+  "response_html": "<div style=\"font-family:Arial,sans-serif;line-height:1.7\"><div dir=\"rtl\">مرحبًا،<br>يرجى مراجعة تفاصيل المشاركة في النظام. هذه رسالة آلية مرتبطة بالسجل المرجعي.</div><hr><div dir=\"ltr\">Hello,<br>Please review the participation details in the system. This automated message is linked to the reference record.</div></div>"
+}
