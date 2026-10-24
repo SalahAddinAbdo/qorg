@@ -1,7 +1,7 @@
 from __future__ import annotations
 import frappe
 from frappe import _
-from frappe.utils import now, today
+from frappe.utils import now, today, cint
 from . import services
 
 def _manager():
@@ -63,3 +63,50 @@ def create_employee_from_appointment(appointment_letter):
     for target,source in (("first_name","applicant_name"),("personal_email","email_id"),("cell_number","phone_number")): 
         if hasattr(e,target) and a.get(source): e.set(target,a.get(source))
     e.qorg_job_applicant=a.name; e.qorg_external_person=a.get("qorg_external_person"); services.copy_context(a,e); e.insert(); frappe.db.set_value("Job Applicant",a.name,{"qorg_selection_status":"Employee Created","qorg_next_action":"Start Employee Onboarding"},update_modified=False); return e.name
+
+
+@frappe.whitelist(methods=["POST"])
+def create_work_commencement_notice(appointment_letter):
+    _manager(); al=_doc("Appointment Letter",appointment_letter,"read")
+    existing=frappe.db.get_value("Work Commencement Notice",{"appointment_letter":al.name,"docstatus":["<",2]},"name")
+    if existing:return existing
+    employee=frappe.db.get_value("Employee",{"qorg_appointment_letter":al.name},"name") if frappe.get_meta("Employee").has_field("qorg_appointment_letter") else None
+    if not employee:
+        applicant=al.get("job_applicant") or al.get("qorg_job_applicant")
+        if applicant:employee=frappe.db.get_value("Employee",{"qorg_job_applicant":applicant},"name")
+    if not employee:frappe.throw(_("Create or link the Employee before creating the Work Commencement Notice."))
+    doc=frappe.new_doc("Work Commencement Notice");doc.appointment_letter=al.name;doc.employee=employee;doc.insert();return doc.name
+
+
+@frappe.whitelist()
+def get_retry_eligibility(interview):
+    _doc("Interview",interview,"read");return services.retry_eligibility(interview)
+
+@frappe.whitelist(methods=["POST"])
+def create_retry_interview(interview,retry_reason=None,reuse_interviewers=0):
+    _manager();source=_doc("Interview",interview,"read");eligibility=services.retry_eligibility(source.name)
+    if not eligibility.get("allowed"):frappe.throw(eligibility.get("reason"))
+    if eligibility.get("existing"):return eligibility["existing"]
+    retry=frappe.new_doc("Interview")
+    for field in ("job_applicant","interview_type","interview_round","qorg_job_opening","qorg_stage_sequence","qorg_stage_name","qorg_stage_weight","qorg_passing_score","qorg_is_mandatory_stage","qorg_project","qorg_branch","qorg_interview_mode","qorg_duration_minutes","qorg_allow_retry","qorg_maximum_attempts","qorg_retry_requires_approval","qorg_retry_approval_role"):
+        if retry.meta.has_field(field) and source.meta.has_field(field):retry.set(field,source.get(field))
+    retry.qorg_attempt_number=max(cint(source.get("qorg_attempt_number")),1)+1;retry.qorg_previous_interview=source.name;retry.qorg_retry_reason=retry_reason
+    if cint(source.get("qorg_retry_requires_approval")):retry.qorg_retry_approved_by=frappe.session.user;retry.qorg_retry_approved_on=now()
+    if cint(reuse_interviewers) and retry.meta.has_field("interview_details") and source.get("interview_details"):
+        for row in source.interview_details:retry.append("interview_details",{"interviewer":row.interviewer})
+    retry.insert();return retry.name
+
+@frappe.whitelist(methods=["POST"])
+def send_applicant_notification(applicant,notification_type,template,primary_recipient=None,cc_json=None,users_json=None,force=0):
+    _manager();doc=_doc("Job Applicant",applicant,"read")
+    allowed={"Reserve Notice":"Reserve / Waitlisted","Application Not Selected":"Rejected"}
+    if notification_type in allowed and doc.get("qorg_final_decision")!=allowed[notification_type]:frappe.throw(_("Applicant decision does not match the selected notification."))
+    from .notifications import send_managed_recruitment_message
+    return send_managed_recruitment_message(notification_type,template,"Job Applicant",doc.name,primary_recipient,cc_json,users_json,force)
+
+@frappe.whitelist(methods=["POST"])
+def notify_commencement_stakeholders(notice,template,users_json=None,force=0):
+    _manager();doc=_doc("Work Commencement Notice",notice,"read")
+    from .notifications import send_managed_recruitment_message
+    result=send_managed_recruitment_message("Internal Stakeholder Notice",template,"Work Commencement Notice",doc.name,None,"[]",users_json,force)
+    frappe.db.set_value("Work Commencement Notice",doc.name,{"finance_notified":1,"it_notified":1,"administration_notified":1},update_modified=False);return result

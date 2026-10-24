@@ -4,6 +4,18 @@ from frappe import _
 from frappe.utils import cint, flt
 
 DEFAULTS = {
+    "require_funding_source": 0,
+    "require_project_for_project_funding": 1,
+    "auto_fetch_cost_center": 1,
+    "contract_beyond_funding_policy": "Require Justification",
+    "require_funding_exception_justification": 1,
+    "validate_recruitment_date_sequence": 1,
+    "require_shortlisting_deadline": 0,
+    "require_interview_start_date": 0,
+    "require_target_decision_date": 0,
+    "default_vacancy_scope": "Internal and External",
+    "require_recruitment_coordinator": 0,
+    "require_hiring_manager": 0,
     "default_screening_weight": 20,
     "default_assessment_weight": 80,
     "default_criterion_passing_score": 60,

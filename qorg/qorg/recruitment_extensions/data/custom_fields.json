@@ -62,11 +62,11 @@
   {
     "dt": "Job Opening",
     "fieldname": "qorg_recruitment_plan_tab",
-    "label": "Recruitment Plan",
-    "fieldtype": "Tab Break",
+    "label": "Screening and Assessment Plan",
+    "fieldtype": "Section Break",
     "module": "QOrg",
     "is_system_generated": 1,
-    "insert_after": "description"
+    "insert_after": "qorg_offer_issue_target_date"
   },
   {
     "dt": "Job Opening",
@@ -76,7 +76,8 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "options": "Project",
-    "insert_after": "qorg_recruitment_plan_tab"
+    "insert_after": "qorg_hiring_manager",
+    "in_standard_filter": 1
   },
   {
     "dt": "Job Opening",
@@ -86,7 +87,8 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "options": "Branch",
-    "insert_after": "qorg_recruitment_plan_tab"
+    "insert_after": "qorg_project",
+    "in_standard_filter": 1
   },
   {
     "dt": "Job Opening",
@@ -96,7 +98,8 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "default": "20",
-    "description": "Contribution of screening to the overall recruitment score."
+    "description": "Contribution of screening to the overall recruitment score.",
+    "insert_after": "qorg_recruitment_plan_tab"
   },
   {
     "dt": "Job Opening",
@@ -106,7 +109,8 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "default": "80",
-    "description": "Contribution of interviews, tests, and assessments. Screening and assessment weights must total 100%."
+    "description": "Contribution of interviews, tests, and assessments. Screening and assessment weights must total 100%.",
+    "insert_after": "qorg_plan_weights_cb"
   },
   {
     "dt": "Job Opening",
@@ -115,7 +119,8 @@
     "fieldtype": "Table",
     "module": "QOrg",
     "is_system_generated": 1,
-    "options": "Recruitment Screening Template Criterion"
+    "options": "Recruitment Screening Template Criterion",
+    "insert_after": "qorg_assessment_weight"
   },
   {
     "dt": "Job Opening",
@@ -124,7 +129,8 @@
     "fieldtype": "Table",
     "module": "QOrg",
     "is_system_generated": 1,
-    "options": "Recruitment Assessment Stage"
+    "options": "Recruitment Assessment Stage",
+    "insert_after": "qorg_screening_template"
   },
   {
     "dt": "Job Requisition",
@@ -134,7 +140,9 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "options": "Project",
-    "allow_on_submit": 1
+    "allow_on_submit": 1,
+    "insert_after": "qorg_funding_source",
+    "in_standard_filter": 1
   },
   {
     "dt": "Job Requisition",
@@ -144,7 +152,9 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "options": "Branch",
-    "allow_on_submit": 1
+    "allow_on_submit": 1,
+    "insert_after": "qorg_project",
+    "in_standard_filter": 1
   },
   {
     "dt": "Job Applicant",
@@ -154,7 +164,8 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "options": "Project",
-    "allow_on_submit": 1
+    "allow_on_submit": 1,
+    "insert_after": "qorg_job_opening"
   },
   {
     "dt": "Job Applicant",
@@ -164,7 +175,8 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "options": "Branch",
-    "allow_on_submit": 1
+    "allow_on_submit": 1,
+    "insert_after": "qorg_project"
   },
   {
     "dt": "Interview",
@@ -214,7 +226,8 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "options": "Project",
-    "allow_on_submit": 1
+    "allow_on_submit": 1,
+    "insert_after": "qorg_job_opening"
   },
   {
     "dt": "Job Offer",
@@ -224,7 +237,8 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "options": "Branch",
-    "allow_on_submit": 1
+    "allow_on_submit": 1,
+    "insert_after": "qorg_project"
   },
   {
     "dt": "Appointment Letter",
@@ -234,7 +248,8 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "options": "Project",
-    "allow_on_submit": 1
+    "allow_on_submit": 1,
+    "insert_after": "qorg_job_opening"
   },
   {
     "dt": "Appointment Letter",
@@ -244,7 +259,8 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "options": "Branch",
-    "allow_on_submit": 1
+    "allow_on_submit": 1,
+    "insert_after": "qorg_project"
   },
   {
     "dt": "Employee",
@@ -274,7 +290,8 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "options": "Project",
-    "allow_on_submit": 1
+    "allow_on_submit": 1,
+    "insert_after": "qorg_job_opening"
   },
   {
     "dt": "Employee Onboarding",
@@ -284,7 +301,8 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "options": "Branch",
-    "allow_on_submit": 1
+    "allow_on_submit": 1,
+    "insert_after": "qorg_project"
   },
   {
     "dt": "Job Applicant",
@@ -850,5 +868,1092 @@
     "is_system_generated": 1,
     "options": null,
     "allow_on_submit": 1
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_recruitment_context_section",
+    "label": "Position and Funding",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "job_description"
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_recruitment_need_type",
+    "label": "Recruitment Need Type",
+    "fieldtype": "Select",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "New Position\nReplacement\nTemporary Increase\nProject-based Position\nSeasonal Requirement\nEmergency Recruitment\nInternship / Trainee\nOther",
+    "insert_after": "qorg_recruitment_context_section",
+    "in_list_view": 1,
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_priority",
+    "label": "Priority",
+    "fieldtype": "Select",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Low\nMedium\nHigh\nUrgent",
+    "default": "Medium",
+    "insert_after": "qorg_recruitment_need_type",
+    "in_list_view": 1
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_replacement_employee",
+    "label": "Replacement Employee",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Employee",
+    "insert_after": "qorg_priority",
+    "depends_on": "eval:doc.qorg_recruitment_need_type==\"Replacement\""
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_context_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_replacement_employee"
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_funding_source",
+    "label": "Funding Source",
+    "fieldtype": "Select",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Internal Operating Budget\nProject Budget\nOrganizational Core Budget\nGrant / Donor Funding\nDepartment Budget\nCost Recovery\nShared Funding\nOther",
+    "insert_after": "qorg_context_cb",
+    "in_list_view": 1,
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_cost_center",
+    "label": "Cost Center",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Cost Center",
+    "insert_after": "qorg_branch"
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_contract_funding_section",
+    "label": "Contract and Funding Period",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_cost_center"
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_expected_contract_duration_months",
+    "label": "Expected Contract Duration (Months)",
+    "fieldtype": "Int",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_contract_funding_section"
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_funding_end_date",
+    "label": "Funding End Date",
+    "fieldtype": "Date",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_expected_contract_duration_months"
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_contract_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_funding_end_date"
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_expected_joining_date",
+    "label": "Expected Joining Date",
+    "fieldtype": "Date",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_contract_cb"
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_funding_exception_justification",
+    "label": "Funding Exception Justification",
+    "fieldtype": "Small Text",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_expected_joining_date",
+    "depends_on": "eval:doc.qorg_funding_end_date && doc.qorg_expected_joining_date && doc.qorg_expected_joining_date > doc.qorg_funding_end_date"
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_justification_section",
+    "label": "Business Justification",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_funding_exception_justification"
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_funding_details",
+    "label": "Funding Details",
+    "fieldtype": "Small Text",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_justification_section",
+    "depends_on": "eval:[\"Grant / Donor Funding\",\"Shared Funding\",\"Other\"].includes(doc.qorg_funding_source)"
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_recruitment_justification",
+    "label": "Recruitment Justification",
+    "fieldtype": "Small Text",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_funding_details"
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_unfilled_risk",
+    "label": "Risk if Position Is Not Filled",
+    "fieldtype": "Small Text",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_recruitment_justification"
+  },
+  {
+    "dt": "Job Requisition",
+    "fieldname": "qorg_approval_notes",
+    "label": "Additional Approval Notes",
+    "fieldtype": "Small Text",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_unfilled_risk"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_recruitment_details_section",
+    "label": "Recruitment Details",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "description"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_job_requisition",
+    "label": "Job Requisition",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Job Requisition",
+    "insert_after": "qorg_recruitment_details_section",
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_recruitment_need_type",
+    "label": "Recruitment Need Type",
+    "fieldtype": "Select",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "New Position\nReplacement\nTemporary Increase\nProject-based Position\nSeasonal Requirement\nEmergency Recruitment\nInternship / Trainee\nOther",
+    "insert_after": "qorg_job_requisition",
+    "read_only": 1
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_vacancy_scope",
+    "label": "Vacancy Scope",
+    "fieldtype": "Select",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Internal\nExternal\nInternal and External\nRestricted / Roster\nDirect Sourcing",
+    "default": "Internal and External",
+    "insert_after": "qorg_recruitment_need_type",
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_recruitment_details_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_vacancy_scope"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_recruitment_coordinator",
+    "label": "Recruitment Coordinator",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "User",
+    "insert_after": "qorg_recruitment_details_cb"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_hiring_manager",
+    "label": "Hiring Manager",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Employee",
+    "insert_after": "qorg_recruitment_coordinator"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_funding_section",
+    "label": "Funding and Duration",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_branch"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_funding_source",
+    "label": "Funding Source",
+    "fieldtype": "Select",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Internal Operating Budget\nProject Budget\nOrganizational Core Budget\nGrant / Donor Funding\nDepartment Budget\nCost Recovery\nShared Funding\nOther",
+    "insert_after": "qorg_funding_section",
+    "read_only_depends_on": "eval:doc.qorg_job_requisition",
+    "in_standard_filter": 1
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_cost_center",
+    "label": "Cost Center",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Cost Center",
+    "insert_after": "qorg_funding_source"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_expected_contract_duration_months",
+    "label": "Expected Contract Duration (Months)",
+    "fieldtype": "Int",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_cost_center"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_funding_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_expected_contract_duration_months"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_funding_end_date",
+    "label": "Funding End Date",
+    "fieldtype": "Date",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_funding_cb"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_expected_joining_date",
+    "label": "Expected Joining Date",
+    "fieldtype": "Date",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_funding_end_date"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_funding_details",
+    "label": "Funding Details",
+    "fieldtype": "Small Text",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_expected_joining_date",
+    "depends_on": "eval:[\"Grant / Donor Funding\",\"Shared Funding\",\"Other\"].includes(doc.qorg_funding_source)"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_funding_exception_justification",
+    "label": "Funding Exception Justification",
+    "fieldtype": "Small Text",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_funding_details"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_timeline_section",
+    "label": "Recruitment Timeline",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_funding_exception_justification"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_shortlisting_deadline",
+    "label": "Shortlisting Deadline",
+    "fieldtype": "Date",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_timeline_section"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_interview_start_date",
+    "label": "Expected Interview Start Date",
+    "fieldtype": "Date",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_shortlisting_deadline"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_target_decision_date",
+    "label": "Target Final Decision Date",
+    "fieldtype": "Date",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_interview_start_date"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_timeline_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_target_decision_date"
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_offer_issue_target_date",
+    "label": "Offer Issue Target Date",
+    "fieldtype": "Date",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_timeline_cb"
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_job_opening",
+    "label": "Job Opening",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Job Opening",
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_screening_selection_tab"
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_cost_center",
+    "label": "Cost Center",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Cost Center",
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_branch"
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_funding_source",
+    "label": "Funding Source",
+    "fieldtype": "Select",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Internal Operating Budget\nProject Budget\nOrganizational Core Budget\nGrant / Donor Funding\nDepartment Budget\nCost Recovery\nShared Funding\nOther",
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_cost_center"
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_funding_end_date",
+    "label": "Funding End Date",
+    "fieldtype": "Date",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": null,
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_funding_source"
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_expected_contract_duration_months",
+    "label": "Expected Contract Duration (Months)",
+    "fieldtype": "Int",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": null,
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_funding_end_date"
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_expected_joining_date",
+    "label": "Expected Joining Date",
+    "fieldtype": "Date",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": null,
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_expected_contract_duration_months"
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_job_opening",
+    "label": "Job Opening",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Job Opening",
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_response_status"
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_cost_center",
+    "label": "Cost Center",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Cost Center",
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_branch"
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_funding_source",
+    "label": "Funding Source",
+    "fieldtype": "Select",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Internal Operating Budget\nProject Budget\nOrganizational Core Budget\nGrant / Donor Funding\nDepartment Budget\nCost Recovery\nShared Funding\nOther",
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_cost_center"
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_funding_end_date",
+    "label": "Funding End Date",
+    "fieldtype": "Date",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": null,
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_funding_source"
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_expected_contract_duration_months",
+    "label": "Expected Contract Duration (Months)",
+    "fieldtype": "Int",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": null,
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_funding_end_date"
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_expected_joining_date",
+    "label": "Expected Joining Date",
+    "fieldtype": "Date",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": null,
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_expected_contract_duration_months"
+  },
+  {
+    "dt": "Appointment Letter",
+    "fieldname": "qorg_job_opening",
+    "label": "Job Opening",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Job Opening",
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_job_offer"
+  },
+  {
+    "dt": "Appointment Letter",
+    "fieldname": "qorg_cost_center",
+    "label": "Cost Center",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Cost Center",
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_branch"
+  },
+  {
+    "dt": "Appointment Letter",
+    "fieldname": "qorg_funding_source",
+    "label": "Funding Source",
+    "fieldtype": "Select",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Internal Operating Budget\nProject Budget\nOrganizational Core Budget\nGrant / Donor Funding\nDepartment Budget\nCost Recovery\nShared Funding\nOther",
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_cost_center"
+  },
+  {
+    "dt": "Appointment Letter",
+    "fieldname": "qorg_funding_end_date",
+    "label": "Funding End Date",
+    "fieldtype": "Date",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": null,
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_funding_source"
+  },
+  {
+    "dt": "Appointment Letter",
+    "fieldname": "qorg_expected_contract_duration_months",
+    "label": "Expected Contract Duration (Months)",
+    "fieldtype": "Int",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": null,
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_funding_end_date"
+  },
+  {
+    "dt": "Appointment Letter",
+    "fieldname": "qorg_expected_joining_date",
+    "label": "Expected Joining Date",
+    "fieldtype": "Date",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": null,
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_expected_contract_duration_months"
+  },
+  {
+    "dt": "Employee Onboarding",
+    "fieldname": "qorg_job_opening",
+    "label": "Job Opening",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Job Opening",
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_job_offer"
+  },
+  {
+    "dt": "Employee Onboarding",
+    "fieldname": "qorg_cost_center",
+    "label": "Cost Center",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Cost Center",
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_branch"
+  },
+  {
+    "dt": "Employee Onboarding",
+    "fieldname": "qorg_funding_source",
+    "label": "Funding Source",
+    "fieldtype": "Select",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Internal Operating Budget\nProject Budget\nOrganizational Core Budget\nGrant / Donor Funding\nDepartment Budget\nCost Recovery\nShared Funding\nOther",
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_cost_center"
+  },
+  {
+    "dt": "Employee Onboarding",
+    "fieldname": "qorg_funding_end_date",
+    "label": "Funding End Date",
+    "fieldtype": "Date",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": null,
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_funding_source"
+  },
+  {
+    "dt": "Employee Onboarding",
+    "fieldname": "qorg_expected_contract_duration_months",
+    "label": "Expected Contract Duration (Months)",
+    "fieldtype": "Int",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": null,
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_funding_end_date"
+  },
+  {
+    "dt": "Employee Onboarding",
+    "fieldname": "qorg_expected_joining_date",
+    "label": "Expected Joining Date",
+    "fieldtype": "Date",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": null,
+    "allow_on_submit": 1,
+    "read_only": 1,
+    "insert_after": "qorg_expected_contract_duration_months"
+  },
+  {
+    "dt": "Employee",
+    "fieldname": "qorg_appointment_letter",
+    "label": "Appointment Letter",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Appointment Letter",
+    "read_only": 1
+  },
+  {
+    "dt": "Employee",
+    "fieldname": "qorg_work_commencement_notice",
+    "label": "Work Commencement Notice",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Work Commencement Notice",
+    "read_only": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_recruitment_financial_controls_section",
+    "label": "Funding and Contract Controls",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_allow_assigned_user_reopen",
+    "idx": 980
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_require_funding_source",
+    "label": "Require Funding Source",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "0",
+    "insert_after": "qorg_recruitment_financial_controls_section",
+    "idx": 981
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_require_project_for_project_funding",
+    "label": "Require Project for Project-funded Positions",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1",
+    "insert_after": "qorg_require_funding_source",
+    "idx": 982
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_auto_fetch_cost_center",
+    "label": "Auto-fetch Cost Center from Project",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1",
+    "insert_after": "qorg_require_project_for_project_funding",
+    "idx": 983
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_financial_controls_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_auto_fetch_cost_center",
+    "idx": 984
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_contract_beyond_funding_policy",
+    "label": "Contract Beyond Funding End Policy",
+    "fieldtype": "Select",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Allow\nWarn\nRequire Justification\nPrevent",
+    "default": "Require Justification",
+    "insert_after": "qorg_financial_controls_cb",
+    "idx": 985
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_require_funding_exception_justification",
+    "label": "Require Funding Exception Justification",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1",
+    "insert_after": "qorg_contract_beyond_funding_policy",
+    "idx": 986
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_recruitment_timeline_controls_section",
+    "label": "Recruitment Timeline Controls",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_require_funding_exception_justification",
+    "idx": 987
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_validate_recruitment_date_sequence",
+    "label": "Validate Recruitment Date Sequence",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1",
+    "insert_after": "qorg_recruitment_timeline_controls_section",
+    "idx": 988
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_require_shortlisting_deadline",
+    "label": "Require Shortlisting Deadline",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "0",
+    "insert_after": "qorg_validate_recruitment_date_sequence",
+    "idx": 989
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_require_interview_start_date",
+    "label": "Require Interview Start Date",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "0",
+    "insert_after": "qorg_require_shortlisting_deadline",
+    "idx": 990
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_timeline_controls_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_require_interview_start_date",
+    "idx": 991
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_require_target_decision_date",
+    "label": "Require Target Decision Date",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "0",
+    "insert_after": "qorg_timeline_controls_cb",
+    "idx": 992
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_default_vacancy_scope",
+    "label": "Default Vacancy Scope",
+    "fieldtype": "Select",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Internal\nExternal\nInternal and External\nRestricted / Roster\nDirect Sourcing",
+    "default": "Internal and External",
+    "insert_after": "qorg_require_target_decision_date",
+    "idx": 993
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_require_recruitment_coordinator",
+    "label": "Require Recruitment Coordinator",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "0",
+    "insert_after": "qorg_default_vacancy_scope",
+    "idx": 994
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_require_hiring_manager",
+    "label": "Require Hiring Manager",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "0",
+    "insert_after": "qorg_require_recruitment_coordinator",
+    "idx": 995
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_plan_weights_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_screening_weight"
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_job_opening",
+    "label": "Job Opening",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Job Opening",
+    "read_only": 1,
+    "allow_on_submit": 1,
+    "insert_after": "qorg_branch"
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_stage_sequence",
+    "label": "Stage Sequence",
+    "fieldtype": "Int",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "read_only": 1,
+    "allow_on_submit": 1,
+    "insert_after": "qorg_job_opening"
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_stage_name",
+    "label": "Stage Name",
+    "fieldtype": "Data",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "read_only": 1,
+    "allow_on_submit": 1,
+    "insert_after": "qorg_stage_sequence"
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_stage_weight",
+    "label": "Stage Weight %",
+    "fieldtype": "Percent",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "read_only": 1,
+    "allow_on_submit": 1,
+    "insert_after": "qorg_stage_name"
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_passing_score",
+    "label": "Passing Score %",
+    "fieldtype": "Percent",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "read_only": 1,
+    "allow_on_submit": 1,
+    "insert_after": "qorg_stage_weight"
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_is_mandatory_stage",
+    "label": "Mandatory Stage",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "read_only": 1,
+    "allow_on_submit": 1,
+    "insert_after": "qorg_passing_score"
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_allow_retry",
+    "label": "Allow Retry",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "read_only": 1,
+    "allow_on_submit": 1,
+    "insert_after": "qorg_is_mandatory_stage"
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_retry_requires_approval",
+    "label": "Retry Requires Approval",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "read_only": 1,
+    "allow_on_submit": 1,
+    "insert_after": "qorg_allow_retry"
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_retry_approval_role",
+    "label": "Retry Approval Role",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Role",
+    "read_only": 1,
+    "allow_on_submit": 1,
+    "insert_after": "qorg_retry_requires_approval"
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_attempt_number",
+    "label": "Attempt Number",
+    "fieldtype": "Int",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1",
+    "read_only": 1,
+    "allow_on_submit": 1,
+    "in_list_view": 1,
+    "insert_after": "qorg_retry_approval_role"
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_previous_interview",
+    "label": "Previous Interview",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "Interview",
+    "read_only": 1,
+    "allow_on_submit": 1,
+    "insert_after": "qorg_attempt_number"
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_retry_approved_by",
+    "label": "Retry Approved By",
+    "fieldtype": "Link",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "options": "User",
+    "read_only": 1,
+    "allow_on_submit": 1,
+    "insert_after": "qorg_previous_interview"
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_retry_approved_on",
+    "label": "Retry Approved On",
+    "fieldtype": "Datetime",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "read_only": 1,
+    "allow_on_submit": 1,
+    "insert_after": "qorg_retry_approved_by"
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_retry_reason",
+    "label": "Retry Reason",
+    "fieldtype": "Small Text",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "allow_on_submit": 1,
+    "insert_after": "qorg_retry_approved_on"
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_maximum_attempts",
+    "label": "Maximum Attempts",
+    "fieldtype": "Int",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "1",
+    "read_only": 1,
+    "allow_on_submit": 1,
+    "insert_after": "qorg_retry_reason"
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_effective_stage_score",
+    "label": "Effective Assessment Stage Score %",
+    "fieldtype": "Percent",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "read_only": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_rank",
+    "label": "Current Rank",
+    "fieldtype": "Int",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "read_only": 1,
+    "in_list_view": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_last_notification_type",
+    "label": "Last Notification Type",
+    "fieldtype": "Data",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "read_only": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_last_notification_on",
+    "label": "Last Notification On",
+    "fieldtype": "Datetime",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "read_only": 1
   }
 ]

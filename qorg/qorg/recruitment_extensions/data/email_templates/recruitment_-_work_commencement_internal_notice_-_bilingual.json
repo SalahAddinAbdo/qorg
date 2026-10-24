@@ -1,0 +1,7 @@
+{
+  "doctype": "Email Template",
+  "name": "Recruitment - Work Commencement Internal Notice - Bilingual",
+  "subject": "Work commencement notice | إشعار مباشرة العمل",
+  "use_html": 1,
+  "response_html": "<div style=\"font-family:Arial,sans-serif\"><div dir=\"rtl\"><strong>Internal Stakeholder Notice</strong><br>يرجى مراجعة تفاصيل المستند والرد على الرسالة عند طلب التأكيد.</div><hr><div dir=\"ltr\"><strong>Internal Stakeholder Notice</strong><br>Please review the document details and reply when acknowledgement is requested.</div></div>"
+}

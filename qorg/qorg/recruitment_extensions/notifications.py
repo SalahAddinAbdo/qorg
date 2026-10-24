@@ -52,3 +52,24 @@ def send_recruitment_message(template,reference_doctype,reference_name,primary_r
     doc=frappe.get_doc(reference_doctype,reference_name);et=frappe.get_doc("Email Template",template);ctx=doc.as_dict();ctx.update(company_branding(doc.get("company")));ctx["recipient_confirmation_required"]=preview["requires_confirmation"]
     frappe.sendmail(recipients=preview["recipients"],subject=frappe.render_template(et.subject,ctx),message=frappe.render_template(et.response_html or et.response,ctx),reference_doctype=reference_doctype,reference_name=reference_name,reply_to=preview["reply_to"],now=True)
     return preview
+
+
+
+def send_managed_recruitment_message(notification_type,template,reference_doctype,reference_name,primary_recipient=None,cc_json=None,users_json=None,force=0):
+    import hashlib
+    preview=preview_recruitment_message(template,reference_doctype,reference_name,primary_recipient,cc_json,users_json,None)
+    recipient_key=",".join(sorted(preview["recipients"]));raw=f"{notification_type}|{reference_doctype}|{reference_name}|{template}|{recipient_key}"
+    key=hashlib.sha256(raw.encode()).hexdigest()
+    existing=frappe.db.get_value("Recruitment Notification Log",{"deduplication_key":key,"delivery_status":"Sent"},"name")
+    if existing and not int(force or 0):frappe.throw(_("This notification was already sent. Log: {0}").format(existing))
+    doc=frappe.get_doc(reference_doctype,reference_name);et=frappe.get_doc("Email Template",template);ctx=doc.as_dict();ctx.update(company_branding(doc.get("company")));ctx["recipient_confirmation_required"]=preview["requires_confirmation"]
+    subject=frappe.render_template(et.subject,ctx);message=frappe.render_template(et.response_html or et.response,ctx)
+    log=frappe.get_doc({"doctype":"Recruitment Notification Log","notification_type":notification_type,"reference_doctype":reference_doctype,"reference_name":reference_name,"template":template,"recipients":"\n".join(preview["recipients"]),"subject":subject,"sent_by":frappe.session.user,"sent_on":frappe.utils.now_datetime(),"delivery_status":"Queued","acknowledgement_required":preview["requires_confirmation"],"deduplication_key":key})
+    log.insert(ignore_permissions=True)
+    try:
+        frappe.sendmail(recipients=preview["recipients"],subject=subject,message=message,reference_doctype=reference_doctype,reference_name=reference_name,reply_to=preview["reply_to"],now=True)
+        frappe.db.set_value("Recruitment Notification Log",log.name,"delivery_status","Sent",update_modified=False)
+        if reference_doctype=="Job Applicant":frappe.db.set_value("Job Applicant",reference_name,{"qorg_last_notification_type":notification_type,"qorg_last_notification_on":frappe.utils.now_datetime()},update_modified=False)
+    except Exception:
+        frappe.db.set_value("Recruitment Notification Log",log.name,{"delivery_status":"Failed","error_message":frappe.get_traceback()},update_modified=False);raise
+    return {"log":log.name,"recipients":preview["recipients"],"requires_confirmation":preview["requires_confirmation"]}

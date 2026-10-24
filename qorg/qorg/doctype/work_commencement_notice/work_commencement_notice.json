@@ -1,0 +1,319 @@
+{
+  "doctype": "DocType",
+  "name": "Work Commencement Notice",
+  "module": "QOrg",
+  "custom": 0,
+  "is_submittable": 1,
+  "track_changes": 1,
+  "autoname": "naming_series:",
+  "title_field": "employee",
+  "search_fields": "employee,appointment_letter,status,actual_commencement_date",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "field_order": [
+    "naming_series",
+    "source_section",
+    "appointment_letter",
+    "job_offer",
+    "job_applicant",
+    "source_cb",
+    "employee",
+    "company",
+    "status",
+    "assignment_section",
+    "designation",
+    "department",
+    "reports_to",
+    "assignment_cb",
+    "branch",
+    "project",
+    "cost_center",
+    "commencement_section",
+    "expected_joining_date",
+    "actual_commencement_date",
+    "work_location",
+    "commencement_cb",
+    "payroll_effective_date",
+    "attendance_effective_date",
+    "onboarding",
+    "confirmation_section",
+    "supervisor_confirmed_by",
+    "supervisor_confirmation_date",
+    "hr_verified_by",
+    "confirmation_cb",
+    "hr_verification_date",
+    "finance_notified",
+    "it_notified",
+    "administration_notified",
+    "notes_section",
+    "commencement_remarks",
+    "delay_no_show_reason",
+    "internal_notification_message"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Series",
+      "fieldtype": "Select",
+      "options": "WCN-.YYYY.-.#####",
+      "default": "WCN-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "source_section",
+      "label": "Source and Employee",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "appointment_letter",
+      "label": "Appointment Letter",
+      "fieldtype": "Link",
+      "options": "Appointment Letter",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "job_offer",
+      "label": "Job Offer",
+      "fieldtype": "Link",
+      "options": "Job Offer",
+      "read_only": 1
+    },
+    {
+      "fieldname": "job_applicant",
+      "label": "Job Applicant",
+      "fieldtype": "Link",
+      "options": "Job Applicant",
+      "read_only": 1
+    },
+    {
+      "fieldname": "source_cb",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "employee",
+      "label": "Employee",
+      "fieldtype": "Link",
+      "options": "Employee",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Commencement Status",
+      "fieldtype": "Select",
+      "options": "Planned\nAwaiting Confirmation\nCommenced\nDeferred\nNo Show\nCancelled",
+      "default": "Planned",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "assignment_section",
+      "label": "Position and Assignment",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "designation",
+      "label": "Designation",
+      "fieldtype": "Link",
+      "options": "Designation",
+      "read_only": 1
+    },
+    {
+      "fieldname": "department",
+      "label": "Department",
+      "fieldtype": "Link",
+      "options": "Department",
+      "read_only": 1
+    },
+    {
+      "fieldname": "reports_to",
+      "label": "Reports To",
+      "fieldtype": "Link",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "assignment_cb",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "branch",
+      "label": "Branch",
+      "fieldtype": "Link",
+      "options": "Branch"
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project"
+    },
+    {
+      "fieldname": "cost_center",
+      "label": "Cost Center",
+      "fieldtype": "Link",
+      "options": "Cost Center"
+    },
+    {
+      "fieldname": "commencement_section",
+      "label": "Commencement Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "expected_joining_date",
+      "label": "Expected Joining Date",
+      "fieldtype": "Date",
+      "read_only": 1
+    },
+    {
+      "fieldname": "actual_commencement_date",
+      "label": "Actual Commencement Date",
+      "fieldtype": "Date",
+      "depends_on": "eval:doc.status==\"Commenced\""
+    },
+    {
+      "fieldname": "work_location",
+      "label": "Work Location",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "commencement_cb",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "payroll_effective_date",
+      "label": "Payroll Effective Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "attendance_effective_date",
+      "label": "Attendance Effective Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "onboarding",
+      "label": "Employee Onboarding",
+      "fieldtype": "Link",
+      "options": "Employee Onboarding",
+      "read_only": 1
+    },
+    {
+      "fieldname": "confirmation_section",
+      "label": "Confirmation and Notifications",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "supervisor_confirmed_by",
+      "label": "Supervisor Confirmed By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "supervisor_confirmation_date",
+      "label": "Supervisor Confirmation Date",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "hr_verified_by",
+      "label": "HR Verified By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "confirmation_cb",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "hr_verification_date",
+      "label": "HR Verification Date",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "finance_notified",
+      "label": "Finance Notified",
+      "fieldtype": "Check",
+      "read_only": 1
+    },
+    {
+      "fieldname": "it_notified",
+      "label": "IT Notified",
+      "fieldtype": "Check",
+      "read_only": 1
+    },
+    {
+      "fieldname": "administration_notified",
+      "label": "Administration Notified",
+      "fieldtype": "Check",
+      "read_only": 1
+    },
+    {
+      "fieldname": "notes_section",
+      "label": "Remarks",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "commencement_remarks",
+      "label": "Commencement Remarks",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "delay_no_show_reason",
+      "label": "Delay / No-show Reason",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:[\"Deferred\",\"No Show\"].includes(doc.status)"
+    },
+    {
+      "fieldname": "internal_notification_message",
+      "label": "Internal Notification Message",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "HR User",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "print": 1,
+      "email": 1
+    },
+    {
+      "role": "HR Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "delete": 1,
+      "print": 1,
+      "email": 1
+    },
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "delete": 1,
+      "print": 1,
+      "email": 1
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 from __future__ import annotations
 import frappe
 from frappe import _
-from frappe.utils import flt, cint, now_datetime, today
+from frappe.utils import getdate, flt, cint, now_datetime, today
 from .constants import FINAL_DECISIONS, ACTIVE_SELECTION_DECISIONS, TERMINAL_OFFER_RESPONSES
 
 
@@ -142,3 +142,133 @@ def next_offer_candidate(job_opening):
     return rows[0].name if rows else None
 
 def propagate_context(source, target): copy_context(source,target)
+
+
+RECRUITMENT_CONTEXT_FIELDS = (
+    "qorg_job_opening", "qorg_project", "qorg_branch", "qorg_cost_center",
+    "qorg_funding_source", "qorg_funding_end_date",
+    "qorg_expected_contract_duration_months", "qorg_expected_joining_date",
+)
+
+def copy_recruitment_context(source, target):
+    for field in RECRUITMENT_CONTEXT_FIELDS:
+        if target.meta.has_field(field) and source.meta.has_field(field) and not target.get(field) and source.get(field) not in (None, ""):
+            target.set(field, source.get(field))
+
+def validate_funding_and_timeline(doc):
+    from .settings import get_settings
+    settings = get_settings()
+    source = doc.get("qorg_funding_source")
+    if getattr(settings, "require_funding_source", 0) and not source:
+        frappe.throw(_("Funding Source is required."))
+    if source == "Project Budget" and getattr(settings, "require_project_for_project_funding", 1) and not doc.get("qorg_project"):
+        frappe.throw(_("Project is required for project-funded positions."))
+    if source in {"Grant / Donor Funding", "Shared Funding", "Other"} and not (doc.get("qorg_funding_details") or "").strip():
+        frappe.throw(_("Funding Details are required for the selected Funding Source."))
+    if doc.get("qorg_expected_joining_date") and doc.get("qorg_funding_end_date") and getdate(doc.qorg_expected_joining_date) > getdate(doc.qorg_funding_end_date):
+        policy = getattr(settings, "contract_beyond_funding_policy", "Require Justification")
+        justified = bool((doc.get("qorg_funding_exception_justification") or "").strip())
+        if policy == "Prevent": frappe.throw(_("Expected Joining Date cannot be after the Funding End Date."))
+        if policy == "Require Justification" and not justified: frappe.throw(_("Funding Exception Justification is required because the planned employment period exceeds the funding period."))
+        if policy == "Warn": frappe.msgprint(_("The planned employment period exceeds the funding period."), indicator="orange")
+
+def validate_recruitment_timeline(doc):
+    from .settings import get_settings
+    settings=get_settings()
+    required=(("qorg_shortlisting_deadline","require_shortlisting_deadline"),("qorg_interview_start_date","require_interview_start_date"),("qorg_target_decision_date","require_target_decision_date"))
+    for field,setting in required:
+        if getattr(settings,setting,0) and not doc.get(field): frappe.throw(_("{0} is required.").format(doc.meta.get_label(field)))
+    if not getattr(settings,"validate_recruitment_date_sequence",1): return
+    sequence=[]
+    for field in ("closes_on","qorg_shortlisting_deadline","qorg_interview_start_date","qorg_target_decision_date","qorg_offer_issue_target_date","qorg_expected_joining_date"):
+        if doc.meta.has_field(field) and doc.get(field): sequence.append((field,getdate(doc.get(field))))
+    for previous,current in zip(sequence,sequence[1:]):
+        if current[1] < previous[1]: frappe.throw(_("{0} cannot be earlier than {1}.").format(doc.meta.get_label(current[0]),doc.meta.get_label(previous[0])))
+
+def sync_opening_from_requisition(doc):
+    if not doc.get("qorg_job_requisition") or not frappe.db.exists("Job Requisition",doc.qorg_job_requisition): return
+    req=frappe.get_doc("Job Requisition",doc.qorg_job_requisition)
+    mapping=("qorg_recruitment_need_type","qorg_project","qorg_branch","qorg_cost_center","qorg_funding_source","qorg_funding_end_date","qorg_expected_contract_duration_months","qorg_expected_joining_date","qorg_funding_details","qorg_funding_exception_justification")
+    for field in mapping:
+        if doc.meta.has_field(field) and not doc.get(field) and req.get(field) not in (None,""): doc.set(field,req.get(field))
+
+def validate_job_requisition_extension(doc):
+    validate_funding_and_timeline(doc)
+
+def validate_job_opening_extension(doc):
+    from .settings import get_settings
+    sync_opening_from_requisition(doc); settings=get_settings()
+    if not doc.get("qorg_vacancy_scope"): doc.qorg_vacancy_scope=getattr(settings,"default_vacancy_scope","Internal and External")
+    if getattr(settings,"require_recruitment_coordinator",0) and not doc.get("qorg_recruitment_coordinator"): frappe.throw(_("Recruitment Coordinator is required."))
+    if getattr(settings,"require_hiring_manager",0) and not doc.get("qorg_hiring_manager"): frappe.throw(_("Hiring Manager is required."))
+    validate_funding_and_timeline(doc); validate_recruitment_timeline(doc)
+
+
+def _opening_for_applicant(applicant):
+    return applicant.get("qorg_job_opening") or applicant.get("job_title") or applicant.get("job_opening")
+
+def _assessment_plan(opening_name):
+    if not opening_name or not frappe.db.exists("Job Opening", opening_name): return []
+    return frappe.get_all("Recruitment Assessment Stage", filters={"parent":opening_name,"parenttype":"Job Opening","parentfield":"qorg_assessment_plan"}, fields=["name","sequence","stage_name","assessment_type","interview_type","weight","passing_score","is_mandatory","default_mode","duration_minutes","allow_retry","maximum_attempts","retry_requires_approval","retry_approval_role","retry_instructions"], order_by="sequence asc, idx asc")
+
+def configure_interview(doc):
+    if not doc.get("job_applicant"): return
+    applicant=frappe.get_doc("Job Applicant",doc.job_applicant); copy_context(applicant,doc)
+    opening=_opening_for_applicant(applicant); _set_if_empty(doc,"qorg_job_opening",opening)
+    plan=_assessment_plan(opening)
+    stage=None
+    if doc.get("qorg_stage_sequence"): stage=next((r for r in plan if cint(r.sequence)==cint(doc.qorg_stage_sequence)),None)
+    if not stage:
+        itype=doc.get("interview_type") or doc.get("interview_round")
+        matches=[r for r in plan if r.interview_type==itype]
+        if len(matches)==1:stage=matches[0]
+    if not stage:return
+    mapping={"qorg_stage_sequence":stage.sequence,"qorg_stage_name":stage.stage_name,"qorg_stage_weight":stage.weight,"qorg_passing_score":stage.passing_score,"qorg_is_mandatory_stage":stage.is_mandatory,"qorg_interview_mode":stage.default_mode,"qorg_duration_minutes":stage.duration_minutes,"qorg_allow_retry":stage.allow_retry,"qorg_maximum_attempts":max(cint(stage.maximum_attempts),1),"qorg_retry_requires_approval":stage.retry_requires_approval,"qorg_retry_approval_role":stage.retry_approval_role}
+    for field,value in mapping.items():_set_if_empty(doc,field,value)
+    if not doc.get("qorg_attempt_number"):doc.qorg_attempt_number=1
+
+def _stage_attempts(applicant_name, opening_name, stage):
+    filters={"job_applicant":applicant_name,"qorg_job_opening":opening_name,"qorg_stage_sequence":stage.sequence}
+    fields=["name","qorg_attempt_number","qorg_panel_completion_status","qorg_assessment_result","qorg_final_score","status","modified"]
+    return frappe.get_all("Interview",filters=filters,fields=fields,order_by="qorg_attempt_number asc, creation asc")
+
+def stage_progress(applicant_name):
+    applicant=frappe.get_doc("Job Applicant",applicant_name);opening=_opening_for_applicant(applicant);plan=_assessment_plan(opening)
+    progress=[]
+    for stage in plan:
+        attempts=[r for r in _stage_attempts(applicant_name,opening,stage) if r.status not in {"Cancelled","Canceled"}]
+        effective=attempts[-1] if attempts else None
+        progress.append(frappe._dict({"stage":stage,"attempts":attempts,"effective":effective,"completed":bool(effective and effective.qorg_panel_completion_status=="Complete"),"passed":bool(effective and effective.qorg_assessment_result=="Passed"),"failed":bool(effective and effective.qorg_assessment_result=="Failed"),"attempts_used":len(attempts),"attempts_allowed":max(cint(stage.maximum_attempts),1)}))
+    return opening,progress
+
+def recalculate_applicant(applicant_name):
+    doc=frappe.get_doc("Job Applicant",applicant_name);opening,progress=stage_progress(applicant_name)
+    screening=flt(doc.get("qorg_screening_score"));sw=flt(frappe.db.get_value("Job Opening",opening,"qorg_screening_weight") or 20) if opening else 20;aw=flt(frappe.db.get_value("Job Opening",opening,"qorg_assessment_weight") or 80) if opening else 80
+    completed=[p for p in progress if p.completed];failed=[p for p in completed if p.failed and cint(p.stage.is_mandatory)];completed_weight=sum(flt(p.stage.weight) for p in completed)
+    assessment=flt(sum(flt(p.effective.qorg_final_score)*flt(p.stage.weight) for p in completed)/completed_weight,2) if completed_weight else 0
+    overall=flt(screening*sw/100+assessment*aw/100,2)
+    values={"qorg_assessment_score":assessment,"qorg_effective_stage_score":assessment,"qorg_overall_score":overall,"qorg_required_stages":len(progress),"qorg_completed_stages":len(completed),"qorg_failed_stages":len(failed),"qorg_remaining_stages":max(len(progress)-len(completed),0),"qorg_completed_stage_weight":completed_weight}
+    frappe.db.set_value("Job Applicant",applicant_name,values,update_modified=False);recalculate_ranking(opening);return values
+
+def recalculate_ranking(opening_name):
+    if not opening_name:return []
+    fields=["name","qorg_overall_score","qorg_final_decision","qorg_selection_status"]
+    candidates=frappe.get_all("Job Applicant",filters={"qorg_job_opening":opening_name},fields=fields,order_by="qorg_overall_score desc, creation asc") if frappe.get_meta("Job Applicant").has_field("qorg_job_opening") else frappe.get_all("Job Applicant",filters={"job_title":opening_name},fields=fields,order_by="qorg_overall_score desc, creation asc")
+    rank=0
+    for row in candidates:
+        if row.qorg_final_decision in {"Withdrawn","Disqualified","Cancelled"}:continue
+        rank+=1;frappe.db.set_value("Job Applicant",row.name,"qorg_rank",rank,update_modified=False)
+    return candidates
+
+def retry_eligibility(interview_name,user=None):
+    interview=frappe.get_doc("Interview",interview_name);user=user or frappe.session.user
+    if interview.get("qorg_panel_completion_status")!="Complete" or interview.get("qorg_assessment_result")!="Failed":return {"allowed":False,"reason":_("Only a completed failed interview can be retried.")}
+    if not cint(interview.get("qorg_allow_retry")):return {"allowed":False,"reason":_("Retry is disabled for this assessment stage.")}
+    maximum=max(cint(interview.get("qorg_maximum_attempts")),1); current=max(cint(interview.get("qorg_attempt_number")),1)
+    if current>=maximum:return {"allowed":False,"reason":_("Maximum attempts have been reached.")}
+    existing=frappe.db.get_value("Interview",{"qorg_previous_interview":interview.name,"status":["not in",["Cancelled","Canceled"]]},"name")
+    if existing:return {"allowed":True,"existing":existing,"reason":_("A retry interview already exists.")}
+    if cint(interview.get("qorg_retry_requires_approval")):
+        role=interview.get("qorg_retry_approval_role") or "HR Manager"
+        if role not in frappe.get_roles(user) and user!="Administrator":return {"allowed":False,"reason":_("Retry approval requires role {0}.").format(role)}
+    return {"allowed":True,"existing":None,"reason":""}

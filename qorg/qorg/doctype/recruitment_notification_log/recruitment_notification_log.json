@@ -1,0 +1,154 @@
+{
+  "doctype": "DocType",
+  "name": "Recruitment Notification Log",
+  "module": "QOrg",
+  "custom": 0,
+  "track_changes": 1,
+  "autoname": "hash",
+  "title_field": "notification_type",
+  "search_fields": "reference_name,recipients,subject",
+  "field_order": [
+    "notification_type",
+    "reference_doctype",
+    "reference_name",
+    "template",
+    "recipients",
+    "cc",
+    "additional_users",
+    "subject",
+    "sent_by",
+    "sent_on",
+    "delivery_status",
+    "acknowledgement_required",
+    "acknowledged_by",
+    "acknowledged_on",
+    "error_message",
+    "deduplication_key"
+  ],
+  "fields": [
+    {
+      "fieldname": "notification_type",
+      "label": "Notification Type",
+      "fieldtype": "Select",
+      "options": "Interview Invitation\nInterview Rescheduled\nMissing Feedback Request\nReserve Notice\nApplication Not Selected\nJob Offer\nAppointment Letter\nCommencement Planned\nCommencement Confirmed\nInternal Stakeholder Notice",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "reference_doctype",
+      "label": "Reference DocType",
+      "fieldtype": "Link",
+      "options": "DocType",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "reference_name",
+      "label": "Reference Name",
+      "fieldtype": "Dynamic Link",
+      "options": "reference_doctype",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "template",
+      "label": "Email Template",
+      "fieldtype": "Link",
+      "options": "Email Template"
+    },
+    {
+      "fieldname": "recipients",
+      "label": "Recipients",
+      "fieldtype": "Small Text",
+      "reqd": 1
+    },
+    {
+      "fieldname": "cc",
+      "label": "CC",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "additional_users",
+      "label": "Additional Users",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "subject",
+      "label": "Subject",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "sent_by",
+      "label": "Sent By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "sent_on",
+      "label": "Sent On",
+      "fieldtype": "Datetime",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "delivery_status",
+      "label": "Delivery Status",
+      "fieldtype": "Select",
+      "options": "Queued\nSent\nFailed",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "acknowledgement_required",
+      "label": "Acknowledgement Required",
+      "fieldtype": "Check",
+      "read_only": 1
+    },
+    {
+      "fieldname": "acknowledged_by",
+      "label": "Acknowledged By",
+      "fieldtype": "Data",
+      "read_only": 1
+    },
+    {
+      "fieldname": "acknowledged_on",
+      "label": "Acknowledged On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "error_message",
+      "label": "Error Message",
+      "fieldtype": "Small Text",
+      "read_only": 1
+    },
+    {
+      "fieldname": "deduplication_key",
+      "label": "Deduplication Key",
+      "fieldtype": "Data",
+      "unique": 1,
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "HR User",
+      "read": 1,
+      "print": 1
+    },
+    {
+      "role": "HR Manager",
+      "read": 1,
+      "print": 1,
+      "export": 1
+    },
+    {
+      "role": "System Manager",
+      "read": 1,
+      "print": 1,
+      "export": 1
+    }
+  ]
+}

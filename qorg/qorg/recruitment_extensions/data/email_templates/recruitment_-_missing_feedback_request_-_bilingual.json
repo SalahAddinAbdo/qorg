@@ -1,0 +1,7 @@
+{
+  "doctype": "Email Template",
+  "name": "Recruitment - Missing Feedback Request - Bilingual",
+  "subject": "Interview feedback required | مطلوب تقييم المقابلة",
+  "use_html": 1,
+  "response_html": "<div style=\"font-family:Arial,sans-serif\"><div dir=\"rtl\"><strong>Missing Feedback Request</strong><br>يرجى مراجعة تفاصيل المستند والرد على الرسالة عند طلب التأكيد.</div><hr><div dir=\"ltr\"><strong>Missing Feedback Request</strong><br>Please review the document details and reply when acknowledgement is requested.</div></div>"
+}
