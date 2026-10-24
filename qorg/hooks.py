@@ -42,10 +42,6 @@ extend_doctype_class = {
 }
 
 doctype_js = {
-    "Interview": "public/js/interview_recruitment.js",
-    "Work Commencement Notice": "public/js/work_commencement_notice.js",
-    "Job Opening": "public/js/job_opening_recruitment.js",
-    "Job Requisition": "public/js/job_requisition_recruitment.js",
     "HR Settings": "public/js/hr_settings_recruitment.js",
     "Designation": "public/js/designation_recruitment.js",
     "Interview Type": "public/js/interview_type.js",
@@ -61,14 +57,33 @@ doctype_js = {
 }
 
 doc_events = {
-    "Job Requisition": {"validate": "qorg.qorg.recruitment_extensions.events.validate_job_requisition_extension"},
-
     "Designation": {"validate": [
         "qorg.qorg.recruitment_extensions.events.designation_validate",
         "qorg.qorg.recruitment_extensions.validation.validate_designation",
     ]},
     "External Person": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete"},
-    "External Opportunity": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete"},
+    "External Opportunity": {
+        "validate": "qorg.qorg.volunteer_management.events.validate_external_opportunity",
+        "on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete",
+    },
+    "Participation Application": {
+        "on_trash": "qorg.qorg.volunteer_management.integrity.prevent_operational_delete",
+    },
+    "Participation Assessment": {
+        "on_trash": "qorg.qorg.volunteer_management.integrity.prevent_operational_delete",
+    },
+    "Participation Engagement": {
+        "on_trash": "qorg.qorg.volunteer_management.integrity.prevent_operational_delete",
+    },
+    "Participation Service Log": {
+        "on_trash": "qorg.qorg.volunteer_management.integrity.prevent_operational_delete",
+    },
+    "Participation Evaluation": {
+        "on_trash": "qorg.qorg.volunteer_management.integrity.prevent_operational_delete",
+    },
+    "Participation Certificate": {
+        "on_trash": "qorg.qorg.volunteer_management.integrity.prevent_operational_delete",
+    },
     "Volunteer Profile": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete"},
     "External Opportunity Type": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_master_delete"},
     "Person Qualification": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_master_delete"},
@@ -213,6 +228,7 @@ after_install = [
 
     "qorg.qorg.recruitment_extensions.provisioning.provision_recruitment_extensions",
     "qorg.qorg.people_and_opportunities.provisioning.provision_people_opportunities_core",
+    "qorg.qorg.volunteer_management.provisioning.provision_volunteer_management",
     "qorg.qorg.project_management.print_settings_integration.provision_print_settings",
     "qorg.qorg.install.after_install",
     "qorg.qorg.task_management.provisioning.provision_task_integration",
@@ -228,6 +244,7 @@ after_migrate = [
 
     "qorg.qorg.recruitment_extensions.provisioning.provision_recruitment_extensions",
     "qorg.qorg.people_and_opportunities.provisioning.provision_people_opportunities_core",
+    "qorg.qorg.volunteer_management.provisioning.provision_volunteer_management",
     "qorg.qorg.project_management.print_settings_integration.provision_print_settings",
     "qorg.qorg.install.after_migrate",
     "qorg.printing.provisioning.provision_universal_print_formats",
