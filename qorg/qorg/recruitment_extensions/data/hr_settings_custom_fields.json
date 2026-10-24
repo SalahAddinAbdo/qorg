@@ -4,14 +4,17 @@
     "label": "QOrg Recruitment",
     "fieldtype": "Tab Break",
     "module": "QOrg",
-    "is_system_generated": 1
+    "is_system_generated": 1,
+    "description": "Central defaults and governance controls for QOrg recruitment extensions. Existing transaction values are not overwritten."
   },
   {
     "fieldname": "qorg_recruitment_scoring_section",
-    "label": "Scoring Defaults",
+    "label": "Scoring and Passing Defaults",
     "fieldtype": "Section Break",
     "module": "QOrg",
-    "is_system_generated": 1
+    "is_system_generated": 1,
+    "description": "Default percentages copied to new recruitment plans and assessment templates. Screening and assessment weights must total 100%.",
+    "insert_after": "qorg_recruitment_defaults_tab"
   },
   {
     "fieldname": "qorg_default_screening_weight",
@@ -20,7 +23,9 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "default": "20",
-    "description": "Default contribution of screening to the overall recruitment score."
+    "reqd": 1,
+    "description": "Default contribution of initial screening to the overall candidate score.",
+    "insert_after": "qorg_recruitment_scoring_section"
   },
   {
     "fieldname": "qorg_default_assessment_weight",
@@ -29,14 +34,17 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "default": "80",
-    "description": "Default contribution of interviews, tests, and assessments. The two defaults must total 100%."
+    "reqd": 1,
+    "description": "Default contribution of interviews, tests, and assessments to the overall candidate score.",
+    "insert_after": "qorg_default_screening_weight"
   },
   {
     "fieldname": "qorg_recruitment_scoring_cb",
     "label": "",
     "fieldtype": "Column Break",
     "module": "QOrg",
-    "is_system_generated": 1
+    "is_system_generated": 1,
+    "insert_after": "qorg_default_assessment_weight"
   },
   {
     "fieldname": "qorg_default_criterion_passing_score",
@@ -44,7 +52,10 @@
     "fieldtype": "Percent",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "60"
+    "default": "60",
+    "reqd": 1,
+    "description": "Default minimum score for a criterion copied into a new Interview Type.",
+    "insert_after": "qorg_recruitment_scoring_cb"
   },
   {
     "fieldname": "qorg_default_stage_passing_score",
@@ -52,14 +63,19 @@
     "fieldtype": "Percent",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "60"
+    "default": "60",
+    "reqd": 1,
+    "description": "Default minimum score for a stage copied into a new Job Opening assessment plan.",
+    "insert_after": "qorg_default_criterion_passing_score"
   },
   {
     "fieldname": "qorg_interview_defaults_section",
-    "label": "Interview Defaults",
+    "label": "Interview and Feedback Defaults",
     "fieldtype": "Section Break",
     "module": "QOrg",
-    "is_system_generated": 1
+    "is_system_generated": 1,
+    "description": "Defaults applied to new interviews and structured interviewer feedback.",
+    "insert_after": "qorg_default_stage_passing_score"
   },
   {
     "fieldname": "qorg_default_interview_mode",
@@ -68,7 +84,9 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "options": "In Person\nOnline\nHybrid",
-    "default": "In Person"
+    "default": "In Person",
+    "reqd": 1,
+    "insert_after": "qorg_interview_defaults_section"
   },
   {
     "fieldname": "qorg_default_interview_duration",
@@ -76,7 +94,17 @@
     "fieldtype": "Int",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "60"
+    "default": "60",
+    "reqd": 1,
+    "insert_after": "qorg_default_interview_mode"
+  },
+  {
+    "fieldname": "qorg_interview_defaults_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_default_interview_duration"
   },
   {
     "fieldname": "qorg_default_required_feedback_count",
@@ -84,14 +112,10 @@
     "fieldtype": "Int",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "1"
-  },
-  {
-    "fieldname": "qorg_interview_defaults_cb",
-    "label": "",
-    "fieldtype": "Column Break",
-    "module": "QOrg",
-    "is_system_generated": 1
+    "default": "1",
+    "reqd": 1,
+    "description": "Number of submitted interviewer feedback records required to complete an interview panel.",
+    "insert_after": "qorg_interview_defaults_cb"
   },
   {
     "fieldname": "qorg_require_evidence_notes",
@@ -99,14 +123,18 @@
     "fieldtype": "Check",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "1"
+    "default": "1",
+    "description": "Require objective evidence notes for every structured criterion score.",
+    "insert_after": "qorg_default_required_feedback_count"
   },
   {
     "fieldname": "qorg_offer_defaults_section",
-    "label": "Offer and Candidate Queue",
+    "label": "Job Offer and Candidate Queue",
     "fieldtype": "Section Break",
     "module": "QOrg",
-    "is_system_generated": 1
+    "is_system_generated": 1,
+    "description": "Controls offer validity, active offers, and ranked candidate processing.",
+    "insert_after": "qorg_require_evidence_notes"
   },
   {
     "fieldname": "qorg_default_offer_validity_days",
@@ -114,7 +142,9 @@
     "fieldtype": "Int",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "7"
+    "default": "7",
+    "reqd": 1,
+    "insert_after": "qorg_offer_defaults_section"
   },
   {
     "fieldname": "qorg_automatically_expire_offers",
@@ -122,7 +152,9 @@
     "fieldtype": "Check",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "1"
+    "default": "1",
+    "description": "Daily reconciliation marks overdue active offers as Expired and updates the candidate next action.",
+    "insert_after": "qorg_default_offer_validity_days"
   },
   {
     "fieldname": "qorg_allow_multiple_active_offers",
@@ -130,22 +162,27 @@
     "fieldtype": "Check",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "0"
+    "default": "0",
+    "insert_after": "qorg_automatically_expire_offers"
   },
   {
     "fieldname": "qorg_offer_defaults_cb",
     "label": "",
     "fieldtype": "Column Break",
     "module": "QOrg",
-    "is_system_generated": 1
+    "is_system_generated": 1,
+    "insert_after": "qorg_allow_multiple_active_offers"
   },
   {
     "fieldname": "qorg_candidate_priority_limit",
-    "label": "Default Candidate Priority Limit",
+    "label": "Candidate Priority Limit",
     "fieldtype": "Int",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "3"
+    "default": "3",
+    "reqd": 1,
+    "description": "Maximum supported selection priority, such as first, second, and third candidate.",
+    "insert_after": "qorg_offer_defaults_cb"
   },
   {
     "fieldname": "qorg_require_unique_priority",
@@ -153,14 +190,18 @@
     "fieldtype": "Check",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "1"
+    "default": "1",
+    "description": "Prevents assigning the same active selection priority twice within one Job Opening.",
+    "insert_after": "qorg_candidate_priority_limit"
   },
   {
     "fieldname": "qorg_decision_governance_section",
     "label": "Final Decision Governance",
     "fieldtype": "Section Break",
     "module": "QOrg",
-    "is_system_generated": 1
+    "is_system_generated": 1,
+    "description": "Mandatory evidence and locking rules for final recruitment decisions.",
+    "insert_after": "qorg_require_unique_priority"
   },
   {
     "fieldname": "qorg_require_rejection_reason",
@@ -168,14 +209,8 @@
     "fieldtype": "Check",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "1"
-  },
-  {
-    "fieldname": "qorg_decision_governance_cb",
-    "label": "",
-    "fieldtype": "Column Break",
-    "module": "QOrg",
-    "is_system_generated": 1
+    "default": "1",
+    "insert_after": "qorg_decision_governance_section"
   },
   {
     "fieldname": "qorg_require_decision_rationale",
@@ -183,7 +218,16 @@
     "fieldtype": "Check",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "1"
+    "default": "1",
+    "insert_after": "qorg_require_rejection_reason"
+  },
+  {
+    "fieldname": "qorg_decision_governance_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_require_decision_rationale"
   },
   {
     "fieldname": "qorg_lock_decision_after_offer",
@@ -191,14 +235,18 @@
     "fieldtype": "Check",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "1"
+    "default": "1",
+    "description": "Prevents direct final-decision changes after a Job Offer exists.",
+    "insert_after": "qorg_decision_governance_cb"
   },
   {
     "fieldname": "qorg_notification_defaults_section",
-    "label": "Notification Defaults",
+    "label": "Recruitment Notifications and Recipients",
     "fieldtype": "Section Break",
     "module": "QOrg",
-    "is_system_generated": 1
+    "is_system_generated": 1,
+    "description": "Controls managed recruitment messages, confirmation copies, recipients, and company branding.",
+    "insert_after": "qorg_lock_decision_after_offer"
   },
   {
     "fieldname": "qorg_enable_applicant_notifications",
@@ -206,7 +254,8 @@
     "fieldtype": "Check",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "1"
+    "default": "1",
+    "insert_after": "qorg_notification_defaults_section"
   },
   {
     "fieldname": "qorg_enable_interviewer_notifications",
@@ -214,7 +263,8 @@
     "fieldtype": "Check",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "1"
+    "default": "1",
+    "insert_after": "qorg_enable_applicant_notifications"
   },
   {
     "fieldname": "qorg_enable_recruitment_team_notifications",
@@ -222,7 +272,16 @@
     "fieldtype": "Check",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "1"
+    "default": "1",
+    "insert_after": "qorg_enable_interviewer_notifications"
+  },
+  {
+    "fieldname": "qorg_notifications_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_enable_recruitment_team_notifications"
   },
   {
     "fieldname": "qorg_send_confirmation_copy_sender",
@@ -230,14 +289,8 @@
     "fieldtype": "Check",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "1"
-  },
-  {
-    "fieldname": "qorg_notifications_cb",
-    "label": "",
-    "fieldtype": "Column Break",
-    "module": "QOrg",
-    "is_system_generated": 1
+    "default": "1",
+    "insert_after": "qorg_notifications_cb"
   },
   {
     "fieldname": "qorg_require_recipient_confirmation",
@@ -245,7 +298,8 @@
     "fieldtype": "Check",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "1"
+    "default": "1",
+    "insert_after": "qorg_send_confirmation_copy_sender"
   },
   {
     "fieldname": "qorg_use_company_branding",
@@ -253,7 +307,17 @@
     "fieldtype": "Check",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "1"
+    "default": "1",
+    "insert_after": "qorg_require_recipient_confirmation"
+  },
+  {
+    "fieldname": "qorg_notification_recipients_section",
+    "label": "Default Internal Recipients",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "description": "Optional internal users automatically included by the managed recruitment notification service.",
+    "insert_after": "qorg_use_company_branding"
   },
   {
     "fieldname": "qorg_default_recruitment_cc_users",
@@ -261,7 +325,16 @@
     "fieldtype": "Table MultiSelect",
     "module": "QOrg",
     "is_system_generated": 1,
-    "options": "HR Settings Recruitment User"
+    "options": "HR Settings Recruitment User",
+    "insert_after": "qorg_notification_recipients_section"
+  },
+  {
+    "fieldname": "qorg_notification_recipients_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_default_recruitment_cc_users"
   },
   {
     "fieldname": "qorg_default_recruitment_additional_users",
@@ -269,14 +342,17 @@
     "fieldtype": "Table MultiSelect",
     "module": "QOrg",
     "is_system_generated": 1,
-    "options": "HR Settings Recruitment User"
+    "options": "HR Settings Recruitment User",
+    "insert_after": "qorg_notification_recipients_cb"
   },
   {
     "fieldname": "qorg_onboarding_defaults_section",
-    "label": "Onboarding Defaults",
+    "label": "Employee Onboarding Controls",
     "fieldtype": "Section Break",
     "module": "QOrg",
-    "is_system_generated": 1
+    "is_system_generated": 1,
+    "description": "Defaults and completion controls for new employee onboarding programs and activities.",
+    "insert_after": "qorg_default_recruitment_additional_users"
   },
   {
     "fieldname": "qorg_default_onboarding_duration_days",
@@ -284,7 +360,9 @@
     "fieldtype": "Int",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "30"
+    "default": "30",
+    "reqd": 1,
+    "insert_after": "qorg_onboarding_defaults_section"
   },
   {
     "fieldname": "qorg_require_mandatory_onboarding",
@@ -292,7 +370,8 @@
     "fieldtype": "Check",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "1"
+    "default": "1",
+    "insert_after": "qorg_default_onboarding_duration_days"
   },
   {
     "fieldname": "qorg_require_mandatory_activity_evidence",
@@ -300,14 +379,16 @@
     "fieldtype": "Check",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "0"
+    "default": "0",
+    "insert_after": "qorg_require_mandatory_onboarding"
   },
   {
     "fieldname": "qorg_onboarding_defaults_cb",
     "label": "",
     "fieldtype": "Column Break",
     "module": "QOrg",
-    "is_system_generated": 1
+    "is_system_generated": 1,
+    "insert_after": "qorg_require_mandatory_activity_evidence"
   },
   {
     "fieldname": "qorg_require_activity_verification",
@@ -315,7 +396,8 @@
     "fieldtype": "Check",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "1"
+    "default": "1",
+    "insert_after": "qorg_onboarding_defaults_cb"
   },
   {
     "fieldname": "qorg_allow_assigned_user_reopen",
@@ -323,6 +405,18 @@
     "fieldtype": "Check",
     "module": "QOrg",
     "is_system_generated": 1,
-    "default": "0"
+    "default": "0",
+    "insert_after": "qorg_require_activity_verification"
+  },
+  {
+    "fieldname": "qorg_recruitment_settings_initialized",
+    "label": "Recruitment Settings Initialized",
+    "fieldtype": "Check",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "default": "0",
+    "hidden": 1,
+    "read_only": 1,
+    "insert_after": "qorg_allow_assigned_user_reopen"
   }
 ]
