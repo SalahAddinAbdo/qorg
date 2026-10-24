@@ -42,6 +42,7 @@ extend_doctype_class = {
 }
 
 doctype_js = {
+    "HR Settings": "public/js/hr_settings_recruitment.js",
     "Designation": "public/js/designation_recruitment.js",
     "Interview Type": "public/js/interview_type.js",
     "Interview Feedback": "public/js/interview_feedback.js",
@@ -56,8 +57,10 @@ doctype_js = {
 }
 
 doc_events = {
-    "Designation": {"validate": "qorg.qorg.recruitment_extensions.validation.validate_designation"},
-    "Designation": {"validate": "qorg.qorg.recruitment_extensions.events.designation_validate"},
+    "Designation": {"validate": [
+        "qorg.qorg.recruitment_extensions.events.designation_validate",
+        "qorg.qorg.recruitment_extensions.validation.validate_designation",
+    ]},
     "External Person": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete"},
     "External Opportunity": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete"},
     "Volunteer Profile": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete"},
@@ -68,26 +71,46 @@ doc_events = {
         "validate": [
             "qorg.qorg.people_and_opportunities.integrations.validate_job_opening",
             "qorg.qorg.recruitment_extensions.events.opening_validate",
+            "qorg.qorg.recruitment_extensions.defaults.apply_job_opening_defaults",
+            "qorg.qorg.recruitment_extensions.validation.validate_job_opening",
         ],
     },
     "Job Applicant": {
-        "before_validate": ["qorg.qorg.people_and_opportunities.integrations.sync_job_applicant_person", "qorg.qorg.recruitment_extensions.events.applicant_validate"],
+        "before_validate": [
+            "qorg.qorg.people_and_opportunities.integrations.sync_job_applicant_person",
+            "qorg.qorg.recruitment_extensions.defaults.validate_job_applicant_policy",
+            "qorg.qorg.recruitment_extensions.events.applicant_validate",
+        ],
         "on_update": "qorg.qorg.people_and_opportunities.integrations.sync_job_applicant_person",
     },
-    "Interview Type": {"validate": "qorg.qorg.recruitment_extensions.events.interview_type_validate"},
+    "Interview Type": {"validate": [
+        "qorg.qorg.recruitment_extensions.defaults.apply_interview_type_defaults",
+        "qorg.qorg.recruitment_extensions.events.interview_type_validate",
+        "qorg.qorg.recruitment_extensions.validation.validate_interview_type",
+    ]},
     "Interview Feedback": {
-        "before_validate": "qorg.qorg.recruitment_extensions.events.feedback_validate",
+        "before_validate": [
+            "qorg.qorg.recruitment_extensions.events.feedback_validate",
+            "qorg.qorg.recruitment_extensions.defaults.validate_feedback_policy",
+            "qorg.qorg.recruitment_extensions.validation.validate_feedback",
+        ],
         "on_submit": "qorg.qorg.recruitment_extensions.events.feedback_submit",
         "on_cancel": "qorg.qorg.recruitment_extensions.events.feedback_cancel",
         "after_delete": "qorg.qorg.recruitment_extensions.events.feedback_delete",
     },
     "Interview": {
-        "validate": "qorg.qorg.recruitment_extensions.events.interview_validate",
+        "validate": [
+            "qorg.qorg.recruitment_extensions.defaults.apply_interview_defaults",
+            "qorg.qorg.recruitment_extensions.events.interview_validate",
+        ],
         "on_cancel": "qorg.qorg.recruitment_extensions.events.interview_cancel",
         "on_trash": "qorg.qorg.recruitment_extensions.events.interview_trash",
     },
     "Job Offer": {
-        "before_validate": "qorg.qorg.recruitment_extensions.events.offer_before_validate",
+        "before_validate": [
+            "qorg.qorg.recruitment_extensions.defaults.apply_job_offer_defaults",
+            "qorg.qorg.recruitment_extensions.events.offer_before_validate",
+        ],
         "on_update": "qorg.qorg.recruitment_extensions.events.offer_on_update",
     },
     "Appointment Letter": {
@@ -98,7 +121,14 @@ doc_events = {
         "validate": "qorg.qorg.recruitment_extensions.events.employee_validate",
         "after_insert": "qorg.qorg.recruitment_extensions.events.employee_after_insert",
     },
-    "Employee Onboarding": {"validate": "qorg.qorg.recruitment_extensions.events.onboarding_validate"},
+    "Employee Onboarding": {
+        "before_validate": "qorg.qorg.recruitment_extensions.defaults.apply_onboarding_defaults",
+        "validate": [
+            "qorg.qorg.recruitment_extensions.events.onboarding_validate",
+            "qorg.qorg.recruitment_extensions.onboarding.validate_onboarding",
+        ],
+    },
+    "HR Settings": {"validate": "qorg.qorg.recruitment_extensions.settings.validate_hr_settings"},
     "Print Settings": {
         "validate": "qorg.qorg.project_management.print_settings_integration.validate_print_settings",
 
@@ -173,6 +203,8 @@ before_migrate = [
 ]
 
 after_install = [
+    "qorg.qorg.recruitment_extensions.settings_provisioning.provision_recruitment_settings",
+
     "qorg.qorg.recruitment_extensions.provisioning.provision_recruitment_extensions",
     "qorg.qorg.people_and_opportunities.provisioning.provision_people_opportunities_core",
     "qorg.qorg.project_management.print_settings_integration.provision_print_settings",
@@ -186,6 +218,8 @@ after_install = [
 ]
 
 after_migrate = [
+    "qorg.qorg.recruitment_extensions.settings_provisioning.provision_recruitment_settings",
+
     "qorg.qorg.recruitment_extensions.provisioning.provision_recruitment_extensions",
     "qorg.qorg.people_and_opportunities.provisioning.provision_people_opportunities_core",
     "qorg.qorg.project_management.print_settings_integration.provision_print_settings",
@@ -202,6 +236,7 @@ after_migrate = [
 
 scheduler_events = {
     "daily": [
+        "qorg.qorg.recruitment_extensions.settings_jobs.run_daily_recruitment_settings_jobs",
         "qorg.qorg.project_management.notification_engine.run_daily_project_notifications",
         "qorg.qorg.project_management.integrity_jobs.run_daily_project_reconciliation",
     ],
