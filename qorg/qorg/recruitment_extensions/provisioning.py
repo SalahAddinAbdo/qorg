@@ -3,7 +3,9 @@ from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 from .constants import CONFIGURATION_VERSION
 
 def provision_recruitment_extensions():
-    _custom_fields(); _email_templates(); frappe.clear_cache()
+    _custom_fields(); _email_templates()
+    from .layout_provisioning import reconcile_recruitment_form_layouts
+    reconcile_recruitment_form_layouts(); frappe.clear_cache()
 
 def _custom_fields():
     path=frappe.get_app_path("qorg","qorg","recruitment_extensions","data","custom_fields.json")

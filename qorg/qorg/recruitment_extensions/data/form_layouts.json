@@ -1,0 +1,1132 @@
+{
+  "Job Requisition": {
+    "anchors": [
+      "status",
+      "expected_by",
+      "requested_by"
+    ],
+    "fields": [
+      {
+        "fieldname": "qorg_recruitment_context_section",
+        "label": "Position and Funding",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_recruitment_need_type",
+        "label": "Recruitment Need Type",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_priority",
+        "label": "Priority",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_replacement_employee",
+        "label": "Replacement Employee",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_context_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_funding_source",
+        "label": "Funding Source",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_project",
+        "label": "Project",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_branch",
+        "label": "Branch",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_cost_center",
+        "label": "Cost Center",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_contract_funding_section",
+        "label": "Contract and Funding Period",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_expected_contract_duration_months",
+        "label": "Expected Contract Duration (Months)",
+        "fieldtype": "Int"
+      },
+      {
+        "fieldname": "qorg_funding_end_date",
+        "label": "Funding End Date",
+        "fieldtype": "Date"
+      },
+      {
+        "fieldname": "qorg_contract_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_expected_joining_date",
+        "label": "Expected Joining Date",
+        "fieldtype": "Date"
+      },
+      {
+        "fieldname": "qorg_funding_exception_justification",
+        "label": "Funding Exception Justification",
+        "fieldtype": "Small Text"
+      },
+      {
+        "fieldname": "qorg_justification_section",
+        "label": "Business Justification",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_funding_details",
+        "label": "Funding Details",
+        "fieldtype": "Small Text"
+      },
+      {
+        "fieldname": "qorg_recruitment_justification",
+        "label": "Recruitment Justification",
+        "fieldtype": "Small Text"
+      },
+      {
+        "fieldname": "qorg_unfilled_risk",
+        "label": "Risk if Position Is Not Filled",
+        "fieldtype": "Small Text"
+      },
+      {
+        "fieldname": "qorg_approval_notes",
+        "label": "Additional Approval Notes",
+        "fieldtype": "Small Text"
+      }
+    ]
+  },
+  "Job Opening": {
+    "anchors": [
+      "description",
+      "status",
+      "job_title"
+    ],
+    "fields": [
+      {
+        "fieldname": "qorg_recruitment_details_section",
+        "label": "Recruitment Details",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_job_requisition",
+        "label": "Job Requisition",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_recruitment_need_type",
+        "label": "Recruitment Need Type",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_vacancy_scope",
+        "label": "Vacancy Scope",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_recruitment_details_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_recruitment_coordinator",
+        "label": "Recruitment Coordinator",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_hiring_manager",
+        "label": "Hiring Manager",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_project",
+        "label": "Project",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_branch",
+        "label": "Branch",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_funding_section",
+        "label": "Funding and Duration",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_funding_source",
+        "label": "Funding Source",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_cost_center",
+        "label": "Cost Center",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_expected_contract_duration_months",
+        "label": "Expected Contract Duration (Months)",
+        "fieldtype": "Int"
+      },
+      {
+        "fieldname": "qorg_funding_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_funding_end_date",
+        "label": "Funding End Date",
+        "fieldtype": "Date"
+      },
+      {
+        "fieldname": "qorg_expected_joining_date",
+        "label": "Expected Joining Date",
+        "fieldtype": "Date"
+      },
+      {
+        "fieldname": "qorg_funding_details",
+        "label": "Funding Details",
+        "fieldtype": "Small Text"
+      },
+      {
+        "fieldname": "qorg_funding_exception_justification",
+        "label": "Funding Exception Justification",
+        "fieldtype": "Small Text"
+      },
+      {
+        "fieldname": "qorg_timeline_section",
+        "label": "Recruitment Timeline",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_shortlisting_deadline",
+        "label": "Shortlisting Deadline",
+        "fieldtype": "Date"
+      },
+      {
+        "fieldname": "qorg_interview_start_date",
+        "label": "Expected Interview Start Date",
+        "fieldtype": "Date"
+      },
+      {
+        "fieldname": "qorg_target_decision_date",
+        "label": "Target Final Decision Date",
+        "fieldtype": "Date"
+      },
+      {
+        "fieldname": "qorg_timeline_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_offer_issue_target_date",
+        "label": "Offer Issue Target Date",
+        "fieldtype": "Date"
+      },
+      {
+        "fieldname": "qorg_recruitment_plan_tab",
+        "label": "Recruitment Plan",
+        "fieldtype": "Tab Break"
+      },
+      {
+        "fieldname": "qorg_screening_assessment_section",
+        "label": "Scoring Weights",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_screening_weight",
+        "label": "Screening Weight %",
+        "fieldtype": "Percent"
+      },
+      {
+        "fieldname": "qorg_plan_weights_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_assessment_weight",
+        "label": "Assessment Weight %",
+        "fieldtype": "Percent"
+      },
+      {
+        "fieldname": "qorg_screening_template_section",
+        "label": "Screening Criteria Template",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_screening_template",
+        "label": "Screening Criteria Template",
+        "fieldtype": "Table"
+      },
+      {
+        "fieldname": "qorg_assessment_plan_section",
+        "label": "Assessment Plan",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_assessment_plan",
+        "label": "Assessment Plan",
+        "fieldtype": "Table"
+      }
+    ]
+  },
+  "Job Applicant": {
+    "anchors": [
+      "qorg_screening_selection_tab"
+    ],
+    "fields": [
+      {
+        "fieldname": "qorg_screening_selection_tab",
+        "label": "Screening & Selection",
+        "fieldtype": "Tab Break"
+      },
+      {
+        "fieldname": "qorg_applicant_context_section",
+        "label": "Position Context",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_job_opening",
+        "label": "Job Opening",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_project",
+        "label": "Project",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_branch",
+        "label": "Branch",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_applicant_context_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_cost_center",
+        "label": "Cost Center",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_funding_source",
+        "label": "Funding Source",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_funding_end_date",
+        "label": "Funding End Date",
+        "fieldtype": "Date"
+      },
+      {
+        "fieldname": "qorg_expected_contract_duration_months",
+        "label": "Expected Contract Duration (Months)",
+        "fieldtype": "Int"
+      },
+      {
+        "fieldname": "qorg_expected_joining_date",
+        "label": "Expected Joining Date",
+        "fieldtype": "Date"
+      },
+      {
+        "fieldname": "qorg_screening_section",
+        "label": "Screening",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_screening_criteria",
+        "label": "Screening Criteria",
+        "fieldtype": "Table"
+      },
+      {
+        "fieldname": "qorg_screening_result_section",
+        "label": "Screening Result",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_screening_score",
+        "label": "Screening Score %",
+        "fieldtype": "Percent"
+      },
+      {
+        "fieldname": "qorg_assessment_progress_section",
+        "label": "Assessment Progress",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_required_stages",
+        "label": "Required Stages",
+        "fieldtype": "Int"
+      },
+      {
+        "fieldname": "qorg_completed_stages",
+        "label": "Completed Stages",
+        "fieldtype": "Int"
+      },
+      {
+        "fieldname": "qorg_remaining_stages",
+        "label": "Remaining Stages",
+        "fieldtype": "Int"
+      },
+      {
+        "fieldname": "qorg_assessment_progress_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_failed_stages",
+        "label": "Failed Stages",
+        "fieldtype": "Int"
+      },
+      {
+        "fieldname": "qorg_completed_stage_weight",
+        "label": "Completed Stage Weight %",
+        "fieldtype": "Percent"
+      },
+      {
+        "fieldname": "qorg_assessment_score",
+        "label": "Assessment Score %",
+        "fieldtype": "Percent"
+      },
+      {
+        "fieldname": "qorg_effective_stage_score",
+        "label": "Effective Assessment Stage Score %",
+        "fieldtype": "Percent"
+      },
+      {
+        "fieldname": "qorg_overall_score",
+        "label": "Overall Score %",
+        "fieldtype": "Percent"
+      },
+      {
+        "fieldname": "qorg_rank",
+        "label": "Current Rank",
+        "fieldtype": "Int"
+      },
+      {
+        "fieldname": "qorg_selection_decision_section",
+        "label": "Selection and Decision",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_selection_priority",
+        "label": "Selection Priority",
+        "fieldtype": "Int"
+      },
+      {
+        "fieldname": "qorg_final_decision",
+        "label": "Final Decision",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_selection_status",
+        "label": "Selection Status",
+        "fieldtype": "Data"
+      },
+      {
+        "fieldname": "qorg_decision_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_next_action",
+        "label": "Next Action",
+        "fieldtype": "Data"
+      },
+      {
+        "fieldname": "qorg_last_notification_type",
+        "label": "Last Notification Type",
+        "fieldtype": "Data"
+      },
+      {
+        "fieldname": "qorg_last_notification_on",
+        "label": "Last Notification On",
+        "fieldtype": "Datetime"
+      },
+      {
+        "fieldname": "qorg_decision_rationale",
+        "label": "Evidence-based Decision Rationale",
+        "fieldtype": "Small Text"
+      },
+      {
+        "fieldname": "qorg_decision_log",
+        "label": "Decision Log",
+        "fieldtype": "Table"
+      }
+    ]
+  },
+  "Interview Type": {
+    "anchors": [
+      "description",
+      "interview_rounds"
+    ],
+    "fields": [
+      {
+        "fieldname": "qorg_interview_type_context_section",
+        "label": "Assessment Configuration",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_assessment_type",
+        "label": "Assessment Type",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_evaluation_criteria_section",
+        "label": "Evaluation Criteria",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_evaluation_criteria",
+        "label": "Evaluation Criteria",
+        "fieldtype": "Table"
+      },
+      {
+        "fieldname": "qorg_general_instructions",
+        "label": "General Instructions",
+        "fieldtype": "Small Text"
+      }
+    ]
+  },
+  "Interview": {
+    "anchors": [
+      "status",
+      "scheduled_on",
+      "job_applicant"
+    ],
+    "fields": [
+      {
+        "fieldname": "qorg_interview_context_section",
+        "label": "Assessment Stage",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_job_opening",
+        "label": "Job Opening",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_stage_sequence",
+        "label": "Stage Sequence",
+        "fieldtype": "Int"
+      },
+      {
+        "fieldname": "qorg_stage_name",
+        "label": "Stage Name",
+        "fieldtype": "Data"
+      },
+      {
+        "fieldname": "qorg_interview_context_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_stage_weight",
+        "label": "Stage Weight %",
+        "fieldtype": "Percent"
+      },
+      {
+        "fieldname": "qorg_passing_score",
+        "label": "Passing Score %",
+        "fieldtype": "Percent"
+      },
+      {
+        "fieldname": "qorg_is_mandatory_stage",
+        "label": "Mandatory Stage",
+        "fieldtype": "Check"
+      },
+      {
+        "fieldname": "qorg_attempt_number",
+        "label": "Attempt Number",
+        "fieldtype": "Int"
+      },
+      {
+        "fieldname": "qorg_previous_interview",
+        "label": "Previous Interview",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_interview_logistics_section",
+        "label": "Interview Logistics",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_interview_mode",
+        "label": "Interview Mode",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_venue",
+        "label": "Venue",
+        "fieldtype": "Data"
+      },
+      {
+        "fieldname": "qorg_meeting_url",
+        "label": "Meeting URL",
+        "fieldtype": "Data"
+      },
+      {
+        "fieldname": "qorg_interview_logistics_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_online_platform",
+        "label": "Online Platform",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_project",
+        "label": "Project",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_branch",
+        "label": "Branch",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_retry_policy_section",
+        "label": "Retry Policy",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_allow_retry",
+        "label": "Allow Retry",
+        "fieldtype": "Check"
+      },
+      {
+        "fieldname": "qorg_maximum_attempts",
+        "label": "Maximum Attempts",
+        "fieldtype": "Int"
+      },
+      {
+        "fieldname": "qorg_retry_requires_approval",
+        "label": "Retry Requires Approval",
+        "fieldtype": "Check"
+      },
+      {
+        "fieldname": "qorg_retry_policy_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_retry_approval_role",
+        "label": "Retry Approval Role",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_retry_approved_by",
+        "label": "Retry Approved By",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_retry_approved_on",
+        "label": "Retry Approved On",
+        "fieldtype": "Datetime"
+      },
+      {
+        "fieldname": "qorg_retry_reason",
+        "label": "Retry Reason",
+        "fieldtype": "Small Text"
+      },
+      {
+        "fieldname": "qorg_panel_result_section",
+        "label": "Panel Completion and Result",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_required_feedback_count",
+        "label": "Required Feedback Count",
+        "fieldtype": "Int"
+      },
+      {
+        "fieldname": "qorg_submitted_feedback_count",
+        "label": "Submitted Feedback Count",
+        "fieldtype": "Int"
+      },
+      {
+        "fieldname": "qorg_missing_feedback_count",
+        "label": "Missing Feedback Count",
+        "fieldtype": "Int"
+      },
+      {
+        "fieldname": "qorg_panel_result_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_panel_completion_status",
+        "label": "Panel Completion Status",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_final_score",
+        "label": "Final Score %",
+        "fieldtype": "Percent"
+      },
+      {
+        "fieldname": "qorg_assessment_result",
+        "label": "Assessment Result",
+        "fieldtype": "Select"
+      }
+    ]
+  },
+  "Interview Feedback": {
+    "anchors": [
+      "result",
+      "interview",
+      "interviewer"
+    ],
+    "fields": [
+      {
+        "fieldname": "qorg_feedback_context_section",
+        "label": "Assessment Context",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_project",
+        "label": "Project",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_branch",
+        "label": "Branch",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_structured_evaluation_section",
+        "label": "Structured Evaluation",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_criterion_scores",
+        "label": "Criterion Scores",
+        "fieldtype": "Table"
+      },
+      {
+        "fieldname": "qorg_feedback_result_section",
+        "label": "Evaluation Result",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_weighted_score",
+        "label": "Weighted Score %",
+        "fieldtype": "Percent"
+      },
+      {
+        "fieldname": "qorg_recommendation",
+        "label": "Recommendation",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_feedback_result_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_evidence_strengths",
+        "label": "Evidence and Strengths",
+        "fieldtype": "Small Text"
+      },
+      {
+        "fieldname": "qorg_risks",
+        "label": "Risks and Concerns",
+        "fieldtype": "Small Text"
+      },
+      {
+        "fieldname": "qorg_legacy_skill_note",
+        "label": "Legacy Skill Note",
+        "fieldtype": "HTML"
+      }
+    ]
+  },
+  "Job Offer": {
+    "anchors": [
+      "offer_terms",
+      "job_applicant",
+      "status"
+    ],
+    "fields": [
+      {
+        "fieldname": "qorg_offer_context_section",
+        "label": "Recruitment Context",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_job_applicant",
+        "label": "Job Applicant",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_job_opening",
+        "label": "Job Opening",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_project",
+        "label": "Project",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_branch",
+        "label": "Branch",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_offer_context_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_cost_center",
+        "label": "Cost Center",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_funding_source",
+        "label": "Funding Source",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_funding_end_date",
+        "label": "Funding End Date",
+        "fieldtype": "Date"
+      },
+      {
+        "fieldname": "qorg_expected_contract_duration_months",
+        "label": "Expected Contract Duration (Months)",
+        "fieldtype": "Int"
+      },
+      {
+        "fieldname": "qorg_expected_joining_date",
+        "label": "Expected Joining Date",
+        "fieldtype": "Date"
+      },
+      {
+        "fieldname": "qorg_response_status",
+        "label": "Response Status",
+        "fieldtype": "Select"
+      }
+    ]
+  },
+  "Appointment Letter": {
+    "anchors": [
+      "closing_notes",
+      "appointment_letter_template",
+      "job_applicant"
+    ],
+    "fields": [
+      {
+        "fieldname": "qorg_appointment_context_section",
+        "label": "Recruitment Context",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_job_offer",
+        "label": "Job Offer",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_job_opening",
+        "label": "Job Opening",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_external_person",
+        "label": "External Person",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_project",
+        "label": "Project",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_branch",
+        "label": "Branch",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_appointment_context_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_cost_center",
+        "label": "Cost Center",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_funding_source",
+        "label": "Funding Source",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_funding_end_date",
+        "label": "Funding End Date",
+        "fieldtype": "Date"
+      },
+      {
+        "fieldname": "qorg_expected_contract_duration_months",
+        "label": "Expected Contract Duration (Months)",
+        "fieldtype": "Int"
+      },
+      {
+        "fieldname": "qorg_expected_joining_date",
+        "label": "Expected Joining Date",
+        "fieldtype": "Date"
+      }
+    ]
+  },
+  "Employee": {
+    "anchors": [
+      "employment_details",
+      "date_of_joining",
+      "status"
+    ],
+    "fields": [
+      {
+        "fieldname": "qorg_recruitment_source_section",
+        "label": "Recruitment Source",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_external_person",
+        "label": "External Person",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_job_applicant",
+        "label": "Job Applicant",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_appointment_letter",
+        "label": "Appointment Letter",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_recruitment_source_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_project",
+        "label": "Project",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_branch",
+        "label": "Branch",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_work_commencement_notice",
+        "label": "Work Commencement Notice",
+        "fieldtype": "Link"
+      }
+    ]
+  },
+  "Employee Onboarding": {
+    "anchors": [
+      "activities",
+      "boarding_begins_on",
+      "job_applicant"
+    ],
+    "fields": [
+      {
+        "fieldname": "qorg_onboarding_context_section",
+        "label": "Recruitment and Assignment Context",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_job_applicant",
+        "label": "Job Applicant",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_job_offer",
+        "label": "Job Offer",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_job_opening",
+        "label": "Job Opening",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_project",
+        "label": "Project",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_branch",
+        "label": "Branch",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_onboarding_context_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_cost_center",
+        "label": "Cost Center",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_funding_source",
+        "label": "Funding Source",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_funding_end_date",
+        "label": "Funding End Date",
+        "fieldtype": "Date"
+      },
+      {
+        "fieldname": "qorg_expected_contract_duration_months",
+        "label": "Expected Contract Duration (Months)",
+        "fieldtype": "Int"
+      },
+      {
+        "fieldname": "qorg_expected_joining_date",
+        "label": "Expected Joining Date",
+        "fieldtype": "Date"
+      },
+      {
+        "fieldname": "qorg_completion_percent",
+        "label": "Completion %",
+        "fieldtype": "Percent"
+      }
+    ]
+  },
+  "Employee Boarding Activity": {
+    "anchors": [
+      "activity_name",
+      "activity"
+    ],
+    "fields": [
+      {
+        "fieldname": "qorg_activity_assignment_section",
+        "label": "Assignment and Delivery",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_activity_category",
+        "label": "Activity Category",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_assigned_user",
+        "label": "Assigned User",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_facilitator",
+        "label": "Facilitator",
+        "fieldtype": "Data"
+      },
+      {
+        "fieldname": "qorg_activity_assignment_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_delivery_method",
+        "label": "Delivery Method",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_location_or_link",
+        "label": "Location / Meeting Link",
+        "fieldtype": "Data"
+      },
+      {
+        "fieldname": "qorg_is_mandatory",
+        "label": "Mandatory",
+        "fieldtype": "Check"
+      },
+      {
+        "fieldname": "qorg_requires_evidence",
+        "label": "Requires Evidence",
+        "fieldtype": "Check"
+      },
+      {
+        "fieldname": "qorg_activity_progress_section",
+        "label": "Progress and Evidence",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_activity_status",
+        "label": "Activity Status",
+        "fieldtype": "Select"
+      },
+      {
+        "fieldname": "qorg_completion_percent",
+        "label": "Completion %",
+        "fieldtype": "Percent"
+      },
+      {
+        "fieldname": "qorg_completion_remarks",
+        "label": "Completion Remarks",
+        "fieldtype": "Small Text"
+      },
+      {
+        "fieldname": "qorg_evidence_attachment",
+        "label": "Evidence Attachment",
+        "fieldtype": "Attach"
+      },
+      {
+        "fieldname": "qorg_activity_verification_section",
+        "label": "Verification",
+        "fieldtype": "Section Break"
+      },
+      {
+        "fieldname": "qorg_completed_by",
+        "label": "Completed By",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_completed_on",
+        "label": "Completed On",
+        "fieldtype": "Datetime"
+      },
+      {
+        "fieldname": "qorg_verified_by",
+        "label": "Verified By",
+        "fieldtype": "Link"
+      },
+      {
+        "fieldname": "qorg_activity_verification_cb",
+        "label": "",
+        "fieldtype": "Column Break"
+      },
+      {
+        "fieldname": "qorg_verified_on",
+        "label": "Verified On",
+        "fieldtype": "Datetime"
+      },
+      {
+        "fieldname": "qorg_verification_remarks",
+        "label": "Verification Remarks",
+        "fieldtype": "Small Text"
+      }
+    ]
+  }
+}

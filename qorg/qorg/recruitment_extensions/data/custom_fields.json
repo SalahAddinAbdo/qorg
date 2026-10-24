@@ -33,7 +33,7 @@
   {
     "dt": "Interview Type",
     "fieldname": "qorg_evaluation_criteria_section",
-    "label": "Structured Evaluation Criteria",
+    "label": "Evaluation Criteria",
     "fieldtype": "Section Break",
     "module": "QOrg",
     "is_system_generated": 1,
@@ -71,7 +71,7 @@
   {
     "dt": "Job Opening",
     "fieldname": "qorg_screening_assessment_section",
-    "label": "Screening and Assessment Plan",
+    "label": "Scoring Weights",
     "fieldtype": "Section Break",
     "module": "QOrg",
     "is_system_generated": 1,
@@ -450,7 +450,7 @@
   {
     "dt": "Job Applicant",
     "fieldname": "qorg_decision_log",
-    "label": "Decision History",
+    "label": "Decision Log",
     "fieldtype": "Table",
     "module": "QOrg",
     "is_system_generated": 1,
@@ -548,7 +548,7 @@
   {
     "dt": "Interview",
     "fieldname": "qorg_final_score",
-    "label": "Final Stage Score %",
+    "label": "Final Score %",
     "fieldtype": "Percent",
     "module": "QOrg",
     "is_system_generated": 1,
@@ -587,7 +587,7 @@
   {
     "dt": "Interview Feedback",
     "fieldname": "qorg_weighted_score",
-    "label": "Calculated Feedback Score %",
+    "label": "Weighted Score %",
     "fieldtype": "Percent",
     "module": "QOrg",
     "is_system_generated": 1,
@@ -597,7 +597,7 @@
   {
     "dt": "Interview Feedback",
     "fieldname": "qorg_evidence_strengths",
-    "label": "Evidence-based Strengths",
+    "label": "Evidence and Strengths",
     "fieldtype": "Small Text",
     "module": "QOrg",
     "is_system_generated": 1
@@ -605,7 +605,7 @@
   {
     "dt": "Interview Feedback",
     "fieldname": "qorg_risks",
-    "label": "Risks / Development Areas",
+    "label": "Risks and Concerns",
     "fieldtype": "Small Text",
     "module": "QOrg",
     "is_system_generated": 1
@@ -622,7 +622,7 @@
   {
     "dt": "Interview Feedback",
     "fieldname": "qorg_legacy_skill_note",
-    "label": "General Skill Rating Note",
+    "label": "Legacy Skill Note",
     "fieldtype": "HTML",
     "module": "QOrg",
     "is_system_generated": 1,
@@ -711,7 +711,7 @@
   {
     "dt": "Employee Onboarding",
     "fieldname": "qorg_completion_percent",
-    "label": "Program Completion %",
+    "label": "Completion %",
     "fieldtype": "Percent",
     "module": "QOrg",
     "is_system_generated": 1,
@@ -741,7 +741,7 @@
   {
     "dt": "Employee Boarding Activity",
     "fieldname": "qorg_facilitator",
-    "label": "Provider / Facilitator",
+    "label": "Facilitator",
     "fieldtype": "Data",
     "module": "QOrg",
     "is_system_generated": 1,
@@ -1964,5 +1964,285 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "read_only": 1
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_screening_template_section",
+    "label": "Screening Criteria Template",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Job Opening",
+    "fieldname": "qorg_assessment_plan_section",
+    "label": "Assessment Plan",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_applicant_context_section",
+    "label": "Position Context",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_applicant_context_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_screening_section",
+    "label": "Screening",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_screening_result_section",
+    "label": "Screening Result",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_assessment_progress_section",
+    "label": "Assessment Progress",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_assessment_progress_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_selection_decision_section",
+    "label": "Selection and Decision",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_decision_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Interview Type",
+    "fieldname": "qorg_interview_type_context_section",
+    "label": "Assessment Configuration",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_interview_context_section",
+    "label": "Assessment Stage",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_interview_context_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_interview_logistics_section",
+    "label": "Interview Logistics",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_interview_logistics_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_retry_policy_section",
+    "label": "Retry Policy",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_retry_policy_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_panel_result_section",
+    "label": "Panel Completion and Result",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Interview",
+    "fieldname": "qorg_panel_result_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Interview Feedback",
+    "fieldname": "qorg_feedback_context_section",
+    "label": "Assessment Context",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Interview Feedback",
+    "fieldname": "qorg_feedback_result_section",
+    "label": "Evaluation Result",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Interview Feedback",
+    "fieldname": "qorg_feedback_result_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_offer_context_section",
+    "label": "Recruitment Context",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Job Offer",
+    "fieldname": "qorg_offer_context_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Appointment Letter",
+    "fieldname": "qorg_appointment_context_section",
+    "label": "Recruitment Context",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Appointment Letter",
+    "fieldname": "qorg_appointment_context_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Employee",
+    "fieldname": "qorg_recruitment_source_section",
+    "label": "Recruitment Source",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Employee",
+    "fieldname": "qorg_recruitment_source_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Employee Onboarding",
+    "fieldname": "qorg_onboarding_context_section",
+    "label": "Recruitment and Assignment Context",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Employee Onboarding",
+    "fieldname": "qorg_onboarding_context_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Employee Boarding Activity",
+    "fieldname": "qorg_activity_assignment_section",
+    "label": "Assignment and Delivery",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Employee Boarding Activity",
+    "fieldname": "qorg_activity_assignment_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Employee Boarding Activity",
+    "fieldname": "qorg_activity_progress_section",
+    "label": "Progress and Evidence",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Employee Boarding Activity",
+    "fieldname": "qorg_activity_verification_section",
+    "label": "Verification",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1
+  },
+  {
+    "dt": "Employee Boarding Activity",
+    "fieldname": "qorg_activity_verification_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1
   }
 ]
