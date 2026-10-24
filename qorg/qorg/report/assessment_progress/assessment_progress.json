@@ -1,0 +1,11 @@
+{
+  "doctype": "Report",
+  "name": "Assessment Progress",
+  "report_name": "Assessment Progress",
+  "ref_doctype": "Participation Assessment",
+  "report_type": "Script Report",
+  "module": "QOrg",
+  "is_standard": "Yes",
+  "disabled": 0,
+  "add_total_row": 0
+}

@@ -1,0 +1,76 @@
+{
+  "doctype": "DocType",
+  "name": "Participation Allowance",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "track_changes": 0,
+  "field_order": [
+    "allowance_type",
+    "amount",
+    "currency",
+    "frequency",
+    "project",
+    "cost_center",
+    "conditions"
+  ],
+  "fields": [
+    {
+      "fieldname": "allowance_type",
+      "label": "Allowance Type",
+      "fieldtype": "Select",
+      "options": "Stipend\nTransport\nMeal\nCommunication\nAccommodation\nInsurance\nOther",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "amount",
+      "label": "Amount",
+      "fieldtype": "Currency",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "currency",
+      "label": "Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "frequency",
+      "label": "Frequency",
+      "fieldtype": "Select",
+      "options": "One Time\nDaily\nWeekly\nMonthly\nUpon Completion",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "cost_center",
+      "label": "Cost Center",
+      "fieldtype": "Link",
+      "options": "Cost Center"
+    },
+    {
+      "fieldname": "conditions",
+      "label": "Payment Conditions",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

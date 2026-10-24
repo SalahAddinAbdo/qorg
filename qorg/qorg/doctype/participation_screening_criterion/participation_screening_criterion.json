@@ -1,0 +1,87 @@
+{
+  "doctype": "DocType",
+  "name": "Participation Screening Criterion",
+  "module": "QOrg",
+  "custom": 0,
+  "autoname": "hash",
+  "track_changes": 0,
+  "field_order": [
+    "sequence",
+    "criterion",
+    "criterion_type",
+    "weight",
+    "passing_score",
+    "mandatory",
+    "instructions",
+    "page_break"
+  ],
+  "fields": [
+    {
+      "fieldname": "sequence",
+      "label": "Sequence",
+      "fieldtype": "Int",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "criterion",
+      "label": "Criterion",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 3
+    },
+    {
+      "fieldname": "criterion_type",
+      "label": "Type",
+      "fieldtype": "Select",
+      "options": "Boolean\nScore\nText",
+      "default": "Score",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "weight",
+      "label": "Weight %",
+      "fieldtype": "Percent",
+      "default": "0",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "passing_score",
+      "label": "Passing Score %",
+      "fieldtype": "Percent",
+      "default": "60",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "mandatory",
+      "label": "Mandatory",
+      "fieldtype": "Check",
+      "default": "1",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "instructions",
+      "label": "Instructions",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "page_break",
+      "label": "Page Break",
+      "fieldtype": "Check",
+      "default": "0",
+      "allow_on_submit": 1,
+      "print_hide": 1
+    }
+  ],
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "istable": 1
+}

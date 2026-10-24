@@ -1,0 +1,261 @@
+{
+  "doctype": "DocType",
+  "name": "Participation Assessment",
+  "module": "QOrg",
+  "custom": 0,
+  "autoname": "naming_series:",
+  "track_changes": 1,
+  "field_order": [
+    "naming_series",
+    "context_section",
+    "application",
+    "opportunity",
+    "stage_sequence",
+    "stage_name",
+    "context_cb",
+    "assessment_method",
+    "attempt_number",
+    "previous_assessment",
+    "assessment_section",
+    "scheduled_on",
+    "assessor",
+    "venue_or_link",
+    "assessment_cb",
+    "score",
+    "result",
+    "status",
+    "retry_section",
+    "allow_retry",
+    "maximum_attempts",
+    "retry_requires_approval",
+    "retry_cb",
+    "retry_approved_by",
+    "retry_approved_on",
+    "retry_reason",
+    "notes_section",
+    "strengths",
+    "risks",
+    "recommendation"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Series",
+      "fieldtype": "Select",
+      "options": "PASS-.YYYY.-.#####",
+      "default": "PASS-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "context_section",
+      "label": "Application and Stage",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "application",
+      "label": "Participation Application",
+      "fieldtype": "Link",
+      "options": "Participation Application",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "opportunity",
+      "label": "External Opportunity",
+      "fieldtype": "Link",
+      "options": "External Opportunity",
+      "read_only": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "stage_sequence",
+      "label": "Stage Sequence",
+      "fieldtype": "Int",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "stage_name",
+      "label": "Stage Name",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "context_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "assessment_method",
+      "label": "Assessment Method",
+      "fieldtype": "Select",
+      "options": "Document Review\nInterview\nWritten Test\nPractical Test\nGroup Exercise\nReference Check\nOther",
+      "read_only": 1
+    },
+    {
+      "fieldname": "attempt_number",
+      "label": "Attempt Number",
+      "fieldtype": "Int",
+      "default": "1",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "previous_assessment",
+      "label": "Previous Assessment",
+      "fieldtype": "Link",
+      "options": "Participation Assessment",
+      "read_only": 1
+    },
+    {
+      "fieldname": "assessment_section",
+      "label": "Assessment",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "scheduled_on",
+      "label": "Scheduled On",
+      "fieldtype": "Datetime"
+    },
+    {
+      "fieldname": "assessor",
+      "label": "Assessor",
+      "fieldtype": "Link",
+      "options": "User"
+    },
+    {
+      "fieldname": "venue_or_link",
+      "label": "Venue / Meeting Link",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "assessment_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "score",
+      "label": "Score %",
+      "fieldtype": "Percent"
+    },
+    {
+      "fieldname": "result",
+      "label": "Result",
+      "fieldtype": "Select",
+      "options": "Pending\nPassed\nFailed",
+      "default": "Pending",
+      "read_only": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Planned\nIn Progress\nCompleted\nCancelled",
+      "default": "Planned",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "retry_section",
+      "label": "Retry",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "allow_retry",
+      "label": "Allow Retry",
+      "fieldtype": "Check",
+      "read_only": 1
+    },
+    {
+      "fieldname": "maximum_attempts",
+      "label": "Maximum Attempts",
+      "fieldtype": "Int",
+      "read_only": 1
+    },
+    {
+      "fieldname": "retry_requires_approval",
+      "label": "Retry Requires Approval",
+      "fieldtype": "Check",
+      "read_only": 1
+    },
+    {
+      "fieldname": "retry_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "retry_approved_by",
+      "label": "Retry Approved By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "retry_approved_on",
+      "label": "Retry Approved On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "retry_reason",
+      "label": "Retry Reason",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "notes_section",
+      "label": "Evidence and Notes",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "strengths",
+      "label": "Strengths / Evidence",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "risks",
+      "label": "Risks / Concerns",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "recommendation",
+      "label": "Recommendation",
+      "fieldtype": "Select",
+      "options": "Strongly Recommend\nRecommend\nReserve\nDo Not Recommend"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Volunteer Coordinator",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "print": 1,
+      "email": 1
+    },
+    {
+      "role": "Volunteer Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "print": 1,
+      "email": 1
+    },
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "print": 1,
+      "email": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "title_field": "application",
+  "search_fields": "application,opportunity,stage_name"
+}

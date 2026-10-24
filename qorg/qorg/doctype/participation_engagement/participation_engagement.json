@@ -1,0 +1,452 @@
+{
+  "doctype": "DocType",
+  "name": "Participation Engagement",
+  "module": "QOrg",
+  "custom": 0,
+  "autoname": "naming_series:",
+  "track_changes": 1,
+  "field_order": [
+    "naming_series",
+    "source_section",
+    "application",
+    "external_person",
+    "opportunity",
+    "participation_type",
+    "source_cb",
+    "status",
+    "company",
+    "project",
+    "branch",
+    "assignment_section",
+    "role_title",
+    "supervisor",
+    "department",
+    "assignment_cb",
+    "start_date",
+    "end_date",
+    "expected_hours",
+    "completed_hours",
+    "agreement_section",
+    "agreement_status",
+    "agreement_date",
+    "code_of_conduct_accepted",
+    "safeguarding_acknowledged",
+    "agreement_cb",
+    "background_check_status",
+    "safeguarding_clearance_status",
+    "confidentiality_accepted",
+    "emergency_contact_verified",
+    "onboarding_section",
+    "onboarding_activities",
+    "onboarding_completion",
+    "performance_section",
+    "midterm_rating",
+    "final_rating",
+    "performance_cb",
+    "completion_status",
+    "certificate_issued",
+    "certificate_date",
+    "exit_section",
+    "renewal_decision",
+    "exit_reason",
+    "exit_date",
+    "exit_cb",
+    "exit_clearance_completed",
+    "assets_returned",
+    "exit_remarks",
+    "learning_section",
+    "learning_objectives",
+    "allowance_section",
+    "allowances",
+    "clearance_section",
+    "clearance_items",
+    "latest_midterm_evaluation",
+    "latest_final_evaluation",
+    "certificate"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Series",
+      "fieldtype": "Select",
+      "options": "PENG-.YYYY.-.#####",
+      "default": "PENG-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "source_section",
+      "label": "Participant and Source",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "application",
+      "label": "Participation Application",
+      "fieldtype": "Link",
+      "options": "Participation Application",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "external_person",
+      "label": "External Person",
+      "fieldtype": "Link",
+      "options": "External Person",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "opportunity",
+      "label": "External Opportunity",
+      "fieldtype": "Link",
+      "options": "External Opportunity",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "participation_type",
+      "label": "Participation Type",
+      "fieldtype": "Select",
+      "options": "Volunteer\nIntern",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "source_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nPending Onboarding\nActive\nSuspended\nCompleted\nTerminated\nWithdrawn\nCancelled",
+      "default": "Draft",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project"
+    },
+    {
+      "fieldname": "branch",
+      "label": "Branch",
+      "fieldtype": "Link",
+      "options": "Branch"
+    },
+    {
+      "fieldname": "assignment_section",
+      "label": "Assignment",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "role_title",
+      "label": "Role / Assignment Title",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "supervisor",
+      "label": "Supervisor",
+      "fieldtype": "Link",
+      "options": "Employee",
+      "reqd": 1
+    },
+    {
+      "fieldname": "department",
+      "label": "Department",
+      "fieldtype": "Link",
+      "options": "Department"
+    },
+    {
+      "fieldname": "assignment_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "start_date",
+      "label": "Start Date",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "end_date",
+      "label": "End Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "expected_hours",
+      "label": "Expected Total Hours",
+      "fieldtype": "Float"
+    },
+    {
+      "fieldname": "completed_hours",
+      "label": "Verified Hours",
+      "fieldtype": "Float",
+      "read_only": 1
+    },
+    {
+      "fieldname": "agreement_section",
+      "label": "Agreement and Compliance",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "agreement_status",
+      "label": "Agreement Status",
+      "fieldtype": "Select",
+      "options": "Not Prepared\nPrepared\nAccepted\nDeclined\nExpired",
+      "default": "Not Prepared",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "agreement_date",
+      "label": "Agreement Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "code_of_conduct_accepted",
+      "label": "Code of Conduct Accepted",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "safeguarding_acknowledged",
+      "label": "Safeguarding Acknowledged",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "agreement_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "background_check_status",
+      "label": "Background Check Status",
+      "fieldtype": "Select",
+      "options": "Not Required\nPending\nCleared\nNot Cleared",
+      "default": "Not Required"
+    },
+    {
+      "fieldname": "safeguarding_clearance_status",
+      "label": "Safeguarding Clearance Status",
+      "fieldtype": "Select",
+      "options": "Not Required\nPending\nCleared\nNot Cleared",
+      "default": "Pending"
+    },
+    {
+      "fieldname": "confidentiality_accepted",
+      "label": "Confidentiality Undertaking Accepted",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "emergency_contact_verified",
+      "label": "Emergency Contact Verified",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "onboarding_section",
+      "label": "Orientation and Onboarding",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "onboarding_activities",
+      "label": "Onboarding Activities",
+      "fieldtype": "Table",
+      "options": "Participation Onboarding Activity"
+    },
+    {
+      "fieldname": "onboarding_completion",
+      "label": "Onboarding Completion %",
+      "fieldtype": "Percent",
+      "read_only": 1
+    },
+    {
+      "fieldname": "performance_section",
+      "label": "Performance and Completion",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "midterm_rating",
+      "label": "Midterm Rating %",
+      "fieldtype": "Percent"
+    },
+    {
+      "fieldname": "final_rating",
+      "label": "Final Rating %",
+      "fieldtype": "Percent"
+    },
+    {
+      "fieldname": "performance_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "completion_status",
+      "label": "Completion Status",
+      "fieldtype": "Select",
+      "options": "Not Due\nPending\nSuccessfully Completed\nPartially Completed\nNot Completed",
+      "default": "Not Due"
+    },
+    {
+      "fieldname": "certificate_issued",
+      "label": "Certificate Issued",
+      "fieldtype": "Check",
+      "read_only": 1
+    },
+    {
+      "fieldname": "certificate_date",
+      "label": "Certificate Date",
+      "fieldtype": "Date",
+      "read_only": 1
+    },
+    {
+      "fieldname": "exit_section",
+      "label": "Renewal and Exit",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "renewal_decision",
+      "label": "Renewal Decision",
+      "fieldtype": "Select",
+      "options": "\nRenew\nDo Not Renew\nNot Applicable"
+    },
+    {
+      "fieldname": "exit_reason",
+      "label": "Exit Reason",
+      "fieldtype": "Select",
+      "options": "\nCompleted\nVoluntary Withdrawal\nPerformance\nMisconduct\nSafeguarding\nHealth or Safety\nProgram Closure\nOther"
+    },
+    {
+      "fieldname": "exit_date",
+      "label": "Exit Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "exit_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "exit_clearance_completed",
+      "label": "Exit Clearance Completed",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "assets_returned",
+      "label": "Assets Returned",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "exit_remarks",
+      "label": "Exit Remarks",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "learning_section",
+      "label": "Learning and Development",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "learning_objectives",
+      "label": "Learning Objectives",
+      "fieldtype": "Table",
+      "options": "Participation Learning Objective",
+      "depends_on": "eval:doc.participation_type==\"Intern\""
+    },
+    {
+      "fieldname": "allowance_section",
+      "label": "Allowances and Funding",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "allowances",
+      "label": "Allowances",
+      "fieldtype": "Table",
+      "options": "Participation Allowance"
+    },
+    {
+      "fieldname": "clearance_section",
+      "label": "Clearances and Compliance",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "clearance_items",
+      "label": "Clearance Items",
+      "fieldtype": "Table",
+      "options": "Participation Clearance Item"
+    },
+    {
+      "fieldname": "latest_midterm_evaluation",
+      "label": "Latest Midterm Evaluation",
+      "fieldtype": "Link",
+      "options": "Participation Evaluation",
+      "read_only": 1
+    },
+    {
+      "fieldname": "latest_final_evaluation",
+      "label": "Latest Final Evaluation",
+      "fieldtype": "Link",
+      "options": "Participation Evaluation",
+      "read_only": 1
+    },
+    {
+      "fieldname": "certificate",
+      "label": "Participation Certificate",
+      "fieldtype": "Link",
+      "options": "Participation Certificate",
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Volunteer Coordinator",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "print": 1,
+      "email": 1,
+      "submit": 1,
+      "cancel": 1
+    },
+    {
+      "role": "Volunteer Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "print": 1,
+      "email": 1,
+      "submit": 1,
+      "cancel": 1
+    },
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "print": 1,
+      "email": 1,
+      "submit": 1,
+      "cancel": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "title_field": "external_person",
+  "search_fields": "external_person,opportunity,role_title,status",
+  "is_submittable": 1
+}

@@ -1,0 +1,193 @@
+{
+  "doctype": "DocType",
+  "name": "Participation Evaluation",
+  "module": "QOrg",
+  "custom": 0,
+  "track_changes": 1,
+  "autoname": "naming_series:",
+  "field_order": [
+    "naming_series",
+    "context_section",
+    "engagement",
+    "external_person",
+    "evaluation_type",
+    "context_cb",
+    "evaluation_date",
+    "evaluator",
+    "status",
+    "result_section",
+    "performance_rating",
+    "attendance_rating",
+    "learning_rating",
+    "result_cb",
+    "overall_rating",
+    "recommendation",
+    "strengths",
+    "development_needs",
+    "participant_feedback",
+    "final_remarks"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Series",
+      "fieldtype": "Select",
+      "options": "PEV-.YYYY.-.#####",
+      "default": "PEV-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "context_section",
+      "label": "Engagement and Evaluation",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "engagement",
+      "label": "Participation Engagement",
+      "fieldtype": "Link",
+      "options": "Participation Engagement",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "external_person",
+      "label": "External Person",
+      "fieldtype": "Link",
+      "options": "External Person",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "evaluation_type",
+      "label": "Evaluation Type",
+      "fieldtype": "Select",
+      "options": "Midterm\nFinal\nSpecial",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "context_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "evaluation_date",
+      "label": "Evaluation Date",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "default": "Today",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "evaluator",
+      "label": "Evaluator",
+      "fieldtype": "Link",
+      "options": "User",
+      "reqd": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nCompleted\nCancelled",
+      "default": "Draft",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "result_section",
+      "label": "Evaluation Result",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "performance_rating",
+      "label": "Performance Rating %",
+      "fieldtype": "Percent",
+      "reqd": 1
+    },
+    {
+      "fieldname": "attendance_rating",
+      "label": "Attendance / Reliability %",
+      "fieldtype": "Percent"
+    },
+    {
+      "fieldname": "learning_rating",
+      "label": "Learning Achievement %",
+      "fieldtype": "Percent"
+    },
+    {
+      "fieldname": "result_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "overall_rating",
+      "label": "Overall Rating %",
+      "fieldtype": "Percent",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "recommendation",
+      "label": "Recommendation",
+      "fieldtype": "Select",
+      "options": "Continue\nComplete Successfully\nRenew\nExtend with Conditions\nPerformance Improvement\nTerminate",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "strengths",
+      "label": "Strengths",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "development_needs",
+      "label": "Development Needs",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "participant_feedback",
+      "label": "Participant Feedback / Reflection",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "final_remarks",
+      "label": "Final Remarks",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Volunteer Coordinator",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "print": 1,
+      "email": 1
+    },
+    {
+      "role": "Volunteer Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "print": 1,
+      "email": 1
+    },
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "print": 1,
+      "email": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "title_field": "engagement",
+  "search_fields": "engagement,external_person,evaluation_type,status"
+}

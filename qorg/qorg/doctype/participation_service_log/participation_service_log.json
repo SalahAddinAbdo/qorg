@@ -1,0 +1,160 @@
+{
+  "doctype": "DocType",
+  "name": "Participation Service Log",
+  "module": "QOrg",
+  "custom": 0,
+  "autoname": "naming_series:",
+  "track_changes": 1,
+  "field_order": [
+    "naming_series",
+    "engagement",
+    "external_person",
+    "service_date",
+    "hours",
+    "activity",
+    "location",
+    "status",
+    "evidence",
+    "supervisor",
+    "verification_section",
+    "verified_by",
+    "verified_on",
+    "verification_remarks",
+    "rejection_reason"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Series",
+      "fieldtype": "Select",
+      "options": "PSL-.YYYY.-.#####",
+      "default": "PSL-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "engagement",
+      "label": "Participation Engagement",
+      "fieldtype": "Link",
+      "options": "Participation Engagement",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "external_person",
+      "label": "External Person",
+      "fieldtype": "Link",
+      "options": "External Person",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "service_date",
+      "label": "Service Date",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "hours",
+      "label": "Hours",
+      "fieldtype": "Float",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "activity",
+      "label": "Activity / Assignment",
+      "fieldtype": "Small Text",
+      "reqd": 1
+    },
+    {
+      "fieldname": "location",
+      "label": "Location",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nSubmitted\nVerified\nRejected",
+      "default": "Draft",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "evidence",
+      "label": "Evidence",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "supervisor",
+      "label": "Supervisor",
+      "fieldtype": "Link",
+      "options": "Employee",
+      "read_only": 1
+    },
+    {
+      "fieldname": "verification_section",
+      "label": "Verification",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "verified_by",
+      "label": "Verified By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "verified_on",
+      "label": "Verified On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "verification_remarks",
+      "label": "Verification Remarks",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "rejection_reason",
+      "label": "Rejection Reason",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:doc.status==\"Rejected\""
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Volunteer Coordinator",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "print": 1,
+      "email": 1
+    },
+    {
+      "role": "Volunteer Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "print": 1,
+      "email": 1
+    },
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "print": 1,
+      "email": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "title_field": "engagement"
+}

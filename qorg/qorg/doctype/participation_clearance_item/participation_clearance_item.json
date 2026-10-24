@@ -1,0 +1,79 @@
+{
+  "doctype": "DocType",
+  "name": "Participation Clearance Item",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "track_changes": 0,
+  "field_order": [
+    "clearance_type",
+    "required",
+    "status",
+    "due_date",
+    "evidence",
+    "verified_by",
+    "verified_on",
+    "remarks"
+  ],
+  "fields": [
+    {
+      "fieldname": "clearance_type",
+      "label": "Clearance Type",
+      "fieldtype": "Select",
+      "options": "Safeguarding\nBackground Check\nReference Check\nConflict of Interest\nCode of Conduct\nConfidentiality\nData Protection\nHealth and Safety\nSecurity Briefing\nEmergency Contact\nAccessibility Arrangement\nAsset Return\nOther",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "required",
+      "label": "Required",
+      "fieldtype": "Check",
+      "default": "1",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Not Required\nPending\nSubmitted\nCleared\nNot Cleared\nWaived",
+      "default": "Pending",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "due_date",
+      "label": "Due Date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "evidence",
+      "label": "Evidence",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "verified_by",
+      "label": "Verified By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "verified_on",
+      "label": "Verified On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "remarks",
+      "label": "Remarks",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

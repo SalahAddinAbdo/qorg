@@ -1,0 +1,91 @@
+{
+  "doctype": "DocType",
+  "name": "Participation Application Criterion",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "track_changes": 0,
+  "field_order": [
+    "criterion",
+    "criterion_type",
+    "weight",
+    "mandatory",
+    "result",
+    "score",
+    "evidence",
+    "reviewed_by",
+    "reviewed_on"
+  ],
+  "fields": [
+    {
+      "fieldname": "criterion",
+      "label": "Criterion",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 3
+    },
+    {
+      "fieldname": "criterion_type",
+      "label": "Type",
+      "fieldtype": "Select",
+      "options": "Boolean\nScore\nText",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "weight",
+      "label": "Weight %",
+      "fieldtype": "Percent",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "mandatory",
+      "label": "Mandatory",
+      "fieldtype": "Check",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "result",
+      "label": "Result",
+      "fieldtype": "Select",
+      "options": "Pending\nMet\nNot Met\nNot Applicable",
+      "default": "Pending",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "score",
+      "label": "Score %",
+      "fieldtype": "Percent",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "evidence",
+      "label": "Evidence / Remarks",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "reviewed_by",
+      "label": "Reviewed By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "reviewed_on",
+      "label": "Reviewed On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    }
+  ],
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}
