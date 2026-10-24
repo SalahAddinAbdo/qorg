@@ -1,7 +1,0 @@
-{
-  "doctype": "Email Template",
-  "name": "Recruitment - Reserve Candidate - Bilingual",
-  "subject": "Application reserve status | حالة قائمة الاحتياط",
-  "use_html": 1,
-  "response_html": "<div style=\"font-family:Arial,sans-serif\"><div dir=\"rtl\"><strong>Reserve Notice</strong><br>يرجى مراجعة تفاصيل المستند والرد على الرسالة عند طلب التأكيد.</div><hr><div dir=\"ltr\"><strong>Reserve Notice</strong><br>Please review the document details and reply when acknowledgement is requested.</div></div>"
-}

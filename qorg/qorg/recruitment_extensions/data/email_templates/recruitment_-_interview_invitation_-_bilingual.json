@@ -1,7 +1,0 @@
-{
-  "doctype": "Email Template",
-  "name": "Recruitment - Interview Invitation - Bilingual",
-  "subject": "Interview invitation | دعوة مقابلة",
-  "use_html": 1,
-  "response_html": "<div style=\"font-family:Arial,sans-serif\"><div dir=\"rtl\"><strong>Interview Invitation</strong><br>يرجى مراجعة تفاصيل المستند والرد على الرسالة عند طلب التأكيد.</div><hr><div dir=\"ltr\"><strong>Interview Invitation</strong><br>Please review the document details and reply when acknowledgement is requested.</div></div>"
-}
