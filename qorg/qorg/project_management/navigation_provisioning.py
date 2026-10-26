@@ -28,24 +28,13 @@ NAVIGATION_PROVIDERS = (
     "qorg.qorg.project_management.navigation.WORKSPACE_CONTRIBUTIONS",
 )
 
-SIDEBAR_DEFINITIONS = [
+LEGACY_SIDEBAR_DEFINITIONS = [
     ("Q Management Hub", "Workspace", "Q Management Hub", "home"),
     ("People & Recruitment", "Workspace", "People & Recruitment", "users"),
     ("Projects & Tasks", "Workspace", "Projects & Tasks", "folder-normal"),
     ("Workflow & Documents", "Workspace", "Workflow & Documents", "workflow"),
     ("Master Data", "Workspace", "Master Data", "folder-normal"),
     ("Reports & Analytics", "Workspace", "Reports & Analytics", "chart"),
-    ("Projects", "DocType", "Project", "folder-normal"),
-    ("Tasks", "DocType", "Task", "folder-normal"),
-    ("Progress Updates", "DocType", "Project Progress Update", "calendar"),
-    ("Project Risks", "DocType", "Project Risk", "folder-normal"),
-    ("Change Requests", "DocType", "Project Change Request", "change"),
-    ("Portfolio Overview", "Report", "Project Portfolio Overview", "chart"),
-    ("Budget Versus Actual", "Report", "Budget Versus Actual", "accounting"),
-    ("Employee Task Tracker", "Report", "Employees Task Tracker", "users"),
-    ("Project Settings", "DocType", "Projects Settings", "setting-gear"),
-    ("Task Settings", "DocType", "Task Management Settings", "setting-gear"),
-    ("Print Settings", "DocType", "Print Settings", "printer"),
 ]
 
 
@@ -228,9 +217,9 @@ def _save_workspace(name, groups):
         doc.save(ignore_permissions=True)
 
 
-def _save_sidebar():
+def _save_legacy_sidebar():
     items = []
-    for label, link_type, target, icon in SIDEBAR_DEFINITIONS:
+    for label, link_type, target, icon in LEGACY_SIDEBAR_DEFINITIONS:
         if not _exists(link_type, target):
             continue
         row = {
@@ -254,7 +243,7 @@ def _save_sidebar():
         frappe.get_doc({"doctype": "Workspace Sidebar", "name": SIDEBAR, **values}).insert(ignore_permissions=True)
 
 
-def _save_icon():
+def _save_legacy_icon():
     values = {
         "label": DESKTOP_ICON, "icon_type": "Link",
         "link_type": "Workspace Sidebar", "link_to": SIDEBAR, "sidebar": "",
@@ -381,13 +370,32 @@ def _integrate_standard_workspaces():
             _integrate_standard_workspace(workspace_name, definition["cards"])
 
 
+def _provision_legacy_navigation_fallback():
+    """Keep the v16 Desktop Icons fallback usable while Frappe still supports it.
+
+    The standard app-owned Sidebar is shipped from qorg/qorg/sidebar and is the
+    source of truth for the new Desk navigation. These legacy records are kept
+    deliberately small and are not used to manage the new Sidebar layer.
+    """
+    if frappe.db.exists("DocType", "Workspace Sidebar"):
+        _save_legacy_sidebar()
+
+    if frappe.db.exists("DocType", "Desktop Icon"):
+        _save_legacy_icon()
+
+
 def provision_q_org_navigation():
+    """Provision QOrg workspaces without overwriting the new Sidebar layer.
+
+    Navigation providers contribute dynamic cards and links to the six stable
+    QOrg workspace shells. This lets functional packages add DocTypes, reports,
+    pages, and dashboards without requiring repeated edits to the app Sidebar.
+    """
     _audit_standard_workspace_shells()
 
     for name, groups in _get_workspace_groups().items():
         _save_workspace(name, groups)
 
-    _save_sidebar()
-    _save_icon()
     _integrate_standard_workspaces()
+    _provision_legacy_navigation_fallback()
     frappe.clear_cache()
