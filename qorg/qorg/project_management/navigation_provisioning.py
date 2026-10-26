@@ -25,6 +25,7 @@ STANDARD_QORG_WORKSPACES = (
 NAVIGATION_PROVIDERS = (
     "qorg.qorg.people_and_opportunities.navigation.WORKSPACE_CONTRIBUTIONS",
     "qorg.qorg.recruitment_extensions.navigation.WORKSPACE_CONTRIBUTIONS",
+    "qorg.qorg.volunteer_management.navigation.WORKSPACE_CONTRIBUTIONS",
     "qorg.qorg.project_management.navigation.WORKSPACE_CONTRIBUTIONS",
 )
 
@@ -370,32 +371,19 @@ def _integrate_standard_workspaces():
             _integrate_standard_workspace(workspace_name, definition["cards"])
 
 
-def _provision_legacy_navigation_fallback():
-    """Keep the v16 Desktop Icons fallback usable while Frappe still supports it.
-
-    The standard app-owned Sidebar is shipped from qorg/qorg/sidebar and is the
-    source of truth for the new Desk navigation. These legacy records are kept
-    deliberately small and are not used to manage the new Sidebar layer.
-    """
-    if frappe.db.exists("DocType", "Workspace Sidebar"):
-        _save_legacy_sidebar()
-
-    if frappe.db.exists("DocType", "Desktop Icon"):
-        _save_legacy_icon()
-
-
 def provision_q_org_navigation():
-    """Provision QOrg workspaces without overwriting the new Sidebar layer.
-
-    Navigation providers contribute dynamic cards and links to the six stable
-    QOrg workspace shells. This lets functional packages add DocTypes, reports,
-    pages, and dashboards without requiring repeated edits to the app Sidebar.
-    """
     _audit_standard_workspace_shells()
 
     for name, groups in _get_workspace_groups().items():
         _save_workspace(name, groups)
 
     _integrate_standard_workspaces()
-    _provision_legacy_navigation_fallback()
+
+    # Compatibility fallback only. The new app-owned Dock and Sidebar are
+    # synchronized from qorg/qorg/dock and qorg/qorg/sidebar by Frappe.
+    if frappe.db.exists("DocType", "Workspace Sidebar"):
+        _save_legacy_sidebar()
+    if frappe.db.exists("DocType", "Desktop Icon"):
+        _save_legacy_icon()
+
     frappe.clear_cache()

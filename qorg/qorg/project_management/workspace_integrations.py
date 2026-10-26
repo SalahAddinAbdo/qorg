@@ -79,6 +79,29 @@ STANDARD_WORKSPACE_INTEGRATIONS = (
         ),
     },
     {
+        "workspace_candidates": ("Recruitment",),
+        "workspace_keywords": ("recruitment",),
+        "cards": (
+            {
+                "label": "Q Org - People & Opportunities",
+                "items": (
+                    ("DocType", "External Person", "External People"),
+                    ("DocType", "External Opportunity", "External Opportunities"),
+                    ("DocType", "Work Commencement Notice", "Work Commencement Notices"),
+                ),
+            },
+            {
+                "label": "Q Org - Volunteer & Internship",
+                "items": (
+                    ("DocType", "Participation Application", "Participation Applications"),
+                    ("DocType", "Participation Assessment", "Participation Assessments"),
+                    ("DocType", "Participation Engagement", "Participation Engagements"),
+                    ("DocType", "Participation Service Log", "Participation Service Logs"),
+                ),
+            },
+        ),
+    },
+    {
         "workspace_candidates": ("Human Resources", "HR", "HRMS"),
         "workspace_keywords": ("human resource", "hrms"),
         "cards": (
