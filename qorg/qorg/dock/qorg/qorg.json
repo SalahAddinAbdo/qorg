@@ -4,12 +4,12 @@
   "doctype": "Dock",
   "idx": 0,
   "items": [
-    {"added": 0, "hidden": 0, "icon": "home-soft", "link_to": "Q Management Hub", "link_type": "Workspace", "title": "Q Management Hub"},
-    {"added": 0, "hidden": 0, "icon": "users-soft", "link_to": "People & Recruitment", "link_type": "Workspace", "title": "People & Recruitment"},
+    {"added": 0, "hidden": 0, "icon": "sliders-soft", "link_to": "Q Management Hub", "link_type": "Workspace", "title": "Management Hub"},
+    {"added": 0, "hidden": 0, "icon": "portal-user-soft", "link_to": "People & Recruitment", "link_type": "Workspace", "title": "People & Recruitment"},
     {"added": 0, "hidden": 0, "icon": "gantt-chart-soft", "link_to": "Projects & Tasks", "link_type": "Workspace", "title": "Projects & Tasks"},
-    {"added": 0, "hidden": 0, "icon": "workflow-soft", "link_to": "Workflow & Documents", "link_type": "Workspace", "title": "Workflow & Documents"},
-    {"added": 0, "hidden": 0, "icon": "database-soft", "link_to": "Master Data", "link_type": "Workspace", "title": "Master Data"},
-    {"added": 0, "hidden": 0, "icon": "chart-column-soft", "link_to": "Reports & Analytics", "link_type": "Workspace", "title": "Reports & Analytics"}
+    {"added": 0, "hidden": 0, "icon": "quality-seal-soft", "link_to": "Workflow & Documents", "link_type": "Workspace", "title": "Workflow & Documents"},
+    {"added": 0, "hidden": 0, "icon": "shelf-rack-soft", "link_to": "Master Data", "link_type": "Workspace", "title": "Master Data"},
+    {"added": 0, "hidden": 0, "icon": "calculator-soft", "link_to": "Reports & Analytics", "link_type": "Workspace", "title": "Reports & Analytics"}
   ],
   "name": "qorg",
   "standard": 1,
