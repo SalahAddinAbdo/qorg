@@ -26,8 +26,6 @@ def validate_responsible_user(doc, method=None):
 
     if _must_bypass(doc):
         return
-    if not doc.meta.has_field(RESPONSIBLE_FIELD):
-        return
     if not _has_active_workflow(doc.doctype):
         return
 
@@ -44,6 +42,12 @@ def validate_responsible_user(doc, method=None):
     if stored_responsible == current_user:
         return
 
+    # Set only by the validated QOrg atomic workflow service. This permits the
+    # first assignment and a same-save handoff without opening a general bypass
+    # for browser saves, imports, REST calls, or direct field manipulation.
+    if getattr(doc.flags, "qorg_atomic_workflow_handoff", False):
+        return
+
     # The assigned user may edit when the stored field was not yet populated,
     # for example immediately after field provisioning or legacy migration.
     if not stored_responsible and incoming_responsible == current_user:
@@ -57,10 +61,18 @@ def validate_responsible_user(doc, method=None):
     )
 
 
+
+def can_override_responsibility(user=None):
+    user = user or frappe.session.user
+    if user == "Administrator":
+        return True
+    return bool(BYPASS_ROLES.intersection(frappe.get_roles(user)))
+
+
 def _must_bypass(doc):
-    if frappe.session.user in {"Administrator", "Guest"}:
-        return frappe.session.user == "Administrator"
-    if BYPASS_ROLES.intersection(frappe.get_roles(frappe.session.user)):
+    if frappe.session.user == "Guest":
+        return False
+    if can_override_responsibility():
         return True
     if getattr(frappe.flags, "in_migrate", False):
         return True
