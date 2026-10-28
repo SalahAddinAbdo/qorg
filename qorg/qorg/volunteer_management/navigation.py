@@ -13,10 +13,5 @@ WORKSPACE_CONTRIBUTIONS = {
                 "Participation Service Log",
             ),
         ),
-        (
-            "Volunteer & Internship Settings",
-            "DocType",
-            ("Volunteer and Internship Settings",),
-        ),
     ),
 }
