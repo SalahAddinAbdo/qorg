@@ -2,10 +2,6 @@ frappe.treeview_settings["Budget Line"] = {
     breadcrumb: "QOrg",
     title: __("Budget Lines"),
     root_label: __("Budget Lines"),
-    get_tree_root: false,
-    get_tree_nodes:
-        "qorg.qorg.doctype.budget_line.budget_line.get_tree_nodes",
-    add_tree_node: "frappe.desk.treeview.add_node",
     filters: [
         {
             fieldname: "project",
