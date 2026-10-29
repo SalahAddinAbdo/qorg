@@ -1,0 +1,93 @@
+{
+  "Web Form": [
+    {
+      "fieldname": "qorg_managed_default",
+      "label": "Managed Default",
+      "fieldtype": "Check",
+      "hidden": 1,
+      "read_only": 1,
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_managed_version",
+      "label": "Managed Version",
+      "fieldtype": "Data",
+      "hidden": 1,
+      "read_only": 1,
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_managed_hash",
+      "label": "Managed Hash",
+      "fieldtype": "Data",
+      "hidden": 1,
+      "read_only": 1,
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_managed_update_available",
+      "label": "Managed Update Available",
+      "fieldtype": "Check",
+      "hidden": 1,
+      "read_only": 1,
+      "module": "QOrg",
+      "is_system_generated": 1
+    }
+  ],
+  "HR Settings": [
+    {
+      "fieldname": "qorg_portal_application_controls_section",
+      "label": "Portal Profile and Application Controls",
+      "fieldtype": "Section Break",
+      "insert_after": "qorg_volunteer_internship_tab",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_allow_profile_portal_editing",
+      "label": "Allow Profile Editing from Portal",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_portal_application_controls_section",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_allow_application_edit_until_closing",
+      "label": "Allow Application Editing Until Closing Date",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_allow_profile_portal_editing",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_portal_controls_column",
+      "fieldtype": "Column Break",
+      "insert_after": "qorg_allow_application_edit_until_closing",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_lock_application_when_screening_starts",
+      "label": "Lock Application When Screening Starts",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_portal_controls_column",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_allow_application_withdrawal",
+      "label": "Allow Applicant Withdrawal",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_lock_application_when_screening_starts",
+      "module": "QOrg",
+      "is_system_generated": 1
+    }
+  ]
+}

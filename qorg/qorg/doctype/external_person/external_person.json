@@ -85,6 +85,10 @@
     "privacy_col_2",
     "privacy_consent_source",
     "user",
+    "allow_portal_editing",
+    "portal_edit_lock_reason",
+    "portal_edit_locked_by",
+    "portal_edit_locked_on",
     "employee",
     "links_section",
     "volunteer",
@@ -585,6 +589,34 @@
       "fieldtype": "Dynamic Link",
       "options": "source_reference_doctype",
       "read_only": 1
+    },
+    {
+      "fieldname": "allow_portal_editing",
+      "label": "Allow Portal Editing",
+      "fieldtype": "Check",
+      "default": "1",
+      "description": "When disabled by an authorized system user, the profile owner can view and print the profile but cannot update it from the portal."
+    },
+    {
+      "fieldname": "portal_edit_lock_reason",
+      "label": "Portal Edit Lock Reason",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:doc.allow_portal_editing==0"
+    },
+    {
+      "fieldname": "portal_edit_locked_by",
+      "label": "Portal Editing Locked By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "portal_edit_locked_on",
+      "label": "Portal Editing Locked On",
+      "fieldtype": "Datetime",
+      "read_only": 1,
+      "no_copy": 1
     }
   ],
   "grid_page_length": 50,

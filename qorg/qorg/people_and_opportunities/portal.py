@@ -260,7 +260,7 @@ def get_public_opportunity(route):
         raise frappe.PermissionError
     result = _sanitize_doc(doc)
     result["is_open"] = is_opportunity_open(doc)
-    result["apply_url"] = f"/opportunities/{quote(route)}#apply"
+    result["apply_url"] = _get_web_form_application_url(doc, route)
     return result
 
 
@@ -276,6 +276,11 @@ def is_opportunity_open(doc):
     if _has_field(doc, "allow_external_applications") and not cint(
         doc.get("allow_external_applications")
     ):
+        return False
+    from qorg.qorg.people_and_opportunities.web_form_services import (
+        is_application_capacity_available,
+    )
+    if not is_application_capacity_available(doc.name):
         return False
     return True
 
@@ -372,7 +377,7 @@ def _create_participation_application(
         frappe.throw(_("Participation Application is not installed."))
     duplicate_filters = {
         "external_person": person.name,
-        "external_opportunity": opportunity.name,
+        "opportunity": opportunity.name,
     }
     existing = frappe.db.get_value(
         "Participation Application",
@@ -389,7 +394,7 @@ def _create_participation_application(
 
     target = frappe.new_doc("Participation Application")
     _set_if_field(target, "external_person", person.name)
-    _set_if_field(target, "external_opportunity", opportunity.name)
+    _set_if_field(target, "opportunity", opportunity.name)
     _set_if_field(target, "company", opportunity.get("company"))
     _set_if_field(target, "project", opportunity.get("project"))
     _set_if_field(target, "branch", opportunity.get("branch"))
@@ -400,7 +405,7 @@ def _create_participation_application(
     _set_if_field(target, "email", person.get("primary_email"))
     _set_if_field(target, "mobile_no", person.get("mobile_no"))
     _set_if_field(target, "motivation", motivation)
-    _set_if_field(target, "availability_start_date", availability_start_date)
+    _set_if_field(target, "available_from", availability_start_date)
     _set_if_field(target, "hours_per_week", hours_per_week)
     _set_if_field(target, "participation_type", _participation_type(opportunity))
     target.insert(ignore_permissions=True)
@@ -452,7 +457,7 @@ def _get_participation_applications(person_name):
     meta = frappe.get_meta("Participation Application")
     fields = ["name", "modified"]
     for fieldname in (
-        "external_opportunity",
+        "opportunity",
         "status",
         "application_date",
         "final_decision",
@@ -470,7 +475,7 @@ def _get_participation_applications(person_name):
         {
             "doctype": "Participation Application",
             "name": row.name,
-            "opportunity": row.get("external_opportunity"),
+            "opportunity": row.get("opportunity"),
             "status": row.get("status") or row.get("final_decision"),
             "application_date": row.get("application_date") or row.modified,
             "overall_score": row.get("overall_score"),
@@ -581,6 +586,16 @@ def _opportunity_behavior(doc):
         if behavior:
             return behavior
     return opportunity_type
+
+
+def _get_web_form_application_url(doc, route):
+    behavior = _opportunity_behavior(doc)
+    target_route = (
+        "employment-application"
+        if behavior == "Employment"
+        else "participation-application"
+    )
+    return f"/{target_route}/new?opportunity={quote(route)}"
 
 
 def _participation_type(doc):

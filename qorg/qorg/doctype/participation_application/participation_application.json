@@ -13,6 +13,8 @@
     "participation_type",
     "identity_cb",
     "application_date",
+    "application_source",
+    "portal_owner",
     "status",
     "project",
     "branch",
@@ -235,6 +237,22 @@
       "fieldtype": "Link",
       "options": "User",
       "read_only": 1
+    },
+    {
+      "fieldname": "application_source",
+      "label": "Application Source",
+      "fieldtype": "Select",
+      "options": "Portal\nManual Entry\nImport\nMigration\nOther",
+      "default": "Manual Entry",
+      "read_only": 1
+    },
+    {
+      "fieldname": "portal_owner",
+      "label": "Portal Owner",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1,
+      "no_copy": 1
     }
   ],
   "permissions": [

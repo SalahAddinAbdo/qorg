@@ -1,145 +1,48 @@
 {% extends "templates/web.html" %}
 {% block title %}{{ opportunity.opportunity_title }}{% endblock %}
-{% block head_include %}
-<link rel="stylesheet" href="/assets/qorg/css/opportunities_portal.css">
-{% endblock %}
+{% block head_include %}<link rel="stylesheet" href="/assets/qorg/css/opportunities_portal.css">{% endblock %}
 {% block page_content %}
 <div class="qorg-portal qorg-detail" dir="{{ 'rtl' if page_is_rtl else 'ltr' }}">
-  <nav class="qorg-breadcrumbs">
-    <a href="/opportunities">{{ _("Opportunities") }}</a>
-    <span>/</span>
-    <span>{{ opportunity.opportunity_title }}</span>
-  </nav>
-
+  <nav class="qorg-breadcrumbs"><a href="/opportunities">{{ _("Opportunities") }}</a><span>/</span><span>{{ opportunity.opportunity_title }}</span></nav>
   <header class="qorg-detail-header">
     <div>
       <div class="qorg-card-topline">
         <span class="qorg-pill">{{ _(opportunity.participation_type or opportunity.opportunity_type or "Opportunity") }}</span>
-        <span class="qorg-pill {% if opportunity.is_open %}is-open{% else %}is-closed{% endif %}">
-          {{ _("Open") if opportunity.is_open else _("Applications Closed") }}
-        </span>
+        <span class="qorg-pill {% if opportunity.is_open %}is-open{% else %}is-closed{% endif %}">{{ _("Open") if opportunity.is_open else _("Applications Closed") }}</span>
       </div>
       <h1>{{ opportunity.opportunity_title }}</h1>
       <p>{{ opportunity.summary }}</p>
     </div>
     <div class="qorg-detail-actions">
       {% if opportunity.is_open %}
-        {% if is_guest %}
-        <a class="btn btn-primary" href="/login?redirect-to=/opportunities/{{ opportunity.route }}">{{ _("Sign in to apply") }}</a>
-        {% else %}
-        <a class="btn btn-primary" href="#apply">{{ _("Apply Now") }}</a>
-        {% endif %}
+        {% if is_guest %}<a class="btn btn-primary" href="/login?redirect-to=/opportunities/{{ opportunity.route }}">{{ _("Sign in to apply") }}</a>
+        {% else %}<a class="btn btn-primary" href="{{ opportunity.apply_url }}">{{ _("Apply Now") }}</a>{% endif %}
       {% endif %}
     </div>
   </header>
-
   <div class="qorg-detail-layout">
     <main>
-      {% if opportunity.description %}
-      <section class="qorg-section">
-        <h2>{{ _("Opportunity Details") }}</h2>
-        <div class="qorg-rich-text">{{ opportunity.description }}</div>
-      </section>
-      {% endif %}
-
-      {% if opportunity.responsibilities %}
-      <section class="qorg-section">
-        <h2>{{ _("Responsibilities") }}</h2>
-        <div class="qorg-rich-text">{{ opportunity.responsibilities }}</div>
-      </section>
-      {% endif %}
-
-      {% if opportunity.qualifications %}
-      <section class="qorg-section">
-        <h2>{{ _("Qualifications and Requirements") }}</h2>
-        <div class="qorg-rich-text">{{ opportunity.qualifications }}</div>
-      </section>
-      {% endif %}
-
-      {% if opportunity.selection_process %}
-      <section class="qorg-section">
-        <h2>{{ _("Selection Process") }}</h2>
-        <div class="qorg-rich-text">{{ opportunity.selection_process }}</div>
-      </section>
-      {% endif %}
-
-      {% if opportunity.application_instructions %}
-      <section class="qorg-section">
-        <h2>{{ _("Application Instructions") }}</h2>
-        <div class="qorg-rich-text">{{ opportunity.application_instructions }}</div>
-      </section>
-      {% endif %}
-
+      {% if opportunity.description %}<section class="qorg-section"><h2>{{ _("Opportunity Details") }}</h2><div class="qorg-rich-text">{{ opportunity.description }}</div></section>{% endif %}
+      {% if opportunity.responsibilities %}<section class="qorg-section"><h2>{{ _("Responsibilities") }}</h2><div class="qorg-rich-text">{{ opportunity.responsibilities }}</div></section>{% endif %}
+      {% if opportunity.qualifications %}<section class="qorg-section"><h2>{{ _("Qualifications and Requirements") }}</h2><div class="qorg-rich-text">{{ opportunity.qualifications }}</div></section>{% endif %}
+      {% if opportunity.selection_process %}<section class="qorg-section"><h2>{{ _("Selection Process") }}</h2><div class="qorg-rich-text">{{ opportunity.selection_process }}</div></section>{% endif %}
+      {% if opportunity.application_instructions %}<section class="qorg-section"><h2>{{ _("Application Instructions") }}</h2><div class="qorg-rich-text">{{ opportunity.application_instructions }}</div></section>{% endif %}
       {% for section in opportunity.sections %}
-      <section class="qorg-section">
-        <h2>{{ _(section.label) }}</h2>
-        <div class="qorg-list-cards">
-          {% for row in section.rows %}
-          <div class="qorg-list-card">
-            {% for key, value in row.items() %}
-              {% if value not in (None, "", 0) %}
-              <div><strong>{{ _(key.replace('_', ' ').title()) }}:</strong> {{ value }}</div>
-              {% endif %}
-            {% endfor %}
-          </div>
-          {% endfor %}
-        </div>
-      </section>
+      <section class="qorg-section"><h2>{{ _(section.label) }}</h2><div class="qorg-list-cards">
+        {% for row in section.rows %}<div class="qorg-list-card">{% for key, value in row.items() %}{% if value not in (None, "", 0) %}<div><strong>{{ _(key.replace('_', ' ').title()) }}:</strong> {{ value }}</div>{% endif %}{% endfor %}</div>{% endfor %}
+      </div></section>
       {% endfor %}
-
-      {% if opportunity.is_open and not is_guest %}
-      <section id="apply" class="qorg-section qorg-apply-card">
-        <h2>{{ _("Submit Your Application") }}</h2>
-        <p>{{ _("Your saved external profile will be used. Review it before submitting this application.") }}</p>
-        <div class="qorg-inline-actions">
-          <a href="/external-profile" class="btn btn-default" target="_blank">{{ _("Review My Profile") }}</a>
-          <a href="/my-applications" class="btn btn-default">{{ _("My Applications") }}</a>
-        </div>
-        <form id="qorg-application-form" data-route="{{ opportunity.route }}">
-          <label>
-            <span>{{ _("Motivation / Cover Note") }}</span>
-            <textarea class="form-control" name="motivation" rows="6" maxlength="4000" required></textarea>
-          </label>
-          <div class="qorg-two-column">
-            <label>
-              <span>{{ _("Available From") }}</span>
-              <input class="form-control" type="date" name="availability_start_date">
-            </label>
-            <label>
-              <span>{{ _("Hours Available per Week") }}</span>
-              <input class="form-control" type="number" name="hours_per_week" min="0" max="168" step="0.5">
-            </label>
-          </div>
-          <label class="qorg-checkbox">
-            <input type="checkbox" name="consent" value="1" required>
-            <span>{{ _("I confirm that my profile and application information are accurate and may be used for this selection process.") }}</span>
-          </label>
-          <button class="btn btn-primary" type="submit">{{ _("Submit Application") }}</button>
-          <div id="qorg-application-message" class="qorg-form-message" aria-live="polite"></div>
-        </form>
-      </section>
-      {% endif %}
     </main>
-
-    <aside class="qorg-sidebar-card">
-      <h2>{{ _("Opportunity Summary") }}</h2>
-      <dl class="qorg-meta-list">
-        {% if opportunity.company %}<div><dt>{{ _("Company") }}</dt><dd>{{ opportunity.company }}</dd></div>{% endif %}
-        {% if opportunity.opportunity_type %}<div><dt>{{ _("Type") }}</dt><dd>{{ opportunity.opportunity_type }}</dd></div>{% endif %}
-        {% if opportunity.participation_type %}<div><dt>{{ _("Participation") }}</dt><dd>{{ opportunity.participation_type }}</dd></div>{% endif %}
-        {% if opportunity.work_arrangement %}<div><dt>{{ _("Arrangement") }}</dt><dd>{{ opportunity.work_arrangement }}</dd></div>{% endif %}
-        {% if opportunity.opening_date %}<div><dt>{{ _("Opening Date") }}</dt><dd>{{ frappe.utils.formatdate(opportunity.opening_date) }}</dd></div>{% endif %}
-        {% if opportunity.closing_date %}<div><dt>{{ _("Closing Date") }}</dt><dd>{{ frappe.utils.formatdate(opportunity.closing_date) }}</dd></div>{% endif %}
-        {% if opportunity.expected_start_date %}<div><dt>{{ _("Expected Start") }}</dt><dd>{{ frappe.utils.formatdate(opportunity.expected_start_date) }}</dd></div>{% endif %}
-        {% if opportunity.duration_text %}<div><dt>{{ _("Duration") }}</dt><dd>{{ opportunity.duration_text }}</dd></div>{% endif %}
-        {% if opportunity.number_of_positions %}<div><dt>{{ _("Positions") }}</dt><dd>{{ opportunity.number_of_positions }}</dd></div>{% endif %}
-        {% if opportunity.expected_total_hours %}<div><dt>{{ _("Expected Hours") }}</dt><dd>{{ opportunity.expected_total_hours }}</dd></div>{% endif %}
-      </dl>
-      {% if opportunity.public_contact_email %}
-      <a href="mailto:{{ opportunity.public_contact_email }}">{{ opportunity.public_contact_email }}</a>
-      {% endif %}
-    </aside>
+    <aside class="qorg-sidebar-card"><h2>{{ _("Opportunity Summary") }}</h2><dl class="qorg-meta-list">
+      {% if opportunity.company %}<div><dt>{{ _("Company") }}</dt><dd>{{ opportunity.company }}</dd></div>{% endif %}
+      {% if opportunity.opportunity_type %}<div><dt>{{ _("Type") }}</dt><dd>{{ opportunity.opportunity_type }}</dd></div>{% endif %}
+      {% if opportunity.participation_type %}<div><dt>{{ _("Participation") }}</dt><dd>{{ opportunity.participation_type }}</dd></div>{% endif %}
+      {% if opportunity.work_arrangement %}<div><dt>{{ _("Arrangement") }}</dt><dd>{{ opportunity.work_arrangement }}</dd></div>{% endif %}
+      {% if opportunity.opening_date %}<div><dt>{{ _("Opening Date") }}</dt><dd>{{ frappe.utils.formatdate(opportunity.opening_date) }}</dd></div>{% endif %}
+      {% if opportunity.closing_date %}<div><dt>{{ _("Closing Date") }}</dt><dd>{{ frappe.utils.formatdate(opportunity.closing_date) }}</dd></div>{% endif %}
+      {% if opportunity.number_of_positions %}<div><dt>{{ _("Positions") }}</dt><dd>{{ opportunity.number_of_positions }}</dd></div>{% endif %}
+      {% if opportunity.expected_total_hours %}<div><dt>{{ _("Expected Hours") }}</dt><dd>{{ opportunity.expected_total_hours }}</dd></div>{% endif %}
+    </dl>{% if opportunity.public_contact_email %}<a href="mailto:{{ opportunity.public_contact_email }}">{{ opportunity.public_contact_email }}</a>{% endif %}</aside>
   </div>
 </div>
-<script src="/assets/qorg/js/opportunities_portal.js"></script>
 {% endblock %}

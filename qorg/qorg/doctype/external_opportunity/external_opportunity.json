@@ -36,9 +36,18 @@
     "expected_end_date",
     "duration_text",
     "application_limit",
+    "applications_received",
+    "remaining_application_capacity",
+    "close_automatically_at_application_limit",
+    "application_limit_reached_on",
+    "applications_closed_reason",
     "dates_col_3",
     "publish_on_website",
     "published_on",
+    "route",
+    "published_by",
+    "portal_visibility",
+    "public_contact_email",
     "is_featured",
     "description_section",
     "summary",
@@ -491,6 +500,70 @@
       "label": "Rejected",
       "fieldtype": "Int",
       "read_only": 1
+    },
+    {
+      "fieldname": "route",
+      "label": "Public Route",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "unique": 1,
+      "no_copy": 1,
+      "description": "Unique public route generated when the opportunity is published."
+    },
+    {
+      "fieldname": "published_by",
+      "label": "Published By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "portal_visibility",
+      "label": "Portal Visibility",
+      "fieldtype": "Select",
+      "options": "Public\nAuthenticated Users\nInternal Only",
+      "default": "Public"
+    },
+    {
+      "fieldname": "public_contact_email",
+      "label": "Public Contact Email",
+      "fieldtype": "Data",
+      "options": "Email"
+    },
+    {
+      "fieldname": "applications_received",
+      "label": "Applications Received",
+      "fieldtype": "Int",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "remaining_application_capacity",
+      "label": "Remaining Application Capacity",
+      "fieldtype": "Int",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "close_automatically_at_application_limit",
+      "label": "Close Automatically at Application Limit",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "application_limit_reached_on",
+      "label": "Application Limit Reached On",
+      "fieldtype": "Datetime",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "applications_closed_reason",
+      "label": "Applications Closed Reason",
+      "fieldtype": "Small Text",
+      "read_only": 1,
+      "no_copy": 1
     }
   ],
   "grid_page_length": 50,
