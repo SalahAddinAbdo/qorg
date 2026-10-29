@@ -5,7 +5,7 @@ import hashlib
 import frappe
 from frappe.utils import cint
 
-CSS_VERSION = "2.0.0"
+CSS_VERSION = "2.1.0"
 DEFAULTS = {
     "enabled": 1,
     "use_company_branding": 1,
@@ -69,84 +69,79 @@ def build_managed_css(web_form):
     if not settings.enabled:
         return ""
 
-    primary, secondary, accent, surface, logo = _branding(settings.company)
-    max_width = settings.max_width
-    header_css = _header_css(primary, secondary, logo) if settings.emphasize_header else ""
+    primary, secondary, accent, surface, _logo = _branding(settings.company)
+    header_css = _header_css(primary, secondary) if settings.emphasize_header else ""
     intro_css = _introduction_css(accent) if settings.emphasize_introduction else ""
     sticky_css = _sticky_actions_css() if settings.sticky_actions else ""
     child_css = _child_name_css() if settings.hide_child_name else ""
 
-    return f'''/* QOrg managed Web Form CSS v{CSS_VERSION}. */
+    return f'''/* QOrg managed Web Form CSS v{CSS_VERSION}. No JavaScript required. */
 :root {{
   --qwf-primary: {primary};
   --qwf-secondary: {secondary};
   --qwf-accent: {accent};
   --qwf-surface: {surface};
-  --qwf-text: #24313a;
-  --qwf-muted: #667784;
+  --qwf-page: #f4f7f9;
+  --qwf-text: #1f2f3a;
+  --qwf-muted: #687985;
   --qwf-border: #dbe4e8;
-  --qwf-max-width: {max_width}px;
+  --qwf-input: #f4f7f9;
+  --qwf-ring: rgba(23, 107, 135, .14);
+  --qwf-max-width: {settings.max_width}px;
 }}
-.web-form-wrapper, .web-form-container {{
+body {{ background: var(--qwf-page); }}
+main .container, .page-content-wrapper > .container {{
+  width: min(100% - 2rem, var(--qwf-max-width));
   max-width: var(--qwf-max-width);
   margin-inline: auto;
-  padding: clamp(1rem, 2.5vw, 2rem);
+}}
+.web-form-wrapper, .web-form-container {{
+  width: 100%;
+  margin: clamp(1rem, 3vw, 2.5rem) auto;
+  padding: clamp(1rem, 3.2vw, 2.75rem);
+  color: var(--qwf-text);
   background: var(--qwf-surface);
   border: 1px solid var(--qwf-border);
-  border-radius: 18px;
-  box-shadow: 0 14px 42px rgba(34, 52, 64, .08);
+  border-radius: 20px;
+  box-shadow: 0 16px 48px rgba(31, 47, 58, .09);
 }}
-.form-section, .web-form-section {{
-  margin: 1rem 0;
-  padding: 1.1rem;
-  background: #fff;
-  border: 1px solid var(--qwf-border);
-  border-radius: 14px;
-}}
-.section-head, .section-title {{ color: var(--qwf-secondary); font-weight: 700; }}
-.control-label, .form-label {{ color: #344550; font-weight: 600; }}
-.form-control, .input-with-feedback, .awesomplete > input {{
-  min-height: 44px;
-  background: #fbfcfd;
-  border-color: var(--qwf-border);
-  border-radius: 10px;
-}}
-textarea.form-control {{ min-height: 130px; line-height: 1.6; }}
-.form-control:focus, .awesomplete > input:focus, .ql-container:focus-within {{
-  background: #fff;
-  border-color: var(--qwf-primary);
-  box-shadow: 0 0 0 3px rgba(23, 107, 135, .12);
-}}
-.ql-toolbar {{ background: #f7fafb; border-radius: 10px 10px 0 0; }}
-.ql-container {{ min-height: 180px; border-radius: 0 0 10px 10px; }}
-.form-grid, .grid-field {{
-  overflow: hidden;
-  background: #fff;
-  border: 1px solid var(--qwf-border);
-  border-radius: 12px;
-}}
-.grid-heading-row {{ background: #eef6f8; color: var(--qwf-secondary); font-weight: 700; }}
-.grid-add-row {{ color: var(--qwf-primary); border-radius: 9px; }}
-.grid-row-form {{ padding: 1rem; background: #fbfcfd; border-radius: 12px; }}
-.btn-primary {{
-  min-height: 42px;
-  background: var(--qwf-primary);
-  border-color: var(--qwf-primary);
-  border-radius: 10px;
-  font-weight: 700;
-}}
-.btn-primary:hover, .btn-primary:focus {{ background: var(--qwf-secondary); border-color: var(--qwf-secondary); }}
-.btn-default, .btn-secondary {{ min-height: 42px; border-radius: 10px; }}
+.form-section, .web-form-section {{ margin: 1.15rem 0; padding: clamp(1rem, 2.2vw, 1.45rem); background: #fff; border: 1px solid var(--qwf-border); border-radius: 14px; }}
+.section-head, .section-title {{ margin-bottom: .95rem; color: var(--qwf-secondary); font-size: 1.05rem; font-weight: 750; }}
+.form-group {{ margin-bottom: 1.05rem; }}
+.control-label, .form-label {{ display: inline-block; margin-bottom: .42rem; color: var(--qwf-text); font-size: .91rem; font-weight: 700; }}
+.help-box, .form-text, .description {{ margin-top: .35rem; color: var(--qwf-muted); font-size: .8rem; line-height: 1.5; }}
+.form-control, .input-with-feedback, .awesomplete > input {{ min-height: 46px; padding-inline: .9rem; color: var(--qwf-text); background: var(--qwf-input); border: 1px solid transparent; border-radius: 9px; box-shadow: none; transition: background .16s ease, border-color .16s ease, box-shadow .16s ease; }}
+textarea.form-control {{ min-height: 132px; padding-top: .78rem; line-height: 1.65; resize: vertical; }}
+.form-control:hover, .awesomplete > input:hover {{ border-color: var(--qwf-border); }}
+.form-control:focus, .awesomplete > input:focus, .ql-container:focus-within {{ color: var(--qwf-text); background: #fff; border-color: var(--qwf-primary); box-shadow: 0 0 0 4px var(--qwf-ring); }}
+.form-control[readonly], .form-control:disabled {{ color: #53636e; background: #eef2f4; opacity: 1; }}
+.ql-toolbar {{ background: #f7f9fa; border-color: var(--qwf-border) !important; border-radius: 10px 10px 0 0; }}
+.ql-container {{ min-height: 180px; background: #fff; border-color: var(--qwf-border) !important; border-radius: 0 0 10px 10px; }}
+.form-grid, .grid-field {{ overflow: hidden; background: #fff; border: 1px solid var(--qwf-border); border-radius: 12px; }}
+.grid-heading-row {{ color: var(--qwf-secondary); background: #eef5f7; font-weight: 700; }}
+.grid-row:hover .data-row {{ background: #f8fafb; }}
+.grid-add-row {{ margin: .7rem; color: var(--qwf-primary); background: #eef6f8; border: 1px dashed #bfd6de; border-radius: 8px; font-weight: 650; }}
+.grid-row-form {{ padding: 1rem; background: #f8fafb; border: 1px solid var(--qwf-border); border-radius: 12px; }}
+.btn {{ min-height: 42px; border-radius: 9px; font-weight: 650; }}
+.btn-primary {{ color: #fff; background: var(--qwf-primary); border-color: var(--qwf-primary); box-shadow: 0 7px 18px rgba(23, 107, 135, .17); }}
+.btn-primary:hover, .btn-primary:focus {{ color: #fff; background: var(--qwf-secondary); border-color: var(--qwf-secondary); }}
+.web-form-actions .btn-primary, .form-actions .btn-primary {{ min-width: min(100%, 220px); padding-inline: 1.35rem; }}
 {header_css}
 {intro_css}
 {sticky_css}
 {child_css}
+@media (min-width: 768px) and (max-width: 1199px) {{ main .container, .page-content-wrapper > .container {{ width: min(100% - 3rem, var(--qwf-max-width)); }} }}
 @media (max-width: 767px) {{
-  .web-form-wrapper, .web-form-container {{ padding: .85rem; border-radius: 14px; }}
-  .form-section, .web-form-section {{ padding: .85rem; }}
+  main .container, .page-content-wrapper > .container {{ width: min(100% - 1rem, var(--qwf-max-width)); }}
+  .web-form-wrapper, .web-form-container {{ margin: .65rem auto 1.25rem; padding: 1rem; border-radius: 14px; box-shadow: 0 8px 24px rgba(31, 47, 58, .07); }}
+  .form-section, .web-form-section {{ padding: .9rem; border-radius: 11px; }}
+  .form-control, .input-with-feedback, .awesomplete > input {{ min-height: 44px; }}
+  .web-form-actions, .form-actions {{ display: grid; grid-template-columns: 1fr; gap: .55rem; }}
+  .web-form-actions .btn, .form-actions .btn {{ width: 100%; }}
 }}
+@media (max-width: 379px) {{ main .container, .page-content-wrapper > .container {{ width: calc(100% - .75rem); }} .web-form-wrapper, .web-form-container {{ padding: .82rem; }} }}
+@media (prefers-reduced-motion: reduce) {{ .form-control, .input-with-feedback, .awesomplete > input {{ transition: none; }} }}
 '''.strip()
-
 
 def get_effective_design_settings(web_form):
     values = frappe._dict(DEFAULTS.copy())
@@ -224,18 +219,21 @@ def _branding(company):
     )
 
 
-def _header_css(primary, secondary, logo):
-    logo_css = f'background-image: url("{logo}"); background-repeat: no-repeat; background-position: calc(100% - 1.25rem) center; background-size: 64px;' if logo else ""
-    return f'''.web-form-header, .web-form-head, .page-header {{
-  margin-bottom: 1rem;
-  padding: 1.4rem;
+def _header_css(primary, secondary):
+    return f'''.web-form-header, .web-form-head {{
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 1.2rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
   color: #fff;
   background: linear-gradient(135deg, {secondary}, {primary});
+  border: 0;
   border-radius: 16px;
-  {logo_css}
+  box-shadow: 0 12px 30px rgba(31, 47, 58, .12);
 }}
-.web-form-header h1, .web-form-head h1, .page-header h1 {{ color: #fff; margin: 0; }}'''
-
+.web-form-header::after, .web-form-head::after {{ content: ""; position: absolute; inset-inline-end: -55px; bottom: -85px; width: 180px; height: 180px; border: 28px solid rgba(255, 255, 255, .08); border-radius: 50%; pointer-events: none; }}
+.web-form-header h1, .web-form-head h1 {{ position: relative; z-index: 1; margin: 0; color: #fff; font-size: clamp(1.55rem, 4vw, 2.35rem); line-height: 1.18; letter-spacing: -.025em; }}
+.page-header {{ background: transparent; }}'''
 
 def _introduction_css(accent):
     return f'''.web-form-introduction, .introduction {{
