@@ -97,5 +97,98 @@
       "module": "QOrg",
       "is_system_generated": 1
     }
+  ],
+  "Web Form": [
+    {
+      "fieldname": "qorg_web_form_appearance_section",
+      "label": "Enhanced Design",
+      "fieldtype": "Section Break",
+      "insert_after": "allow_print",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_design_mode",
+      "label": "Design Mode",
+      "fieldtype": "Select",
+      "options": "Use Global Setting\nEnhanced Design\nStandard Frappe Design",
+      "default": "Use Global Setting",
+      "insert_after": "qorg_web_form_appearance_section",
+      "description": "Choose whether this Web Form inherits the global Website Settings design, forces the enhanced design, or uses the standard Frappe design.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_branding_company",
+      "label": "Branding Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "insert_after": "qorg_web_form_design_mode",
+      "depends_on": "eval:doc.qorg_web_form_design_mode!='Standard Frappe Design'",
+      "description": "Optional company whose logo and colors override the global Web Form company for this form.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_max_content_width_override",
+      "label": "Maximum Content Width Override",
+      "fieldtype": "Int",
+      "insert_after": "qorg_web_form_branding_company",
+      "depends_on": "eval:doc.qorg_web_form_design_mode!='Standard Frappe Design'",
+      "description": "Optional width in pixels for this form only. Leave blank to inherit Website Settings.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_appearance_column",
+      "fieldtype": "Column Break",
+      "insert_after": "qorg_web_form_max_content_width_override",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_hero_mode",
+      "label": "Hero Header",
+      "fieldtype": "Select",
+      "options": "Use Global Setting\nShow\nHide",
+      "default": "Use Global Setting",
+      "insert_after": "qorg_web_form_appearance_column",
+      "depends_on": "eval:doc.qorg_web_form_design_mode!='Standard Frappe Design'",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_privacy_notice_mode",
+      "label": "Privacy and Security Notice",
+      "fieldtype": "Select",
+      "options": "Use Global Setting\nShow\nHide",
+      "default": "Use Global Setting",
+      "insert_after": "qorg_web_form_hero_mode",
+      "depends_on": "eval:doc.qorg_web_form_design_mode!='Standard Frappe Design'",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_sticky_actions_mode",
+      "label": "Sticky Form Actions",
+      "fieldtype": "Select",
+      "options": "Use Global Setting\nEnable\nDisable",
+      "default": "Use Global Setting",
+      "insert_after": "qorg_web_form_privacy_notice_mode",
+      "depends_on": "eval:doc.qorg_web_form_design_mode!='Standard Frappe Design'",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_child_name_mode",
+      "label": "Child Row Internal Name",
+      "fieldtype": "Select",
+      "options": "Use Global Setting\nHide\nShow",
+      "default": "Use Global Setting",
+      "insert_after": "qorg_web_form_sticky_actions_mode",
+      "depends_on": "eval:doc.qorg_web_form_design_mode!='Standard Frappe Design'",
+      "module": "QOrg",
+      "is_system_generated": 1
+    }
   ]
 }

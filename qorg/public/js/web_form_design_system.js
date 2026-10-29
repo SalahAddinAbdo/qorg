@@ -26,7 +26,8 @@
 
   async function loadSettings() {
     try {
-      const response = await fetch(SETTINGS_METHOD, {
+      const route = getWebFormRoute();
+      const response = await fetch(`${SETTINGS_METHOD}?route=${encodeURIComponent(route)}`, {
         method: "GET",
         credentials: "same-origin",
         headers: { Accept: "application/json" },
@@ -45,6 +46,10 @@
     } catch (error) {
       console.warn("QOrg Web Form design was not applied.", error);
     }
+  }
+
+  function getWebFormRoute() {
+    return window.location.pathname.replace(/^\/+|\/+$/g, "").split("/")[0] || "";
   }
 
   function applyDesign(settings) {

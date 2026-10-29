@@ -55,6 +55,7 @@ extend_doctype_class = {
 
 doctype_js = {
     "Website Settings": "public/js/website_settings_opportunity_portal.js",
+    "Web Form": "public/js/web_form_design_settings.js",
     "HR Settings": "public/js/hr_settings_recruitment.js",
     "Designation": "public/js/designation_recruitment.js",
     "Interview Type": "public/js/interview_type.js",

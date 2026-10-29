@@ -71,7 +71,7 @@ def validate_website_settings(doc, method=None):
 
 
 @frappe.whitelist(allow_guest=True)
-def get_web_form_design_settings():
+def get_web_form_design_settings(route=None):
     values = frappe._dict(WEB_FORM_DESIGN_DEFAULTS.copy())
     if not frappe.db.exists("DocType", "Website Settings"):
         return values
@@ -91,6 +91,10 @@ def get_web_form_design_settings():
         if settings.meta.has_field(fieldname) and settings.get(fieldname) is not None:
             values[key] = settings.get(fieldname)
 
+    web_form = _get_web_form_by_route(route)
+    if web_form:
+        _apply_web_form_design_overrides(values, web_form)
+
     for key in (
         "enabled",
         "use_company_branding",
@@ -102,7 +106,7 @@ def get_web_form_design_settings():
         values[key] = cint(values[key])
     values.max_content_width = min(max(cint(values.max_content_width) or 1180, 760), 1600)
 
-    company = values.default_company or frappe.defaults.get_global_default("company")
+    company = values.get("branding_company") or values.default_company or frappe.defaults.get_global_default("company")
     branding = _get_company_branding(company) if values.use_company_branding else {}
     values.company = company
     values.company_name = branding.get("company_name") or company
@@ -112,6 +116,61 @@ def get_web_form_design_settings():
     values.accent_color = branding.get("accent_color") or "#2f855a"
     values.surface_color = branding.get("surface_color") or "#ffffff"
     return values
+
+
+def _get_web_form_by_route(route):
+    route = (route or "").strip().strip("/")
+    if not route or not frappe.db.exists("DocType", "Web Form"):
+        return None
+    name = frappe.db.get_value("Web Form", {"route": route, "published": 1}, "name")
+    return frappe.get_cached_doc("Web Form", name) if name else None
+
+
+def _apply_web_form_design_overrides(values, web_form):
+    mode = web_form.get("qorg_web_form_design_mode") or "Use Global Setting"
+    if mode == "Standard Frappe Design":
+        values.enabled = 0
+        return
+    if mode == "Enhanced Design":
+        values.enabled = 1
+
+    values.branding_company = web_form.get("qorg_web_form_branding_company")
+    width = cint(web_form.get("qorg_web_form_max_content_width_override"))
+    if width:
+        values.max_content_width = width
+
+    values.show_hero_header = _resolve_form_choice(
+        web_form.get("qorg_web_form_hero_mode"),
+        values.show_hero_header,
+        "Show",
+        "Hide",
+    )
+    values.show_privacy_notice = _resolve_form_choice(
+        web_form.get("qorg_web_form_privacy_notice_mode"),
+        values.show_privacy_notice,
+        "Show",
+        "Hide",
+    )
+    values.sticky_actions = _resolve_form_choice(
+        web_form.get("qorg_web_form_sticky_actions_mode"),
+        values.sticky_actions,
+        "Enable",
+        "Disable",
+    )
+    values.hide_child_row_name = _resolve_form_choice(
+        web_form.get("qorg_web_form_child_name_mode"),
+        values.hide_child_row_name,
+        "Hide",
+        "Show",
+    )
+
+
+def _resolve_form_choice(value, inherited, enabled_label, disabled_label):
+    if value == enabled_label:
+        return 1
+    if value == disabled_label:
+        return 0
+    return inherited
 
 
 def _get_company_branding(company):
