@@ -73,7 +73,12 @@ def _rebuild_layout(doc, definition):
         if fieldtype in LAYOUT_TYPES:
             layout_index += 1
             row = doc.append(table_field, {})
-            _set(row, child_meta, "fieldname", f"qorg_layout_{layout_index}")
+            # Frappe validates Page Break fieldnames against the target DocType.
+            # A synthetic fieldname therefore makes the Web Form invalid. Page
+            # Break rows are layout-only and must keep fieldname empty. Section
+            # and Column Break rows may retain a stable technical fieldname.
+            if fieldtype != "Page Break":
+                _set(row, child_meta, "fieldname", f"qorg_layout_{layout_index}")
             _set(row, child_meta, "fieldtype", fieldtype)
             _set(row, child_meta, "label", item.get("label") or "")
             continue
