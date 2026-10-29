@@ -27,23 +27,37 @@ EMPLOYMENT_FIELDS = [
 PROFILE_SCRIPT = r'''
 frappe.web_form.after_load = async () => {
   try {
-    const result = await frappe.call({
-      method: "qorg.qorg.people_and_opportunities.web_form_services.get_profile_web_form_state"
-    });
-    const state = result.message || {};
+    const response = await fetch(
+      "/api/method/qorg.qorg.people_and_opportunities.web_form_services.get_profile_web_form_state",
+      {
+        method: "GET",
+        credentials: "same-origin",
+        headers: { Accept: "application/json" },
+        cache: "no-store",
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`Profile state request failed: ${response.status}`);
+    }
+    const payload = await response.json();
+    const state = payload.message || {};
     if (state.name && window.location.pathname.endsWith("/new")) {
-      window.location.replace(`/external-profile-form/${encodeURIComponent(state.name)}/edit`);
+      window.location.replace(
+        `/external-profile-form/${encodeURIComponent(state.name)}/edit`
+      );
       return;
     }
     if (state.locked) {
       frappe.msgprint({
         title: __("Profile editing is locked"),
-        message: state.lock_reason || __("Contact the organization if a profile update is required."),
-        indicator: "orange"
+        message:
+          state.lock_reason ||
+          __("Contact the organization if a profile update is required."),
+        indicator: "orange",
       });
     }
   } catch (error) {
-    console.error(error);
+    console.warn("External profile state could not be loaded.", error);
   }
 };
 '''
@@ -56,14 +70,28 @@ frappe.web_form.after_load = async () => {
     frappe.msgprint(__("Open the application form from a published opportunity."));
     return;
   }
+
   try {
-    const result = await frappe.call({
-      method: "qorg.qorg.people_and_opportunities.web_form_services.get_application_web_form_context",
-      args: { opportunity_route: route, target_doctype: frappe.web_form.doc_type }
+    const endpoint =
+      "/api/method/qorg.qorg.people_and_opportunities.web_form_services.get_application_web_form_context";
+    const url = `${endpoint}?opportunity_route=${encodeURIComponent(
+      route
+    )}&target_doctype=${encodeURIComponent(frappe.web_form.doc_type)}`;
+    const response = await fetch(url, {
+      method: "GET",
+      credentials: "same-origin",
+      headers: { Accept: "application/json" },
+      cache: "no-store",
     });
-    const context = result.message || {};
+    if (!response.ok) {
+      throw new Error(`Application context request failed: ${response.status}`);
+    }
+    const payload = await response.json();
+    const context = payload.message || {};
     if (!context.open) {
-      frappe.msgprint(context.message || __("Applications are closed for this opportunity."));
+      frappe.msgprint(
+        context.message || __("Applications are closed for this opportunity.")
+      );
       return;
     }
     Object.entries(context.values || {}).forEach(([fieldname, value]) => {
@@ -72,7 +100,10 @@ frappe.web_form.after_load = async () => {
       }
     });
   } catch (error) {
-    console.error(error);
+    console.warn("Application context could not be loaded.", error);
+    frappe.msgprint(
+      __("The application context could not be loaded. Please reopen the form from the opportunity page.")
+    );
   }
 };
 

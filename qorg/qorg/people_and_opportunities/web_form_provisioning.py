@@ -57,6 +57,9 @@ def _reconcile_web_form(definition, result):
         _apply_managed_presentation(doc, definition)
         status = "updated"
     else:
+        # Security/runtime fixes in the managed client script must be applied even
+        # when labels, field order, or other presentation details were customized.
+        _set_if_field(doc, "client_script", definition.get("client_script"))
         _set_if_field(doc, "qorg_managed_update_available", 1)
         status = "preserved_custom"
 
