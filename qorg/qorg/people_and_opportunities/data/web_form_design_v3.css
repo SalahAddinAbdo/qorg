@@ -1,0 +1,91 @@
+/* QOrg Web Form UX System v3.0. Scoped to the standard Frappe Web Form DOM. */
+:root {
+  --qwf-primary: __PRIMARY__;
+  --qwf-secondary: __SECONDARY__;
+  --qwf-accent: __ACCENT__;
+  --qwf-page: #f4f7f8;
+  --qwf-card: #ffffff;
+  --qwf-input: #f3f6f7;
+  --qwf-text: #102a34;
+  --qwf-muted: #667982;
+  --qwf-border: #d7e2e6;
+  --qwf-danger: #c93f3f;
+  --qwf-focus: rgba(11,100,119,.16);
+  --qwf-max-width: __MAX_WIDTH__px;
+}
+body { color: var(--qwf-text); background: var(--qwf-page); }
+main.container { width: min(calc(100% - 32px), var(--qwf-max-width)); max-width: var(--qwf-max-width); margin-inline: auto; padding-inline: 0; }
+main.container > form.web-form { margin: 24px 0 40px; }
+form.web-form, form.web-form .web-form-body, form.web-form .web-form-wrapper { width: 100%; max-width: none; }
+form.web-form .web-form-body { padding: 0; background: transparent; border: 0; box-shadow: none; }
+form.web-form .web-form-wrapper { padding: clamp(22px,3vw,40px); background: var(--qwf-card); border: 1px solid var(--qwf-border); border-radius: 18px; box-shadow: 0 22px 64px rgba(16,42,52,.09); }
+form.web-form .form-layout, form.web-form .form-page { background: transparent; }
+form.web-form .form-section { margin: 0; padding: 24px 0; background: transparent; border: 0; border-bottom: 1px solid #e8eef0; border-radius: 0; box-shadow: none; }
+form.web-form .form-section:last-child { border-bottom: 0; }
+form.web-form .section-head { display: flex; align-items: center; gap: 9px; margin: 0 0 17px; color: var(--qwf-secondary); font-size: 1.06rem; font-weight: 800; }
+form.web-form .section-head::before { content: ""; width: 5px; height: 20px; flex: 0 0 5px; background: var(--qwf-accent); border-radius: 99px; }
+form.web-form .form-column { min-width: 0; }
+form.web-form .frappe-control { min-width: 0; }
+form.web-form .form-group { margin-bottom: 16px; }
+form.web-form .control-label { display: inline-block; margin: 0 0 7px; color: var(--qwf-text); font-size: .9rem; font-weight: 700; line-height: 1.35; }
+form.web-form .control-label.reqd::after, form.web-form .reqd::after { color: var(--qwf-danger); }
+form.web-form .help-box, form.web-form .description { margin-top: 6px; color: var(--qwf-muted); font-size: .79rem; line-height: 1.5; }
+form.web-form input.form-control:not([type="checkbox"]), form.web-form textarea.form-control, form.web-form select.form-control, form.web-form .awesomplete > input.form-control { width: 100%; min-height: 44px; padding-inline: 13px; color: var(--qwf-text); background: var(--qwf-input); border: 1px solid transparent; border-radius: 10px; box-shadow: inset 0 0 0 1px rgba(16,42,52,.025); transition: background .14s,border-color .14s,box-shadow .14s; }
+form.web-form textarea.form-control { min-height: 122px; padding-top: 11px; line-height: 1.6; resize: vertical; }
+form.web-form input.form-control:not([type="checkbox"]):hover, form.web-form textarea.form-control:hover, form.web-form select.form-control:hover { background: #edf3f5; border-color: #bfd0d6; }
+form.web-form input.form-control:not([type="checkbox"]):focus, form.web-form textarea.form-control:focus, form.web-form select.form-control:focus, form.web-form .awesomplete > input.form-control:focus, form.web-form .ql-container:focus-within { color: var(--qwf-text); background: #fff; border-color: var(--qwf-primary); box-shadow: 0 0 0 4px var(--qwf-focus); outline: 0; }
+form.web-form .like-disabled-input, form.web-form .form-control[readonly], form.web-form .form-control:disabled { color: #52636d; background: #eaf0f2; opacity: 1; }
+form.web-form input[type="checkbox"], form.web-form input[type="checkbox"].input-with-feedback, form.web-form .grid-row-check { appearance: auto; -webkit-appearance: checkbox; width: 18px !important; height: 18px !important; min-width: 18px !important; min-height: 18px !important; max-width: 18px !important; max-height: 18px !important; margin: 0; padding: 0 !important; box-shadow: none !important; accent-color: var(--qwf-primary); }
+form.web-form .checkbox label { display: inline-flex; align-items: center; gap: 9px; min-height: 24px; margin: 0; }
+form.web-form .awesomplete > ul { z-index: 1060; max-height: 280px; overflow-y: auto; margin-top: 6px; padding: 6px; color: var(--qwf-text); background: #fff; border: 1px solid var(--qwf-border); border-radius: 11px; box-shadow: 0 16px 36px rgba(16,42,52,.14); }
+form.web-form .awesomplete > ul > li { min-height: 38px; padding: 9px 11px; color: var(--qwf-text); border-radius: 8px; }
+form.web-form .awesomplete > ul > li:hover, form.web-form .awesomplete > ul > li[aria-selected="true"] { color: var(--qwf-secondary); background: #eaf6f8; }
+form.web-form .awesomplete > ul > li p { margin: 0; }
+form.web-form .ql-toolbar { display: flex; flex-wrap: wrap; gap: 2px; padding: 7px; background: #f5f8f9; border-color: var(--qwf-border) !important; border-radius: 10px 10px 0 0; }
+form.web-form .ql-container { min-height: 160px; background: #fff; border-color: var(--qwf-border) !important; border-radius: 0 0 10px 10px; }
+form.web-form .frappe-control[data-fieldtype="Table"] { margin: 20px 0 24px; padding: 0; }
+form.web-form .grid-field > .control-label { display: block; margin: 0 0 10px; color: var(--qwf-secondary); font-size: 1.02rem; font-weight: 800; }
+form.web-form .form-grid-container { overflow-x: auto; border: 1px solid var(--qwf-border); border-radius: 12px; box-shadow: 0 8px 24px rgba(16,42,52,.045); -webkit-overflow-scrolling: touch; }
+form.web-form .form-grid { min-width: 640px; background: #fff; border: 0; border-radius: 0; box-shadow: none; }
+form.web-form .grid-heading-row { min-height: 42px; color: var(--qwf-text); background: #e8f3f5; border-bottom: 1px solid #c9dde3; font-weight: 800; }
+form.web-form .grid-heading-row .data-row, form.web-form .grid-heading-row .grid-static-col, form.web-form .grid-heading-row .row-index { min-height: 42px; color: var(--qwf-text); background: transparent; border-color: #d4e4e8; }
+form.web-form .grid-heading-row .static-area { padding: 10px 9px; font-size: .82rem; line-height: 1.2; }
+form.web-form .grid-row .data-row { min-height: 46px; border-color: var(--qwf-border); }
+form.web-form .grid-row .grid-static-col, form.web-form .grid-row .row-index { min-height: 46px; }
+form.web-form .grid-row:hover .data-row { background: #f4f8f9; }
+form.web-form .grid-empty { padding: 18px; color: var(--qwf-muted); }
+form.web-form .grid-footer { padding: 10px; background: #fff; border-top: 1px solid #e8eef0; }
+form.web-form .grid-add-row { min-height: 36px; padding: 8px 13px; color: var(--qwf-secondary); background: #eaf6f8; border: 1px dashed #91bdc8; border-radius: 8px; font-weight: 750; }
+form.web-form .form-in-grid { padding: 16px; background: #fff; border-top: 3px solid var(--qwf-accent); }
+form.web-form .grid-form-heading { margin: -16px -16px 16px; padding: 12px 16px; background: #f3f7f8; border-bottom: 1px solid var(--qwf-border); }
+form.web-form .grid-header-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+form.web-form .grid-header-toolbar .panel-title { color: var(--qwf-secondary); font-weight: 800; }
+form.web-form .grid-header-toolbar .row-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+form.web-form .grid-header-toolbar .es-button { min-height: 34px; padding: 6px 10px; border-radius: 8px; }
+form.web-form .form-in-grid .frappe-control[data-fieldname="name"], form.web-form .form-in-grid .frappe-control[data-fieldname="page_break"], form.web-form .grid-heading-row [data-fieldname="page_break"], form.web-form .grid-row [data-fieldname="page_break"] { display: none !important; }
+form.web-form .grid-shortcuts { display: none; }
+form.web-form .web-form-actions, form.web-form .form-actions { position: static; display: flex; justify-content: flex-end; gap: 10px; margin: 8px 0 0; padding: 22px 0 0; background: transparent; border-top: 1px solid var(--qwf-border); box-shadow: none; }
+form.web-form .btn { min-height: 42px; padding: 9px 18px; border-radius: 9px; font-weight: 750; }
+form.web-form .btn-primary { min-width: 180px; color: #fff; background: linear-gradient(135deg,var(--qwf-primary),var(--qwf-secondary)); border-color: var(--qwf-primary); box-shadow: 0 8px 20px rgba(11,100,119,.22); }
+form.web-form .btn-primary:hover { background: var(--qwf-secondary); border-color: var(--qwf-secondary); }
+form.web-form .btn-default, form.web-form .btn-secondary { color: var(--qwf-secondary); background: #eef4f6; border-color: transparent; }
+form.web-form .form-page .page-break { margin: 0; }
+form.web-form .web-form-page-progress, form.web-form .progress { height: 6px; overflow: hidden; background: #e7eef1; border-radius: 99px; }
+form.web-form .progress-bar { background: linear-gradient(90deg,var(--qwf-accent),var(--qwf-primary)); }
+/* Web Form list */
+.web-form-list, .web-list-container, .web-form-list-container { overflow: hidden; background: #fff; border: 1px solid var(--qwf-border); border-radius: 14px; box-shadow: 0 16px 40px rgba(16,42,52,.07); }
+.web-list-header, .web-form-list .list-row-head { padding: 13px 16px; color: #fff; background: var(--qwf-primary); font-weight: 800; }
+.web-list-item, .web-form-list .list-row { min-height: 56px; padding: 13px 16px; color: var(--qwf-text); background: #fff; border-bottom: 1px solid #e7eef1; }
+.web-list-item:hover, .web-form-list .list-row:hover { background: #f2f8f9; }
+@media (max-width: 767px) {
+  main.container { width: calc(100% - 14px); }
+  main.container > form.web-form { margin: 7px 0 18px; }
+  form.web-form .web-form-wrapper { padding: 16px; border-radius: 13px; box-shadow: 0 10px 28px rgba(16,42,52,.08); }
+  form.web-form .form-section { padding: 18px 0; }
+  form.web-form .form-in-grid { padding: 12px; }
+  form.web-form .grid-form-heading { margin: -12px -12px 14px; padding: 10px 12px; }
+  form.web-form .web-form-actions, form.web-form .form-actions { display: grid; grid-template-columns: 1fr; }
+  form.web-form .web-form-actions .btn, form.web-form .form-actions .btn { width: 100%; min-width: 0; }
+}
+@media (max-width: 379px) { main.container { width: calc(100% - 8px); } form.web-form .web-form-wrapper { padding: 13px; } }
+@media (prefers-reduced-motion: reduce) { form.web-form * { transition: none !important; } }

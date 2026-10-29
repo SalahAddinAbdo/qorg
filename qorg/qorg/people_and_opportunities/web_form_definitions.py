@@ -1,6 +1,28 @@
 from __future__ import annotations
 
-MANAGED_VERSION = "2.0.0"
+MANAGED_VERSION = "3.0.0"
+
+
+def page(label):
+    return {"fieldtype": "Page Break", "label": label}
+
+
+def section(label):
+    return {"fieldtype": "Section Break", "label": label}
+
+
+def column():
+    return {"fieldtype": "Column Break"}
+
+
+def field(fieldname, *, required=False, read_only=False, label=None):
+    return {
+        "fieldname": fieldname,
+        "required": required,
+        "read_only": read_only,
+        "label": label,
+    }
+
 
 WEB_FORMS = [
     {
@@ -13,20 +35,42 @@ WEB_FORMS = [
         "allow_print": 1,
         "introduction_text": "Create and maintain one professional profile for employment, volunteering, and internship applications.",
         "success_message": "Your professional profile has been saved successfully.",
-        "candidate_fields": [
-            "first_name", "middle_name", "last_name", "full_name", "name_in_arabic",
-            "primary_email", "secondary_email", "mobile_no", "alternative_mobile_no",
-            "current_location", "preferred_contact_method", "preferred_language",
-            "identification_type", "identification_number", "identification_country",
-            "date_of_birth", "nationality", "marital_status", "gender", "image",
-            "professional_title", "years_of_experience", "availability_status",
-            "professional_summary", "career_objective", "sectors_of_expertise",
-            "key_achievements", "education", "experience", "training", "languages",
-            "skills", "volunteer_experience", "references", "resume", "portfolio_url",
-            "linkedin_url", "privacy_consent",
+        "submit_button_label": "Save Profile",
+        "layout": [
+            page("Personal Information"),
+            section("Identity and Contact"),
+            field("first_name", required=True), field("middle_name"), field("last_name"),
+            column(),
+            field("name_in_arabic"), field("date_of_birth"), field("gender"),
+            section("Contact Details"),
+            field("primary_email", required=True), field("mobile_no"), field("current_location"),
+            column(),
+            field("secondary_email"), field("alternative_mobile_no"), field("preferred_contact_method"), field("preferred_language"),
+            page("Identity and Availability"),
+            section("Identification"),
+            field("identification_type"), field("identification_number"), field("identification_country"),
+            column(),
+            field("nationality"), field("marital_status"), field("address"),
+            section("Professional Availability"),
+            field("professional_title"), field("years_of_experience"), field("availability_status"),
+            column(),
+            field("image"), field("resume"), field("full_name", read_only=True),
+            page("Professional Profile"),
+            section("Professional Summary"),
+            field("professional_summary"), field("career_objective"), field("sectors_of_expertise"), field("key_achievements"),
+            page("Education and Experience"),
+            section("Education"), field("education"),
+            section("Work Experience"), field("experience"),
+            page("Skills and Development"),
+            section("Skills"), field("skills"),
+            section("Languages"), field("languages"),
+            section("Training and Certifications"), field("training"),
+            section("Volunteering Experience"), field("volunteer_experience"),
+            page("References and Consent"),
+            section("Professional References"), field("references"),
+            section("Professional Links"), field("portfolio_url"), field("linkedin_url"),
+            section("Consent"), field("privacy_consent", required=True),
         ],
-        "required_fields": ["first_name", "primary_email", "privacy_consent"],
-        "read_only_fields": ["full_name"],
     },
     {
         "title": "Participation Application",
@@ -38,14 +82,16 @@ WEB_FORMS = [
         "allow_print": 1,
         "introduction_text": "Apply for a volunteering or internship opportunity using your saved external profile.",
         "success_message": "Your participation application has been submitted successfully.",
-        "candidate_fields": [
-            "opportunity", "external_person", "participation_type", "application_date",
-            "status", "available_from", "available_to", "hours_per_week", "motivation",
-            "relevant_experience", "accommodation_needs",
-        ],
-        "required_fields": ["opportunity", "motivation"],
-        "read_only_fields": [
-            "opportunity", "external_person", "participation_type", "application_date", "status"
+        "submit_button_label": "Submit Application",
+        "layout": [
+            section("Opportunity and Profile"),
+            field("opportunity", required=True, read_only=True), field("external_person", read_only=True),
+            column(),
+            field("participation_type", read_only=True), field("application_date", read_only=True), field("status", read_only=True),
+            section("Availability"),
+            field("available_from"), field("available_to"), field("hours_per_week"),
+            section("Application Details"),
+            field("motivation", required=True), field("relevant_experience"), field("accommodation_needs"),
         ],
     },
     {
@@ -58,15 +104,16 @@ WEB_FORMS = [
         "allow_print": 1,
         "introduction_text": "Apply for an employment opportunity using your saved external profile.",
         "success_message": "Your employment application has been submitted successfully.",
-        "candidate_fields": [
-            "qorg_external_opportunity", "qorg_external_person", "job_title",
-            "applicant_name", "email_id", "phone_number", "cover_letter",
-            "resume_attachment", "resume", "status", "source",
-        ],
-        "required_fields": [],
-        "read_only_fields": [
-            "qorg_external_opportunity", "qorg_external_person", "job_title",
-            "applicant_name", "email_id", "phone_number", "status", "source",
+        "submit_button_label": "Submit Application",
+        "layout": [
+            section("Opportunity and Profile"),
+            field("qorg_external_opportunity", read_only=True), field("qorg_external_person", read_only=True),
+            column(),
+            field("job_title", read_only=True), field("status", read_only=True), field("source", read_only=True),
+            section("Applicant Details"),
+            field("applicant_name", read_only=True), field("email_id", read_only=True), field("phone_number", read_only=True),
+            section("Application"),
+            field("cover_letter"), field("resume_attachment"), field("resume"),
         ],
     },
 ]

@@ -10,3 +10,4 @@ qorg.qorg.recruitment_extensions.migration
 qorg.qorg.patches.v1_0.provision_opportunity_portal
 qorg.qorg.patches.v1_0.provision_clean_opportunity_web_forms
 qorg.qorg.patches.v1_0.upgrade_managed_web_form_design_v2_1
+qorg.qorg.patches.v1_0.provision_web_form_ux_system_v3

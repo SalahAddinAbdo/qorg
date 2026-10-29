@@ -64,7 +64,8 @@
       "insert_after": "qorg_web_form_design_column",
       "depends_on": "eval:doc.qorg_enable_enhanced_web_form_design==1",
       "module": "QOrg",
-      "is_system_generated": 1
+      "is_system_generated": 1,
+      "hidden": 1
     },
     {
       "fieldname": "qorg_web_form_emphasize_introduction",
@@ -74,7 +75,8 @@
       "insert_after": "qorg_web_form_emphasize_header",
       "depends_on": "eval:doc.qorg_enable_enhanced_web_form_design==1",
       "module": "QOrg",
-      "is_system_generated": 1
+      "is_system_generated": 1,
+      "hidden": 1
     },
     {
       "fieldname": "qorg_web_form_sticky_actions",
@@ -92,6 +94,17 @@
       "fieldtype": "Check",
       "default": "1",
       "insert_after": "qorg_web_form_sticky_actions",
+      "depends_on": "eval:doc.qorg_enable_enhanced_web_form_design==1",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_header_style",
+      "label": "Default Web Form Header Style",
+      "fieldtype": "Select",
+      "options": "Standard\nHero",
+      "default": "Hero",
+      "insert_after": "qorg_web_form_default_company",
       "depends_on": "eval:doc.qorg_enable_enhanced_web_form_design==1",
       "module": "QOrg",
       "is_system_generated": 1
@@ -152,7 +165,8 @@
       "insert_after": "qorg_web_form_appearance_column",
       "depends_on": "eval:doc.qorg_web_form_design_mode!='Standard Frappe Design'",
       "module": "QOrg",
-      "is_system_generated": 1
+      "is_system_generated": 1,
+      "hidden": 1
     },
     {
       "fieldname": "qorg_web_form_introduction_mode",
@@ -163,7 +177,8 @@
       "insert_after": "qorg_web_form_header_mode",
       "depends_on": "eval:doc.qorg_web_form_design_mode!='Standard Frappe Design'",
       "module": "QOrg",
-      "is_system_generated": 1
+      "is_system_generated": 1,
+      "hidden": 1
     },
     {
       "fieldname": "qorg_web_form_sticky_actions_mode",
@@ -224,6 +239,17 @@
       "hidden": 1,
       "read_only": 1,
       "insert_after": "qorg_managed_css_hash",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_header_style_override",
+      "label": "Header Style",
+      "fieldtype": "Select",
+      "options": "Use Global Setting\nStandard\nHero",
+      "default": "Use Global Setting",
+      "insert_after": "qorg_web_form_branding_company",
+      "depends_on": "eval:doc.qorg_web_form_design_mode!='Standard Frappe Design'",
       "module": "QOrg",
       "is_system_generated": 1
     }
