@@ -2,7 +2,20 @@
 {% block title %}{{ _("External Profile") }}{% endblock %}
 {% block head_include %}
 <link rel="stylesheet" href="/assets/qorg/css/opportunities_portal.css">
-<style>@media print{.qorg-no-print,.web-footer,.navbar{display:none!important}.qorg-profile-cv{box-shadow:none!important;border:0!important}}</style>
+<style>
+@media print {
+  .qorg-no-print,
+  .web-footer,
+  .navbar {
+    display: none !important;
+  }
+
+  .qorg-profile-cv {
+    box-shadow: none !important;
+    border: 0 !important;
+  }
+}
+</style>
 {% endblock %}
 {% block page_content %}
 <div class="qorg-portal" dir="{{ 'rtl' if page_is_rtl else 'ltr' }}">
@@ -12,14 +25,26 @@
       <h1>{{ _("External Profile") }}</h1>
       <p>{{ _("Maintain one professional profile for employment, volunteering, and internship applications.") }}</p>
     </div>
+
     <div class="qorg-hero-actions">
       {% if profile_exists %}
-        {% if not profile_locked %}<a class="btn btn-primary" href="{{ profile_form_url }}">{{ _("Edit Profile") }}</a>{% endif %}
-        <button class="btn btn-default" type="button" onclick="window.print()">{{ _("Print CV") }}</button>
+        {% if not profile_locked %}
+        <a class="btn btn-primary" href="/external-profile-form/{{ person.name }}/edit">
+          {{ _("Edit Profile") }}
+        </a>
+        {% endif %}
+        <button class="btn btn-default" type="button" onclick="window.print()">
+          {{ _("Print CV") }}
+        </button>
       {% else %}
-        <a class="btn btn-primary" href="{{ profile_form_url }}">{{ _("Create My Profile") }}</a>
+        <a class="btn btn-primary" href="/external-profile-form/new">
+          {{ _("Create My Profile") }}
+        </a>
       {% endif %}
-      <a class="btn btn-default" href="/my-applications">{{ _("My Applications") }}</a>
+
+      <a class="btn btn-default" href="/my-applications">
+        {{ _("My Applications") }}
+      </a>
     </div>
   </section>
 
@@ -31,13 +56,23 @@
   {% endif %}
 
   {% if profile_exists %}
-    {% if cv_html %}<div class="qorg-section qorg-profile-cv">{{ cv_html | safe }}</div>
-    {% else %}<div class="qorg-section"><h2>{{ person.full_name or person.name }}</h2><p>{{ person.profile_summary or person.professional_summary or '' }}</p></div>{% endif %}
+    {% if cv_html %}
+    <div class="qorg-section qorg-profile-cv">
+      {{ cv_html | safe }}
+    </div>
+    {% else %}
+    <div class="qorg-section">
+      <h2>{{ person.full_name or person.name }}</h2>
+      <p>{{ person.profile_summary or person.professional_summary or '' }}</p>
+    </div>
+    {% endif %}
   {% else %}
   <div class="qorg-empty-state">
     <h3>{{ _("No profile is linked to this account yet") }}</h3>
     <p>{{ _("Create your professional profile before applying for an opportunity.") }}</p>
-    <a class="btn btn-primary" href="{{ profile_form_url }}">{{ _("Create My Profile") }}</a>
+    <a class="btn btn-primary" href="/external-profile-form/new">
+      {{ _("Create My Profile") }}
+    </a>
   </div>
   {% endif %}
 </div>

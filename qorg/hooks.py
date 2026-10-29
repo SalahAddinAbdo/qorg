@@ -27,6 +27,7 @@ app_include_js = [
 
 app_include_css = [
     "/assets/qorg/css/model_policy.css",
+    "/assets/qorg/css/child_table_row_cleanup.css",
 ]
 
 website_route_rules = [
@@ -129,19 +130,7 @@ doc_events = {
             "qorg.qorg.recruitment_extensions.defaults.validate_job_applicant_policy",
             "qorg.qorg.recruitment_extensions.events.applicant_validate",
         ],
-        "validate": [
-            "qorg.qorg.people_and_opportunities.web_form_events.validate_job_applicant_portal",
-        ],
-        "after_insert": [
-            "qorg.qorg.people_and_opportunities.web_form_events.reconcile_job_applicant_capacity",
-        ],
-        "on_update": [
-            "qorg.qorg.people_and_opportunities.integrations.sync_job_applicant_person",
-            "qorg.qorg.people_and_opportunities.web_form_events.reconcile_job_applicant_capacity",
-        ],
-        "on_trash": [
-            "qorg.qorg.people_and_opportunities.web_form_events.reconcile_job_applicant_capacity",
-        ],
+        "on_update": "qorg.qorg.people_and_opportunities.integrations.sync_job_applicant_person",
     },
     "Interview Type": {"validate": [
         "qorg.qorg.recruitment_extensions.defaults.apply_interview_type_defaults",
@@ -276,7 +265,6 @@ after_install = [
     "qorg.qorg.recruitment_extensions.provisioning.provision_recruitment_extensions",
     "qorg.qorg.people_and_opportunities.provisioning.provision_people_opportunities_core",
     "qorg.qorg.people_and_opportunities.portal_provisioning.provision_opportunity_portal",
-    "qorg.qorg.people_and_opportunities.web_form_provisioning.provision_standard_opportunity_web_forms",
     "qorg.qorg.volunteer_management.provisioning.provision_volunteer_management",
     "qorg.qorg.project_management.print_settings_integration.provision_print_settings",
     "qorg.qorg.install.after_install",
@@ -294,7 +282,6 @@ after_migrate = [
     "qorg.qorg.recruitment_extensions.provisioning.provision_recruitment_extensions",
     "qorg.qorg.people_and_opportunities.provisioning.provision_people_opportunities_core",
     "qorg.qorg.people_and_opportunities.portal_provisioning.provision_opportunity_portal",
-    "qorg.qorg.people_and_opportunities.web_form_provisioning.provision_standard_opportunity_web_forms",
     "qorg.qorg.volunteer_management.provisioning.provision_volunteer_management",
     "qorg.qorg.project_management.print_settings_integration.provision_print_settings",
     "qorg.qorg.install.after_migrate",
