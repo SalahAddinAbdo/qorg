@@ -1,0 +1,101 @@
+{
+  "Website Settings": [
+    {
+      "fieldname": "qorg_web_form_design_section",
+      "label": "Web Form Appearance",
+      "fieldtype": "Section Break",
+      "insert_after": "qorg_opportunity_portal_page_size",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_enable_enhanced_web_form_design",
+      "label": "Enable Enhanced Web Form Design",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_web_form_design_section",
+      "description": "Apply the unified professional design to all published Web Forms. Disable this option to use the standard Frappe Web Form design.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_use_company_branding",
+      "label": "Use Company Branding",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_enable_enhanced_web_form_design",
+      "depends_on": "eval:doc.qorg_enable_enhanced_web_form_design==1",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_default_company",
+      "label": "Default Web Form Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "insert_after": "qorg_web_form_use_company_branding",
+      "depends_on": "eval:doc.qorg_enable_enhanced_web_form_design==1 && doc.qorg_web_form_use_company_branding==1",
+      "description": "Optional company used for Web Form logo and colors when the document itself has no company.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_design_column",
+      "fieldtype": "Column Break",
+      "insert_after": "qorg_web_form_default_company",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_show_hero_header",
+      "label": "Show Web Form Hero Header",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_web_form_design_column",
+      "depends_on": "eval:doc.qorg_enable_enhanced_web_form_design==1",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_show_privacy_notice",
+      "label": "Show Privacy and Security Notice",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_web_form_show_hero_header",
+      "depends_on": "eval:doc.qorg_enable_enhanced_web_form_design==1",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_sticky_actions",
+      "label": "Use Sticky Form Actions",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_web_form_show_privacy_notice",
+      "depends_on": "eval:doc.qorg_enable_enhanced_web_form_design==1",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_hide_child_row_name",
+      "label": "Hide Child Row Internal Name",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_web_form_sticky_actions",
+      "depends_on": "eval:doc.qorg_enable_enhanced_web_form_design==1",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_max_content_width",
+      "label": "Web Form Maximum Content Width",
+      "fieldtype": "Int",
+      "default": "1180",
+      "insert_after": "qorg_web_form_hide_child_row_name",
+      "depends_on": "eval:doc.qorg_enable_enhanced_web_form_design==1",
+      "description": "Maximum content width in pixels. Allowed range: 760 to 1600.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    }
+  ]
+}

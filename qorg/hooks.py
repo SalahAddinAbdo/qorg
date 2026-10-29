@@ -27,7 +27,14 @@ app_include_js = [
 
 app_include_css = [
     "/assets/qorg/css/model_policy.css",
-    "/assets/qorg/css/child_table_row_cleanup.css",
+]
+
+web_include_css = [
+    "/assets/qorg/css/web_form_design_system.css",
+]
+
+web_include_js = [
+    "/assets/qorg/js/web_form_design_system.js",
 ]
 
 website_route_rules = [

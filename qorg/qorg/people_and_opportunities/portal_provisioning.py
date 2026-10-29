@@ -10,6 +10,7 @@ from frappe.website.utils import delete_page_cache
 
 def provision_opportunity_portal():
     _create_custom_fields()
+    _create_web_form_design_custom_fields()
     _backfill_routes()
     frappe.clear_cache(doctype="External Opportunity")
     delete_page_cache()
@@ -18,6 +19,12 @@ def provision_opportunity_portal():
 
 def _create_custom_fields():
     path = Path(__file__).resolve().parent / "data" / "portal_custom_fields.json"
+    definitions = json.loads(path.read_text(encoding="utf-8"))
+    create_custom_fields(definitions, update=True)
+
+
+def _create_web_form_design_custom_fields():
+    path = Path(__file__).resolve().parent / "data" / "web_form_design_custom_fields.json"
     definitions = json.loads(path.read_text(encoding="utf-8"))
     create_custom_fields(definitions, update=True)
 
