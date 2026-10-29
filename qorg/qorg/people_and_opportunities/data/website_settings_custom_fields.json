@@ -1,0 +1,134 @@
+{
+  "Website Settings": [
+    {
+      "fieldname": "qorg_opportunity_portal_tab",
+      "label": "Opportunity Portal",
+      "fieldtype": "Tab Break",
+      "insert_after": "website_theme",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_opportunity_portal_general_section",
+      "label": "Portal Availability",
+      "fieldtype": "Section Break",
+      "insert_after": "qorg_opportunity_portal_tab",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_opportunity_portal_enabled",
+      "label": "Enable Opportunity Portal",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_opportunity_portal_general_section",
+      "description": "Enables the public opportunity list, opportunity detail pages, and applicant portal integration.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_public_opportunity_listing",
+      "label": "Enable Public Opportunity Listing",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_opportunity_portal_enabled",
+      "description": "Allows opportunities with Public visibility to appear to guests.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_external_applications_enabled",
+      "label": "Enable External Applications",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_public_opportunity_listing",
+      "description": "Allows signed-in website users with an external profile to submit applications.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_opportunity_portal_general_cb",
+      "label": "",
+      "fieldtype": "Column Break",
+      "insert_after": "qorg_external_applications_enabled",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_default_opportunity_visibility",
+      "label": "Default Portal Visibility",
+      "fieldtype": "Select",
+      "options": "Public\nAuthenticated Users\nInternal Only",
+      "default": "Public",
+      "insert_after": "qorg_opportunity_portal_general_cb",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_require_external_profile",
+      "label": "Require External Profile before Application",
+      "fieldtype": "Check",
+      "default": "1",
+      "read_only": 1,
+      "insert_after": "qorg_default_opportunity_visibility",
+      "description": "Applications use the authenticated user's External Person profile as the person master record.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_opportunity_portal_display_section",
+      "label": "Listing and Lifecycle",
+      "fieldtype": "Section Break",
+      "insert_after": "qorg_require_external_profile",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_show_upcoming_opportunities",
+      "label": "Show Upcoming Opportunities",
+      "fieldtype": "Check",
+      "default": "0",
+      "insert_after": "qorg_opportunity_portal_display_section",
+      "description": "Shows published opportunities before their Opening Date, without allowing application submission.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_show_closed_opportunities",
+      "label": "Show Closed Opportunities",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_show_upcoming_opportunities",
+      "description": "Keeps closed opportunity details visible while preventing new applications.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_opportunity_portal_page_size",
+      "label": "Opportunities per Page",
+      "fieldtype": "Int",
+      "default": "24",
+      "insert_after": "qorg_show_closed_opportunities",
+      "description": "Maximum number of opportunities loaded per page. Values are limited to 6–50.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_opportunity_portal_display_cb",
+      "label": "",
+      "fieldtype": "Column Break",
+      "insert_after": "qorg_opportunity_portal_page_size",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_opportunity_portal_information",
+      "label": "Standard Website Integration",
+      "fieldtype": "HTML",
+      "insert_after": "qorg_opportunity_portal_display_cb",
+      "options": "<div class='alert alert-info'>The portal uses the Website Theme selected in Website Settings, the standard website header and footer, Portal Settings navigation, standard login and signup controls, route redirects, and website indexing controls.</div>",
+      "module": "QOrg",
+      "is_system_generated": 1
+    }
+  ]
+}

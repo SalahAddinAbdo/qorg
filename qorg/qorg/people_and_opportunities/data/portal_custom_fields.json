@@ -1,0 +1,48 @@
+{
+  "External Opportunity": [
+    {
+      "fieldname": "route",
+      "label": "Public Route",
+      "fieldtype": "Data",
+      "insert_after": "publish_on_website",
+      "read_only": 1,
+      "unique": 1,
+      "no_copy": 1,
+      "description": "Unique public route generated when the opportunity is published.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "published_by",
+      "label": "Published By",
+      "fieldtype": "Link",
+      "options": "User",
+      "insert_after": "published_on",
+      "read_only": 1,
+      "no_copy": 1,
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "portal_visibility",
+      "label": "Portal Visibility",
+      "fieldtype": "Select",
+      "options": "Public\nAuthenticated Users\nInternal Only",
+      "default": "Public",
+      "insert_after": "published_by",
+      "description": "Controls who can view the published opportunity. Applications always require sign-in.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "public_contact_email",
+      "label": "Public Contact Email",
+      "fieldtype": "Data",
+      "options": "Email",
+      "insert_after": "portal_visibility",
+      "description": "Optional public email for opportunity enquiries.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    }
+  ]
+}

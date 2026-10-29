@@ -1,5 +1,4 @@
 [pre_model_sync]
-
 [post_model_sync]
 qorg.qorg.patches.v3_0.provision_task_management
 qorg.qorg.patches.v3_0.normalize_legacy_tasks
@@ -7,3 +6,4 @@ qorg.qorg.patches.v3_0.rebuild_task_rollups
 qorg.qorg.patches.v3_0.reconcile_task_shares
 qorg.qorg.patches.v3_0_2.migrate_task_management_settings
 qorg.qorg.recruitment_extensions.migration
+qorg.qorg.patches.v1_0.provision_opportunity_portal

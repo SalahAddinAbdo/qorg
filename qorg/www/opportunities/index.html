@@ -1,0 +1,90 @@
+{% extends "templates/web.html" %}
+{% block title %}{{ _("Opportunities") }}{% endblock %}
+{% block head_include %}
+<link rel="stylesheet" href="/assets/qorg/css/opportunities_portal.css">
+{% endblock %}
+{% block page_content %}
+<div class="qorg-portal" dir="{{ 'rtl' if is_rtl else 'ltr' }}">
+  <section class="qorg-hero">
+    <div>
+      <span class="qorg-eyebrow">{{ _("People and Opportunities") }}</span>
+      <h1>{{ _("Explore current opportunities") }}</h1>
+      <p>{{ _("Browse employment, volunteering, internship, and other participation opportunities. Use one professional profile for your applications.") }}</p>
+    </div>
+    <div class="qorg-hero-actions">
+      {% if is_guest %}
+      <a class="btn btn-primary" href="/login?redirect-to=/opportunities">{{ _("Sign in to apply") }}</a>
+      {% else %}
+      <a class="btn btn-primary" href="/my-applications">{{ _("My Applications") }}</a>
+      <a class="btn btn-default" href="/external-profile">{{ _("My Profile") }}</a>
+      {% endif %}
+    </div>
+  </section>
+
+  <form class="qorg-filter-card" method="get" action="/opportunities">
+    <div class="qorg-filter-grid">
+      <label>
+        <span>{{ _("Search") }}</span>
+        <input class="form-control" name="search" value="{{ filters.get('search') or '' }}" placeholder="{{ _('Title, summary, or keyword') }}">
+      </label>
+      <label>
+        <span>{{ _("Type") }}</span>
+        <select class="form-control" name="type">
+          <option value="">{{ _("All opportunity types") }}</option>
+          {% for value in ["Employment", "Volunteering", "Internship", "Consultancy", "Other"] %}
+          <option value="{{ value }}" {% if filters.get('type') == value %}selected{% endif %}>{{ _(value) }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>
+        <span>{{ _("Work arrangement") }}</span>
+        <select class="form-control" name="arrangement">
+          <option value="">{{ _("All arrangements") }}</option>
+          {% for value in ["On-site", "Remote", "Hybrid", "Field Based", "Multiple Locations"] %}
+          <option value="{{ value }}" {% if filters.get('arrangement') == value %}selected{% endif %}>{{ _(value) }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <div class="qorg-filter-actions">
+        <button class="btn btn-primary" type="submit">{{ _("Apply Filters") }}</button>
+        <a class="btn btn-default" href="/opportunities">{{ _("Reset") }}</a>
+      </div>
+    </div>
+  </form>
+
+  <div class="qorg-results-heading">
+    <h2>{{ _("Open Opportunities") }}</h2>
+    <span>{{ opportunities|length }} {{ _("result(s)") }}</span>
+  </div>
+
+  {% if opportunities %}
+  <div class="qorg-card-grid">
+    {% for item in opportunities %}
+    <article class="qorg-opportunity-card">
+      <div class="qorg-card-topline">
+        <span class="qorg-pill">{{ _(item.participation_type or item.opportunity_type or "Opportunity") }}</span>
+        {% if item.days_remaining is not none %}
+        <span class="qorg-deadline {% if item.days_remaining <= 3 %}is-urgent{% endif %}">
+          {{ item.days_remaining }} {{ _("day(s) remaining") }}
+        </span>
+        {% endif %}
+      </div>
+      <h3><a href="/opportunities/{{ item.route }}">{{ item.opportunity_title }}</a></h3>
+      <p class="qorg-summary">{{ item.summary or _("View the opportunity for full details.") }}</p>
+      <dl class="qorg-meta-list">
+        {% if item.company %}<div><dt>{{ _("Company") }}</dt><dd>{{ item.company }}</dd></div>{% endif %}
+        {% if item.work_arrangement %}<div><dt>{{ _("Arrangement") }}</dt><dd>{{ _(item.work_arrangement) }}</dd></div>{% endif %}
+        {% if item.closing_date %}<div><dt>{{ _("Closing Date") }}</dt><dd>{{ frappe.utils.formatdate(item.closing_date) }}</dd></div>{% endif %}
+      </dl>
+      <a class="btn btn-primary btn-sm" href="/opportunities/{{ item.route }}">{{ _("View Opportunity") }}</a>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="qorg-empty-state">
+    <h3>{{ _("No open opportunities match the selected filters") }}</h3>
+    <p>{{ _("Reset the filters or check again later for newly published opportunities.") }}</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
