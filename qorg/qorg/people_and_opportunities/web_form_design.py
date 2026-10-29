@@ -6,7 +6,7 @@ from pathlib import Path
 import frappe
 from frappe.utils import cint
 
-CSS_VERSION = "3.0.2"
+CSS_VERSION = "3.0.3"
 DEFAULTS = {"enabled": 1, "company": None, "max_width": 1180, "header_style": "Hero", "hide_child_name": 1}
 
 
@@ -105,18 +105,77 @@ def _effective_settings(web_form):
 
 
 def _header_css(style, primary, secondary, accent):
-    # Frappe places the title block above the form and may wrap it differently
-    # by route/theme. Do not require it to be a direct child of main.container.
-    selectors = "main.container .web-form-header, main.container .page-header, main.container .web-form-head"
-    title_selectors = "main.container .web-form-header h1, main.container .page-header h1, main.container .web-form-head h1"
-    common = f"{selectors} {{ margin: 22px 0 0; }}\n"
+    # Scope the managed header strictly to Frappe's Web Form title blocks.
+    # Never style the generic .page-header because it is also used by internal
+    # status/card elements and can create oversized decorative layers.
+    selectors = "main.container .web-form-header, main.container .web-form-head"
+    title_selectors = "main.container .web-form-header h1, main.container .web-form-head h1"
+    status_selectors = "main.container .web-form-header .indicator-pill, main.container .web-form-head .indicator-pill"
+
+    reset = f"""{selectors}::before,
+{selectors}::after {{
+  content: none !important;
+  display: none !important;
+}}
+{selectors} {{
+  margin: 22px 0 0;
+  transform: none;
+  clip-path: none;
+}}
+"""
+
     if style == "Standard":
-        return common + f"""{selectors} {{ padding: 0 0 18px; background: transparent; border: 0; border-bottom: 2px solid {primary}; border-radius: 0; box-shadow: none; }}
-{title_selectors} {{ color: #102a34; font-size: clamp(1.75rem,3.2vw,2.45rem); }}"""
-    return common + f"""{selectors} {{ position: relative; overflow: hidden; padding: clamp(24px,4vw,46px); color: #fff; background: linear-gradient(135deg,{secondary},{primary}); border: 0; border-radius: 18px; box-shadow: 0 18px 44px rgba(8,75,89,.20); }}
-{selectors}::after {{ content: ""; position: absolute; inset-inline-end: -65px; bottom: -100px; width: 220px; height: 220px; border: 34px solid rgba(255,255,255,.08); border-radius: 50%; pointer-events: none; }}
-{title_selectors} {{ position: relative; z-index: 1; margin: 0; color: #fff; font-size: clamp(1.8rem,4vw,2.7rem); }}
-main.container .web-form-introduction, main.container .introduction {{ margin-top: 14px; border-inline-start-color: {accent}; }}"""
+        return reset + f"""{selectors} {{
+  position: relative;
+  overflow: visible;
+  padding: 0 0 18px;
+  color: #102a34;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid {primary};
+  border-radius: 0;
+  box-shadow: none;
+}}
+{title_selectors} {{
+  margin: 0;
+  color: #102a34;
+  font-size: clamp(1.75rem, 3.2vw, 2.45rem);
+  line-height: 1.12;
+}}
+"""
+
+    return reset + f"""{selectors} {{
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(24px, 4vw, 44px);
+  color: #fff;
+  background: linear-gradient(135deg, {secondary} 0%, {primary} 100%);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 18px;
+  box-shadow: 0 18px 44px rgba(8,75,89,.20);
+}}
+{title_selectors} {{
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  line-height: 1.12;
+}}
+{status_selectors} {{
+  position: relative;
+  z-index: 1;
+  color: #6b4b00;
+  background: #fff3c9;
+  border: 1px solid rgba(217,166,46,.42);
+}}
+main.container .web-form-introduction,
+main.container .introduction {{
+  margin-top: 14px;
+  border-inline-start-color: {accent};
+}}
+"""
 
 
 def _branding(company):
