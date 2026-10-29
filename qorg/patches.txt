@@ -1,4 +1,5 @@
 [pre_model_sync]
+
 [post_model_sync]
 qorg.qorg.patches.v3_0.provision_task_management
 qorg.qorg.patches.v3_0.normalize_legacy_tasks

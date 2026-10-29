@@ -4,8 +4,10 @@ app_publisher = "Q Org"
 app_description = "Audit-focused extensions for ERPNext"
 app_email = ""
 app_license = "GPL-3.0"
+
 app_logo_url = "/assets/qorg/images/qorg_project_cycle.png"
 app_home = "/desk/q-management-hub"
+
 add_to_apps_screen = [{
     "name": app_name,
     "logo": app_logo_url,
@@ -13,28 +15,36 @@ add_to_apps_screen = [{
     "route": app_home,
     "sequence_id": 5,
 }]
+
 required_apps = ["erpnext", "hrms"]
+
 extend_bootinfo = "qorg.qorg.enterprise_foundation.boot.extend_bootinfo"
+
 app_include_js = [
     "/assets/qorg/js/qorg_form_bootstrap.js",
     "/assets/qorg/js/model_policy.js",
 ]
+
 app_include_css = [
     "/assets/qorg/css/model_policy.css",
 ]
+
 website_route_rules = [
     {"from_route": "/opportunities/<route>", "to_route": "opportunities/detail"},
 ]
+
 override_whitelisted_methods = {
     "frappe.model.rename_doc.update_document_title": (
         "qorg.qorg.enterprise_foundation.overrides.update_document_title"
     ),
 }
+
 extend_doctype_class = {
     "Task": [
         "qorg.qorg.task_management.task_controller.TaskProjectPeriodPolicyMixin"
     ],
 }
+
 doctype_js = {
     "Website Settings": "public/js/website_settings_opportunity_portal.js",
     "HR Settings": "public/js/hr_settings_recruitment.js",
@@ -50,39 +60,69 @@ doctype_js = {
     "Projects Settings": "public/js/projects_settings.js",
     "Print Settings": "public/js/print_settings.js",
 }
+
 doc_events = {
     "Designation": {"validate": [
         "qorg.qorg.recruitment_extensions.events.designation_validate",
         "qorg.qorg.recruitment_extensions.validation.validate_designation",
     ]},
     "External Person": {
-        "on_update": "qorg.qorg.people_and_opportunities.portal_settings.sync_external_person_portal_access",
-        "on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete",
+        "on_update": (
+            "qorg.qorg.people_and_opportunities.portal_settings."
+            "sync_external_person_portal_access"
+        ),
+        "on_trash": (
+            "qorg.qorg.people_and_opportunities.integrity."
+            "prevent_operational_delete"
+        ),
     },
     "External Opportunity": {
         "validate": [
             "qorg.qorg.volunteer_management.events.validate_external_opportunity",
-            "qorg.qorg.people_and_opportunities.portal.validate_external_opportunity_publication",
+            (
+                "qorg.qorg.people_and_opportunities.portal."
+                "validate_external_opportunity_publication"
+            ),
         ],
-        "on_update": "qorg.qorg.people_and_opportunities.portal.handle_external_opportunity_publication",
-        "on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete",
+        "on_update": (
+            "qorg.qorg.people_and_opportunities.portal."
+            "handle_external_opportunity_publication"
+        ),
+        "on_trash": (
+            "qorg.qorg.people_and_opportunities.integrity."
+            "prevent_operational_delete"
+        ),
     },
-    "Participation Application": {"on_trash": "qorg.qorg.volunteer_management.integrity.prevent_operational_delete"},
-    "Participation Assessment": {"on_trash": "qorg.qorg.volunteer_management.integrity.prevent_operational_delete"},
-    "Participation Engagement": {"on_trash": "qorg.qorg.volunteer_management.integrity.prevent_operational_delete"},
-    "Participation Service Log": {"on_trash": "qorg.qorg.volunteer_management.integrity.prevent_operational_delete"},
-    "Participation Evaluation": {"on_trash": "qorg.qorg.volunteer_management.integrity.prevent_operational_delete"},
-    "Participation Certificate": {"on_trash": "qorg.qorg.volunteer_management.integrity.prevent_operational_delete"},
+    "Participation Application": {
+        "on_trash": "qorg.qorg.volunteer_management.integrity.prevent_operational_delete",
+    },
+    "Participation Assessment": {
+        "on_trash": "qorg.qorg.volunteer_management.integrity.prevent_operational_delete",
+    },
+    "Participation Engagement": {
+        "on_trash": "qorg.qorg.volunteer_management.integrity.prevent_operational_delete",
+    },
+    "Participation Service Log": {
+        "on_trash": "qorg.qorg.volunteer_management.integrity.prevent_operational_delete",
+    },
+    "Participation Evaluation": {
+        "on_trash": "qorg.qorg.volunteer_management.integrity.prevent_operational_delete",
+    },
+    "Participation Certificate": {
+        "on_trash": "qorg.qorg.volunteer_management.integrity.prevent_operational_delete",
+    },
     "Volunteer Profile": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete"},
     "External Opportunity Type": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_master_delete"},
     "Person Qualification": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_master_delete"},
     "Volunteer Category": {"on_trash": "qorg.qorg.people_and_opportunities.integrity.prevent_master_delete"},
-    "Job Opening": {"validate": [
-        "qorg.qorg.people_and_opportunities.integrations.validate_job_opening",
-        "qorg.qorg.recruitment_extensions.events.opening_validate",
-        "qorg.qorg.recruitment_extensions.defaults.apply_job_opening_defaults",
-        "qorg.qorg.recruitment_extensions.validation.validate_job_opening",
-    ]},
+    "Job Opening": {
+        "validate": [
+            "qorg.qorg.people_and_opportunities.integrations.validate_job_opening",
+            "qorg.qorg.recruitment_extensions.events.opening_validate",
+            "qorg.qorg.recruitment_extensions.defaults.apply_job_opening_defaults",
+            "qorg.qorg.recruitment_extensions.validation.validate_job_opening",
+        ],
+    },
     "Job Applicant": {
         "before_validate": [
             "qorg.qorg.people_and_opportunities.integrations.sync_job_applicant_person",
@@ -137,19 +177,38 @@ doc_events = {
         ],
     },
     "Website Settings": {
-        "validate": "qorg.qorg.people_and_opportunities.portal_settings.validate_website_settings",
+        "validate": (
+            "qorg.qorg.people_and_opportunities.portal_settings."
+            "validate_website_settings"
+        ),
     },
-    "HR Settings": {"validate": "qorg.qorg.recruitment_extensions.settings.validate_hr_settings"},
-    "Print Settings": {"validate": "qorg.qorg.project_management.print_settings_integration.validate_print_settings"},
-    "Project Risk": {"on_update": "qorg.qorg.project_management.notification_engine.process_project_notification_on_update"},
+    "HR Settings": {
+        "validate": "qorg.qorg.recruitment_extensions.settings.validate_hr_settings"
+    },
+    "Print Settings": {
+        "validate": "qorg.qorg.project_management.print_settings_integration.validate_print_settings",
+
+    },
+    "Project Risk": {
+        "on_update": (
+            "qorg.qorg.project_management.notification_engine."
+            "process_project_notification_on_update"
+        )
+    },
     "Task": {
         "before_validate": "qorg.qorg.task_management.events.before_validate",
         "on_update": "qorg.qorg.task_management.events.on_update",
         "after_delete": "qorg.qorg.task_management.events.after_delete",
     },
     "Workflow": {
-        "validate": "qorg.qorg.workflow.provisioning.validate_workflow_configuration",
-        "on_update": "qorg.qorg.workflow.provisioning.ensure_current_responsible_user",
+        "validate": (
+            "qorg.qorg.workflow.provisioning."
+            "validate_workflow_configuration"
+        ),
+        "on_update": (
+            "qorg.qorg.workflow.provisioning."
+            "ensure_current_responsible_user"
+        ),
     },
     "*": {
         "before_insert": "qorg.qorg.enterprise_foundation.policy_enforcement.enforce_model_policy",
@@ -158,9 +217,13 @@ doc_events = {
         "before_cancel": "qorg.qorg.enterprise_foundation.policy_enforcement.enforce_model_policy",
         "before_update_after_submit": "qorg.qorg.enterprise_foundation.policy_enforcement.enforce_model_policy",
         "on_trash": "qorg.qorg.enterprise_foundation.policy_enforcement.enforce_model_policy",
-        "validate": "qorg.qorg.workflow.permissions.validate_responsible_user",
+        "validate": (
+            "qorg.qorg.workflow.permissions."
+            "validate_responsible_user"
+        ),
     },
 }
+
 fixtures = [
     {"dt": "Custom Field", "filters": [["name", "in", [
         "Workflow Transition-custom_employee_signature_mapping_key",
@@ -189,12 +252,15 @@ fixtures = [
         "Company-custom_print_border_color",
     ]]]},
 ]
+
 before_migrate = [
     "qorg.qorg.project_management.identity_migration.prepare_q_org_identity",
     "qorg.qorg.project_management.workspace_migration.prepare_q_management_hub",
 ]
+
 after_install = [
     "qorg.qorg.recruitment_extensions.settings_provisioning.provision_recruitment_settings",
+
     "qorg.qorg.recruitment_extensions.provisioning.provision_recruitment_extensions",
     "qorg.qorg.people_and_opportunities.provisioning.provision_people_opportunities_core",
     "qorg.qorg.people_and_opportunities.portal_provisioning.provision_opportunity_portal",
@@ -208,8 +274,10 @@ after_install = [
     "qorg.qorg.enterprise_foundation.provisioning.provision_enterprise_foundation",
     "qorg.qorg.project_management.navigation_provisioning.provision_q_org_navigation",
 ]
+
 after_migrate = [
     "qorg.qorg.recruitment_extensions.settings_provisioning.provision_recruitment_settings",
+
     "qorg.qorg.recruitment_extensions.provisioning.provision_recruitment_extensions",
     "qorg.qorg.people_and_opportunities.provisioning.provision_people_opportunities_core",
     "qorg.qorg.people_and_opportunities.portal_provisioning.provision_opportunity_portal",
@@ -225,6 +293,7 @@ after_migrate = [
     "qorg.qorg.enterprise_foundation.provisioning.provision_enterprise_foundation",
     "qorg.qorg.project_management.navigation_provisioning.provision_q_org_navigation",
 ]
+
 scheduler_events = {
     "daily": [
         "qorg.qorg.recruitment_extensions.settings_jobs.run_daily_recruitment_settings_jobs",
@@ -232,8 +301,13 @@ scheduler_events = {
         "qorg.qorg.project_management.notification_engine.run_daily_project_notifications",
         "qorg.qorg.project_management.integrity_jobs.run_daily_project_reconciliation",
     ],
-    "cron": {"*/15 * * * *": ["qorg.qorg.task_management.scheduler.run_scheduled_task_summary"]},
+    "cron": {
+        "*/15 * * * *": [
+            "qorg.qorg.task_management.scheduler.run_scheduled_task_summary"
+        ]
+    },
 }
+
 standard_portal_menu_items = [
     {
         "title": "Opportunities",
@@ -253,15 +327,23 @@ standard_portal_menu_items = [
         "role": "External Applicant",
     },
 ]
-role_home_page = {"External Applicant": "opportunities"}
+
+role_home_page = {
+    "External Applicant": "opportunities",
+}
 
 permission_query_conditions = {
     "Task": "qorg.qorg.task_management.permissions.task_query_condition",
-    "Task Assignment Request": "qorg.qorg.task_management.permissions.request_query_condition",
+    "Task Assignment Request": (
+        "qorg.qorg.task_management.permissions.request_query_condition"
+    ),
 }
+
 has_permission = {
     "Feature Control Center": "qorg.qorg.enterprise_foundation.permissions.feature_control_center_has_permission",
     "Managed Configuration State": "qorg.qorg.enterprise_foundation.permissions.managed_state_has_permission",
     "Task": "qorg.qorg.task_management.permissions.has_task_permission",
-    "Task Assignment Request": "qorg.qorg.task_management.permissions.has_request_permission",
+    "Task Assignment Request": (
+        "qorg.qorg.task_management.permissions.has_request_permission"
+    ),
 }
