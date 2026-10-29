@@ -6,7 +6,7 @@ from pathlib import Path
 import frappe
 from frappe.utils import cint
 
-CSS_VERSION = "3.0.0"
+CSS_VERSION = "3.0.2"
 DEFAULTS = {"enabled": 1, "company": None, "max_width": 1180, "header_style": "Hero", "hide_child_name": 1}
 
 
@@ -87,7 +87,16 @@ def _effective_settings(web_form):
         if width < 760 or width > 1600: frappe.throw("Maximum Content Width Override must be between 760 and 1600 pixels.")
         values.max_width = width
     override = web_form.get("qorg_web_form_header_style_override")
-    if override and override != "Use Global Setting": values.header_style = override
+    if override and override != "Use Global Setting":
+        values.header_style = override
+    else:
+        # Backward compatibility: the earlier per-form Hero Header setting must
+        # continue to have a real effect until the obsolete fields are removed.
+        legacy_hero = web_form.get("qorg_web_form_hero_mode")
+        if legacy_hero == "Show":
+            values.header_style = "Hero"
+        elif legacy_hero == "Hide":
+            values.header_style = "Standard"
     values.enabled = cint(values.enabled)
     values.max_width = min(max(cint(values.max_width) or 1180, 760), 1600)
     values.company = values.company or frappe.defaults.get_global_default("company")
@@ -96,10 +105,18 @@ def _effective_settings(web_form):
 
 
 def _header_css(style, primary, secondary, accent):
-    common = '''main.container > .web-form-header, main.container > .page-header { margin: 22px 0 0; }\n'''
+    # Frappe places the title block above the form and may wrap it differently
+    # by route/theme. Do not require it to be a direct child of main.container.
+    selectors = "main.container .web-form-header, main.container .page-header, main.container .web-form-head"
+    title_selectors = "main.container .web-form-header h1, main.container .page-header h1, main.container .web-form-head h1"
+    common = f"{selectors} {{ margin: 22px 0 0; }}\n"
     if style == "Standard":
-        return common + f'''main.container > .web-form-header, main.container > .page-header {{ padding: 0 0 18px; background: transparent; border-bottom: 2px solid {primary}; }}\nmain.container > .web-form-header h1, main.container > .page-header h1 {{ color: #102a34; font-size: clamp(1.75rem,3.2vw,2.45rem); }}'''
-    return common + f'''main.container > .web-form-header, main.container > .page-header {{ position: relative; overflow: hidden; padding: clamp(24px,4vw,46px); color: #fff; background: linear-gradient(135deg,{secondary},{primary}); border: 0; border-radius: 18px; box-shadow: 0 18px 44px rgba(8,75,89,.20); }}\nmain.container > .web-form-header::after, main.container > .page-header::after {{ content: ""; position: absolute; inset-inline-end: -65px; bottom: -100px; width: 220px; height: 220px; border: 34px solid rgba(255,255,255,.08); border-radius: 50%; pointer-events: none; }}\nmain.container > .web-form-header h1, main.container > .page-header h1 {{ position: relative; z-index: 1; margin: 0; color: #fff; font-size: clamp(1.8rem,4vw,2.7rem); }}\nmain.container > .web-form-introduction, main.container > .introduction {{ margin-top: -1px; border-inline-start-color: {accent}; }}'''
+        return common + f"""{selectors} {{ padding: 0 0 18px; background: transparent; border: 0; border-bottom: 2px solid {primary}; border-radius: 0; box-shadow: none; }}
+{title_selectors} {{ color: #102a34; font-size: clamp(1.75rem,3.2vw,2.45rem); }}"""
+    return common + f"""{selectors} {{ position: relative; overflow: hidden; padding: clamp(24px,4vw,46px); color: #fff; background: linear-gradient(135deg,{secondary},{primary}); border: 0; border-radius: 18px; box-shadow: 0 18px 44px rgba(8,75,89,.20); }}
+{selectors}::after {{ content: ""; position: absolute; inset-inline-end: -65px; bottom: -100px; width: 220px; height: 220px; border: 34px solid rgba(255,255,255,.08); border-radius: 50%; pointer-events: none; }}
+{title_selectors} {{ position: relative; z-index: 1; margin: 0; color: #fff; font-size: clamp(1.8rem,4vw,2.7rem); }}
+main.container .web-form-introduction, main.container .introduction {{ margin-top: 14px; border-inline-start-color: {accent}; }}"""
 
 
 def _branding(company):

@@ -37,7 +37,6 @@ WEB_FORMS = [
         "success_message": "Your professional profile has been saved successfully.",
         "submit_button_label": "Save Profile",
         "layout": [
-            page("Personal Information"),
             section("Identity and Contact"),
             field("first_name", required=True), field("middle_name"), field("last_name"),
             column(),
