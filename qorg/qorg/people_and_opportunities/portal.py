@@ -595,7 +595,7 @@ def _get_web_form_application_url(doc, route):
         if behavior == "Employment"
         else "participation-application"
     )
-    return f"/{target_route}/new?opportunity={quote(route)}"
+    return f"/{target_route}/new?opportunity_route={quote(route)}"
 
 
 def _participation_type(doc):
