@@ -1,0 +1,284 @@
+{
+  "Website Settings": [
+    {
+      "fieldname": "qorg_web_form_design_section",
+      "label": "Web Form Appearance",
+      "fieldtype": "Section Break",
+      "insert_after": "qorg_opportunity_portal_page_size",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_enable_enhanced_web_form_design",
+      "label": "Enable Enhanced Web Form Design",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_web_form_design_section",
+      "description": "Apply the managed professional CSS design to Web Forms that inherit the global setting.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_use_company_branding",
+      "label": "Use Company Branding",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_enable_enhanced_web_form_design",
+      "depends_on": "eval:doc.qorg_enable_enhanced_web_form_design==1",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_default_company",
+      "label": "Default Web Form Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "insert_after": "qorg_web_form_use_company_branding",
+      "depends_on": "eval:doc.qorg_enable_enhanced_web_form_design==1 && doc.qorg_web_form_use_company_branding==1",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_max_content_width",
+      "label": "Maximum Content Width",
+      "fieldtype": "Int",
+      "default": "1180",
+      "insert_after": "qorg_web_form_default_company",
+      "depends_on": "eval:doc.qorg_enable_enhanced_web_form_design==1",
+      "description": "Allowed range: 760 to 1600 pixels.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_design_column",
+      "fieldtype": "Column Break",
+      "insert_after": "qorg_web_form_max_content_width",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_emphasize_header",
+      "label": "Emphasize Form Header",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_web_form_design_column",
+      "depends_on": "eval:doc.qorg_enable_enhanced_web_form_design==1",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_emphasize_introduction",
+      "label": "Emphasize Form Introduction",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_web_form_emphasize_header",
+      "depends_on": "eval:doc.qorg_enable_enhanced_web_form_design==1",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_sticky_actions",
+      "label": "Use Sticky Form Actions",
+      "fieldtype": "Check",
+      "default": "0",
+      "insert_after": "qorg_web_form_emphasize_introduction",
+      "depends_on": "eval:doc.qorg_enable_enhanced_web_form_design==1",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_hide_child_row_name",
+      "label": "Hide Child Row Internal Name",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_web_form_sticky_actions",
+      "depends_on": "eval:doc.qorg_enable_enhanced_web_form_design==1",
+      "module": "QOrg",
+      "is_system_generated": 1
+    }
+  ],
+  "Web Form": [
+    {
+      "fieldname": "qorg_web_form_appearance_section",
+      "label": "Enhanced Design",
+      "fieldtype": "Section Break",
+      "insert_after": "allow_print",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_design_mode",
+      "label": "Design Mode",
+      "fieldtype": "Select",
+      "options": "Use Global Setting\nEnhanced Design\nStandard Frappe Design",
+      "default": "Use Global Setting",
+      "insert_after": "qorg_web_form_appearance_section",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_branding_company",
+      "label": "Branding Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "insert_after": "qorg_web_form_design_mode",
+      "depends_on": "eval:doc.qorg_web_form_design_mode!='Standard Frappe Design'",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_max_content_width_override",
+      "label": "Maximum Content Width Override",
+      "fieldtype": "Int",
+      "insert_after": "qorg_web_form_branding_company",
+      "depends_on": "eval:doc.qorg_web_form_design_mode!='Standard Frappe Design'",
+      "description": "Leave blank to inherit Website Settings. Allowed range: 760 to 1600 pixels.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_appearance_column",
+      "fieldtype": "Column Break",
+      "insert_after": "qorg_web_form_max_content_width_override",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_header_mode",
+      "label": "Form Header",
+      "fieldtype": "Select",
+      "options": "Use Global Setting\nEmphasize\nStandard",
+      "default": "Use Global Setting",
+      "insert_after": "qorg_web_form_appearance_column",
+      "depends_on": "eval:doc.qorg_web_form_design_mode!='Standard Frappe Design'",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_introduction_mode",
+      "label": "Form Introduction",
+      "fieldtype": "Select",
+      "options": "Use Global Setting\nEmphasize\nStandard",
+      "default": "Use Global Setting",
+      "insert_after": "qorg_web_form_header_mode",
+      "depends_on": "eval:doc.qorg_web_form_design_mode!='Standard Frappe Design'",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_sticky_actions_mode",
+      "label": "Sticky Form Actions",
+      "fieldtype": "Select",
+      "options": "Use Global Setting\nEnable\nDisable",
+      "default": "Use Global Setting",
+      "insert_after": "qorg_web_form_introduction_mode",
+      "depends_on": "eval:doc.qorg_web_form_design_mode!='Standard Frappe Design'",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_web_form_child_name_mode",
+      "label": "Child Row Internal Name",
+      "fieldtype": "Select",
+      "options": "Use Global Setting\nHide\nShow",
+      "default": "Use Global Setting",
+      "insert_after": "qorg_web_form_sticky_actions_mode",
+      "depends_on": "eval:doc.qorg_web_form_design_mode!='Standard Frappe Design'",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_apply_managed_web_form_design",
+      "label": "Apply Managed Design Now",
+      "fieldtype": "Check",
+      "default": "0",
+      "insert_after": "qorg_web_form_child_name_mode",
+      "description": "Replace the current Custom CSS with the managed design during the next save.",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_managed_css_version",
+      "label": "Managed CSS Version",
+      "fieldtype": "Data",
+      "hidden": 1,
+      "read_only": 1,
+      "insert_after": "qorg_apply_managed_web_form_design",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_managed_css_hash",
+      "label": "Managed CSS Hash",
+      "fieldtype": "Data",
+      "hidden": 1,
+      "read_only": 1,
+      "insert_after": "qorg_managed_css_version",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_managed_css_update_available",
+      "label": "Managed CSS Update Available",
+      "fieldtype": "Check",
+      "hidden": 1,
+      "read_only": 1,
+      "insert_after": "qorg_managed_css_hash",
+      "module": "QOrg",
+      "is_system_generated": 1
+    }
+  ],
+  "HR Settings": [
+    {
+      "fieldname": "qorg_portal_application_controls_section",
+      "label": "Portal Profile and Application Controls",
+      "fieldtype": "Section Break",
+      "insert_after": "qorg_volunteer_internship_tab",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_allow_profile_portal_editing",
+      "label": "Allow Profile Editing from Portal",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_portal_application_controls_section",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_allow_application_edit_until_closing",
+      "label": "Allow Application Editing Until Closing Date",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_allow_profile_portal_editing",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_portal_controls_column",
+      "fieldtype": "Column Break",
+      "insert_after": "qorg_allow_application_edit_until_closing",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_lock_application_when_screening_starts",
+      "label": "Lock Application When Screening Starts",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_portal_controls_column",
+      "module": "QOrg",
+      "is_system_generated": 1
+    },
+    {
+      "fieldname": "qorg_allow_application_withdrawal",
+      "label": "Allow Applicant Withdrawal",
+      "fieldtype": "Check",
+      "default": "1",
+      "insert_after": "qorg_lock_application_when_screening_starts",
+      "module": "QOrg",
+      "is_system_generated": 1
+    }
+  ]
+}

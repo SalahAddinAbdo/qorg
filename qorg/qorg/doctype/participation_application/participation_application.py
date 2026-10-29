@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from frappe.model.document import Document
 
 from qorg.qorg.people_and_opportunities.web_form_services import (

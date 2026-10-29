@@ -27,11 +27,7 @@
       {% if opportunity.qualifications %}<section class="qorg-section"><h2>{{ _("Qualifications and Requirements") }}</h2><div class="qorg-rich-text">{{ opportunity.qualifications }}</div></section>{% endif %}
       {% if opportunity.selection_process %}<section class="qorg-section"><h2>{{ _("Selection Process") }}</h2><div class="qorg-rich-text">{{ opportunity.selection_process }}</div></section>{% endif %}
       {% if opportunity.application_instructions %}<section class="qorg-section"><h2>{{ _("Application Instructions") }}</h2><div class="qorg-rich-text">{{ opportunity.application_instructions }}</div></section>{% endif %}
-      {% for section in opportunity.sections %}
-      <section class="qorg-section"><h2>{{ _(section.label) }}</h2><div class="qorg-list-cards">
-        {% for row in section.rows %}<div class="qorg-list-card">{% for key, value in row.items() %}{% if value not in (None, "", 0) %}<div><strong>{{ _(key.replace('_', ' ').title()) }}:</strong> {{ value }}</div>{% endif %}{% endfor %}</div>{% endfor %}
-      </div></section>
-      {% endfor %}
+      {% for section in opportunity.sections %}<section class="qorg-section"><h2>{{ _(section.label) }}</h2><div class="qorg-list-cards">{% for row in section.rows %}<div class="qorg-list-card">{% for key, value in row.items() %}{% if value not in (None, "", 0) %}<div><strong>{{ _(key.replace('_', ' ').title()) }}:</strong> {{ value }}</div>{% endif %}{% endfor %}</div>{% endfor %}</div></section>{% endfor %}
     </main>
     <aside class="qorg-sidebar-card"><h2>{{ _("Opportunity Summary") }}</h2><dl class="qorg-meta-list">
       {% if opportunity.company %}<div><dt>{{ _("Company") }}</dt><dd>{{ opportunity.company }}</dd></div>{% endif %}
@@ -40,9 +36,7 @@
       {% if opportunity.work_arrangement %}<div><dt>{{ _("Arrangement") }}</dt><dd>{{ opportunity.work_arrangement }}</dd></div>{% endif %}
       {% if opportunity.opening_date %}<div><dt>{{ _("Opening Date") }}</dt><dd>{{ frappe.utils.formatdate(opportunity.opening_date) }}</dd></div>{% endif %}
       {% if opportunity.closing_date %}<div><dt>{{ _("Closing Date") }}</dt><dd>{{ frappe.utils.formatdate(opportunity.closing_date) }}</dd></div>{% endif %}
-      {% if opportunity.number_of_positions %}<div><dt>{{ _("Positions") }}</dt><dd>{{ opportunity.number_of_positions }}</dd></div>{% endif %}
-      {% if opportunity.expected_total_hours %}<div><dt>{{ _("Expected Hours") }}</dt><dd>{{ opportunity.expected_total_hours }}</dd></div>{% endif %}
-    </dl>{% if opportunity.public_contact_email %}<a href="mailto:{{ opportunity.public_contact_email }}">{{ opportunity.public_contact_email }}</a>{% endif %}</aside>
+    </dl></aside>
   </div>
 </div>
 {% endblock %}

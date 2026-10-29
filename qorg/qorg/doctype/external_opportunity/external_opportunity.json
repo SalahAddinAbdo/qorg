@@ -507,8 +507,7 @@
       "fieldtype": "Data",
       "read_only": 1,
       "unique": 1,
-      "no_copy": 1,
-      "description": "Unique public route generated when the opportunity is published."
+      "no_copy": 1
     },
     {
       "fieldname": "published_by",
