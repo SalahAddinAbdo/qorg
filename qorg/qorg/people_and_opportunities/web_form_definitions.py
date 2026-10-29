@@ -51,7 +51,7 @@ frappe.web_form.after_load = async () => {
 APPLICATION_SCRIPT = r'''
 frappe.web_form.after_load = async () => {
   const params = new URLSearchParams(window.location.search);
-  const route = params.get("opportunity");
+  const route = params.get("opportunity_route");
   if (!route) {
     frappe.msgprint(__("Open the application form from a published opportunity."));
     return;
@@ -78,7 +78,7 @@ frappe.web_form.after_load = async () => {
 
 frappe.web_form.validate = () => {
   const params = new URLSearchParams(window.location.search);
-  if (!params.get("opportunity")) {
+  if (!params.get("opportunity_route")) {
     frappe.msgprint(__("The opportunity reference is missing."));
     return false;
   }
