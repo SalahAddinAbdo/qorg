@@ -5,6 +5,7 @@ from datetime import date
 from urllib.parse import quote
 
 import frappe
+from frappe.website.utils import delete_page_cache
 from frappe import _
 from frappe.utils import cint, getdate, now_datetime, today
 
@@ -139,7 +140,7 @@ def validate_external_opportunity_publication(doc, method=None):
 def handle_external_opportunity_publication(doc, method=None):
     if doc.get("status") == "Published" and cint(doc.get("publish_on_website")):
         ensure_public_route(doc)
-    frappe.clear_website_cache()
+    delete_page_cache()
 
 
 def ensure_public_route(doc):
@@ -360,7 +361,7 @@ def close_expired_opportunities():
             update_modified=True,
         )
     if names:
-        frappe.clear_website_cache()
+        delete_page_cache()
     return {"closed": len(names)}
 
 
