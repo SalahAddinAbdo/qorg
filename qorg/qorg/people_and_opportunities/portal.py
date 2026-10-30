@@ -267,7 +267,12 @@ def get_public_opportunity(route):
         result["apply_url"] = f"/employment-application/new?qorg_external_opportunity={quote(doc.name)}"
     else:
         result["application_doctype"] = "Participation Application"
-        result["apply_url"] = f"/participation-application/new?opportunity={quote(doc.name)}"
+        result["apply_url"] = (
+            "/api/method/"
+            "qorg.qorg.people_and_opportunities.web_form_workflow."
+            "start_participation_application"
+            f"?opportunity={quote(doc.name)}"
+        )
     return result
 
 
