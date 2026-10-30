@@ -264,7 +264,7 @@ def get_public_opportunity(route):
     if behavior == "Employment":
         result["apply_url"] = f"/employment-application/new?external_opportunity={quote(doc.name)}"
     else:
-        result["apply_url"] = f"/participation-application/new?external_opportunity={quote(doc.name)}"
+        result["apply_url"] = f"/participation-application/new?opportunity={quote(doc.name)}"
     return result
 
 
@@ -383,7 +383,7 @@ def _create_participation_application(
         frappe.throw(_("Participation Application is not installed."))
     duplicate_filters = {
         "external_person": person.name,
-        "external_opportunity": opportunity.name,
+        "opportunity": opportunity.name,
     }
     existing = frappe.db.get_value(
         "Participation Application",
@@ -400,7 +400,7 @@ def _create_participation_application(
 
     target = frappe.new_doc("Participation Application")
     _set_if_field(target, "external_person", person.name)
-    _set_if_field(target, "external_opportunity", opportunity.name)
+    _set_if_field(target, "opportunity", opportunity.name)
     _set_if_field(target, "company", opportunity.get("company"))
     _set_if_field(target, "project", opportunity.get("project"))
     _set_if_field(target, "branch", opportunity.get("branch"))
@@ -467,7 +467,7 @@ def _get_participation_applications(person_name):
     meta = frappe.get_meta("Participation Application")
     fields = ["name", "modified"]
     for fieldname in (
-        "external_opportunity",
+        "opportunity",
         "status",
         "application_date",
         "final_decision",
@@ -485,7 +485,7 @@ def _get_participation_applications(person_name):
         {
             "doctype": "Participation Application",
             "name": row.name,
-            "opportunity": row.get("external_opportunity"),
+            "opportunity": row.get("opportunity"),
             "status": row.get("status") or row.get("final_decision"),
             "application_date": row.get("application_date") or row.modified,
             "overall_score": row.get("overall_score"),

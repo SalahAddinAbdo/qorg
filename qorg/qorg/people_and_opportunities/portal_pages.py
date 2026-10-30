@@ -69,7 +69,7 @@ def get_opportunity_context(context):
                     """
                     select name
                       from `tabParticipation Application`
-                     where external_opportunity = %s
+                     where opportunity = %s
                        and external_person = %s
                        and coalesce(status, '') != 'Cancelled'
                        and coalesce(final_decision, '') not in ('Withdrawn', 'Cancelled')

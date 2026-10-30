@@ -21,16 +21,16 @@ class ParticipationApplication(Document):
         services.validate_application(self)
 
     def after_insert(self):
-        sync_opportunity_application_stats(self.external_opportunity)
+        sync_opportunity_application_stats(self.opportunity)
 
     def on_update(self):
         previous = self.get_doc_before_save()
-        sync_opportunity_application_stats(self.external_opportunity)
-        if previous and previous.external_opportunity != self.external_opportunity:
-            sync_opportunity_application_stats(previous.external_opportunity)
+        sync_opportunity_application_stats(self.opportunity)
+        if previous and previous.opportunity != self.opportunity:
+            sync_opportunity_application_stats(previous.opportunity)
 
     def on_trash(self):
-        self.flags.qorg_opportunity_to_sync = self.external_opportunity
+        self.flags.qorg_opportunity_to_sync = self.opportunity
 
     def after_delete(self):
         sync_opportunity_application_stats(
@@ -58,16 +58,16 @@ class ParticipationApplication(Document):
         self.profile_modified_on_application = person.modified
 
     def _validate_portal_application(self):
-        if not self.external_opportunity:
+        if not self.opportunity:
             frappe.throw(_("External Opportunity is required."))
 
-        opportunity = lock_and_get_opportunity(self.external_opportunity)
+        opportunity = lock_and_get_opportunity(self.opportunity)
         self.participation_type = get_participation_type(opportunity)
         self.application_date = self.application_date or today()
         self.status = self.status or "Draft"
 
         previous = self.get_doc_before_save()
-        if self.is_new() or (previous and previous.external_opportunity != self.external_opportunity):
+        if self.is_new() or (previous and previous.opportunity != self.opportunity):
             _validate_opportunity_is_open(opportunity, self.name)
         _validate_duplicate_application(self)
 
@@ -124,14 +124,14 @@ def _validate_duplicate_application(doc):
         """
         select name
           from `tabParticipation Application`
-         where external_opportunity = %s
+         where opportunity = %s
            and external_person = %s
            and name != %s
            and coalesce(status, '') != 'Cancelled'
            and coalesce(final_decision, '') not in ('Withdrawn', 'Cancelled')
          limit 1
         """,
-        (doc.external_opportunity, doc.external_person, doc.name or ""),
+        (doc.opportunity, doc.external_person, doc.name or ""),
         as_dict=True,
     )
     if existing:
@@ -169,7 +169,7 @@ def get_participation_type(opportunity):
 
 
 def count_capacity_applications(opportunity: str, exclude_name=None) -> int:
-    conditions = ["external_opportunity = %s"]
+    conditions = ["opportunity = %s"]
     values = [opportunity]
     if exclude_name:
         conditions.append("name != %s")
