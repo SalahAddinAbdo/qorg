@@ -3,6 +3,23 @@ from qorg.qorg.design_system import DESIGN_SYSTEM_SCHEMA_VERSION
 
 PALETTE = {'primary_accent': '#137690', 'secondary_accent': '#cbae66', 'neutral_accent': '#606c77', 'success_color': '#2e8b57', 'warning_color': '#d79b26', 'danger_color': '#bd4546', 'information_color': '#258bd3', 'focus_color': '#269ad7', 'navbar_surface': '#fafafa', 'sidebar_surface': '#f2f6f7', 'page_surface': '#f6f8fa', 'card_surface': '#ffffff', 'dialog_surface': '#ffffff', 'input_surface': '#ffffff', 'text_primary_color': '#0f3246', 'text_muted_color': '#606c77', 'heading_color': '#0f3246', 'border_color': '#d6e0e4', 'selected_surface': '#e0f1f5', 'hover_surface': '#edf7f9'}
 
+UNIFIED_POLISH = {
+    "control_height_policy": "Enterprise Best", "custom_control_height": 40,
+    "control_horizontal_padding": 12, "control_label_gap": 6,
+    "small_text_height_policy": "Comfortable", "small_text_min_height": 88,
+    "text_editor_min_height": 160, "select_option_height": 40,
+    "focus_ring_style": "Outline and Soft Glow",
+    "page_width_policy": "Wide Adaptive", "page_max_width": 1600, "page_inline_padding": 24,
+    "app_rail_style": "Integrated Executive", "app_rail_icon_size": 20,
+    "module_sidebar_style": "Integrated Executive", "module_sidebar_width": 272,
+    "navigation_item_height": 40, "navbar_search_style": "Subtle Brand",
+    "breadcrumb_emphasis": "Current Page", "menu_density": "Comfortable",
+    "workspace_content_width": "Wide Adaptive", "workspace_grid_policy": "Adaptive",
+    "workspace_column_gap": 16, "workspace_row_gap": 16,
+    "workspace_card_style": "Executive Subtle", "workspace_card_height_policy": "Content Based",
+    "workspace_heading_accent": "Short Underline", "nested_surface_policy": "Avoid Nested Cards",
+    "section_action_style": "Inline", "mixed_content_bidi_safety": 1,
+}
 PRESETS = {
     "Frappe Standard": {
         "theme_mode_policy": "Follow Frappe/System", "density": "Frappe Default",
@@ -15,6 +32,7 @@ PRESETS = {
         "touch_target_policy": "Frappe Default",
     },
     "QOrg Comfortable": {
+        **UNIFIED_POLISH,
         **PALETTE, "theme_mode_policy": "Light", "density": "Comfortable",
         "typography_policy": "System UI", "heading_weight": "Semibold",
         "line_height_scale": "Comfortable", "body_font_size": 13, "label_font_size": 13,
@@ -29,6 +47,8 @@ PRESETS = {
         "rtl_spacing_corrections": 1, "touch_target_policy": "Enhanced",
     },
     "QOrg Compact": {
+        **UNIFIED_POLISH, "control_height_policy": "Compact", "small_text_height_policy": "Compact",
+        "menu_density": "Compact", "module_sidebar_style": "Compact",
         **PALETTE, "theme_mode_policy": "Light", "density": "Compact",
         "typography_policy": "System UI", "heading_weight": "Semibold",
         "line_height_scale": "Default", "body_font_size": 13, "label_font_size": 12,
@@ -49,14 +69,16 @@ PRESETS = {
 # without overwriting user-managed changes.
 PRESETS.update({
     "QOrg Executive Light": {
+        **UNIFIED_POLISH,
         "theme_mode_policy": "Light", "density": "Comfortable", "experience_style": "QOrg Executive",
-        "surface_hierarchy": "Layered", "navigation_emphasis": "Balanced", "page_header_style": "Executive",
+        "surface_hierarchy": "Subtle", "navigation_emphasis": "Balanced", "page_header_style": "Executive",
         "form_control_style": "Enterprise", "toolbar_style": "Unified", "grid_style": "Enterprise",
         "workspace_layout_style": "Enterprise Canvas", "kpi_card_style": "Executive", "chart_presentation": "Balanced",
         "login_experience_style": "QOrg Executive", "web_form_presentation": "Enterprise", "portal_presentation": "Enterprise",
         **PALETTE,
     },
     "QOrg Midnight": {
+        **UNIFIED_POLISH,
         "theme_mode_policy": "Dark", "density": "Comfortable", "experience_style": "QOrg Midnight",
         "surface_hierarchy": "Layered", "navigation_emphasis": "Brand Forward", "page_header_style": "Executive",
         "form_control_style": "Enterprise", "toolbar_style": "Unified", "grid_style": "Enterprise",
@@ -69,6 +91,8 @@ PRESETS.update({
         "border_color": "#29434f", "selected_surface": "#173b49", "hover_surface": "#14313d",
     },
     "QOrg Compact Operations": {
+        **UNIFIED_POLISH, "control_height_policy": "Compact", "small_text_height_policy": "Compact",
+        "menu_density": "Compact", "module_sidebar_style": "Compact", "workspace_card_height_policy": "Compact Equal",
         "theme_mode_policy": "Follow Frappe/System", "density": "Compact", "experience_style": "QOrg Operations",
         "surface_hierarchy": "Subtle", "navigation_emphasis": "Minimal", "form_control_style": "Compact Operations",
         "toolbar_style": "Compact", "grid_style": "Compact Operations", "dialog_style": "Compact",
@@ -78,6 +102,7 @@ PRESETS.update({
         "web_form_presentation": "Compact", "portal_presentation": "Compact", **PALETTE,
     },
     "QOrg High Contrast": {
+        **UNIFIED_POLISH,
         "theme_mode_policy": "Follow Frappe/System", "density": "Comfortable", "contrast_policy": "WCAG AA Guard",
         "enhanced_focus_visibility": 1, "touch_target_policy": "Enhanced", "chart_presentation": "High Contrast",
         "border_strength": "Defined", "status_indicator_strength": "Enhanced", "primary_accent": "#006f86",
@@ -108,7 +133,8 @@ def provision_design_system():
     changed = False
     defaults = {
         **PALETTE,
-        "active_preset": "QOrg Comfortable",
+        **UNIFIED_POLISH,
+        "active_preset": "QOrg Executive Light",
         "apply_to_desk": 1, "apply_to_login": 1,
         "apply_to_qorg_web_components": 1, "respect_active_website_theme": 1,
         "theme_mode_policy": "Light", "density": "Comfortable",
@@ -164,7 +190,7 @@ def provision_design_system():
             settings.set(fieldname, value)
             changed = True
     if settings.enabled is None:
-        settings.enabled = 0
+        settings.enabled = 1
         changed = True
     if changed:
         settings.flags.ignore_permissions = True

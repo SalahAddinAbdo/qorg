@@ -10,6 +10,7 @@
     createPromise: null,
     observer: null,
     routeTimer: null,
+    reconcileToken: 0,
     installedVariables: new Set(),
     originalTheme: document.documentElement.getAttribute("data-theme"),
   };
@@ -48,6 +49,23 @@
     "data-qorg-workspace-quick-actions",
     "data-qorg-dashboard-reflow",
     "data-qorg-dashboard-reduced-motion",
+    "data-qorg-control-height-policy",
+    "data-qorg-small-text-height",
+    "data-qorg-focus-ring-style",
+    "data-qorg-page-width",
+    "data-qorg-app-rail-style",
+    "data-qorg-module-sidebar-style",
+    "data-qorg-navbar-search-style",
+    "data-qorg-breadcrumb-emphasis",
+    "data-qorg-menu-density",
+    "data-qorg-workspace-content-width",
+    "data-qorg-workspace-grid-policy",
+    "data-qorg-workspace-card-style",
+    "data-qorg-workspace-card-height",
+    "data-qorg-workspace-heading-accent",
+    "data-qorg-nested-surfaces",
+    "data-qorg-section-actions",
+    "data-qorg-mixed-bidi",
   ];
 
   const normalizeKey = (value, fallback = "default") =>
@@ -104,6 +122,23 @@
     root.dataset.qorgWorkspaceQuickActions = configuration.workspace_quick_actions ? "1" : "0";
     root.dataset.qorgDashboardReflow = configuration.dashboard_responsive_reflow ? "1" : "0";
     root.dataset.qorgDashboardReducedMotion = configuration.dashboard_reduce_decorative_motion ? "1" : "0";
+    root.dataset.qorgControlHeightPolicy = normalizeKey(configuration.control_height_policy, "enterprise-best");
+    root.dataset.qorgSmallTextHeight = normalizeKey(configuration.small_text_height_policy, "comfortable");
+    root.dataset.qorgFocusRingStyle = normalizeKey(configuration.focus_ring_style, "outline-and-soft-glow");
+    root.dataset.qorgPageWidth = normalizeKey(configuration.page_width_policy, "wide-adaptive");
+    root.dataset.qorgAppRailStyle = normalizeKey(configuration.app_rail_style, "integrated-executive");
+    root.dataset.qorgModuleSidebarStyle = normalizeKey(configuration.module_sidebar_style, "integrated-executive");
+    root.dataset.qorgNavbarSearchStyle = normalizeKey(configuration.navbar_search_style, "subtle-brand");
+    root.dataset.qorgBreadcrumbEmphasis = normalizeKey(configuration.breadcrumb_emphasis, "current-page");
+    root.dataset.qorgMenuDensity = normalizeKey(configuration.menu_density, "comfortable");
+    root.dataset.qorgWorkspaceContentWidth = normalizeKey(configuration.workspace_content_width, "wide-adaptive");
+    root.dataset.qorgWorkspaceGridPolicy = normalizeKey(configuration.workspace_grid_policy, "adaptive");
+    root.dataset.qorgWorkspaceCardStyle = normalizeKey(configuration.workspace_card_style, "executive-subtle");
+    root.dataset.qorgWorkspaceCardHeight = normalizeKey(configuration.workspace_card_height_policy, "content-based");
+    root.dataset.qorgWorkspaceHeadingAccent = normalizeKey(configuration.workspace_heading_accent, "short-underline");
+    root.dataset.qorgNestedSurfaces = normalizeKey(configuration.nested_surface_policy, "avoid-nested-cards");
+    root.dataset.qorgSectionActions = normalizeKey(configuration.section_action_style, "inline");
+    root.dataset.qorgMixedBidi = configuration.mixed_content_bidi_safety ? "1" : "0";
 
     if (configuration.theme_mode_policy === "Dark" || configuration.experience_style === "QOrg Midnight") {
       root.setAttribute("data-theme", "dark");
@@ -416,22 +451,63 @@
     return sidebar ? "sidebar" : "floating";
   }
 
-  async function mountActionDock() {
-    const config = state.configuration || {};
-    document.querySelector("[data-qorg-action-dock]")?.remove();
-    closeOverlays();
-
-    if (!config.enable_action_dock || frappe.session?.user === "Guest") return;
-    if (!config.show_create_action && !config.show_language_action) return;
-
+  function actionDockSignature(config, placement, target) {
+    return JSON.stringify({
+      placement,
+      adapter: target?.adapter || "floating",
+      collapsed: Boolean(target?.collapsed),
+      create: Boolean(config.show_create_action),
+      language: Boolean(config.show_language_action),
+      createLabel: config.quick_create_button_label || __("Create"),
+      collapsedBehavior: config.action_dock_collapsed_behavior || "Expand on Hover",
+      mobilePlacement: config.action_dock_mobile_placement || "Floating Orb",
+      tooltips: Boolean(config.action_dock_tooltips),
+    });
+  }
+  function removeDuplicateDocks(keep = null) {
+    document.querySelectorAll("[data-qorg-action-dock]").forEach((dock) => {
+      if (dock !== keep) dock.remove();
+    });
+  }
+  function placeActionDock(dock, placement, target) {
+    dock.dataset.qorgDockPlacement = placement;
+    if (placement === "sidebar" && target?.host?.isConnected) {
+      dock.dataset.qorgNavigationAdapter = target.adapter || "sidebar";
+      dock.dataset.qorgNavigationCollapsed = target.collapsed ? "1" : "0";
+      if (target.before?.isConnected && target.before.parentElement === target.host) {
+        if (dock.parentElement !== target.host || dock.nextSibling !== target.before) {
+          target.host.insertBefore(dock, target.before);
+        }
+      } else if (dock.parentElement !== target.host) {
+        target.host.append(dock);
+      }
+      delete dock.dataset.qorgMobilePlacement;
+      return;
+    }
+    dock.dataset.qorgNavigationAdapter = "floating";
+    dock.dataset.qorgNavigationCollapsed = "0";
+    dock.dataset.qorgMobilePlacement = normalizeKey(
+      state.configuration?.action_dock_mobile_placement,
+      "floating-orb"
+    );
+    if (dock.parentElement !== document.body) document.body.append(dock);
+  }
+  function buildActionDock(config) {
     const dock = document.createElement("div");
     dock.className = "qorg-action-dock";
     dock.dataset.qorgActionDock = "1";
-    dock.dataset.qorgDockCollapsed = normalizeKey(config.action_dock_collapsed_behavior, "expand-on-hover");
+    dock.dataset.qorgDockCollapsed = normalizeKey(
+      config.action_dock_collapsed_behavior,
+      "expand-on-hover"
+    );
     dock.setAttribute("aria-label", __("QOrg quick actions"));
-
     if (config.show_create_action) {
-      const create = dockButton("create", config.quick_create_button_label || __("Create"), "add", true);
+      const create = dockButton(
+        "create",
+        config.quick_create_button_label || __("Create"),
+        "add",
+        true
+      );
       create.addEventListener("click", () => {
         if (document.querySelector('[data-qorg-overlay="create"]')) closeOverlays();
         else openCreateMenu(create).catch((error) => {
@@ -442,7 +518,6 @@
       });
       dock.append(create);
     }
-
     if (config.show_language_action) {
       const language = dockButton("language", __("Language"), "language");
       language.addEventListener("click", () => {
@@ -455,27 +530,40 @@
       });
       dock.append(language);
     }
-
-    const placement = desiredDockPlacement();
-    dock.dataset.qorgDockPlacement = placement;
-    if (placement === "sidebar") {
-      const target = findSidebarFooter();
-      dock.dataset.qorgNavigationAdapter = target?.adapter || "legacy-sidebar";
-      dock.dataset.qorgNavigationCollapsed = target?.collapsed ? "1" : "0";
-      if (target?.before) target.host.insertBefore(dock, target.before);
-      else target?.host.append(dock);
-    } else {
-      document.body.append(dock);
-      dock.dataset.qorgMobilePlacement = normalizeKey(config.action_dock_mobile_placement, "floating-orb");
+    return dock;
+  }
+  async function mountActionDock() {
+    const token = ++state.reconcileToken;
+    const config = state.configuration || {};
+    closeOverlays();
+    if (!config.enable_action_dock || frappe.session?.user === "Guest" ||
+        (!config.show_create_action && !config.show_language_action)) {
+      removeDuplicateDocks();
+      state.dock = null;
+      return;
     }
+    const placement = desiredDockPlacement();
+    const target = placement === "sidebar" ? findSidebarFooter() : null;
+    if (token !== state.reconcileToken) return;
+    const signature = actionDockSignature(config, placement, target);
+    let dock = document.querySelector("[data-qorg-action-dock]");
+    removeDuplicateDocks(dock);
+    if (!dock || dock.dataset.qorgSignature !== signature) {
+      dock?.remove();
+      dock = buildActionDock(config);
+      dock.dataset.qorgSignature = signature;
+    }
+    placeActionDock(dock, placement, target);
     state.dock = dock;
   }
-
-  function scheduleRemount() {
+  function scheduleRemount(reason = "dom") {
     clearTimeout(state.routeTimer);
     state.routeTimer = setTimeout(() => {
-      if (!document.querySelector("[data-qorg-action-dock]")) mountActionDock();
-    }, 250);
+      mountActionDock().catch((error) => console.warn(
+        `QOrg Action Dock reconciliation failed (${reason}).`,
+        error
+      ));
+    }, 90);
   }
 
   document.addEventListener("click", (event) => {
@@ -509,10 +597,21 @@
     state.createPromise = null;
     loadAppearance(true);
   });
-  frappe.router?.on?.("change", scheduleRemount);
+  window.addEventListener("qorg-design-system-updated", () => {
+    state.settingsPromise = null;
+    state.createPromise = null;
+    state.createMenu = null;
+    state.languageMenu = null;
+    loadAppearance(true);
+  });
+  frappe.router?.on?.("change", () => {
+    closeOverlays();
+    scheduleRemount("route");
+    setTimeout(() => scheduleRemount("route-settled"), 320);
+  });
   window.addEventListener("qorg:navigation-context-change", () => {
     closeOverlays();
-    mountActionDock();
+    scheduleRemount("navigation-context");
   });
 
   if (document.readyState === "loading") {
@@ -521,7 +620,11 @@
     loadAppearance();
   }
 
-  state.observer = new MutationObserver(scheduleRemount);
-  state.observer.observe(document.body, { childList: true, subtree: true });
-  setTimeout(() => state.observer?.disconnect(), 20000);
+  state.observer = new MutationObserver(() => scheduleRemount("mutation"));
+  state.observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["class", "data-collapsed", "aria-expanded", "aria-current"],
+  });
 })();

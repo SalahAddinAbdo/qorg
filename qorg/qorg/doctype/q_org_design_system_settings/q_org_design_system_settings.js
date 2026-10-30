@@ -9,10 +9,24 @@ frappe.ui.form.on("Q Org Design System Settings", {
       window.qorgDesignSystem?.preview(response.message);
     }, __("Design System"));
 
+    frm.add_custom_button(__("Live Preview"), () => {
+      window.QOrgDesignAdmin?.showLivePreview?.(frm);
+    }, __("Design System"));
+    frm.add_custom_button(__("Visual Validation"), () => {
+      window.QOrgDesignAdmin?.showVisualValidation?.(frm);
+    }, __("Design System"));
+    frm.add_custom_button(__("Theme Comparison"), () => {
+      window.QOrgDesignAdmin?.showComparison?.(frm);
+    }, __("Design System"));
+    frm.add_custom_button(__("Preset Gallery"), () => {
+      window.QOrgDesignAdmin?.showPresetGallery?.();
+    }, __("Presets"));
+
     frm.add_custom_button(__("Apply"), async () => {
       await frm.save();
       await frappe.call({ method: "qorg.qorg.design_system.api.apply", type: "POST", freeze: true });
-      window.location.reload();
+      await window.QOrgDesignAdmin?.refreshPublishedExperience?.();
+      frappe.show_alert({ message: __("Design System applied."), indicator: "green" });
     }, __("Design System"));
 
     frm.add_custom_button(__("Validate"), async () => {
@@ -34,7 +48,8 @@ frappe.ui.form.on("Q Org Design System Settings", {
     frm.add_custom_button(__("Restore Frappe Default"), () => {
       frappe.confirm(__("Restore the standard Frappe appearance?"), async () => {
         await frappe.call({ method: "qorg.qorg.design_system.api.restore_frappe_default", type: "POST", freeze: true });
-        window.location.reload();
+        await window.QOrgDesignAdmin?.refreshPublishedExperience?.();
+        frappe.show_alert({ message: __("Frappe Standard appearance restored."), indicator: "green" });
       });
     }, __("Design System"));
 
@@ -83,6 +98,7 @@ frappe.ui.form.on("Q Org Design System Settings", {
       for (const [fieldname, value] of Object.entries(response.message || {})) {
         if (frm.fields_dict[fieldname]) await frm.set_value(fieldname, value);
       }
+      await window.QOrgDesignAdmin?.refreshPublishedExperience?.();
     } finally {
       frm.__qorg_loading_preset = false;
     }

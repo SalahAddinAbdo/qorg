@@ -60,6 +60,28 @@ def audit_runtime_configuration() -> dict[str, Any]:
     add("Effective configuration enabled value is boolean", config.get("enabled") in (True, False, 0, 1), config.get("enabled"))
     add("Effective configuration has CSS variables", bool(config.get("css_variables")), len(config.get("css_variables") or {}))
 
+    required_visual_fields = {
+        "control_height_policy", "small_text_height_policy", "focus_ring_style",
+        "page_width_policy", "app_rail_style", "module_sidebar_style",
+        "navbar_search_style", "workspace_content_width", "workspace_grid_policy",
+        "workspace_card_style", "workspace_card_height_policy", "workspace_heading_accent",
+        "nested_surface_policy", "section_action_style", "mixed_content_bidi_safety",
+    }
+    missing_unified_fields = sorted(required_visual_fields - set(VISUAL_FIELDS))
+    add("Unified Polish fields are registered", not missing_unified_fields, missing_unified_fields)
+    expected_variables = {
+        "--qorg-control-height", "--qorg-small-text-min-height", "--qorg-text-editor-min-height",
+        "--qorg-page-max-width", "--qorg-app-rail-icon-size", "--qorg-module-sidebar-width",
+        "--qorg-navigation-item-height", "--qorg-workspace-column-gap", "--qorg-workspace-row-gap",
+    }
+    css_variables = config.get("css_variables") or {}
+    missing_variables = sorted(expected_variables - set(css_variables))
+    add("Unified Polish CSS variables are generated", not missing_variables, missing_variables)
+    add("Action Dock has a visible action", not config.get("enable_action_dock") or bool(config.get("show_create_action") or config.get("show_language_action")), {
+        "enabled": config.get("enable_action_dock"), "create": config.get("show_create_action"), "language": config.get("show_language_action"),
+    })
+    add("Unified Polish page width is configured", config.get("page_width_policy") in {"Wide Adaptive", "Balanced", "Full Width", "Custom", "Frappe Default"}, config.get("page_width_policy"))
+    add("Unified Polish workspace grid is configured", config.get("workspace_grid_policy") in {"Adaptive", "Content Based", "Two Columns", "Three Columns", "Frappe Default"}, config.get("workspace_grid_policy"))
     if frappe.db.exists("DocType", "Web Form"):
         published = frappe.db.count("Web Form", {"published": 1})
         add("Published Web Forms discovered", True, published, "Info")

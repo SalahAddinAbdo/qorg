@@ -1,1 +1,1 @@
-DESIGN_SYSTEM_SCHEMA_VERSION = "2.7.2-final-ready"
+DESIGN_SYSTEM_SCHEMA_VERSION = "2.8.0-unified-polish"
