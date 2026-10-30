@@ -38,8 +38,12 @@ def start_participation_application(opportunity: str | None = None):
         "name",
     )
     if existing:
-        frappe.local.response["type"] = "redirect"
-        frappe.local.response["location"] = f"/participation-application/{existing}"
+        request = _create_web_form_request(
+            values={},
+            reference_doctype="Participation Application",
+            reference_docname=existing,
+        )
+        _redirect_to_participation_form(request, existing)
         return
 
     participation_type = (
@@ -55,26 +59,53 @@ def start_participation_application(opportunity: str | None = None):
         "status": "Draft",
     }
 
-    request = frappe.new_doc("Web Form Request")
-    request.web_form = frappe.db.get_value(
+    request = _create_web_form_request(values=values)
+    _redirect_to_participation_form(request)
+
+
+def _create_web_form_request(
+    values: dict,
+    reference_doctype: str | None = None,
+    reference_docname: str | None = None,
+):
+    web_form = frappe.db.get_value(
         "Web Form", {"route": "participation-application"}, "name"
     )
-    request.web_form_values = json.dumps(values)
-    request.doc_values = json.dumps(values)
+    if not web_form:
+        frappe.throw(_("Participation Application Web Form is not configured."))
+
+    request = frappe.new_doc("Web Form Request")
+    request.web_form = web_form
+    request.web_form_values = json.dumps(values or {})
+    request.doc_values = json.dumps(values or {})
+
+    if reference_doctype and reference_docname:
+        request.append(
+            "references",
+            {
+                "link_doctype": reference_doctype,
+                "link_name": reference_docname,
+            },
+        )
+
     if request.meta.has_field("expires_on"):
         request.expires_on = add_to_date(now_datetime(), hours=2)
+
     request.insert(ignore_permissions=True)
 
     # This whitelisted workflow is opened through a portal link (HTTP GET).
-    # Frappe does not commit database writes made by successful GET requests,
-    # so persist the short-lived request before redirecting to the Web Form.
+    # Persist the request before redirecting to the Web Form.
     frappe.db.commit()
+    return request
 
+
+def _redirect_to_participation_form(request, docname: str | None = None):
     key = request.get("key") or request.name
+    path = "/participation-application"
+    path += f"/{docname}" if docname else "/new"
+
     frappe.local.response["type"] = "redirect"
-    frappe.local.response["location"] = (
-        f"/participation-application/new?web_form_request_key={key}"
-    )
+    frappe.local.response["location"] = f"{path}?web_form_request_key={key}"
 
 
 def _owned_external_profile(user: str):
