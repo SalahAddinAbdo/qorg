@@ -73,6 +73,51 @@ def start_participation_application(
     _redirect_to_participation_form(request)
 
 
+def redirect_to_my_participation_applications():
+    """Open Frappe's standard Web Form list for the current user's applications."""
+    if frappe.session.user == "Guest":
+        frappe.local.flags.redirect_location = "/login?redirect-to=/my-applications"
+        raise frappe.Redirect
+
+    person_names = _get_external_person_names_for_user(frappe.session.user)
+    filters = []
+    if person_names:
+        filters.append(
+            ["Participation Application", "external_person", "in", person_names]
+        )
+    filters.append(
+        ["Participation Application", "owner", "=", frappe.session.user]
+    )
+
+    application_names = frappe.get_all(
+        "Participation Application",
+        or_filters=filters,
+        pluck="name",
+        order_by="modified desc",
+    )
+
+    request = _create_web_form_request(values={})
+    for application_name in dict.fromkeys(application_names):
+        request.append(
+            "references",
+            {
+                "link_doctype": "Participation Application",
+                "link_name": application_name,
+            },
+        )
+
+    # _create_web_form_request commits the initial insert. Save appended references
+    # and commit again because this page is opened through an HTTP GET request.
+    request.save(ignore_permissions=True)
+    frappe.db.commit()
+
+    key = request.get("key") or request.name
+    frappe.local.flags.redirect_location = (
+        f"/participation-application/list?web_form_request_key={key}"
+    )
+    raise frappe.Redirect
+
+
 def _create_web_form_request(
     values: dict,
     reference_doctype: str | None = None,

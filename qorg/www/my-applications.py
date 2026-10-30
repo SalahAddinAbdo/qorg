@@ -1,5 +1,7 @@
-from qorg.qorg.people_and_opportunities.portal_pages import get_my_applications_context
+from qorg.qorg.people_and_opportunities.web_form_workflow import (
+    redirect_to_my_participation_applications,
+)
 
 
 def get_context(context):
-    return get_my_applications_context(context)
+    redirect_to_my_participation_applications()
