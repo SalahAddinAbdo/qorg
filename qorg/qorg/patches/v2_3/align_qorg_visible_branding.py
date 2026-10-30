@@ -32,9 +32,13 @@ def execute() -> None:
     if not frappe.db.exists("DocType", PRESET_DOCTYPE):
         return
 
-    _rename_managed_presets()
+    # Normalize legacy field values first. Renaming a Preset updates Link
+    # fields in the Single settings document and triggers its validate method;
+    # that validation must not encounter legacy enum values such as
+    # "Q Org Bundled".
     _normalize_settings()
     _normalize_presets()
+    _rename_managed_presets()
     frappe.clear_cache(doctype=PRESET_DOCTYPE)
     if frappe.db.exists("DocType", SETTINGS_DOCTYPE):
         frappe.clear_cache(doctype=SETTINGS_DOCTYPE)
