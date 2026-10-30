@@ -136,12 +136,6 @@ def _effective_settings(web_form):
     override = web_form.get("qorg_web_form_header_style_override")
     if override and override != "Use Global Setting":
         values.header_style = override
-    else:
-        legacy_hero = web_form.get("qorg_web_form_hero_mode")
-        if legacy_hero == "Show":
-            values.header_style = "Hero"
-        elif legacy_hero == "Hide":
-            values.header_style = "Standard"
 
     values.enabled = cint(values.enabled)
     values.max_width = min(
