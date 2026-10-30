@@ -6,7 +6,11 @@ import frappe
 from frappe import _
 from frappe.utils import add_to_date, now_datetime, today
 
-from qorg.qorg.people_and_opportunities.portal import is_opportunity_open
+from qorg.qorg.people_and_opportunities.portal import (
+    _get_external_person_for_user,
+    _get_external_person_names_for_user,
+    is_opportunity_open,
+)
 
 
 @frappe.whitelist()
@@ -36,8 +40,9 @@ def start_participation_application(
     opportunity_doc = frappe.get_doc("External Opportunity", opportunity_name)
     if not is_opportunity_open(opportunity_doc):
         frappe.throw(_("Applications are closed for this opportunity."))
-    person = _owned_external_profile(frappe.session.user)
-    if not person:
+    person_names = _get_external_person_names_for_user(frappe.session.user)
+    person = _get_external_person_for_user(frappe.session.user)
+    if not person or not person_names:
         frappe.local.response["type"] = "redirect"
         frappe.local.response["location"] = "/external-profile-form"
         return
@@ -99,12 +104,3 @@ def _redirect_to_participation_form(request, docname: str | None = None):
 
     frappe.local.response["type"] = "redirect"
     frappe.local.response["location"] = f"{path}?web_form_request_key={key}"
-
-
-def _owned_external_profile(user: str):
-    active = {"person_status": ["!=", "Merged"]}
-    name = frappe.db.get_value("External Person", {**active, "owner": user}, "name", order_by="creation desc")
-    if not name and frappe.get_meta("External Person").has_field("user"):
-        name = frappe.db.get_value("External Person", {**active, "user": user}, "name", order_by="creation desc")
-    return frappe.get_doc("External Person", name) if name else None
-
