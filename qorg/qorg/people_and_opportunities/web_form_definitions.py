@@ -115,7 +115,7 @@ WEB_FORMS = [
             section("Applicant Details"),
             field("applicant_name", read_only=True), field("email_id", read_only=True), field("phone_number", read_only=True),
             section("Application"),
-            field("cover_letter"), field("resume_attachment"), field("resume"),
+            field("cover_letter"), field("resume_attachment"),
         ],
     },
 ]
