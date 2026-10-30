@@ -347,22 +347,6 @@ def submit_opportunity_application(
     }
 
 
-@frappe.whitelist()
-def get_my_applications():
-    if frappe.session.user == "Guest":
-        frappe.throw(_("Please sign in to view your applications."), frappe.PermissionError)
-    person_names = _get_external_person_names_for_user(frappe.session.user)
-    if not person_names:
-        return []
-    primary_person = _get_external_person_for_user(frappe.session.user)
-    primary_email = primary_person.get("primary_email") if primary_person else None
-    rows = []
-    rows.extend(_get_participation_applications(person_names, frappe.session.user))
-    rows.extend(_get_job_applications(person_names, primary_email, frappe.session.user))
-    rows.sort(key=lambda row: str(row.get("application_date") or ""), reverse=True)
-    return rows
-
-
 def close_expired_opportunities():
     names = frappe.get_all(
         "External Opportunity",
@@ -469,98 +453,6 @@ def _create_job_applicant(opportunity, person, motivation):
     _copy_attachment(person, target, "resume", ("resume_attachment", "resume"))
     target.insert(ignore_permissions=True)
     return target
-
-
-def _get_participation_applications(person_names, user=None):
-    if not frappe.db.exists("DocType", "Participation Application"):
-        return []
-
-    meta = frappe.get_meta("Participation Application")
-    fields = ["name", "modified", "owner"]
-    for fieldname in (
-        "opportunity",
-        "external_person",
-        "status",
-        "application_date",
-        "final_decision",
-        "overall_score",
-    ):
-        if meta.has_field(fieldname):
-            fields.append(fieldname)
-
-    filters = []
-    if person_names:
-        filters.append(["Participation Application", "external_person", "in", person_names])
-    if user:
-        filters.append(["Participation Application", "owner", "=", user])
-    if not filters:
-        return []
-
-    rows = frappe.get_all(
-        "Participation Application",
-        or_filters=filters,
-        fields=fields,
-        order_by="modified desc",
-    )
-    return [
-        {
-            "doctype": "Participation Application",
-            "name": row.name,
-            "opportunity": row.get("opportunity"),
-            "status": row.get("status") or row.get("final_decision"),
-            "application_date": row.get("application_date") or row.modified,
-            "overall_score": row.get("overall_score"),
-            "view_url": (
-                "/api/method/"
-                "qorg.qorg.people_and_opportunities.web_form_workflow."
-                "start_participation_application"
-                f"?opportunity={quote(row.get('opportunity'))}"
-                if row.get("opportunity")
-                else None
-            ),
-        }
-        for row in rows
-    ]
-
-
-def _get_job_applications(person_names, email, user=None):
-    if not frappe.db.exists("DocType", "Job Applicant"):
-        return []
-
-    meta = frappe.get_meta("Job Applicant")
-    or_filters = []
-    if meta.has_field("qorg_external_person") and person_names:
-        or_filters.append(["Job Applicant", "qorg_external_person", "in", person_names])
-    if email:
-        or_filters.append(["Job Applicant", "email_id", "=", email])
-    if user:
-        or_filters.append(["Job Applicant", "owner", "=", user])
-    if not or_filters:
-        return []
-
-    fields = ["name", "modified", "owner", "status", "job_title"]
-    for fieldname in ("qorg_external_opportunity", "qorg_overall_score"):
-        if meta.has_field(fieldname):
-            fields.append(fieldname)
-
-    rows = frappe.get_all(
-        "Job Applicant",
-        or_filters=or_filters,
-        fields=fields,
-        order_by="modified desc",
-    )
-    return [
-        {
-            "doctype": "Job Applicant",
-            "name": row.name,
-            "opportunity": row.get("qorg_external_opportunity") or row.get("job_title"),
-            "status": row.get("status"),
-            "application_date": row.modified,
-            "overall_score": row.get("qorg_overall_score"),
-            "view_url": None,
-        }
-        for row in rows
-    ]
 
 
 def _get_external_person_names_for_user(user):

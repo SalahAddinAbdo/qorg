@@ -8,7 +8,6 @@ from frappe import _
 from qorg.qorg.people_and_opportunities.portal import (
     _get_external_person_for_user,
     _get_external_person_names_for_user,
-    get_my_applications,
     get_public_opportunities,
     get_public_opportunity,
 )
@@ -87,15 +86,4 @@ def get_opportunity_context(context):
     else:
         context.apply_action = "apply"
         context.application_action_url = opportunity.get("apply_url")
-    return context
-
-
-def get_my_applications_context(context):
-    context.no_cache = 1
-    if frappe.session.user == "Guest":
-        frappe.local.flags.redirect_location = "/login?redirect-to=/my-applications"
-        raise frappe.Redirect
-    context.title = _("My Applications")
-    context.applications = get_my_applications()
-    context.page_is_rtl = _is_rtl_language()
     return context
