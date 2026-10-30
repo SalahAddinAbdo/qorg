@@ -5,9 +5,6 @@ from urllib.parse import quote, urlencode
 import frappe
 from frappe import _
 
-from qorg.qorg.doctype.external_person.external_person import (
-    resolve_external_person_for_user,
-)
 from qorg.qorg.people_and_opportunities.portal import (
     get_my_applications,
     get_public_opportunities,
@@ -39,9 +36,7 @@ def get_opportunity_context(context):
     try:
         opportunity = get_public_opportunity(route)
     except frappe.PermissionError:
-        frappe.local.flags.redirect_location = (
-            f"/login?redirect-to={quote(f'/opportunities/{route}', safe='')}"
-        )
+        frappe.local.flags.redirect_location = f"/login?redirect-to={quote(f'/opportunities/{route}', safe='')}"
         raise frappe.Redirect
     except frappe.DoesNotExistError:
         raise frappe.PageDoesNotExistError
@@ -49,74 +44,48 @@ def get_opportunity_context(context):
     context.opportunity = opportunity
     context.title = opportunity.get("opportunity_title") or _("Opportunity")
     context.is_guest = frappe.session.user == "Guest"
-    context.user_email = None if context.is_guest else frappe.session.user
     context.page_is_rtl = _is_rtl_language()
     context.apply_action = "closed"
     context.application_action_url = None
-    context.profile_creation_url = None
-    context.existing_application = None
 
     if not opportunity.get("is_open"):
         return context
-
-    return_path = f"/opportunities/{route}"
     if context.is_guest:
         context.apply_action = "login"
-        context.application_action_url = (
-            f"/login?redirect-to={quote(return_path, safe='')}"
-        )
+        context.application_action_url = f"/login?redirect-to={quote(f'/opportunities/{route}', safe='')}"
         return context
 
-    person = resolve_external_person_for_user(frappe.session.user, repair=True)
-    if not person:
+    profile = frappe.db.get_value(
+        "External Person",
+        {"owner": frappe.session.user, "person_status": ["!=", "Merged"]},
+        "name",
+        order_by="creation desc",
+    ) or frappe.db.get_value("External Person", {"user": frappe.session.user}, "name")
+
+    if not profile:
         context.apply_action = "profile"
-        context.profile_creation_url = "/external-profile?" + urlencode(
-            {"return_to": return_path}
-        )
-        context.application_action_url = context.profile_creation_url
+        context.application_action_url = "/external-profile-form"
         return context
 
-    opportunity_name = opportunity.get("name")
-    participation_type = opportunity.get("participation_type") or "Volunteer"
-    existing = _find_existing_participation_application(
-        opportunity_name, person.name
+    existing = frappe.db.get_value(
+        "Participation Application",
+        {
+            "opportunity": opportunity.name,
+            "external_person": profile,
+            "status": ["!=", "Cancelled"],
+        },
+        "name",
     )
     if existing:
         context.apply_action = "existing"
-        context.existing_application = existing
-        context.application_action_url = (
-            f"/participation-application/{quote(existing)}"
-        )
+        context.application_action_url = f"/participation-application/{existing}"
     else:
         context.apply_action = "apply"
-        context.application_action_url = "/participation-application/new?" + urlencode(
-            {
-                "opportunity": opportunity_name,
-                "external_person": person.name,
-                "participation_type": participation_type,
-            }
+        context.application_action_url = (
+            "/api/method/qorg.qorg.people_and_opportunities.web_form_workflow."
+            "start_participation_application?" + urlencode({"opportunity": opportunity.name})
         )
     return context
-
-
-def _find_existing_participation_application(opportunity: str, person: str):
-    if not frappe.db.exists("DocType", "Participation Application"):
-        return None
-    rows = frappe.db.sql(
-        """
-        select name
-          from `tabParticipation Application`
-         where opportunity = %s
-           and external_person = %s
-           and coalesce(status, '') != 'Cancelled'
-           and coalesce(final_decision, '') not in ('Withdrawn', 'Cancelled')
-         order by creation desc
-         limit 1
-        """,
-        (opportunity, person),
-        as_dict=True,
-    )
-    return rows[0].name if rows else None
 
 
 def get_my_applications_context(context):

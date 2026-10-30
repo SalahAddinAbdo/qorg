@@ -8,113 +8,78 @@ from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 
 from qorg.qorg.people_and_opportunities.web_form_definitions import WEB_FORMS
 from qorg.qorg.people_and_opportunities.web_form_design import apply_managed_design
-from qorg.qorg.people_and_opportunities.web_form_grid_policies import provision_external_profile_grid_policies
+from qorg.qorg.people_and_opportunities.web_form_grid_policies import (
+    provision_external_profile_grid_policies,
+)
 
-SECURITY = {"published": 1, "login_required": 1, "allow_delete": 0, "anonymous": 0}
 LAYOUT_TYPES = {"Page Break", "Section Break", "Column Break"}
-
-OBSOLETE_CUSTOM_FIELDS = {
-    "Website Settings": {
-        "qorg_web_form_show_hero_header",
-        "qorg_web_form_show_privacy_notice",
-        "qorg_web_form_emphasize_header",
-        "qorg_web_form_emphasize_introduction",
-    },
-    "Web Form": {
-        "qorg_web_form_hero_mode",
-        "qorg_web_form_privacy_notice_mode",
-        "qorg_web_form_header_mode",
-        "qorg_web_form_introduction_mode",
-    },
-}
-
-
-def cleanup_obsolete_web_form_design_fields():
-    deleted = []
-    for doctype, fieldnames in OBSOLETE_CUSTOM_FIELDS.items():
-        for fieldname in sorted(fieldnames):
-            custom_field_name = frappe.db.get_value(
-                "Custom Field",
-                {"dt": doctype, "fieldname": fieldname},
-                "name",
-            )
-            if custom_field_name:
-                frappe.delete_doc(
-                    "Custom Field",
-                    custom_field_name,
-                    ignore_permissions=True,
-                    force=True,
-                )
-                deleted.append(f"{doctype}.{fieldname}")
-
-            for property_setter in frappe.get_all(
-                "Property Setter",
-                filters={"doc_type": doctype, "field_name": fieldname},
-                pluck="name",
-            ):
-                frappe.delete_doc(
-                    "Property Setter",
-                    property_setter,
-                    ignore_permissions=True,
-                    force=True,
-                )
-    return deleted
 
 
 def provision_standard_opportunity_web_forms():
-    deleted = cleanup_obsolete_web_form_design_fields()
     _create_custom_fields()
     provision_external_profile_grid_policies()
-    result = {
-        "created": [],
-        "updated": [],
-        "deleted_obsolete_fields": deleted,
-    }
+    result = {"created": [], "updated": []}
     for definition in WEB_FORMS:
         if frappe.db.exists("DocType", definition["doc_type"]):
             _provision_one(definition, result)
-    frappe.clear_cache(doctype="Website Settings")
     frappe.clear_cache(doctype="Web Form")
     return result
 
 
 def _create_custom_fields():
     path = Path(__file__).resolve().parent / "data" / "web_form_architecture_custom_fields.json"
-    create_custom_fields(json.loads(path.read_text(encoding="utf-8")), update=True)
+    if path.exists():
+        create_custom_fields(json.loads(path.read_text(encoding="utf-8")), update=True)
 
 
 def _provision_one(definition, result):
     name = frappe.db.get_value("Web Form", {"route": definition["route"]}, "name")
     doc = frappe.get_doc("Web Form", name) if name else frappe.new_doc("Web Form")
     status = "updated" if name else "created"
-    _apply_base(doc, definition)
-    _rebuild_layout(doc, definition)
-    _validate_managed_form_definition(doc, definition)
+    _apply_settings(doc, definition)
+    _rebuild_fields(doc, definition)
     if doc.meta.has_field("client_script"):
         doc.client_script = ""
     apply_managed_design(doc, force=True)
-    doc.save(ignore_permissions=True) if name else doc.insert(ignore_permissions=True)
+    if name:
+        doc.save(ignore_permissions=True)
+    else:
+        doc.insert(ignore_permissions=True)
     result[status].append(definition["route"])
 
 
-def _apply_base(doc, definition):
+def _apply_settings(doc, definition):
     values = {
-        "title": definition["title"], "route": definition["route"],
-        "doc_type": definition["doc_type"], "module": "QOrg", "is_standard": 0,
-        "allow_multiple": definition["allow_multiple"], "allow_edit": definition["allow_edit"],
-        "show_list": definition["show_list"], "allow_print": definition["allow_print"],
+        "title": definition["title"],
+        "route": definition["route"],
+        "doc_type": definition["doc_type"],
+        "module": "QOrg",
+        "is_standard": 0,
+        "published": 1,
+        "login_required": 1,
+        "anonymous": 0,
+        "allow_multiple": definition["allow_multiple"],
+        "allow_edit": definition["allow_edit"],
+        "allow_delete": 0,
+        "show_list": definition["show_list"],
+        "allow_print": definition["allow_print"],
+        "apply_document_permissions": 0,
         "introduction_text": definition["introduction_text"],
-        "success_message": definition["success_message"], "apply_document_permissions": 0,
+        "success_message": definition["success_message"],
         "button_label": definition.get("submit_button_label"),
     }
-    values.update(SECURITY)
     for fieldname, value in values.items():
-        if doc.meta.has_field(fieldname) and value is not None:
+        if doc.meta.has_field(fieldname):
             doc.set(fieldname, value)
+    if doc.meta.has_field("key_required"):
+        doc.key_required = 0
 
 
-def _rebuild_layout(doc, definition):
-    table_field = next((f.fieldname for f in doc.meta.fields if f.fieldtype == "Table" and f.options == "Web Form Field"), None)
+def _rebuild_fields(doc, definition):
+    table_field = next(
+        (f.fieldname for f in doc.meta.fields if f.fieldtype == "Table" and f.options == "Web Form Field"),
+        None,
+    )
     if not table_field:
         frappe.throw("Web Form Field table was not found.")
     child_meta = frappe.get_meta(doc.meta.get_field(table_field).options)
@@ -124,27 +89,23 @@ def _rebuild_layout(doc, definition):
 
     for item in definition["layout"]:
         fieldtype = item.get("fieldtype")
+        row = doc.append(table_field, {})
         if fieldtype in LAYOUT_TYPES:
             layout_index += 1
-            row = doc.append(table_field, {})
-            # Frappe validates Page Break fieldnames against the target DocType.
-            # A synthetic fieldname therefore makes the Web Form invalid. Page
-            # Break rows are layout-only and must keep fieldname empty. Section
-            # and Column Break rows may retain a stable technical fieldname.
             if fieldtype != "Page Break":
                 _set(row, child_meta, "fieldname", f"qorg_layout_{layout_index}")
             _set(row, child_meta, "fieldtype", fieldtype)
             _set(row, child_meta, "label", item.get("label") or "")
             continue
 
-        fieldname = item["fieldname"]
-        target = target_meta.get_field(fieldname)
+        target = target_meta.get_field(item["fieldname"])
         if not target:
-            continue
-        row = doc.append(table_field, {})
-        _set(row, child_meta, "fieldname", fieldname)
+            frappe.throw(
+                f"{definition['doc_type']} is missing managed field {item['fieldname']}"
+            )
+        _set(row, child_meta, "fieldname", target.fieldname)
         _set(row, child_meta, "fieldtype", target.fieldtype)
-        _set(row, child_meta, "label", item.get("label") or target.label or fieldname)
+        _set(row, child_meta, "label", item.get("label") or target.label or target.fieldname)
         _set(row, child_meta, "options", target.options)
         _set(row, child_meta, "description", target.description)
         _set(row, child_meta, "reqd", int(item.get("required", False)))
@@ -156,88 +117,3 @@ def _rebuild_layout(doc, definition):
 def _set(row, meta, fieldname, value):
     if meta.has_field(fieldname):
         row.set(fieldname, value)
-
-
-
-
-def _validate_managed_form_definition(doc, definition):
-    table_field = next(
-        (
-            field.fieldname
-            for field in doc.meta.fields
-            if field.fieldtype == "Table" and field.options == "Web Form Field"
-        ),
-        None,
-    )
-    if not table_field:
-        frappe.throw("Web Form Field table was not found.")
-
-    actual = {}
-    duplicates = []
-    for row in doc.get(table_field) or []:
-        if not row.fieldname or row.fieldtype in LAYOUT_TYPES:
-            continue
-        if row.fieldname in actual:
-            duplicates.append(row.fieldname)
-        actual[row.fieldname] = row
-
-    if duplicates:
-        frappe.throw(
-            "Duplicate Web Form fields were generated: " + ", ".join(sorted(set(duplicates)))
-        )
-
-    required_by_doctype = {
-        "External Person": {
-            "full_name",
-            "primary_email",
-            "professional_title",
-            "professional_summary",
-            "privacy_consent",
-        },
-        "Participation Application": {
-            "external_person",
-            "opportunity",
-            "participation_type",
-            "application_date",
-            "status",
-            "profile_review_confirmed",
-        },
-    }
-    expected = required_by_doctype.get(definition.get("doc_type"), set())
-    missing = sorted(expected - set(actual))
-    if missing:
-        frappe.throw(
-            f"Managed Web Form {definition['route']} is missing required fields: "
-            + ", ".join(missing)
-        )
-
-    if definition.get("doc_type") == "External Person":
-        row = actual["full_name"]
-        if not int(row.reqd or 0) or int(row.read_only or 0):
-            frappe.throw(
-                "External Profile must contain editable, required field full_name."
-            )
-
-
-def audit_managed_opportunity_web_forms():
-    results = []
-    for definition in WEB_FORMS:
-        route = definition["route"]
-        name = frappe.db.get_value("Web Form", {"route": route}, "name")
-        if not name:
-            results.append({"route": route, "ok": False, "error": "Web Form not found"})
-            continue
-        doc = frappe.get_doc("Web Form", name)
-        try:
-            _validate_managed_form_definition(doc, definition)
-            results.append({"route": route, "doc_type": doc.doc_type, "ok": True})
-        except Exception as exc:
-            results.append(
-                {
-                    "route": route,
-                    "doc_type": doc.doc_type,
-                    "ok": False,
-                    "error": frappe.as_unicode(exc),
-                }
-            )
-    return results
