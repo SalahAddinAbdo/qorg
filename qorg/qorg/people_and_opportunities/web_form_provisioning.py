@@ -72,7 +72,7 @@ def _apply_settings(doc, definition):
         if doc.meta.has_field(fieldname):
             doc.set(fieldname, value)
     if doc.meta.has_field("key_required"):
-        doc.key_required = 0
+        doc.key_required = int(definition.get("key_required", 0))
 
 
 def _rebuild_fields(doc, definition):
