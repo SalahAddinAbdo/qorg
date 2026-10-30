@@ -65,6 +65,11 @@ def start_participation_application(opportunity: str | None = None):
         request.expires_on = add_to_date(now_datetime(), hours=2)
     request.insert(ignore_permissions=True)
 
+    # This whitelisted workflow is opened through a portal link (HTTP GET).
+    # Frappe does not commit database writes made by successful GET requests,
+    # so persist the short-lived request before redirecting to the Web Form.
+    frappe.db.commit()
+
     key = request.get("key") or request.name
     frappe.local.response["type"] = "redirect"
     frappe.local.response["location"] = (
