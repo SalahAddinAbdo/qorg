@@ -10,9 +10,13 @@ from qorg.qorg.people_and_opportunities.portal import is_opportunity_open
 
 
 @frappe.whitelist()
-def start_participation_application(opportunity: str):
+def start_participation_application(opportunity: str | None = None):
     if frappe.session.user == "Guest":
         frappe.throw(_("Please sign in before applying."), frappe.PermissionError)
+
+    opportunity = (opportunity or "").strip()
+    if not opportunity or opportunity.lower() in {"none", "null", "undefined"}:
+        frappe.throw(_("A valid external opportunity is required to start an application."))
 
     opportunity_doc = frappe.get_doc("External Opportunity", opportunity)
     if not is_opportunity_open(opportunity_doc):

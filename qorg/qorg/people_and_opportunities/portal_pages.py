@@ -67,10 +67,14 @@ def get_opportunity_context(context):
         context.application_action_url = "/external-profile-form"
         return context
 
+    opportunity_name = opportunity.get("name")
+    if not opportunity_name:
+        frappe.throw(_("The opportunity identifier is missing from the public opportunity context."))
+
     existing = frappe.db.get_value(
         "Participation Application",
         {
-            "opportunity": opportunity.name,
+            "opportunity": opportunity_name,
             "external_person": profile,
             "status": ["!=", "Cancelled"],
         },
@@ -83,7 +87,7 @@ def get_opportunity_context(context):
         context.apply_action = "apply"
         context.application_action_url = (
             "/api/method/qorg.qorg.people_and_opportunities.web_form_workflow."
-            "start_participation_application?" + urlencode({"opportunity": opportunity.name})
+            "start_participation_application?" + urlencode({"opportunity": opportunity_name})
         )
     return context
 
