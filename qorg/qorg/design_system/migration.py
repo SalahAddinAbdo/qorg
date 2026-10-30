@@ -85,7 +85,6 @@ def _migrate_settings() -> None:
             "qorg_web_form_hide_child_row_name": (
                 "web_form_hide_technical_child_row_name"
             ),
-            "qorg_web_form_max_content_width": "web_form_max_content_width",
         }
 
         for source, target in mapping.items():
@@ -101,6 +100,44 @@ def _migrate_settings() -> None:
             if settings.get(target) != value:
                 settings.set(target, value)
                 changed = True
+
+        # Legacy Int fields can contain 0 when they were never configured.
+        # Never copy that sentinel into the new validated width setting.
+        if settings.meta.has_field("web_form_max_content_width"):
+            legacy_width = (
+                website_settings.get("qorg_web_form_max_content_width")
+                if website_settings.meta.has_field("qorg_web_form_max_content_width")
+                else None
+            )
+            try:
+                legacy_width = int(legacy_width or 0)
+            except (TypeError, ValueError):
+                legacy_width = 0
+
+            target_width = settings.get("web_form_max_content_width")
+            try:
+                target_width = int(target_width or 0)
+            except (TypeError, ValueError):
+                target_width = 0
+
+            if 760 <= legacy_width <= 1600:
+                if target_width != legacy_width:
+                    settings.web_form_max_content_width = legacy_width
+                    changed = True
+            elif not 760 <= target_width <= 1600:
+                settings.web_form_max_content_width = 1180
+                changed = True
+
+    # Repair an invalid zero or out-of-range value left by a previous failed
+    # migration, even when Website Settings or the legacy field is absent.
+    if settings.meta.has_field("web_form_max_content_width"):
+        try:
+            current_width = int(settings.get("web_form_max_content_width") or 0)
+        except (TypeError, ValueError):
+            current_width = 0
+        if not 760 <= current_width <= 1600:
+            settings.web_form_max_content_width = 1180
+            changed = True
 
     if changed:
         settings.flags.ignore_permissions = True
