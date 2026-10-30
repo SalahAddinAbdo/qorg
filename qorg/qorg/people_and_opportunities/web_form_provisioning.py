@@ -13,14 +13,67 @@ from qorg.qorg.people_and_opportunities.web_form_grid_policies import provision_
 SECURITY = {"published": 1, "login_required": 1, "allow_delete": 0, "anonymous": 0}
 LAYOUT_TYPES = {"Page Break", "Section Break", "Column Break"}
 
+OBSOLETE_CUSTOM_FIELDS = {
+    "Website Settings": {
+        "qorg_web_form_show_hero_header",
+        "qorg_web_form_show_privacy_notice",
+        "qorg_web_form_emphasize_header",
+        "qorg_web_form_emphasize_introduction",
+    },
+    "Web Form": {
+        "qorg_web_form_hero_mode",
+        "qorg_web_form_privacy_notice_mode",
+        "qorg_web_form_header_mode",
+        "qorg_web_form_introduction_mode",
+    },
+}
+
+
+def cleanup_obsolete_web_form_design_fields():
+    deleted = []
+    for doctype, fieldnames in OBSOLETE_CUSTOM_FIELDS.items():
+        for fieldname in sorted(fieldnames):
+            custom_field_name = frappe.db.get_value(
+                "Custom Field",
+                {"dt": doctype, "fieldname": fieldname},
+                "name",
+            )
+            if custom_field_name:
+                frappe.delete_doc(
+                    "Custom Field",
+                    custom_field_name,
+                    ignore_permissions=True,
+                    force=True,
+                )
+                deleted.append(f"{doctype}.{fieldname}")
+
+            for property_setter in frappe.get_all(
+                "Property Setter",
+                filters={"doc_type": doctype, "field_name": fieldname},
+                pluck="name",
+            ):
+                frappe.delete_doc(
+                    "Property Setter",
+                    property_setter,
+                    ignore_permissions=True,
+                    force=True,
+                )
+    return deleted
+
 
 def provision_standard_opportunity_web_forms():
+    deleted = cleanup_obsolete_web_form_design_fields()
     _create_custom_fields()
     provision_external_profile_grid_policies()
-    result = {"created": [], "updated": []}
+    result = {
+        "created": [],
+        "updated": [],
+        "deleted_obsolete_fields": deleted,
+    }
     for definition in WEB_FORMS:
         if frappe.db.exists("DocType", definition["doc_type"]):
             _provision_one(definition, result)
+    frappe.clear_cache(doctype="Website Settings")
     frappe.clear_cache(doctype="Web Form")
     return result
 
