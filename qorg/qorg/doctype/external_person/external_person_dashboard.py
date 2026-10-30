@@ -18,7 +18,12 @@ def get_data():
             continue
         meta = frappe.get_meta(doctype)
         fieldname = next(
-            (fieldname for fieldname in possible_fields if meta.has_field(fieldname)),
+            (
+                fieldname
+                for fieldname in possible_fields
+                if meta.has_field(fieldname)
+                and frappe.db.has_column(doctype, fieldname)
+            ),
             None,
         )
         if not fieldname:

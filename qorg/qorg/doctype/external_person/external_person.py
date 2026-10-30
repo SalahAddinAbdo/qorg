@@ -74,6 +74,7 @@ def _is_web_form_request() -> bool:
     return (
         "frappe.website.doctype.web_form.web_form.accept" in path
         or command == "frappe.website.doctype.web_form.web_form.accept"
+        or path.endswith("/api/method/frappe.website.doctype.web_form.web_form.accept")
         or path.startswith("/external-profile-form")
     )
 
