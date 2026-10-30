@@ -625,7 +625,16 @@ def _viewer_can_see(doc):
 
 def _sanitize_doc(doc):
     result = frappe._dict()
+
+    # ``name`` is a standard Document property, not a DocField.  Therefore
+    # ``meta.has_field("name")`` is false even though every document has a name.
+    # Preserve it explicitly so portal context and application lookups use the
+    # actual External Opportunity identifier.
+    result["name"] = doc.name
+
     for fieldname in PUBLIC_SCALAR_FIELDS:
+        if fieldname == "name":
+            continue
         if _has_field(doc, fieldname):
             result[fieldname] = doc.get(fieldname)
     meta = frappe.get_meta(doc.doctype)
