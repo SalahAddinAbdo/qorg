@@ -1,17 +1,47 @@
 from __future__ import annotations
 
 import frappe
+from frappe import _
 from frappe.model.document import Document
+from frappe.utils import now_datetime
 
-from qorg.qorg.people_and_opportunities.services.people import update_profile_metrics, validate_external_person
-from qorg.qorg.people_and_opportunities.web_form_services import validate_external_person_portal_access
+from qorg.qorg.people_and_opportunities.services.people import (
+    update_profile_metrics,
+    validate_external_person,
+)
 
 
 class ExternalPerson(Document):
+    def before_validate(self):
+        self._apply_portal_defaults()
+
     def validate(self):
         validate_external_person(self)
-        validate_external_person_portal_access(self)
         update_profile_metrics(self)
 
     def on_update(self):
-        self.db_set("last_profile_update", frappe.utils.now(), update_modified=False)
+        self.db_set("last_profile_update", now_datetime(), update_modified=False)
+
+    def _apply_portal_defaults(self):
+        user = frappe.session.user
+        if not user or user == "Guest":
+            return
+        if frappe.db.get_value("User", user, "user_type") != "Website User":
+            return
+
+        if not self.is_new() and self.user and self.user != user:
+            frappe.throw(_("You can only update your own external profile."), frappe.PermissionError)
+
+        duplicate = frappe.db.get_value(
+            "External Person",
+            {"user": user, "name": ["!=", self.name or ""]},
+            "name",
+        )
+        if duplicate:
+            frappe.throw(_("An external profile already exists for this account: {0}").format(duplicate))
+
+        self.user = user
+        self.source = self.source or "Portal Registration"
+        if self.get("privacy_consent"):
+            self.privacy_consent_on = self.privacy_consent_on or now_datetime()
+            self.privacy_consent_source = self.privacy_consent_source or "External Profile Portal"

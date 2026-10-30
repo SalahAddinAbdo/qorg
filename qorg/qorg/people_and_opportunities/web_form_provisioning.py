@@ -89,7 +89,7 @@ def _provision_one(definition, result):
     status = "updated" if name else "created"
     _apply_base(doc, definition)
     _rebuild_layout(doc, definition)
-    _ensure_application_profile_confirmation(doc, definition)
+    _enforce_participation_application_fields(doc, definition)
     if doc.meta.has_field("client_script"):
         doc.client_script = ""
     apply_managed_design(doc, force=True)
@@ -158,7 +158,7 @@ def _set(row, meta, fieldname, value):
         row.set(fieldname, value)
 
 
-def _ensure_application_profile_confirmation(doc, definition):
+def _enforce_participation_application_fields(doc, definition):
     if definition.get("doc_type") != "Participation Application":
         return
     table_field = next(
@@ -178,3 +178,70 @@ def _ensure_application_profile_confirmation(doc, definition):
     _set(row, child_meta, "description", "Review and update your external profile before submitting this application.")
     _set(row, child_meta, "reqd", 1)
     _set(row, child_meta, "read_only", 0)
+
+
+def _enforce_participation_application_fields(doc, definition):
+    if definition.get("doc_type") != "Participation Application":
+        return
+
+    table_field = next(
+        (
+            field.fieldname
+            for field in doc.meta.fields
+            if field.fieldtype == "Table" and field.options == "Web Form Field"
+        ),
+        None,
+    )
+    if not table_field:
+        return
+
+    child_meta = frappe.get_meta(doc.meta.get_field(table_field).options)
+    target_meta = frappe.get_meta("Participation Application")
+    rows = doc.get(table_field) or []
+    rows_by_fieldname = {row.fieldname: row for row in rows if row.fieldname}
+
+    required_system_fields = (
+        "external_person",
+        "opportunity",
+        "participation_type",
+        "application_date",
+        "status",
+    )
+    for fieldname in required_system_fields:
+        target = target_meta.get_field(fieldname)
+        if not target:
+            continue
+        row = rows_by_fieldname.get(fieldname) or doc.append(table_field, {})
+        _set(row, child_meta, "fieldname", fieldname)
+        _set(row, child_meta, "fieldtype", target.fieldtype)
+        _set(row, child_meta, "label", target.label)
+        _set(row, child_meta, "options", target.options)
+        _set(row, child_meta, "reqd", 1)
+        _set(row, child_meta, "read_only", 1)
+        if target.fieldtype == "Link":
+            _set(row, child_meta, "allow_read_on_all_link_options", 1)
+
+    confirmation = rows_by_fieldname.get("profile_review_confirmed")
+    if not confirmation:
+        section = doc.append(table_field, {})
+        _set(section, child_meta, "fieldname", "qorg_profile_confirmation_section")
+        _set(section, child_meta, "fieldtype", "Section Break")
+        _set(section, child_meta, "label", "Profile Confirmation")
+        confirmation = doc.append(table_field, {})
+
+    _set(confirmation, child_meta, "fieldname", "profile_review_confirmed")
+    _set(confirmation, child_meta, "fieldtype", "Check")
+    _set(
+        confirmation,
+        child_meta,
+        "label",
+        "I confirm that I reviewed my profile and that its information and documents are current and accurate",
+    )
+    _set(
+        confirmation,
+        child_meta,
+        "description",
+        "Review and update your external profile before submitting this application.",
+    )
+    _set(confirmation, child_meta, "reqd", 1)
+    _set(confirmation, child_meta, "read_only", 0)

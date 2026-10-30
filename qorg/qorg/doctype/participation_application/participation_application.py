@@ -8,16 +8,16 @@ from frappe.website.utils import clear_cache as clear_website_cache
 
 from qorg.qorg.volunteer_management import services
 
-NON_CAPACITY_STATUSES = {"Cancelled"}
-NON_CAPACITY_DECISIONS = {"Withdrawn", "Cancelled"}
+CAPACITY_EXCLUDED_STATUSES = {"Cancelled"}
+CAPACITY_EXCLUDED_DECISIONS = {"Withdrawn", "Cancelled"}
 
 
 class ParticipationApplication(Document):
     def before_validate(self):
-        self._apply_portal_identity()
+        self._bind_portal_identity()
 
     def validate(self):
-        self._validate_portal_application()
+        self._validate_application_context()
         services.validate_application(self)
 
     def after_insert(self):
@@ -30,20 +30,17 @@ class ParticipationApplication(Document):
             sync_opportunity_application_stats(previous.opportunity)
 
     def on_trash(self):
-        self.flags.qorg_opportunity_to_sync = self.opportunity
+        opportunity = self.opportunity
+        if opportunity:
+            frappe.db.after_commit.add(
+                lambda opportunity=opportunity: sync_opportunity_application_stats(opportunity)
+            )
 
-    def after_delete(self):
-        sync_opportunity_application_stats(
-            getattr(self.flags, "qorg_opportunity_to_sync", None)
-        )
-
-    def _apply_portal_identity(self):
+    def _bind_portal_identity(self):
         if frappe.session.user == "Guest":
             frappe.throw(_("Please sign in before applying."), frappe.PermissionError)
 
-        # Desk users may manage applications operationally. Website users can only
-        # create and edit their own application/profile relationship.
-        if frappe.db.get_value("User", frappe.session.user, "user_type") == "System User":
+        if not is_website_user(frappe.session.user):
             return
 
         person = get_external_person_for_user(frappe.session.user)
@@ -52,12 +49,15 @@ class ParticipationApplication(Document):
                 _("Complete your external profile before applying."),
                 frappe.ValidationError,
             )
+
         self.external_person = person.name
         self.profile_reviewed_by = frappe.session.user
         self.profile_reviewed_on = now_datetime()
         self.profile_modified_on_application = person.modified
+        self.application_date = self.application_date or today()
+        self.status = self.status or "Draft"
 
-    def _validate_portal_application(self):
+    def _validate_application_context(self):
         if not self.opportunity:
             frappe.throw(_("External Opportunity is required."))
 
@@ -68,10 +68,11 @@ class ParticipationApplication(Document):
 
         previous = self.get_doc_before_save()
         if self.is_new() or (previous and previous.opportunity != self.opportunity):
-            _validate_opportunity_is_open(opportunity, self.name)
-        _validate_duplicate_application(self)
+            validate_opportunity_is_open(opportunity, exclude_application=self.name)
 
-        if frappe.db.get_value("User", frappe.session.user, "user_type") != "System User":
+        validate_duplicate_application(self)
+
+        if is_website_user(frappe.session.user):
             person = get_external_person_for_user(frappe.session.user)
             if not person or person.name != self.external_person:
                 frappe.throw(_("The application must use your own external profile."))
@@ -83,15 +84,20 @@ class ParticipationApplication(Document):
             validate_profile_completeness(person, opportunity)
 
 
-def get_external_person_for_user(user: str):
+def is_website_user(user: str | None) -> bool:
     if not user or user == "Guest":
+        return False
+    return frappe.db.get_value("User", user, "user_type") == "Website User"
+
+
+def get_external_person_for_user(user: str | None):
+    if not user or user == "Guest" or not frappe.db.exists("DocType", "External Person"):
         return None
     name = frappe.db.get_value("External Person", {"user": user}, "name")
     return frappe.get_doc("External Person", name) if name else None
 
 
 def lock_and_get_opportunity(name: str):
-    # Row lock prevents two requests from consuming the final place concurrently.
     locked = frappe.db.sql(
         "select name from `tabExternal Opportunity` where name=%s for update",
         name,
@@ -102,24 +108,26 @@ def lock_and_get_opportunity(name: str):
     return frappe.get_doc("External Opportunity", name)
 
 
-def _validate_opportunity_is_open(opportunity, current_application=None):
+def validate_opportunity_is_open(opportunity, exclude_application=None):
     if opportunity.status != "Published" or not cint(opportunity.publish_on_website):
         frappe.throw(_("Applications are closed for this opportunity."))
     if opportunity.opening_date and getdate(opportunity.opening_date) > getdate(today()):
         frappe.throw(_("Applications have not opened yet."))
     if opportunity.closing_date and getdate(opportunity.closing_date) < getdate(today()):
         frappe.throw(_("The application closing date has passed."))
-    if opportunity.meta.has_field("allow_external_applications") and not cint(opportunity.allow_external_applications):
+    if opportunity.meta.has_field("allow_external_applications") and not cint(
+        opportunity.allow_external_applications
+    ):
         frappe.throw(_("External applications are disabled for this opportunity."))
 
     limit = cint(opportunity.application_limit)
-    if limit > 0:
-        count = count_capacity_applications(opportunity.name, exclude_name=current_application)
-        if count >= limit:
-            frappe.throw(_("The application limit for this opportunity has been reached."))
+    if limit > 0 and count_capacity_applications(
+        opportunity.name, exclude_name=exclude_application
+    ) >= limit:
+        frappe.throw(_("The application limit for this opportunity has been reached."))
 
 
-def _validate_duplicate_application(doc):
+def validate_duplicate_application(doc):
     existing = frappe.db.sql(
         """
         select name
@@ -148,8 +156,14 @@ def validate_profile_completeness(person, opportunity):
         if person.meta.has_field(fieldname) and not person.get(fieldname):
             missing.append(label)
 
-    if cint(opportunity.get("require_resume")) and person.meta.has_field("resume") and not person.resume:
-        missing.append(_("Resume"))
+    if cint(opportunity.get("require_resume")):
+        resume_field = next(
+            (fieldname for fieldname in ("resume", "resume_attachment") if person.meta.has_field(fieldname)),
+            None,
+        )
+        if resume_field and not person.get(resume_field):
+            missing.append(_("Resume"))
+
     if missing:
         frappe.throw(
             _("Complete the following profile fields before applying: {0}").format(
@@ -163,9 +177,7 @@ def get_participation_type(opportunity):
     if explicit:
         return explicit
     opportunity_type = (opportunity.get("opportunity_type") or "").strip()
-    if "intern" in opportunity_type.lower():
-        return "Intern"
-    return "Volunteer"
+    return "Intern" if "intern" in opportunity_type.lower() else "Volunteer"
 
 
 def count_capacity_applications(opportunity: str, exclude_name=None) -> int:
@@ -174,6 +186,7 @@ def count_capacity_applications(opportunity: str, exclude_name=None) -> int:
     if exclude_name:
         conditions.append("name != %s")
         values.append(exclude_name)
+
     result = frappe.db.sql(
         f"""
         select count(*)
@@ -198,11 +211,13 @@ def sync_opportunity_application_stats(opportunity_name: str | None):
         ["application_limit", "close_at_application_limit", "status"],
         as_dict=True,
     )
+    if not values:
+        return
+
     limit = cint(values.application_limit)
-    remaining = max(limit - count, 0) if limit > 0 else 0
     updates = {
         "application_count": count,
-        "remaining_application_capacity": remaining,
+        "remaining_application_capacity": max(limit - count, 0) if limit > 0 else 0,
     }
     if limit > 0 and count >= limit and cint(values.close_at_application_limit):
         updates["status"] = "Closed"
@@ -214,4 +229,16 @@ def sync_opportunity_application_stats(opportunity_name: str | None):
         update_modified=False,
     )
     frappe.clear_document_cache("External Opportunity", opportunity_name)
-    clear_website_cache()
+    frappe.db.after_commit.add(clear_website_cache)
+
+
+def reconcile_all_opportunity_application_stats():
+    if not frappe.db.exists("DocType", "External Opportunity") or not frappe.db.exists(
+        "DocType", "Participation Application"
+    ):
+        return {"reconciled": 0}
+
+    names = frappe.get_all("External Opportunity", pluck="name", limit_page_length=0)
+    for name in names:
+        sync_opportunity_application_stats(name)
+    return {"reconciled": len(names)}

@@ -261,9 +261,12 @@ def get_public_opportunity(route):
     result = _sanitize_doc(doc)
     result["is_open"] = is_opportunity_open(doc)
     behavior = _opportunity_behavior(doc)
+    result["application_kind"] = behavior
     if behavior == "Employment":
-        result["apply_url"] = f"/employment-application/new?external_opportunity={quote(doc.name)}"
+        result["application_doctype"] = "Job Applicant"
+        result["apply_url"] = f"/employment-application/new?qorg_external_opportunity={quote(doc.name)}"
     else:
+        result["application_doctype"] = "Participation Application"
         result["apply_url"] = f"/participation-application/new?opportunity={quote(doc.name)}"
     return result
 
@@ -406,7 +409,7 @@ def _create_participation_application(
     _set_if_field(target, "branch", opportunity.get("branch"))
     _set_if_field(target, "application_date", today())
     _set_if_field(target, "application_source", "Portal")
-    _set_if_field(target, "status", "Submitted")
+    _set_if_field(target, "status", "Draft")
     _set_if_field(target, "applicant_name", person.get("full_name"))
     _set_if_field(target, "email", person.get("primary_email"))
     _set_if_field(target, "mobile_no", person.get("mobile_no"))
