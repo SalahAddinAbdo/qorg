@@ -7,7 +7,6 @@ import frappe
 from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 
 from qorg.qorg.people_and_opportunities.web_form_definitions import WEB_FORMS
-from qorg.qorg.people_and_opportunities.web_form_design import apply_managed_design
 from qorg.qorg.people_and_opportunities.web_form_grid_policies import (
     provision_external_profile_grid_policies,
 )
@@ -27,9 +26,11 @@ def provision_standard_opportunity_web_forms():
 
 
 def _create_custom_fields():
-    path = Path(__file__).resolve().parent / "data" / "web_form_architecture_custom_fields.json"
-    if path.exists():
-        create_custom_fields(json.loads(path.read_text(encoding="utf-8")), update=True)
+    data_dir = Path(__file__).resolve().parent / "data"
+    for filename in ("web_form_architecture_custom_fields.json", "web_form_design_custom_fields.json"):
+        path = data_dir / filename
+        if path.exists():
+            create_custom_fields(json.loads(path.read_text(encoding="utf-8")), update=True)
 
 
 def _provision_one(definition, result):
@@ -40,7 +41,6 @@ def _provision_one(definition, result):
     _rebuild_fields(doc, definition)
     if doc.meta.has_field("client_script"):
         doc.client_script = ""
-    apply_managed_design(doc, force=True)
     if name:
         doc.save(ignore_permissions=True)
     else:

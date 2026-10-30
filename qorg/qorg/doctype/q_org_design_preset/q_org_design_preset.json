@@ -1,0 +1,583 @@
+{
+  "doctype": "DocType",
+  "name": "Q Org Design Preset",
+  "module": "QOrg",
+  "custom": 0,
+  "autoname": "field:preset_name",
+  "track_changes": 1,
+  "title_field": "preset_name",
+  "search_fields": "preset_name,description",
+  "field_order": [
+    "identity_tab",
+    "identity_section",
+    "preset_name",
+    "description",
+    "identity_column",
+    "enabled",
+    "is_standard",
+    "schema_version",
+    "preset_palette_section",
+    "primary_accent",
+    "secondary_accent",
+    "neutral_accent",
+    "success_color",
+    "preset_palette_column",
+    "warning_color",
+    "danger_color",
+    "information_color",
+    "focus_color",
+    "preset_surfaces_section",
+    "navbar_surface",
+    "sidebar_surface",
+    "page_surface",
+    "card_surface",
+    "dialog_surface",
+    "input_surface",
+    "preset_surfaces_column",
+    "text_primary_color",
+    "text_muted_color",
+    "heading_color",
+    "border_color",
+    "selected_surface",
+    "hover_surface",
+    "appearance_tab",
+    "preset_typography_section",
+    "theme_mode_policy",
+    "density",
+    "typography_policy",
+    "preset_typography_column",
+    "heading_weight",
+    "line_height_scale",
+    "preset_sizes_section",
+    "body_font_size",
+    "label_font_size",
+    "heading_scale",
+    "preset_sizes_column",
+    "navbar_height",
+    "page_header_height",
+    "sidebar_width",
+    "icon_size",
+    "preset_shape_section",
+    "control_radius",
+    "button_radius",
+    "card_radius",
+    "preset_shape_column",
+    "dialog_radius",
+    "border_strength",
+    "elevation_scale",
+    "components_tab",
+    "preset_components_section",
+    "enhanced_section_headings",
+    "compact_child_tables",
+    "sticky_list_header",
+    "preset_components_column",
+    "workspace_card_density",
+    "dialog_width_policy",
+    "status_indicator_strength",
+    "preset_accessibility_section",
+    "respect_reduced_motion",
+    "enhanced_focus_visibility",
+    "contrast_policy",
+    "preset_accessibility_column",
+    "rtl_spacing_corrections",
+    "touch_target_policy",
+    "reduced_transparency",
+    "integrity_tab",
+    "integrity_section",
+    "configuration_fingerprint",
+    "validation_status",
+    "last_validated_on"
+  ],
+  "fields": [
+    {
+      "fieldname": "identity_tab",
+      "fieldtype": "Tab Break",
+      "label": "Identity"
+    },
+    {
+      "fieldname": "identity_section",
+      "fieldtype": "Section Break",
+      "label": "Preset Identity"
+    },
+    {
+      "fieldname": "preset_name",
+      "fieldtype": "Data",
+      "label": "Preset Name",
+      "reqd": 1,
+      "unique": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Small Text",
+      "label": "Description"
+    },
+    {
+      "fieldname": "identity_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "enabled",
+      "fieldtype": "Check",
+      "label": "Enabled",
+      "default": "1",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "is_standard",
+      "fieldtype": "Check",
+      "label": "Is Standard",
+      "read_only": 1
+    },
+    {
+      "fieldname": "schema_version",
+      "fieldtype": "Data",
+      "label": "Schema Version",
+      "read_only": 1
+    },
+    {
+      "fieldname": "preset_palette_section",
+      "fieldtype": "Section Break",
+      "label": "Semantic Palette"
+    },
+    {
+      "fieldname": "primary_accent",
+      "fieldtype": "Color",
+      "label": "Primary Accent",
+      "default": "#137690"
+    },
+    {
+      "fieldname": "secondary_accent",
+      "fieldtype": "Color",
+      "label": "Secondary Accent",
+      "default": "#cbae66"
+    },
+    {
+      "fieldname": "neutral_accent",
+      "fieldtype": "Color",
+      "label": "Neutral Accent",
+      "default": "#606c77"
+    },
+    {
+      "fieldname": "success_color",
+      "fieldtype": "Color",
+      "label": "Success",
+      "default": "#2e8b57"
+    },
+    {
+      "fieldname": "preset_palette_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "warning_color",
+      "fieldtype": "Color",
+      "label": "Warning",
+      "default": "#d79b26"
+    },
+    {
+      "fieldname": "danger_color",
+      "fieldtype": "Color",
+      "label": "Danger",
+      "default": "#bd4546"
+    },
+    {
+      "fieldname": "information_color",
+      "fieldtype": "Color",
+      "label": "Information",
+      "default": "#258bd3"
+    },
+    {
+      "fieldname": "focus_color",
+      "fieldtype": "Color",
+      "label": "Focus Ring",
+      "default": "#269ad7"
+    },
+    {
+      "fieldname": "preset_surfaces_section",
+      "fieldtype": "Section Break",
+      "label": "Surfaces and Text"
+    },
+    {
+      "fieldname": "navbar_surface",
+      "fieldtype": "Color",
+      "label": "Navbar Surface",
+      "default": "#fafafa"
+    },
+    {
+      "fieldname": "sidebar_surface",
+      "fieldtype": "Color",
+      "label": "Sidebar Surface",
+      "default": "#f2f6f7"
+    },
+    {
+      "fieldname": "page_surface",
+      "fieldtype": "Color",
+      "label": "Page Surface",
+      "default": "#f6f8fa"
+    },
+    {
+      "fieldname": "card_surface",
+      "fieldtype": "Color",
+      "label": "Card Surface",
+      "default": "#ffffff"
+    },
+    {
+      "fieldname": "dialog_surface",
+      "fieldtype": "Color",
+      "label": "Dialog Surface",
+      "default": "#ffffff"
+    },
+    {
+      "fieldname": "input_surface",
+      "fieldtype": "Color",
+      "label": "Input Surface",
+      "default": "#ffffff"
+    },
+    {
+      "fieldname": "preset_surfaces_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "text_primary_color",
+      "fieldtype": "Color",
+      "label": "Primary Text",
+      "default": "#0f3246"
+    },
+    {
+      "fieldname": "text_muted_color",
+      "fieldtype": "Color",
+      "label": "Muted Text",
+      "default": "#606c77"
+    },
+    {
+      "fieldname": "heading_color",
+      "fieldtype": "Color",
+      "label": "Heading Text",
+      "default": "#0f3246"
+    },
+    {
+      "fieldname": "border_color",
+      "fieldtype": "Color",
+      "label": "Border",
+      "default": "#d6e0e4"
+    },
+    {
+      "fieldname": "selected_surface",
+      "fieldtype": "Color",
+      "label": "Selected Surface",
+      "default": "#e0f1f5"
+    },
+    {
+      "fieldname": "hover_surface",
+      "fieldtype": "Color",
+      "label": "Hover Surface",
+      "default": "#edf7f9"
+    },
+    {
+      "fieldname": "appearance_tab",
+      "fieldtype": "Tab Break",
+      "label": "Appearance"
+    },
+    {
+      "fieldname": "preset_typography_section",
+      "fieldtype": "Section Break",
+      "label": "Typography"
+    },
+    {
+      "fieldname": "theme_mode_policy",
+      "fieldtype": "Select",
+      "label": "Theme Mode Policy",
+      "options": "Follow Frappe/System\nLight\nDark",
+      "default": "Light"
+    },
+    {
+      "fieldname": "density",
+      "fieldtype": "Select",
+      "label": "Density",
+      "options": "Frappe Default\nComfortable\nCompact",
+      "default": "Comfortable"
+    },
+    {
+      "fieldname": "typography_policy",
+      "fieldtype": "Select",
+      "label": "Typography Policy",
+      "options": "Frappe Default\nSystem UI\nQ Org Bundled",
+      "default": "System UI"
+    },
+    {
+      "fieldname": "preset_typography_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "heading_weight",
+      "fieldtype": "Select",
+      "label": "Heading Weight",
+      "options": "Default\nMedium\nSemibold",
+      "default": "Semibold"
+    },
+    {
+      "fieldname": "line_height_scale",
+      "fieldtype": "Select",
+      "label": "Line Height",
+      "options": "Default\nComfortable\nSpacious",
+      "default": "Comfortable"
+    },
+    {
+      "fieldname": "preset_sizes_section",
+      "fieldtype": "Section Break",
+      "label": "Sizes and Layout"
+    },
+    {
+      "fieldname": "body_font_size",
+      "fieldtype": "Int",
+      "label": "Body Font Size (px)",
+      "default": "13",
+      "description": "Allowed range: 12 to 20."
+    },
+    {
+      "fieldname": "label_font_size",
+      "fieldtype": "Int",
+      "label": "Label Font Size (px)",
+      "default": "13",
+      "description": "Allowed range: 11 to 18."
+    },
+    {
+      "fieldname": "heading_scale",
+      "fieldtype": "Float",
+      "label": "Heading Scale",
+      "default": "1.2",
+      "description": "Allowed range: 1.0 to 1.6."
+    },
+    {
+      "fieldname": "preset_sizes_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "navbar_height",
+      "fieldtype": "Int",
+      "label": "Navbar Height (px)",
+      "default": "50",
+      "description": "Allowed range: 40 to 72."
+    },
+    {
+      "fieldname": "page_header_height",
+      "fieldtype": "Int",
+      "label": "Page Header Height (px)",
+      "default": "50",
+      "description": "Default 50. Allowed range: 40 to 72."
+    },
+    {
+      "fieldname": "sidebar_width",
+      "fieldtype": "Int",
+      "label": "Sidebar Width (px)",
+      "default": "240",
+      "description": "Allowed range: 200 to 340."
+    },
+    {
+      "fieldname": "icon_size",
+      "fieldtype": "Int",
+      "label": "Default Icon Size (px)",
+      "default": "16",
+      "description": "Allowed range: 14 to 24."
+    },
+    {
+      "fieldname": "preset_shape_section",
+      "fieldtype": "Section Break",
+      "label": "Shape and Elevation"
+    },
+    {
+      "fieldname": "control_radius",
+      "fieldtype": "Select",
+      "label": "Control Radius",
+      "options": "Frappe Default\nCompact\nSubtle\nRounded",
+      "default": "Compact"
+    },
+    {
+      "fieldname": "button_radius",
+      "fieldtype": "Select",
+      "label": "Button Radius",
+      "options": "Frappe Default\nCompact\nSubtle\nRounded",
+      "default": "Compact"
+    },
+    {
+      "fieldname": "card_radius",
+      "fieldtype": "Select",
+      "label": "Card Radius",
+      "options": "Frappe Default\nCompact\nSubtle\nRounded",
+      "default": "Compact"
+    },
+    {
+      "fieldname": "preset_shape_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "dialog_radius",
+      "fieldtype": "Select",
+      "label": "Dialog Radius",
+      "options": "Frappe Default\nCompact\nSubtle\nRounded",
+      "default": "Compact"
+    },
+    {
+      "fieldname": "border_strength",
+      "fieldtype": "Select",
+      "label": "Border Strength",
+      "options": "Frappe Default\nSubtle\nDefined",
+      "default": "Subtle"
+    },
+    {
+      "fieldname": "elevation_scale",
+      "fieldtype": "Select",
+      "label": "Elevation",
+      "options": "Frappe Default\nFlat\nSubtle\nElevated",
+      "default": "Subtle"
+    },
+    {
+      "fieldname": "components_tab",
+      "fieldtype": "Tab Break",
+      "label": "Components"
+    },
+    {
+      "fieldname": "preset_components_section",
+      "fieldtype": "Section Break",
+      "label": "Desk Components"
+    },
+    {
+      "fieldname": "enhanced_section_headings",
+      "fieldtype": "Check",
+      "label": "Enhanced Section Headings",
+      "default": "1"
+    },
+    {
+      "fieldname": "compact_child_tables",
+      "fieldtype": "Check",
+      "label": "Compact Child Tables",
+      "default": "0"
+    },
+    {
+      "fieldname": "sticky_list_header",
+      "fieldtype": "Check",
+      "label": "Sticky List Header",
+      "default": "1"
+    },
+    {
+      "fieldname": "preset_components_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "workspace_card_density",
+      "fieldtype": "Select",
+      "label": "Workspace Card Density",
+      "options": "Frappe Default\nComfortable\nCompact",
+      "default": "Comfortable"
+    },
+    {
+      "fieldname": "dialog_width_policy",
+      "fieldtype": "Select",
+      "label": "Dialog Width Policy",
+      "options": "Frappe Default\nAdaptive",
+      "default": "Adaptive"
+    },
+    {
+      "fieldname": "status_indicator_strength",
+      "fieldtype": "Select",
+      "label": "Status Indicator Strength",
+      "options": "Frappe Default\nEnhanced",
+      "default": "Enhanced"
+    },
+    {
+      "fieldname": "preset_accessibility_section",
+      "fieldtype": "Section Break",
+      "label": "Accessibility"
+    },
+    {
+      "fieldname": "respect_reduced_motion",
+      "fieldtype": "Check",
+      "label": "Respect Reduced Motion",
+      "default": "1"
+    },
+    {
+      "fieldname": "enhanced_focus_visibility",
+      "fieldtype": "Check",
+      "label": "Enhanced Focus Visibility",
+      "default": "1"
+    },
+    {
+      "fieldname": "contrast_policy",
+      "fieldtype": "Select",
+      "label": "Contrast Policy",
+      "options": "Frappe Default\nWCAG AA Guard",
+      "default": "WCAG AA Guard"
+    },
+    {
+      "fieldname": "preset_accessibility_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "rtl_spacing_corrections",
+      "fieldtype": "Check",
+      "label": "RTL Spacing Corrections",
+      "default": "1"
+    },
+    {
+      "fieldname": "touch_target_policy",
+      "fieldtype": "Select",
+      "label": "Touch Target Policy",
+      "options": "Frappe Default\nEnhanced",
+      "default": "Enhanced"
+    },
+    {
+      "fieldname": "reduced_transparency",
+      "fieldtype": "Check",
+      "label": "Reduced Transparency",
+      "default": "0"
+    },
+    {
+      "fieldname": "integrity_tab",
+      "fieldtype": "Tab Break",
+      "label": "Integrity"
+    },
+    {
+      "fieldname": "integrity_section",
+      "fieldtype": "Section Break",
+      "label": "Integrity"
+    },
+    {
+      "fieldname": "configuration_fingerprint",
+      "fieldtype": "Data",
+      "label": "Configuration Fingerprint",
+      "read_only": 1
+    },
+    {
+      "fieldname": "validation_status",
+      "fieldtype": "Data",
+      "label": "Validation Status",
+      "read_only": 1
+    },
+    {
+      "fieldname": "last_validated_on",
+      "fieldtype": "Datetime",
+      "label": "Last Validated On",
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "export": 1
+    }
+  ],
+  "sort_field": "preset_name",
+  "sort_order": "ASC"
+}

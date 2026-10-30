@@ -470,7 +470,7 @@ function wf_style_actions(frm) {
             })
             .removeClass("btn-default")
             .addClass("btn-primary")
-            .css({ color: "#fff" });
+            ;
     };
     apply();
     [200, 500, 1000].forEach(delay => setTimeout(apply, delay));

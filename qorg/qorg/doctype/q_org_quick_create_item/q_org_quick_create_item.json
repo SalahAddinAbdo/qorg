@@ -1,0 +1,63 @@
+{
+  "doctype": "DocType",
+  "name": "Q Org Quick Create Item",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "editable_grid": 1,
+  "field_order": [
+    "enabled",
+    "reference_doctype",
+    "display_label",
+    "icon",
+    "sequence"
+  ],
+  "fields": [
+    {
+      "fieldname": "enabled",
+      "fieldtype": "Check",
+      "label": "Enabled",
+      "default": "1",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "reference_doctype",
+      "fieldtype": "Link",
+      "label": "Document Type",
+      "options": "DocType",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 3,
+      "description": "Users see this item only when they have Create permission for the selected document type."
+    },
+    {
+      "fieldname": "display_label",
+      "fieldtype": "Data",
+      "label": "Display Label",
+      "in_list_view": 1,
+      "columns": 3,
+      "description": "Optional translated menu label. Leave blank to use the DocType label."
+    },
+    {
+      "fieldname": "icon",
+      "fieldtype": "Data",
+      "label": "Icon",
+      "in_list_view": 1,
+      "columns": 2,
+      "description": "Optional Frappe icon name, for example add, file, task or users."
+    },
+    {
+      "fieldname": "sequence",
+      "fieldtype": "Int",
+      "label": "Sequence",
+      "default": "10",
+      "in_list_view": 1,
+      "columns": 1
+    }
+  ],
+  "permissions": [],
+  "sort_field": "idx",
+  "sort_order": "ASC",
+  "track_changes": 0
+}

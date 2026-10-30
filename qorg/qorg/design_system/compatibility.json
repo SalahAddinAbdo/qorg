@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "minimum_versions": {
+    "frappe": "16.53.0",
+    "erpnext": "16.52.1",
+    "hrms": "16.52.0"
+  },
+  "supported_major": 16,
+  "blocked_dependencies": [
+    "Company printing palette"
+  ],
+  "website_theme_source_of_truth": true
+}

@@ -43,7 +43,7 @@
       "fieldtype": "Select",
       "in_list_view": 1,
       "label": "Component Type",
-      "options": "Workflow\nModel Policy\nModel Action Policy\nInterface Policy\nFeature Configuration\nOther",
+      "options": "Workflow\nModel Policy\nModel Action Policy\nInterface Policy\nFeature Configuration\nDesign System\nOther",
       "read_only": 1,
       "reqd": 1
     },
