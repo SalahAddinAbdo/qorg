@@ -32,50 +32,53 @@ def execute() -> None:
     if not frappe.db.exists("DocType", PRESET_DOCTYPE):
         return
 
-    # Normalize legacy field values first. Renaming a Preset updates Link
-    # fields in the Single settings document and triggers its validate method;
-    # that validation must not encounter legacy enum values such as
-    # "Q Org Bundled".
+    # Normalize legacy values before touching linked presets.
     _normalize_settings()
     _normalize_presets()
-    _rename_managed_presets()
+    _adopt_canonical_presets()
     frappe.clear_cache(doctype=PRESET_DOCTYPE)
     if frappe.db.exists("DocType", SETTINGS_DOCTYPE):
         frappe.clear_cache(doctype=SETTINGS_DOCTYPE)
 
 
-def _rename_managed_presets() -> None:
+def _adopt_canonical_presets() -> None:
+    """Create canonical managed presets without framework-level rename.
+
+    The installed Frappe build generates an invalid ``IN ()`` query when
+    ``rename_doc`` is called for this DocType because it has no eligible link
+    fields for User Settings. Keeping the legacy source disabled also protects
+    any site-specific references outside the managed Settings Link.
+    """
     for old_name, new_name in PRESET_RENAMES.items():
         old_exists = bool(frappe.db.exists(PRESET_DOCTYPE, old_name))
         new_exists = bool(frappe.db.exists(PRESET_DOCTYPE, new_name))
 
         if old_exists and not new_exists:
-            frappe.rename_doc(
-                PRESET_DOCTYPE,
-                old_name,
-                new_name,
-                force=True,
-            )
+            source = frappe.get_doc(PRESET_DOCTYPE, old_name)
+            target = frappe.copy_doc(source)
+            target.name = None
+            target.preset_name = new_name
+            target.flags.ignore_permissions = True
+            target.insert(ignore_permissions=True)
+            new_exists = True
+
+        if not old_exists:
             continue
 
-        if not old_exists or not new_exists:
-            continue
+        if new_exists:
+            _replace_active_preset(old_name, new_name)
 
-        # A prior partial run may have both records. Point the Single setting to
-        # the canonical target before deleting an obsolete managed source.
-        _replace_active_preset(old_name, new_name)
-        is_standard = frappe.db.get_value(PRESET_DOCTYPE, old_name, "is_standard")
-        if is_standard:
-            # Do not delete a source that a site-specific Link field may still
-            # reference. Keep the obsolete managed record disabled; a later
-            # reconciliation can remove it only after a full Link audit.
-            frappe.db.set_value(
-                PRESET_DOCTYPE,
-                old_name,
-                {"enabled": 0, "description": "Obsolete managed preset retained for link safety."},
-                update_modified=False,
-            )
-
+        # Retain the legacy record for unknown external links, but prevent it
+        # from appearing as an active managed choice. No destructive delete.
+        frappe.db.set_value(
+            PRESET_DOCTYPE,
+            old_name,
+            {
+                "enabled": 0,
+                "description": "Obsolete managed preset retained for link safety.",
+            },
+            update_modified=False,
+        )
 
 def _replace_active_preset(old_name: str, new_name: str) -> None:
     if not frappe.db.exists("DocType", SETTINGS_DOCTYPE):
