@@ -5,14 +5,14 @@ from qorg.qorg.design_system.service import SETTINGS, PRESET, VISUAL_FIELDS, cle
 
 def _manager():
     if frappe.session.user=="Guest" or not frappe.has_permission(SETTINGS,"write"):
-        frappe.throw(_("You are not permitted to manage the Q Org Design System."),frappe.PermissionError)
+        frappe.throw(_("You are not permitted to manage the QOrg Design System."),frappe.PermissionError)
 
 @frappe.whitelist(allow_guest=True)
 def get_effective_configuration():
     config = effective()
     if frappe.session.user != "Guest":
         return config
-    allowed = ("enabled", "apply_to_login", "apply_to_qorg_web_components", "respect_active_website_theme", "theme_mode_policy", "density", "login_layout", "login_visual_source", "login_visual_image", "login_visual_gradient", "login_welcome_title", "login_welcome_subtitle", "show_login_language_switcher", "login_mobile_visual_policy", "web_form_max_content_width", "web_form_sticky_actions", "web_form_hide_technical_child_row_name", "css_variables")
+    allowed = ("enabled", "apply_to_login", "apply_to_qorg_web_components", "respect_active_website_theme", "theme_mode_policy", "density", "login_layout", "login_visual_source", "login_visual_image", "login_visual_gradient", "login_welcome_title", "login_welcome_subtitle", "show_login_language_switcher", "login_mobile_visual_policy", "login_experience_style", "login_form_density", "login_show_trust_message", "login_trust_message", "login_card_alignment", "login_show_security_footer", "login_focus_first_field", "web_form_max_content_width", "web_form_sticky_actions", "web_form_hide_technical_child_row_name", "web_form_presentation", "portal_presentation", "public_card_style", "public_validation_summary", "public_success_presentation", "public_mobile_sticky_actions", "css_variables")
     return {key: config.get(key) for key in allowed}
 
 @frappe.whitelist(methods=["POST"])
@@ -86,10 +86,16 @@ def get_quick_create_menu():
             "doctype": doctype,
             "label": _(row.display_label) if row.display_label else _(doctype),
             "icon": row.icon or "add",
+            "group": row.menu_group or _("Other"),
+            "favorite": bool(row.is_favorite),
+            "description": row.description or "",
         })
+    items.sort(key=lambda item: (not item["favorite"], item["group"], item["label"]))
     return {
         "enabled": True,
         "label": _(settings.get("quick_create_button_label")) if settings.get("quick_create_button_label") else _("Create"),
+        "search": bool(settings.get("create_menu_search")),
+        "grouped": bool(settings.get("group_create_items")),
         "items": items,
     }
 
@@ -162,3 +168,53 @@ def validate_current_configuration():
     if doc.get("enable_quick_create_menu") and not any(row.enabled for row in (doc.get("quick_create_items") or [])):
         findings.append({"severity": "Info", "message": _("The Create button is enabled, but no Create Menu Items are enabled.")})
     return {"valid": not any(row["severity"] in {"Error", "Blocked"} for row in findings), "findings": findings}
+
+
+@frappe.whitelist()
+def get_preset_gallery():
+    _manager()
+    rows = frappe.get_all(
+        PRESET,
+        filters={"enabled": 1},
+        fields=["name", "preset_name", "description", "is_standard", "configuration_fingerprint"],
+        order_by="is_standard desc, preset_name asc",
+    )
+    result = []
+    for row in rows:
+        doc = frappe.get_doc(PRESET, row.name)
+        config = _preset_payload(doc)
+        result.append({
+            **row,
+            "configuration": config,
+            "swatches": [
+                config.get("primary_accent") or "#137690",
+                config.get("secondary_accent") or "#cbae66",
+                config.get("page_surface") or "#f6f8fa",
+                config.get("card_surface") or "#ffffff",
+            ],
+        })
+    return result
+
+
+@frappe.whitelist(methods=["POST"])
+def validate_visual_configuration(configuration=None):
+    _manager()
+    values = json.loads(configuration) if isinstance(configuration, str) else (configuration or {})
+    doc = frappe.get_single(SETTINGS)
+    for fieldname, value in values.items():
+        if doc.meta.has_field(fieldname):
+            doc.set(fieldname, value)
+    validate_values(doc)
+    findings = []
+    width = int(doc.get("web_form_max_content_width") or 0)
+    if width and width < 760:
+        findings.append({"severity": "Error", "area": "Public", "message": _("Web Form width must be at least 760 pixels.")})
+    if width and width > 1600:
+        findings.append({"severity": "Error", "area": "Public", "message": _("Web Form width cannot exceed 1600 pixels.")})
+    if doc.get("touch_target_policy") == "44px minimum" and int(doc.get("control_height") or 0) and int(doc.get("control_height")) < 40:
+        findings.append({"severity": "Warning", "area": "Accessibility", "message": _("Control height is below the recommended touch target.")})
+    if doc.get("theme_mode_policy") == "Dark" and doc.get("card_surface") in {"#ffffff", "#fff", "white"}:
+        findings.append({"severity": "Warning", "area": "Dark Mode", "message": _("A white card surface may conflict with the selected dark policy.")})
+    if doc.get("login_visual_source") == "Managed Image" and not doc.get("login_visual_image"):
+        findings.append({"severity": "Warning", "area": "Login", "message": _("Managed Image is selected without an image.")})
+    return {"valid": not any(row["severity"] == "Error" for row in findings), "findings": findings}

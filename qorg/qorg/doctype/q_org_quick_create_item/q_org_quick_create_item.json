@@ -9,6 +9,9 @@
     "enabled",
     "reference_doctype",
     "display_label",
+    "menu_group",
+    "is_favorite",
+    "description",
     "icon",
     "sequence"
   ],
@@ -40,11 +43,31 @@
       "description": "Optional translated menu label. Leave blank to use the DocType label."
     },
     {
+      "fieldname": "menu_group",
+      "fieldtype": "Data",
+      "label": "Group",
+      "in_list_view": 1,
+      "columns": 2,
+      "description": "Optional group such as Favorites, Projects, People, Procurement or Finance."
+    },
+    {
+      "fieldname": "is_favorite",
+      "fieldtype": "Check",
+      "label": "Highlight as Favorite",
+      "default": "0"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Small Text",
+      "label": "Description",
+      "description": "Optional short description shown in the Create command menu."
+    },
+    {
       "fieldname": "icon",
       "fieldtype": "Data",
       "label": "Icon",
-      "in_list_view": 1,
-      "columns": 2,
+      "in_list_view": 0,
+      "columns": 0,
       "description": "Optional Frappe icon name, for example add, file, task or users."
     },
     {

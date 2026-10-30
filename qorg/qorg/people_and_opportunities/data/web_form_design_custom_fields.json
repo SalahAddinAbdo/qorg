@@ -2,7 +2,7 @@
   "Web Form": [
     {
       "fieldname": "qorg_web_form_design_section",
-      "label": "Q Org Web Form Presentation",
+      "label": "QOrg Web Form Presentation",
       "fieldtype": "Section Break",
       "insert_after": "allow_edit",
       "module": "QOrg",
@@ -17,7 +17,7 @@
       "is_system_generated": 1,
       "options": "Use Global Setting\nEnhanced Design\nStandard Frappe Design",
       "default": "Use Global Setting",
-      "description": "Use the central Q Org Design System, force enhanced presentation, or use standard Frappe presentation."
+      "description": "Use the central QOrg Design System, force enhanced presentation, or use standard Frappe presentation."
     },
     {
       "fieldname": "qorg_web_form_header_style_override",

@@ -22,6 +22,15 @@ frappe.ui.form.on("Q Org Design System Settings", {
       frappe.msgprint({ title: __("Design System Validation"), indicator: "orange", message: findings.map((row) => `<p><strong>${frappe.utils.escape_html(row.severity)}</strong>: ${frappe.utils.escape_html(row.message)}</p>`).join("") });
     }, __("Design System"));
 
+    frm.add_custom_button(__("Copy Navigation Audit"), async () => {
+      if (!window.QOrgNavigation?.copyAudit) {
+        return frappe.msgprint(__("QOrg Navigation Alignment is not loaded."));
+      }
+      const payload = await window.QOrgNavigation.copyAudit();
+      frappe.show_alert({ message: __("Navigation audit copied to the clipboard."), indicator: "green" });
+      console.info("QOrg Navigation Audit", JSON.parse(payload));
+    }, __("Design System"));
+
     frm.add_custom_button(__("Restore Frappe Default"), () => {
       frappe.confirm(__("Restore the standard Frappe appearance?"), async () => {
         await frappe.call({ method: "qorg.qorg.design_system.api.restore_frappe_default", type: "POST", freeze: true });

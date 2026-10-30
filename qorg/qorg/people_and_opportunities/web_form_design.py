@@ -12,7 +12,7 @@ MAX_CONTENT_WIDTH = 1600
 def validate_website_settings(doc, method=None) -> None:
     """Compatibility validator for Website Settings.
 
-    Global visual configuration now lives in Q Org Design System Settings, but
+    Global visual configuration now lives in QOrg Design System Settings, but
     portal_settings and existing hooks still import this stable function name.
     Only validate the legacy width when the field exists and contains a positive
     configured value. Zero means that the legacy field was never configured.
@@ -59,5 +59,5 @@ def reconcile_all_web_form_designs(doc=None, method=None, force=False):
     return {
         "updated": [],
         "preserved": preserved,
-        "design_source": "Q Org Design System Settings",
+        "design_source": "QOrg Design System Settings",
     }

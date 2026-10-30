@@ -9,7 +9,7 @@ from qorg.qorg.design_system.provisioning import provision_design_system
 
 SETTINGS_DOCTYPE = "Q Org Design System Settings"
 PRESET_DOCTYPE = "Q Org Design Preset"
-DEFAULT_PRESET = "Q Org Comfortable"
+DEFAULT_PRESET = "QOrg Comfortable"
 
 OBSOLETE_WEBSITE_FIELDS = (
     "qorg_enable_enhanced_web_form_design",

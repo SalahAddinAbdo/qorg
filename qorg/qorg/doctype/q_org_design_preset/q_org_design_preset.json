@@ -86,7 +86,74 @@
     "integrity_section",
     "configuration_fingerprint",
     "validation_status",
-    "last_validated_on"
+    "last_validated_on",
+    "enterprise_experience_tab",
+    "preset_navigation_section",
+    "experience_style",
+    "surface_hierarchy",
+    "navigation_emphasis",
+    "page_header_style",
+    "preset_navigation_section_column",
+    "section_presentation",
+    "table_presentation",
+    "action_dock_desktop_placement",
+    "action_dock_mobile_placement",
+    "preset_operational_section",
+    "form_control_style",
+    "toolbar_style",
+    "grid_style",
+    "alternate_view_style",
+    "dialog_style",
+    "preset_operational_section_column",
+    "workflow_timeline_style",
+    "state_presentation",
+    "sticky_primary_columns",
+    "numeric_alignment",
+    "preset_workspace_section",
+    "workspace_layout_style",
+    "kpi_card_style",
+    "chart_presentation",
+    "priority_panel_style",
+    "activity_panel_style",
+    "preset_workspace_section_column",
+    "operational_table_style",
+    "workspace_quick_actions",
+    "dashboard_responsive_reflow",
+    "dashboard_reduce_decorative_motion",
+    "preset_action_dock_section",
+    "action_dock_collapsed_behavior",
+    "action_dock_tooltips",
+    "show_create_action",
+    "show_language_action",
+    "preset_action_dock_section_column",
+    "create_menu_search",
+    "group_create_items",
+    "preset_login_section",
+    "login_layout",
+    "login_experience_style",
+    "login_form_density",
+    "login_card_alignment",
+    "login_visual_source",
+    "login_visual_gradient",
+    "preset_login_section_column",
+    "login_show_trust_message",
+    "login_trust_message",
+    "login_show_security_footer",
+    "login_focus_first_field",
+    "login_welcome_title",
+    "login_welcome_subtitle",
+    "login_mobile_visual_policy",
+    "preset_public_section",
+    "web_form_presentation",
+    "portal_presentation",
+    "public_card_style",
+    "public_validation_summary",
+    "public_success_presentation",
+    "preset_public_section_column",
+    "public_mobile_sticky_actions",
+    "web_form_max_content_width",
+    "web_form_sticky_actions",
+    "web_form_hide_technical_child_row_name"
   ],
   "fields": [
     {
@@ -304,7 +371,7 @@
       "fieldname": "typography_policy",
       "fieldtype": "Select",
       "label": "Typography Policy",
-      "options": "Frappe Default\nSystem UI\nQ Org Bundled",
+      "options": "Frappe Default\nSystem UI\nQOrg Bundled",
       "default": "System UI"
     },
     {
@@ -566,6 +633,431 @@
       "fieldtype": "Datetime",
       "label": "Last Validated On",
       "read_only": 1
+    },
+    {
+      "fieldname": "enterprise_experience_tab",
+      "fieldtype": "Tab Break",
+      "label": "Enterprise Experience"
+    },
+    {
+      "fieldname": "preset_navigation_section",
+      "fieldtype": "Section Break",
+      "label": "Navigation and Structure"
+    },
+    {
+      "fieldname": "experience_style",
+      "fieldtype": "Select",
+      "label": "Experience Style",
+      "options": "QOrg Executive\nQOrg Midnight\nQOrg Operations\nFrappe Standard",
+      "default": "QOrg Executive"
+    },
+    {
+      "fieldname": "surface_hierarchy",
+      "fieldtype": "Select",
+      "label": "Surface Hierarchy",
+      "options": "Layered\nSubtle\nFlat",
+      "default": "Layered"
+    },
+    {
+      "fieldname": "navigation_emphasis",
+      "fieldtype": "Select",
+      "label": "Navigation Emphasis",
+      "options": "Balanced\nBrand Forward\nMinimal",
+      "default": "Balanced"
+    },
+    {
+      "fieldname": "page_header_style",
+      "fieldtype": "Select",
+      "label": "Page Header Style",
+      "options": "Executive\nCompact\nFrappe Standard",
+      "default": "Executive"
+    },
+    {
+      "fieldname": "preset_navigation_section_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "section_presentation",
+      "fieldtype": "Select",
+      "label": "Section Presentation",
+      "options": "Structured\nSoft Cards\nFrappe Standard",
+      "default": "Structured"
+    },
+    {
+      "fieldname": "table_presentation",
+      "fieldtype": "Select",
+      "label": "Table Presentation",
+      "options": "Enterprise\nCompact Operations\nFrappe Standard",
+      "default": "Enterprise"
+    },
+    {
+      "fieldname": "action_dock_desktop_placement",
+      "fieldtype": "Select",
+      "label": "Desktop Placement",
+      "options": "Auto\nSidebar Footer\nFloating Edge",
+      "default": "Auto"
+    },
+    {
+      "fieldname": "action_dock_mobile_placement",
+      "fieldtype": "Select",
+      "label": "Mobile Placement",
+      "options": "Floating Orb\nBottom Bar",
+      "default": "Floating Orb"
+    },
+    {
+      "fieldname": "preset_operational_section",
+      "fieldtype": "Section Break",
+      "label": "Operational Components"
+    },
+    {
+      "fieldname": "form_control_style",
+      "fieldtype": "Select",
+      "label": "Form Control Style",
+      "options": "Enterprise\nCompact Operations\nFrappe Standard",
+      "default": "Enterprise"
+    },
+    {
+      "fieldname": "toolbar_style",
+      "fieldtype": "Select",
+      "label": "List and Report Toolbar Style",
+      "options": "Unified\nCompact\nFrappe Standard",
+      "default": "Unified"
+    },
+    {
+      "fieldname": "grid_style",
+      "fieldtype": "Select",
+      "label": "Grid and DataTable Style",
+      "options": "Enterprise\nCompact Operations\nFrappe Standard",
+      "default": "Enterprise"
+    },
+    {
+      "fieldname": "alternate_view_style",
+      "fieldtype": "Select",
+      "label": "Tree, Calendar and Kanban Style",
+      "options": "Enterprise\nSubtle\nFrappe Standard",
+      "default": "Enterprise"
+    },
+    {
+      "fieldname": "dialog_style",
+      "fieldtype": "Select",
+      "label": "Dialogs and Quick Entry Style",
+      "options": "Enterprise\nCompact\nFrappe Standard",
+      "default": "Enterprise"
+    },
+    {
+      "fieldname": "preset_operational_section_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "workflow_timeline_style",
+      "fieldtype": "Select",
+      "label": "Workflow and Timeline Style",
+      "options": "Enterprise\nSubtle\nFrappe Standard",
+      "default": "Enterprise"
+    },
+    {
+      "fieldname": "state_presentation",
+      "fieldtype": "Select",
+      "label": "Empty, Loading and Error States",
+      "options": "Illustrated Minimal\nCompact\nFrappe Standard",
+      "default": "Illustrated Minimal"
+    },
+    {
+      "fieldname": "sticky_primary_columns",
+      "fieldtype": "Check",
+      "label": "Sticky Primary Columns",
+      "default": "1"
+    },
+    {
+      "fieldname": "numeric_alignment",
+      "fieldtype": "Check",
+      "label": "Align Numeric and Financial Values",
+      "default": "1"
+    },
+    {
+      "fieldname": "preset_workspace_section",
+      "fieldtype": "Section Break",
+      "label": "Workspace and Dashboard"
+    },
+    {
+      "fieldname": "workspace_layout_style",
+      "fieldtype": "Select",
+      "label": "Workspace Layout Style",
+      "options": "Enterprise Canvas\nCompact Operations\nFrappe Standard",
+      "default": "Enterprise Canvas"
+    },
+    {
+      "fieldname": "kpi_card_style",
+      "fieldtype": "Select",
+      "label": "KPI Card Style",
+      "options": "Executive\nOperational\nFrappe Standard",
+      "default": "Executive"
+    },
+    {
+      "fieldname": "chart_presentation",
+      "fieldtype": "Select",
+      "label": "Chart Presentation",
+      "options": "Balanced\nHigh Contrast\nFrappe Standard",
+      "default": "Balanced"
+    },
+    {
+      "fieldname": "priority_panel_style",
+      "fieldtype": "Select",
+      "label": "Priority Panel Style",
+      "options": "Action Oriented\nCompact\nFrappe Standard",
+      "default": "Action Oriented"
+    },
+    {
+      "fieldname": "activity_panel_style",
+      "fieldtype": "Select",
+      "label": "Activity Panel Style",
+      "options": "Timeline Cards\nCompact Feed\nFrappe Standard",
+      "default": "Timeline Cards"
+    },
+    {
+      "fieldname": "preset_workspace_section_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "operational_table_style",
+      "fieldtype": "Select",
+      "label": "Operational Table Style",
+      "options": "Enterprise\nCompact Operations\nFrappe Standard",
+      "default": "Enterprise"
+    },
+    {
+      "fieldname": "workspace_quick_actions",
+      "fieldtype": "Check",
+      "label": "Emphasize Workspace Quick Actions",
+      "default": "1"
+    },
+    {
+      "fieldname": "dashboard_responsive_reflow",
+      "fieldtype": "Check",
+      "label": "Responsive Dashboard Reflow",
+      "default": "1"
+    },
+    {
+      "fieldname": "dashboard_reduce_decorative_motion",
+      "fieldtype": "Check",
+      "label": "Reduce Decorative Dashboard Motion",
+      "default": "1"
+    },
+    {
+      "fieldname": "preset_action_dock_section",
+      "fieldtype": "Section Break",
+      "label": "Action Dock and Create Menu"
+    },
+    {
+      "fieldname": "action_dock_collapsed_behavior",
+      "fieldtype": "Select",
+      "label": "Collapsed Sidebar Behavior",
+      "options": "Icons Only\nExpand on Hover",
+      "default": "Expand on Hover"
+    },
+    {
+      "fieldname": "action_dock_tooltips",
+      "fieldtype": "Check",
+      "label": "Show Action Tooltips",
+      "default": "1"
+    },
+    {
+      "fieldname": "show_create_action",
+      "fieldtype": "Check",
+      "label": "Show Create Action",
+      "default": "1"
+    },
+    {
+      "fieldname": "show_language_action",
+      "fieldtype": "Check",
+      "label": "Show Language Action",
+      "default": "1"
+    },
+    {
+      "fieldname": "preset_action_dock_section_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "create_menu_search",
+      "fieldtype": "Check",
+      "label": "Enable Create Menu Search",
+      "default": "1"
+    },
+    {
+      "fieldname": "group_create_items",
+      "fieldtype": "Check",
+      "label": "Group Create Menu Items",
+      "default": "1"
+    },
+    {
+      "fieldname": "preset_login_section",
+      "fieldtype": "Section Break",
+      "label": "Login Experience"
+    },
+    {
+      "fieldname": "login_layout",
+      "fieldtype": "Select",
+      "label": "Login Layout",
+      "options": "Frappe Standard\nQOrg Split\nQOrg Centered\nQOrg Visual",
+      "default": "QOrg Split"
+    },
+    {
+      "fieldname": "login_experience_style",
+      "fieldtype": "Select",
+      "label": "Login Experience Style",
+      "options": "QOrg Executive\nQOrg Midnight\nQOrg Visual\nFrappe Standard",
+      "default": "QOrg Executive"
+    },
+    {
+      "fieldname": "login_form_density",
+      "fieldtype": "Select",
+      "label": "Login Form Density",
+      "options": "Comfortable\nCompact\nFrappe Standard",
+      "default": "Comfortable"
+    },
+    {
+      "fieldname": "login_card_alignment",
+      "fieldtype": "Select",
+      "label": "Login Card Alignment",
+      "options": "Auto\nStart\nCenter\nEnd",
+      "default": "Auto"
+    },
+    {
+      "fieldname": "login_visual_source",
+      "fieldtype": "Select",
+      "label": "Visual Source",
+      "options": "None\nManaged Image\nGradient",
+      "default": "Gradient"
+    },
+    {
+      "fieldname": "login_visual_gradient",
+      "fieldtype": "Select",
+      "label": "Managed Gradient",
+      "options": "QOrg Blue\nQOrg Violet\nQOrg Sunrise",
+      "default": "QOrg Blue"
+    },
+    {
+      "fieldname": "preset_login_section_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "login_show_trust_message",
+      "fieldtype": "Check",
+      "label": "Show Trust Message",
+      "default": "1"
+    },
+    {
+      "fieldname": "login_trust_message",
+      "fieldtype": "Small Text",
+      "label": "Trust Message",
+      "default": "Secure access to your organization workspace."
+    },
+    {
+      "fieldname": "login_show_security_footer",
+      "fieldtype": "Check",
+      "label": "Show Security Footer",
+      "default": "1"
+    },
+    {
+      "fieldname": "login_focus_first_field",
+      "fieldtype": "Check",
+      "label": "Focus First Login Field",
+      "default": "1"
+    },
+    {
+      "fieldname": "login_welcome_title",
+      "fieldtype": "Data",
+      "label": "Welcome Title",
+      "translatable": 1,
+      "default": "Welcome to QOrg"
+    },
+    {
+      "fieldname": "login_welcome_subtitle",
+      "fieldtype": "Small Text",
+      "label": "Welcome Subtitle",
+      "translatable": 1,
+      "default": "Integrated, secure and efficient enterprise management."
+    },
+    {
+      "fieldname": "login_mobile_visual_policy",
+      "fieldtype": "Select",
+      "label": "Mobile Visual Policy",
+      "options": "Hide\nCompact Header\nShow Below Form",
+      "default": "Hide"
+    },
+    {
+      "fieldname": "preset_public_section",
+      "fieldtype": "Section Break",
+      "label": "Website, Web Forms and Portal"
+    },
+    {
+      "fieldname": "web_form_presentation",
+      "fieldtype": "Select",
+      "label": "Web Form Presentation",
+      "options": "Enterprise\nCompact\nFrappe Standard",
+      "default": "Enterprise"
+    },
+    {
+      "fieldname": "portal_presentation",
+      "fieldtype": "Select",
+      "label": "Portal Presentation",
+      "options": "Enterprise\nCompact\nFrappe Standard",
+      "default": "Enterprise"
+    },
+    {
+      "fieldname": "public_card_style",
+      "fieldtype": "Select",
+      "label": "Public Card Style",
+      "options": "Elevated\nSubtle\nFrappe Standard",
+      "default": "Elevated"
+    },
+    {
+      "fieldname": "public_validation_summary",
+      "fieldtype": "Check",
+      "label": "Show Validation Summary",
+      "default": "1"
+    },
+    {
+      "fieldname": "public_success_presentation",
+      "fieldtype": "Select",
+      "label": "Submission Success Presentation",
+      "options": "Celebratory Minimal\nCompact\nFrappe Standard",
+      "default": "Celebratory Minimal"
+    },
+    {
+      "fieldname": "preset_public_section_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "public_mobile_sticky_actions",
+      "fieldtype": "Check",
+      "label": "Mobile Sticky Actions",
+      "default": "1"
+    },
+    {
+      "fieldname": "web_form_max_content_width",
+      "fieldtype": "Int",
+      "label": "Web Form Maximum Content Width",
+      "default": "1180",
+      "description": "Allowed range: 760 to 1600 pixels."
+    },
+    {
+      "fieldname": "web_form_sticky_actions",
+      "fieldtype": "Check",
+      "label": "Sticky Web Form Actions",
+      "default": "1"
+    },
+    {
+      "fieldname": "web_form_hide_technical_child_row_name",
+      "fieldtype": "Check",
+      "label": "Hide Technical Child Row Name",
+      "default": "1"
     }
   ],
   "permissions": [

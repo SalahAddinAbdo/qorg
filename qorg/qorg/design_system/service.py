@@ -18,7 +18,7 @@ CACHE_KEY = "qorg:design-system:effective:v2"
 ENUMS = {
     "theme_mode_policy": {"Follow Frappe/System", "Light", "Dark"},
     "density": {"Frappe Default", "Comfortable", "Compact"},
-    "typography_policy": {"Frappe Default", "System UI", "Q Org Bundled"},
+    "typography_policy": {"Frappe Default", "System UI", "QOrg Bundled"},
     "heading_weight": {"Default", "Medium", "Semibold"},
     "line_height_scale": {"Default", "Comfortable", "Spacious"},
     "control_radius": {"Frappe Default", "Compact", "Subtle", "Rounded"},
@@ -32,9 +32,38 @@ ENUMS = {
     "status_indicator_strength": {"Frappe Default", "Enhanced"},
     "contrast_policy": {"Frappe Default", "WCAG AA Guard"},
     "touch_target_policy": {"Frappe Default", "Enhanced"},
-    "login_layout": {"Frappe Standard", "Q Org Split", "Q Org Centered", "Q Org Visual"},
+    "login_layout": {"Frappe Standard", "QOrg Split", "QOrg Centered", "QOrg Visual"},
     "login_visual_source": {"None", "Managed Image", "Gradient"},
     "login_mobile_visual_policy": {"Hide", "Compact Header", "Show Below Form"},
+    "experience_style": {"QOrg Executive", "QOrg Midnight", "QOrg Operations", "Frappe Standard"},
+    "surface_hierarchy": {"Layered", "Subtle", "Flat"},
+    "navigation_emphasis": {"Balanced", "Brand Forward", "Minimal"},
+    "page_header_style": {"Executive", "Compact", "Frappe Standard"},
+    "section_presentation": {"Structured", "Soft Cards", "Frappe Standard"},
+    "table_presentation": {"Enterprise", "Compact Operations", "Frappe Standard"},
+    "action_dock_desktop_placement": {"Auto", "Sidebar Footer", "Floating Edge"},
+    "action_dock_mobile_placement": {"Floating Orb", "Bottom Bar"},
+    "action_dock_collapsed_behavior": {"Icons Only", "Expand on Hover"},
+    "form_control_style": {"Enterprise", "Compact Operations", "Frappe Standard"},
+    "toolbar_style": {"Unified", "Compact", "Frappe Standard"},
+    "grid_style": {"Enterprise", "Compact Operations", "Frappe Standard"},
+    "alternate_view_style": {"Enterprise", "Subtle", "Frappe Standard"},
+    "dialog_style": {"Enterprise", "Compact", "Frappe Standard"},
+    "workflow_timeline_style": {"Enterprise", "Subtle", "Frappe Standard"},
+    "state_presentation": {"Illustrated Minimal", "Compact", "Frappe Standard"},
+    "workspace_layout_style": {"Enterprise Canvas", "Compact Operations", "Frappe Standard"},
+    "kpi_card_style": {"Executive", "Operational", "Frappe Standard"},
+    "chart_presentation": {"Balanced", "High Contrast", "Frappe Standard"},
+    "priority_panel_style": {"Action Oriented", "Compact", "Frappe Standard"},
+    "activity_panel_style": {"Timeline Cards", "Compact Feed", "Frappe Standard"},
+    "operational_table_style": {"Enterprise", "Compact Operations", "Frappe Standard"},
+    "login_experience_style": {"QOrg Executive", "QOrg Midnight", "QOrg Visual", "Frappe Standard"},
+    "login_form_density": {"Comfortable", "Compact", "Frappe Standard"},
+    "login_card_alignment": {"Auto", "Start", "Center", "End"},
+    "web_form_presentation": {"Enterprise", "Compact", "Frappe Standard"},
+    "portal_presentation": {"Enterprise", "Compact", "Frappe Standard"},
+    "public_card_style": {"Elevated", "Subtle", "Frappe Standard"},
+    "public_success_presentation": {"Celebratory Minimal", "Compact", "Frappe Standard"},
 }
 COLOR_FIELDS = (
     "primary_accent", "secondary_accent", "neutral_accent", "success_color",
@@ -44,19 +73,55 @@ COLOR_FIELDS = (
     "heading_color", "border_color", "selected_surface", "hover_surface",
 )
 VISUAL_FIELDS = tuple(ENUMS) + COLOR_FIELDS + (
-    "body_font_size", "label_font_size", "heading_scale", "navbar_height",
-    "sidebar_width", "page_header_height", "icon_size", "enhanced_section_headings",
-    "compact_child_tables", "sticky_list_header", "reduced_transparency",
-    "respect_reduced_motion", "enhanced_focus_visibility", "rtl_spacing_corrections",
+    'body_font_size',
+    'label_font_size',
+    'heading_scale',
+    'navbar_height',
+    'sidebar_width',
+    'page_header_height',
+    'icon_size',
+    'enhanced_section_headings',
+    'compact_child_tables',
+    'sticky_list_header',
+    'reduced_transparency',
+    'respect_reduced_motion',
+    'enhanced_focus_visibility',
+    'rtl_spacing_corrections',
+    'sticky_primary_columns',
+    'numeric_alignment',
+    'workspace_quick_actions',
+    'dashboard_responsive_reflow',
+    'dashboard_reduce_decorative_motion',
+    'login_show_trust_message',
+    'login_trust_message',
+    'login_show_security_footer',
+    'login_focus_first_field',
+    'public_validation_summary',
+    'public_mobile_sticky_actions',
+    'login_visual_gradient',
+    'login_welcome_title',
+    'login_welcome_subtitle',
+    'web_form_max_content_width',
+    'web_form_sticky_actions',
+    'web_form_hide_technical_child_row_name',
+    'action_dock_tooltips',
+    'show_create_action',
+    'show_language_action',
+    'create_menu_search',
+    'group_create_items',
 )
 CONFIG_FIELDS = VISUAL_FIELDS + (
-    "enabled", "apply_to_desk", "apply_to_login", "apply_to_qorg_web_components",
-    "respect_active_website_theme", "active_preset", "login_visual_image",
-    "login_visual_gradient", "login_welcome_title", "login_welcome_subtitle",
-    "show_login_language_switcher", "login_mobile_visual_policy",
-    "web_form_max_content_width", "web_form_sticky_actions",
-    "web_form_hide_technical_child_row_name", "enable_quick_create_menu",
-    "quick_create_button_label",
+    'enabled',
+    'apply_to_desk',
+    'apply_to_login',
+    'apply_to_qorg_web_components',
+    'respect_active_website_theme',
+    'active_preset',
+    'login_visual_image',
+    'show_login_language_switcher',
+    'enable_quick_create_menu',
+    'quick_create_button_label',
+    'enable_action_dock',
 )
 DEFAULTS = {
     "primary_accent": "#137690",
@@ -90,14 +155,39 @@ DEFAULTS = {
     "dialog_width_policy": "Adaptive", "status_indicator_strength": "Enhanced",
     "respect_reduced_motion": 1, "enhanced_focus_visibility": 1,
     "contrast_policy": "WCAG AA Guard", "rtl_spacing_corrections": 1,
-    "touch_target_policy": "Enhanced", "login_layout": "Q Org Split",
-    "login_visual_source": "Gradient", "login_visual_gradient": "Q Org Blue",
-    "login_welcome_title": "Welcome to Q Org", "login_welcome_subtitle": "Integrated, secure and efficient enterprise management.", "login_mobile_visual_policy": "Hide",
+    "touch_target_policy": "Enhanced", "login_layout": "QOrg Split",
+    "login_visual_source": "Gradient", "login_visual_gradient": "QOrg Blue",
+    "login_welcome_title": "Welcome to QOrg", "login_welcome_subtitle": "Integrated, secure and efficient enterprise management.", "login_mobile_visual_policy": "Hide",
     "show_login_language_switcher": 1, "web_form_max_content_width": 1180,
     "web_form_hide_technical_child_row_name": 1, "web_form_sticky_actions": 1, "body_font_size": 13,
     "label_font_size": 13, "heading_scale": 1.2, "navbar_height": 50, "page_header_height": 50,
     "sidebar_width": 240, "icon_size": 16, "enable_quick_create_menu": 1,
     "quick_create_button_label": "Create",
+    "experience_style": "QOrg Executive", "surface_hierarchy": "Layered",
+    "navigation_emphasis": "Balanced", "page_header_style": "Executive",
+    "section_presentation": "Structured", "table_presentation": "Enterprise",
+    "enable_action_dock": 1, "action_dock_desktop_placement": "Auto",
+    "action_dock_mobile_placement": "Floating Orb",
+    "action_dock_collapsed_behavior": "Expand on Hover",
+    "show_create_action": 1, "show_language_action": 1,
+    "create_menu_search": 1, "group_create_items": 1,
+    "action_dock_tooltips": 1,
+    "form_control_style": "Enterprise", "toolbar_style": "Unified",
+    "grid_style": "Enterprise", "alternate_view_style": "Enterprise",
+    "dialog_style": "Enterprise", "workflow_timeline_style": "Enterprise",
+    "state_presentation": "Illustrated Minimal", "sticky_primary_columns": 1,
+    "numeric_alignment": 1,
+    "workspace_layout_style": "Enterprise Canvas", "kpi_card_style": "Executive",
+    "chart_presentation": "Balanced", "priority_panel_style": "Action Oriented",
+    "activity_panel_style": "Timeline Cards", "operational_table_style": "Enterprise",
+    "workspace_quick_actions": 1, "dashboard_responsive_reflow": 1,
+    "dashboard_reduce_decorative_motion": 1,
+    "login_experience_style": "QOrg Executive", "login_form_density": "Comfortable",
+    "login_show_trust_message": 1, "login_trust_message": "Secure access to your organization workspace.",
+    "login_card_alignment": "Auto", "login_show_security_footer": 1, "login_focus_first_field": 1,
+    "web_form_presentation": "Enterprise", "portal_presentation": "Enterprise",
+    "public_card_style": "Elevated", "public_validation_summary": 1,
+    "public_success_presentation": "Celebratory Minimal", "public_mobile_sticky_actions": 1,
 }
 
 
@@ -194,6 +284,10 @@ def validate_values(doc) -> None:
                 frappe.throw(_("Create menu labels cannot exceed 140 characters."))
             if row.icon and not re.fullmatch(r"[a-z0-9-]{1,64}", row.icon):
                 frappe.throw(_("Create menu icon names may contain lowercase letters, numbers and hyphens only."))
+            if row.menu_group and len(row.menu_group) > 80:
+                frappe.throw(_("Create menu group names cannot exceed 80 characters."))
+            if row.description and len(row.description) > 240:
+                frappe.throw(_("Create menu descriptions cannot exceed 240 characters."))
         if doc.get("quick_create_button_label") and len(doc.quick_create_button_label) > 40:
             frappe.throw(_("The Create button label cannot exceed 40 characters."))
         doc.configuration_status = "Valid"
@@ -201,7 +295,7 @@ def validate_values(doc) -> None:
         if doc.meta.has_field("active_website_theme"):
             doc.active_website_theme = frappe.db.get_single_value("Website Settings", "website_theme") or "Frappe Standard"
         if doc.meta.has_field("website_integration_status"):
-            doc.website_integration_status = "Website Theme respected" if doc.get("respect_active_website_theme") else "Q Org managed tokens"
+            doc.website_integration_status = "Website Theme respected" if doc.get("respect_active_website_theme") else "QOrg managed tokens"
 
 
 def values_from(doc, *, with_defaults: bool = True) -> dict[str, Any]:
@@ -271,7 +365,7 @@ def css_variables(values: dict[str, Any]) -> dict[str, str]:
     variables["--qorg-web-form-max-width"] = f"{cint(values.get('web_form_max_content_width') or 1180)}px"
     variables["--qorg-heading-weight"] = {"Default": "var(--weight-semibold,600)", "Medium": "500", "Semibold": "600"}.get(values.get("heading_weight"), "600")
     variables["--qorg-line-height"] = {"Default": "var(--line-height-base,1.5)", "Comfortable": "1.6", "Spacious": "1.75"}.get(values.get("line_height_scale"), "1.5")
-    variables["--qorg-font-family"] = {"Frappe Default": "inherit", "System UI": "system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif", "Q Org Bundled": "var(--font-stack,system-ui,sans-serif)"}.get(values.get("typography_policy"), "inherit")
+    variables["--qorg-font-family"] = {"Frappe Default": "inherit", "System UI": "system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif", "QOrg Bundled": "var(--font-stack,system-ui,sans-serif)"}.get(values.get("typography_policy"), "inherit")
     variables["--qorg-border-width"] = {"Frappe Default": "1px", "Subtle": "1px", "Defined": "2px"}.get(values.get("border_strength"), "1px")
     variables["--qorg-elevation"] = {"Frappe Default": "var(--shadow-sm,0 1px 2px rgba(0,0,0,.08))", "Flat": "none", "Subtle": "0 4px 16px rgba(15,23,42,.08)", "Elevated": "0 12px 32px rgba(15,23,42,.14)"}.get(values.get("elevation_scale"), "none")
     variables["--qorg-workspace-card-padding"] = {"Frappe Default": "var(--padding-md,12px)", "Comfortable": "16px", "Compact": "10px"}.get(values.get("workspace_card_density"), "12px")
@@ -280,6 +374,17 @@ def css_variables(values: dict[str, Any]) -> dict[str, str]:
     variables["--qorg-touch-target"] = "44px" if values.get("touch_target_policy") == "Enhanced" else "var(--control-height,34px)"
     if values.get("primary_accent"):
         variables["--qorg-accent-foreground"] = _best_foreground(values["primary_accent"])
+    # Enterprise Experience semantic levels. Values inherit configured colors
+    # while retaining safe fallbacks for Frappe light and dark modes.
+    variables["--qorg-app-bg"] = values.get("page_surface") or "#f3f6f8"
+    variables["--qorg-page-bg"] = values.get("page_surface") or "#f8fafb"
+    variables["--qorg-surface"] = values.get("card_surface") or "#ffffff"
+    variables["--qorg-surface-raised"] = values.get("dialog_surface") or "#ffffff"
+    variables["--qorg-surface-subtle"] = values.get("sidebar_surface") or "#eef3f5"
+    variables["--qorg-border-subtle"] = values.get("border_color") or "#e1e8eb"
+    variables["--qorg-text-strong"] = values.get("heading_color") or "#0f2735"
+    variables["--qorg-brand-soft"] = values.get("selected_surface") or "#e0f1f5"
+    variables["--qorg-hover-surface"] = values.get("hover_surface") or "#edf7f9"
     return variables
 
 

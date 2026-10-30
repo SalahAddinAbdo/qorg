@@ -1,3 +1,96 @@
-(()=>{"use strict";function applyVars(c){Object.entries(c.css_variables||{}).forEach(([n,v])=>{if(n.startsWith("--qorg-")&&typeof v==="string")document.documentElement.style.setProperty(n,v);});}function loginVisual(c){const card=document.querySelector(".for-login .page-card");if(!card||card.querySelector(".qorg-login-visual"))return;document.documentElement.classList.add("qorg-login-enhanced", `qorg-login-${String(c.login_layout || "Q Org Split").toLowerCase().replace(/[^a-z]+/g, "-")}`);
-const mobilePolicy = String(c.login_mobile_visual_policy || "Hide").toLowerCase().replace(/[^a-z]+/g, "-");
-document.documentElement.dataset.qorgLoginMobile = mobilePolicy;const panel=document.createElement("aside");panel.className="qorg-login-visual";panel.setAttribute("aria-hidden","true");if(c.login_visual_source==="Managed Image"&&c.login_visual_image){const safe=String(c.login_visual_image).replace(/["'()\\]/g,encodeURIComponent);panel.style.backgroundImage=`linear-gradient(rgba(15,23,42,.18),rgba(15,23,42,.42)),url("${safe}")`;}else panel.dataset.gradient=c.login_visual_gradient||"Q Org Blue";const copy=document.createElement("div");copy.className="qorg-login-visual-copy";const title=document.createElement("h2");title.textContent=c.login_welcome_title||"Q Org";const sub=document.createElement("p");sub.textContent=c.login_welcome_subtitle||"Integrated enterprise management";copy.append(title,sub);panel.append(copy);card.append(panel);}async function guestLanguagePicker(c){if(!c.show_login_language_switcher||document.querySelector("[data-qorg-guest-language],.language-selector,[data-language-selector]"))return;const r=await frappe.call("qorg.qorg.design_system.api.get_available_languages");const rows=r.message||[];if(!rows.length)return;const host=document.querySelector(".for-login .page-card,.for-login");if(!host)return;const wrap=document.createElement("label");wrap.className="qorg-guest-language";wrap.dataset.qorgGuestLanguage="1";const caption=document.createElement("span");caption.textContent=__("Language");const select=document.createElement("select");select.className="form-control";rows.forEach(row=>{const option=document.createElement("option");option.value=row.name;option.textContent=row.language_name||row.name;if(row.name===(frappe.boot?.lang||frappe.lang))option.selected=true;select.append(option);});select.addEventListener("change",async()=>{document.cookie=`preferred_language=${encodeURIComponent(select.value)}; path=/; max-age=31536000; SameSite=Lax`;const url=new URL(window.location.href);url.searchParams.set("_lang",select.value);window.location.assign(url.toString());});wrap.append(caption,select);host.prepend(wrap);}async function init(){if(!window.frappe)return;const login=location.pathname.replace(/\/$/,"")==="/login";if(!login&&!document.querySelector(".web-form,.qorg-portal"))return;try{const r=await frappe.call("qorg.qorg.design_system.api.get_effective_configuration");const c=r.message||{};applyVars(c);if(login){if(c.enabled&&c.apply_to_login)loginVisual(c);await guestLanguagePicker(c);}if(document.querySelector(".web-form")&&c.enabled&&c.apply_to_qorg_web_components){const route=location.pathname.replace(/^\/|\/$/g,"");const o=(await frappe.call("qorg.qorg.design_system.api.get_web_form_overrides",{route})).message||{};if(o.qorg_web_form_design_mode!=="Standard Frappe Design"){document.documentElement.classList.add("qorg-web-form-enhanced");if(o.qorg_web_form_header_style_override==="Hero")document.documentElement.classList.add("qorg-web-form-hero");if(o.qorg_web_form_sticky_actions_mode==="Enable"||(!o.qorg_web_form_sticky_actions_mode&&c.web_form_sticky_actions))document.documentElement.classList.add("qorg-web-form-sticky-actions");if(o.qorg_web_form_child_name_mode==="Hide"||(!o.qorg_web_form_child_name_mode&&c.web_form_hide_technical_child_row_name))document.documentElement.classList.add("qorg-web-form-hide-child-name");const width=Number(o.qorg_web_form_max_content_width_override||c.web_form_max_content_width||1180);if(width>=760&&width<=1600)document.documentElement.style.setProperty("--qorg-web-form-max-width",`${width}px`);if(o.qorg_web_form_privacy_notice_mode==="Show"){const form=document.querySelector(".web-form");if(form&&!form.querySelector(".qorg-privacy-notice")){const notice=document.createElement("div");notice.className="alert alert-info qorg-privacy-notice";notice.textContent=__("Your information is processed according to the website privacy and security settings.");form.prepend(notice);}}}}}catch(e){console.warn("Q Org website design fallback active.",e);}}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",init,{once:true}):init();})();
+(() => {
+  "use strict";
+  const root = document.documentElement;
+  const key = (value, fallback = "standard") => String(value || fallback).trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  const onReady = (fn) => document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", fn, { once: true }) : fn();
+
+  function applyVariables(config) {
+    Object.entries(config.css_variables || {}).forEach(([name, value]) => {
+      if (name.startsWith("--qorg-") && typeof value === "string") root.style.setProperty(name, value);
+    });
+  }
+
+  function applyPublicAttributes(config) {
+    root.dataset.qorgWebForm = key(config.web_form_presentation, "enterprise");
+    root.dataset.qorgPortal = key(config.portal_presentation, "enterprise");
+    root.dataset.qorgPublicCards = key(config.public_card_style, "elevated");
+    root.dataset.qorgPublicValidation = config.public_validation_summary ? "1" : "0";
+    root.dataset.qorgPublicSuccess = key(config.public_success_presentation, "celebratory-minimal");
+    root.dataset.qorgPublicMobileActions = config.public_mobile_sticky_actions ? "1" : "0";
+    root.dataset.qorgWebFormStickyActions = config.web_form_sticky_actions ? "1" : "0";
+    root.dataset.qorgHideTechnicalChildRowName = config.web_form_hide_technical_child_row_name ? "1" : "0";
+  }
+
+  function buildLogin(config) {
+    const login = document.querySelector(".for-login");
+    const card = login?.querySelector(".page-card");
+    if (!login || !card || config.login_experience_style === "Frappe Standard") return;
+
+    root.classList.add("qorg-login-enhanced");
+    root.dataset.qorgLoginExperience = key(config.login_experience_style, "qorg-executive");
+    root.dataset.qorgLoginDensity = key(config.login_form_density, "comfortable");
+    root.dataset.qorgLoginAlignment = key(config.login_card_alignment, "auto");
+    root.dataset.qorgLoginMobile = key(config.login_mobile_visual_policy, "hide");
+    card.dataset.qorgLoginCard = "1";
+
+    if (!card.querySelector(".qorg-login-visual")) {
+      const visual = document.createElement("aside");
+      visual.className = "qorg-login-visual";
+      visual.setAttribute("aria-hidden", "true");
+      if (config.login_visual_source === "Managed Image" && config.login_visual_image) {
+        visual.style.backgroundImage = `linear-gradient(rgba(8,35,47,.24),rgba(8,35,47,.72)),url(${JSON.stringify(String(config.login_visual_image))})`;
+      } else {
+        visual.dataset.gradient = key(config.login_visual_gradient, "qorg-blue");
+      }
+      const copy = document.createElement("div"); copy.className = "qorg-login-visual-copy";
+      const brand = document.createElement("span"); brand.className = "qorg-login-brand"; brand.textContent = "QOrg";
+      const title = document.createElement("h2"); title.textContent = config.login_welcome_title || "Welcome to QOrg";
+      const subtitle = document.createElement("p"); subtitle.textContent = config.login_welcome_subtitle || "Integrated, secure and efficient enterprise management.";
+      copy.append(brand, title, subtitle); visual.append(copy); card.append(visual);
+    }
+
+    const body = card.querySelector(".page-card-body") || card;
+    if (config.login_show_trust_message && config.login_trust_message && !card.querySelector(".qorg-login-trust")) {
+      const trust = document.createElement("div"); trust.className = "qorg-login-trust"; trust.textContent = config.login_trust_message; body.append(trust);
+    }
+    if (config.login_show_security_footer && !card.querySelector(".qorg-login-security")) {
+      const security = document.createElement("div"); security.className = "qorg-login-security"; security.textContent = __("Secure session protected by your organization settings."); card.append(security);
+    }
+    if (config.login_focus_first_field) setTimeout(() => card.querySelector('input:not([type="hidden"]):not([disabled])')?.focus(), 80);
+  }
+
+  async function addLanguagePicker(config) {
+    if (!config.show_login_language_switcher || document.querySelector("[data-qorg-guest-language],.language-selector,[data-language-selector]")) return;
+    const host = document.querySelector(".for-login .page-card"); if (!host) return;
+    const response = await frappe.call("qorg.qorg.design_system.api.get_available_languages");
+    const rows = response.message || []; if (!rows.length) return;
+    const wrap = document.createElement("label"); wrap.className = "qorg-guest-language"; wrap.dataset.qorgGuestLanguage = "1";
+    const label = document.createElement("span"); label.textContent = __("Language");
+    const select = document.createElement("select"); select.setAttribute("aria-label", __("Language"));
+    rows.forEach((row) => { const option = document.createElement("option"); option.value = row.name; option.textContent = row.language_name || row.name; option.selected = row.name === (frappe.boot?.lang || frappe.lang); select.append(option); });
+    select.addEventListener("change", () => { const url = new URL(location.href); url.searchParams.set("lang", select.value); location.href = url.toString(); });
+    wrap.append(label, select); host.append(wrap);
+  }
+
+  function enhanceWebForm(config) {
+    const form = document.querySelector(".web-form, .web-form-container"); if (!form) return;
+    form.dataset.qorgEnhanced = "1";
+    if (config.public_validation_summary && !form.querySelector(".qorg-validation-summary")) {
+      const summary = document.createElement("div"); summary.className = "qorg-validation-summary"; summary.hidden = true; summary.setAttribute("role", "alert"); summary.setAttribute("aria-live", "polite"); form.prepend(summary);
+      form.addEventListener("invalid", () => { const invalid = [...form.querySelectorAll(":invalid")]; if (!invalid.length) return; summary.hidden = false; summary.textContent = __("Review the highlighted fields before continuing."); }, true);
+      form.addEventListener("input", () => { if (!form.querySelector(":invalid")) summary.hidden = true; });
+    }
+  }
+
+  async function initialize() {
+    try {
+      const response = await frappe.call("qorg.qorg.design_system.api.get_effective_configuration");
+      const config = response.message || {};
+      if (!config.enabled) return;
+      applyVariables(config); applyPublicAttributes(config);
+      if (config.apply_to_login) { buildLogin(config); await addLanguagePicker(config); }
+      if (config.apply_to_qorg_web_components) enhanceWebForm(config);
+    } catch (error) { console.warn("QOrg public experience restored Frappe Standard.", error); }
+  }
+  onReady(initialize);
+})();

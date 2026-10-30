@@ -1,6 +1,6 @@
 app_name = "qorg"
-app_title = "Q Org"
-app_publisher = "Q Org"
+app_title = "QOrg"
+app_publisher = "QOrg"
 app_description = "Audit-focused extensions for ERPNext"
 app_email = ""
 app_license = "GPL-3.0"
@@ -11,7 +11,7 @@ app_home = "/desk/q-management-hub"
 add_to_apps_screen = [{
     "name": app_name,
     "logo": app_logo_url,
-    "title": "Q Org",
+    "title": "QOrg",
     "route": app_home,
     "sequence_id": 5,
 }]
@@ -23,7 +23,9 @@ extend_bootinfo = "qorg.qorg.enterprise_foundation.boot.extend_bootinfo"
 app_include_js = [
     "/assets/qorg/js/qorg_form_bootstrap.js",
     "/assets/qorg/js/model_policy.js",
+    "qorg_navigation_alignment.bundle.js",
     "qorg_design_system.bundle.js",
+    "qorg_design_admin.bundle.js",
 ]
 
 app_include_css = [
