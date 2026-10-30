@@ -51,7 +51,6 @@ def _rename_managed_presets() -> None:
                 old_name,
                 new_name,
                 force=True,
-                ignore_permissions=True,
             )
             continue
 
