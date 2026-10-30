@@ -283,7 +283,6 @@ after_migrate = [
     "qorg.qorg.people_and_opportunities.provisioning.provision_people_opportunities_core",
     "qorg.qorg.people_and_opportunities.portal_provisioning.provision_opportunity_portal",
     "qorg.qorg.people_and_opportunities.web_form_provisioning.provision_standard_opportunity_web_forms",
-    "qorg.qorg.doctype.participation_application.participation_application.reconcile_all_opportunity_application_stats",
     "qorg.qorg.volunteer_management.provisioning.provision_volunteer_management",
     "qorg.qorg.project_management.print_settings_integration.provision_print_settings",
     "qorg.qorg.install.after_migrate",
