@@ -89,8 +89,7 @@ def _provision_one(definition, result):
     status = "updated" if name else "created"
     _apply_base(doc, definition)
     _rebuild_layout(doc, definition)
-    _enforce_external_profile_fields(doc, definition)
-    _enforce_participation_application_fields(doc, definition)
+    _validate_managed_form_definition(doc, definition)
     if doc.meta.has_field("client_script"):
         doc.client_script = ""
     apply_managed_design(doc, force=True)
@@ -160,10 +159,8 @@ def _set(row, meta, fieldname, value):
 
 
 
-def _enforce_external_profile_fields(doc, definition):
-    if definition.get("doc_type") != "External Person":
-        return
 
+def _validate_managed_form_definition(doc, definition):
     table_field = next(
         (
             field.fieldname
@@ -173,187 +170,74 @@ def _enforce_external_profile_fields(doc, definition):
         None,
     )
     if not table_field:
-        frappe.throw("Web Form Field table was not found for External Profile.")
+        frappe.throw("Web Form Field table was not found.")
 
-    child_meta = frappe.get_meta(doc.meta.get_field(table_field).options)
-    target_meta = frappe.get_meta("External Person")
-    rows = doc.get(table_field) or []
-    rows_by_fieldname = {row.fieldname: row for row in rows if row.fieldname}
-
-    # These fields are mandatory in the DocType and must be submitted by the
-    # applicant. System-owned defaults are populated by the controller.
-    mandatory_inputs = (
-        "full_name",
-        "professional_title",
-        "professional_summary",
-        "privacy_consent",
-    )
-    for fieldname in mandatory_inputs:
-        target = target_meta.get_field(fieldname)
-        if not target:
-            frappe.throw(f"Required External Person field is missing: {fieldname}")
-        row = rows_by_fieldname.get(fieldname)
-        if not row:
-            row = doc.append(table_field, {})
-            rows_by_fieldname[fieldname] = row
-        _set(row, child_meta, "fieldname", fieldname)
-        _set(row, child_meta, "fieldtype", target.fieldtype)
-        _set(row, child_meta, "label", target.label or fieldname)
-        _set(row, child_meta, "options", target.options)
-        _set(row, child_meta, "description", target.description)
-        _set(row, child_meta, "reqd", 1)
-        _set(row, child_meta, "read_only", 0)
-
-    # Keep technical defaults available to Frappe while preventing applicants
-    # from selecting ownership or lifecycle values.
-    technical_fields = ("naming_series", "person_status", "source")
-    for fieldname in technical_fields:
-        target = target_meta.get_field(fieldname)
-        if not target:
+    actual = {}
+    duplicates = []
+    for row in doc.get(table_field) or []:
+        if not row.fieldname or row.fieldtype in LAYOUT_TYPES:
             continue
-        row = rows_by_fieldname.get(fieldname)
-        if not row:
-            continue
-        _set(row, child_meta, "reqd", int(bool(target.reqd)))
-        _set(row, child_meta, "read_only", 1)
+        if row.fieldname in actual:
+            duplicates.append(row.fieldname)
+        actual[row.fieldname] = row
 
+    if duplicates:
+        frappe.throw(
+            "Duplicate Web Form fields were generated: " + ", ".join(sorted(set(duplicates)))
+        )
 
-def _enforce_participation_application_fields(doc, definition):
-    if definition.get("doc_type") != "Participation Application":
-        return
-    table_field = next(
-        (f.fieldname for f in doc.meta.fields if f.fieldtype == "Table" and f.options == "Web Form Field"),
-        None,
-    )
-    if not table_field:
-        return
-    rows = doc.get(table_field) or []
-    if any(row.fieldname == "profile_review_confirmed" for row in rows):
-        return
-    child_meta = frappe.get_meta(doc.meta.get_field(table_field).options)
-    row = doc.append(table_field, {})
-    _set(row, child_meta, "fieldname", "profile_review_confirmed")
-    _set(row, child_meta, "fieldtype", "Check")
-    _set(row, child_meta, "label", "I confirm that I reviewed my profile and that its information and documents are current and accurate")
-    _set(row, child_meta, "description", "Review and update your external profile before submitting this application.")
-    _set(row, child_meta, "reqd", 1)
-    _set(row, child_meta, "read_only", 0)
+    required_by_doctype = {
+        "External Person": {
+            "full_name",
+            "primary_email",
+            "professional_title",
+            "professional_summary",
+            "privacy_consent",
+        },
+        "Participation Application": {
+            "external_person",
+            "opportunity",
+            "participation_type",
+            "application_date",
+            "status",
+            "profile_review_confirmed",
+        },
+    }
+    expected = required_by_doctype.get(definition.get("doc_type"), set())
+    missing = sorted(expected - set(actual))
+    if missing:
+        frappe.throw(
+            f"Managed Web Form {definition['route']} is missing required fields: "
+            + ", ".join(missing)
+        )
 
-
-def _enforce_participation_application_fields(doc, definition):
-    if definition.get("doc_type") != "Participation Application":
-        return
-
-    table_field = next(
-        (
-            field.fieldname
-            for field in doc.meta.fields
-            if field.fieldtype == "Table" and field.options == "Web Form Field"
-        ),
-        None,
-    )
-    if not table_field:
-        return
-
-    child_meta = frappe.get_meta(doc.meta.get_field(table_field).options)
-    target_meta = frappe.get_meta("Participation Application")
-    rows = doc.get(table_field) or []
-    rows_by_fieldname = {row.fieldname: row for row in rows if row.fieldname}
-
-    required_system_fields = (
-        "external_person",
-        "opportunity",
-        "participation_type",
-        "application_date",
-        "status",
-    )
-    for fieldname in required_system_fields:
-        target = target_meta.get_field(fieldname)
-        if not target:
-            continue
-        row = rows_by_fieldname.get(fieldname) or doc.append(table_field, {})
-        _set(row, child_meta, "fieldname", fieldname)
-        _set(row, child_meta, "fieldtype", target.fieldtype)
-        _set(row, child_meta, "label", target.label)
-        _set(row, child_meta, "options", target.options)
-        _set(row, child_meta, "reqd", 1)
-        _set(row, child_meta, "read_only", 1)
-        if target.fieldtype == "Link":
-            _set(row, child_meta, "allow_read_on_all_link_options", 1)
-
-    confirmation = rows_by_fieldname.get("profile_review_confirmed")
-    if not confirmation:
-        section = doc.append(table_field, {})
-        _set(section, child_meta, "fieldname", "qorg_profile_confirmation_section")
-        _set(section, child_meta, "fieldtype", "Section Break")
-        _set(section, child_meta, "label", "Profile Confirmation")
-        confirmation = doc.append(table_field, {})
-
-    _set(confirmation, child_meta, "fieldname", "profile_review_confirmed")
-    _set(confirmation, child_meta, "fieldtype", "Check")
-    _set(
-        confirmation,
-        child_meta,
-        "label",
-        "I confirm that I reviewed my profile and that its information and documents are current and accurate",
-    )
-    _set(
-        confirmation,
-        child_meta,
-        "description",
-        "Review and update your external profile before submitting this application.",
-    )
-    _set(confirmation, child_meta, "reqd", 1)
-    _set(confirmation, child_meta, "read_only", 0)
+    if definition.get("doc_type") == "External Person":
+        row = actual["full_name"]
+        if not int(row.reqd or 0) or int(row.read_only or 0):
+            frappe.throw(
+                "External Profile must contain editable, required field full_name."
+            )
 
 
 def audit_managed_opportunity_web_forms():
-    expected = {
-        "external-profile-form": {
-            "doc_type": "External Person",
-            "required": {
-                "full_name",
-                "professional_title",
-                "professional_summary",
-                "privacy_consent",
-            },
-        },
-        "participation-application": {
-            "doc_type": "Participation Application",
-            "required": {
-                "external_person",
-                "opportunity",
-                "participation_type",
-                "application_date",
-                "status",
-                "profile_review_confirmed",
-            },
-        },
-    }
     results = []
-    for route, rule in expected.items():
+    for definition in WEB_FORMS:
+        route = definition["route"]
         name = frappe.db.get_value("Web Form", {"route": route}, "name")
         if not name:
             results.append({"route": route, "ok": False, "error": "Web Form not found"})
             continue
         doc = frappe.get_doc("Web Form", name)
-        table_field = next(
-            (
-                field.fieldname
-                for field in doc.meta.fields
-                if field.fieldtype == "Table" and field.options == "Web Form Field"
-            ),
-            None,
-        )
-        rows = doc.get(table_field) if table_field else []
-        present = {row.fieldname for row in rows if row.fieldname}
-        missing = sorted(rule["required"] - present)
-        results.append(
-            {
-                "route": route,
-                "doc_type": doc.doc_type,
-                "ok": doc.doc_type == rule["doc_type"] and not missing,
-                "missing": missing,
-            }
-        )
+        try:
+            _validate_managed_form_definition(doc, definition)
+            results.append({"route": route, "doc_type": doc.doc_type, "ok": True})
+        except Exception as exc:
+            results.append(
+                {
+                    "route": route,
+                    "doc_type": doc.doc_type,
+                    "ok": False,
+                    "error": frappe.as_unicode(exc),
+                }
+            )
     return results

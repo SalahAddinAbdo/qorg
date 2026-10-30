@@ -23,7 +23,6 @@ class ExternalPerson(Document):
     def on_update(self):
         self.db_set("last_profile_update", now_datetime(), update_modified=False)
 
-
     def _compose_full_name_when_missing(self):
         if self.get("full_name"):
             self.full_name = self.full_name.strip()
@@ -38,17 +37,13 @@ class ExternalPerson(Document):
 
     def _apply_portal_defaults(self):
         self.person_status = self.person_status or "Active"
-        self.source = self.source or "Portal Registration"
-
         user = frappe.session.user
         if not user or user == "Guest":
             return
         if frappe.db.get_value("User", user, "user_type") != "Website User":
             return
-
         if not self.is_new() and self.user and self.user != user:
             frappe.throw(_("You can only update your own external profile."), frappe.PermissionError)
-
         duplicate = frappe.db.get_value(
             "External Person",
             {"user": user, "name": ["!=", self.name or ""]},
@@ -56,9 +51,9 @@ class ExternalPerson(Document):
         )
         if duplicate:
             frappe.throw(_("An external profile already exists for this account: {0}").format(duplicate))
-
         self.user = user
-        self.source = self.source or "Portal Registration"
+        if self.is_new():
+            self.source = "Portal Registration"
         if self.get("privacy_consent"):
             self.privacy_consent_on = self.privacy_consent_on or now_datetime()
             self.privacy_consent_source = self.privacy_consent_source or "External Profile Portal"
