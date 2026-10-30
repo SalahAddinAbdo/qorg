@@ -48,7 +48,19 @@ def start_participation_application(
         return
     existing = frappe.db.get_value(
         "Participation Application",
-        {"opportunity": opportunity_doc.name, "external_person": ["in", person_names], "status": ["!=", "Cancelled"]},
+        {
+            "opportunity": opportunity_doc.name,
+            "external_person": ["in", person_names],
+            "status": ["!=", "Cancelled"],
+        },
+        "name",
+    ) or frappe.db.get_value(
+        "Participation Application",
+        {
+            "opportunity": opportunity_doc.name,
+            "owner": frappe.session.user,
+            "status": ["!=", "Cancelled"],
+        },
         "name",
     )
     if existing:

@@ -72,6 +72,14 @@ def get_opportunity_context(context):
             "status": ["!=", "Cancelled"],
         },
         "name",
+    ) or frappe.db.get_value(
+        "Participation Application",
+        {
+            "opportunity": opportunity.name,
+            "owner": frappe.session.user,
+            "status": ["!=", "Cancelled"],
+        },
+        "name",
     )
     if existing:
         context.apply_action = "existing"
