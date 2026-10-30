@@ -1,290 +1,318 @@
 {
-  "doctype": "DocType",
-  "name": "Participation Application",
-  "module": "QOrg",
-  "custom": 0,
-  "autoname": "naming_series:",
-  "track_changes": 1,
-  "field_order": [
-    "naming_series",
-    "identity_section",
-    "external_person",
-    "opportunity",
-    "participation_type",
-    "identity_cb",
-    "application_date",
-    "application_source",
-    "portal_owner",
-    "status",
-    "project",
-    "branch",
-    "availability_section",
-    "available_from",
-    "available_to",
-    "hours_per_week",
-    "availability_cb",
-    "motivation",
-    "relevant_experience",
-    "accommodation_needs",
-    "screening_section",
-    "screening_score",
-    "assessment_score",
-    "overall_score",
-    "ranking",
-    "screening_criteria",
-    "decision_section",
-    "final_decision",
-    "selection_priority",
-    "decision_cb",
-    "next_action",
-    "decision_rationale",
-    "decision_on",
-    "decision_by"
-  ],
-  "fields": [
-    {
-      "fieldname": "naming_series",
-      "label": "Series",
-      "fieldtype": "Select",
-      "options": "VAPP-.YYYY.-.#####",
-      "default": "VAPP-.YYYY.-.#####",
-      "reqd": 1
-    },
-    {
-      "fieldname": "identity_section",
-      "label": "Applicant and Opportunity",
-      "fieldtype": "Section Break"
-    },
-    {
-      "fieldname": "external_person",
-      "label": "External Person",
-      "fieldtype": "Link",
-      "options": "External Person",
-      "reqd": 1,
-      "in_list_view": 1,
-      "in_standard_filter": 1
-    },
-    {
-      "fieldname": "opportunity",
-      "label": "External Opportunity",
-      "fieldtype": "Link",
-      "options": "External Opportunity",
-      "reqd": 1,
-      "in_list_view": 1,
-      "in_standard_filter": 1
-    },
-    {
-      "fieldname": "participation_type",
-      "label": "Participation Type",
-      "fieldtype": "Select",
-      "options": "Volunteer\nIntern",
-      "reqd": 1,
-      "in_list_view": 1,
-      "in_standard_filter": 1
-    },
-    {
-      "fieldname": "identity_cb",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "application_date",
-      "label": "Application Date",
-      "fieldtype": "Date",
-      "reqd": 1,
-      "default": "Today",
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "status",
-      "label": "Status",
-      "fieldtype": "Select",
-      "options": "Draft\nUnder Screening\nScreened In\nScreened Out\nUnder Assessment\nSelected\nReserve / Waitlisted\nRejected\nWithdrawn\nCancelled",
-      "default": "Draft",
-      "reqd": 1,
-      "in_list_view": 1,
-      "in_standard_filter": 1
-    },
-    {
-      "fieldname": "project",
-      "label": "Project",
-      "fieldtype": "Link",
-      "options": "Project"
-    },
-    {
-      "fieldname": "branch",
-      "label": "Branch",
-      "fieldtype": "Link",
-      "options": "Branch"
-    },
-    {
-      "fieldname": "availability_section",
-      "label": "Availability and Motivation",
-      "fieldtype": "Section Break"
-    },
-    {
-      "fieldname": "available_from",
-      "label": "Available From",
-      "fieldtype": "Date"
-    },
-    {
-      "fieldname": "available_to",
-      "label": "Available To",
-      "fieldtype": "Date"
-    },
-    {
-      "fieldname": "hours_per_week",
-      "label": "Available Hours per Week",
-      "fieldtype": "Float"
-    },
-    {
-      "fieldname": "availability_cb",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "motivation",
-      "label": "Motivation",
-      "fieldtype": "Small Text"
-    },
-    {
-      "fieldname": "relevant_experience",
-      "label": "Relevant Experience",
-      "fieldtype": "Small Text"
-    },
-    {
-      "fieldname": "accommodation_needs",
-      "label": "Accessibility / Accommodation Needs",
-      "fieldtype": "Small Text"
-    },
-    {
-      "fieldname": "screening_section",
-      "label": "Screening",
-      "fieldtype": "Section Break"
-    },
-    {
-      "fieldname": "screening_score",
-      "label": "Screening Score %",
-      "fieldtype": "Percent",
-      "read_only": 1
-    },
-    {
-      "fieldname": "assessment_score",
-      "label": "Assessment Score %",
-      "fieldtype": "Percent",
-      "read_only": 1
-    },
-    {
-      "fieldname": "overall_score",
-      "label": "Overall Score %",
-      "fieldtype": "Percent",
-      "read_only": 1
-    },
-    {
-      "fieldname": "ranking",
-      "label": "Current Rank",
-      "fieldtype": "Int",
-      "read_only": 1
-    },
-    {
-      "fieldname": "screening_criteria",
-      "label": "Screening Criteria",
-      "fieldtype": "Table",
-      "options": "Participation Application Criterion"
-    },
-    {
-      "fieldname": "decision_section",
-      "label": "Decision",
-      "fieldtype": "Section Break"
-    },
-    {
-      "fieldname": "final_decision",
-      "label": "Final Decision",
-      "fieldtype": "Select",
-      "options": "\nSelected\nReserve / Waitlisted\nRejected\nWithdrawn\nDisqualified\nCancelled",
-      "in_standard_filter": 1
-    },
-    {
-      "fieldname": "selection_priority",
-      "label": "Selection Priority",
-      "fieldtype": "Int"
-    },
-    {
-      "fieldname": "decision_cb",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "next_action",
-      "label": "Next Action",
-      "fieldtype": "Data",
-      "read_only": 1
-    },
-    {
-      "fieldname": "decision_rationale",
-      "label": "Decision Rationale",
-      "fieldtype": "Small Text"
-    },
-    {
-      "fieldname": "decision_on",
-      "label": "Decision On",
-      "fieldtype": "Datetime",
-      "read_only": 1
-    },
-    {
-      "fieldname": "decision_by",
-      "label": "Decision By",
-      "fieldtype": "Link",
-      "options": "User",
-      "read_only": 1
-    },
-    {
-      "fieldname": "application_source",
-      "label": "Application Source",
-      "fieldtype": "Select",
-      "options": "Portal\nManual Entry\nImport\nMigration\nOther",
-      "default": "Manual Entry",
-      "read_only": 1
-    },
-    {
-      "fieldname": "portal_owner",
-      "label": "Portal Owner",
-      "fieldtype": "Link",
-      "options": "User",
-      "read_only": 1,
-      "no_copy": 1
-    }
-  ],
-  "permissions": [
-    {
-      "role": "Volunteer Coordinator",
-      "read": 1,
-      "write": 1,
-      "create": 1,
-      "print": 1,
-      "email": 1
-    },
-    {
-      "role": "Volunteer Manager",
-      "read": 1,
-      "write": 1,
-      "create": 1,
-      "delete": 1,
-      "print": 1,
-      "email": 1
-    },
-    {
-      "role": "System Manager",
-      "read": 1,
-      "write": 1,
-      "create": 1,
-      "delete": 1,
-      "print": 1,
-      "email": 1
-    }
-  ],
-  "sort_field": "modified",
-  "sort_order": "DESC",
-  "title_field": "external_person",
-  "search_fields": "external_person,opportunity,status"
+ "doctype": "DocType",
+ "name": "Participation Application",
+ "module": "QOrg",
+ "custom": 0,
+ "autoname": "naming_series:",
+ "track_changes": 1,
+ "field_order": [
+  "naming_series",
+  "identity_section",
+  "external_person",
+  "opportunity",
+  "participation_type",
+  "identity_cb",
+  "application_date",
+  "status",
+  "project",
+  "branch",
+  "profile_confirmation_section",
+  "profile_review_confirmed",
+  "profile_reviewed_on",
+  "profile_confirmation_cb",
+  "profile_reviewed_by",
+  "profile_modified_on_application",
+  "availability_section",
+  "available_from",
+  "available_to",
+  "hours_per_week",
+  "availability_cb",
+  "motivation",
+  "relevant_experience",
+  "accommodation_needs",
+  "screening_section",
+  "screening_score",
+  "assessment_score",
+  "overall_score",
+  "ranking",
+  "screening_criteria",
+  "decision_section",
+  "final_decision",
+  "selection_priority",
+  "decision_cb",
+  "next_action",
+  "decision_rationale",
+  "decision_on",
+  "decision_by"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "label": "Series",
+   "fieldtype": "Select",
+   "options": "VAPP-.YYYY.-.#####",
+   "default": "VAPP-.YYYY.-.#####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "identity_section",
+   "label": "Applicant and Opportunity",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "external_person",
+   "label": "External Person",
+   "fieldtype": "Link",
+   "options": "External Person",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "opportunity",
+   "label": "External Opportunity",
+   "fieldtype": "Link",
+   "options": "External Opportunity",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "participation_type",
+   "label": "Participation Type",
+   "fieldtype": "Select",
+   "options": "Volunteer\nIntern",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "identity_cb",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "application_date",
+   "label": "Application Date",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "default": "Today",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Draft\nUnder Screening\nScreened In\nScreened Out\nUnder Assessment\nSelected\nReserve / Waitlisted\nRejected\nWithdrawn\nCancelled",
+   "default": "Draft",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "project",
+   "label": "Project",
+   "fieldtype": "Link",
+   "options": "Project"
+  },
+  {
+   "fieldname": "branch",
+   "label": "Branch",
+   "fieldtype": "Link",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "availability_section",
+   "label": "Availability and Motivation",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "available_from",
+   "label": "Available From",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "available_to",
+   "label": "Available To",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "hours_per_week",
+   "label": "Available Hours per Week",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "availability_cb",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "motivation",
+   "label": "Motivation",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "relevant_experience",
+   "label": "Relevant Experience",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "accommodation_needs",
+   "label": "Accessibility / Accommodation Needs",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "screening_section",
+   "label": "Screening",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "screening_score",
+   "label": "Screening Score %",
+   "fieldtype": "Percent",
+   "read_only": 1
+  },
+  {
+   "fieldname": "assessment_score",
+   "label": "Assessment Score %",
+   "fieldtype": "Percent",
+   "read_only": 1
+  },
+  {
+   "fieldname": "overall_score",
+   "label": "Overall Score %",
+   "fieldtype": "Percent",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ranking",
+   "label": "Current Rank",
+   "fieldtype": "Int",
+   "read_only": 1
+  },
+  {
+   "fieldname": "screening_criteria",
+   "label": "Screening Criteria",
+   "fieldtype": "Table",
+   "options": "Participation Application Criterion"
+  },
+  {
+   "fieldname": "decision_section",
+   "label": "Decision",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "final_decision",
+   "label": "Final Decision",
+   "fieldtype": "Select",
+   "options": "\nSelected\nReserve / Waitlisted\nRejected\nWithdrawn\nDisqualified\nCancelled",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "selection_priority",
+   "label": "Selection Priority",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "decision_cb",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "next_action",
+   "label": "Next Action",
+   "fieldtype": "Data",
+   "read_only": 1
+  },
+  {
+   "fieldname": "decision_rationale",
+   "label": "Decision Rationale",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "decision_on",
+   "label": "Decision On",
+   "fieldtype": "Datetime",
+   "read_only": 1
+  },
+  {
+   "fieldname": "decision_by",
+   "label": "Decision By",
+   "fieldtype": "Link",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "profile_confirmation_section",
+   "label": "Profile Confirmation",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "profile_review_confirmed",
+   "label": "I confirm that I reviewed my profile and that its information and documents are current and accurate",
+   "fieldtype": "Check",
+   "reqd": 1,
+   "description": "Review and update your external profile before submitting this application."
+  },
+  {
+   "fieldname": "profile_reviewed_on",
+   "label": "Profile Reviewed On",
+   "fieldtype": "Datetime",
+   "read_only": 1
+  },
+  {
+   "fieldname": "profile_confirmation_cb",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "profile_reviewed_by",
+   "label": "Profile Reviewed By",
+   "fieldtype": "Link",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "profile_modified_on_application",
+   "label": "Profile Last Modified On Application",
+   "fieldtype": "Datetime",
+   "read_only": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "Volunteer Coordinator",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "print": 1,
+   "email": 1
+  },
+  {
+   "role": "Volunteer Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "print": 1,
+   "email": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "print": 1,
+   "email": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "external_person",
+ "search_fields": "external_person,opportunity,status"
 }

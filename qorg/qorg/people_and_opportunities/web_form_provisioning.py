@@ -89,6 +89,7 @@ def _provision_one(definition, result):
     status = "updated" if name else "created"
     _apply_base(doc, definition)
     _rebuild_layout(doc, definition)
+    _ensure_application_profile_confirmation(doc, definition)
     if doc.meta.has_field("client_script"):
         doc.client_script = ""
     apply_managed_design(doc, force=True)
@@ -155,3 +156,25 @@ def _rebuild_layout(doc, definition):
 def _set(row, meta, fieldname, value):
     if meta.has_field(fieldname):
         row.set(fieldname, value)
+
+
+def _ensure_application_profile_confirmation(doc, definition):
+    if definition.get("doc_type") != "Participation Application":
+        return
+    table_field = next(
+        (f.fieldname for f in doc.meta.fields if f.fieldtype == "Table" and f.options == "Web Form Field"),
+        None,
+    )
+    if not table_field:
+        return
+    rows = doc.get(table_field) or []
+    if any(row.fieldname == "profile_review_confirmed" for row in rows):
+        return
+    child_meta = frappe.get_meta(doc.meta.get_field(table_field).options)
+    row = doc.append(table_field, {})
+    _set(row, child_meta, "fieldname", "profile_review_confirmed")
+    _set(row, child_meta, "fieldtype", "Check")
+    _set(row, child_meta, "label", "I confirm that I reviewed my profile and that its information and documents are current and accurate")
+    _set(row, child_meta, "description", "Review and update your external profile before submitting this application.")
+    _set(row, child_meta, "reqd", 1)
+    _set(row, child_meta, "read_only", 0)

@@ -5,7 +5,6 @@ from datetime import date
 from urllib.parse import quote
 
 import frappe
-from frappe.website.utils import delete_page_cache
 from frappe import _
 from frappe.utils import cint, getdate, now_datetime, today
 
@@ -140,7 +139,7 @@ def validate_external_opportunity_publication(doc, method=None):
 def handle_external_opportunity_publication(doc, method=None):
     if doc.get("status") == "Published" and cint(doc.get("publish_on_website")):
         ensure_public_route(doc)
-    delete_page_cache()
+    frappe.clear_website_cache()
 
 
 def ensure_public_route(doc):
@@ -260,7 +259,11 @@ def get_public_opportunity(route):
         raise frappe.PermissionError
     result = _sanitize_doc(doc)
     result["is_open"] = is_opportunity_open(doc)
-    result["apply_url"] = _application_web_form_url(doc)
+    behavior = _opportunity_behavior(doc)
+    if behavior == "Employment":
+        result["apply_url"] = f"/employment-application/new?external_opportunity={quote(doc.name)}"
+    else:
+        result["apply_url"] = f"/participation-application/new?external_opportunity={quote(doc.name)}"
     return result
 
 
@@ -277,8 +280,14 @@ def is_opportunity_open(doc):
         doc.get("allow_external_applications")
     ):
         return False
-    from qorg.qorg.people_and_opportunities.web_form_services import is_application_capacity_available
-    return is_application_capacity_available(doc.name)
+    limit = cint(doc.get("application_limit"))
+    if limit > 0:
+        from qorg.qorg.doctype.participation_application.participation_application import (
+            count_capacity_applications,
+        )
+        if count_capacity_applications(doc.name) >= limit:
+            return False
+    return True
 
 
 @frappe.whitelist()
@@ -295,7 +304,7 @@ def submit_opportunity_application(
     if frappe.session.user == "Guest":
         frappe.throw(_("Please sign in before applying."), frappe.PermissionError)
     if not cint(consent):
-        frappe.throw(_("Confirm that the submitted information is accurate."))
+        frappe.throw(_("Confirm that you reviewed your profile and that it is current."))
 
     public = get_public_opportunity(opportunity_route)
     doc = frappe.get_doc("External Opportunity", public.name)
@@ -362,7 +371,7 @@ def close_expired_opportunities():
             update_modified=True,
         )
     if names:
-        delete_page_cache()
+        frappe.clear_website_cache()
     return {"closed": len(names)}
 
 
@@ -404,6 +413,10 @@ def _create_participation_application(
     _set_if_field(target, "availability_start_date", availability_start_date)
     _set_if_field(target, "hours_per_week", hours_per_week)
     _set_if_field(target, "participation_type", _participation_type(opportunity))
+    _set_if_field(target, "profile_review_confirmed", 1)
+    _set_if_field(target, "profile_reviewed_by", frappe.session.user)
+    _set_if_field(target, "profile_reviewed_on", now_datetime())
+    _set_if_field(target, "profile_modified_on_application", person.modified)
     target.insert(ignore_permissions=True)
     return target
 
@@ -582,13 +595,6 @@ def _opportunity_behavior(doc):
         if behavior:
             return behavior
     return opportunity_type
-
-
-def _application_web_form_url(doc):
-    behavior = _opportunity_behavior(doc)
-    if behavior == "Employment":
-        return f"/employment-application/new?qorg_external_opportunity={quote(doc.name)}"
-    return f"/participation-application/new?opportunity={quote(doc.name)}"
 
 
 def _participation_type(doc):

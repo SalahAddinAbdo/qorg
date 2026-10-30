@@ -15,8 +15,15 @@
     </div>
     <div class="qorg-detail-actions">
       {% if opportunity.is_open %}
-        {% if is_guest %}<a class="btn btn-primary" href="/login?redirect-to=/opportunities/{{ opportunity.route }}">{{ _("Sign in to apply") }}</a>
-        {% else %}<a class="btn btn-primary" href="{{ opportunity.apply_url }}">{{ _("Apply Now") }}</a>{% endif %}
+        {% if apply_action == "login" %}
+          <a class="btn btn-primary" href="{{ apply_url }}">{{ _("Sign In to Apply") }}</a>
+        {% elif apply_action == "profile" %}
+          <a class="btn btn-primary" href="{{ apply_url }}">{{ _("Create Profile to Apply") }}</a>
+        {% elif apply_action == "existing" %}
+          <a class="btn btn-secondary" href="{{ apply_url }}">{{ _("View My Application") }}</a>
+        {% elif apply_action == "apply" %}
+          <a class="btn btn-primary" href="{{ apply_url }}">{{ _("Apply Now") }}</a>
+        {% endif %}
       {% endif %}
     </div>
   </header>
