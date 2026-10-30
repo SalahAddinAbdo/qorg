@@ -351,12 +351,14 @@ def submit_opportunity_application(
 def get_my_applications():
     if frappe.session.user == "Guest":
         frappe.throw(_("Please sign in to view your applications."), frappe.PermissionError)
-    person = _get_external_person_for_user(frappe.session.user)
-    if not person:
+    person_names = _get_external_person_names_for_user(frappe.session.user)
+    if not person_names:
         return []
+    primary_person = _get_external_person_for_user(frappe.session.user)
+    primary_email = primary_person.get("primary_email") if primary_person else None
     rows = []
-    rows.extend(_get_participation_applications(person.name))
-    rows.extend(_get_job_applications(person.name, person.get("primary_email")))
+    rows.extend(_get_participation_applications(person_names))
+    rows.extend(_get_job_applications(person_names, primary_email))
     rows.sort(key=lambda row: str(row.get("application_date") or ""), reverse=True)
     return rows
 
@@ -469,7 +471,7 @@ def _create_job_applicant(opportunity, person, motivation):
     return target
 
 
-def _get_participation_applications(person_name):
+def _get_participation_applications(person_names):
     if not frappe.db.exists("DocType", "Participation Application"):
         return []
     meta = frappe.get_meta("Participation Application")
@@ -485,7 +487,7 @@ def _get_participation_applications(person_name):
             fields.append(fieldname)
     rows = frappe.get_all(
         "Participation Application",
-        filters={"external_person": person_name},
+        filters={"external_person": ["in", person_names]},
         fields=fields,
         order_by="modified desc",
     )
@@ -509,13 +511,13 @@ def _get_participation_applications(person_name):
     ]
 
 
-def _get_job_applications(person_name, email):
+def _get_job_applications(person_names, email):
     if not frappe.db.exists("DocType", "Job Applicant"):
         return []
     meta = frappe.get_meta("Job Applicant")
     filters = {}
     if meta.has_field("qorg_external_person"):
-        filters["qorg_external_person"] = person_name
+        filters["qorg_external_person"] = ["in", person_names]
     elif email:
         filters["email_id"] = email
     else:
@@ -543,18 +545,27 @@ def _get_job_applications(person_name, email):
     ]
 
 
-def _get_external_person_for_user(user):
+def _get_external_person_names_for_user(user):
     if not frappe.db.exists("DocType", "External Person"):
-        return None
-    active = {"person_status": ["!=", "Merged"]}
-    name = frappe.db.get_value(
-        "External Person", {**active, "owner": user}, "name", order_by="creation desc"
-    )
-    if not name and frappe.get_meta("External Person").has_field("user"):
-        name = frappe.db.get_value(
-            "External Person", {**active, "user": user}, "name", order_by="creation desc"
+        return []
+    active_filter = {"person_status": ["!=", "Merged"]}
+    linked_names = []
+    meta = frappe.get_meta("External Person")
+    if meta.has_field("user"):
+        linked_names = frappe.get_all(
+            "External Person", filters={**active_filter, "user": user},
+            pluck="name", order_by="creation desc"
         )
-    return frappe.get_doc("External Person", name) if name else None
+    owned_names = frappe.get_all(
+        "External Person", filters={**active_filter, "owner": user},
+        pluck="name", order_by="creation desc"
+    )
+    return list(dict.fromkeys([*linked_names, *owned_names]))
+
+
+def _get_external_person_for_user(user):
+    names = _get_external_person_names_for_user(user)
+    return frappe.get_doc("External Person", names[0]) if names else None
 
 
 def _viewer_can_see(doc):

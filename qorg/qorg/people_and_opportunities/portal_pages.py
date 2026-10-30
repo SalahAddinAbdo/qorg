@@ -7,6 +7,7 @@ from frappe import _
 
 from qorg.qorg.people_and_opportunities.portal import (
     _get_external_person_for_user,
+    _get_external_person_names_for_user,
     get_my_applications,
     get_public_opportunities,
     get_public_opportunity,
@@ -56,10 +57,9 @@ def get_opportunity_context(context):
         context.application_action_url = f"/login?redirect-to={quote(f'/opportunities/{route}', safe='')}"
         return context
 
-    profile_doc = _get_external_person_for_user(frappe.session.user)
-    profile = profile_doc.name if profile_doc else None
+    profile_names = _get_external_person_names_for_user(frappe.session.user)
 
-    if not profile:
+    if not profile_names:
         context.apply_action = "profile"
         context.application_action_url = "/external-profile-form"
         return context
@@ -68,7 +68,7 @@ def get_opportunity_context(context):
         "Participation Application",
         {
             "opportunity": opportunity.name,
-            "external_person": profile,
+            "external_person": ["in", profile_names],
             "status": ["!=", "Cancelled"],
         },
         "name",
