@@ -14,6 +14,7 @@ from qorg.qorg.people_and_opportunities.services.people import (
 class ExternalPerson(Document):
     def before_validate(self):
         self._apply_portal_defaults()
+        self._compose_full_name_when_missing()
 
     def validate(self):
         validate_external_person(self)
@@ -22,7 +23,23 @@ class ExternalPerson(Document):
     def on_update(self):
         self.db_set("last_profile_update", now_datetime(), update_modified=False)
 
+
+    def _compose_full_name_when_missing(self):
+        if self.get("full_name"):
+            self.full_name = self.full_name.strip()
+            return
+        parts = [
+            (self.get(fieldname) or "").strip()
+            for fieldname in ("first_name", "middle_name", "last_name")
+        ]
+        composed = " ".join(part for part in parts if part)
+        if composed:
+            self.full_name = composed
+
     def _apply_portal_defaults(self):
+        self.person_status = self.person_status or "Active"
+        self.source = self.source or "Portal Registration"
+
         user = frappe.session.user
         if not user or user == "Guest":
             return
