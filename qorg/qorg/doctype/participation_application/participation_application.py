@@ -4,6 +4,7 @@ import frappe
 from frappe import _
 from frappe.model.document import Document
 from frappe.utils import cint, getdate, now_datetime, today
+from frappe.website.utils import clear_cache as clear_website_cache
 
 from qorg.qorg.volunteer_management import services
 
@@ -158,13 +159,13 @@ def validate_profile_completeness(person, opportunity):
 
 
 def get_participation_type(opportunity):
-    value = opportunity.get("participation_type")
-    if value:
-        return value
-    label = frappe.db.get_value(
-        "External Opportunity Type", opportunity.opportunity_type, "opportunity_type"
-    ) if opportunity.get("opportunity_type") else None
-    return label or opportunity.get("opportunity_type")
+    explicit = opportunity.get("qorg_participation_type") or opportunity.get("participation_type")
+    if explicit:
+        return explicit
+    opportunity_type = (opportunity.get("opportunity_type") or "").strip()
+    if "intern" in opportunity_type.lower():
+        return "Intern"
+    return "Volunteer"
 
 
 def count_capacity_applications(opportunity: str, exclude_name=None) -> int:
@@ -213,4 +214,4 @@ def sync_opportunity_application_stats(opportunity_name: str | None):
         update_modified=False,
     )
     frappe.clear_document_cache("External Opportunity", opportunity_name)
-    frappe.clear_website_cache()
+    clear_website_cache()

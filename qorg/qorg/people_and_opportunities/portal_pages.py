@@ -63,7 +63,7 @@ def get_opportunity_context(context):
             person = get_external_person_for_user(frappe.session.user)
             if not person:
                 context.apply_action = "profile"
-                context.apply_url = f"/external-profile/new?return_to={return_path}"
+                context.apply_url = f"/external-profile?return_to={return_path}"
             else:
                 rows = frappe.db.sql(
                     """
