@@ -6,6 +6,7 @@ import frappe
 from frappe import _
 
 from qorg.qorg.people_and_opportunities.portal import (
+    _get_external_person_for_user,
     get_my_applications,
     get_public_opportunities,
     get_public_opportunity,
@@ -55,12 +56,8 @@ def get_opportunity_context(context):
         context.application_action_url = f"/login?redirect-to={quote(f'/opportunities/{route}', safe='')}"
         return context
 
-    profile = frappe.db.get_value(
-        "External Person",
-        {"owner": frappe.session.user, "person_status": ["!=", "Merged"]},
-        "name",
-        order_by="creation desc",
-    ) or frappe.db.get_value("External Person", {"user": frappe.session.user}, "name")
+    profile_doc = _get_external_person_for_user(frappe.session.user)
+    profile = profile_doc.name if profile_doc else None
 
     if not profile:
         context.apply_action = "profile"
@@ -81,10 +78,7 @@ def get_opportunity_context(context):
         context.application_action_url = opportunity.get("apply_url")
     else:
         context.apply_action = "apply"
-        context.application_action_url = (
-            "/api/method/qorg.qorg.people_and_opportunities.web_form_workflow."
-            "start_participation_application?" + urlencode({"opportunity": opportunity.name})
-        )
+        context.application_action_url = opportunity.get("apply_url")
     return context
 
 

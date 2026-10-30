@@ -497,6 +497,13 @@ def _get_participation_applications(person_name):
             "status": row.get("status") or row.get("final_decision"),
             "application_date": row.get("application_date") or row.modified,
             "overall_score": row.get("overall_score"),
+            "view_url": (
+                "/api/method/"
+                "qorg.qorg.people_and_opportunities.web_form_workflow."
+                "start_participation_application"
+                f"?opportunity={quote(row.get('opportunity'))}"
+                if row.get("opportunity") else None
+            ),
         }
         for row in rows
     ]
@@ -539,10 +546,14 @@ def _get_job_applications(person_name, email):
 def _get_external_person_for_user(user):
     if not frappe.db.exists("DocType", "External Person"):
         return None
-    meta = frappe.get_meta("External Person")
-    if not meta.has_field("user"):
-        return None
-    name = frappe.db.get_value("External Person", {"user": user}, "name")
+    active = {"person_status": ["!=", "Merged"]}
+    name = frappe.db.get_value(
+        "External Person", {**active, "owner": user}, "name", order_by="creation desc"
+    )
+    if not name and frappe.get_meta("External Person").has_field("user"):
+        name = frappe.db.get_value(
+            "External Person", {**active, "user": user}, "name", order_by="creation desc"
+        )
     return frappe.get_doc("External Person", name) if name else None
 
 

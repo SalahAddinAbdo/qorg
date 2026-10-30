@@ -10,55 +10,48 @@ from qorg.qorg.people_and_opportunities.portal import is_opportunity_open
 
 
 @frappe.whitelist()
-def start_participation_application(opportunity: str | None = None):
+def start_participation_application(
+    opportunity: str | None = None,
+    external_opportunity: str | None = None,
+    qorg_external_opportunity: str | None = None,
+    route: str | None = None,
+):
     if frappe.session.user == "Guest":
         frappe.throw(_("Please sign in before applying."), frappe.PermissionError)
-
-    opportunity = (opportunity or "").strip()
-    if not opportunity or opportunity.lower() in {"none", "null", "undefined"}:
+    opportunity_value = (
+        opportunity or external_opportunity or qorg_external_opportunity or route
+        or frappe.form_dict.get("opportunity")
+        or frappe.form_dict.get("external_opportunity")
+        or frappe.form_dict.get("qorg_external_opportunity")
+        or frappe.form_dict.get("route") or ""
+    )
+    opportunity_value = str(opportunity_value).strip()
+    if not opportunity_value or opportunity_value.lower() in {"none", "null", "undefined"}:
         frappe.throw(_("A valid external opportunity is required to start an application."))
-
-    opportunity_doc = frappe.get_doc("External Opportunity", opportunity)
+    opportunity_name = opportunity_value
+    if not frappe.db.exists("External Opportunity", opportunity_name):
+        opportunity_name = frappe.db.get_value("External Opportunity", {"route": opportunity_value}, "name")
+    if not opportunity_name:
+        frappe.throw(_("The selected external opportunity does not exist."))
+    opportunity_doc = frappe.get_doc("External Opportunity", opportunity_name)
     if not is_opportunity_open(opportunity_doc):
         frappe.throw(_("Applications are closed for this opportunity."))
-
     person = _owned_external_profile(frappe.session.user)
     if not person:
         frappe.local.response["type"] = "redirect"
         frappe.local.response["location"] = "/external-profile-form"
         return
-
     existing = frappe.db.get_value(
         "Participation Application",
-        {
-            "opportunity": opportunity_doc.name,
-            "external_person": person.name,
-            "status": ["!=", "Cancelled"],
-        },
+        {"opportunity": opportunity_doc.name, "external_person": person.name, "status": ["!=", "Cancelled"]},
         "name",
     )
     if existing:
-        request = _create_web_form_request(
-            values={},
-            reference_doctype="Participation Application",
-            reference_docname=existing,
-        )
+        request = _create_web_form_request(values={}, reference_doctype="Participation Application", reference_docname=existing)
         _redirect_to_participation_form(request, existing)
         return
-
-    participation_type = (
-        opportunity_doc.get("qorg_participation_type")
-        or opportunity_doc.get("participation_type")
-        or "Volunteer"
-    )
-    values = {
-        "opportunity": opportunity_doc.name,
-        "external_person": person.name,
-        "participation_type": participation_type,
-        "application_date": today(),
-        "status": "Draft",
-    }
-
+    participation_type = opportunity_doc.get("qorg_participation_type") or opportunity_doc.get("participation_type") or "Volunteer"
+    values = {"opportunity": opportunity_doc.name, "external_person": person.name, "participation_type": participation_type, "application_date": today(), "status": "Draft"}
     request = _create_web_form_request(values=values)
     _redirect_to_participation_form(request)
 
@@ -109,12 +102,9 @@ def _redirect_to_participation_form(request, docname: str | None = None):
 
 
 def _owned_external_profile(user: str):
-    name = frappe.db.get_value(
-        "External Person",
-        {"owner": user, "person_status": ["!=", "Merged"]},
-        "name",
-        order_by="creation desc",
-    )
-    if not name:
-        name = frappe.db.get_value("External Person", {"user": user}, "name")
+    active = {"person_status": ["!=", "Merged"]}
+    name = frappe.db.get_value("External Person", {**active, "owner": user}, "name", order_by="creation desc")
+    if not name and frappe.get_meta("External Person").has_field("user"):
+        name = frappe.db.get_value("External Person", {**active, "user": user}, "name", order_by="creation desc")
     return frappe.get_doc("External Person", name) if name else None
+
