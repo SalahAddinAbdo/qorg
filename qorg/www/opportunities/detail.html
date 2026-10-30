@@ -3,20 +3,31 @@
 {% block head_include %}<link rel="stylesheet" href="/assets/qorg/css/opportunities_portal.css">{% endblock %}
 {% block page_content %}
 <div class="qorg-portal qorg-detail" dir="{{ 'rtl' if page_is_rtl else 'ltr' }}">
-  <nav class="qorg-breadcrumbs"><a href="/opportunities">{{ _("Opportunities") }}</a><span>/</span><span>{{ opportunity.opportunity_title }}</span></nav>
+  <nav class="qorg-breadcrumbs">
+    <a href="/opportunities">{{ _("Opportunities") }}</a>
+    <span>/</span>
+    <span>{{ opportunity.opportunity_title }}</span>
+  </nav>
   <header class="qorg-detail-header">
     <div>
       <div class="qorg-card-topline">
         <span class="qorg-pill">{{ _(opportunity.participation_type or opportunity.opportunity_type or "Opportunity") }}</span>
-        <span class="qorg-pill {% if opportunity.is_open %}is-open{% else %}is-closed{% endif %}">{{ _("Open") if opportunity.is_open else _("Applications Closed") }}</span>
+        <span class="qorg-pill {% if opportunity.is_open %}is-open{% else %}is-closed{% endif %}">
+          {{ _("Open") if opportunity.is_open else _("Applications Closed") }}
+        </span>
       </div>
       <h1>{{ opportunity.opportunity_title }}</h1>
       <p>{{ opportunity.summary }}</p>
     </div>
     <div class="qorg-detail-actions">
-      {% if opportunity.is_open %}
-        {% if is_guest %}<a class="btn btn-primary" href="/login?redirect-to=/opportunities/{{ opportunity.route }}">{{ _("Sign in to apply") }}</a>
-        {% else %}<a class="btn btn-primary" href="{{ opportunity.apply_url }}">{{ _("Apply Now") }}</a>{% endif %}
+      {% if apply_action == "login" %}
+        <a class="btn btn-primary" href="{{ application_action_url | e }}">{{ _("Sign In to Apply") }}</a>
+      {% elif apply_action == "profile" %}
+        <a class="btn btn-primary" href="{{ application_action_url | e }}">{{ _("Create Profile to Apply") }}</a>
+      {% elif apply_action == "existing" %}
+        <a class="btn btn-secondary" href="{{ application_action_url | e }}">{{ _("View My Application") }}</a>
+      {% elif apply_action == "apply" %}
+        <a class="btn btn-primary" href="{{ application_action_url | e }}">{{ _("Apply Now") }}</a>
       {% endif %}
     </div>
   </header>
