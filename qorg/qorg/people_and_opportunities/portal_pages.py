@@ -33,12 +33,27 @@ def get_opportunities_context(context):
 def get_opportunity_context(context):
     context.no_cache = 1
     route = (frappe.form_dict.get("route") or "").strip()
+    if not route:
+        raise frappe.PageDoesNotExistError
+
     try:
         opportunity = get_public_opportunity(route)
     except frappe.PermissionError:
-        frappe.local.flags.redirect_location = f"/login?redirect-to={quote(f'/opportunities/{route}', safe='')}"
+        frappe.local.flags.redirect_location = (
+            f"/login?redirect-to={quote(f'/opportunities/{route}', safe='')}"
+        )
         raise frappe.Redirect
     except frappe.DoesNotExistError:
+        raise frappe.PageDoesNotExistError
+
+    # The public serializer returns presentation data and does not expose the
+    # internal document name. Resolve the canonical name from the route.
+    opportunity_name = frappe.db.get_value(
+        "External Opportunity",
+        {"route": route},
+        "name",
+    )
+    if not opportunity_name:
         raise frappe.PageDoesNotExistError
 
     context.opportunity = opportunity
@@ -50,26 +65,32 @@ def get_opportunity_context(context):
 
     if not opportunity.get("is_open"):
         return context
+
     if context.is_guest:
         context.apply_action = "login"
-        context.application_action_url = f"/login?redirect-to={quote(f'/opportunities/{route}', safe='')}"
+        context.application_action_url = (
+            f"/login?redirect-to={quote(f'/opportunities/{route}', safe='')}"
+        )
         return context
 
     profile = frappe.db.get_value(
         "External Person",
-        {"owner": frappe.session.user, "person_status": ["!=", "Merged"]},
+        {
+            "owner": frappe.session.user,
+            "person_status": ["!=", "Merged"],
+        },
         "name",
         order_by="creation desc",
-    ) or frappe.db.get_value("External Person", {"user": frappe.session.user}, "name")
+    ) or frappe.db.get_value(
+        "External Person",
+        {"user": frappe.session.user},
+        "name",
+    )
 
     if not profile:
         context.apply_action = "profile"
         context.application_action_url = "/external-profile-form"
         return context
-
-    opportunity_name = opportunity.get("name")
-    if not opportunity_name:
-        frappe.throw(_("The opportunity identifier is missing from the public opportunity context."))
 
     existing = frappe.db.get_value(
         "Participation Application",
@@ -82,13 +103,15 @@ def get_opportunity_context(context):
     )
     if existing:
         context.apply_action = "existing"
-        context.application_action_url = f"/participation-application/{existing}"
+        context.application_action_url = f"/participation-application/{quote(existing)}"
     else:
         context.apply_action = "apply"
         context.application_action_url = (
             "/api/method/qorg.qorg.people_and_opportunities.web_form_workflow."
-            "start_participation_application?" + urlencode({"opportunity": opportunity_name})
+            "start_participation_application?"
+            + urlencode({"opportunity": opportunity_name})
         )
+
     return context
 
 
@@ -97,6 +120,7 @@ def get_my_applications_context(context):
     if frappe.session.user == "Guest":
         frappe.local.flags.redirect_location = "/login?redirect-to=/my-applications"
         raise frappe.Redirect
+
     context.title = _("My Applications")
     context.applications = get_my_applications()
     context.page_is_rtl = _is_rtl_language()
