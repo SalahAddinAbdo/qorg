@@ -65,7 +65,7 @@ def start_participation_application(opportunity: str | None = None):
         request.expires_on = add_to_date(now_datetime(), hours=2)
     request.insert(ignore_permissions=True)
 
-    key = request.get("request_key") or request.name
+    key = request.get("key") or request.name
     frappe.local.response["type"] = "redirect"
     frappe.local.response["location"] = (
         f"/participation-application/new?web_form_request_key={key}"
