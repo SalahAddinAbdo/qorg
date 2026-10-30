@@ -51,3 +51,10 @@ def _ensure_print_format():
     if frappe.db.exists("Print Format",name): return
     html=Path(__file__).parent.joinpath("templates","external_person_cv.html").read_text()
     frappe.get_doc({"doctype":"Print Format","name":name,"doc_type":"External Person","print_format_type":"Jinja","html":html,"standard":"No","custom_format":1}).insert(ignore_permissions=True)
+
+
+def reconcile_external_profile_ownership():
+    from qorg.qorg.doctype.external_person.external_person import (
+        reconcile_unlinked_external_profiles,
+    )
+    return reconcile_unlinked_external_profiles()

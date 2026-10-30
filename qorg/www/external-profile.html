@@ -14,7 +14,7 @@
     </div>
     <div class="qorg-hero-actions">
       {% if profile_exists %}
-        {% if not profile_locked %}<a class="btn btn-primary" href="{{ edit_url | e }}">{{ _("Edit Profile") }}</a>{% endif %}
+        {% if not profile_locked %}<a class="btn btn-primary" href="{{ edit_url }}">{{ _("Edit Profile") }}</a>{% endif %}
         <button class="btn btn-default" type="button" onclick="window.print()">{{ _("Print CV") }}</button>
       {% else %}
         <a class="btn btn-primary" href="/external-profile-form/new">{{ _("Create My Profile") }}</a>
@@ -22,26 +22,15 @@
       <a class="btn btn-default" href="/my-applications">{{ _("My Applications") }}</a>
     </div>
   </section>
-
-  {% if profile_locked %}
-    <div class="alert alert-warning qorg-no-print">
-      <strong>{{ _("Profile editing is locked.") }}</strong>
-      {{ lock_reason or _("Contact the organization if an update is required.") }}
-    </div>
-  {% endif %}
-
+  {% if profile_locked %}<div class="alert alert-warning qorg-no-print"><strong>{{ _("Profile editing is locked.") }}</strong> {{ lock_reason or _("Contact the organization if an update is required.") }}</div>{% endif %}
   {% if profile_exists %}
-    <div class="qorg-section">
-      <h2>{{ person.full_name or person.name }}</h2>
-      {% if person.professional_title %}<p><strong>{{ person.professional_title }}</strong></p>{% endif %}
-      {% if person.professional_summary %}<div>{{ person.professional_summary | safe }}</div>{% endif %}
-    </div>
+  <div class="qorg-section">
+    <h2>{{ person.full_name or person.name }}</h2>
+    {% if person.professional_title %}<p><strong>{{ person.professional_title }}</strong></p>{% endif %}
+    {% if person.professional_summary %}<div>{{ person.professional_summary | safe }}</div>{% endif %}
+  </div>
   {% else %}
-    <div class="qorg-empty-state">
-      <h3>{{ _("No profile is linked to this account yet") }}</h3>
-      <p>{{ _("Create your professional profile before applying for an opportunity.") }}</p>
-      <a class="btn btn-primary" href="/external-profile-form/new">{{ _("Create My Profile") }}</a>
-    </div>
+  <div class="qorg-empty-state"><h3>{{ _("No profile is linked to this account yet") }}</h3><p>{{ _("Create your professional profile before applying for an opportunity.") }}</p><a class="btn btn-primary" href="/external-profile-form/new">{{ _("Create My Profile") }}</a></div>
   {% endif %}
 </div>
 {% endblock %}
