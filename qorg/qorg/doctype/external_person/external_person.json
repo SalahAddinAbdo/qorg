@@ -662,6 +662,6 @@
   "show_name_in_global_search": 1,
   "title_field": "full_name",
   "show_title_field_in_link": 1,
-  "search_fields": "full_name,name_in_arabic,professional_title,current_location,primary_email,mobile_no,identification_number",
+  "search_fields": "full_name,name_in_arabic,professional_title,current_location,primary_email,mobile_no",
   "image_field": "image"
 }
