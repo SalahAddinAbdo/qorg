@@ -1,12 +1,4 @@
-from __future__ import annotations
+from qorg.qorg.design_system.provisioning import provision_login_experience
 
-import frappe
-
-from qorg.qorg.design_system.provisioning import provision_baseline_records
-from qorg.qorg.design_system.service import clear_legacy_theme_cache
-
-
-def reset_to_frappe_baseline() -> None:
-    """Reset presentation only; preserve both DocTypes and Quick Create rows."""
-    provision_baseline_records()
-    clear_legacy_theme_cache()
+def migrate_login_experience():
+    provision_login_experience()

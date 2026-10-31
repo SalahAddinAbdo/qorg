@@ -6,15 +6,40 @@
   "issingle": 1,
   "track_changes": 1,
   "field_order": [
+    "baseline_tab",
     "baseline_section",
     "enabled",
     "active_preset",
     "language_section",
     "show_language_action",
     "quick_create_section",
-    "quick_create_items"
+    "quick_create_items",
+    "login_tab",
+    "login_enable_section",
+    "enable_login_experience",
+    "show_login_language_switcher",
+    "login_visual_section",
+    "login_background_image",
+    "login_background_position",
+    "login_visual_column",
+    "login_overlay_strength",
+    "login_text_color",
+    "login_content_section",
+    "login_visual_title",
+    "login_visual_subtitle",
+    "login_form_column",
+    "login_form_title",
+    "login_form_subtitle",
+    "login_brand_section",
+    "login_brand_logo",
+    "login_footer_text"
   ],
   "fields": [
+    {
+      "fieldname": "baseline_tab",
+      "fieldtype": "Tab Break",
+      "label": "Baseline"
+    },
     {
       "fieldname": "baseline_section",
       "fieldtype": "Section Break",
@@ -23,10 +48,9 @@
     {
       "fieldname": "enabled",
       "fieldtype": "Check",
-      "label": "Enable Custom Theme",
+      "label": "Enable Custom Desk Theme",
       "default": "0",
-      "read_only": 1,
-      "description": "Disabled during the Frappe baseline reset."
+      "read_only": 1
     },
     {
       "fieldname": "active_preset",
@@ -44,7 +68,7 @@
     {
       "fieldname": "show_language_action",
       "fieldtype": "Check",
-      "label": "Show Language Action",
+      "label": "Show Desk Language Action",
       "default": "1"
     },
     {
@@ -56,8 +80,114 @@
       "fieldname": "quick_create_items",
       "fieldtype": "Table",
       "label": "Quick Create Items",
-      "options": "Q Org Quick Create Item",
-      "description": "Configuration is preserved for the next design phase. No custom New button is loaded during baseline reset."
+      "options": "Q Org Quick Create Item"
+    },
+    {
+      "fieldname": "login_tab",
+      "fieldtype": "Tab Break",
+      "label": "Login Experience"
+    },
+    {
+      "fieldname": "login_enable_section",
+      "fieldtype": "Section Break",
+      "label": "Login Page"
+    },
+    {
+      "fieldname": "enable_login_experience",
+      "fieldtype": "Check",
+      "label": "Enable Full Width Login Experience",
+      "default": "1"
+    },
+    {
+      "fieldname": "show_login_language_switcher",
+      "fieldtype": "Check",
+      "label": "Show Language Switcher",
+      "default": "1"
+    },
+    {
+      "fieldname": "login_visual_section",
+      "fieldtype": "Section Break",
+      "label": "Visual Panel"
+    },
+    {
+      "fieldname": "login_background_image",
+      "fieldtype": "Attach Image",
+      "label": "Background Image",
+      "description": "Recommended: landscape image at least 1600 x 1200 pixels."
+    },
+    {
+      "fieldname": "login_background_position",
+      "fieldtype": "Select",
+      "label": "Image Position",
+      "options": "Center\nTop\nBottom\nLeft\nRight",
+      "default": "Center"
+    },
+    {
+      "fieldname": "login_visual_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "login_overlay_strength",
+      "fieldtype": "Select",
+      "label": "Overlay Strength",
+      "options": "None\nLight\nMedium\nStrong",
+      "default": "Medium"
+    },
+    {
+      "fieldname": "login_text_color",
+      "fieldtype": "Select",
+      "label": "Visual Text Color",
+      "options": "Light\nDark",
+      "default": "Light"
+    },
+    {
+      "fieldname": "login_content_section",
+      "fieldtype": "Section Break",
+      "label": "Visual Content"
+    },
+    {
+      "fieldname": "login_visual_title",
+      "fieldtype": "Data",
+      "label": "Visual Title",
+      "default": "Q Org"
+    },
+    {
+      "fieldname": "login_visual_subtitle",
+      "fieldtype": "Small Text",
+      "label": "Visual Subtitle",
+      "default": "Integrated enterprise management for your organization."
+    },
+    {
+      "fieldname": "login_form_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "login_form_title",
+      "fieldtype": "Data",
+      "label": "Form Title",
+      "default": "Welcome"
+    },
+    {
+      "fieldname": "login_form_subtitle",
+      "fieldtype": "Data",
+      "label": "Form Subtitle",
+      "default": "Sign in to continue"
+    },
+    {
+      "fieldname": "login_brand_section",
+      "fieldtype": "Section Break",
+      "label": "Branding"
+    },
+    {
+      "fieldname": "login_brand_logo",
+      "fieldtype": "Attach Image",
+      "label": "Login Logo",
+      "description": "Optional. If empty, the standard site/app logo remains visible."
+    },
+    {
+      "fieldname": "login_footer_text",
+      "fieldtype": "Small Text",
+      "label": "Footer Text"
     }
   ],
   "permissions": [

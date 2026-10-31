@@ -1,1 +1,1 @@
-BASELINE_VERSION = "1.0.1-frappe-standard-reset"
+LOGIN_EXPERIENCE_VERSION = "1.0.0-full-width-split"

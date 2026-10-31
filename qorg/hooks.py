@@ -28,8 +28,8 @@ app_include_js = [
 
 app_include_css = ["/assets/qorg/css/model_policy.css"]
 
-web_include_css = []
-web_include_js = []
+web_include_css = ["qorg_login_experience.bundle.css"]
+web_include_js = ["qorg_login_experience.bundle.js"]
 
 website_route_rules = [
     {"from_route": "/opportunities/<route>", "to_route": "opportunities/detail"},
@@ -275,7 +275,7 @@ after_install = [
     "qorg.qorg.project_management.workflow_provisioning.provision_project_workflows",
     "qorg.qorg.project_management.notification_provisioning.provision_project_notifications",
     "qorg.qorg.enterprise_foundation.provisioning.provision_enterprise_foundation",
-    "qorg.qorg.design_system.provisioning.provision_baseline_records",
+    "qorg.qorg.design_system.provisioning.provision_login_experience",
     "qorg.qorg.project_management.navigation_provisioning.provision_q_org_navigation",
 ]
 
@@ -297,8 +297,8 @@ after_migrate = [
     "qorg.qorg.project_management.workflow_provisioning.provision_project_workflows",
     "qorg.qorg.project_management.notification_provisioning.provision_project_notifications",
     "qorg.qorg.enterprise_foundation.provisioning.provision_enterprise_foundation",
-    "qorg.qorg.design_system.migration.reset_to_frappe_baseline",
-    "qorg.qorg.design_system.provisioning.provision_baseline_records",
+    "qorg.qorg.design_system.provisioning.provision_login_experience",
+    "qorg.qorg.design_system.migration.migrate_login_experience",
     "qorg.qorg.project_management.navigation_provisioning.provision_q_org_navigation",
 ]
 
