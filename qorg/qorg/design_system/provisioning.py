@@ -1,36 +1,185 @@
 from __future__ import annotations
-import json
+
 import frappe
+
 from qorg.qorg.design_system import THEME_SCHEMA_VERSION
-from qorg.qorg.design_system.service import PRESET, SETTINGS, DEFAULTS, clear_cache
+from qorg.qorg.design_system.service import DEFAULTS, PRESET, SETTINGS, clear_cache
+
 
 PRESETS = {
- "Frappe Standard": {"description":"Unmodified Frappe presentation.","enabled":0,"theme_mode":"Follow System","density":"Comfortable","surface_style":"Flat","content_width":"Standard","navigation_style":"Standard"},
- "Q Org Enterprise": {"description":"Balanced enterprise experience for daily work.","theme_mode":"Follow System","density":"Comfortable","surface_style":"Soft","content_width":"Wide","navigation_style":"Integrated"},
- "Q Org Compact": {"description":"Dense operations layout for tables and accounting.","theme_mode":"Follow System","density":"Compact","surface_style":"Flat","content_width":"Wide","navigation_style":"Integrated"},
- "Q Org Dark": {"description":"Dark enterprise experience.","theme_mode":"Dark","density":"Comfortable","surface_style":"Soft","content_width":"Wide","navigation_style":"Integrated"},
- "Q Org Accessible": {"description":"High clarity and stronger focus treatment.","theme_mode":"Follow System","density":"Comfortable","surface_style":"Flat","content_width":"Standard","navigation_style":"Standard"},
+    "Frappe Standard": {
+        "description": "Unmodified Frappe presentation.",
+        "enabled": 1,
+        "theme_mode": "Follow System",
+        "density": "Comfortable",
+        "surface_style": "Flat",
+        "content_width": "Standard",
+        "navigation_style": "Standard",
+    },
+    "Q Org Enterprise": {
+        "description": "Balanced enterprise experience for daily work.",
+        "enabled": 1,
+        "theme_mode": "Follow System",
+        "density": "Comfortable",
+        "surface_style": "Soft",
+        "content_width": "Wide",
+        "navigation_style": "Integrated",
+    },
+    "Q Org Compact": {
+        "description": "Dense operations layout for tables and accounting.",
+        "enabled": 1,
+        "theme_mode": "Follow System",
+        "density": "Compact",
+        "surface_style": "Flat",
+        "content_width": "Wide",
+        "navigation_style": "Integrated",
+    },
+    "Q Org Dark": {
+        "description": "Dark enterprise experience.",
+        "enabled": 1,
+        "theme_mode": "Dark",
+        "density": "Comfortable",
+        "surface_style": "Soft",
+        "content_width": "Wide",
+        "navigation_style": "Integrated",
+    },
+    "Q Org Accessible": {
+        "description": "High clarity and stronger focus treatment.",
+        "enabled": 1,
+        "theme_mode": "Follow System",
+        "density": "Comfortable",
+        "surface_style": "Flat",
+        "content_width": "Standard",
+        "navigation_style": "Standard",
+    },
 }
 
-def provision_design_system():
-    if not frappe.db.exists("DocType", PRESET) or not frappe.db.exists("DocType", SETTINGS): return
+VALUE_ALIASES = {
+    "active_preset": {
+        "QOrg Executive Light": "Q Org Enterprise",
+        "QOrg Comfortable": "Q Org Enterprise",
+        "QOrg Midnight": "Q Org Dark",
+        "QOrg Compact Operations": "Q Org Compact",
+        "QOrg High Contrast": "Q Org Accessible",
+    },
+    "theme_mode": {
+        "Auto": "Follow System",
+        "System": "Follow System",
+        "Frappe Default": "Follow System",
+    },
+    "density": {
+        "Standard": "Comfortable",
+        "Balanced": "Comfortable",
+        "Dense": "Compact",
+    },
+    "content_width": {
+        "Frappe Default": "Standard",
+        "Balanced": "Standard",
+        "Wide Adaptive": "Wide",
+        "Full Width": "Wide",
+        "Custom": "Wide",
+    },
+    "navigation_style": {
+        "Frappe Standard": "Standard",
+        "Unified": "Integrated",
+        "Enterprise": "Integrated",
+    },
+    "surface_style": {
+        "Frappe Standard": "Flat",
+        "Enterprise": "Soft",
+        "Balanced": "Soft",
+    },
+    "login_layout": {
+        "QOrg Split": "Split",
+        "Full Width Split": "Split",
+        "QOrg Visual": "Split",
+        "QOrg Centered": "Centered",
+        "QOrg Executive": "Centered",
+        "QOrg Standard": "Standard",
+        "Frappe Standard": "Standard",
+    },
+}
+
+ALLOWED_VALUES = {
+    "theme_mode": {"Follow System", "Light", "Dark"},
+    "density": {"Comfortable", "Compact"},
+    "content_width": {"Standard", "Wide"},
+    "navigation_style": {"Standard", "Integrated"},
+    "surface_style": {"Flat", "Soft", "Elevated"},
+    "login_layout": {"Standard", "Split", "Centered"},
+}
+
+
+def normalize_settings_values(settings) -> bool:
+    """Map retained legacy options to the compact v3 contract.
+
+    The function is intentionally idempotent and also falls back to a known
+    default for unknown historic values, preventing migrate from being blocked
+    by a Select value that no longer belongs to the new schema.
+    """
+    changed = False
+
+    for fieldname, aliases in VALUE_ALIASES.items():
+        if not settings.meta.has_field(fieldname):
+            continue
+        value = settings.get(fieldname)
+        mapped = aliases.get(value)
+        if mapped and mapped != value:
+            settings.set(fieldname, mapped)
+            changed = True
+
+    for fieldname, allowed in ALLOWED_VALUES.items():
+        if not settings.meta.has_field(fieldname):
+            continue
+        value = settings.get(fieldname)
+        if value in (None, ""):
+            settings.set(fieldname, DEFAULTS[fieldname])
+            changed = True
+        elif value not in allowed:
+            settings.set(fieldname, DEFAULTS[fieldname])
+            changed = True
+
+    preset = settings.get("active_preset")
+    mapped_preset = VALUE_ALIASES["active_preset"].get(preset)
+    if mapped_preset and mapped_preset != preset:
+        settings.active_preset = mapped_preset
+        changed = True
+
+    return changed
+
+
+def provision_design_system() -> None:
+    if not frappe.db.exists("DocType", PRESET) or not frappe.db.exists("DocType", SETTINGS):
+        return
+
     for name, values in PRESETS.items():
-        existing=frappe.db.exists(PRESET,name)
+        existing = frappe.db.exists(PRESET, name)
         if existing:
-            doc=frappe.get_doc(PRESET,existing)
-            if not doc.get("is_system_preset"): continue
+            doc = frappe.get_doc(PRESET, existing)
+            if not doc.get("is_system_preset"):
+                continue
         else:
-            doc=frappe.new_doc(PRESET); doc.preset_title=name
-        doc.enabled=1; doc.is_system_preset=1; doc.managed_version=THEME_SCHEMA_VERSION
-        for field,value in values.items():
-            if doc.meta.has_field(field): doc.set(field,value)
-        doc.flags.ignore_permissions=True; doc.save()
-    settings=frappe.get_single(SETTINGS)
-    changed=False
-    for field,value in DEFAULTS.items():
-        if settings.meta.has_field(field) and settings.get(field) in (None,""):
-            settings.set(field,value); changed=True
-    if settings.meta.has_field("schema_version"): settings.schema_version=THEME_SCHEMA_VERSION; changed=True
+            doc = frappe.new_doc(PRESET)
+            doc.preset_title = name
+
+        doc.is_system_preset = 1
+        doc.managed_version = THEME_SCHEMA_VERSION
+        for fieldname, value in values.items():
+            if doc.meta.has_field(fieldname):
+                doc.set(fieldname, value)
+        doc.flags.ignore_permissions = True
+        doc.save()
+
+    settings = frappe.get_single(SETTINGS)
+    changed = normalize_settings_values(settings)
+
+    for fieldname, value in DEFAULTS.items():
+        if settings.meta.has_field(fieldname) and settings.get(fieldname) in (None, ""):
+            settings.set(fieldname, value)
+            changed = True
+
     if changed:
-        settings.flags.ignore_permissions=True; settings.save()
+        settings.flags.ignore_permissions = True
+        settings.save()
+
     clear_cache()

@@ -1,1 +1,1 @@
-THEME_SCHEMA_VERSION = "3.1.0-modern-frappe-shell"
+THEME_SCHEMA_VERSION = "3.1.1-safe-migration"
