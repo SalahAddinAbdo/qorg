@@ -15,7 +15,12 @@ def ensure_frappe_standard_preset() -> None:
         doc = frappe.get_doc(PRESET, name)
     else:
         doc = frappe.new_doc(PRESET)
+
+    # Older preset schemas could name the document without persisting the new
+    # mandatory title field. Always backfill it before Document validation.
+    if doc.meta.has_field("preset_title") and not doc.get("preset_title"):
         doc.preset_title = BASELINE_PRESET
+
     if doc.meta.has_field("enabled"):
         doc.enabled = 1
     if doc.meta.has_field("is_system_preset"):
