@@ -1,0 +1,1 @@
+(() => { "use strict"; frappe.router?.on?.("change",()=>{ if(frappe.get_route()?.[1]==="Q Org Design System Settings") document.documentElement.dataset.qorgThemeAdmin="1"; else delete document.documentElement.dataset.qorgThemeAdmin; }); })();

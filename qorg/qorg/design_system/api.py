@@ -1,220 +1,63 @@
+from __future__ import annotations
 import json
 import frappe
 from frappe import _
-from qorg.qorg.design_system.service import SETTINGS, PRESET, VISUAL_FIELDS, clear_cache, css_variables, effective, update_state, validate_values, values_from
+from frappe.utils import cint
+from qorg.qorg.design_system.service import SETTINGS, PRESET, clear_cache, effective, validate_values
 
 def _manager():
-    if frappe.session.user=="Guest" or not frappe.has_permission(SETTINGS,"write"):
-        frappe.throw(_("You are not permitted to manage the QOrg Design System."),frappe.PermissionError)
+    if frappe.session.user == "Guest" or not frappe.has_permission(SETTINGS, "write"):
+        frappe.throw(_("Not permitted"), frappe.PermissionError)
 
 @frappe.whitelist(allow_guest=True)
-def get_effective_configuration():
-    config = effective()
-    if frappe.session.user != "Guest":
-        return config
-    allowed = ("enabled", "apply_to_login", "apply_to_qorg_web_components", "respect_active_website_theme", "theme_mode_policy", "density", "login_layout", "login_visual_source", "login_visual_image", "login_visual_gradient", "login_welcome_title", "login_welcome_subtitle", "show_login_language_switcher", "login_mobile_visual_policy", "login_experience_style", "login_form_density", "login_show_trust_message", "login_trust_message", "login_card_alignment", "login_show_security_footer", "login_focus_first_field", "web_form_max_content_width", "web_form_sticky_actions", "web_form_hide_technical_child_row_name", "web_form_presentation", "portal_presentation", "public_card_style", "public_validation_summary", "public_success_presentation", "public_mobile_sticky_actions", "css_variables")
-    return {key: config.get(key) for key in allowed}
+def get_effective_configuration(force=0):
+    config=effective(use_cache=not cint(force))
+    if frappe.session.user == "Guest":
+        allowed={"enabled","apply_to_login","login_layout","login_image","login_title","login_subtitle","apply_to_web_forms","wide_web_forms","sticky_mobile_actions","theme_mode","density","surface_style","tokens","schema_version","fingerprint"}
+        return {k:v for k,v in config.items() if k in allowed}
+    return config
 
 @frappe.whitelist(methods=["POST"])
 def preview(configuration=None):
     _manager(); values=json.loads(configuration) if isinstance(configuration,str) else (configuration or {})
-    doc=frappe.get_single(SETTINGS)
-    for k,v in values.items():
-        if doc.meta.has_field(k): doc.set(k,v)
-    validate_values(doc)
-    data={**effective(use_cache=False),**values}; data["enabled"]=1; data["css_variables"]=css_variables(data)
-    return data
+    config=effective(False); config.update({k:v for k,v in values.items() if k in config}); return config
 
 @frappe.whitelist(methods=["POST"])
 def apply():
-    _manager(); doc=frappe.get_single(SETTINGS); doc.save(); clear_cache(); update_state("Managed")
-    config=effective(use_cache=False); frappe.publish_realtime("qorg_design_system_changed",{"fingerprint":config["fingerprint"]},after_commit=True)
+    _manager(); doc=frappe.get_single(SETTINGS); validate_values(doc); clear_cache(); config=effective(False)
+    frappe.publish_realtime("qorg_theme_changed", {"fingerprint":config["fingerprint"]}, after_commit=True)
     return config
 
 @frappe.whitelist(methods=["POST"])
 def restore_frappe_default():
-    _manager(); doc=frappe.get_single(SETTINGS); doc.enabled=0; doc.active_preset="Frappe Standard"; doc.save(); clear_cache(); update_state("Restored")
-    frappe.publish_realtime("qorg_design_system_changed",{"restored":True},after_commit=True)
-    return {"message":_("Frappe Standard appearance restored.")}
-
-
-@frappe.whitelist(allow_guest=True)
-def get_available_languages():
-    fields = ["name", "language_name"]
-    filters = {"enabled": 1} if frappe.get_meta("Language").has_field("enabled") else {}
-    return frappe.get_all("Language", filters=filters, fields=fields, order_by="language_name asc")
-
-
-@frappe.whitelist(methods=["POST"])
-def set_current_user_language(language):
-    if frappe.session.user == "Guest":
-        frappe.throw(_("Log in before changing the Desk language."), frappe.PermissionError)
-    if not frappe.db.exists("Language", language):
-        frappe.throw(_("Unknown language: {0}").format(language))
-    frappe.db.set_value("User", frappe.session.user, "language", language, update_modified=False)
-    frappe.clear_cache(user=frappe.session.user)
-    return {"language": language, "reload": True}
-
-
-@frappe.whitelist(allow_guest=True)
-def get_web_form_overrides(route):
-    name = frappe.db.get_value("Web Form", {"route": route, "published": 1}, "name")
-    if not name:
-        return {}
-    doc = frappe.get_doc("Web Form", name)
-    fields = ("qorg_web_form_design_mode", "qorg_web_form_header_style_override", "qorg_web_form_max_content_width_override", "qorg_web_form_privacy_notice_mode", "qorg_web_form_sticky_actions_mode", "qorg_web_form_child_name_mode")
-    return {fieldname: doc.get(fieldname) for fieldname in fields if doc.meta.has_field(fieldname)}
-
-
-@frappe.whitelist()
-def get_quick_create_menu():
-    if frappe.session.user == "Guest" or not frappe.db.exists("DocType", SETTINGS):
-        return {"enabled": False, "label": _("Create"), "items": []}
-    settings = frappe.get_single(SETTINGS)
-    if not settings.get("enable_quick_create_menu"):
-        return {"enabled": False, "label": _(settings.get("quick_create_button_label")) if settings.get("quick_create_button_label") else _("Create"), "items": []}
-    items = []
-    rows = sorted(settings.get("quick_create_items") or [], key=lambda row: (row.sequence if row.sequence is not None else 10, row.idx or 0))
-    for row in rows:
-        doctype = row.reference_doctype
-        if not row.enabled or not doctype or not frappe.db.exists("DocType", doctype):
-            continue
-        meta = frappe.get_meta(doctype)
-        if meta.istable or meta.issingle or not frappe.has_permission(doctype, ptype="create"):
-            continue
-        items.append({
-            "doctype": doctype,
-            "label": _(row.display_label) if row.display_label else _(doctype),
-            "icon": row.icon or "add",
-            "group": row.menu_group or _("Other"),
-            "favorite": bool(row.is_favorite),
-            "description": row.description or "",
-        })
-    items.sort(key=lambda item: (not item["favorite"], item["group"], item["label"]))
-    return {
-        "enabled": True,
-        "label": _(settings.get("quick_create_button_label")) if settings.get("quick_create_button_label") else _("Create"),
-        "search": bool(settings.get("create_menu_search")),
-        "grouped": bool(settings.get("group_create_items")),
-        "items": items,
-    }
-
-
-def _preset_payload(doc):
-    return {fieldname: doc.get(fieldname) for fieldname in VISUAL_FIELDS if doc.meta.has_field(fieldname) and doc.get(fieldname) not in (None, "")}
-
-
-@frappe.whitelist()
-def get_preset_configuration(name):
-    _manager()
-    if not frappe.db.exists(PRESET, name):
-        frappe.throw(_("Unknown design preset: {0}").format(name))
-    return _preset_payload(frappe.get_doc(PRESET, name))
-
-
-@frappe.whitelist()
-def export_preset(name):
-    _manager()
-    if not frappe.db.exists(PRESET, name):
-        frappe.throw(_("Unknown design preset: {0}").format(name))
-    doc = frappe.get_doc(PRESET, name)
-    return {"schema_version": doc.schema_version, "preset_name": doc.preset_name, "description": doc.description, "configuration": _preset_payload(doc)}
-
-
-@frappe.whitelist(methods=["POST"])
-def clone_preset(source, target):
-    _manager()
-    target = (target or "").strip()
-    if not target or frappe.db.exists(PRESET, target):
-        frappe.throw(_("Enter a unique preset name."))
-    source_doc = frappe.get_doc(PRESET, source)
-    values = _preset_payload(source_doc)
-    doc = frappe.get_doc({"doctype": PRESET, "preset_name": target, "description": _("Cloned from {0}").format(source), "enabled": 1, "is_standard": 0, **values})
-    doc.insert()
-    return {"name": doc.name}
-
-
-@frappe.whitelist(methods=["POST"])
-def import_preset(payload, target=None):
-    _manager()
-    if isinstance(payload, str) and len(payload.encode("utf-8")) > 65536:
-        frappe.throw(_("Preset JSON cannot exceed 64 KB."))
-    try:
-        data = json.loads(payload) if isinstance(payload, str) else (payload or {})
-    except (TypeError, ValueError):
-        frappe.throw(_("The preset JSON is not valid."))
-    configuration = data.get("configuration") or {}
-    unknown = set(configuration) - set(VISUAL_FIELDS)
-    if unknown:
-        frappe.throw(_("Unsupported preset keys: {0}").format(", ".join(sorted(unknown))))
-    name = (target or data.get("preset_name") or "").strip()
-    if not name or frappe.db.exists(PRESET, name):
-        frappe.throw(_("Enter a unique preset name."))
-    doc = frappe.get_doc({"doctype": PRESET, "preset_name": name, "description": data.get("description") or _("Imported preset"), "enabled": 1, "is_standard": 0, **configuration})
-    doc.insert()
-    return {"name": doc.name}
-
+    _manager(); doc=frappe.get_single(SETTINGS); doc.active_preset="Frappe Standard"; doc.enabled=0; doc.save(); clear_cache(); return effective(False)
 
 @frappe.whitelist()
 def validate_current_configuration():
-    _manager()
-    doc = frappe.get_single(SETTINGS)
-    validate_values(doc)
-    findings = []
-    if doc.get("apply_to_login") and doc.get("login_layout") != "Frappe Standard" and doc.get("login_visual_source") == "Managed Image" and not doc.get("login_visual_image"):
-        findings.append({"severity": "Warning", "message": _("Login visual source is Managed Image, but no image is selected.")})
-    if doc.get("apply_to_qorg_web_components") and doc.get("respect_active_website_theme") and not doc.get("active_website_theme"):
-        findings.append({"severity": "Warning", "message": _("No active Website Theme was detected; Frappe Standard website variables will be used.")})
-    if doc.get("enable_quick_create_menu") and not any(row.enabled for row in (doc.get("quick_create_items") or [])):
-        findings.append({"severity": "Info", "message": _("The Create button is enabled, but no Create Menu Items are enabled.")})
-    return {"valid": not any(row["severity"] in {"Error", "Blocked"} for row in findings), "findings": findings}
-
+    _manager(); validate_values(frappe.get_single(SETTINGS)); return {"valid":True,"findings":[]}
 
 @frappe.whitelist()
-def get_preset_gallery():
-    _manager()
-    rows = frappe.get_all(
-        PRESET,
-        filters={"enabled": 1},
-        fields=["name", "preset_name", "description", "is_standard", "configuration_fingerprint"],
-        order_by="is_standard desc, preset_name asc",
-    )
-    result = []
-    for row in rows:
-        doc = frappe.get_doc(PRESET, row.name)
-        config = _preset_payload(doc)
-        result.append({
-            **row,
-            "configuration": config,
-            "swatches": [
-                config.get("primary_accent") or "#137690",
-                config.get("secondary_accent") or "#cbae66",
-                config.get("page_surface") or "#f6f8fa",
-                config.get("card_surface") or "#ffffff",
-            ],
-        })
-    return result
+def get_quick_create_menu():
+    if frappe.session.user == "Guest": return {"items":[],"grouped":{}}
+    settings=frappe.get_single(SETTINGS); items=[]
+    for row in settings.get("quick_create_items") or []:
+        dt=row.reference_doctype
+        if not row.enabled or not dt or not frappe.db.exists("DocType",dt): continue
+        meta=frappe.get_meta(dt)
+        if meta.istable or meta.issingle or not frappe.has_permission(dt,"create"): continue
+        items.append({"doctype":dt,"label":row.display_label or _(dt),"group":row.menu_group or _("Other"),"description":row.description or "","icon":row.icon or "add","favorite":cint(row.is_favorite),"sequence":row.sequence or 0})
+    items.sort(key=lambda x:(not x["favorite"],x["group"],x["sequence"],x["label"]))
+    grouped={}
+    for item in items: grouped.setdefault(item["group"],[]).append(item)
+    return {"items":items,"grouped":grouped}
 
+@frappe.whitelist(allow_guest=True)
+def get_available_languages():
+    languages=frappe.get_all("Language",filters={"enabled":1},fields=["language_code","language_name"],order_by="language_name")
+    return {"current":frappe.local.lang,"languages":languages}
 
 @frappe.whitelist(methods=["POST"])
-def validate_visual_configuration(configuration=None):
-    _manager()
-    values = json.loads(configuration) if isinstance(configuration, str) else (configuration or {})
-    doc = frappe.get_single(SETTINGS)
-    for fieldname, value in values.items():
-        if doc.meta.has_field(fieldname):
-            doc.set(fieldname, value)
-    validate_values(doc)
-    findings = []
-    width = int(doc.get("web_form_max_content_width") or 0)
-    if width and width < 760:
-        findings.append({"severity": "Error", "area": "Public", "message": _("Web Form width must be at least 760 pixels.")})
-    if width and width > 1600:
-        findings.append({"severity": "Error", "area": "Public", "message": _("Web Form width cannot exceed 1600 pixels.")})
-    if doc.get("touch_target_policy") == "44px minimum" and int(doc.get("control_height") or 0) and int(doc.get("control_height")) < 40:
-        findings.append({"severity": "Warning", "area": "Accessibility", "message": _("Control height is below the recommended touch target.")})
-    if doc.get("theme_mode_policy") == "Dark" and doc.get("card_surface") in {"#ffffff", "#fff", "white"}:
-        findings.append({"severity": "Warning", "area": "Dark Mode", "message": _("A white card surface may conflict with the selected dark policy.")})
-    if doc.get("login_visual_source") == "Managed Image" and not doc.get("login_visual_image"):
-        findings.append({"severity": "Warning", "area": "Login", "message": _("Managed Image is selected without an image.")})
-    return {"valid": not any(row["severity"] == "Error" for row in findings), "findings": findings}
+def set_current_user_language(language):
+    if frappe.session.user == "Guest": frappe.throw(_("Please sign in first."),frappe.PermissionError)
+    if not frappe.db.exists("Language", {"language_code":language,"enabled":1}): frappe.throw(_("Language is not enabled."))
+    frappe.db.set_value("User",frappe.session.user,"language",language); frappe.clear_cache(user=frappe.session.user); return {"language":language}
