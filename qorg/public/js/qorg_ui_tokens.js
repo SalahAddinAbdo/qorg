@@ -1,0 +1,1 @@
+(()=>{frappe.call({method:"qorg.qorg.design_system.api.get_ui_configuration"}).then(r=>{const t=r.message||{},s=document.documentElement.style;s.setProperty("--primary-color",t.primary_color);s.setProperty("--primary",t.primary_color);s.setProperty("--secondary-color",t.secondary_color);s.setProperty("--border-radius",`${t.border_radius}px`)})})();

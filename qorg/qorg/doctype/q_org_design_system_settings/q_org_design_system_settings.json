@@ -7,12 +7,13 @@
   "track_changes": 1,
   "field_order": [
     "baseline_tab",
-    "baseline_section",
-    "enabled",
-    "active_preset",
+    "global_tokens_section",
+    "primary_color",
+    "secondary_color",
+    "tokens_column",
+    "border_radius",
     "language_section",
     "show_language_action",
-    "quick_create_section",
     "quick_create_items",
     "login_tab",
     "login_enable_section",
@@ -41,40 +42,43 @@
       "label": "Baseline"
     },
     {
-      "fieldname": "baseline_section",
+      "fieldname": "global_tokens_section",
       "fieldtype": "Section Break",
-      "label": "Frappe Baseline"
+      "label": "Global Interface Tokens"
     },
     {
-      "fieldname": "enabled",
-      "fieldtype": "Check",
-      "label": "Enable Custom Desk Theme",
-      "default": "0",
-      "read_only": 1
+      "fieldname": "primary_color",
+      "fieldtype": "Color",
+      "label": "Primary Color",
+      "default": "#137690"
     },
     {
-      "fieldname": "active_preset",
-      "fieldtype": "Link",
-      "label": "Active Preset",
-      "options": "Q Org Design Preset",
-      "default": "Frappe Standard",
-      "read_only": 1
+      "fieldname": "secondary_color",
+      "fieldtype": "Color",
+      "label": "Secondary Color",
+      "default": "#CBAE66"
+    },
+    {
+      "fieldname": "tokens_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "border_radius",
+      "fieldtype": "Int",
+      "label": "Border Radius (px)",
+      "default": "4",
+      "non_negative": 1
     },
     {
       "fieldname": "language_section",
       "fieldtype": "Section Break",
-      "label": "Language"
+      "label": "Language and Quick Create"
     },
     {
       "fieldname": "show_language_action",
       "fieldtype": "Check",
       "label": "Show Desk Language Action",
       "default": "1"
-    },
-    {
-      "fieldname": "quick_create_section",
-      "fieldtype": "Section Break",
-      "label": "Quick Create Configuration"
     },
     {
       "fieldname": "quick_create_items",
@@ -112,8 +116,7 @@
     {
       "fieldname": "login_background_image",
       "fieldtype": "Attach Image",
-      "label": "Background Image",
-      "description": "Recommended: landscape image at least 1600 x 1200 pixels."
+      "label": "Background Image"
     },
     {
       "fieldname": "login_background_position",
@@ -143,7 +146,7 @@
     {
       "fieldname": "login_content_section",
       "fieldtype": "Section Break",
-      "label": "Visual Content"
+      "label": "Content"
     },
     {
       "fieldname": "login_visual_title",
@@ -181,8 +184,7 @@
     {
       "fieldname": "login_brand_logo",
       "fieldtype": "Attach Image",
-      "label": "Login Logo",
-      "description": "Optional. If empty, the standard site/app logo remains visible."
+      "label": "Login Logo"
     },
     {
       "fieldname": "login_footer_text",
@@ -196,12 +198,8 @@
       "read": 1,
       "write": 1,
       "create": 1,
-      "delete": 0,
       "report": 1,
-      "export": 1,
-      "print": 1,
-      "email": 1,
-      "share": 1
+      "export": 1
     }
   ]
 }

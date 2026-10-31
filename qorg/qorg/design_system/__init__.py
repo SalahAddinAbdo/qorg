@@ -1,1 +1,1 @@
-LOGIN_EXPERIENCE_VERSION = "1.0.0-full-width-split"
+LOGIN_EXPERIENCE_VERSION="1.1.0-fluid-tokens-language-menu"

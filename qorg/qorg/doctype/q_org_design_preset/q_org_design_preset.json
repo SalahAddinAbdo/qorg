@@ -5,22 +5,12 @@
   "custom": 0,
   "autoname": "field:preset_title",
   "title_field": "preset_title",
-  "track_changes": 1,
   "field_order": [
-    "preset_section",
     "preset_title",
     "enabled",
-    "is_system_preset",
-    "preset_column",
-    "description",
-    "baseline_status"
+    "description"
   ],
   "fields": [
-    {
-      "fieldname": "preset_section",
-      "fieldtype": "Section Break",
-      "label": "Preset"
-    },
     {
       "fieldname": "preset_title",
       "fieldtype": "Data",
@@ -34,27 +24,9 @@
       "default": "0"
     },
     {
-      "fieldname": "is_system_preset",
-      "fieldtype": "Check",
-      "label": "System Preset",
-      "read_only": 1
-    },
-    {
-      "fieldname": "preset_column",
-      "fieldtype": "Column Break"
-    },
-    {
       "fieldname": "description",
       "fieldtype": "Small Text",
       "label": "Description"
-    },
-    {
-      "fieldname": "baseline_status",
-      "fieldtype": "Select",
-      "label": "Baseline Status",
-      "options": "Legacy\nFrappe Standard",
-      "default": "Legacy",
-      "read_only": 1
     }
   ],
   "permissions": [
@@ -63,12 +35,7 @@
       "read": 1,
       "write": 1,
       "create": 1,
-      "delete": 1,
-      "report": 1,
-      "export": 1,
-      "print": 1,
-      "email": 1,
-      "share": 1
+      "delete": 1
     }
   ]
 }
