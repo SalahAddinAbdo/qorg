@@ -45,16 +45,9 @@
     observer: null,
     settleTimer: null,
     listenersBound: false,
-    nodeIds: new WeakMap(),
-    nextNodeId: 1,
   };
 
   const unique = (items) => [...new Set(items.filter(Boolean))];
-  function nodeIdentity(element) {
-    if (!element) return null;
-    if (!state.nodeIds.has(element)) state.nodeIds.set(element, state.nextNodeId++);
-    return state.nodeIds.get(element);
-  }
   const visible = (element) => Boolean(
     element && element.isConnected &&
     element.getClientRects().length &&
@@ -174,11 +167,7 @@
       collapsed: context.collapsed,
       mobile: context.mobile,
       adapter: mount.adapter,
-      hostId: nodeIdentity(mount.host),
-      beforeId: nodeIdentity(mount.before),
       hostClass: mount.host?.className || '',
-      dockId: nodeIdentity(detectDock().element),
-      sidebarId: nodeIdentity(detectSidebar().element),
     });
   }
 

@@ -211,18 +211,8 @@ def validate_visual_configuration(configuration=None):
         findings.append({"severity": "Error", "area": "Public", "message": _("Web Form width must be at least 760 pixels.")})
     if width and width > 1600:
         findings.append({"severity": "Error", "area": "Public", "message": _("Web Form width cannot exceed 1600 pixels.")})
-    control_policy = doc.get("control_height_policy") or "Enterprise Best"
-    control_height = int(doc.get("custom_control_height") or 40) if control_policy == "Custom" else {
-        "Enterprise Best": 40, "Compact": 34, "Comfortable": 40, "Spacious": 46, "Frappe Default": 38,
-    }.get(control_policy, 40)
-    if doc.get("touch_target_policy") == "Enhanced" and control_height < 40:
-        findings.append({"severity": "Warning", "area": "Accessibility", "message": _("Control height is below the enhanced touch target recommendation.")})
-    if doc.get("page_width_policy") == "Custom" and int(doc.get("page_max_width") or 0) < 1100:
-        findings.append({"severity": "Warning", "area": "Layout", "message": _("A narrow custom page width may create avoidable empty space in Workspaces and reports.")})
-    if doc.get("nested_surface_policy") == "Frappe Default" and doc.get("surface_hierarchy") == "Layered":
-        findings.append({"severity": "Info", "area": "Surfaces", "message": _("Layered surfaces may look more coherent with Avoid Nested Cards.")})
-    if doc.get("enable_action_dock") and not (doc.get("show_create_action") or doc.get("show_language_action")):
-        findings.append({"severity": "Warning", "area": "Navigation", "message": _("Action Dock is enabled without any visible action.")})
+    if doc.get("touch_target_policy") == "44px minimum" and int(doc.get("control_height") or 0) and int(doc.get("control_height")) < 40:
+        findings.append({"severity": "Warning", "area": "Accessibility", "message": _("Control height is below the recommended touch target.")})
     if doc.get("theme_mode_policy") == "Dark" and doc.get("card_surface") in {"#ffffff", "#fff", "white"}:
         findings.append({"severity": "Warning", "area": "Dark Mode", "message": _("A white card surface may conflict with the selected dark policy.")})
     if doc.get("login_visual_source") == "Managed Image" and not doc.get("login_visual_image"):

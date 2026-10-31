@@ -139,6 +139,7 @@ def _migrate_settings() -> None:
             settings.web_form_max_content_width = 1180
             changed = True
 
+    changed = _apply_v29_empty_defaults(settings) or changed
     if changed:
         settings.flags.ignore_permissions = True
         settings.save()
@@ -180,3 +181,21 @@ def _delete_obsolete_fields() -> None:
                     ignore_permissions=True,
                     force=True,
                 )
+
+
+def _apply_v29_empty_defaults(settings) -> bool:
+    defaults = {
+        "font_source": "System and Frappe",
+        "language_font_strategy": "Automatic Best Match",
+        "latin_font_family": "Inter",
+        "arabic_font_family": "Noto Sans Arabic",
+        "typography_weight_system": "Balanced",
+        "login_layout": "Full Width Split",
+        "login_mobile_visual_policy": "Compact Header",
+    }
+    changed = False
+    for fieldname, value in defaults.items():
+        if settings.meta.has_field(fieldname) and settings.get(fieldname) in (None, ""):
+            settings.set(fieldname, value)
+            changed = True
+    return changed

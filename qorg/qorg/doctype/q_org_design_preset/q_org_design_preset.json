@@ -42,6 +42,14 @@
     "hover_surface",
     "appearance_tab",
     "preset_typography_section",
+    "font_source",
+    "language_font_strategy",
+    "latin_font_family",
+    "arabic_font_family",
+    "font_source_column",
+    "typography_weight_system",
+    "custom_font_stack",
+    "prefer_locally_hosted_fonts",
     "theme_mode_policy",
     "density",
     "typography_policy",
@@ -153,44 +161,7 @@
     "public_mobile_sticky_actions",
     "web_form_max_content_width",
     "web_form_sticky_actions",
-    "web_form_hide_technical_child_row_name",
-    "unified_polish_tab",
-    "preset_control_sizing_section",
-    "control_height_policy",
-    "custom_control_height",
-    "control_horizontal_padding",
-    "control_label_gap",
-    "preset_control_sizing_section_column",
-    "small_text_height_policy",
-    "small_text_min_height",
-    "text_editor_min_height",
-    "select_option_height",
-    "focus_ring_style",
-    "preset_shell_layout_section",
-    "page_width_policy",
-    "page_max_width",
-    "page_inline_padding",
-    "app_rail_style",
-    "app_rail_icon_size",
-    "preset_shell_layout_section_column",
-    "module_sidebar_style",
-    "module_sidebar_width",
-    "navigation_item_height",
-    "navbar_search_style",
-    "breadcrumb_emphasis",
-    "menu_density",
-    "preset_workspace_composition_section",
-    "workspace_content_width",
-    "workspace_grid_policy",
-    "workspace_column_gap",
-    "workspace_row_gap",
-    "workspace_card_style",
-    "preset_workspace_composition_section_column",
-    "workspace_card_height_policy",
-    "workspace_heading_accent",
-    "nested_surface_policy",
-    "section_action_style",
-    "mixed_content_bidi_safety"
+    "web_form_hide_technical_child_row_name"
   ],
   "fields": [
     {
@@ -391,6 +362,58 @@
       "label": "Typography"
     },
     {
+      "fieldname": "font_source",
+      "fieldtype": "Select",
+      "label": "Font Source",
+      "options": "System and Frappe\nManaged Google Catalog\nCustom Font Stack",
+      "default": "System and Frappe"
+    },
+    {
+      "fieldname": "language_font_strategy",
+      "fieldtype": "Select",
+      "label": "Language Font Strategy",
+      "options": "Automatic Best Match\nOne Family for All Languages\nSeparate Arabic and Latin Fonts",
+      "default": "Automatic Best Match"
+    },
+    {
+      "fieldname": "latin_font_family",
+      "fieldtype": "Select",
+      "label": "Latin Interface Font",
+      "options": "Inter\nRoboto\nOpen Sans\nSource Sans 3\nIBM Plex Sans\nNoto Sans\nLato\nNunito Sans",
+      "default": "Inter"
+    },
+    {
+      "fieldname": "arabic_font_family",
+      "fieldtype": "Select",
+      "label": "Arabic Interface Font",
+      "options": "Noto Sans Arabic\nIBM Plex Sans Arabic\nTajawal\nCairo\nAlmarai\nAlexandria\nNoto Kufi Arabic",
+      "default": "Noto Sans Arabic"
+    },
+    {
+      "fieldname": "font_source_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "typography_weight_system",
+      "fieldtype": "Select",
+      "label": "Typography Weight System",
+      "options": "Balanced\nStrong Hierarchy\nLightweight\nFrappe Standard",
+      "default": "Balanced"
+    },
+    {
+      "fieldname": "custom_font_stack",
+      "fieldtype": "Data",
+      "label": "Custom Interface Font Stack",
+      "default": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+    },
+    {
+      "fieldname": "prefer_locally_hosted_fonts",
+      "fieldtype": "Check",
+      "label": "Prefer Locally Hosted Fonts",
+      "default": "0"
+    },
+    {
       "fieldname": "theme_mode_policy",
       "fieldtype": "Select",
       "label": "Theme Mode Policy",
@@ -499,21 +522,21 @@
       "fieldtype": "Select",
       "label": "Control Radius",
       "options": "Frappe Default\nCompact\nSubtle\nRounded",
-      "default": "Subtle"
+      "default": "Compact"
     },
     {
       "fieldname": "button_radius",
       "fieldtype": "Select",
       "label": "Button Radius",
       "options": "Frappe Default\nCompact\nSubtle\nRounded",
-      "default": "Subtle"
+      "default": "Compact"
     },
     {
       "fieldname": "card_radius",
       "fieldtype": "Select",
       "label": "Card Radius",
       "options": "Frappe Default\nCompact\nSubtle\nRounded",
-      "default": "Subtle"
+      "default": "Compact"
     },
     {
       "fieldname": "preset_shape_column",
@@ -525,7 +548,7 @@
       "fieldtype": "Select",
       "label": "Dialog Radius",
       "options": "Frappe Default\nCompact\nSubtle\nRounded",
-      "default": "Subtle"
+      "default": "Compact"
     },
     {
       "fieldname": "border_strength",
@@ -693,7 +716,7 @@
       "fieldtype": "Select",
       "label": "Surface Hierarchy",
       "options": "Layered\nSubtle\nFlat",
-      "default": "Subtle"
+      "default": "Layered"
     },
     {
       "fieldname": "navigation_emphasis",
@@ -1094,240 +1117,6 @@
       "fieldname": "web_form_hide_technical_child_row_name",
       "fieldtype": "Check",
       "label": "Hide Technical Child Row Name",
-      "default": "1"
-    },
-    {
-      "fieldname": "unified_polish_tab",
-      "fieldtype": "Tab Break",
-      "label": "Unified Polish"
-    },
-    {
-      "fieldname": "preset_control_sizing_section",
-      "fieldtype": "Section Break",
-      "label": "Controls and Text Areas"
-    },
-    {
-      "fieldname": "control_height_policy",
-      "fieldtype": "Select",
-      "label": "Control Height Policy",
-      "options": "Enterprise Best\nCompact\nComfortable\nSpacious\nCustom\nFrappe Default",
-      "default": "Enterprise Best"
-    },
-    {
-      "fieldname": "custom_control_height",
-      "fieldtype": "Int",
-      "label": "Custom Control Height (px)",
-      "default": "40",
-      "depends_on": "eval:doc.control_height_policy==\"Custom\""
-    },
-    {
-      "fieldname": "control_horizontal_padding",
-      "fieldtype": "Int",
-      "label": "Control Horizontal Padding (px)",
-      "default": "12"
-    },
-    {
-      "fieldname": "control_label_gap",
-      "fieldtype": "Int",
-      "label": "Label to Control Gap (px)",
-      "default": "6"
-    },
-    {
-      "fieldname": "preset_control_sizing_section_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "small_text_height_policy",
-      "fieldtype": "Select",
-      "label": "Small Text Height Policy",
-      "options": "Compact\nComfortable\nSpacious\nCustom\nFrappe Default",
-      "default": "Comfortable"
-    },
-    {
-      "fieldname": "small_text_min_height",
-      "fieldtype": "Int",
-      "label": "Small Text Minimum Height (px)",
-      "default": "88",
-      "depends_on": "eval:doc.small_text_height_policy==\"Custom\""
-    },
-    {
-      "fieldname": "text_editor_min_height",
-      "fieldtype": "Int",
-      "label": "Text Editor Minimum Height (px)",
-      "default": "160"
-    },
-    {
-      "fieldname": "select_option_height",
-      "fieldtype": "Int",
-      "label": "Select Option Height (px)",
-      "default": "40"
-    },
-    {
-      "fieldname": "focus_ring_style",
-      "fieldtype": "Select",
-      "label": "Focus Ring Style",
-      "options": "Outline and Soft Glow\nOutline\nSoft Glow\nFrappe Default",
-      "default": "Outline and Soft Glow"
-    },
-    {
-      "fieldname": "preset_shell_layout_section",
-      "fieldtype": "Section Break",
-      "label": "Application Shell and Navigation"
-    },
-    {
-      "fieldname": "page_width_policy",
-      "fieldtype": "Select",
-      "label": "Page Width Policy",
-      "options": "Wide Adaptive\nBalanced\nFull Width\nCustom\nFrappe Default",
-      "default": "Wide Adaptive"
-    },
-    {
-      "fieldname": "page_max_width",
-      "fieldtype": "Int",
-      "label": "Custom Maximum Content Width (px)",
-      "default": "1600",
-      "depends_on": "eval:doc.page_width_policy==\"Custom\""
-    },
-    {
-      "fieldname": "page_inline_padding",
-      "fieldtype": "Int",
-      "label": "Page Inline Padding (px)",
-      "default": "24"
-    },
-    {
-      "fieldname": "app_rail_style",
-      "fieldtype": "Select",
-      "label": "App Rail Style",
-      "options": "Integrated Executive\nCompact\nSpacious\nFrappe Default",
-      "default": "Integrated Executive"
-    },
-    {
-      "fieldname": "app_rail_icon_size",
-      "fieldtype": "Int",
-      "label": "App Rail Icon Size (px)",
-      "default": "20"
-    },
-    {
-      "fieldname": "preset_shell_layout_section_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "module_sidebar_style",
-      "fieldtype": "Select",
-      "label": "Module Sidebar Style",
-      "options": "Integrated Executive\nCompact\nBalanced\nFrappe Default",
-      "default": "Integrated Executive"
-    },
-    {
-      "fieldname": "module_sidebar_width",
-      "fieldtype": "Int",
-      "label": "Module Sidebar Width (px)",
-      "default": "272"
-    },
-    {
-      "fieldname": "navigation_item_height",
-      "fieldtype": "Int",
-      "label": "Navigation Item Height (px)",
-      "default": "40"
-    },
-    {
-      "fieldname": "navbar_search_style",
-      "fieldtype": "Select",
-      "label": "Navbar Search Style",
-      "options": "Subtle Brand\nSurface\nBordered\nFrappe Default",
-      "default": "Subtle Brand"
-    },
-    {
-      "fieldname": "breadcrumb_emphasis",
-      "fieldtype": "Select",
-      "label": "Breadcrumb Emphasis",
-      "options": "Current Page\nBalanced\nFrappe Default",
-      "default": "Current Page"
-    },
-    {
-      "fieldname": "menu_density",
-      "fieldtype": "Select",
-      "label": "Menu Density",
-      "options": "Comfortable\nCompact\nFrappe Default",
-      "default": "Comfortable"
-    },
-    {
-      "fieldname": "preset_workspace_composition_section",
-      "fieldtype": "Section Break",
-      "label": "Workspace Composition"
-    },
-    {
-      "fieldname": "workspace_content_width",
-      "fieldtype": "Select",
-      "label": "Workspace Content Width",
-      "options": "Wide Adaptive\nBalanced\nFull Width\nFrappe Default",
-      "default": "Wide Adaptive"
-    },
-    {
-      "fieldname": "workspace_grid_policy",
-      "fieldtype": "Select",
-      "label": "Workspace Grid Policy",
-      "options": "Adaptive\nContent Based\nTwo Columns\nThree Columns\nFrappe Default",
-      "default": "Adaptive"
-    },
-    {
-      "fieldname": "workspace_column_gap",
-      "fieldtype": "Int",
-      "label": "Workspace Column Gap (px)",
-      "default": "16"
-    },
-    {
-      "fieldname": "workspace_row_gap",
-      "fieldtype": "Int",
-      "label": "Workspace Row Gap (px)",
-      "default": "16"
-    },
-    {
-      "fieldname": "workspace_card_style",
-      "fieldtype": "Select",
-      "label": "Workspace Card Style",
-      "options": "Executive Subtle\nBordered\nFlat\nFrappe Default",
-      "default": "Executive Subtle"
-    },
-    {
-      "fieldname": "preset_workspace_composition_section_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "workspace_card_height_policy",
-      "fieldtype": "Select",
-      "label": "Workspace Card Height",
-      "options": "Content Based\nEqual Per Row\nCompact Equal\nFrappe Default",
-      "default": "Content Based"
-    },
-    {
-      "fieldname": "workspace_heading_accent",
-      "fieldtype": "Select",
-      "label": "Workspace Heading Accent",
-      "options": "Short Underline\nAccent Bar\nFull Divider\nNone",
-      "default": "Short Underline"
-    },
-    {
-      "fieldname": "nested_surface_policy",
-      "fieldtype": "Select",
-      "label": "Nested Surface Policy",
-      "options": "Avoid Nested Cards\nAllow One Level\nFrappe Default",
-      "default": "Avoid Nested Cards"
-    },
-    {
-      "fieldname": "section_action_style",
-      "fieldtype": "Select",
-      "label": "Section Action Style",
-      "options": "Inline\nSubtle Button\nFrappe Default",
-      "default": "Inline"
-    },
-    {
-      "fieldname": "mixed_content_bidi_safety",
-      "fieldtype": "Check",
-      "label": "Mixed Arabic and English Content Safety",
       "default": "1"
     }
   ],

@@ -1,5 +1,15 @@
 frappe.ui.form.on("Q Org Design System Settings", {
   refresh(frm) {
+    const preview = frm.fields_dict.font_preview?.$wrapper;
+    if (preview) {
+      const latin = frappe.utils.escape_html(frm.doc.latin_font_family || "System UI");
+      const arabic = frappe.utils.escape_html(frm.doc.arabic_font_family || "خط النظام");
+      preview.html(`<div class="qorg-font-preview" style="padding:16px;border:1px solid var(--border-color);border-radius:12px;background:var(--card-bg)">
+        <div style="font-size:20px;font-weight:650">${arabic}: إدارة المشاريع والموارد والتقارير</div>
+        <div style="margin-top:8px;font-size:18px">${latin}: Projects, Finance, People and Reports</div>
+        <div style="margin-top:8px;font-variant-numeric:tabular-nums">123,456.78 · 2026</div>
+      </div>`);
+    }
     frm.add_custom_button(__("Preview"), async () => {
       const response = await frappe.call({
         method: "qorg.qorg.design_system.api.preview",
@@ -9,23 +19,10 @@ frappe.ui.form.on("Q Org Design System Settings", {
       window.qorgDesignSystem?.preview(response.message);
     }, __("Design System"));
 
-    frm.add_custom_button(__("Live Preview"), () => {
-      window.QOrgDesignAdmin?.showLivePreview?.(frm);
-    }, __("Design System"));
-    frm.add_custom_button(__("Visual Validation"), () => {
-      window.QOrgDesignAdmin?.showVisualValidation?.(frm);
-    }, __("Design System"));
-    frm.add_custom_button(__("Theme Comparison"), () => {
-      window.QOrgDesignAdmin?.showComparison?.(frm);
-    }, __("Design System"));
-    frm.add_custom_button(__("Preset Gallery"), () => {
-      window.QOrgDesignAdmin?.showPresetGallery?.();
-    }, __("Presets"));
-
     frm.add_custom_button(__("Apply"), async () => {
       await frm.save();
       await frappe.call({ method: "qorg.qorg.design_system.api.apply", type: "POST", freeze: true });
-      await window.QOrgDesignAdmin?.refreshPublishedExperience?.();
+      await window.qorgDesignSystem?.reload?.();
       frappe.show_alert({ message: __("Design System applied."), indicator: "green" });
     }, __("Design System"));
 
@@ -48,7 +45,7 @@ frappe.ui.form.on("Q Org Design System Settings", {
     frm.add_custom_button(__("Restore Frappe Default"), () => {
       frappe.confirm(__("Restore the standard Frappe appearance?"), async () => {
         await frappe.call({ method: "qorg.qorg.design_system.api.restore_frappe_default", type: "POST", freeze: true });
-        await window.QOrgDesignAdmin?.refreshPublishedExperience?.();
+        await window.qorgDesignSystem?.reload?.();
         frappe.show_alert({ message: __("Frappe Standard appearance restored."), indicator: "green" });
       });
     }, __("Design System"));
@@ -98,7 +95,6 @@ frappe.ui.form.on("Q Org Design System Settings", {
       for (const [fieldname, value] of Object.entries(response.message || {})) {
         if (frm.fields_dict[fieldname]) await frm.set_value(fieldname, value);
       }
-      await window.QOrgDesignAdmin?.refreshPublishedExperience?.();
     } finally {
       frm.__qorg_loading_preset = false;
     }
