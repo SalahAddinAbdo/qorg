@@ -12,7 +12,7 @@ def audit_runtime_configuration():
  if not all(x["passed"] for x in checks): return _finish(checks)
  config=effective(False)
  add("Schema version",config.get("schema_version")==THEME_SCHEMA_VERSION,config.get("schema_version"))
- add("Cache key",CACHE_KEY=="qorg:theme:effective:v3.1.1",CACHE_KEY)
+ add("Cache key",CACHE_KEY=="qorg:theme:effective:v3.1.2",CACHE_KEY)
  add("Small configuration contract",len(DEFAULTS)<=20,len(DEFAULTS))
  add("Effective fields complete",not [x for x in DEFAULTS if x not in config],[x for x in DEFAULTS if x not in config])
  add("Semantic tokens generated",len(config.get("tokens") or {})>=12,len(config.get("tokens") or {}))

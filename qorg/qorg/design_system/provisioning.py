@@ -110,13 +110,37 @@ ALLOWED_VALUES = {
 }
 
 
-def normalize_settings_values(settings) -> bool:
-    """Map retained legacy options to the compact v3 contract.
+def ensure_presets() -> None:
+    """Create or safely reconcile preset masters before Settings is saved.
 
-    The function is intentionally idempotent and also falls back to a known
-    default for unknown historic values, preventing migrate from being blocked
-    by a Select value that no longer belongs to the new schema.
+    Active Preset is a Link field. Therefore, the target preset records must
+    exist before any normalization can save Q Org Design System Settings.
     """
+    if not frappe.db.exists("DocType", PRESET):
+        return
+
+    for name, values in PRESETS.items():
+        existing = frappe.db.exists(PRESET, name)
+        if existing:
+            doc = frappe.get_doc(PRESET, existing)
+            if not doc.get("is_system_preset"):
+                # Safe adoption: keep a user-owned compatible record untouched.
+                continue
+        else:
+            doc = frappe.new_doc(PRESET)
+            doc.preset_title = name
+
+        doc.is_system_preset = 1
+        doc.managed_version = THEME_SCHEMA_VERSION
+        for fieldname, value in values.items():
+            if doc.meta.has_field(fieldname):
+                doc.set(fieldname, value)
+        doc.flags.ignore_permissions = True
+        doc.save()
+
+
+def normalize_settings_values(settings) -> bool:
+    """Map legacy values to the compact v3 contract, idempotently."""
     changed = False
 
     for fieldname, aliases in VALUE_ALIASES.items():
@@ -132,10 +156,7 @@ def normalize_settings_values(settings) -> bool:
         if not settings.meta.has_field(fieldname):
             continue
         value = settings.get(fieldname)
-        if value in (None, ""):
-            settings.set(fieldname, DEFAULTS[fieldname])
-            changed = True
-        elif value not in allowed:
+        if value in (None, "") or value not in allowed:
             settings.set(fieldname, DEFAULTS[fieldname])
             changed = True
 
@@ -145,30 +166,20 @@ def normalize_settings_values(settings) -> bool:
         settings.active_preset = mapped_preset
         changed = True
 
+    # A dangling Link must never block migrate. Presets have already been
+    # ensured, so an unknown or removed preset safely falls back to Enterprise.
+    if settings.meta.has_field("active_preset"):
+        preset = settings.get("active_preset")
+        if not preset or not frappe.db.exists(PRESET, preset):
+            settings.active_preset = DEFAULTS["active_preset"]
+            changed = True
+
     return changed
 
 
-def provision_design_system() -> None:
-    if not frappe.db.exists("DocType", PRESET) or not frappe.db.exists("DocType", SETTINGS):
+def ensure_settings() -> None:
+    if not frappe.db.exists("DocType", SETTINGS):
         return
-
-    for name, values in PRESETS.items():
-        existing = frappe.db.exists(PRESET, name)
-        if existing:
-            doc = frappe.get_doc(PRESET, existing)
-            if not doc.get("is_system_preset"):
-                continue
-        else:
-            doc = frappe.new_doc(PRESET)
-            doc.preset_title = name
-
-        doc.is_system_preset = 1
-        doc.managed_version = THEME_SCHEMA_VERSION
-        for fieldname, value in values.items():
-            if doc.meta.has_field(fieldname):
-                doc.set(fieldname, value)
-        doc.flags.ignore_permissions = True
-        doc.save()
 
     settings = frappe.get_single(SETTINGS)
     changed = normalize_settings_values(settings)
@@ -182,4 +193,12 @@ def provision_design_system() -> None:
         settings.flags.ignore_permissions = True
         settings.save()
 
+
+def provision_design_system() -> None:
+    """Provision in dependency order: Link targets, then Single settings."""
+    if not frappe.db.exists("DocType", PRESET) or not frappe.db.exists("DocType", SETTINGS):
+        return
+
+    ensure_presets()
+    ensure_settings()
     clear_cache()

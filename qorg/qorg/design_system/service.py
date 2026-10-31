@@ -11,7 +11,7 @@ from qorg.qorg.design_system import THEME_SCHEMA_VERSION
 
 SETTINGS = "Q Org Design System Settings"
 PRESET = "Q Org Design Preset"
-CACHE_KEY = "qorg:theme:effective:v3.1.1"
+CACHE_KEY = "qorg:theme:effective:v3.1.2"
 
 DEFAULTS = {
     "enabled": 1,

@@ -2,39 +2,30 @@ from __future__ import annotations
 
 import frappe
 
-from qorg.qorg.design_system.provisioning import normalize_settings_values, provision_design_system
+from qorg.qorg.design_system.provisioning import (
+    ensure_presets,
+    normalize_settings_values,
+    provision_design_system,
+)
 from qorg.qorg.design_system.service import SETTINGS, clear_cache
 
 
-# Legacy values that can survive schema synchronization when a new field keeps
-# the same fieldname but intentionally exposes a smaller option set.
-LEGACY_PRESET_ALIASES = {
-    "QOrg Executive Light": "Q Org Enterprise",
-    "QOrg Comfortable": "Q Org Enterprise",
-    "QOrg Midnight": "Q Org Dark",
-    "QOrg Compact Operations": "Q Org Compact",
-    "QOrg High Contrast": "Q Org Accessible",
-}
-
-
 def migrate_clean_theme() -> None:
-    """Normalize retained v2 values before the v3 Settings document is saved.
+    """Atomically migrate retained theme values without dangling Link errors.
 
-    Frappe keeps values for columns whose fieldnames still exist after DocType
-    synchronization. This is intentional and preserves data, but old Select
-    values must be mapped before document validation runs.
+    Dependency order is deliberate:
+    1. Create/reconcile Q Org Design Preset Link targets.
+    2. Normalize retained legacy Select and Link values.
+    3. Save Settings only after every Link target exists.
+    4. Run idempotent provisioning for defaults and managed reconciliation.
     """
     if not frappe.db.exists("DocType", SETTINGS):
         return
 
+    ensure_presets()
+
     settings = frappe.get_single(SETTINGS)
-    changed = normalize_settings_values(settings)
-
-    if settings.get("active_preset") in LEGACY_PRESET_ALIASES:
-        settings.active_preset = LEGACY_PRESET_ALIASES[settings.active_preset]
-        changed = True
-
-    if changed:
+    if normalize_settings_values(settings):
         settings.flags.ignore_permissions = True
         settings.save()
 
