@@ -855,7 +855,10 @@ html[data-qorg-design-system][data-qorg-sticky-primary-columns="1"] :where(.dt-c
   background: inherit;
 }
 html[data-qorg-design-system][data-qorg-sticky-primary-columns="1"] :where(.dt-cell--col-0) { inset-inline-start: 0; }
-html[data-qorg-design-system][data-qorg-sticky-primary-columns="1"] :where(.dt-cell--col-1) { box-shadow: 6px 0 12px -12px var(--qorg-text-secondary); }
+html[data-qorg-design-system][data-qorg-sticky-primary-columns="1"] :where(.dt-cell--col-1) {
+  inset-inline-start: var(--qorg-sticky-col-1-offset, 0px);
+  box-shadow: 6px 0 12px -12px var(--qorg-text-secondary);
+}
 
 html[data-qorg-design-system][data-qorg-numeric-alignment="1"] :where(
   [data-fieldtype="Currency"], [data-fieldtype="Float"], [data-fieldtype="Int"],
@@ -1716,7 +1719,7 @@ html[data-qorg-design-system] :where(
   .multiselect-list .awesomplete > ul, .multi-select-list .awesomplete > ul,
   .select2-dropdown, .choices__list--dropdown, .multiselect-list .dropdown-menu
 ) {
-  z-index: 2147483001 !important;
+  z-index: 1080 !important;
   margin-top: 6px;
   padding: 6px;
   overflow: auto;
@@ -1783,7 +1786,7 @@ html[data-qorg-design-system] :where(
   max-width: 100%;
 }
 html[data-qorg-design-system] :where(.form-grid .grid-row, .datatable .dt-row) {
-  contain: inline-size layout;
+  contain: inline-size;
 }
 
 /* List filters and result table use the same canvas edges with a small intentional gap. */
@@ -1843,7 +1846,7 @@ html[data-qorg-design-system] :where(
   .standard-actions .dropdown-menu, .list-view-switcher .dropdown-menu,
   .view-switcher .dropdown-menu, .page-head .dropdown-menu
 ) {
-  z-index: 2147483001 !important;
+  z-index: 1080 !important;
   min-width: 220px;
   max-width: min(360px, calc(100vw - 24px));
   padding: 7px;
@@ -1864,11 +1867,11 @@ html[data-qorg-design-system] :where(
 
 /* Persistent viewport-level Action Dock. Menus are one layer above the dock. */
 .qorg-action-dock[data-qorg-dock-placement="floating"] {
-  z-index: 2147483000 !important;
+  z-index: 1070 !important;
   transition: transform var(--qorg-transition), opacity var(--qorg-transition), box-shadow var(--qorg-transition);
 }
 .qorg-command-menu {
-  z-index: 2147483001 !important;
+  z-index: 1080 !important;
 }
 .qorg-action-dock .qorg-dock-toggle {
   min-width: 30px;
@@ -1910,4 +1913,27 @@ html[dir="rtl"] .qorg-action-dock[data-qorg-user-collapsed="1"] {
   html[dir="rtl"] .qorg-action-dock[data-qorg-user-collapsed="1"] {
     transform: translateX(calc(-100% + 34px));
   }
+}
+
+
+/* QOrg Enterprise Experience v2.9.3: consolidated safety and interoperability */
+html[data-qorg-design-system] {
+  --qorg-z-dock: 1040;
+  --qorg-z-dropdown: 1060;
+  --qorg-z-command: 1080;
+}
+html[data-qorg-design-system] [data-qorg-action-dock] { z-index: var(--qorg-z-dock) !important; }
+html[data-qorg-design-system] [data-qorg-overlay] { z-index: var(--qorg-z-command) !important; }
+html[data-qorg-design-system] .modal-backdrop { z-index: 1090; }
+html[data-qorg-design-system] .modal { z-index: 1100; }
+html[data-qorg-design-system][data-qorg-sticky-primary-columns="1"] .dt-cell--col-1 {
+  inset-inline-start: var(--qorg-sticky-col-1-offset, 0px);
+}
+html[data-qorg-design-system] :where(.datatable .dt-row, .datatable .dt-cell) { contain: none; }
+html[data-qorg-design-system] :where(.datatable .dt-cell, .datatable .dt-cell__content) {
+  min-width: 0;
+  max-width: 100%;
+}
+html[data-qorg-design-system][dir="rtl"] :where(.qorg-toast, .qorg-notification, .alert) {
+  border-inline-start: 3px solid var(--qorg-brand-600);
 }

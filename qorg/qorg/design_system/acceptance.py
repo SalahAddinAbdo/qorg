@@ -7,7 +7,10 @@ from typing import Any
 import frappe
 
 from qorg.qorg.design_system import DESIGN_SYSTEM_SCHEMA_VERSION
-from qorg.qorg.design_system.service import PRESET, SETTINGS, VISUAL_FIELDS, effective, validate_values
+from qorg.qorg.design_system.service import (
+    CACHE_KEY, CONFIG_FIELDS, DEFAULTS, PRESET, SETTINGS, VISUAL_FIELDS,
+    effective, validate_values,
+)
 
 REQUIRED_PRESETS = (
     "Frappe Standard",
@@ -23,6 +26,8 @@ REQUIRED_ASSETS = (
     "qorg_design_system.bundle.scss",
     "qorg_website_design.bundle.js",
     "qorg_website_design.bundle.scss",
+    "qorg_form_bootstrap.js",
+    "model_policy.js",
 )
 
 
@@ -39,6 +44,9 @@ def audit_runtime_configuration() -> dict[str, Any]:
         return _finish(checks)
 
     settings = frappe.get_single(SETTINGS)
+    missing_defaults = sorted(set(CONFIG_FIELDS) - set(DEFAULTS))
+    add("Every configuration field has an explicit default", not missing_defaults, missing_defaults)
+    add("Runtime cache key matches v2.9.3", CACHE_KEY.endswith(":v2.9.3"), CACHE_KEY)
     try:
         validate_values(settings)
         add("Settings values are valid", True)
@@ -57,6 +65,9 @@ def audit_runtime_configuration() -> dict[str, Any]:
     add("Active preset is valid", not active or bool(frappe.db.exists(PRESET, active)), active)
 
     config = effective(use_cache=False)
+    add("Effective schema matches installed package", config.get("schema_version") == DESIGN_SYSTEM_SCHEMA_VERSION, config.get("schema_version"))
+    missing_effective = sorted(field for field in CONFIG_FIELDS if field not in config)
+    add("Effective configuration covers every field", not missing_effective, missing_effective)
     add("Effective configuration enabled value is boolean", config.get("enabled") in (True, False, 0, 1), config.get("enabled"))
     add("Effective configuration has CSS variables", bool(config.get("css_variables")), len(config.get("css_variables") or {}))
 

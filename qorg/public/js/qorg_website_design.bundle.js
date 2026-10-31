@@ -25,6 +25,7 @@
     const login = document.querySelector(".for-login");
     const card = login?.querySelector(".page-card");
     if (!login || !card || config.login_experience_style === "Frappe Standard") return;
+    if (card.dataset.qorgLoginCard === "1") return;
 
     root.classList.add("qorg-login-enhanced");
     root.dataset.qorgLoginExperience = key(config.login_experience_style, "qorg-executive");
@@ -36,6 +37,7 @@
     if (!card.querySelector(".qorg-login-visual")) {
       const visual = document.createElement("aside");
       visual.className = "qorg-login-visual";
+      visual.dataset.mobilePolicy = key(config.login_mobile_visual_policy, "hide");
       visual.setAttribute("aria-hidden", "true");
       if (config.login_visual_source === "Managed Image" && config.login_visual_image) {
         visual.style.backgroundImage = `linear-gradient(rgba(8,35,47,.24),rgba(8,35,47,.72)),url(${JSON.stringify(String(config.login_visual_image))})`;
@@ -74,6 +76,7 @@
 
   function enhanceWebForm(config) {
     const form = document.querySelector(".web-form, .web-form-container"); if (!form) return;
+    if (form.dataset.qorgEnhanced === "1") return;
     form.dataset.qorgEnhanced = "1";
     if (config.public_validation_summary && !form.querySelector(".qorg-validation-summary")) {
       const summary = document.createElement("div"); summary.className = "qorg-validation-summary"; summary.hidden = true; summary.setAttribute("role", "alert"); summary.setAttribute("aria-live", "polite"); form.prepend(summary);

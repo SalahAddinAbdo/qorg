@@ -13,7 +13,7 @@ from qorg.qorg.design_system import DESIGN_SYSTEM_SCHEMA_VERSION
 
 SETTINGS = "Q Org Design System Settings"
 PRESET = "Q Org Design Preset"
-CACHE_KEY = "qorg:design-system:effective:v2.8.2"
+CACHE_KEY = "qorg:design-system:effective:v2.9.3"
 
 ENUMS = {
     "theme_mode_policy": {"Follow Frappe/System", "Light", "Dark"},
@@ -145,6 +145,12 @@ CONFIG_FIELDS = VISUAL_FIELDS + (
     'enable_action_dock',
 )
 DEFAULTS = {
+    "active_preset": None,
+    "login_visual_image": None,
+    "enhanced_section_headings": 1,
+    "compact_child_tables": 0,
+    "sticky_list_header": 1,
+    "reduced_transparency": 0,
     "primary_accent": "#137690",
     "secondary_accent": "#cbae66",
     "neutral_accent": "#606c77",

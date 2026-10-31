@@ -346,3 +346,20 @@ html[data-qorg-hide-technical-child-row-name="1"] :where(
 ) {
   display: none !important;
 }
+
+
+/* QOrg Website Experience v2.9.3: consolidated public interface guards */
+html[data-qorg-web-form-sticky-actions="1"] .web-form-actions,
+html[data-qorg-public-mobile-actions="1"] .web-form-actions { z-index: 40; }
+.qorg-table { --qorg-portal-first-column-width: 150px; }
+.qorg-table th:first-child, .qorg-table td:first-child {
+  inline-size: var(--qorg-portal-first-column-width);
+  min-inline-size: var(--qorg-portal-first-column-width);
+}
+.qorg-table th:nth-child(2), .qorg-table td:nth-child(2) {
+  inset-inline-start: var(--qorg-portal-first-column-width);
+}
+@media (max-width: 767px) {
+  html.qorg-login-enhanced .qorg-login-visual[data-mobile-policy="hide"] { display: none !important; }
+  html.qorg-login-enhanced .qorg-login-visual[data-mobile-policy="compact-header"] { min-height: 132px; }
+}

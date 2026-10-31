@@ -11,6 +11,8 @@
     observer: null,
     routeTimer: null,
     reconcileToken: 0,
+    overlayToken: 0,
+    stickyTimer: null,
     dockCollapsed: false,
     installedVariables: new Set(),
     originalTheme: document.documentElement.getAttribute("data-theme"),
@@ -191,6 +193,7 @@
   }
 
   function closeOverlays() {
+    state.overlayToken += 1;
     removeOverlay("create");
     removeOverlay("language");
     document.querySelectorAll("[data-qorg-dock-action]").forEach((button) => {
@@ -310,8 +313,10 @@
 
   async function openCreateMenu(anchor) {
     closeOverlays();
+    const token = state.overlayToken;
     anchor.setAttribute("aria-expanded", "true");
     const configuration = await getCreateConfiguration();
+    if (token !== state.overlayToken || !anchor.isConnected) return;
     const overlay = document.createElement("section");
     overlay.className = "qorg-command-menu";
     overlay.dataset.qorgOverlay = "create";
@@ -355,8 +360,10 @@
 
   async function openLanguageMenu(anchor) {
     closeOverlays();
+    const token = state.overlayToken;
     anchor.setAttribute("aria-expanded", "true");
     const response = await frappe.call("qorg.qorg.design_system.api.get_available_languages");
+    if (token !== state.overlayToken || !anchor.isConnected) return;
     const languages = response.message || [];
     const overlay = document.createElement("section");
     overlay.className = "qorg-command-menu qorg-language-menu";
@@ -584,6 +591,33 @@
     state.dock = dock;
     syncDockCollapsedState(dock);
   }
+
+  function updateStickyPrimaryColumns() {
+    if (document.documentElement.dataset.qorgStickyPrimaryColumns !== "1") return;
+    document.querySelectorAll(".datatable").forEach((table) => {
+      const first = table.querySelector(".dt-row-header .dt-cell--col-0, .dt-row .dt-cell--col-0");
+      if (!first) return;
+      const width = Math.max(0, Math.round(first.getBoundingClientRect().width));
+      table.style.setProperty("--qorg-sticky-col-1-offset", `${width}px`);
+    });
+  }
+
+  function scheduleStickyColumns() {
+    clearTimeout(state.stickyTimer);
+    state.stickyTimer = setTimeout(updateStickyPrimaryColumns, 60);
+  }
+
+  function mutationAffectsDock(mutations) {
+    return mutations.some((mutation) => {
+      const target = mutation.target instanceof Element ? mutation.target : mutation.target?.parentElement;
+      if (!target) return false;
+      if (target.closest?.("[data-qorg-action-dock], [data-module-sidebar], .module-sidebar, .desk-sidebar, .layout-side-section, .sidebar-footer")) return true;
+      return [...(mutation.addedNodes || [])].some((node) =>
+        node instanceof Element && node.matches?.("[data-module-sidebar], .module-sidebar, .desk-sidebar, .layout-side-section, .sidebar-footer, .page-container")
+      );
+    });
+  }
+
   function scheduleRemount(reason = "dom") {
     clearTimeout(state.routeTimer);
     state.routeTimer = setTimeout(() => {
@@ -604,9 +638,11 @@
   });
   window.addEventListener("resize", () => {
     closeOverlays();
-    mountActionDock();
+    scheduleRemount("resize");
+    scheduleStickyColumns();
   }, { passive: true });
   window.addEventListener("scroll", (event) => {
+    scheduleStickyColumns();
     if (event.target?.closest?.("[data-qorg-overlay]")) return;
     const overlay = document.querySelector("[data-qorg-overlay]");
     const action = overlay?.dataset.qorgOverlay;
@@ -654,11 +690,15 @@
     loadAppearance();
   }
 
-  state.observer = new MutationObserver(() => scheduleRemount("mutation"));
+  state.observer = new MutationObserver((mutations) => {
+    scheduleStickyColumns();
+    if (mutationAffectsDock(mutations)) scheduleRemount("mutation");
+  });
+  scheduleStickyColumns();
   state.observer.observe(document.body, {
     childList: true,
     subtree: true,
     attributes: true,
-    attributeFilter: ["class", "data-collapsed", "aria-expanded", "aria-current"],
+    attributeFilter: ["class", "data-collapsed", "aria-current"],
   });
 })();
