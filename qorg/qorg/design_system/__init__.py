@@ -1,1 +1,1 @@
-DESIGN_SYSTEM_SCHEMA_VERSION = "2.8.0-unified-polish"
+DESIGN_SYSTEM_SCHEMA_VERSION = "2.8.2-universal-interface-polish"

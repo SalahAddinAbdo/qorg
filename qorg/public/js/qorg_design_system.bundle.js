@@ -11,6 +11,7 @@
     observer: null,
     routeTimer: null,
     reconcileToken: 0,
+    dockCollapsed: false,
     installedVariables: new Set(),
     originalTheme: document.documentElement.getAttribute("data-theme"),
   };
@@ -445,9 +446,8 @@
   function desiredDockPlacement() {
     const config = state.configuration || {};
     if (window.innerWidth <= 767) return "floating";
-    if (config.action_dock_desktop_placement === "Floating Edge") return "floating";
+    if (config.action_dock_desktop_placement !== "Sidebar Footer") return "floating";
     const sidebar = findSidebarFooter();
-    if (config.action_dock_desktop_placement === "Sidebar Footer") return sidebar ? "sidebar" : "floating";
     return sidebar ? "sidebar" : "floating";
   }
 
@@ -492,6 +492,33 @@
     );
     if (dock.parentElement !== document.body) document.body.append(dock);
   }
+  function syncDockCollapsedState(dock) {
+    dock.dataset.qorgUserCollapsed = state.dockCollapsed ? "1" : "0";
+    const toggle = dock.querySelector('[data-qorg-dock-action="toggle"]');
+    if (!toggle) return;
+    const rtl = document.documentElement.dir === "rtl";
+    const hiddenLabel = rtl ? __("Show quick actions from the left edge") : __("Show quick actions from the right edge");
+    const shownLabel = rtl ? __("Hide quick actions to the left edge") : __("Hide quick actions to the right edge");
+    const label = state.dockCollapsed ? hiddenLabel : shownLabel;
+    toggle.setAttribute("aria-label", label);
+    toggle.title = label;
+    toggle.setAttribute("aria-expanded", state.dockCollapsed ? "false" : "true");
+    const iconBox = toggle.querySelector(".qorg-dock-action-icon");
+    if (iconBox) iconBox.innerHTML = icon(state.dockCollapsed ? (rtl ? "right" : "left") : (rtl ? "left" : "right"), "sm");
+  }
+  function dockToggleButton() {
+    const button = dockButton("toggle", __("Hide quick actions"), "left");
+    button.classList.add("qorg-dock-toggle");
+    button.setAttribute("aria-haspopup", "false");
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      closeOverlays();
+      state.dockCollapsed = !state.dockCollapsed;
+      if (state.dock) syncDockCollapsedState(state.dock);
+    });
+    return button;
+  }
+
   function buildActionDock(config) {
     const dock = document.createElement("div");
     dock.className = "qorg-action-dock";
@@ -501,6 +528,7 @@
       "expand-on-hover"
     );
     dock.setAttribute("aria-label", __("QOrg quick actions"));
+    dock.append(dockToggleButton());
     if (config.show_create_action) {
       const create = dockButton(
         "create",
@@ -535,7 +563,6 @@
   async function mountActionDock() {
     const token = ++state.reconcileToken;
     const config = state.configuration || {};
-    closeOverlays();
     if (!config.enable_action_dock || frappe.session?.user === "Guest" ||
         (!config.show_create_action && !config.show_language_action)) {
       removeDuplicateDocks();
@@ -555,6 +582,7 @@
     }
     placeActionDock(dock, placement, target);
     state.dock = dock;
+    syncDockCollapsedState(dock);
   }
   function scheduleRemount(reason = "dom") {
     clearTimeout(state.routeTimer);
@@ -578,7 +606,13 @@
     closeOverlays();
     mountActionDock();
   }, { passive: true });
-  window.addEventListener("scroll", closeOverlays, { passive: true, capture: true });
+  window.addEventListener("scroll", (event) => {
+    if (event.target?.closest?.("[data-qorg-overlay]")) return;
+    const overlay = document.querySelector("[data-qorg-overlay]");
+    const action = overlay?.dataset.qorgOverlay;
+    const anchor = action ? document.querySelector(`[data-qorg-dock-action="${action}"]`) : null;
+    if (overlay && anchor) positionOverlay(overlay, anchor);
+  }, { passive: true, capture: true });
 
   window.qorgDesignSystem = {
     apply: applyAppearance,

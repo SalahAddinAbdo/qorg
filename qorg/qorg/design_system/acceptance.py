@@ -82,6 +82,9 @@ def audit_runtime_configuration() -> dict[str, Any]:
     })
     add("Unified Polish page width is configured", config.get("page_width_policy") in {"Wide Adaptive", "Balanced", "Full Width", "Custom", "Frappe Default"}, config.get("page_width_policy"))
     add("Unified Polish workspace grid is configured", config.get("workspace_grid_policy") in {"Adaptive", "Content Based", "Two Columns", "Three Columns", "Frappe Default"}, config.get("workspace_grid_policy"))
+    add("Universal interface polish is enabled", bool(config.get("sticky_list_header") and config.get("enable_action_dock")), {
+        "sticky_list_header": config.get("sticky_list_header"), "action_dock": config.get("enable_action_dock"),
+    })
     if frappe.db.exists("DocType", "Web Form"):
         published = frappe.db.count("Web Form", {"published": 1})
         add("Published Web Forms discovered", True, published, "Info")

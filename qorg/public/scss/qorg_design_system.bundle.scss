@@ -1656,3 +1656,258 @@ html[data-qorg-design-system] :where(.dropdown-menu .dropdown-item, .frappe-menu
   color: var(--qorg-text-strong);
   background: var(--qorg-hover-surface-ui);
 }
+
+/* QOrg Enterprise Experience v2.8.2: Universal Interface Polish */
+
+/* Report/DataTable sticky headers must remain in their own scroll context.
+   The previous page-level 50px offset visually covered the first report rows. */
+html[data-qorg-design-system][data-qorg-sticky-list="1"] .report-wrapper :where(.dt-header, .dt-header .dt-row),
+html[data-qorg-design-system][data-qorg-sticky-list="1"] .datatable :where(.dt-header, .dt-header .dt-row) {
+  inset-block-start: 0 !important;
+}
+html[data-qorg-design-system][data-qorg-sticky-list="1"] :where(.report-wrapper, .report-view) .dt-header {
+  position: sticky;
+  top: 0 !important;
+  z-index: 8;
+}
+html[data-qorg-design-system] :where(.report-wrapper .dt-scrollable, .report-view .dt-scrollable) {
+  scroll-padding-block-start: 0;
+  isolation: isolate;
+}
+html[data-qorg-design-system] :where(.report-wrapper .dt-row, .report-view .dt-row) {
+  position: relative;
+  z-index: 1;
+}
+html[data-qorg-design-system] :where(.report-wrapper .dt-header, .report-view .dt-header) {
+  z-index: 8;
+  background: var(--qorg-surface);
+}
+
+/* MultiSelectList, MultiCheck, autocomplete and token controls share one complete treatment. */
+html[data-qorg-design-system] :where(
+  .multiselect-list, .multi-select-list, .multicheck, .multi-check,
+  .tag-input, .tags-input, .select2-container, .choices, .choices__inner
+) {
+  width: 100%;
+  min-width: 0;
+  color: var(--qorg-text-primary-ui);
+}
+html[data-qorg-design-system] :where(
+  .multiselect-list .form-control, .multi-select-list .form-control,
+  .multiselect-list .input-with-feedback, .multi-select-list .input-with-feedback,
+  .tag-input, .tags-input, .select2-selection, .choices__inner
+) {
+  min-height: var(--qorg-control-height, 40px);
+  padding: 5px var(--qorg-control-inline-padding, 12px);
+  border: 1px solid var(--qorg-border-default) !important;
+  border-radius: var(--qorg-control-radius, 8px) !important;
+  background: var(--qorg-surface-interactive) !important;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 28%, transparent);
+}
+html[data-qorg-design-system] :where(
+  .multiselect-list .form-control, .multi-select-list .form-control,
+  .tag-input, .tags-input, .select2-selection, .choices__inner
+):focus-within {
+  border-color: var(--qorg-focus-color, var(--qorg-brand-500)) !important;
+  box-shadow: 0 0 0 1px var(--qorg-focus-color, var(--qorg-brand-500)),
+    0 0 0 4px color-mix(in srgb, var(--qorg-focus-color, var(--qorg-brand-500)) 16%, transparent) !important;
+}
+html[data-qorg-design-system] :where(
+  .multiselect-list .awesomplete > ul, .multi-select-list .awesomplete > ul,
+  .select2-dropdown, .choices__list--dropdown, .multiselect-list .dropdown-menu
+) {
+  z-index: 2147483001 !important;
+  margin-top: 6px;
+  padding: 6px;
+  overflow: auto;
+  max-height: min(360px, 52vh);
+  border: 1px solid var(--qorg-border-subtle) !important;
+  border-radius: calc(var(--qorg-control-radius, 8px) + 2px) !important;
+  background: var(--qorg-surface-raised) !important;
+  box-shadow: var(--qorg-shadow-md) !important;
+}
+html[data-qorg-design-system] :where(
+  .multiselect-list .awesomplete > ul > li, .multi-select-list .awesomplete > ul > li,
+  .select2-results__option, .choices__item--choice, .multiselect-list .dropdown-item
+) {
+  min-height: var(--qorg-select-option-height, 40px);
+  padding: 8px 10px;
+  border-radius: calc(var(--qorg-control-radius, 8px) - 2px);
+  color: var(--qorg-text-primary-ui);
+  line-height: 1.35;
+  white-space: normal;
+}
+html[data-qorg-design-system] :where(
+  .multiselect-list .awesomplete > ul > li:hover,
+  .multiselect-list .awesomplete > ul > li[aria-selected="true"],
+  .multi-select-list .awesomplete > ul > li:hover,
+  .select2-results__option--highlighted, .choices__item--choice.is-highlighted
+) {
+  color: var(--qorg-text-strong) !important;
+  background: var(--qorg-hover-surface-ui) !important;
+}
+html[data-qorg-design-system] :where(
+  .multiselect-list .tag, .multi-select-list .tag,
+  .select2-selection__choice, .choices__item--selectable
+) {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 28px;
+  margin: 2px 3px 2px 0;
+  padding: 3px 8px;
+  border: 1px solid color-mix(in srgb, var(--qorg-brand-600) 18%, var(--qorg-border-subtle));
+  border-radius: 999px;
+  color: var(--qorg-brand-700);
+  background: var(--qorg-brand-soft);
+}
+
+/* Flexible table cells: Link/Select content is allowed to consume its column without breaking grids. */
+html[data-qorg-design-system] :where(.dt-cell, .grid-static-col, .grid-row .data-row-col) {
+  min-width: 0;
+}
+html[data-qorg-design-system] :where(.dt-cell__content, .grid-static-col .static-area, .grid-row .data-row-col .ellipsis) {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+html[data-qorg-design-system] :where(
+  .form-grid .link-field, .form-grid .awesomplete,
+  .form-grid .multiselect-list, .form-grid .multi-select-list,
+  .form-grid .control-input-wrapper, .form-grid .form-control
+) {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+html[data-qorg-design-system] :where(.form-grid .grid-row, .datatable .dt-row) {
+  contain: inline-size layout;
+}
+
+/* List filters and result table use the same canvas edges with a small intentional gap. */
+html[data-qorg-design-system] :where(.list-view, .report-view) {
+  --qorg-view-canvas-gap: 12px;
+}
+html[data-qorg-design-system] :where(
+  .list-view .page-form, .list-view .list-filters,
+  .list-view .standard-filter-section, .list-view .result,
+  .list-view .list-row-container, .list-view .list-paging-area,
+  .report-view .page-form, .report-view .report-wrapper
+) {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0 !important;
+  box-sizing: border-box;
+}
+html[data-qorg-design-system] :where(
+  .list-view .result, .list-view .list-row-container,
+  .report-view .report-wrapper
+) {
+  margin-top: var(--qorg-view-canvas-gap) !important;
+}
+html[data-qorg-design-system] :where(.list-row-container, .report-wrapper, .datatable) {
+  border-radius: var(--qorg-card-radius, 8px);
+}
+
+/* Universal page actions and view selectors, including menus beside Save and List View. */
+html[data-qorg-design-system] :where(
+  .page-actions, .custom-actions, .standard-actions, .page-actions .actions-btn-group,
+  .list-view-switcher, .view-switcher, .page-head .btn-group
+) {
+  gap: 6px;
+}
+html[data-qorg-design-system] :where(
+  .page-actions .btn, .custom-actions .btn, .standard-actions .btn,
+  .list-view-switcher .btn, .view-switcher .btn, .page-head .btn-group > .btn
+) {
+  min-height: 38px;
+  padding-inline: 12px;
+  border: 1px solid var(--qorg-border-subtle);
+  border-radius: var(--qorg-button-radius, 8px) !important;
+  background: var(--qorg-surface);
+  color: var(--qorg-text-primary-ui);
+  box-shadow: var(--qorg-shadow-xs);
+}
+html[data-qorg-design-system] :where(
+  .page-actions .btn, .custom-actions .btn, .standard-actions .btn,
+  .list-view-switcher .btn, .view-switcher .btn, .page-head .btn-group > .btn
+):hover {
+  border-color: color-mix(in srgb, var(--qorg-brand-600) 24%, var(--qorg-border-subtle));
+  background: var(--qorg-hover-surface-ui);
+  color: var(--qorg-text-strong);
+}
+html[data-qorg-design-system] :where(
+  .page-actions .dropdown-menu, .custom-actions .dropdown-menu,
+  .standard-actions .dropdown-menu, .list-view-switcher .dropdown-menu,
+  .view-switcher .dropdown-menu, .page-head .dropdown-menu
+) {
+  z-index: 2147483001 !important;
+  min-width: 220px;
+  max-width: min(360px, calc(100vw - 24px));
+  padding: 7px;
+  border-radius: calc(var(--qorg-dialog-radius, 8px) - 2px);
+  box-shadow: var(--qorg-shadow-md);
+}
+html[data-qorg-design-system] :where(
+  .page-actions .dropdown-item, .custom-actions .dropdown-item,
+  .standard-actions .dropdown-item, .list-view-switcher .dropdown-item,
+  .view-switcher .dropdown-item, .page-head .dropdown-item
+) {
+  min-height: 40px;
+  padding: 8px 10px;
+  border-radius: calc(var(--qorg-control-radius, 8px) - 2px);
+  line-height: 1.35;
+  white-space: normal;
+}
+
+/* Persistent viewport-level Action Dock. Menus are one layer above the dock. */
+.qorg-action-dock[data-qorg-dock-placement="floating"] {
+  z-index: 2147483000 !important;
+  transition: transform var(--qorg-transition), opacity var(--qorg-transition), box-shadow var(--qorg-transition);
+}
+.qorg-command-menu {
+  z-index: 2147483001 !important;
+}
+.qorg-action-dock .qorg-dock-toggle {
+  min-width: 30px;
+  width: 30px;
+  padding-inline: 0;
+  border-style: dashed;
+  color: var(--qorg-text-secondary);
+  background: color-mix(in srgb, var(--qorg-surface) 92%, var(--qorg-brand-soft));
+}
+.qorg-action-dock[data-qorg-user-collapsed="1"] {
+  gap: 0;
+  padding: 5px;
+  transform: translateX(calc(100% - 36px));
+}
+[dir="rtl"] .qorg-action-dock[data-qorg-user-collapsed="1"],
+html[dir="rtl"] .qorg-action-dock[data-qorg-user-collapsed="1"] {
+  transform: translateX(calc(-100% + 36px));
+}
+.qorg-action-dock[data-qorg-user-collapsed="1"] > :not(.qorg-dock-toggle) {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  width: 0;
+  min-width: 0;
+  padding-inline: 0;
+  border-width: 0;
+  overflow: hidden;
+}
+.qorg-action-dock[data-qorg-user-collapsed="1"] .qorg-dock-toggle {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+@media (max-width: 767px) {
+  .qorg-action-dock[data-qorg-user-collapsed="1"] {
+    transform: translateX(calc(100% - 34px));
+  }
+  [dir="rtl"] .qorg-action-dock[data-qorg-user-collapsed="1"],
+  html[dir="rtl"] .qorg-action-dock[data-qorg-user-collapsed="1"] {
+    transform: translateX(calc(-100% + 34px));
+  }
+}

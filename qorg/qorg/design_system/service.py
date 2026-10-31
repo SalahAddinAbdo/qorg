@@ -13,7 +13,7 @@ from qorg.qorg.design_system import DESIGN_SYSTEM_SCHEMA_VERSION
 
 SETTINGS = "Q Org Design System Settings"
 PRESET = "Q Org Design Preset"
-CACHE_KEY = "qorg:design-system:effective:v2.8"
+CACHE_KEY = "qorg:design-system:effective:v2.8.2"
 
 ENUMS = {
     "theme_mode_policy": {"Follow Frappe/System", "Light", "Dark"},
