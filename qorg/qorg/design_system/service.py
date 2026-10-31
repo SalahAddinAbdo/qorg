@@ -13,17 +13,12 @@ from qorg.qorg.design_system import DESIGN_SYSTEM_SCHEMA_VERSION
 
 SETTINGS = "Q Org Design System Settings"
 PRESET = "Q Org Design Preset"
-CACHE_KEY = "qorg:design-system:effective:v2.9"
+CACHE_KEY = "qorg:design-system:effective:v2.9.3.3.3"
 
 ENUMS = {
     "theme_mode_policy": {"Follow Frappe/System", "Light", "Dark"},
     "density": {"Frappe Default", "Comfortable", "Compact"},
     "typography_policy": {"Frappe Default", "System UI", "QOrg Bundled"},
-    "font_source": {"System and Frappe", "Managed Google Catalog", "Custom Font Stack"},
-    "language_font_strategy": {"Automatic Best Match", "One Family for All Languages", "Separate Arabic and Latin Fonts"},
-    "latin_font_family": {"Inter", "Roboto", "Open Sans", "Source Sans 3", "IBM Plex Sans", "Noto Sans", "Lato", "Nunito Sans"},
-    "arabic_font_family": {"Noto Sans Arabic", "IBM Plex Sans Arabic", "Tajawal", "Cairo", "Almarai", "Alexandria", "Noto Kufi Arabic"},
-    "typography_weight_system": {"Balanced", "Strong Hierarchy", "Lightweight", "Frappe Standard"},
     "heading_weight": {"Default", "Medium", "Semibold"},
     "line_height_scale": {"Default", "Comfortable", "Spacious"},
     "control_radius": {"Frappe Default", "Compact", "Subtle", "Rounded"},
@@ -37,7 +32,7 @@ ENUMS = {
     "status_indicator_strength": {"Frappe Default", "Enhanced"},
     "contrast_policy": {"Frappe Default", "WCAG AA Guard"},
     "touch_target_policy": {"Frappe Default", "Enhanced"},
-    "login_layout": {"Frappe Standard", "Full Width Split", "QOrg Split", "QOrg Centered", "QOrg Visual"},
+    "login_layout": {"Frappe Standard", "QOrg Split", "QOrg Centered", "QOrg Visual"},
     "login_visual_source": {"None", "Managed Image", "Gradient"},
     "login_mobile_visual_policy": {"Hide", "Compact Header", "Show Below Form"},
     "experience_style": {"QOrg Executive", "QOrg Midnight", "QOrg Operations", "Frappe Standard"},
@@ -69,6 +64,22 @@ ENUMS = {
     "portal_presentation": {"Enterprise", "Compact", "Frappe Standard"},
     "public_card_style": {"Elevated", "Subtle", "Frappe Standard"},
     "public_success_presentation": {"Celebratory Minimal", "Compact", "Frappe Standard"},
+    "control_height_policy": {"Enterprise Best", "Compact", "Comfortable", "Spacious", "Custom", "Frappe Default"},
+    "small_text_height_policy": {"Compact", "Comfortable", "Spacious", "Custom", "Frappe Default"},
+    "focus_ring_style": {"Outline and Soft Glow", "Outline", "Soft Glow", "Frappe Default"},
+    "page_width_policy": {"Wide Adaptive", "Balanced", "Full Width", "Custom", "Frappe Default"},
+    "app_rail_style": {"Integrated Executive", "Compact", "Spacious", "Frappe Default"},
+    "module_sidebar_style": {"Integrated Executive", "Compact", "Balanced", "Frappe Default"},
+    "navbar_search_style": {"Subtle Brand", "Surface", "Bordered", "Frappe Default"},
+    "breadcrumb_emphasis": {"Current Page", "Balanced", "Frappe Default"},
+    "menu_density": {"Comfortable", "Compact", "Frappe Default"},
+    "workspace_content_width": {"Wide Adaptive", "Balanced", "Full Width", "Frappe Default"},
+    "workspace_grid_policy": {"Adaptive", "Content Based", "Two Columns", "Three Columns", "Frappe Default"},
+    "workspace_card_style": {"Executive Subtle", "Bordered", "Flat", "Frappe Default"},
+    "workspace_card_height_policy": {"Content Based", "Equal Per Row", "Compact Equal", "Frappe Default"},
+    "workspace_heading_accent": {"Short Underline", "Accent Bar", "Full Divider", "None"},
+    "nested_surface_policy": {"Avoid Nested Cards", "Allow One Level", "Frappe Default"},
+    "section_action_style": {"Inline", "Subtle Button", "Frappe Default"},
 }
 COLOR_FIELDS = (
     "primary_accent", "secondary_accent", "neutral_accent", "success_color",
@@ -109,7 +120,11 @@ VISUAL_FIELDS = tuple(ENUMS) + COLOR_FIELDS + (
     'web_form_max_content_width',
     'web_form_sticky_actions',
     'web_form_hide_technical_child_row_name',
-    'custom_font_stack', 'prefer_locally_hosted_fonts',
+    'custom_control_height', 'control_horizontal_padding', 'control_label_gap',
+    'small_text_min_height', 'text_editor_min_height', 'select_option_height',
+    'page_max_width', 'page_inline_padding', 'app_rail_icon_size',
+    'module_sidebar_width', 'navigation_item_height', 'workspace_column_gap',
+    'workspace_row_gap', 'mixed_content_bidi_safety',
     'action_dock_tooltips',
     'show_create_action',
     'show_language_action',
@@ -130,6 +145,12 @@ CONFIG_FIELDS = VISUAL_FIELDS + (
     'enable_action_dock',
 )
 DEFAULTS = {
+    "active_preset": None,
+    "login_visual_image": None,
+    "enhanced_section_headings": 1,
+    "compact_child_tables": 0,
+    "sticky_list_header": 1,
+    "reduced_transparency": 0,
     "primary_accent": "#137690",
     "secondary_accent": "#cbae66",
     "neutral_accent": "#606c77",
@@ -150,7 +171,7 @@ DEFAULTS = {
     "border_color": "#d6e0e4",
     "selected_surface": "#e0f1f5",
     "hover_surface": "#edf7f9",
-    "enabled": 0, "apply_to_desk": 1, "apply_to_login": 0,
+    "enabled": 1, "apply_to_desk": 1, "apply_to_login": 1,
     "apply_to_qorg_web_components": 1, "respect_active_website_theme": 1,
     "theme_mode_policy": "Light", "density": "Comfortable",
     "typography_policy": "System UI", "heading_weight": "Semibold",
@@ -161,9 +182,9 @@ DEFAULTS = {
     "dialog_width_policy": "Adaptive", "status_indicator_strength": "Enhanced",
     "respect_reduced_motion": 1, "enhanced_focus_visibility": 1,
     "contrast_policy": "WCAG AA Guard", "rtl_spacing_corrections": 1,
-    "touch_target_policy": "Enhanced", "login_layout": "Full Width Split",
+    "touch_target_policy": "Enhanced", "login_layout": "QOrg Split",
     "login_visual_source": "Gradient", "login_visual_gradient": "QOrg Blue",
-    "login_welcome_title": "Welcome to QOrg", "login_welcome_subtitle": "Integrated, secure and efficient enterprise management.", "login_mobile_visual_policy": "Compact Header",
+    "login_welcome_title": "Welcome to QOrg", "login_welcome_subtitle": "Integrated, secure and efficient enterprise management.", "login_mobile_visual_policy": "Hide",
     "show_login_language_switcher": 1, "web_form_max_content_width": 1180,
     "web_form_hide_technical_child_row_name": 1, "web_form_sticky_actions": 1, "body_font_size": 13,
     "label_font_size": 13, "heading_scale": 1.2, "navbar_height": 50, "page_header_height": 50,
@@ -177,6 +198,21 @@ DEFAULTS = {
     "action_dock_collapsed_behavior": "Expand on Hover",
     "show_create_action": 1, "show_language_action": 1,
     "create_menu_search": 1, "group_create_items": 1,
+    "control_height_policy": "Enterprise Best", "custom_control_height": 40,
+    "control_horizontal_padding": 12, "control_label_gap": 6,
+    "small_text_height_policy": "Comfortable", "small_text_min_height": 88,
+    "text_editor_min_height": 160, "select_option_height": 40,
+    "focus_ring_style": "Outline and Soft Glow",
+    "page_width_policy": "Wide Adaptive", "page_max_width": 1600, "page_inline_padding": 24,
+    "app_rail_style": "Integrated Executive", "app_rail_icon_size": 20,
+    "module_sidebar_style": "Integrated Executive", "module_sidebar_width": 272,
+    "navigation_item_height": 40, "navbar_search_style": "Subtle Brand",
+    "breadcrumb_emphasis": "Current Page", "menu_density": "Comfortable",
+    "workspace_content_width": "Wide Adaptive", "workspace_grid_policy": "Adaptive",
+    "workspace_column_gap": 16, "workspace_row_gap": 16,
+    "workspace_card_style": "Executive Subtle", "workspace_card_height_policy": "Content Based",
+    "workspace_heading_accent": "Short Underline", "nested_surface_policy": "Avoid Nested Cards",
+    "section_action_style": "Inline", "mixed_content_bidi_safety": 1,
     "action_dock_tooltips": 1,
     "form_control_style": "Enterprise", "toolbar_style": "Unified",
     "grid_style": "Enterprise", "alternate_view_style": "Enterprise",
@@ -244,7 +280,7 @@ def validate_values(doc) -> None:
     limits = {
         "web_form_max_content_width": (760, 1600, 1180),
         "body_font_size": (12, 20, 14), "label_font_size": (11, 18, 13),
-        "navbar_height": (40, 72, 48), "sidebar_width": (200, 340, 240),
+        "navbar_height": (40, 72, 48), "sidebar_width": (200, 340, 240), "custom_control_height": (32, 64, 40), "control_horizontal_padding": (6, 24, 12), "control_label_gap": (2, 16, 6), "small_text_min_height": (56, 320, 88), "text_editor_min_height": (96, 640, 160), "select_option_height": (32, 64, 40), "page_max_width": (960, 2400, 1600), "page_inline_padding": (8, 64, 24), "app_rail_icon_size": (16, 32, 20), "module_sidebar_width": (220, 380, 272), "navigation_item_height": (32, 56, 40), "workspace_column_gap": (8, 40, 16), "workspace_row_gap": (8, 48, 16),
         "icon_size": (14, 24, 16), "page_header_height": (40, 72, 50),
     }
     for fieldname, (minimum, maximum, fallback) in limits.items():
@@ -367,6 +403,25 @@ def css_variables(values: dict[str, Any]) -> dict[str, str]:
     variables["--qorg-navbar-height"] = f"{cint(values.get('navbar_height') or 50)}px"
     variables["--qorg-page-head-height"] = f"{cint(values.get('page_header_height') or 50)}px"
     variables["--qorg-sidebar-width"] = f"{cint(values.get('sidebar_width') or 240)}px"
+    control_heights = {"Enterprise Best": 40, "Compact": 34, "Comfortable": 40, "Spacious": 46, "Frappe Default": 38}
+    small_text_heights = {"Compact": 64, "Comfortable": 88, "Spacious": 120, "Frappe Default": 72}
+    policy = values.get("control_height_policy") or "Enterprise Best"
+    control_height = cint(values.get("custom_control_height") or 40) if policy == "Custom" else control_heights.get(policy, 40)
+    text_policy = values.get("small_text_height_policy") or "Comfortable"
+    small_text_height = cint(values.get("small_text_min_height") or 88) if text_policy == "Custom" else small_text_heights.get(text_policy, 88)
+    variables["--qorg-control-height"] = f"{control_height}px"
+    variables["--qorg-control-inline-padding"] = f"{cint(values.get('control_horizontal_padding') or 12)}px"
+    variables["--qorg-control-label-gap"] = f"{cint(values.get('control_label_gap') or 6)}px"
+    variables["--qorg-small-text-min-height"] = f"{small_text_height}px"
+    variables["--qorg-text-editor-min-height"] = f"{cint(values.get('text_editor_min_height') or 160)}px"
+    variables["--qorg-select-option-height"] = f"{cint(values.get('select_option_height') or 40)}px"
+    variables["--qorg-page-max-width"] = f"{cint(values.get('page_max_width') or 1600)}px"
+    variables["--qorg-page-inline-padding"] = f"{cint(values.get('page_inline_padding') or 24)}px"
+    variables["--qorg-app-rail-icon-size"] = f"{cint(values.get('app_rail_icon_size') or 20)}px"
+    variables["--qorg-module-sidebar-width"] = f"{cint(values.get('module_sidebar_width') or 272)}px"
+    variables["--qorg-navigation-item-height"] = f"{cint(values.get('navigation_item_height') or 40)}px"
+    variables["--qorg-workspace-column-gap"] = f"{cint(values.get('workspace_column_gap') or 16)}px"
+    variables["--qorg-workspace-row-gap"] = f"{cint(values.get('workspace_row_gap') or 16)}px"
     variables["--qorg-icon-size"] = f"{cint(values.get('icon_size') or 16)}px"
     variables["--qorg-web-form-max-width"] = f"{cint(values.get('web_form_max_content_width') or 1180)}px"
     variables["--qorg-heading-weight"] = {"Default": "var(--weight-semibold,600)", "Medium": "500", "Semibold": "600"}.get(values.get("heading_weight"), "600")
@@ -391,16 +446,6 @@ def css_variables(values: dict[str, Any]) -> dict[str, str]:
     variables["--qorg-text-strong"] = values.get("heading_color") or "#0f2735"
     variables["--qorg-brand-soft"] = values.get("selected_surface") or "#e0f1f5"
     variables["--qorg-hover-surface"] = values.get("hover_surface") or "#edf7f9"
-    system_stack = 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
-    source = values.get("font_source") or "System and Frappe"
-    interface_stack = values.get("custom_font_stack") if source == "Custom Font Stack" else system_stack
-    if source == "Managed Google Catalog":
-        latin = values.get("latin_font_family") or "Inter"
-        arabic = values.get("arabic_font_family") or "Noto Sans Arabic"
-        interface_stack = f'"{latin}", "{arabic}", {system_stack}'
-        variables["--qorg-font-latin"] = f'"{latin}", {system_stack}'
-        variables["--qorg-font-arabic"] = f'"{arabic}", Tahoma, Arial, sans-serif'
-    variables["--qorg-font-interface"] = interface_stack or system_stack
     return variables
 
 

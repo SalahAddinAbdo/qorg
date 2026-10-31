@@ -9,6 +9,12 @@
         frappe.boot.qorg_action_policies = action_policies;
     }
 
+    function restore_add_controls(frm) {
+        const wrapper = $(frm.page?.wrapper || frm.wrapper);
+        wrapper.find(".comment-box, .add-attachment, .attachment-btn, [data-label='Add Attachment']").show();
+        frm.page?.menu?.find("[data-label='Print'], [data-label='Print View'], [data-label='Email'], [data-label='New Email']").closest("li").show();
+        frm.__qorg_model_policy_applied = false;
+    }
     function hide_add_controls(frm, config) {
         const wrapper = $(frm.page?.wrapper || frm.wrapper);
         if (!config.allow_comments) wrapper.find(".comment-box").hide();
@@ -19,10 +25,11 @@
 
     window.qorg_apply_model_policy = async function(frm) {
         frm = frm || window.cur_frm;
-        if (!frm?.doctype || frappe.session.user === "Administrator") return;
+        if (!frm?.doctype) return;
+        if (frappe.session.user === "Administrator") { restore_add_controls(frm); return; }
         if (!Object.prototype.hasOwnProperty.call(action_policies, frm.doctype)) await reload_policies();
         const config = action_policies[frm.doctype];
-        if (!config || config.policy !== "View Only") return;
+        if (!config || config.policy !== "View Only") { restore_add_controls(frm); return; }
         // Native Custom DocPerm protects data. This runs after all Q Org workflow
         // and dimension controllers, and only removes form action surfaces.
         frm.clear_custom_buttons?.();

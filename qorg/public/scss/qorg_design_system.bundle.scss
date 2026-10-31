@@ -1245,10 +1245,10 @@ html[data-qorg-design-system][data-qorg-dashboard-reduced-motion="1"] :where(
 /* QOrg Enterprise Experience v2.5: Administration UX */
 .qorg-admin-preview{display:grid;grid-template-columns:150px 1fr;max-width:100%;min-height:520px;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:var(--bg);color:var(--ink);font-family:system-ui,sans-serif}.qorg-admin-preview[data-mode="dark"]{--bg:#0b1b24!important;--card:#122832!important;--ink:#e7f2f5!important;--muted:#9db0b8!important;--line:#29434f!important}.qorg-admin-preview[data-viewport="tablet"]{max-width:760px;margin:auto;grid-template-columns:110px 1fr}.qorg-admin-preview[data-viewport="mobile"]{max-width:360px;margin:auto;display:block}.qorg-admin-preview[data-viewport="mobile"] .qap-side{display:flex;min-height:auto;overflow:auto}.qap-side{display:flex;flex-direction:column;gap:8px;padding:16px;background:var(--card);border-inline-end:1px solid var(--line)}.qap-side strong{font-size:1.1rem;color:var(--p)}.qap-side span{padding:8px 9px;border-radius:8px;color:var(--muted)}.qap-side .active{background:color-mix(in srgb,var(--p) 14%,var(--card));color:var(--p);font-weight:650}.qap-main{min-width:0;padding:18px}.qap-main header{display:flex;justify-content:space-between;align-items:center}.qap-main h3{margin:2px 0 0}.qap-main small{color:var(--muted)}.qap-main button{border:0;border-radius:8px;padding:8px 12px;background:var(--p);color:#fff}.qap-kpis,.qap-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}.qap-kpis article,.qap-grid article,.qap-form{padding:14px;border:1px solid var(--line);border-radius:11px;background:var(--card)}.qap-kpis b{display:block;margin-top:6px;font-size:1.6rem}.qap-grid{grid-template-columns:1.4fr 1fr}.bars{display:flex;align-items:flex-end;gap:7px;height:100px}.bars i{flex:1;height:45%;border-radius:5px 5px 0 0;background:var(--p)}.bars i:nth-child(2){height:72%}.bars i:nth-child(3){height:58%;background:var(--s)}.bars i:nth-child(4){height:88%}.bars i:nth-child(5){height:66%;background:var(--s)}.dot{display:inline-block;width:8px;height:8px;margin-inline-end:7px;border-radius:50%;background:var(--s)}.dot.high{background:#bd4546}.qap-form{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;margin-top:10px}.qap-form label{display:grid;gap:5px;color:var(--muted);font-size:.78rem}.qap-form input,.qap-form select{min-height:36px;padding:7px;border:1px solid var(--line);border-radius:7px;background:var(--card);color:var(--ink)}.qap-form .check{display:flex;align-items:center}.qorg-preset-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.qorg-preset-card{display:grid;gap:9px;padding:14px;border:1px solid var(--border-color);border-radius:12px;background:var(--card-bg);color:var(--text-color);text-align:start}.qorg-preset-card:hover{border-color:var(--primary);box-shadow:var(--shadow-sm)}.qorg-preset-card small{color:var(--text-muted)}.swatches{display:flex;height:32px;overflow:hidden;border-radius:8px}.swatches i{flex:1}.qorg-theme-comparison{display:grid;grid-template-columns:1fr 1fr;gap:16px}.qorg-theme-comparison .qorg-admin-preview{min-height:430px;grid-template-columns:100px 1fr}.qorg-finding{margin-bottom:9px;padding:11px 13px;border:1px solid var(--border-color);border-radius:10px}.qorg-finding.error{border-color:#bd4546}.qorg-finding.warning{border-color:#d79b26}.qorg-finding.valid{border-color:#2e8b57}.qorg-finding p{margin:3px 0 0}@media(max-width:900px){.qorg-theme-comparison{grid-template-columns:1fr}.qap-kpis{grid-template-columns:1fr}.qap-grid,.qap-form{grid-template-columns:1fr}}
 
-/* ======================================================================
-   QOrg Enterprise Experience v2.9 - Complete UI Reconciliation
-   Scoped to Desk. Print/POS renderers are intentionally excluded.
-   ====================================================================== */
+/* QOrg Enterprise Experience v2.8 Unified Polish
+ * Append after qorg_design_system.bundle.scss.
+ * No print, POS or POS Awesome rules.
+ */
 html[data-qorg-design-system] {
   --qorg-space-1: 4px;
   --qorg-space-2: 8px;
@@ -1256,476 +1256,684 @@ html[data-qorg-design-system] {
   --qorg-space-4: 16px;
   --qorg-space-5: 20px;
   --qorg-space-6: 24px;
-  --qorg-control-height: 40px;
-  --qorg-control-radius: 8px;
-  --qorg-card-radius: 12px;
-  --qorg-view-gap: 12px;
-  --qorg-mobile-safe-bottom: max(12px, env(safe-area-inset-bottom));
-  --bg-color: var(--qorg-app-bg);
-  --fg-color: var(--qorg-surface);
-  --card-bg: var(--qorg-surface);
-  --subtle-fg: var(--qorg-surface-subtle);
-  --control-bg: var(--qorg-surface-interactive);
-  --text-color: var(--qorg-text-primary-ui);
-  --text-muted: var(--qorg-text-secondary);
-  --heading-color: var(--qorg-text-strong);
-  --border-color: var(--qorg-border-subtle);
-}
-html[data-qorg-design-system][data-theme="dark"],
-html[data-qorg-design-system][data-qorg-experience="q-org-midnight"] {
-  --bg-color: var(--qorg-app-bg);
-  --fg-color: var(--qorg-surface);
-  --card-bg: var(--qorg-surface);
-  --subtle-fg: var(--qorg-surface-subtle);
-  --control-bg: var(--qorg-surface-interactive);
-  --text-color: var(--qorg-text-primary-ui);
-  --text-muted: var(--qorg-text-secondary);
-  --heading-color: var(--qorg-text-strong);
-  --border-color: var(--qorg-border-subtle);
+  --qorg-shell-radius: 12px;
+  --qorg-section-radius: 14px;
 }
 
-/* Shell and surfaces */
-html[data-qorg-design-system] :where(body, .desk-container, .page-container, .page-body,
-  .layout-main, .layout-main-section-wrapper, .layout-main-section, .workspace-container,
-  .workspace-body, .workspace, .dashboard, .dashboard-container) {
-  color: var(--qorg-text-primary-ui);
+/* Application canvas: broad, centered and coherent rather than isolated islands. */
+html[data-qorg-design-system][data-qorg-page-width="wide-adaptive"] :where(
+  .layout-main-section-wrapper > .layout-main-section,
+  .page-container > .page-body,
+  .workspace-container,
+  .workspace-body
+) {
+  width: min(100%, var(--qorg-page-max-width, 1600px));
+  max-width: none;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 2vw, var(--qorg-page-inline-padding, 24px));
 }
-html[data-qorg-design-system] :where(.page-container, .page-body, .layout-main-section-wrapper,
-  .workspace-container, .workspace-body, .workspace, .dashboard, .dashboard-container) {
-  background: var(--qorg-page-bg) !important;
-}
-html[data-qorg-design-system] :where(.page-head, .page-head-content, .navbar) {
-  color: var(--qorg-text-primary-ui);
-  background: color-mix(in srgb, var(--qorg-surface) 96%, transparent) !important;
-  border-color: var(--qorg-border-subtle) !important;
-}
+html[data-qorg-design-system][data-qorg-page-width="balanced"] :where(
+  .layout-main-section-wrapper > .layout-main-section,
+  .page-container > .page-body,
+  .workspace-container,
+  .workspace-body
+) { width: min(100%, 1360px); margin-inline: auto; }
+html[data-qorg-design-system][data-qorg-page-width="full-width"] :where(
+  .layout-main-section-wrapper > .layout-main-section,
+  .page-container > .page-body,
+  .workspace-container,
+  .workspace-body
+) { width: 100%; max-width: none; }
 
-/* Controls: one wrapper owns pointer focus, no duplicated browser/Frappe/QOrg rings. */
-html[data-qorg-design-system] :where(.control-input-wrapper, .input-with-feedback, .awesomplete) {
-  min-width: 0;
-}
-html[data-qorg-design-system] :where(input.form-control, select.form-control, textarea.form-control,
-  .input-with-feedback):not([type="checkbox"]):not([type="radio"]):not([type="color"]) {
-  outline: 0 !important;
-  border: 1px solid var(--qorg-border-default);
-  border-radius: var(--qorg-control-radius);
-  background: var(--qorg-surface-interactive);
-  color: var(--qorg-text-primary-ui);
-  box-shadow: none;
-}
-html[data-qorg-design-system] :where(.control-input-wrapper, .awesomplete):focus-within {
-  border-radius: var(--qorg-control-radius);
-  background: color-mix(in srgb, var(--qorg-selected-surface) 24%, transparent);
-}
-html[data-qorg-design-system] :where(.control-input-wrapper, .awesomplete):focus-within :where(
-  input.form-control, select.form-control, textarea.form-control, .input-with-feedback) {
-  border-color: var(--qorg-focus-color, var(--qorg-brand-500)) !important;
-  outline: 0 !important;
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--qorg-focus-color, var(--qorg-brand-500)) 16%, transparent) !important;
-  background: color-mix(in srgb, var(--qorg-selected-surface) 18%, var(--qorg-surface-interactive)) !important;
-}
-html[data-qorg-design-system] :where(input, select, textarea, button, a, [tabindex]):focus {
+/* Controls: one geometry for inputs, selects and autocomplete controls. */
+html[data-qorg-design-system] :where(
+  input.form-control:not([type="checkbox"]):not([type="radio"]):not([type="color"]),
+  select.form-control,
+  textarea.form-control,
+  .input-with-feedback:not([type="checkbox"]),
+  .awesomplete > input
+) {
+  min-height: var(--qorg-control-height, 40px);
+  padding-inline: var(--qorg-control-inline-padding, 12px);
   outline: 0;
 }
-html[data-qorg-design-system] :where(button, a, [tabindex]):focus-visible {
-  outline: 2px solid var(--qorg-focus-color, var(--qorg-brand-500));
-  outline-offset: 2px;
+html[data-qorg-design-system] :where(.control-label, .form-label) {
+  margin-bottom: var(--qorg-control-label-gap, 6px);
 }
-html[data-qorg-design-system] :where(input.form-control, select.form-control, textarea.form-control):focus-visible {
-  outline: 0 !important;
+html[data-qorg-design-system] [data-fieldtype="Small Text"] textarea,
+html[data-qorg-design-system] .frappe-control[data-fieldtype="Small Text"] textarea {
+  min-height: var(--qorg-small-text-min-height, 88px);
+  height: auto;
+  resize: vertical;
 }
-html[data-qorg-design-system] :where(.has-error, .invalid) :where(input.form-control, select.form-control, textarea.form-control) {
-  border-color: var(--qorg-danger, #a93435) !important;
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--qorg-danger, #a93435) 14%, transparent) !important;
+html[data-qorg-design-system] :where(.ql-container, .text-editor .ql-container) {
+  min-height: var(--qorg-text-editor-min-height, 160px);
 }
-
-/* Select indicators stay inside their own wrapper in both directions. */
-html[data-qorg-design-system] :where(.select-icon, .link-btn, .date-field .input-group-text,
-  .time-field .input-group-text, .control-input-wrapper > .icon) {
-  position: absolute;
-  inset-inline-end: 10px;
-  inset-inline-start: auto;
-  inset-block-start: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-  pointer-events: none;
-  color: var(--qorg-text-secondary);
-}
-html[data-qorg-design-system] :where(.select-icon, .link-btn) + :where(input, select),
-html[data-qorg-design-system] :where(.control-input-wrapper:has(.select-icon), .control-input-wrapper:has(.link-btn)) :where(input, select) {
-  padding-inline-end: 38px !important;
-}
-
-/* Select, Link, autocomplete, multiselect and token families. */
-html[data-qorg-design-system] :where(.awesomplete > ul, .autocomplete-list, .select-options,
-  .dropdown-menu, .frappe-menu, .multiselect-list .dropdown-menu, .multi-select-list .dropdown-menu) {
-  max-width: min(420px, calc(100vw - 24px));
-  max-height: min(420px, calc(100dvh - 96px));
-  overflow: auto;
-  padding: 6px;
-  border: 1px solid var(--qorg-border-subtle);
-  border-radius: calc(var(--qorg-control-radius) + 2px);
-  background: var(--qorg-surface-raised) !important;
-  color: var(--qorg-text-primary-ui);
-  box-shadow: var(--qorg-shadow-md);
-}
-html[data-qorg-design-system] :where(.awesomplete > ul > li, .autocomplete-list li, .select-options li,
-  .dropdown-menu .dropdown-item, .frappe-menu .menu-item, .multiselect-list .dropdown-item,
-  .multi-select-list .dropdown-item) {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+html[data-qorg-design-system] :where(.awesomplete > ul > li, .dropdown-menu .dropdown-item) {
+  min-height: var(--qorg-select-option-height, 40px);
+  display: flex;
   align-items: center;
+}
+html[data-qorg-design-system][data-qorg-focus-ring-style="outline-and-soft-glow"] :where(
+  input.form-control, select.form-control, textarea.form-control, .input-with-feedback
+):focus {
+  border-color: var(--qorg-focus-color, var(--qorg-brand-500));
+  box-shadow: 0 0 0 1px var(--qorg-focus-color, var(--qorg-brand-500)),
+    0 0 0 4px color-mix(in srgb, var(--qorg-focus-color, var(--qorg-brand-500)) 16%, transparent);
+}
+html[data-qorg-design-system][data-qorg-focus-ring-style="outline"] :where(
+  input.form-control, select.form-control, textarea.form-control, .input-with-feedback
+):focus { box-shadow: 0 0 0 2px var(--qorg-focus-color, var(--qorg-brand-500)); }
+html[data-qorg-design-system][data-qorg-focus-ring-style="soft-glow"] :where(
+  input.form-control, select.form-control, textarea.form-control, .input-with-feedback
+):focus { box-shadow: 0 0 0 4px color-mix(in srgb, var(--qorg-focus-color, var(--qorg-brand-500)) 18%, transparent); }
+
+/* Unified app rail and module sidebar. */
+html[data-qorg-design-system][data-qorg-app-rail-style="integrated-executive"] :where(
+  [data-testid="desk-dock"], [data-testid="dock"], [data-dock],
+  .desk-dock, .module-dock, .app-dock, .dock-container
+) {
+  padding: 8px 6px;
+  border-inline-end: 1px solid var(--qorg-border-subtle);
+  background: color-mix(in srgb, var(--qorg-surface) 96%, var(--qorg-brand-soft));
+  box-shadow: 1px 0 0 var(--qorg-border-subtle);
+}
+html[data-qorg-design-system] :where(
+  [data-testid="desk-dock"], [data-testid="dock"], [data-dock],
+  .desk-dock, .module-dock, .app-dock, .dock-container
+) :where(svg, .icon) {
+  width: var(--qorg-app-rail-icon-size, 20px);
+  height: var(--qorg-app-rail-icon-size, 20px);
+}
+html[data-qorg-design-system][data-qorg-module-sidebar-style="integrated-executive"] :where(
+  [data-testid="module-sidebar"], [data-module-sidebar], .module-sidebar,
+  .desk-sidebar, .standard-sidebar, .layout-side-section
+) {
+  width: var(--qorg-module-sidebar-width, 272px);
+  flex-basis: var(--qorg-module-sidebar-width, 272px);
+  padding: 10px 8px;
+  background: color-mix(in srgb, var(--qorg-surface) 97%, var(--qorg-surface-subtle));
+}
+html[data-qorg-design-system] :where(
+  .standard-sidebar-item, .desk-sidebar-item, .sidebar-item
+) { min-height: var(--qorg-navigation-item-height, 40px); }
+
+/* Navbar, search, breadcrumbs and menus share the same density. */
+html[data-qorg-design-system][data-qorg-navbar-search-style="subtle-brand"] :where(
+  .navbar-search-bar, .search-bar, .awesomebar
+) {
+  border: 1px solid color-mix(in srgb, var(--qorg-brand-600) 12%, var(--qorg-border-subtle));
+  border-radius: var(--qorg-control-radius, 8px);
+  background: color-mix(in srgb, var(--qorg-brand-soft) 42%, var(--qorg-surface));
+}
+html[data-qorg-design-system][data-qorg-navbar-search-style="bordered"] :where(
+  .navbar-search-bar, .search-bar, .awesomebar
+) { border: 1px solid var(--qorg-border-default); background: var(--qorg-surface); }
+html[data-qorg-design-system][data-qorg-breadcrumb-emphasis="current-page"] #navbar-breadcrumbs li:last-child > a {
+  color: var(--qorg-brand-700);
+  font-weight: 650;
+}
+html[data-qorg-design-system][data-qorg-menu-density="comfortable"] :where(
+  .dropdown-menu .dropdown-item, .frappe-menu .menu-item
+) { min-height: 40px; padding-block: 8px; }
+html[data-qorg-design-system][data-qorg-menu-density="compact"] :where(
+  .dropdown-menu .dropdown-item, .frappe-menu .menu-item
+) { min-height: 32px; padding-block: 4px; }
+
+/* Workspaces: consume space, avoid forced empty height and align all card families. */
+html[data-qorg-design-system][data-qorg-workspace-content-width="wide-adaptive"] :where(
+  .workspace-container, .workspace-body, .codex-editor__redactor
+) { width: 100%; max-width: none; }
+html[data-qorg-design-system] :where(.widget-group, .widget-group-body, .workspace-widget-group) {
+  column-gap: var(--qorg-workspace-column-gap, 16px);
+  row-gap: var(--qorg-workspace-row-gap, 16px);
+}
+html[data-qorg-design-system][data-qorg-workspace-grid-policy="adaptive"] :where(
+  .widget-group-body, .workspace-widget-group, .dashboard-grid
+) { grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); }
+html[data-qorg-design-system][data-qorg-workspace-grid-policy="two-columns"] :where(
+  .widget-group-body, .workspace-widget-group, .dashboard-grid
+) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+html[data-qorg-design-system][data-qorg-workspace-grid-policy="three-columns"] :where(
+  .widget-group-body, .workspace-widget-group, .dashboard-grid
+) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+html[data-qorg-design-system][data-qorg-workspace-card-height="content-based"] :where(
+  .widget, .shortcut-widget-box, .links-widget-box, .quick-list-widget-box,
+  .dashboard-widget, .workspace-block
+) { height: auto; min-height: 0; align-self: start; }
+html[data-qorg-design-system][data-qorg-workspace-card-style="executive-subtle"] :where(
+  .widget, .shortcut-widget-box, .links-widget-box, .quick-list-widget-box,
+  .dashboard-widget
+) {
+  border-color: color-mix(in srgb, var(--qorg-brand-600) 10%, var(--qorg-border-subtle));
+  background: linear-gradient(145deg, var(--qorg-surface), color-mix(in srgb, var(--qorg-brand-soft) 10%, var(--qorg-surface)));
+  box-shadow: var(--qorg-shadow-xs);
+}
+
+/* Workspace heading accents use logical properties for RTL/LTR. */
+html[data-qorg-design-system][data-qorg-workspace-heading-accent="short-underline"] :where(
+  .workspace-section-title, .workspace-section-header, .ce-header
+) { position: relative; padding-block-end: 9px; }
+html[data-qorg-design-system][data-qorg-workspace-heading-accent="short-underline"] :where(
+  .workspace-section-title, .workspace-section-header, .ce-header
+)::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-end: 0;
+  width: 48px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--qorg-brand-600), var(--qorg-gold-500));
+}
+html[data-qorg-design-system][data-qorg-workspace-heading-accent="full-divider"] :where(
+  .workspace-section-title, .workspace-section-header, .ce-header
+) { border-block-end: 1px solid var(--qorg-border-subtle); padding-block-end: 9px; }
+
+/* Section headers and actions: one row, no card inside card. */
+html[data-qorg-design-system][data-qorg-section-actions="inline"] :where(
+  .form-timeline .timeline-head, .form-timeline .timeline-header,
+  .form-dashboard-section .section-head, .activity-section .section-head,
+  .form-activity .activity-header
+) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--qorg-space-4);
+  min-height: 56px;
+  padding: 12px 16px;
+  border: 1px solid var(--qorg-border-subtle);
+  border-radius: var(--qorg-section-radius);
+  background: color-mix(in srgb, var(--qorg-surface) 94%, var(--qorg-brand-soft));
+}
+html[data-qorg-design-system][data-qorg-section-actions="inline"] :where(
+  .form-timeline .timeline-head, .form-timeline .timeline-header,
+  .activity-section .section-head, .form-activity .activity-header
+) :where(.btn, .actions, .section-actions) {
+  margin: 0;
+  background: transparent;
+  box-shadow: none;
+}
+html[data-qorg-design-system][data-qorg-nested-surfaces="avoid-nested-cards"] :where(
+  .section-head, .timeline-head, .activity-header
+) :where(.frappe-card, .card, .widget) {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Mixed Arabic/English text without changing structural containers. */
+html[data-qorg-design-system][data-qorg-mixed-bidi="1"] :where(
+  .control-value, .like-disabled-input, .dt-cell__content,
+  .list-row-col .ellipsis, .ql-editor, .comment-content, .timeline-content
+) { unicode-bidi: plaintext; }
+
+@media (max-width: 991px) {
+  html[data-qorg-design-system] :where(.workspace-widget-group, .dashboard-grid) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 767px) {
+  html[data-qorg-design-system] :where(
+    .workspace-widget-group, .dashboard-grid, .widget-group-body
+  ) { grid-template-columns: minmax(0, 1fr); }
+  html[data-qorg-design-system] :where(
+    .layout-main-section-wrapper > .layout-main-section,
+    .page-container > .page-body, .workspace-container, .workspace-body
+  ) { padding-inline: 12px; }
+}
+
+/* v2.8 Administration preview: shell, controls, workspace and activity acceptance. */
+.qorg-admin-preview-v28 {
+  grid-template-columns: 54px var(--qap-side-width, 142px) minmax(0, 1fr);
+  column-gap: 0;
+}
+.qorg-admin-preview-v28 .qap-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 7px;
+  border-inline-end: 1px solid var(--line);
+  background: color-mix(in srgb, var(--card) 94%, var(--p));
+}
+.qorg-admin-preview-v28 .qap-rail b { color: var(--p); font-size: 1.08rem; }
+.qorg-admin-preview-v28 .qap-rail button {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font-size: var(--qap-rail-icon, 20px);
+}
+.qorg-admin-preview-v28 .qap-rail button.active {
+  color: var(--p);
+  background: color-mix(in srgb, var(--p) 12%, var(--card));
+}
+.qorg-admin-preview-v28 .qap-side { min-width: 0; }
+.qorg-admin-preview-v28 .qap-actions {
+  display: grid;
+  gap: 7px;
+  margin-top: auto;
+}
+.qorg-admin-preview-v28 .qap-actions button,
+.qorg-admin-preview-v28 .qap-heading button,
+.qorg-admin-preview-v28 .qap-activity button {
+  min-height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--ink);
+}
+.qorg-admin-preview-v28 .qap-actions button.primary { background: var(--p); color: #fff; border-color: var(--p); }
+.qorg-admin-preview-v28 .qap-search {
+  min-width: 150px;
+  min-height: var(--qap-control, 40px);
+  padding: 9px 12px;
+  border: 1px solid color-mix(in srgb, var(--p) 14%, var(--line));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--p) 5%, var(--card));
+  color: var(--muted);
+}
+.qorg-admin-preview-v28 .qap-kpis,
+.qorg-admin-preview-v28 .qap-grid { column-gap: var(--qap-col-gap, 16px); row-gap: var(--qap-row-gap, 16px); }
+.qorg-admin-preview-v28 .qap-heading,
+.qorg-admin-preview-v28 .qap-activity > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 12px;
-  min-height: 40px;
+}
+.qorg-admin-preview-v28 .qap-heading { margin-top: 18px; padding-block-end: 8px; border-bottom: 1px solid var(--line); }
+.qorg-admin-preview-v28 .qap-heading h4 { position: relative; margin: 0; }
+.qorg-admin-preview-v28 .qap-heading h4::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-end: -9px;
+  width: 42px;
+  height: 3px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--p), var(--s));
+}
+.qorg-admin-preview-v28 .qap-form { grid-template-columns: 1fr 1fr; }
+.qorg-admin-preview-v28 .qap-form input,
+.qorg-admin-preview-v28 .qap-form select { min-height: var(--qap-control, 40px); }
+.qorg-admin-preview-v28 .qap-form .qap-small-label { grid-column: 1 / -1; }
+.qorg-admin-preview-v28 .qap-form textarea {
+  min-height: var(--qap-small, 88px);
+  resize: none;
+  padding: 9px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--ink);
+}
+.qorg-admin-preview-v28 .qap-activity {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--card);
+}
+.qorg-admin-preview-v28 .qap-activity h4,
+.qorg-admin-preview-v28 .qap-activity p { margin: 0; }
+.qorg-admin-preview-v28 .qap-activity p { margin-top: 8px; color: var(--muted); }
+.qorg-admin-preview-v28[data-viewport="tablet"] { grid-template-columns: 48px 110px minmax(0, 1fr); }
+.qorg-admin-preview-v28[data-viewport="mobile"] { display: block; }
+.qorg-admin-preview-v28[data-viewport="mobile"] .qap-rail { flex-direction: row; overflow: auto; border-inline-end: 0; border-bottom: 1px solid var(--line); }
+.qorg-admin-preview-v28[data-viewport="mobile"] .qap-side { display: none; }
+.qorg-admin-preview-v28[data-viewport="mobile"] .qap-main header { align-items: flex-start; gap: 10px; }
+.qorg-admin-preview-v28[data-viewport="mobile"] .qap-search { min-width: 110px; }
+
+/* Deep review refinements: complete active navigation states and notification coherence. */
+html[data-qorg-design-system] :where(
+  .standard-sidebar-item.selected, .standard-sidebar-item.active-sidebar,
+  .desk-sidebar-item.selected, .desk-sidebar-item.active-sidebar,
+  .sidebar-item.selected, .sidebar-item.active-sidebar,
+  .standard-sidebar-item:has(> a[aria-current="page"]),
+  .desk-sidebar-item:has(> a[aria-current="page"]),
+  .sidebar-item:has(> a[aria-current="page"])
+) {
+  position: relative;
+  background: var(--qorg-brand-soft);
+  color: var(--qorg-brand-700);
+  font-weight: 620;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--qorg-brand-600) 10%, transparent);
+}
+html[data-qorg-design-system] :where(
+  .standard-sidebar-item.active-sidebar,
+  .desk-sidebar-item.active-sidebar,
+  .sidebar-item.active-sidebar,
+  .standard-sidebar-item:has(> a[aria-current="page"]),
+  .desk-sidebar-item:has(> a[aria-current="page"]),
+  .sidebar-item:has(> a[aria-current="page"])
+)::before {
+  content: "";
+  position: absolute;
+  inset-block: 8px;
+  inset-inline-start: 0;
+  width: 3px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--qorg-brand-500), var(--qorg-gold-500));
+}
+html[data-qorg-design-system] :where(.notifications-list, .notification-list) {
+  width: min(490px, calc(100vw - 24px));
+  max-width: 100%;
+}
+html[data-qorg-design-system] :where(.recent-item.notification-item, .notification-item) {
+  min-height: 44px;
+  margin: 3px 6px;
+  padding: 9px 10px;
+  border-radius: var(--qorg-control-radius, 8px);
+  white-space: normal;
+  line-height: 1.45;
+}
+html[data-qorg-design-system] :where(.recent-item.notification-item.unread, .notification-item.unread) {
+  background: color-mix(in srgb, var(--qorg-brand-soft) 68%, var(--qorg-surface));
+  box-shadow: inset 3px 0 0 var(--qorg-brand-600);
+}
+[dir="rtl"] html[data-qorg-design-system] :where(.recent-item.notification-item.unread, .notification-item.unread),
+html[data-qorg-design-system][dir="rtl"] :where(.recent-item.notification-item.unread, .notification-item.unread) {
+  box-shadow: inset -3px 0 0 var(--qorg-brand-600);
+}
+html[data-qorg-design-system] :where(.notifications-unseen, .notification-indicator) {
+  color: var(--qorg-brand-600);
+}
+html[data-qorg-design-system] :where(.dropdown-menu, .frappe-menu) {
+  padding: 6px;
+}
+html[data-qorg-design-system] :where(.dropdown-menu .dropdown-item, .frappe-menu .menu-item) {
+  border-radius: calc(var(--qorg-control-radius, 8px) - 2px);
+  transition: color var(--qorg-transition), background-color var(--qorg-transition);
+}
+html[data-qorg-design-system] :where(.dropdown-menu .dropdown-item, .frappe-menu .menu-item):hover,
+html[data-qorg-design-system] :where(.dropdown-menu .dropdown-item, .frappe-menu .menu-item):focus-visible {
+  color: var(--qorg-text-strong);
+  background: var(--qorg-hover-surface-ui);
+}
+
+/* QOrg Enterprise Experience v2.8.2: Universal Interface Polish */
+
+/* Report/DataTable sticky headers must remain in their own scroll context.
+   The previous page-level 50px offset visually covered the first report rows. */
+html[data-qorg-design-system][data-qorg-sticky-list="1"] .report-wrapper :where(.dt-header, .dt-header .dt-row),
+html[data-qorg-design-system][data-qorg-sticky-list="1"] .datatable :where(.dt-header, .dt-header .dt-row) {
+  inset-block-start: 0 !important;
+}
+html[data-qorg-design-system][data-qorg-sticky-list="1"] :where(.report-wrapper, .report-view) .dt-header {
+  position: sticky;
+  top: 0 !important;
+  z-index: 8;
+}
+html[data-qorg-design-system] :where(.report-wrapper .dt-scrollable, .report-view .dt-scrollable) {
+  scroll-padding-block-start: 0;
+  isolation: isolate;
+}
+html[data-qorg-design-system] :where(.report-wrapper .dt-row, .report-view .dt-row) {
+  position: relative;
+  z-index: 1;
+}
+html[data-qorg-design-system] :where(.report-wrapper .dt-header, .report-view .dt-header) {
+  z-index: 8;
+  background: var(--qorg-surface);
+}
+
+/* MultiSelectList, MultiCheck, autocomplete and token controls share one complete treatment. */
+html[data-qorg-design-system] :where(
+  .multiselect-list, .multi-select-list, .multicheck, .multi-check,
+  .tag-input, .tags-input, .select2-container, .choices, .choices__inner
+) {
+  width: 100%;
+  min-width: 0;
+  color: var(--qorg-text-primary-ui);
+}
+html[data-qorg-design-system] :where(
+  .multiselect-list .form-control, .multi-select-list .form-control,
+  .multiselect-list .input-with-feedback, .multi-select-list .input-with-feedback,
+  .tag-input, .tags-input, .select2-selection, .choices__inner
+) {
+  min-height: var(--qorg-control-height, 40px);
+  padding: 5px var(--qorg-control-inline-padding, 12px);
+  border: 1px solid var(--qorg-border-default) !important;
+  border-radius: var(--qorg-control-radius, 8px) !important;
+  background: var(--qorg-surface-interactive) !important;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 28%, transparent);
+}
+html[data-qorg-design-system] :where(
+  .multiselect-list .form-control, .multi-select-list .form-control,
+  .tag-input, .tags-input, .select2-selection, .choices__inner
+):focus-within {
+  border-color: var(--qorg-focus-color, var(--qorg-brand-500)) !important;
+  box-shadow: 0 0 0 1px var(--qorg-focus-color, var(--qorg-brand-500)),
+    0 0 0 4px color-mix(in srgb, var(--qorg-focus-color, var(--qorg-brand-500)) 16%, transparent) !important;
+}
+html[data-qorg-design-system] :where(
+  .multiselect-list .awesomplete > ul, .multi-select-list .awesomplete > ul,
+  .select2-dropdown, .choices__list--dropdown, .multiselect-list .dropdown-menu
+) {
+  z-index: 1080 !important;
+  margin-top: 6px;
+  padding: 6px;
+  overflow: auto;
+  max-height: min(360px, 52vh);
+  border: 1px solid var(--qorg-border-subtle) !important;
+  border-radius: calc(var(--qorg-control-radius, 8px) + 2px) !important;
+  background: var(--qorg-surface-raised) !important;
+  box-shadow: var(--qorg-shadow-md) !important;
+}
+html[data-qorg-design-system] :where(
+  .multiselect-list .awesomplete > ul > li, .multi-select-list .awesomplete > ul > li,
+  .select2-results__option, .choices__item--choice, .multiselect-list .dropdown-item
+) {
+  min-height: var(--qorg-select-option-height, 40px);
   padding: 8px 10px;
-  border-radius: max(5px, calc(var(--qorg-control-radius) - 2px));
+  border-radius: calc(var(--qorg-control-radius, 8px) - 2px);
   color: var(--qorg-text-primary-ui);
   line-height: 1.35;
   white-space: normal;
 }
-html[data-qorg-design-system] :where(.awesomplete > ul > li, .autocomplete-list li,
-  .dropdown-menu .dropdown-item, .frappe-menu .menu-item):is(:hover, :focus-visible, [aria-selected="true"], .active) {
-  color: var(--qorg-text-strong);
+html[data-qorg-design-system] :where(
+  .multiselect-list .awesomplete > ul > li:hover,
+  .multiselect-list .awesomplete > ul > li[aria-selected="true"],
+  .multi-select-list .awesomplete > ul > li:hover,
+  .select2-results__option--highlighted, .choices__item--choice.is-highlighted
+) {
+  color: var(--qorg-text-strong) !important;
   background: var(--qorg-hover-surface-ui) !important;
 }
-html[data-qorg-design-system] :where(.multiselect-list, .multi-select-list, .multicheck, .multi-check,
-  .tag-input, .tags-input) {
-  width: 100%;
-  min-width: 0;
-}
-html[data-qorg-design-system] :where(.multiselect-list, .multi-select-list) :where(.form-control, .input-with-feedback) {
-  min-height: var(--qorg-control-height);
-  padding: 5px 38px 5px 10px;
-  border: 1px solid var(--qorg-border-default) !important;
-  border-radius: var(--qorg-control-radius) !important;
-  background: var(--qorg-surface-interactive) !important;
-  overflow: visible;
-}
-html[data-qorg-design-system] :where(.multiselect-list .tag, .multi-select-list .tag,
-  .tag-input .tag, .tags-input .tag) {
+html[data-qorg-design-system] :where(
+  .multiselect-list .tag, .multi-select-list .tag,
+  .select2-selection__choice, .choices__item--selectable
+) {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   min-height: 28px;
-  margin: 2px;
+  margin: 2px 3px 2px 0;
   padding: 3px 8px;
-  max-width: 100%;
   border: 1px solid color-mix(in srgb, var(--qorg-brand-600) 18%, var(--qorg-border-subtle));
   border-radius: 999px;
   color: var(--qorg-brand-700);
   background: var(--qorg-brand-soft);
 }
 
-/* Color is an independent control family; generic dropdown geometry must not compress it. */
-html[data-qorg-design-system] :where(.color-picker, .color-picker-popover, .frappe-control[data-fieldtype="Color"]) {
-  contain: none !important;
-}
-html[data-qorg-design-system] :where(.color-picker-popover, .color-picker .popover) {
-  width: min(300px, calc(100vw - 24px)) !important;
-  min-width: 260px;
-  height: auto !important;
-  max-height: min(440px, calc(100dvh - 48px));
-  overflow: visible !important;
-  padding: 12px !important;
-  border: 1px solid var(--qorg-border-subtle);
-  border-radius: 12px;
-  background: var(--qorg-surface-raised) !important;
-  box-shadow: var(--qorg-shadow-lg);
-  z-index: 2147483002 !important;
-}
-html[data-qorg-design-system] :where(.color-picker-popover *, .color-picker .popover *) {
-  box-sizing: border-box;
-  max-width: 100%;
-}
-html[data-qorg-design-system] :where(.color-picker-popover canvas, .color-picker .colour-area,
-  .color-picker .hue-bar, .color-picker .saturation) {
-  width: 100% !important;
-  transform: none !important;
-}
-
-/* DataTable and reports: preserve the engine's virtual row geometry. */
-html[data-qorg-design-system] :where(.datatable .dt-row, .report-wrapper .dt-row,
-  .datatable .dt-cell, .report-wrapper .dt-cell) {
-  contain: none !important;
-}
-html[data-qorg-design-system] :where(.datatable .dt-row, .report-wrapper .dt-row) {
-  position: relative;
-  z-index: auto;
-}
-html[data-qorg-design-system][data-qorg-sticky-list="1"] :where(.report-wrapper, .report-view, .datatable) .dt-header {
-  position: sticky;
-  inset-block-start: 0 !important;
-  top: 0 !important;
-  z-index: 8;
-  background: var(--qorg-surface) !important;
-}
+/* Flexible table cells: Link/Select content is allowed to consume its column without breaking grids. */
 html[data-qorg-design-system] :where(.dt-cell, .grid-static-col, .grid-row .data-row-col) {
   min-width: 0;
 }
-html[data-qorg-design-system] :where(.dt-cell__content, .grid-static-col .static-area,
-  .grid-row .data-row-col .ellipsis) {
+html[data-qorg-design-system] :where(.dt-cell__content, .grid-static-col .static-area, .grid-row .data-row-col .ellipsis) {
   min-width: 0;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-html[data-qorg-design-system] :where(.form-grid .control-input-wrapper, .form-grid .form-control,
-  .form-grid .awesomplete, .form-grid .link-field, .form-grid .multiselect-list) {
+html[data-qorg-design-system] :where(
+  .form-grid .link-field, .form-grid .awesomplete,
+  .form-grid .multiselect-list, .form-grid .multi-select-list,
+  .form-grid .control-input-wrapper, .form-grid .form-control
+) {
   width: 100%;
   min-width: 0;
   max-width: 100%;
 }
-
-/* List and report canvas alignment. */
-html[data-qorg-design-system] :where(.list-view, .report-view) {
-  --qorg-view-gap: 12px;
+html[data-qorg-design-system] :where(.form-grid .grid-row, .datatable .dt-row) {
+  contain: inline-size;
 }
-html[data-qorg-design-system] :where(.list-view .page-form, .list-view .list-filters,
-  .list-view .standard-filter-section, .list-view .result, .list-view .list-row-container,
-  .list-view .list-paging-area, .report-view .page-form, .report-view .report-wrapper) {
+
+/* List filters and result table use the same canvas edges with a small intentional gap. */
+html[data-qorg-design-system] :where(.list-view, .report-view) {
+  --qorg-view-canvas-gap: 12px;
+}
+html[data-qorg-design-system] :where(
+  .list-view .page-form, .list-view .list-filters,
+  .list-view .standard-filter-section, .list-view .result,
+  .list-view .list-row-container, .list-view .list-paging-area,
+  .report-view .page-form, .report-view .report-wrapper
+) {
   width: 100%;
   max-width: none;
   margin-inline: 0 !important;
   box-sizing: border-box;
 }
-html[data-qorg-design-system] :where(.list-view .result, .list-view .list-row-container,
-  .report-view .report-wrapper) {
-  margin-top: var(--qorg-view-gap) !important;
+html[data-qorg-design-system] :where(
+  .list-view .result, .list-view .list-row-container,
+  .report-view .report-wrapper
+) {
+  margin-top: var(--qorg-view-canvas-gap) !important;
 }
-html[data-qorg-design-system] :where(.list-view .result, .list-row-container, .report-wrapper) {
-  overflow: clip;
-  border: 1px solid var(--qorg-border-subtle);
-  border-radius: var(--qorg-card-radius);
-  background: var(--qorg-surface);
-  box-shadow: var(--qorg-shadow-xs);
-}
-html[data-qorg-design-system] :where(.list-row-head, .list-row, .list-paging-area) {
-  margin-inline: 0;
-  border-radius: 0;
+html[data-qorg-design-system] :where(.list-row-container, .report-wrapper, .datatable) {
+  border-radius: var(--qorg-card-radius, 8px);
 }
 
-/* Page actions and menus share one professional hierarchy. */
-html[data-qorg-design-system] :where(.page-actions, .custom-actions, .standard-actions,
-  .list-view-switcher, .view-switcher, .page-head .btn-group) {
-  display: flex;
-  align-items: center;
+/* Universal page actions and view selectors, including menus beside Save and List View. */
+html[data-qorg-design-system] :where(
+  .page-actions, .custom-actions, .standard-actions, .page-actions .actions-btn-group,
+  .list-view-switcher, .view-switcher, .page-head .btn-group
+) {
   gap: 6px;
 }
-html[data-qorg-design-system] :where(.page-actions .btn, .custom-actions .btn,
-  .standard-actions .btn, .list-view-switcher .btn, .view-switcher .btn,
-  .page-head .btn-group > .btn) {
+html[data-qorg-design-system] :where(
+  .page-actions .btn, .custom-actions .btn, .standard-actions .btn,
+  .list-view-switcher .btn, .view-switcher .btn, .page-head .btn-group > .btn
+) {
   min-height: 38px;
+  padding-inline: 12px;
   border: 1px solid var(--qorg-border-subtle);
   border-radius: var(--qorg-button-radius, 8px) !important;
   background: var(--qorg-surface);
   color: var(--qorg-text-primary-ui);
   box-shadow: var(--qorg-shadow-xs);
 }
-html[data-qorg-design-system] :where(.page-actions .dropdown-menu, .custom-actions .dropdown-menu,
-  .standard-actions .dropdown-menu, .view-switcher .dropdown-menu, .page-head .dropdown-menu) {
-  min-width: 240px;
-  width: max-content;
-  max-width: min(420px, calc(100vw - 24px));
-  max-height: min(640px, calc(100dvh - 72px));
-  overflow: auto;
-  z-index: 2147483001 !important;
-}
-html[data-qorg-design-system] :where(.dropdown-menu .dropdown-divider, .frappe-menu .dropdown-divider) {
-  margin: 6px 4px;
-  border-color: var(--qorg-border-subtle);
-}
-html[data-qorg-design-system] :where(.dropdown-menu .keyboard-shortcut, .dropdown-menu kbd) {
-  justify-self: end;
-  color: var(--qorg-text-muted-ui);
-  font-size: .76rem;
-  white-space: nowrap;
-}
-
-/* Sidebar anchors fill the visual item and remain RTL-safe. */
-html[data-qorg-design-system] :where(.body-sidebar, .standard-sidebar, .desk-sidebar, .module-sidebar)
-  .standard-sidebar-item .item-anchor {
-  width: 100%;
-  min-width: 0;
-  min-height: var(--qorg-navigation-item-height, 40px);
-  height: auto !important;
-  padding-block: 6px;
-  padding-inline: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  overflow: visible;
-  border-radius: var(--qorg-control-radius);
-  transition: color var(--qorg-transition), background-color var(--qorg-transition), box-shadow var(--qorg-transition);
-}
-html[data-qorg-design-system] :where(.standard-sidebar-item .item-anchor .sidebar-item-label,
-  .standard-sidebar-item .item-anchor .item-label) {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* Modern workspace cards. */
-html[data-qorg-design-system] :where(.widget, .frappe-card, .number-card,
-  .shortcut-widget-box, .links-widget-box, .quick-list-widget-box,
-  .chart-widget, .dashboard-widget, .workspace-block) {
-  min-width: 0;
-  height: auto;
-  align-self: start;
-  border: 1px solid color-mix(in srgb, var(--qorg-brand-600) 10%, var(--qorg-border-subtle));
-  border-radius: var(--qorg-card-radius);
-  background: linear-gradient(145deg, var(--qorg-surface), color-mix(in srgb, var(--qorg-brand-soft) 8%, var(--qorg-surface))) !important;
-  color: var(--qorg-text-primary-ui);
-  box-shadow: var(--qorg-shadow-xs);
-  transition: transform var(--qorg-transition), border-color var(--qorg-transition), box-shadow var(--qorg-transition);
-}
-html[data-qorg-design-system] :where(.widget, .frappe-card, .number-card,
-  .shortcut-widget-box, .links-widget-box, .quick-list-widget-box,
-  .chart-widget, .dashboard-widget):hover {
-  transform: translateY(-1px);
+html[data-qorg-design-system] :where(
+  .page-actions .btn, .custom-actions .btn, .standard-actions .btn,
+  .list-view-switcher .btn, .view-switcher .btn, .page-head .btn-group > .btn
+):hover {
   border-color: color-mix(in srgb, var(--qorg-brand-600) 24%, var(--qorg-border-subtle));
-  box-shadow: var(--qorg-shadow-sm);
-}
-html[data-qorg-design-system] :where(.widget-head, .widget-title, .card-title,
-  .workspace-section-title, .workspace-section-header) {
-  color: var(--qorg-text-strong) !important;
-  font-weight: 650;
-}
-html[data-qorg-design-system] :where(.links-widget-box a, .shortcut-widget-box a,
-  .quick-list-widget-box a, .widget .link-item) {
-  display: flex;
-  align-items: center;
-  min-height: 36px;
-  padding: 7px 9px;
-  border-radius: max(6px, calc(var(--qorg-control-radius) - 1px));
-  color: var(--qorg-text-primary-ui);
-  transition: color var(--qorg-transition), background-color var(--qorg-transition), transform var(--qorg-transition);
-}
-html[data-qorg-design-system] :where(.links-widget-box a, .shortcut-widget-box a,
-  .quick-list-widget-box a, .widget .link-item):hover {
-  color: var(--qorg-text-strong);
   background: var(--qorg-hover-surface-ui);
-  transform: translateX(2px);
+  color: var(--qorg-text-strong);
 }
-html[dir="rtl"][data-qorg-design-system] :where(.links-widget-box a, .shortcut-widget-box a,
-  .quick-list-widget-box a, .widget .link-item):hover { transform: translateX(-2px); }
-html[data-qorg-design-system] :where(.workspace-widget-group, .widget-group-body, .dashboard-grid) {
-  gap: 16px !important;
-  grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 1fr));
+html[data-qorg-design-system] :where(
+  .page-actions .dropdown-menu, .custom-actions .dropdown-menu,
+  .standard-actions .dropdown-menu, .list-view-switcher .dropdown-menu,
+  .view-switcher .dropdown-menu, .page-head .dropdown-menu
+) {
+  z-index: 1080 !important;
+  min-width: 220px;
+  max-width: min(360px, calc(100vw - 24px));
+  padding: 7px;
+  border-radius: calc(var(--qorg-dialog-radius, 8px) - 2px);
+  box-shadow: var(--qorg-shadow-md);
 }
-
-/* Action dock: viewport-level, icon-only toggle, safe edge state. */
-.qorg-action-dock[data-qorg-dock-placement="floating"] {
-  z-index: 2147483000 !important;
-  inset-inline-end: max(16px, env(safe-area-inset-right));
-  inset-block-end: max(16px, env(safe-area-inset-bottom));
-  max-width: calc(100vw - 24px);
-  overflow: visible;
-}
-.qorg-action-dock .qorg-dock-toggle {
-  min-width: 32px;
-  width: 32px;
-  padding: 0;
-  overflow: hidden;
-}
-.qorg-action-dock .qorg-dock-toggle .qorg-dock-action-label { display: none !important; }
-.qorg-action-dock[data-qorg-user-collapsed="1"] {
-  transform: translateX(calc(100% - 38px));
-}
-html[dir="rtl"] .qorg-action-dock[data-qorg-user-collapsed="1"] {
-  transform: translateX(calc(-100% + 38px));
-}
-.qorg-action-dock[data-qorg-user-collapsed="1"] > :not(.qorg-dock-toggle) {
-  width: 0;
-  min-width: 0;
-  padding-inline: 0;
-  margin: 0;
-  border-width: 0;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  overflow: hidden;
-}
-.qorg-command-menu { z-index: 2147483001 !important; }
-.qorg-command-title, .qorg-command-description {
-  max-width: none;
-  overflow: visible;
-  text-overflow: clip;
+html[data-qorg-design-system] :where(
+  .page-actions .dropdown-item, .custom-actions .dropdown-item,
+  .standard-actions .dropdown-item, .list-view-switcher .dropdown-item,
+  .view-switcher .dropdown-item, .page-head .dropdown-item
+) {
+  min-height: 40px;
+  padding: 8px 10px;
+  border-radius: calc(var(--qorg-control-radius, 8px) - 2px);
+  line-height: 1.35;
   white-space: normal;
 }
 
-/* Mobile/tablet drawer and fluid content. */
-.qorg-mobile-backdrop {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 1098;
-  border: 0;
-  background: rgba(5, 20, 28, .42);
-  backdrop-filter: blur(2px);
+/* Persistent viewport-level Action Dock. Menus are one layer above the dock. */
+.qorg-action-dock[data-qorg-dock-placement="floating"] {
+  z-index: 1040 !important;
+  transition: transform var(--qorg-transition), opacity var(--qorg-transition), box-shadow var(--qorg-transition);
 }
-@media (max-width: 991px) {
-  html[data-qorg-design-system] :where(.layout-main, .layout-main-section-wrapper, .layout-main-section,
-    .page-container, .page-body) { width: 100%; min-width: 0; max-width: 100%; }
-  html[data-qorg-design-system] :where(.body-sidebar, .desk-sidebar, .standard-sidebar, .module-sidebar,
-    [data-testid="module-sidebar"], [data-module-sidebar]) {
-    position: fixed !important;
-    z-index: 1099;
-    inset-block: 0;
-    inset-inline-start: 0;
-    width: min(88vw, 340px) !important;
-    max-width: 340px;
-    transform: translateX(calc(-100% - 12px));
-    transition: transform 180ms cubic-bezier(.2,.8,.2,1);
-    box-shadow: var(--qorg-shadow-lg);
-    overflow: auto;
-    overscroll-behavior: contain;
+.qorg-command-menu {
+  z-index: 1080 !important;
+}
+.qorg-action-dock .qorg-dock-toggle {
+  min-width: 30px;
+  width: 30px;
+  padding-inline: 0;
+  border-style: dashed;
+  color: var(--qorg-text-secondary);
+  background: color-mix(in srgb, var(--qorg-surface) 92%, var(--qorg-brand-soft));
+}
+.qorg-action-dock[data-qorg-user-collapsed="1"] {
+  gap: 0;
+  padding: 5px;
+  transform: translateX(calc(100% - 36px));
+}
+[dir="rtl"] .qorg-action-dock[data-qorg-user-collapsed="1"],
+html[dir="rtl"] .qorg-action-dock[data-qorg-user-collapsed="1"] {
+  transform: translateX(calc(-100% + 36px));
+}
+.qorg-action-dock[data-qorg-user-collapsed="1"] > :not(.qorg-dock-toggle) {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  width: 0;
+  min-width: 0;
+  padding-inline: 0;
+  border-width: 0;
+  overflow: hidden;
+}
+.qorg-action-dock[data-qorg-user-collapsed="1"] .qorg-dock-toggle {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+@media (max-width: 767px) {
+  .qorg-action-dock[data-qorg-user-collapsed="1"] {
+    transform: translateX(calc(100% - 34px));
   }
-  html[dir="rtl"][data-qorg-design-system] :where(.body-sidebar, .desk-sidebar, .standard-sidebar,
-    .module-sidebar, [data-testid="module-sidebar"], [data-module-sidebar]) {
-    transform: translateX(calc(100% + 12px));
-  }
-  html.qorg-mobile-nav-open[data-qorg-design-system] :where(.body-sidebar, .desk-sidebar,
-    .standard-sidebar, .module-sidebar, [data-testid="module-sidebar"], [data-module-sidebar]) {
-    transform: translateX(0);
-  }
-  html.qorg-mobile-nav-open .qorg-mobile-backdrop { display: block; }
-  html.qorg-mobile-nav-open body { overflow: hidden; }
-  html[data-qorg-design-system] :where(.form-layout .row, .form-section .section-body) { min-width: 0; }
-  html[data-qorg-design-system] :where(.page-head .page-title, .page-head .title-text) {
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  html[data-qorg-design-system] :where(.page-actions .btn:not(.btn-primary), .standard-actions .btn:not(.btn-primary)) {
-    max-width: 44px;
-    overflow: hidden;
-  }
-  html[data-qorg-design-system] :where(.workspace-widget-group, .widget-group-body, .dashboard-grid) {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  [dir="rtl"] .qorg-action-dock[data-qorg-user-collapsed="1"],
+  html[dir="rtl"] .qorg-action-dock[data-qorg-user-collapsed="1"] {
+    transform: translateX(calc(-100% + 34px));
   }
 }
-@media (max-width: 575px) {
-  html[data-qorg-design-system] :where(.workspace-widget-group, .widget-group-body, .dashboard-grid) {
-    grid-template-columns: minmax(0, 1fr) !important;
-  }
-  html[data-qorg-design-system] :where(.layout-main-section-wrapper > .layout-main-section,
-    .page-container > .page-body, .workspace-container, .workspace-body) { padding-inline: 12px !important; }
-  .qorg-action-dock[data-qorg-dock-placement="floating"] {
-    inset-inline-end: 10px;
-    inset-block-end: var(--qorg-mobile-safe-bottom);
-  }
-  .qorg-command-menu { inset-inline: 12px !important; width: auto !important; max-width: none; }
-}
-html[data-qorg-design-system] body,
-html[data-qorg-design-system] button,
-html[data-qorg-design-system] input,
-html[data-qorg-design-system] select,
-html[data-qorg-design-system] textarea { font-family: var(--qorg-font-interface, system-ui, sans-serif); }
-html[lang^="ar"][data-qorg-design-system] body,
-html[lang^="ar"][data-qorg-design-system] button,
-html[lang^="ar"][data-qorg-design-system] input,
-html[lang^="ar"][data-qorg-design-system] select,
-html[lang^="ar"][data-qorg-design-system] textarea { font-family: var(--qorg-font-arabic, var(--qorg-font-interface, Tahoma, sans-serif)); }
+
+
+/* QOrg v2.9.3 full reconciliation: final interaction geometry */
+html[data-qorg-design-system] { --qorg-z-dock:1040; --qorg-z-dropdown:1060; --qorg-z-command:1080; }
+html[data-qorg-design-system] [data-qorg-action-dock] { z-index:var(--qorg-z-dock)!important; }
+html[data-qorg-design-system] [data-qorg-overlay] { z-index:var(--qorg-z-command)!important; }
+html[data-qorg-design-system] .modal-backdrop { z-index:1090; }
+html[data-qorg-design-system] .modal { z-index:1100; }
+html[data-qorg-design-system] :where(.datatable .dt-row,.datatable .dt-cell,.grid-row-open,.form-in-grid,.grid-form){contain:none!important;}
+html[data-qorg-design-system] :where(.multiselect-list,.multi-select-list,.table-multiselect,.control-input-wrapper:has(.awesomplete),.control-input:has(.awesomplete)){position:relative;min-width:0;max-width:100%;overflow:visible;box-sizing:border-box;}
+html[data-qorg-design-system] :where(.multiselect-list input,.multi-select-list input,.table-multiselect input,.control-input-wrapper:has(.awesomplete) input){min-width:0;max-width:100%;padding-inline-end:2.35rem!important;box-sizing:border-box;}
+html[data-qorg-design-system] :where(.multiselect-list .select-icon,.multi-select-list .select-icon,.table-multiselect .select-icon,.control-input-wrapper:has(.awesomplete)>.select-icon,.control-input:has(.awesomplete)>.select-icon){position:absolute!important;inset-inline-end:.7rem!important;inset-inline-start:auto!important;inset-block-start:50%!important;width:1rem;height:1rem;margin:0!important;transform:translateY(-50%)!important;pointer-events:none;z-index:2;}
+html[data-qorg-design-system] :where(.multiselect-list .awesomplete,.multi-select-list .awesomplete,.table-multiselect .awesomplete,.multiselect-list .form-control,.multi-select-list .form-control){width:100%!important;min-width:0;max-width:100%;}
+html[data-qorg-design-system] :where(.multiselect-list .tags-input,.multi-select-list .tags-input,.table-multiselect .tags-input,.multiselect-list .selected-items,.multi-select-list .selected-items){display:flex;flex-wrap:wrap;align-items:center;gap:.35rem;min-width:0;max-width:100%;}
+html[data-qorg-design-system] :where(.multiselect-list .awesomplete>ul,.multi-select-list .awesomplete>ul,.table-multiselect .awesomplete>ul,.modal .awesomplete>ul,.form-in-grid .awesomplete>ul){inset-inline:0 auto;width:max-content;min-width:100%;max-width:min(32rem,calc(100vw - 2rem));z-index:var(--qorg-z-command)!important;}
+html[data-qorg-design-system] :where(.grid-row-open,.grid-row.grid-row-open,.form-in-grid,.grid-form,.grid-row-open .grid-form){position:relative;width:100%!important;min-width:0;max-width:100%!important;overflow:visible!important;transform:none!important;box-sizing:border-box;}
+html[data-qorg-design-system] :where(.grid-row-open .form-layout,.form-in-grid .form-layout,.grid-form .form-layout,.grid-row-open .section-body,.form-in-grid .section-body,.grid-row-open .form-column,.form-in-grid .form-column,.grid-form .form-column,.grid-row-open .frappe-control,.form-in-grid .frappe-control){width:100%;min-width:0;max-width:100%;}
+html[data-qorg-design-system] :where(.modal-dialog,.modal-content,.modal-body,.dialog-container){min-width:0;box-sizing:border-box;}
+html[data-qorg-design-system] .modal-body{overflow-x:hidden;overflow-y:auto;}
+html[data-qorg-design-system] :where(.modal .form-in-grid,.modal .grid-form){overflow:visible!important;padding-inline:clamp(.5rem,2vw,1rem);}
+html[data-qorg-design-system] :where(.tree,.frappe-tree,.tree-node,.tree-link,.tree-node-toolbar,.tree-children,.tree-node-children){box-sizing:border-box;}
+html[data-qorg-design-system] :where(.tree-node,.tree-link){min-height:2.25rem;border:1px solid transparent;margin-block:1px;transform:none!important;translate:none!important;backface-visibility:hidden;transition:background-color 120ms ease,border-color 120ms ease,color 120ms ease!important;}
+html[data-qorg-design-system] :where(.tree-node:hover,.tree-node:focus-within,.tree-link:hover,.tree-link:focus-visible,.tree-node.selected,.tree-node.active){transform:none!important;translate:none!important;margin-block:1px;border-width:1px;}
+html[data-qorg-design-system] :where(.tree-node svg,.tree-link svg,.tree-node .icon,.tree-link .icon,.tree-node .tree-toggle,.tree-link .tree-toggle){flex:0 0 auto;width:1rem;height:1rem;transform:none;}
+html[data-qorg-design-system] :where(.tree-children,.tree-node-children){min-width:0;transform:none!important;transition:none!important;}
+@media(max-width:767px){html[data-qorg-design-system] :where(.grid-row-open .form-column,.form-in-grid .form-column,.grid-form .form-column){flex:0 0 100%!important;width:100%!important;max-width:100%!important;}html[data-qorg-design-system] :where(.modal-dialog,.modal-content){max-width:calc(100vw - 1rem)!important;margin-inline:auto;}}

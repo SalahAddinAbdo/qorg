@@ -1,1273 +1,1547 @@
 {
-  "doctype": "DocType",
-  "name": "Q Org Design System Settings",
-  "module": "QOrg",
-  "custom": 0,
-  "issingle": 1,
-  "track_changes": 1,
-  "field_order": [
-    "overview_tab",
-    "status_section",
-    "enabled",
-    "active_preset",
-    "status_column",
-    "configuration_status",
-    "compatibility_status",
-    "scope_section",
-    "apply_to_desk",
-    "apply_to_login",
-    "scope_column",
-    "apply_to_qorg_web_components",
-    "respect_active_website_theme",
-    "identity_tab",
-    "palette_section",
-    "primary_accent",
-    "secondary_accent",
-    "neutral_accent",
-    "success_color",
-    "palette_balanced_column",
-    "warning_color",
-    "danger_color",
-    "information_color",
-    "focus_color",
-    "surfaces_section",
-    "navbar_surface",
-    "sidebar_surface",
-    "page_surface",
-    "card_surface",
-    "dialog_surface",
-    "input_surface",
-    "surface_column",
-    "text_primary_color",
-    "text_muted_color",
-    "heading_color",
-    "border_color",
-    "selected_surface",
-    "hover_surface",
-    "appearance_tab",
-    "typography_section",
-    "theme_mode_policy",
-    "density",
-    "typography_policy",
-    "typography_column",
-    "heading_weight",
-    "line_height_scale",
-    "font_section",
-    "font_source",
-    "language_font_strategy",
-    "latin_font_family",
-    "arabic_font_family",
-    "font_source_column",
-    "typography_weight_system",
-    "custom_font_stack",
-    "prefer_locally_hosted_fonts",
-    "font_preview",
-    "body_font_size",
-    "label_font_size",
-    "heading_scale",
-    "font_column",
-    "navbar_height",
-    "page_header_height",
-    "sidebar_width",
-    "icon_size",
-    "shape_section",
-    "control_radius",
-    "button_radius",
-    "card_radius",
-    "shape_column",
-    "dialog_radius",
-    "border_strength",
-    "elevation_scale",
-    "components_tab",
-    "components_section",
-    "enhanced_section_headings",
-    "compact_child_tables",
-    "sticky_list_header",
-    "component_column",
-    "workspace_card_density",
-    "dialog_width_policy",
-    "status_indicator_strength",
-    "experience_section",
-    "experience_style",
-    "surface_hierarchy",
-    "navigation_emphasis",
-    "experience_column",
-    "page_header_style",
-    "section_presentation",
-    "table_presentation",
-    "operational_components_section",
-    "form_control_style",
-    "toolbar_style",
-    "grid_style",
-    "alternate_view_style",
-    "operational_components_column",
-    "dialog_style",
-    "workflow_timeline_style",
-    "state_presentation",
-    "sticky_primary_columns",
-    "numeric_alignment",
-    "workspace_dashboard_section",
-    "workspace_layout_style",
-    "kpi_card_style",
-    "chart_presentation",
-    "priority_panel_style",
-    "workspace_dashboard_column",
-    "activity_panel_style",
-    "operational_table_style",
-    "workspace_quick_actions",
-    "dashboard_responsive_reflow",
-    "dashboard_reduce_decorative_motion",
-    "quick_create_section",
-    "enable_quick_create_menu",
-    "quick_create_column",
-    "quick_create_button_label",
-    "quick_create_items_section",
-    "quick_create_items",
-    "action_dock_section",
-    "enable_action_dock",
-    "action_dock_desktop_placement",
-    "action_dock_collapsed_behavior",
-    "show_create_action",
-    "action_dock_column",
-    "action_dock_mobile_placement",
-    "show_language_action",
-    "create_menu_search",
-    "group_create_items",
-    "action_dock_tooltips",
-    "accessibility_tab",
-    "accessibility_section",
-    "respect_reduced_motion",
-    "enhanced_focus_visibility",
-    "contrast_policy",
-    "accessibility_column",
-    "rtl_spacing_corrections",
-    "touch_target_policy",
-    "reduced_transparency",
-    "login_tab",
-    "login_section",
-    "login_layout",
-    "login_visual_source",
-    "login_visual_image",
-    "login_visual_gradient",
-    "login_column",
-    "login_welcome_title",
-    "login_welcome_subtitle",
-    "show_login_language_switcher",
-    "login_mobile_visual_policy",
-    "login_experience_section",
-    "login_experience_style",
-    "login_form_density",
-    "login_show_trust_message",
-    "login_trust_message",
-    "login_experience_column",
-    "login_card_alignment",
-    "login_show_security_footer",
-    "login_focus_first_field",
-    "website_tab",
-    "website_section",
-    "active_website_theme",
-    "website_integration_status",
-    "website_column",
-    "web_form_max_content_width",
-    "web_form_sticky_actions",
-    "web_form_hide_technical_child_row_name",
-    "public_experience_section",
-    "web_form_presentation",
-    "portal_presentation",
-    "public_card_style",
-    "public_experience_column",
-    "public_validation_summary",
-    "public_success_presentation",
-    "public_mobile_sticky_actions"
-  ],
-  "fields": [
-    {
-      "fieldname": "overview_tab",
-      "fieldtype": "Tab Break",
-      "label": "Overview"
-    },
-    {
-      "fieldname": "status_section",
-      "fieldtype": "Section Break",
-      "label": "System Status"
-    },
-    {
-      "fieldname": "enabled",
-      "fieldtype": "Check",
-      "label": "Enable QOrg Design System",
-      "description": "Managed visual extensions with Frappe Standard fallback."
-    },
-    {
-      "fieldname": "active_preset",
-      "fieldtype": "Link",
-      "label": "Active Preset",
-      "options": "Q Org Design Preset",
-      "default": "QOrg Executive Light"
-    },
-    {
-      "fieldname": "status_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "configuration_status",
-      "fieldtype": "Data",
-      "label": "Configuration Status",
-      "read_only": 1,
-      "default": "Valid"
-    },
-    {
-      "fieldname": "compatibility_status",
-      "fieldtype": "Data",
-      "label": "Compatibility Status",
-      "read_only": 1,
-      "default": "Validated baseline: Frappe 16.53+"
-    },
-    {
-      "fieldname": "scope_section",
-      "fieldtype": "Section Break",
-      "label": "Application Scope"
-    },
-    {
-      "fieldname": "apply_to_desk",
-      "fieldtype": "Check",
-      "label": "Apply to Desk",
-      "default": "1"
-    },
-    {
-      "fieldname": "apply_to_login",
-      "fieldtype": "Check",
-      "label": "Apply to Login",
-      "default": "1"
-    },
-    {
-      "fieldname": "scope_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "apply_to_qorg_web_components",
-      "fieldtype": "Check",
-      "label": "Apply to QOrg Web Components",
-      "default": "1"
-    },
-    {
-      "fieldname": "respect_active_website_theme",
-      "fieldtype": "Check",
-      "label": "Respect Active Website Theme",
-      "default": "1"
-    },
-    {
-      "fieldname": "identity_tab",
-      "fieldtype": "Tab Break",
-      "label": "Identity and Colors"
-    },
-    {
-      "fieldname": "palette_section",
-      "fieldtype": "Section Break",
-      "label": "Semantic Palette",
-      "description": "Independent from Company printing colors. Website Theme remains the web source of truth."
-    },
-    {
-      "fieldname": "primary_accent",
-      "fieldtype": "Color",
-      "label": "Primary Accent",
-      "default": "#137690"
-    },
-    {
-      "fieldname": "secondary_accent",
-      "fieldtype": "Color",
-      "label": "Secondary Accent",
-      "default": "#cbae66"
-    },
-    {
-      "fieldname": "neutral_accent",
-      "fieldtype": "Color",
-      "label": "Neutral Accent",
-      "default": "#606c77"
-    },
-    {
-      "fieldname": "success_color",
-      "fieldtype": "Color",
-      "label": "Success",
-      "default": "#2e8b57"
-    },
-    {
-      "fieldname": "palette_balanced_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "warning_color",
-      "fieldtype": "Color",
-      "label": "Warning",
-      "default": "#d79b26"
-    },
-    {
-      "fieldname": "danger_color",
-      "fieldtype": "Color",
-      "label": "Danger",
-      "default": "#bd4546"
-    },
-    {
-      "fieldname": "information_color",
-      "fieldtype": "Color",
-      "label": "Information",
-      "default": "#258bd3"
-    },
-    {
-      "fieldname": "focus_color",
-      "fieldtype": "Color",
-      "label": "Focus Ring",
-      "default": "#269ad7"
-    },
-    {
-      "fieldname": "surfaces_section",
-      "fieldtype": "Section Break",
-      "label": "Surfaces and Text",
-      "description": "Optional semantic overrides. Leave blank to inherit Frappe or the active Website Theme."
-    },
-    {
-      "fieldname": "navbar_surface",
-      "fieldtype": "Color",
-      "label": "Navbar Surface",
-      "default": "#fafafa"
-    },
-    {
-      "fieldname": "sidebar_surface",
-      "fieldtype": "Color",
-      "label": "Sidebar Surface",
-      "default": "#f2f6f7"
-    },
-    {
-      "fieldname": "page_surface",
-      "fieldtype": "Color",
-      "label": "Page Surface",
-      "default": "#f6f8fa"
-    },
-    {
-      "fieldname": "card_surface",
-      "fieldtype": "Color",
-      "label": "Card Surface",
-      "default": "#ffffff"
-    },
-    {
-      "fieldname": "dialog_surface",
-      "fieldtype": "Color",
-      "label": "Dialog Surface",
-      "default": "#ffffff"
-    },
-    {
-      "fieldname": "input_surface",
-      "fieldtype": "Color",
-      "label": "Input Surface",
-      "default": "#ffffff"
-    },
-    {
-      "fieldname": "surface_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "text_primary_color",
-      "fieldtype": "Color",
-      "label": "Primary Text",
-      "default": "#0f3246"
-    },
-    {
-      "fieldname": "text_muted_color",
-      "fieldtype": "Color",
-      "label": "Muted Text",
-      "default": "#606c77"
-    },
-    {
-      "fieldname": "heading_color",
-      "fieldtype": "Color",
-      "label": "Heading Text",
-      "default": "#0f3246"
-    },
-    {
-      "fieldname": "border_color",
-      "fieldtype": "Color",
-      "label": "Border",
-      "default": "#d6e0e4"
-    },
-    {
-      "fieldname": "selected_surface",
-      "fieldtype": "Color",
-      "label": "Selected Surface",
-      "default": "#e0f1f5"
-    },
-    {
-      "fieldname": "hover_surface",
-      "fieldtype": "Color",
-      "label": "Hover Surface",
-      "default": "#edf7f9"
-    },
-    {
-      "fieldname": "appearance_tab",
-      "fieldtype": "Tab Break",
-      "label": "Typography and Shape"
-    },
-    {
-      "fieldname": "typography_section",
-      "fieldtype": "Section Break",
-      "label": "Typography"
-    },
-    {
-      "fieldname": "theme_mode_policy",
-      "fieldtype": "Select",
-      "label": "Theme Mode Policy",
-      "options": "Follow Frappe/System\nLight\nDark",
-      "default": "Light"
-    },
-    {
-      "fieldname": "density",
-      "fieldtype": "Select",
-      "label": "Density",
-      "options": "Frappe Default\nComfortable\nCompact",
-      "default": "Comfortable"
-    },
-    {
-      "fieldname": "typography_policy",
-      "fieldtype": "Select",
-      "label": "Typography Policy",
-      "options": "Frappe Default\nSystem UI\nQOrg Bundled",
-      "default": "System UI"
-    },
-    {
-      "fieldname": "typography_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "heading_weight",
-      "fieldtype": "Select",
-      "label": "Heading Weight",
-      "options": "Default\nMedium\nSemibold",
-      "default": "Semibold"
-    },
-    {
-      "fieldname": "line_height_scale",
-      "fieldtype": "Select",
-      "label": "Line Height",
-      "options": "Default\nComfortable\nSpacious",
-      "default": "Comfortable"
-    },
-    {
-      "fieldname": "font_section",
-      "fieldtype": "Section Break",
-      "label": "Font Sizes and Layout"
-    },
-    {
-      "fieldname": "font_source",
-      "fieldtype": "Select",
-      "label": "Font Source",
-      "options": "System and Frappe\nManaged Google Catalog\nCustom Font Stack",
-      "default": "System and Frappe",
-      "description": "External fonts are loaded only when Managed Google Catalog is selected."
-    },
-    {
-      "fieldname": "language_font_strategy",
-      "fieldtype": "Select",
-      "label": "Language Font Strategy",
-      "options": "Automatic Best Match\nOne Family for All Languages\nSeparate Arabic and Latin Fonts",
-      "default": "Automatic Best Match"
-    },
-    {
-      "fieldname": "latin_font_family",
-      "fieldtype": "Select",
-      "label": "Latin Interface Font",
-      "options": "Inter\nRoboto\nOpen Sans\nSource Sans 3\nIBM Plex Sans\nNoto Sans\nLato\nNunito Sans",
-      "default": "Inter",
-      "depends_on": "eval:doc.font_source==\"Managed Google Catalog\""
-    },
-    {
-      "fieldname": "arabic_font_family",
-      "fieldtype": "Select",
-      "label": "Arabic Interface Font",
-      "options": "Noto Sans Arabic\nIBM Plex Sans Arabic\nTajawal\nCairo\nAlmarai\nAlexandria\nNoto Kufi Arabic",
-      "default": "Noto Sans Arabic",
-      "depends_on": "eval:doc.font_source==\"Managed Google Catalog\""
-    },
-    {
-      "fieldname": "font_source_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "typography_weight_system",
-      "fieldtype": "Select",
-      "label": "Typography Weight System",
-      "options": "Balanced\nStrong Hierarchy\nLightweight\nFrappe Standard",
-      "default": "Balanced"
-    },
-    {
-      "fieldname": "custom_font_stack",
-      "fieldtype": "Data",
-      "label": "Custom Interface Font Stack",
-      "default": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
-      "depends_on": "eval:doc.font_source==\"Custom Font Stack\""
-    },
-    {
-      "fieldname": "prefer_locally_hosted_fonts",
-      "fieldtype": "Check",
-      "label": "Prefer Locally Hosted Fonts",
-      "default": "0",
-      "description": "Use this when matching font files are supplied by the organization assets."
-    },
-    {
-      "fieldname": "font_preview",
-      "fieldtype": "HTML",
-      "label": "Typography Preview"
-    },
-    {
-      "fieldname": "body_font_size",
-      "fieldtype": "Int",
-      "label": "Body Font Size (px)",
-      "default": "13",
-      "description": "Allowed range: 12 to 20."
-    },
-    {
-      "fieldname": "label_font_size",
-      "fieldtype": "Int",
-      "label": "Label Font Size (px)",
-      "default": "13",
-      "description": "Allowed range: 11 to 18."
-    },
-    {
-      "fieldname": "heading_scale",
-      "fieldtype": "Float",
-      "label": "Heading Scale",
-      "default": "1.2",
-      "description": "Allowed range: 1.0 to 1.6."
-    },
-    {
-      "fieldname": "font_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "navbar_height",
-      "fieldtype": "Int",
-      "label": "Navbar Height (px)",
-      "default": "50",
-      "description": "Allowed range: 40 to 72."
-    },
-    {
-      "fieldname": "page_header_height",
-      "fieldtype": "Int",
-      "label": "Page Header Height (px)",
-      "default": "50",
-      "description": "Default 50. Allowed range: 40 to 72."
-    },
-    {
-      "fieldname": "sidebar_width",
-      "fieldtype": "Int",
-      "label": "Sidebar Width (px)",
-      "default": "240",
-      "description": "Allowed range: 200 to 340."
-    },
-    {
-      "fieldname": "icon_size",
-      "fieldtype": "Int",
-      "label": "Default Icon Size (px)",
-      "default": "16",
-      "description": "Allowed range: 14 to 24."
-    },
-    {
-      "fieldname": "shape_section",
-      "fieldtype": "Section Break",
-      "label": "Shape and Elevation"
-    },
-    {
-      "fieldname": "control_radius",
-      "fieldtype": "Select",
-      "label": "Control Radius",
-      "options": "Frappe Default\nCompact\nSubtle\nRounded",
-      "default": "Compact"
-    },
-    {
-      "fieldname": "button_radius",
-      "fieldtype": "Select",
-      "label": "Button Radius",
-      "options": "Frappe Default\nCompact\nSubtle\nRounded",
-      "default": "Compact"
-    },
-    {
-      "fieldname": "card_radius",
-      "fieldtype": "Select",
-      "label": "Card Radius",
-      "options": "Frappe Default\nCompact\nSubtle\nRounded",
-      "default": "Compact"
-    },
-    {
-      "fieldname": "shape_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "dialog_radius",
-      "fieldtype": "Select",
-      "label": "Dialog Radius",
-      "options": "Frappe Default\nCompact\nSubtle\nRounded",
-      "default": "Compact"
-    },
-    {
-      "fieldname": "border_strength",
-      "fieldtype": "Select",
-      "label": "Border Strength",
-      "options": "Frappe Default\nSubtle\nDefined",
-      "default": "Subtle"
-    },
-    {
-      "fieldname": "elevation_scale",
-      "fieldtype": "Select",
-      "label": "Elevation",
-      "options": "Frappe Default\nFlat\nSubtle\nElevated",
-      "default": "Subtle"
-    },
-    {
-      "fieldname": "components_tab",
-      "fieldtype": "Tab Break",
-      "label": "Components"
-    },
-    {
-      "fieldname": "components_section",
-      "fieldtype": "Section Break",
-      "label": "Desk Components"
-    },
-    {
-      "fieldname": "enhanced_section_headings",
-      "fieldtype": "Check",
-      "label": "Enhanced Section Headings",
-      "default": "1"
-    },
-    {
-      "fieldname": "compact_child_tables",
-      "fieldtype": "Check",
-      "label": "Compact Child Tables",
-      "default": "0"
-    },
-    {
-      "fieldname": "sticky_list_header",
-      "fieldtype": "Check",
-      "label": "Sticky List Header",
-      "default": "1"
-    },
-    {
-      "fieldname": "component_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "workspace_card_density",
-      "fieldtype": "Select",
-      "label": "Workspace Card Density",
-      "options": "Frappe Default\nComfortable\nCompact",
-      "default": "Comfortable"
-    },
-    {
-      "fieldname": "dialog_width_policy",
-      "fieldtype": "Select",
-      "label": "Dialog Width Policy",
-      "options": "Frappe Default\nAdaptive",
-      "default": "Adaptive"
-    },
-    {
-      "fieldname": "status_indicator_strength",
-      "fieldtype": "Select",
-      "label": "Status Indicator Strength",
-      "options": "Frappe Default\nEnhanced",
-      "default": "Enhanced"
-    },
-    {
-      "fieldname": "experience_section",
-      "fieldtype": "Section Break",
-      "label": "Enterprise Experience",
-      "description": "Controls the Frappe-native enterprise shell, hierarchy and interaction refinement."
-    },
-    {
-      "fieldname": "experience_style",
-      "fieldtype": "Select",
-      "label": "Experience Style",
-      "options": "QOrg Executive\nQOrg Midnight\nQOrg Operations\nFrappe Standard",
-      "default": "QOrg Executive"
-    },
-    {
-      "fieldname": "surface_hierarchy",
-      "fieldtype": "Select",
-      "label": "Surface Hierarchy",
-      "options": "Layered\nSubtle\nFlat",
-      "default": "Layered"
-    },
-    {
-      "fieldname": "navigation_emphasis",
-      "fieldtype": "Select",
-      "label": "Navigation Emphasis",
-      "options": "Balanced\nBrand Forward\nMinimal",
-      "default": "Balanced"
-    },
-    {
-      "fieldname": "experience_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "page_header_style",
-      "fieldtype": "Select",
-      "label": "Page Header Style",
-      "options": "Executive\nCompact\nFrappe Standard",
-      "default": "Executive"
-    },
-    {
-      "fieldname": "section_presentation",
-      "fieldtype": "Select",
-      "label": "Section Presentation",
-      "options": "Structured\nSoft Cards\nFrappe Standard",
-      "default": "Structured"
-    },
-    {
-      "fieldname": "table_presentation",
-      "fieldtype": "Select",
-      "label": "Table Presentation",
-      "options": "Enterprise\nCompact Operations\nFrappe Standard",
-      "default": "Enterprise"
-    },
-    {
-      "fieldname": "operational_components_section",
-      "fieldtype": "Section Break",
-      "label": "Operational Components",
-      "description": "Controls enterprise behavior for forms, toolbars, data grids, alternate views, dialogs, workflow, timeline and interface states."
-    },
-    {
-      "fieldname": "form_control_style",
-      "fieldtype": "Select",
-      "label": "Form Control Style",
-      "options": "Enterprise\nCompact Operations\nFrappe Standard",
-      "default": "Enterprise"
-    },
-    {
-      "fieldname": "toolbar_style",
-      "fieldtype": "Select",
-      "label": "List and Report Toolbar Style",
-      "options": "Unified\nCompact\nFrappe Standard",
-      "default": "Unified"
-    },
-    {
-      "fieldname": "grid_style",
-      "fieldtype": "Select",
-      "label": "Grid and DataTable Style",
-      "options": "Enterprise\nCompact Operations\nFrappe Standard",
-      "default": "Enterprise"
-    },
-    {
-      "fieldname": "alternate_view_style",
-      "fieldtype": "Select",
-      "label": "Tree, Calendar and Kanban Style",
-      "options": "Enterprise\nSubtle\nFrappe Standard",
-      "default": "Enterprise"
-    },
-    {
-      "fieldname": "operational_components_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "dialog_style",
-      "fieldtype": "Select",
-      "label": "Dialogs and Quick Entry Style",
-      "options": "Enterprise\nCompact\nFrappe Standard",
-      "default": "Enterprise"
-    },
-    {
-      "fieldname": "workflow_timeline_style",
-      "fieldtype": "Select",
-      "label": "Workflow and Timeline Style",
-      "options": "Enterprise\nSubtle\nFrappe Standard",
-      "default": "Enterprise"
-    },
-    {
-      "fieldname": "state_presentation",
-      "fieldtype": "Select",
-      "label": "Empty, Loading and Error States",
-      "options": "Illustrated Minimal\nCompact\nFrappe Standard",
-      "default": "Illustrated Minimal"
-    },
-    {
-      "fieldname": "sticky_primary_columns",
-      "fieldtype": "Check",
-      "label": "Sticky Primary Columns",
-      "default": "1"
-    },
-    {
-      "fieldname": "numeric_alignment",
-      "fieldtype": "Check",
-      "label": "Align Numeric and Financial Values",
-      "default": "1"
-    },
-    {
-      "fieldname": "workspace_dashboard_section",
-      "fieldtype": "Section Break",
-      "label": "Workspace and Dashboard",
-      "description": "Controls the executive and operational presentation of workspaces, KPIs, charts, priority panels, activity and dashboard tables."
-    },
-    {
-      "fieldname": "workspace_layout_style",
-      "fieldtype": "Select",
-      "label": "Workspace Layout Style",
-      "options": "Enterprise Canvas\nCompact Operations\nFrappe Standard",
-      "default": "Enterprise Canvas"
-    },
-    {
-      "fieldname": "kpi_card_style",
-      "fieldtype": "Select",
-      "label": "KPI Card Style",
-      "options": "Executive\nOperational\nFrappe Standard",
-      "default": "Executive"
-    },
-    {
-      "fieldname": "chart_presentation",
-      "fieldtype": "Select",
-      "label": "Chart Presentation",
-      "options": "Balanced\nHigh Contrast\nFrappe Standard",
-      "default": "Balanced"
-    },
-    {
-      "fieldname": "priority_panel_style",
-      "fieldtype": "Select",
-      "label": "Priority Panel Style",
-      "options": "Action Oriented\nCompact\nFrappe Standard",
-      "default": "Action Oriented"
-    },
-    {
-      "fieldname": "workspace_dashboard_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "activity_panel_style",
-      "fieldtype": "Select",
-      "label": "Activity Panel Style",
-      "options": "Timeline Cards\nCompact Feed\nFrappe Standard",
-      "default": "Timeline Cards"
-    },
-    {
-      "fieldname": "operational_table_style",
-      "fieldtype": "Select",
-      "label": "Operational Table Style",
-      "options": "Enterprise\nCompact Operations\nFrappe Standard",
-      "default": "Enterprise"
-    },
-    {
-      "fieldname": "workspace_quick_actions",
-      "fieldtype": "Check",
-      "label": "Emphasize Workspace Quick Actions",
-      "default": "1"
-    },
-    {
-      "fieldname": "dashboard_responsive_reflow",
-      "fieldtype": "Check",
-      "label": "Responsive Dashboard Reflow",
-      "default": "1"
-    },
-    {
-      "fieldname": "dashboard_reduce_decorative_motion",
-      "fieldtype": "Check",
-      "label": "Reduce Decorative Dashboard Motion",
-      "default": "1"
-    },
-    {
-      "fieldname": "quick_create_section",
-      "fieldtype": "Section Break",
-      "label": "Persistent Create Menu",
-      "description": "Configure the document types shown in the permanent Create button in the Desk top bar. Each user only sees document types they are allowed to create."
-    },
-    {
-      "fieldname": "enable_quick_create_menu",
-      "fieldtype": "Check",
-      "label": "Enable Persistent Create Button",
-      "default": "1"
-    },
-    {
-      "fieldname": "quick_create_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "quick_create_button_label",
-      "fieldtype": "Data",
-      "label": "Create Button Label",
-      "default": "Create",
-      "translatable": 1
-    },
-    {
-      "fieldname": "quick_create_items_section",
-      "fieldtype": "Section Break",
-      "label": "Create Menu Items",
-      "description": "The table is full width. Add, remove, disable and reorder document types. Users only see entries they can create."
-    },
-    {
-      "fieldname": "quick_create_items",
-      "fieldtype": "Table",
-      "label": "Create Menu Items",
-      "options": "Q Org Quick Create Item",
-      "description": "Add, remove and reorder document types. Disabled rows remain saved but are hidden from the menu."
-    },
-    {
-      "fieldname": "action_dock_section",
-      "fieldtype": "Section Break",
-      "label": "Global Action Dock",
-      "description": "Places Create and Language actions in the Frappe 16 sidebar footer, with an adaptive floating fallback when the sidebar is unavailable."
-    },
-    {
-      "fieldname": "enable_action_dock",
-      "fieldtype": "Check",
-      "label": "Enable Global Action Dock",
-      "default": "1"
-    },
-    {
-      "fieldname": "action_dock_desktop_placement",
-      "fieldtype": "Select",
-      "label": "Desktop Placement",
-      "options": "Auto\nSidebar Footer\nFloating Edge",
-      "default": "Auto"
-    },
-    {
-      "fieldname": "action_dock_collapsed_behavior",
-      "fieldtype": "Select",
-      "label": "Collapsed Sidebar Behavior",
-      "options": "Icons Only\nExpand on Hover",
-      "default": "Expand on Hover"
-    },
-    {
-      "fieldname": "show_create_action",
-      "fieldtype": "Check",
-      "label": "Show Create Action",
-      "default": "1"
-    },
-    {
-      "fieldname": "action_dock_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "action_dock_mobile_placement",
-      "fieldtype": "Select",
-      "label": "Mobile Placement",
-      "options": "Floating Orb\nBottom Bar",
-      "default": "Floating Orb"
-    },
-    {
-      "fieldname": "show_language_action",
-      "fieldtype": "Check",
-      "label": "Show Language Action",
-      "default": "1"
-    },
-    {
-      "fieldname": "create_menu_search",
-      "fieldtype": "Check",
-      "label": "Enable Create Menu Search",
-      "default": "1"
-    },
-    {
-      "fieldname": "group_create_items",
-      "fieldtype": "Check",
-      "label": "Group Create Menu Items",
-      "default": "1"
-    },
-    {
-      "fieldname": "action_dock_tooltips",
-      "fieldtype": "Check",
-      "label": "Show Action Tooltips",
-      "default": "1"
-    },
-    {
-      "fieldname": "accessibility_tab",
-      "fieldtype": "Tab Break",
-      "label": "Accessibility"
-    },
-    {
-      "fieldname": "accessibility_section",
-      "fieldtype": "Section Break",
-      "label": "Accessibility Policies"
-    },
-    {
-      "fieldname": "respect_reduced_motion",
-      "fieldtype": "Check",
-      "label": "Respect Reduced Motion",
-      "default": "1"
-    },
-    {
-      "fieldname": "enhanced_focus_visibility",
-      "fieldtype": "Check",
-      "label": "Enhanced Focus Visibility",
-      "default": "1"
-    },
-    {
-      "fieldname": "contrast_policy",
-      "fieldtype": "Select",
-      "label": "Contrast Policy",
-      "options": "Frappe Default\nWCAG AA Guard",
-      "default": "WCAG AA Guard"
-    },
-    {
-      "fieldname": "accessibility_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "rtl_spacing_corrections",
-      "fieldtype": "Check",
-      "label": "RTL Spacing Corrections",
-      "default": "1"
-    },
-    {
-      "fieldname": "touch_target_policy",
-      "fieldtype": "Select",
-      "label": "Touch Target Policy",
-      "options": "Frappe Default\nEnhanced",
-      "default": "Enhanced"
-    },
-    {
-      "fieldname": "reduced_transparency",
-      "fieldtype": "Check",
-      "label": "Reduced Transparency",
-      "default": "0"
-    },
-    {
-      "fieldname": "login_tab",
-      "fieldtype": "Tab Break",
-      "label": "Login"
-    },
-    {
-      "fieldname": "login_section",
-      "fieldtype": "Section Break",
-      "label": "Login Visual and Content"
-    },
-    {
-      "fieldname": "login_layout",
-      "fieldtype": "Select",
-      "label": "Login Layout",
-      "options": "Frappe Standard\nQOrg Split\nQOrg Centered\nQOrg Visual\nFull Width Split",
-      "default": "Full Width Split"
-    },
-    {
-      "fieldname": "login_visual_source",
-      "fieldtype": "Select",
-      "label": "Visual Source",
-      "options": "None\nManaged Image\nGradient",
-      "default": "Gradient"
-    },
-    {
-      "fieldname": "login_visual_image",
-      "fieldtype": "Attach Image",
-      "label": "Managed Visual Image"
-    },
-    {
-      "fieldname": "login_visual_gradient",
-      "fieldtype": "Select",
-      "label": "Managed Gradient",
-      "options": "QOrg Blue\nQOrg Violet\nQOrg Sunrise",
-      "default": "QOrg Blue"
-    },
-    {
-      "fieldname": "login_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "login_welcome_title",
-      "fieldtype": "Data",
-      "label": "Welcome Title",
-      "translatable": 1,
-      "default": "Welcome to QOrg"
-    },
-    {
-      "fieldname": "login_welcome_subtitle",
-      "fieldtype": "Small Text",
-      "label": "Welcome Subtitle",
-      "translatable": 1,
-      "default": "Integrated, secure and efficient enterprise management."
-    },
-    {
-      "fieldname": "show_login_language_switcher",
-      "fieldtype": "Check",
-      "label": "Show Language Switcher",
-      "default": "1"
-    },
-    {
-      "fieldname": "login_mobile_visual_policy",
-      "fieldtype": "Select",
-      "label": "Mobile Visual Policy",
-      "options": "Hide\nCompact Header\nShow Below Form",
-      "default": "Compact Header"
-    },
-    {
-      "fieldname": "login_experience_section",
-      "fieldtype": "Section Break",
-      "label": "Login Behavior and Trust",
-      "description": "Controls the complete public sign-in experience while preserving all standard Frappe authentication methods."
-    },
-    {
-      "fieldname": "login_experience_style",
-      "fieldtype": "Select",
-      "label": "Login Experience Style",
-      "options": "QOrg Executive\nQOrg Midnight\nQOrg Visual\nFrappe Standard",
-      "default": "QOrg Executive"
-    },
-    {
-      "fieldname": "login_form_density",
-      "fieldtype": "Select",
-      "label": "Login Form Density",
-      "options": "Comfortable\nCompact\nFrappe Standard",
-      "default": "Comfortable"
-    },
-    {
-      "fieldname": "login_show_trust_message",
-      "fieldtype": "Check",
-      "label": "Show Trust Message",
-      "default": "1"
-    },
-    {
-      "fieldname": "login_trust_message",
-      "fieldtype": "Small Text",
-      "label": "Trust Message",
-      "default": "Secure access to your organization workspace."
-    },
-    {
-      "fieldname": "login_experience_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "login_card_alignment",
-      "fieldtype": "Select",
-      "label": "Login Card Alignment",
-      "options": "Auto\nStart\nCenter\nEnd",
-      "default": "Auto"
-    },
-    {
-      "fieldname": "login_show_security_footer",
-      "fieldtype": "Check",
-      "label": "Show Security Footer",
-      "default": "1"
-    },
-    {
-      "fieldname": "login_focus_first_field",
-      "fieldtype": "Check",
-      "label": "Focus First Login Field",
-      "default": "1"
-    },
-    {
-      "fieldname": "website_tab",
-      "fieldtype": "Tab Break",
-      "label": "Website and Web Forms"
-    },
-    {
-      "fieldname": "website_section",
-      "fieldtype": "Section Break",
-      "label": "Website Integration"
-    },
-    {
-      "fieldname": "active_website_theme",
-      "fieldtype": "Data",
-      "label": "Active Website Theme",
-      "read_only": 1,
-      "default": "Frappe Standard"
-    },
-    {
-      "fieldname": "website_integration_status",
-      "fieldtype": "Data",
-      "label": "Integration Status",
-      "read_only": 1,
-      "default": "Website Theme respected"
-    },
-    {
-      "fieldname": "website_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "web_form_max_content_width",
-      "fieldtype": "Int",
-      "label": "Web Form Maximum Content Width",
-      "default": "1180",
-      "description": "Allowed range: 760 to 1600 pixels."
-    },
-    {
-      "fieldname": "web_form_sticky_actions",
-      "fieldtype": "Check",
-      "label": "Sticky Web Form Actions",
-      "default": "1"
-    },
-    {
-      "fieldname": "web_form_hide_technical_child_row_name",
-      "fieldtype": "Check",
-      "label": "Hide Technical Child Row Name",
-      "default": "1"
-    },
-    {
-      "fieldname": "public_experience_section",
-      "fieldtype": "Section Break",
-      "label": "Public Experience",
-      "description": "Controls Web Forms, portal pages, public cards, validation, success states and mobile presentation."
-    },
-    {
-      "fieldname": "web_form_presentation",
-      "fieldtype": "Select",
-      "label": "Web Form Presentation",
-      "options": "Enterprise\nCompact\nFrappe Standard",
-      "default": "Enterprise"
-    },
-    {
-      "fieldname": "portal_presentation",
-      "fieldtype": "Select",
-      "label": "Portal Presentation",
-      "options": "Enterprise\nCompact\nFrappe Standard",
-      "default": "Enterprise"
-    },
-    {
-      "fieldname": "public_card_style",
-      "fieldtype": "Select",
-      "label": "Public Card Style",
-      "options": "Elevated\nSubtle\nFrappe Standard",
-      "default": "Elevated"
-    },
-    {
-      "fieldname": "public_experience_column",
-      "fieldtype": "Column Break",
-      "label": ""
-    },
-    {
-      "fieldname": "public_validation_summary",
-      "fieldtype": "Check",
-      "label": "Show Validation Summary",
-      "default": "1"
-    },
-    {
-      "fieldname": "public_success_presentation",
-      "fieldtype": "Select",
-      "label": "Submission Success Presentation",
-      "options": "Celebratory Minimal\nCompact\nFrappe Standard",
-      "default": "Celebratory Minimal"
-    },
-    {
-      "fieldname": "public_mobile_sticky_actions",
-      "fieldtype": "Check",
-      "label": "Mobile Sticky Actions",
-      "default": "1"
-    }
-  ],
-  "permissions": [
-    {
-      "role": "System Manager",
-      "read": 1,
-      "write": 1,
-      "create": 1,
-      "export": 1
-    }
-  ],
-  "sort_field": "modified",
-  "sort_order": "DESC"
+ "doctype": "DocType",
+ "name": "Q Org Design System Settings",
+ "module": "QOrg",
+ "custom": 0,
+ "issingle": 1,
+ "track_changes": 1,
+ "field_order": [
+  "overview_tab",
+  "status_section",
+  "enabled",
+  "active_preset",
+  "status_column",
+  "configuration_status",
+  "compatibility_status",
+  "scope_section",
+  "apply_to_desk",
+  "apply_to_login",
+  "scope_column",
+  "apply_to_qorg_web_components",
+  "respect_active_website_theme",
+  "identity_tab",
+  "palette_section",
+  "primary_accent",
+  "secondary_accent",
+  "neutral_accent",
+  "success_color",
+  "palette_balanced_column",
+  "warning_color",
+  "danger_color",
+  "information_color",
+  "focus_color",
+  "surfaces_section",
+  "navbar_surface",
+  "sidebar_surface",
+  "page_surface",
+  "card_surface",
+  "dialog_surface",
+  "input_surface",
+  "surface_column",
+  "text_primary_color",
+  "text_muted_color",
+  "heading_color",
+  "border_color",
+  "selected_surface",
+  "hover_surface",
+  "appearance_tab",
+  "typography_section",
+  "theme_mode_policy",
+  "density",
+  "typography_policy",
+  "typography_column",
+  "heading_weight",
+  "line_height_scale",
+  "font_section",
+  "font_source",
+  "language_font_strategy",
+  "latin_font_family",
+  "arabic_font_family",
+  "font_source_column",
+  "typography_weight_system",
+  "custom_font_stack",
+  "prefer_locally_hosted_fonts",
+  "font_preview",
+  "body_font_size",
+  "label_font_size",
+  "heading_scale",
+  "font_column",
+  "navbar_height",
+  "page_header_height",
+  "sidebar_width",
+  "icon_size",
+  "shape_section",
+  "control_radius",
+  "button_radius",
+  "card_radius",
+  "shape_column",
+  "dialog_radius",
+  "border_strength",
+  "elevation_scale",
+  "components_tab",
+  "components_section",
+  "enhanced_section_headings",
+  "compact_child_tables",
+  "sticky_list_header",
+  "component_column",
+  "workspace_card_density",
+  "dialog_width_policy",
+  "status_indicator_strength",
+  "experience_section",
+  "experience_style",
+  "surface_hierarchy",
+  "navigation_emphasis",
+  "experience_column",
+  "page_header_style",
+  "section_presentation",
+  "table_presentation",
+  "operational_components_section",
+  "form_control_style",
+  "toolbar_style",
+  "grid_style",
+  "alternate_view_style",
+  "operational_components_column",
+  "dialog_style",
+  "workflow_timeline_style",
+  "state_presentation",
+  "sticky_primary_columns",
+  "numeric_alignment",
+  "workspace_dashboard_section",
+  "workspace_layout_style",
+  "kpi_card_style",
+  "chart_presentation",
+  "priority_panel_style",
+  "workspace_dashboard_column",
+  "activity_panel_style",
+  "operational_table_style",
+  "workspace_quick_actions",
+  "dashboard_responsive_reflow",
+  "dashboard_reduce_decorative_motion",
+  "quick_create_section",
+  "enable_quick_create_menu",
+  "quick_create_column",
+  "quick_create_button_label",
+  "quick_create_items_section",
+  "quick_create_items",
+  "action_dock_section",
+  "enable_action_dock",
+  "action_dock_desktop_placement",
+  "action_dock_collapsed_behavior",
+  "show_create_action",
+  "action_dock_column",
+  "action_dock_mobile_placement",
+  "show_language_action",
+  "create_menu_search",
+  "group_create_items",
+  "action_dock_tooltips",
+  "accessibility_tab",
+  "accessibility_section",
+  "respect_reduced_motion",
+  "enhanced_focus_visibility",
+  "contrast_policy",
+  "accessibility_column",
+  "rtl_spacing_corrections",
+  "touch_target_policy",
+  "reduced_transparency",
+  "login_tab",
+  "login_section",
+  "login_layout",
+  "login_visual_source",
+  "login_visual_image",
+  "login_visual_gradient",
+  "login_column",
+  "login_welcome_title",
+  "login_welcome_subtitle",
+  "show_login_language_switcher",
+  "login_mobile_visual_policy",
+  "login_experience_section",
+  "login_experience_style",
+  "login_form_density",
+  "login_show_trust_message",
+  "login_trust_message",
+  "login_experience_column",
+  "login_card_alignment",
+  "login_show_security_footer",
+  "login_focus_first_field",
+  "website_tab",
+  "website_section",
+  "active_website_theme",
+  "website_integration_status",
+  "website_column",
+  "web_form_max_content_width",
+  "web_form_sticky_actions",
+  "web_form_hide_technical_child_row_name",
+  "public_experience_section",
+  "web_form_presentation",
+  "portal_presentation",
+  "public_card_style",
+  "public_experience_column",
+  "public_validation_summary",
+  "public_success_presentation",
+  "public_mobile_sticky_actions",
+  "unified_polish_v293_section",
+  "control_sizing_section",
+  "control_height_policy",
+  "custom_control_height",
+  "control_horizontal_padding",
+  "control_label_gap",
+  "control_sizing_column",
+  "small_text_height_policy",
+  "small_text_min_height",
+  "text_editor_min_height",
+  "select_option_height",
+  "focus_ring_style",
+  "shell_layout_section",
+  "page_width_policy",
+  "page_max_width",
+  "page_inline_padding",
+  "app_rail_style",
+  "app_rail_icon_size",
+  "shell_layout_column",
+  "module_sidebar_style",
+  "module_sidebar_width",
+  "navigation_item_height",
+  "navbar_search_style",
+  "breadcrumb_emphasis",
+  "menu_density",
+  "workspace_composition_section",
+  "workspace_content_width",
+  "workspace_grid_policy",
+  "workspace_column_gap",
+  "workspace_row_gap",
+  "workspace_composition_column",
+  "workspace_card_style",
+  "workspace_card_height_policy",
+  "workspace_heading_accent",
+  "nested_surface_policy",
+  "section_action_style",
+  "mixed_content_bidi_safety"
+ ],
+ "fields": [
+  {
+   "fieldname": "overview_tab",
+   "fieldtype": "Tab Break",
+   "label": "Overview"
+  },
+  {
+   "fieldname": "status_section",
+   "fieldtype": "Section Break",
+   "label": "System Status"
+  },
+  {
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enable QOrg Design System",
+   "description": "Managed visual extensions with Frappe Standard fallback."
+  },
+  {
+   "fieldname": "active_preset",
+   "fieldtype": "Link",
+   "label": "Active Preset",
+   "options": "Q Org Design Preset",
+   "default": "QOrg Executive Light"
+  },
+  {
+   "fieldname": "status_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "configuration_status",
+   "fieldtype": "Data",
+   "label": "Configuration Status",
+   "read_only": 1,
+   "default": "Valid"
+  },
+  {
+   "fieldname": "compatibility_status",
+   "fieldtype": "Data",
+   "label": "Compatibility Status",
+   "read_only": 1,
+   "default": "Validated baseline: Frappe 16.53+"
+  },
+  {
+   "fieldname": "scope_section",
+   "fieldtype": "Section Break",
+   "label": "Application Scope"
+  },
+  {
+   "fieldname": "apply_to_desk",
+   "fieldtype": "Check",
+   "label": "Apply to Desk",
+   "default": "1"
+  },
+  {
+   "fieldname": "apply_to_login",
+   "fieldtype": "Check",
+   "label": "Apply to Login",
+   "default": "1"
+  },
+  {
+   "fieldname": "scope_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "apply_to_qorg_web_components",
+   "fieldtype": "Check",
+   "label": "Apply to QOrg Web Components",
+   "default": "1"
+  },
+  {
+   "fieldname": "respect_active_website_theme",
+   "fieldtype": "Check",
+   "label": "Respect Active Website Theme",
+   "default": "1"
+  },
+  {
+   "fieldname": "identity_tab",
+   "fieldtype": "Tab Break",
+   "label": "Identity and Colors"
+  },
+  {
+   "fieldname": "palette_section",
+   "fieldtype": "Section Break",
+   "label": "Semantic Palette",
+   "description": "Independent from Company printing colors. Website Theme remains the web source of truth."
+  },
+  {
+   "fieldname": "primary_accent",
+   "fieldtype": "Color",
+   "label": "Primary Accent",
+   "default": "#137690"
+  },
+  {
+   "fieldname": "secondary_accent",
+   "fieldtype": "Color",
+   "label": "Secondary Accent",
+   "default": "#cbae66"
+  },
+  {
+   "fieldname": "neutral_accent",
+   "fieldtype": "Color",
+   "label": "Neutral Accent",
+   "default": "#606c77"
+  },
+  {
+   "fieldname": "success_color",
+   "fieldtype": "Color",
+   "label": "Success",
+   "default": "#2e8b57"
+  },
+  {
+   "fieldname": "palette_balanced_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "warning_color",
+   "fieldtype": "Color",
+   "label": "Warning",
+   "default": "#d79b26"
+  },
+  {
+   "fieldname": "danger_color",
+   "fieldtype": "Color",
+   "label": "Danger",
+   "default": "#bd4546"
+  },
+  {
+   "fieldname": "information_color",
+   "fieldtype": "Color",
+   "label": "Information",
+   "default": "#258bd3"
+  },
+  {
+   "fieldname": "focus_color",
+   "fieldtype": "Color",
+   "label": "Focus Ring",
+   "default": "#269ad7"
+  },
+  {
+   "fieldname": "surfaces_section",
+   "fieldtype": "Section Break",
+   "label": "Surfaces and Text",
+   "description": "Optional semantic overrides. Leave blank to inherit Frappe or the active Website Theme."
+  },
+  {
+   "fieldname": "navbar_surface",
+   "fieldtype": "Color",
+   "label": "Navbar Surface",
+   "default": "#fafafa"
+  },
+  {
+   "fieldname": "sidebar_surface",
+   "fieldtype": "Color",
+   "label": "Sidebar Surface",
+   "default": "#f2f6f7"
+  },
+  {
+   "fieldname": "page_surface",
+   "fieldtype": "Color",
+   "label": "Page Surface",
+   "default": "#f6f8fa"
+  },
+  {
+   "fieldname": "card_surface",
+   "fieldtype": "Color",
+   "label": "Card Surface",
+   "default": "#ffffff"
+  },
+  {
+   "fieldname": "dialog_surface",
+   "fieldtype": "Color",
+   "label": "Dialog Surface",
+   "default": "#ffffff"
+  },
+  {
+   "fieldname": "input_surface",
+   "fieldtype": "Color",
+   "label": "Input Surface",
+   "default": "#ffffff"
+  },
+  {
+   "fieldname": "surface_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "text_primary_color",
+   "fieldtype": "Color",
+   "label": "Primary Text",
+   "default": "#0f3246"
+  },
+  {
+   "fieldname": "text_muted_color",
+   "fieldtype": "Color",
+   "label": "Muted Text",
+   "default": "#606c77"
+  },
+  {
+   "fieldname": "heading_color",
+   "fieldtype": "Color",
+   "label": "Heading Text",
+   "default": "#0f3246"
+  },
+  {
+   "fieldname": "border_color",
+   "fieldtype": "Color",
+   "label": "Border",
+   "default": "#d6e0e4"
+  },
+  {
+   "fieldname": "selected_surface",
+   "fieldtype": "Color",
+   "label": "Selected Surface",
+   "default": "#e0f1f5"
+  },
+  {
+   "fieldname": "hover_surface",
+   "fieldtype": "Color",
+   "label": "Hover Surface",
+   "default": "#edf7f9"
+  },
+  {
+   "fieldname": "appearance_tab",
+   "fieldtype": "Tab Break",
+   "label": "Typography and Shape"
+  },
+  {
+   "fieldname": "typography_section",
+   "fieldtype": "Section Break",
+   "label": "Typography"
+  },
+  {
+   "fieldname": "theme_mode_policy",
+   "fieldtype": "Select",
+   "label": "Theme Mode Policy",
+   "options": "Follow Frappe/System\nLight\nDark",
+   "default": "Light"
+  },
+  {
+   "fieldname": "density",
+   "fieldtype": "Select",
+   "label": "Density",
+   "options": "Frappe Default\nComfortable\nCompact",
+   "default": "Comfortable"
+  },
+  {
+   "fieldname": "typography_policy",
+   "fieldtype": "Select",
+   "label": "Typography Policy",
+   "options": "Frappe Default\nSystem UI\nQOrg Bundled",
+   "default": "System UI"
+  },
+  {
+   "fieldname": "typography_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "heading_weight",
+   "fieldtype": "Select",
+   "label": "Heading Weight",
+   "options": "Default\nMedium\nSemibold",
+   "default": "Semibold"
+  },
+  {
+   "fieldname": "line_height_scale",
+   "fieldtype": "Select",
+   "label": "Line Height",
+   "options": "Default\nComfortable\nSpacious",
+   "default": "Comfortable"
+  },
+  {
+   "fieldname": "font_section",
+   "fieldtype": "Section Break",
+   "label": "Font Sizes and Layout"
+  },
+  {
+   "fieldname": "font_source",
+   "fieldtype": "Select",
+   "label": "Font Source",
+   "options": "System and Frappe\nManaged Google Catalog\nCustom Font Stack",
+   "default": "System and Frappe",
+   "description": "External fonts are loaded only when Managed Google Catalog is selected."
+  },
+  {
+   "fieldname": "language_font_strategy",
+   "fieldtype": "Select",
+   "label": "Language Font Strategy",
+   "options": "Automatic Best Match\nOne Family for All Languages\nSeparate Arabic and Latin Fonts",
+   "default": "Automatic Best Match"
+  },
+  {
+   "fieldname": "latin_font_family",
+   "fieldtype": "Select",
+   "label": "Latin Interface Font",
+   "options": "Inter\nRoboto\nOpen Sans\nSource Sans 3\nIBM Plex Sans\nNoto Sans\nLato\nNunito Sans",
+   "default": "Inter",
+   "depends_on": "eval:doc.font_source==\"Managed Google Catalog\""
+  },
+  {
+   "fieldname": "arabic_font_family",
+   "fieldtype": "Select",
+   "label": "Arabic Interface Font",
+   "options": "Noto Sans Arabic\nIBM Plex Sans Arabic\nTajawal\nCairo\nAlmarai\nAlexandria\nNoto Kufi Arabic",
+   "default": "Noto Sans Arabic",
+   "depends_on": "eval:doc.font_source==\"Managed Google Catalog\""
+  },
+  {
+   "fieldname": "font_source_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "typography_weight_system",
+   "fieldtype": "Select",
+   "label": "Typography Weight System",
+   "options": "Balanced\nStrong Hierarchy\nLightweight\nFrappe Standard",
+   "default": "Balanced"
+  },
+  {
+   "fieldname": "custom_font_stack",
+   "fieldtype": "Data",
+   "label": "Custom Interface Font Stack",
+   "default": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+   "depends_on": "eval:doc.font_source==\"Custom Font Stack\""
+  },
+  {
+   "fieldname": "prefer_locally_hosted_fonts",
+   "fieldtype": "Check",
+   "label": "Prefer Locally Hosted Fonts",
+   "default": "0",
+   "description": "Use this when matching font files are supplied by the organization assets."
+  },
+  {
+   "fieldname": "font_preview",
+   "fieldtype": "HTML",
+   "label": "Typography Preview"
+  },
+  {
+   "fieldname": "body_font_size",
+   "fieldtype": "Int",
+   "label": "Body Font Size (px)",
+   "default": "13",
+   "description": "Allowed range: 12 to 20."
+  },
+  {
+   "fieldname": "label_font_size",
+   "fieldtype": "Int",
+   "label": "Label Font Size (px)",
+   "default": "13",
+   "description": "Allowed range: 11 to 18."
+  },
+  {
+   "fieldname": "heading_scale",
+   "fieldtype": "Float",
+   "label": "Heading Scale",
+   "default": "1.2",
+   "description": "Allowed range: 1.0 to 1.6."
+  },
+  {
+   "fieldname": "font_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "navbar_height",
+   "fieldtype": "Int",
+   "label": "Navbar Height (px)",
+   "default": "50",
+   "description": "Allowed range: 40 to 72."
+  },
+  {
+   "fieldname": "page_header_height",
+   "fieldtype": "Int",
+   "label": "Page Header Height (px)",
+   "default": "50",
+   "description": "Default 50. Allowed range: 40 to 72."
+  },
+  {
+   "fieldname": "sidebar_width",
+   "fieldtype": "Int",
+   "label": "Sidebar Width (px)",
+   "default": "240",
+   "description": "Allowed range: 200 to 340."
+  },
+  {
+   "fieldname": "icon_size",
+   "fieldtype": "Int",
+   "label": "Default Icon Size (px)",
+   "default": "16",
+   "description": "Allowed range: 14 to 24."
+  },
+  {
+   "fieldname": "shape_section",
+   "fieldtype": "Section Break",
+   "label": "Shape and Elevation"
+  },
+  {
+   "fieldname": "control_radius",
+   "fieldtype": "Select",
+   "label": "Control Radius",
+   "options": "Frappe Default\nCompact\nSubtle\nRounded",
+   "default": "Compact"
+  },
+  {
+   "fieldname": "button_radius",
+   "fieldtype": "Select",
+   "label": "Button Radius",
+   "options": "Frappe Default\nCompact\nSubtle\nRounded",
+   "default": "Compact"
+  },
+  {
+   "fieldname": "card_radius",
+   "fieldtype": "Select",
+   "label": "Card Radius",
+   "options": "Frappe Default\nCompact\nSubtle\nRounded",
+   "default": "Compact"
+  },
+  {
+   "fieldname": "shape_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "dialog_radius",
+   "fieldtype": "Select",
+   "label": "Dialog Radius",
+   "options": "Frappe Default\nCompact\nSubtle\nRounded",
+   "default": "Compact"
+  },
+  {
+   "fieldname": "border_strength",
+   "fieldtype": "Select",
+   "label": "Border Strength",
+   "options": "Frappe Default\nSubtle\nDefined",
+   "default": "Subtle"
+  },
+  {
+   "fieldname": "elevation_scale",
+   "fieldtype": "Select",
+   "label": "Elevation",
+   "options": "Frappe Default\nFlat\nSubtle\nElevated",
+   "default": "Subtle"
+  },
+  {
+   "fieldname": "components_tab",
+   "fieldtype": "Tab Break",
+   "label": "Components"
+  },
+  {
+   "fieldname": "components_section",
+   "fieldtype": "Section Break",
+   "label": "Desk Components"
+  },
+  {
+   "fieldname": "enhanced_section_headings",
+   "fieldtype": "Check",
+   "label": "Enhanced Section Headings",
+   "default": "1"
+  },
+  {
+   "fieldname": "compact_child_tables",
+   "fieldtype": "Check",
+   "label": "Compact Child Tables",
+   "default": "0"
+  },
+  {
+   "fieldname": "sticky_list_header",
+   "fieldtype": "Check",
+   "label": "Sticky List Header",
+   "default": "1"
+  },
+  {
+   "fieldname": "component_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "workspace_card_density",
+   "fieldtype": "Select",
+   "label": "Workspace Card Density",
+   "options": "Frappe Default\nComfortable\nCompact",
+   "default": "Comfortable"
+  },
+  {
+   "fieldname": "dialog_width_policy",
+   "fieldtype": "Select",
+   "label": "Dialog Width Policy",
+   "options": "Frappe Default\nAdaptive",
+   "default": "Adaptive"
+  },
+  {
+   "fieldname": "status_indicator_strength",
+   "fieldtype": "Select",
+   "label": "Status Indicator Strength",
+   "options": "Frappe Default\nEnhanced",
+   "default": "Enhanced"
+  },
+  {
+   "fieldname": "experience_section",
+   "fieldtype": "Section Break",
+   "label": "Enterprise Experience",
+   "description": "Controls the Frappe-native enterprise shell, hierarchy and interaction refinement."
+  },
+  {
+   "fieldname": "experience_style",
+   "fieldtype": "Select",
+   "label": "Experience Style",
+   "options": "QOrg Executive\nQOrg Midnight\nQOrg Operations\nFrappe Standard",
+   "default": "QOrg Executive"
+  },
+  {
+   "fieldname": "surface_hierarchy",
+   "fieldtype": "Select",
+   "label": "Surface Hierarchy",
+   "options": "Layered\nSubtle\nFlat",
+   "default": "Layered"
+  },
+  {
+   "fieldname": "navigation_emphasis",
+   "fieldtype": "Select",
+   "label": "Navigation Emphasis",
+   "options": "Balanced\nBrand Forward\nMinimal",
+   "default": "Balanced"
+  },
+  {
+   "fieldname": "experience_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "page_header_style",
+   "fieldtype": "Select",
+   "label": "Page Header Style",
+   "options": "Executive\nCompact\nFrappe Standard",
+   "default": "Executive"
+  },
+  {
+   "fieldname": "section_presentation",
+   "fieldtype": "Select",
+   "label": "Section Presentation",
+   "options": "Structured\nSoft Cards\nFrappe Standard",
+   "default": "Structured"
+  },
+  {
+   "fieldname": "table_presentation",
+   "fieldtype": "Select",
+   "label": "Table Presentation",
+   "options": "Enterprise\nCompact Operations\nFrappe Standard",
+   "default": "Enterprise"
+  },
+  {
+   "fieldname": "operational_components_section",
+   "fieldtype": "Section Break",
+   "label": "Operational Components",
+   "description": "Controls enterprise behavior for forms, toolbars, data grids, alternate views, dialogs, workflow, timeline and interface states."
+  },
+  {
+   "fieldname": "form_control_style",
+   "fieldtype": "Select",
+   "label": "Form Control Style",
+   "options": "Enterprise\nCompact Operations\nFrappe Standard",
+   "default": "Enterprise"
+  },
+  {
+   "fieldname": "toolbar_style",
+   "fieldtype": "Select",
+   "label": "List and Report Toolbar Style",
+   "options": "Unified\nCompact\nFrappe Standard",
+   "default": "Unified"
+  },
+  {
+   "fieldname": "grid_style",
+   "fieldtype": "Select",
+   "label": "Grid and DataTable Style",
+   "options": "Enterprise\nCompact Operations\nFrappe Standard",
+   "default": "Enterprise"
+  },
+  {
+   "fieldname": "alternate_view_style",
+   "fieldtype": "Select",
+   "label": "Tree, Calendar and Kanban Style",
+   "options": "Enterprise\nSubtle\nFrappe Standard",
+   "default": "Enterprise"
+  },
+  {
+   "fieldname": "operational_components_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "dialog_style",
+   "fieldtype": "Select",
+   "label": "Dialogs and Quick Entry Style",
+   "options": "Enterprise\nCompact\nFrappe Standard",
+   "default": "Enterprise"
+  },
+  {
+   "fieldname": "workflow_timeline_style",
+   "fieldtype": "Select",
+   "label": "Workflow and Timeline Style",
+   "options": "Enterprise\nSubtle\nFrappe Standard",
+   "default": "Enterprise"
+  },
+  {
+   "fieldname": "state_presentation",
+   "fieldtype": "Select",
+   "label": "Empty, Loading and Error States",
+   "options": "Illustrated Minimal\nCompact\nFrappe Standard",
+   "default": "Illustrated Minimal"
+  },
+  {
+   "fieldname": "sticky_primary_columns",
+   "fieldtype": "Check",
+   "label": "Sticky Primary Columns",
+   "default": "1"
+  },
+  {
+   "fieldname": "numeric_alignment",
+   "fieldtype": "Check",
+   "label": "Align Numeric and Financial Values",
+   "default": "1"
+  },
+  {
+   "fieldname": "workspace_dashboard_section",
+   "fieldtype": "Section Break",
+   "label": "Workspace and Dashboard",
+   "description": "Controls the executive and operational presentation of workspaces, KPIs, charts, priority panels, activity and dashboard tables."
+  },
+  {
+   "fieldname": "workspace_layout_style",
+   "fieldtype": "Select",
+   "label": "Workspace Layout Style",
+   "options": "Enterprise Canvas\nCompact Operations\nFrappe Standard",
+   "default": "Enterprise Canvas"
+  },
+  {
+   "fieldname": "kpi_card_style",
+   "fieldtype": "Select",
+   "label": "KPI Card Style",
+   "options": "Executive\nOperational\nFrappe Standard",
+   "default": "Executive"
+  },
+  {
+   "fieldname": "chart_presentation",
+   "fieldtype": "Select",
+   "label": "Chart Presentation",
+   "options": "Balanced\nHigh Contrast\nFrappe Standard",
+   "default": "Balanced"
+  },
+  {
+   "fieldname": "priority_panel_style",
+   "fieldtype": "Select",
+   "label": "Priority Panel Style",
+   "options": "Action Oriented\nCompact\nFrappe Standard",
+   "default": "Action Oriented"
+  },
+  {
+   "fieldname": "workspace_dashboard_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "activity_panel_style",
+   "fieldtype": "Select",
+   "label": "Activity Panel Style",
+   "options": "Timeline Cards\nCompact Feed\nFrappe Standard",
+   "default": "Timeline Cards"
+  },
+  {
+   "fieldname": "operational_table_style",
+   "fieldtype": "Select",
+   "label": "Operational Table Style",
+   "options": "Enterprise\nCompact Operations\nFrappe Standard",
+   "default": "Enterprise"
+  },
+  {
+   "fieldname": "workspace_quick_actions",
+   "fieldtype": "Check",
+   "label": "Emphasize Workspace Quick Actions",
+   "default": "1"
+  },
+  {
+   "fieldname": "dashboard_responsive_reflow",
+   "fieldtype": "Check",
+   "label": "Responsive Dashboard Reflow",
+   "default": "1"
+  },
+  {
+   "fieldname": "dashboard_reduce_decorative_motion",
+   "fieldtype": "Check",
+   "label": "Reduce Decorative Dashboard Motion",
+   "default": "1"
+  },
+  {
+   "fieldname": "quick_create_section",
+   "fieldtype": "Section Break",
+   "label": "Persistent Create Menu",
+   "description": "Configure the document types shown in the permanent Create button in the Desk top bar. Each user only sees document types they are allowed to create."
+  },
+  {
+   "fieldname": "enable_quick_create_menu",
+   "fieldtype": "Check",
+   "label": "Enable Persistent Create Button",
+   "default": "1"
+  },
+  {
+   "fieldname": "quick_create_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "quick_create_button_label",
+   "fieldtype": "Data",
+   "label": "Create Button Label",
+   "default": "Create",
+   "translatable": 1
+  },
+  {
+   "fieldname": "quick_create_items_section",
+   "fieldtype": "Section Break",
+   "label": "Create Menu Items",
+   "description": "The table is full width. Add, remove, disable and reorder document types. Users only see entries they can create."
+  },
+  {
+   "fieldname": "quick_create_items",
+   "fieldtype": "Table",
+   "label": "Create Menu Items",
+   "options": "Q Org Quick Create Item",
+   "description": "Add, remove and reorder document types. Disabled rows remain saved but are hidden from the menu."
+  },
+  {
+   "fieldname": "action_dock_section",
+   "fieldtype": "Section Break",
+   "label": "Global Action Dock",
+   "description": "Places Create and Language actions in the Frappe 16 sidebar footer, with an adaptive floating fallback when the sidebar is unavailable."
+  },
+  {
+   "fieldname": "enable_action_dock",
+   "fieldtype": "Check",
+   "label": "Enable Global Action Dock",
+   "default": "1"
+  },
+  {
+   "fieldname": "action_dock_desktop_placement",
+   "fieldtype": "Select",
+   "label": "Desktop Placement",
+   "options": "Auto\nSidebar Footer\nFloating Edge",
+   "default": "Auto"
+  },
+  {
+   "fieldname": "action_dock_collapsed_behavior",
+   "fieldtype": "Select",
+   "label": "Collapsed Sidebar Behavior",
+   "options": "Icons Only\nExpand on Hover",
+   "default": "Expand on Hover"
+  },
+  {
+   "fieldname": "show_create_action",
+   "fieldtype": "Check",
+   "label": "Show Create Action",
+   "default": "1"
+  },
+  {
+   "fieldname": "action_dock_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "action_dock_mobile_placement",
+   "fieldtype": "Select",
+   "label": "Mobile Placement",
+   "options": "Floating Orb\nBottom Bar",
+   "default": "Floating Orb"
+  },
+  {
+   "fieldname": "show_language_action",
+   "fieldtype": "Check",
+   "label": "Show Language Action",
+   "default": "1"
+  },
+  {
+   "fieldname": "create_menu_search",
+   "fieldtype": "Check",
+   "label": "Enable Create Menu Search",
+   "default": "1"
+  },
+  {
+   "fieldname": "group_create_items",
+   "fieldtype": "Check",
+   "label": "Group Create Menu Items",
+   "default": "1"
+  },
+  {
+   "fieldname": "action_dock_tooltips",
+   "fieldtype": "Check",
+   "label": "Show Action Tooltips",
+   "default": "1"
+  },
+  {
+   "fieldname": "accessibility_tab",
+   "fieldtype": "Tab Break",
+   "label": "Accessibility"
+  },
+  {
+   "fieldname": "accessibility_section",
+   "fieldtype": "Section Break",
+   "label": "Accessibility Policies"
+  },
+  {
+   "fieldname": "respect_reduced_motion",
+   "fieldtype": "Check",
+   "label": "Respect Reduced Motion",
+   "default": "1"
+  },
+  {
+   "fieldname": "enhanced_focus_visibility",
+   "fieldtype": "Check",
+   "label": "Enhanced Focus Visibility",
+   "default": "1"
+  },
+  {
+   "fieldname": "contrast_policy",
+   "fieldtype": "Select",
+   "label": "Contrast Policy",
+   "options": "Frappe Default\nWCAG AA Guard",
+   "default": "WCAG AA Guard"
+  },
+  {
+   "fieldname": "accessibility_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "rtl_spacing_corrections",
+   "fieldtype": "Check",
+   "label": "RTL Spacing Corrections",
+   "default": "1"
+  },
+  {
+   "fieldname": "touch_target_policy",
+   "fieldtype": "Select",
+   "label": "Touch Target Policy",
+   "options": "Frappe Default\nEnhanced",
+   "default": "Enhanced"
+  },
+  {
+   "fieldname": "reduced_transparency",
+   "fieldtype": "Check",
+   "label": "Reduced Transparency",
+   "default": "0"
+  },
+  {
+   "fieldname": "login_tab",
+   "fieldtype": "Tab Break",
+   "label": "Login"
+  },
+  {
+   "fieldname": "login_section",
+   "fieldtype": "Section Break",
+   "label": "Login Visual and Content"
+  },
+  {
+   "fieldname": "login_layout",
+   "fieldtype": "Select",
+   "label": "Login Layout",
+   "options": "Frappe Standard\nQOrg Split\nQOrg Centered\nQOrg Visual\nFull Width Split",
+   "default": "Full Width Split"
+  },
+  {
+   "fieldname": "login_visual_source",
+   "fieldtype": "Select",
+   "label": "Visual Source",
+   "options": "None\nManaged Image\nGradient",
+   "default": "Gradient"
+  },
+  {
+   "fieldname": "login_visual_image",
+   "fieldtype": "Attach Image",
+   "label": "Managed Visual Image"
+  },
+  {
+   "fieldname": "login_visual_gradient",
+   "fieldtype": "Select",
+   "label": "Managed Gradient",
+   "options": "QOrg Blue\nQOrg Violet\nQOrg Sunrise",
+   "default": "QOrg Blue"
+  },
+  {
+   "fieldname": "login_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "login_welcome_title",
+   "fieldtype": "Data",
+   "label": "Welcome Title",
+   "translatable": 1,
+   "default": "Welcome to QOrg"
+  },
+  {
+   "fieldname": "login_welcome_subtitle",
+   "fieldtype": "Small Text",
+   "label": "Welcome Subtitle",
+   "translatable": 1,
+   "default": "Integrated, secure and efficient enterprise management."
+  },
+  {
+   "fieldname": "show_login_language_switcher",
+   "fieldtype": "Check",
+   "label": "Show Language Switcher",
+   "default": "1"
+  },
+  {
+   "fieldname": "login_mobile_visual_policy",
+   "fieldtype": "Select",
+   "label": "Mobile Visual Policy",
+   "options": "Hide\nCompact Header\nShow Below Form",
+   "default": "Compact Header"
+  },
+  {
+   "fieldname": "login_experience_section",
+   "fieldtype": "Section Break",
+   "label": "Login Behavior and Trust",
+   "description": "Controls the complete public sign-in experience while preserving all standard Frappe authentication methods."
+  },
+  {
+   "fieldname": "login_experience_style",
+   "fieldtype": "Select",
+   "label": "Login Experience Style",
+   "options": "QOrg Executive\nQOrg Midnight\nQOrg Visual\nFrappe Standard",
+   "default": "QOrg Executive"
+  },
+  {
+   "fieldname": "login_form_density",
+   "fieldtype": "Select",
+   "label": "Login Form Density",
+   "options": "Comfortable\nCompact\nFrappe Standard",
+   "default": "Comfortable"
+  },
+  {
+   "fieldname": "login_show_trust_message",
+   "fieldtype": "Check",
+   "label": "Show Trust Message",
+   "default": "1"
+  },
+  {
+   "fieldname": "login_trust_message",
+   "fieldtype": "Small Text",
+   "label": "Trust Message",
+   "default": "Secure access to your organization workspace."
+  },
+  {
+   "fieldname": "login_experience_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "login_card_alignment",
+   "fieldtype": "Select",
+   "label": "Login Card Alignment",
+   "options": "Auto\nStart\nCenter\nEnd",
+   "default": "Auto"
+  },
+  {
+   "fieldname": "login_show_security_footer",
+   "fieldtype": "Check",
+   "label": "Show Security Footer",
+   "default": "1"
+  },
+  {
+   "fieldname": "login_focus_first_field",
+   "fieldtype": "Check",
+   "label": "Focus First Login Field",
+   "default": "1"
+  },
+  {
+   "fieldname": "website_tab",
+   "fieldtype": "Tab Break",
+   "label": "Website and Web Forms"
+  },
+  {
+   "fieldname": "website_section",
+   "fieldtype": "Section Break",
+   "label": "Website Integration"
+  },
+  {
+   "fieldname": "active_website_theme",
+   "fieldtype": "Data",
+   "label": "Active Website Theme",
+   "read_only": 1,
+   "default": "Frappe Standard"
+  },
+  {
+   "fieldname": "website_integration_status",
+   "fieldtype": "Data",
+   "label": "Integration Status",
+   "read_only": 1,
+   "default": "Website Theme respected"
+  },
+  {
+   "fieldname": "website_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "web_form_max_content_width",
+   "fieldtype": "Int",
+   "label": "Web Form Maximum Content Width",
+   "default": "1180",
+   "description": "Allowed range: 760 to 1600 pixels."
+  },
+  {
+   "fieldname": "web_form_sticky_actions",
+   "fieldtype": "Check",
+   "label": "Sticky Web Form Actions",
+   "default": "1"
+  },
+  {
+   "fieldname": "web_form_hide_technical_child_row_name",
+   "fieldtype": "Check",
+   "label": "Hide Technical Child Row Name",
+   "default": "1"
+  },
+  {
+   "fieldname": "public_experience_section",
+   "fieldtype": "Section Break",
+   "label": "Public Experience",
+   "description": "Controls Web Forms, portal pages, public cards, validation, success states and mobile presentation."
+  },
+  {
+   "fieldname": "web_form_presentation",
+   "fieldtype": "Select",
+   "label": "Web Form Presentation",
+   "options": "Enterprise\nCompact\nFrappe Standard",
+   "default": "Enterprise"
+  },
+  {
+   "fieldname": "portal_presentation",
+   "fieldtype": "Select",
+   "label": "Portal Presentation",
+   "options": "Enterprise\nCompact\nFrappe Standard",
+   "default": "Enterprise"
+  },
+  {
+   "fieldname": "public_card_style",
+   "fieldtype": "Select",
+   "label": "Public Card Style",
+   "options": "Elevated\nSubtle\nFrappe Standard",
+   "default": "Elevated"
+  },
+  {
+   "fieldname": "public_experience_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "public_validation_summary",
+   "fieldtype": "Check",
+   "label": "Show Validation Summary",
+   "default": "1"
+  },
+  {
+   "fieldname": "public_success_presentation",
+   "fieldtype": "Select",
+   "label": "Submission Success Presentation",
+   "options": "Celebratory Minimal\nCompact\nFrappe Standard",
+   "default": "Celebratory Minimal"
+  },
+  {
+   "fieldname": "public_mobile_sticky_actions",
+   "fieldtype": "Check",
+   "label": "Mobile Sticky Actions",
+   "default": "1"
+  },
+  {
+   "fieldname": "unified_polish_v293_section",
+   "fieldtype": "Section Break",
+   "label": "Unified Interface Geometry"
+  },
+  {
+   "fieldname": "control_sizing_section",
+   "fieldtype": "Section Break",
+   "label": "Controls and Text Areas",
+   "description": "Unified dimensions for Frappe controls, dropdowns, text areas and focus states."
+  },
+  {
+   "fieldname": "control_height_policy",
+   "fieldtype": "Select",
+   "label": "Control Height Policy",
+   "options": "Enterprise Best\nCompact\nComfortable\nSpacious\nCustom\nFrappe Default",
+   "default": "Enterprise Best"
+  },
+  {
+   "fieldname": "custom_control_height",
+   "fieldtype": "Int",
+   "label": "Custom Control Height (px)",
+   "default": "40",
+   "depends_on": "eval:doc.control_height_policy==\"Custom\""
+  },
+  {
+   "fieldname": "control_horizontal_padding",
+   "fieldtype": "Int",
+   "label": "Control Horizontal Padding (px)",
+   "default": "12"
+  },
+  {
+   "fieldname": "control_label_gap",
+   "fieldtype": "Int",
+   "label": "Label to Control Gap (px)",
+   "default": "6"
+  },
+  {
+   "fieldname": "control_sizing_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "small_text_height_policy",
+   "fieldtype": "Select",
+   "label": "Small Text Height Policy",
+   "options": "Compact\nComfortable\nSpacious\nCustom\nFrappe Default",
+   "default": "Comfortable"
+  },
+  {
+   "fieldname": "small_text_min_height",
+   "fieldtype": "Int",
+   "label": "Small Text Minimum Height (px)",
+   "default": "88",
+   "depends_on": "eval:doc.small_text_height_policy==\"Custom\""
+  },
+  {
+   "fieldname": "text_editor_min_height",
+   "fieldtype": "Int",
+   "label": "Text Editor Minimum Height (px)",
+   "default": "160"
+  },
+  {
+   "fieldname": "select_option_height",
+   "fieldtype": "Int",
+   "label": "Select Option Height (px)",
+   "default": "40"
+  },
+  {
+   "fieldname": "focus_ring_style",
+   "fieldtype": "Select",
+   "label": "Focus Ring Style",
+   "options": "Outline and Soft Glow\nOutline\nSoft Glow\nFrappe Default",
+   "default": "Outline and Soft Glow"
+  },
+  {
+   "fieldname": "shell_layout_section",
+   "fieldtype": "Section Break",
+   "label": "Application Shell and Navigation",
+   "description": "Creates one visual language across the app rail, module sidebar, navbar, breadcrumbs and menus."
+  },
+  {
+   "fieldname": "page_width_policy",
+   "fieldtype": "Select",
+   "label": "Page Width Policy",
+   "options": "Wide Adaptive\nBalanced\nFull Width\nCustom\nFrappe Default",
+   "default": "Wide Adaptive"
+  },
+  {
+   "fieldname": "page_max_width",
+   "fieldtype": "Int",
+   "label": "Custom Maximum Content Width (px)",
+   "default": "1600",
+   "depends_on": "eval:doc.page_width_policy==\"Custom\""
+  },
+  {
+   "fieldname": "page_inline_padding",
+   "fieldtype": "Int",
+   "label": "Page Inline Padding (px)",
+   "default": "24"
+  },
+  {
+   "fieldname": "app_rail_style",
+   "fieldtype": "Select",
+   "label": "App Rail Style",
+   "options": "Integrated Executive\nCompact\nSpacious\nFrappe Default",
+   "default": "Integrated Executive"
+  },
+  {
+   "fieldname": "app_rail_icon_size",
+   "fieldtype": "Int",
+   "label": "App Rail Icon Size (px)",
+   "default": "20"
+  },
+  {
+   "fieldname": "shell_layout_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "module_sidebar_style",
+   "fieldtype": "Select",
+   "label": "Module Sidebar Style",
+   "options": "Integrated Executive\nCompact\nBalanced\nFrappe Default",
+   "default": "Integrated Executive"
+  },
+  {
+   "fieldname": "module_sidebar_width",
+   "fieldtype": "Int",
+   "label": "Module Sidebar Width (px)",
+   "default": "272"
+  },
+  {
+   "fieldname": "navigation_item_height",
+   "fieldtype": "Int",
+   "label": "Navigation Item Height (px)",
+   "default": "40"
+  },
+  {
+   "fieldname": "navbar_search_style",
+   "fieldtype": "Select",
+   "label": "Navbar Search Style",
+   "options": "Subtle Brand\nSurface\nBordered\nFrappe Default",
+   "default": "Subtle Brand"
+  },
+  {
+   "fieldname": "breadcrumb_emphasis",
+   "fieldtype": "Select",
+   "label": "Breadcrumb Emphasis",
+   "options": "Current Page\nBalanced\nFrappe Default",
+   "default": "Current Page"
+  },
+  {
+   "fieldname": "menu_density",
+   "fieldtype": "Select",
+   "label": "Menu Density",
+   "options": "Comfortable\nCompact\nFrappe Default",
+   "default": "Comfortable"
+  },
+  {
+   "fieldname": "workspace_composition_section",
+   "fieldtype": "Section Break",
+   "label": "Workspace Composition",
+   "description": "Balances workspace width, cards, headings and section actions as one coherent canvas."
+  },
+  {
+   "fieldname": "workspace_content_width",
+   "fieldtype": "Select",
+   "label": "Workspace Content Width",
+   "options": "Wide Adaptive\nBalanced\nFull Width\nFrappe Default",
+   "default": "Wide Adaptive"
+  },
+  {
+   "fieldname": "workspace_grid_policy",
+   "fieldtype": "Select",
+   "label": "Workspace Grid Policy",
+   "options": "Adaptive\nContent Based\nTwo Columns\nThree Columns\nFrappe Default",
+   "default": "Adaptive"
+  },
+  {
+   "fieldname": "workspace_column_gap",
+   "fieldtype": "Int",
+   "label": "Workspace Column Gap (px)",
+   "default": "16"
+  },
+  {
+   "fieldname": "workspace_row_gap",
+   "fieldtype": "Int",
+   "label": "Workspace Row Gap (px)",
+   "default": "16"
+  },
+  {
+   "fieldname": "workspace_composition_column",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "workspace_card_style",
+   "fieldtype": "Select",
+   "label": "Workspace Card Style",
+   "options": "Executive Subtle\nBordered\nFlat\nFrappe Default",
+   "default": "Executive Subtle"
+  },
+  {
+   "fieldname": "workspace_card_height_policy",
+   "fieldtype": "Select",
+   "label": "Workspace Card Height",
+   "options": "Content Based\nEqual Per Row\nCompact Equal\nFrappe Default",
+   "default": "Content Based"
+  },
+  {
+   "fieldname": "workspace_heading_accent",
+   "fieldtype": "Select",
+   "label": "Workspace Heading Accent",
+   "options": "Short Underline\nAccent Bar\nFull Divider\nNone",
+   "default": "Short Underline"
+  },
+  {
+   "fieldname": "nested_surface_policy",
+   "fieldtype": "Select",
+   "label": "Nested Surface Policy",
+   "options": "Avoid Nested Cards\nAllow One Level\nFrappe Default",
+   "default": "Avoid Nested Cards"
+  },
+  {
+   "fieldname": "section_action_style",
+   "fieldtype": "Select",
+   "label": "Section Action Style",
+   "options": "Inline\nSubtle Button\nFrappe Default",
+   "default": "Inline"
+  },
+  {
+   "fieldname": "mixed_content_bidi_safety",
+   "fieldtype": "Check",
+   "label": "Mixed Arabic and English Content Safety",
+   "default": "1"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "export": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
 }

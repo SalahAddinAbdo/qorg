@@ -22,13 +22,13 @@ def preview(configuration=None):
     for k,v in values.items():
         if doc.meta.has_field(k): doc.set(k,v)
     validate_values(doc)
-    data={**effective(False),**values}; data["enabled"]=1; data["css_variables"]=css_variables(data)
+    data={**effective(use_cache=False),**values}; data["enabled"]=1; data["css_variables"]=css_variables(data)
     return data
 
 @frappe.whitelist(methods=["POST"])
 def apply():
     _manager(); doc=frappe.get_single(SETTINGS); doc.save(); clear_cache(); update_state("Managed")
-    config=effective(False); frappe.publish_realtime("qorg_design_system_changed",{"fingerprint":config["fingerprint"]},after_commit=True)
+    config=effective(use_cache=False); frappe.publish_realtime("qorg_design_system_changed",{"fingerprint":config["fingerprint"]},after_commit=True)
     return config
 
 @frappe.whitelist(methods=["POST"])
