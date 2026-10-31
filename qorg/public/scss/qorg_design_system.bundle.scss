@@ -1937,3 +1937,229 @@ html[data-qorg-design-system] :where(.datatable .dt-cell, .datatable .dt-cell__c
 html[data-qorg-design-system][dir="rtl"] :where(.qorg-toast, .qorg-notification, .alert) {
   border-inline-start: 3px solid var(--qorg-brand-600);
 }
+
+/* QOrg Enterprise Experience v2.9.3 - final gap closure
+   MultiSelect affordances, child-row editor stability, and Tree View geometry. */
+
+/* 1) Keep MultiSelect/Autocomplete affordances inside the control in LTR and RTL. */
+html[data-qorg-design-system] :where(
+  .multiselect-list,
+  .table-multiselect,
+  .control-input,
+  .control-input-wrapper,
+  .input-with-feedback
+) {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+html[data-qorg-design-system] :where(
+  .multiselect-list,
+  .table-multiselect,
+  .control-input-wrapper:has(.awesomplete),
+  .control-input:has(.awesomplete)
+) {
+  position: relative;
+  overflow: visible;
+}
+html[data-qorg-design-system] :where(
+  .multiselect-list input,
+  .table-multiselect input,
+  .control-input-wrapper:has(.awesomplete) input,
+  .control-input:has(.awesomplete) input
+) {
+  min-width: 0;
+  max-width: 100%;
+  padding-inline-end: 2.35rem !important;
+  box-sizing: border-box;
+}
+html[data-qorg-design-system] :where(
+  .multiselect-list .select-icon,
+  .table-multiselect .select-icon,
+  .control-input-wrapper:has(.awesomplete) > .select-icon,
+  .control-input:has(.awesomplete) > .select-icon,
+  .control-input-wrapper:has(.awesomplete) .input-with-feedback + .select-icon
+) {
+  position: absolute !important;
+  inset-inline-end: .7rem !important;
+  inset-inline-start: auto !important;
+  inset-block-start: 50% !important;
+  width: 1rem;
+  height: 1rem;
+  margin: 0 !important;
+  transform: translateY(-50%) !important;
+  pointer-events: none;
+  z-index: 2;
+}
+html[data-qorg-design-system] :where(
+  .multiselect-list .awesomplete,
+  .table-multiselect .awesomplete,
+  .multiselect-list .form-control,
+  .table-multiselect .form-control
+) {
+  width: 100% !important;
+  min-width: 0;
+  max-width: 100%;
+}
+html[data-qorg-design-system] :where(
+  .multiselect-list .tags-input,
+  .table-multiselect .tags-input,
+  .multiselect-list .selected-items,
+  .table-multiselect .selected-items
+) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .35rem;
+  min-width: 0;
+  max-width: 100%;
+}
+html[data-qorg-design-system] :where(
+  .multiselect-list .awesomplete > ul,
+  .table-multiselect .awesomplete > ul,
+  .modal .awesomplete > ul,
+  .form-in-grid .awesomplete > ul
+) {
+  inset-inline: 0 auto;
+  width: max-content;
+  min-width: 100%;
+  max-width: min(32rem, calc(100vw - 2rem));
+  z-index: var(--qorg-z-command, 1080) !important;
+}
+
+/* 2) Child-table row editor: full width, stable flow, visible controls and scroll-safe dialogs. */
+html[data-qorg-design-system] :where(
+  .grid-row-open,
+  .grid-row.grid-row-open,
+  .form-in-grid,
+  .grid-form,
+  .grid-row-open .grid-form
+) {
+  width: 100% !important;
+  min-width: 0;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+html[data-qorg-design-system] :where(.grid-row-open, .form-in-grid, .grid-form) {
+  position: relative;
+  overflow: visible !important;
+  transform: none !important;
+  contain: none !important;
+}
+html[data-qorg-design-system] :where(
+  .grid-row-open .form-layout,
+  .form-in-grid .form-layout,
+  .grid-form .form-layout,
+  .grid-row-open .section-body,
+  .form-in-grid .section-body
+) {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+html[data-qorg-design-system] :where(
+  .grid-row-open .form-column,
+  .form-in-grid .form-column,
+  .grid-form .form-column,
+  .grid-row-open .frappe-control,
+  .form-in-grid .frappe-control
+) {
+  min-width: 0;
+  max-width: 100%;
+}
+html[data-qorg-design-system] :where(.modal-dialog, .modal-content, .modal-body, .dialog-container) {
+  min-width: 0;
+  box-sizing: border-box;
+}
+html[data-qorg-design-system] .modal-body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+html[data-qorg-design-system] :where(.modal .form-in-grid, .modal .grid-form) {
+  overflow: visible !important;
+  padding-inline: clamp(.5rem, 2vw, 1rem);
+}
+html[data-qorg-design-system] :where(
+  .grid-row-open .grid-footer,
+  .form-in-grid .grid-footer,
+  .grid-form .grid-footer,
+  .grid-row-open .grid-form-heading
+) {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  clear: both;
+}
+@media (max-width: 767px) {
+  html[data-qorg-design-system] :where(.grid-row-open .form-column, .form-in-grid .form-column, .grid-form .form-column) {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  html[data-qorg-design-system] :where(.modal-dialog, .modal-content) {
+    max-width: calc(100vw - 1rem) !important;
+    margin-inline: auto;
+  }
+}
+
+/* 3) Tree View: preserve geometry across hover/focus/expand to eliminate jitter. */
+html[data-qorg-design-system] :where(
+  .tree,
+  .frappe-tree,
+  .tree-node,
+  .tree-link,
+  .tree-node-toolbar,
+  .tree-children,
+  .tree-node-children
+) {
+  box-sizing: border-box;
+}
+html[data-qorg-design-system] :where(.tree-node, .tree-link) {
+  min-height: 2.25rem;
+  border: 1px solid transparent;
+  margin-block: 1px;
+  transform: none !important;
+  translate: none !important;
+  backface-visibility: hidden;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease !important;
+}
+html[data-qorg-design-system] :where(
+  .tree-node:hover,
+  .tree-node:focus-within,
+  .tree-link:hover,
+  .tree-link:focus-visible,
+  .tree-node.selected,
+  .tree-node.active
+) {
+  transform: none !important;
+  translate: none !important;
+  margin-block: 1px;
+  border-width: 1px;
+}
+html[data-qorg-design-system] :where(
+  .tree-node .tree-link,
+  .tree-node .tree-label,
+  .tree-node .tree-node-label,
+  .tree-node .tree-node-toolbar
+) {
+  min-width: 0;
+  line-height: 1.35;
+}
+html[data-qorg-design-system] :where(
+  .tree-node svg,
+  .tree-link svg,
+  .tree-node .icon,
+  .tree-link .icon,
+  .tree-node .tree-toggle,
+  .tree-link .tree-toggle
+) {
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+  transform: none;
+}
+html[data-qorg-design-system] :where(.tree-children, .tree-node-children) {
+  min-width: 0;
+  transform: none !important;
+  transition: none !important;
+}
