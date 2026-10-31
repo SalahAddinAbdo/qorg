@@ -6,143 +6,40 @@
   "issingle": 1,
   "track_changes": 1,
   "field_order": [
-    "general_tab",
-    "general_section",
+    "baseline_section",
     "enabled",
     "active_preset",
-    "general_column",
-    "theme_mode",
-    "density",
-    "brand_section",
-    "primary_color",
-    "accent_color",
-    "brand_column",
-    "surface_style",
-    "layout_tab",
-    "layout_section",
-    "content_width",
-    "navigation_style",
-    "actions_section",
-    "show_create_action",
+    "language_section",
     "show_language_action",
-    "quick_create_items",
-    "public_tab",
-    "login_section",
-    "apply_to_login",
-    "login_layout",
-    "login_image",
-    "login_column",
-    "login_title",
-    "login_subtitle",
-    "web_section",
-    "apply_to_web_forms",
-    "wide_web_forms",
-    "sticky_mobile_actions"
+    "quick_create_section",
+    "quick_create_items"
   ],
   "fields": [
     {
-      "fieldname": "general_tab",
-      "fieldtype": "Tab Break",
-      "label": "General"
-    },
-    {
-      "fieldname": "general_section",
+      "fieldname": "baseline_section",
       "fieldtype": "Section Break",
-      "label": "Theme"
+      "label": "Frappe Baseline"
     },
     {
       "fieldname": "enabled",
       "fieldtype": "Check",
-      "label": "Enable Q Org Theme",
-      "default": "1"
+      "label": "Enable Custom Theme",
+      "default": "0",
+      "read_only": 1,
+      "description": "Disabled during the Frappe baseline reset."
     },
     {
       "fieldname": "active_preset",
       "fieldtype": "Link",
       "label": "Active Preset",
       "options": "Q Org Design Preset",
-      "default": "Q Org Enterprise"
+      "default": "Frappe Standard",
+      "read_only": 1
     },
     {
-      "fieldname": "general_column",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "theme_mode",
-      "fieldtype": "Select",
-      "label": "Theme Mode",
-      "options": "Follow System\nLight\nDark",
-      "default": "Follow System"
-    },
-    {
-      "fieldname": "density",
-      "fieldtype": "Select",
-      "label": "Density",
-      "options": "Comfortable\nCompact",
-      "default": "Comfortable"
-    },
-    {
-      "fieldname": "brand_section",
+      "fieldname": "language_section",
       "fieldtype": "Section Break",
-      "label": "Brand and Surfaces"
-    },
-    {
-      "fieldname": "primary_color",
-      "fieldtype": "Color",
-      "label": "Primary Color",
-      "default": "#137690"
-    },
-    {
-      "fieldname": "accent_color",
-      "fieldtype": "Color",
-      "label": "Accent Color",
-      "default": "#CBAE66"
-    },
-    {
-      "fieldname": "brand_column",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "surface_style",
-      "fieldtype": "Select",
-      "label": "Surface Style",
-      "options": "Flat\nSoft\nElevated",
-      "default": "Soft"
-    },
-    {
-      "fieldname": "layout_tab",
-      "fieldtype": "Tab Break",
-      "label": "Layout and Actions"
-    },
-    {
-      "fieldname": "layout_section",
-      "fieldtype": "Section Break",
-      "label": "Desk Layout"
-    },
-    {
-      "fieldname": "content_width",
-      "fieldtype": "Select",
-      "label": "Content Width",
-      "options": "Standard\nWide",
-      "default": "Wide"
-    },
-    {
-      "fieldname": "navigation_style",
-      "fieldtype": "Select",
-      "label": "Navigation Style",
-      "options": "Standard\nIntegrated",
-      "default": "Integrated"
-    },
-    {
-      "fieldname": "actions_section",
-      "fieldtype": "Section Break",
-      "label": "Global Actions"
-    },
-    {
-      "fieldname": "show_create_action",
-      "fieldtype": "Check",
-      "label": "Show Create Action",
-      "default": "1"
+      "label": "Language"
     },
     {
       "fieldname": "show_language_action",
@@ -151,77 +48,16 @@
       "default": "1"
     },
     {
+      "fieldname": "quick_create_section",
+      "fieldtype": "Section Break",
+      "label": "Quick Create Configuration"
+    },
+    {
       "fieldname": "quick_create_items",
       "fieldtype": "Table",
       "label": "Quick Create Items",
-      "options": "Q Org Quick Create Item"
-    },
-    {
-      "fieldname": "public_tab",
-      "fieldtype": "Tab Break",
-      "label": "Login and Public"
-    },
-    {
-      "fieldname": "login_section",
-      "fieldtype": "Section Break",
-      "label": "Login"
-    },
-    {
-      "fieldname": "apply_to_login",
-      "fieldtype": "Check",
-      "label": "Apply Theme to Login",
-      "default": "1"
-    },
-    {
-      "fieldname": "login_layout",
-      "fieldtype": "Select",
-      "label": "Login Layout",
-      "options": "Standard\nSplit\nCentered",
-      "default": "Split"
-    },
-    {
-      "fieldname": "login_image",
-      "fieldtype": "Attach Image",
-      "label": "Login Image"
-    },
-    {
-      "fieldname": "login_column",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "login_title",
-      "fieldtype": "Data",
-      "label": "Login Title",
-      "default": "Welcome to Q Org"
-    },
-    {
-      "fieldname": "login_subtitle",
-      "fieldtype": "Small Text",
-      "label": "Login Subtitle",
-      "default": "Integrated enterprise management for your organization."
-    },
-    {
-      "fieldname": "web_section",
-      "fieldtype": "Section Break",
-      "label": "Web Forms and Portal"
-    },
-    {
-      "fieldname": "apply_to_web_forms",
-      "fieldtype": "Check",
-      "label": "Apply Theme to Web Forms and Portal",
-      "default": "1"
-    },
-    {
-      "fieldname": "wide_web_forms",
-      "fieldtype": "Check",
-      "label": "Use Wide Web Forms",
-      "default": "1"
-    },
-    {
-      "fieldname": "sticky_mobile_actions",
-      "fieldtype": "Check",
-      "label": "Sticky Mobile Form Actions",
-      "default": "1"
+      "options": "Q Org Quick Create Item",
+      "description": "Configuration is preserved for the next design phase. No custom New button is loaded during baseline reset."
     }
   ],
   "permissions": [

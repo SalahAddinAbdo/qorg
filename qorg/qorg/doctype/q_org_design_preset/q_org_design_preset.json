@@ -7,27 +7,17 @@
   "title_field": "preset_title",
   "track_changes": 1,
   "field_order": [
-    "identity_section",
+    "preset_section",
     "preset_title",
     "enabled",
     "is_system_preset",
-    "identity_column",
+    "preset_column",
     "description",
-    "appearance_section",
-    "theme_mode",
-    "density",
-    "primary_color",
-    "accent_color",
-    "appearance_column",
-    "content_width",
-    "navigation_style",
-    "surface_style",
-    "tokens_json",
-    "managed_version"
+    "baseline_status"
   ],
   "fields": [
     {
-      "fieldname": "identity_section",
+      "fieldname": "preset_section",
       "fieldtype": "Section Break",
       "label": "Preset"
     },
@@ -41,7 +31,7 @@
       "fieldname": "enabled",
       "fieldtype": "Check",
       "label": "Enabled",
-      "default": "1"
+      "default": "0"
     },
     {
       "fieldname": "is_system_preset",
@@ -50,7 +40,7 @@
       "read_only": 1
     },
     {
-      "fieldname": "identity_column",
+      "fieldname": "preset_column",
       "fieldtype": "Column Break"
     },
     {
@@ -59,72 +49,11 @@
       "label": "Description"
     },
     {
-      "fieldname": "appearance_section",
-      "fieldtype": "Section Break",
-      "label": "Appearance"
-    },
-    {
-      "fieldname": "theme_mode",
+      "fieldname": "baseline_status",
       "fieldtype": "Select",
-      "label": "Theme Mode",
-      "options": "Follow System\nLight\nDark",
-      "default": "Follow System"
-    },
-    {
-      "fieldname": "density",
-      "fieldtype": "Select",
-      "label": "Density",
-      "options": "Comfortable\nCompact",
-      "default": "Comfortable"
-    },
-    {
-      "fieldname": "primary_color",
-      "fieldtype": "Color",
-      "label": "Primary Color",
-      "default": "#137690"
-    },
-    {
-      "fieldname": "accent_color",
-      "fieldtype": "Color",
-      "label": "Accent Color",
-      "default": "#CBAE66"
-    },
-    {
-      "fieldname": "appearance_column",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "content_width",
-      "fieldtype": "Select",
-      "label": "Content Width",
-      "options": "Standard\nWide",
-      "default": "Wide"
-    },
-    {
-      "fieldname": "navigation_style",
-      "fieldtype": "Select",
-      "label": "Navigation Style",
-      "options": "Standard\nIntegrated",
-      "default": "Integrated"
-    },
-    {
-      "fieldname": "surface_style",
-      "fieldtype": "Select",
-      "label": "Surface Style",
-      "options": "Flat\nSoft\nElevated",
-      "default": "Soft"
-    },
-    {
-      "fieldname": "tokens_json",
-      "fieldtype": "Code",
-      "label": "Advanced Semantic Tokens",
-      "options": "JSON",
-      "description": "Optional advanced tokens. Leave blank for system presets."
-    },
-    {
-      "fieldname": "managed_version",
-      "fieldtype": "Data",
-      "label": "Managed Version",
+      "label": "Baseline Status",
+      "options": "Legacy\nFrappe Standard",
+      "default": "Legacy",
       "read_only": 1
     }
   ],

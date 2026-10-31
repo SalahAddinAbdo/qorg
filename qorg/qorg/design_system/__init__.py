@@ -1,1 +1,1 @@
-THEME_SCHEMA_VERSION = "3.1.3-validation-hardened"
+BASELINE_VERSION = "1.0.0-frappe-standard-reset"

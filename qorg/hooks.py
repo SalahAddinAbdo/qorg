@@ -23,14 +23,13 @@ extend_bootinfo = "qorg.qorg.enterprise_foundation.boot.extend_bootinfo"
 app_include_js = [
     "/assets/qorg/js/qorg_form_bootstrap.js",
     "/assets/qorg/js/model_policy.js",
-    "qorg_theme.bundle.js",
-    "qorg_theme_admin.bundle.js",
+    "/assets/qorg/js/qorg_language_action.js",
 ]
 
-app_include_css = ["qorg_theme.bundle.css"]
+app_include_css = ["/assets/qorg/css/model_policy.css"]
 
-web_include_css = ["qorg_theme_web.bundle.css"]
-web_include_js = ["qorg_theme_web.bundle.js"]
+web_include_css = []
+web_include_js = []
 
 website_route_rules = [
     {"from_route": "/opportunities/<route>", "to_route": "opportunities/detail"},
@@ -276,7 +275,7 @@ after_install = [
     "qorg.qorg.project_management.workflow_provisioning.provision_project_workflows",
     "qorg.qorg.project_management.notification_provisioning.provision_project_notifications",
     "qorg.qorg.enterprise_foundation.provisioning.provision_enterprise_foundation",
-    "qorg.qorg.design_system.provisioning.provision_design_system",
+    "qorg.qorg.design_system.provisioning.provision_baseline_records",
     "qorg.qorg.project_management.navigation_provisioning.provision_q_org_navigation",
 ]
 
@@ -298,8 +297,8 @@ after_migrate = [
     "qorg.qorg.project_management.workflow_provisioning.provision_project_workflows",
     "qorg.qorg.project_management.notification_provisioning.provision_project_notifications",
     "qorg.qorg.enterprise_foundation.provisioning.provision_enterprise_foundation",
-    "qorg.qorg.design_system.migration.migrate_clean_theme",
-    "qorg.qorg.design_system.provisioning.provision_design_system",
+    "qorg.qorg.design_system.migration.reset_to_frappe_baseline",
+    "qorg.qorg.design_system.provisioning.provision_baseline_records",
     "qorg.qorg.project_management.navigation_provisioning.provision_q_org_navigation",
 ]
 
