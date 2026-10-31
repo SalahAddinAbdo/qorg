@@ -3,7 +3,9 @@ from __future__ import annotations
 import frappe
 
 from qorg.qorg.design_system import THEME_SCHEMA_VERSION
-from qorg.qorg.design_system.service import DEFAULTS, PRESET, SETTINGS, clear_cache
+from qorg.qorg.design_system.service import (
+    DEFAULTS, PRESET, SETTINGS, clear_cache, normalize_color,
+)
 
 
 PRESETS = {
@@ -159,6 +161,14 @@ def normalize_settings_values(settings) -> bool:
         if value in (None, "") or value not in allowed:
             settings.set(fieldname, DEFAULTS[fieldname])
             changed = True
+
+    for fieldname in ("primary_color", "accent_color"):
+        if settings.meta.has_field(fieldname):
+            value = settings.get(fieldname)
+            normalized = normalize_color(value, DEFAULTS[fieldname])
+            if normalized != value:
+                settings.set(fieldname, normalized)
+                changed = True
 
     preset = settings.get("active_preset")
     mapped_preset = VALUE_ALIASES["active_preset"].get(preset)

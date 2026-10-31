@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from typing import Any
 
 import frappe
@@ -11,7 +12,7 @@ from qorg.qorg.design_system import THEME_SCHEMA_VERSION
 
 SETTINGS = "Q Org Design System Settings"
 PRESET = "Q Org Design Preset"
-CACHE_KEY = "qorg:theme:effective:v3.1.2"
+CACHE_KEY = "qorg:theme:effective:v3.1.3"
 
 DEFAULTS = {
     "enabled": 1,
@@ -76,8 +77,32 @@ def validate_values(doc) -> None:
             frappe.throw(f"Invalid {field}: {value}")
     for field in ("primary_color", "accent_color"):
         value = doc.get(field)
-        if value and not frappe.utils.validate_json_string(json.dumps(value)):
-            frappe.throw(f"Invalid {field}")
+        if value and not is_valid_color(value):
+            frappe.throw(f"Invalid {field}: {value}")
+
+
+def is_valid_color(value: Any) -> bool:
+    """Validate the compact theme contract's stored color format.
+
+    Frappe Color controls persist hexadecimal values. This validator is
+    deliberately side-effect free; validate_json_string is not a boolean color
+    validator and must not be used in a truth test.
+    """
+    if not isinstance(value, str):
+        return False
+    return bool(re.fullmatch(r"#[0-9A-Fa-f]{6}", value.strip()))
+
+
+def normalize_color(value: Any, fallback: str) -> str:
+    """Return a canonical #RRGGBB value without blocking migrations."""
+    if not isinstance(value, str):
+        return fallback
+    value = value.strip()
+    if re.fullmatch(r"#[0-9A-Fa-f]{6}", value):
+        return value.upper()
+    if re.fullmatch(r"#[0-9A-Fa-f]{3}", value):
+        return "#" + "".join(character * 2 for character in value[1:]).upper()
+    return fallback
 
 def effective(use_cache: bool = True) -> dict[str, Any]:
     if use_cache:
