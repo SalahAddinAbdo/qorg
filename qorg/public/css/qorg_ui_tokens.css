@@ -1,0 +1,55 @@
+:root {
+    --qorg-body-line-height: 1.35;
+    --qorg-paragraph-line-height: 1.55;
+    --qorg-heading-line-height: 1.25;
+}
+
+html[data-qorg-tokens="1"] body,
+html[data-qorg-tokens="1"] button,
+html[data-qorg-tokens="1"] input,
+html[data-qorg-tokens="1"] select,
+html[data-qorg-tokens="1"] textarea {
+    font-family: var(--qorg-font-family, inherit);
+}
+
+html[data-qorg-tokens="1"] body {
+    font-size: var(--font-size-base, 14px);
+    line-height: var(--qorg-body-line-height);
+}
+
+html[data-qorg-tokens="1"] h1,
+html[data-qorg-tokens="1"] .h1 { font-size: var(--font-size-4xl, 32px); }
+html[data-qorg-tokens="1"] h2,
+html[data-qorg-tokens="1"] .h2 { font-size: var(--font-size-3xl, 24px); }
+html[data-qorg-tokens="1"] h3,
+html[data-qorg-tokens="1"] .h3 { font-size: var(--font-size-2xl, 20px); }
+html[data-qorg-tokens="1"] h4,
+html[data-qorg-tokens="1"] .h4 { font-size: var(--font-size-xl, 18px); }
+html[data-qorg-tokens="1"] h5,
+html[data-qorg-tokens="1"] .h5 { font-size: var(--font-size-lg, 16px); }
+html[data-qorg-tokens="1"] h6,
+html[data-qorg-tokens="1"] .h6 { font-size: var(--font-size-base, 14px); }
+
+html[data-qorg-tokens="1"] h1,
+html[data-qorg-tokens="1"] h2,
+html[data-qorg-tokens="1"] h3,
+html[data-qorg-tokens="1"] h4,
+html[data-qorg-tokens="1"] h5,
+html[data-qorg-tokens="1"] h6,
+html[data-qorg-tokens="1"] .h1,
+html[data-qorg-tokens="1"] .h2,
+html[data-qorg-tokens="1"] .h3,
+html[data-qorg-tokens="1"] .h4,
+html[data-qorg-tokens="1"] .h5,
+html[data-qorg-tokens="1"] .h6 {
+    line-height: var(--qorg-heading-line-height);
+}
+
+html[data-qorg-tokens="1"] p { line-height: var(--qorg-paragraph-line-height); }
+html[data-qorg-tokens="1"] small,
+html[data-qorg-tokens="1"] .small,
+html[data-qorg-tokens="1"] .text-muted,
+html[data-qorg-tokens="1"] .help-box,
+html[data-qorg-tokens="1"] .help-block,
+html[data-qorg-tokens="1"] .form-text { font-size: var(--font-size-sm, 12px); }
+html[data-qorg-tokens="1"] a { font-size: inherit; }

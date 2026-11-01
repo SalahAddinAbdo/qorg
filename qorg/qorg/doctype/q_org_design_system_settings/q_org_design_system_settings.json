@@ -15,6 +15,15 @@
     "language_section",
     "show_language_action",
     "quick_create_items",
+    "theme_surfaces_section",
+    "page_background_color",
+    "surface_color",
+    "control_background_color",
+    "surface_column",
+    "primary_text_color",
+    "muted_text_color",
+    "border_color",
+    "large_border_radius",
     "login_tab",
     "login_enable_section",
     "enable_login_experience",
@@ -33,7 +42,40 @@
     "login_form_subtitle",
     "login_brand_section",
     "login_brand_logo",
-    "login_footer_text"
+    "login_footer_text",
+    "login_slides_section",
+    "login_image_panel_width",
+    "login_slide_interval",
+    "login_return_label",
+    "login_return_url",
+    "login_slides",
+    "theme_typography_tab",
+    "font_source_section",
+    "font_source",
+    "font_column_break",
+    "font_stylesheet_url",
+    "font_weights",
+    "font_scale_section",
+    "font_size_xs",
+    "font_size_sm",
+    "font_size_base",
+    "font_size_lg",
+    "font_scale_column",
+    "font_size_h6",
+    "font_size_h5",
+    "font_size_h4",
+    "font_scale_section_2",
+    "font_size_h3",
+    "font_size_h2",
+    "font_size_h1",
+    "font_scale_column_2",
+    "font_size_display",
+    "body_line_height",
+    "paragraph_line_height",
+    "heading_line_height",
+    "primary_font_family",
+    "arabic_font_family",
+    "fallback_font_family"
   ],
   "fields": [
     {
@@ -87,6 +129,58 @@
       "options": "Q Org Quick Create Item"
     },
     {
+      "fieldname": "theme_surfaces_section",
+      "fieldtype": "Section Break",
+      "label": "Surfaces and Text"
+    },
+    {
+      "fieldname": "page_background_color",
+      "fieldtype": "Color",
+      "label": "Page Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "fieldname": "surface_color",
+      "fieldtype": "Color",
+      "label": "Surface Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "fieldname": "control_background_color",
+      "fieldtype": "Color",
+      "label": "Control Background Color",
+      "default": "#F4F5F6"
+    },
+    {
+      "fieldname": "surface_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "primary_text_color",
+      "fieldtype": "Color",
+      "label": "Primary Text Color",
+      "default": "#1F272E"
+    },
+    {
+      "fieldname": "muted_text_color",
+      "fieldtype": "Color",
+      "label": "Muted Text Color",
+      "default": "#687178"
+    },
+    {
+      "fieldname": "border_color",
+      "fieldtype": "Color",
+      "label": "Border Color",
+      "default": "#DFE2E5"
+    },
+    {
+      "fieldname": "large_border_radius",
+      "fieldtype": "Int",
+      "label": "Large Border Radius",
+      "default": "8",
+      "description": "Applied to cards and large surfaces."
+    },
+    {
       "fieldname": "login_tab",
       "fieldtype": "Tab Break",
       "label": "Login Experience"
@@ -116,14 +210,20 @@
     {
       "fieldname": "login_background_image",
       "fieldtype": "Attach Image",
-      "label": "Background Image"
+      "label": "Background Image",
+      "hidden": 1,
+      "read_only": 1,
+      "description": "Legacy value retained for automatic migration to Login Slides."
     },
     {
       "fieldname": "login_background_position",
       "fieldtype": "Select",
       "label": "Image Position",
       "options": "Center\nTop\nBottom\nLeft\nRight",
-      "default": "Center"
+      "default": "Center",
+      "hidden": 1,
+      "read_only": 1,
+      "description": "Legacy value retained for automatic migration to Login Slides."
     },
     {
       "fieldname": "login_visual_column",
@@ -134,14 +234,20 @@
       "fieldtype": "Select",
       "label": "Overlay Strength",
       "options": "None\nLight\nMedium\nStrong",
-      "default": "Medium"
+      "default": "Medium",
+      "hidden": 1,
+      "read_only": 1,
+      "description": "Legacy value retained for automatic migration to Login Slides."
     },
     {
       "fieldname": "login_text_color",
       "fieldtype": "Select",
       "label": "Visual Text Color",
       "options": "Light\nDark",
-      "default": "Light"
+      "default": "Light",
+      "hidden": 1,
+      "read_only": 1,
+      "description": "Legacy value retained for automatic migration to Login Slides."
     },
     {
       "fieldname": "login_content_section",
@@ -152,13 +258,19 @@
       "fieldname": "login_visual_title",
       "fieldtype": "Data",
       "label": "Visual Title",
-      "default": "Q Org"
+      "default": "Q Org",
+      "hidden": 1,
+      "read_only": 1,
+      "description": "Legacy value retained for automatic migration to Login Slides."
     },
     {
       "fieldname": "login_visual_subtitle",
       "fieldtype": "Small Text",
       "label": "Visual Subtitle",
-      "default": "Integrated enterprise management for your organization."
+      "default": "Integrated enterprise management for your organization.",
+      "hidden": 1,
+      "read_only": 1,
+      "description": "Legacy value retained for automatic migration to Login Slides."
     },
     {
       "fieldname": "login_form_column",
@@ -190,6 +302,205 @@
       "fieldname": "login_footer_text",
       "fieldtype": "Small Text",
       "label": "Footer Text"
+    },
+    {
+      "fieldname": "login_slides_section",
+      "fieldtype": "Section Break",
+      "label": "Login Slides",
+      "depends_on": "enable_login_experience"
+    },
+    {
+      "fieldname": "login_image_panel_width",
+      "fieldtype": "Int",
+      "label": "Image Panel Width (%)",
+      "default": "48",
+      "depends_on": "enable_login_experience"
+    },
+    {
+      "fieldname": "login_slide_interval",
+      "fieldtype": "Int",
+      "label": "Slide Interval (seconds)",
+      "default": "6",
+      "depends_on": "enable_login_experience"
+    },
+    {
+      "fieldname": "login_return_label",
+      "fieldtype": "Data",
+      "label": "Return to Website Label",
+      "default": "Back to website",
+      "depends_on": "enable_login_experience"
+    },
+    {
+      "fieldname": "login_return_url",
+      "fieldtype": "Data",
+      "label": "Return to Website URL",
+      "default": "/",
+      "depends_on": "enable_login_experience"
+    },
+    {
+      "fieldname": "login_slides",
+      "fieldtype": "Table",
+      "label": "Login Slides",
+      "options": "Q Org Login Slide",
+      "depends_on": "enable_login_experience"
+    },
+    {
+      "fieldname": "theme_typography_tab",
+      "fieldtype": "Tab Break",
+      "label": "Typography"
+    },
+    {
+      "fieldname": "font_source_section",
+      "fieldtype": "Section Break",
+      "label": "Font Family"
+    },
+    {
+      "fieldname": "font_source",
+      "fieldtype": "Select",
+      "label": "Font Source",
+      "options": "Frappe Default\nSystem Font\nGoogle Fonts\nCustom Web Font",
+      "default": "Frappe Default"
+    },
+    {
+      "fieldname": "font_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "font_stylesheet_url",
+      "fieldtype": "Data",
+      "label": "Font Stylesheet URL",
+      "depends_on": "eval:[\"Google Fonts\", \"Custom Web Font\"].includes(doc.font_source)"
+    },
+    {
+      "fieldname": "font_weights",
+      "fieldtype": "Data",
+      "label": "Font Weights",
+      "default": "400,500,600,700",
+      "depends_on": "eval:doc.font_source != \"Frappe Default\""
+    },
+    {
+      "fieldname": "font_scale_section",
+      "fieldtype": "Section Break",
+      "label": "Typography Scale"
+    },
+    {
+      "fieldname": "font_size_xs",
+      "fieldtype": "Int",
+      "label": "Extra Small Text (px)",
+      "default": "11"
+    },
+    {
+      "fieldname": "font_size_sm",
+      "fieldtype": "Int",
+      "label": "Small Text (px)",
+      "default": "12"
+    },
+    {
+      "fieldname": "font_size_base",
+      "fieldtype": "Int",
+      "label": "Base Text (px)",
+      "default": "14"
+    },
+    {
+      "fieldname": "font_size_lg",
+      "fieldtype": "Int",
+      "label": "Large Text (px)",
+      "default": "16"
+    },
+    {
+      "fieldname": "font_scale_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "font_size_h6",
+      "fieldtype": "Int",
+      "label": "H6 (px)",
+      "default": "14"
+    },
+    {
+      "fieldname": "font_size_h5",
+      "fieldtype": "Int",
+      "label": "H5 (px)",
+      "default": "16"
+    },
+    {
+      "fieldname": "font_size_h4",
+      "fieldtype": "Int",
+      "label": "H4 (px)",
+      "default": "18"
+    },
+    {
+      "fieldname": "font_scale_section_2",
+      "fieldtype": "Section Break",
+      "label": "Headings and Rhythm"
+    },
+    {
+      "fieldname": "font_size_h3",
+      "fieldtype": "Int",
+      "label": "H3 (px)",
+      "default": "20"
+    },
+    {
+      "fieldname": "font_size_h2",
+      "fieldtype": "Int",
+      "label": "H2 (px)",
+      "default": "24"
+    },
+    {
+      "fieldname": "font_size_h1",
+      "fieldtype": "Int",
+      "label": "H1 (px)",
+      "default": "32"
+    },
+    {
+      "fieldname": "font_scale_column_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "font_size_display",
+      "fieldtype": "Int",
+      "label": "Display Text (px)",
+      "default": "48"
+    },
+    {
+      "fieldname": "body_line_height",
+      "fieldtype": "Float",
+      "label": "Body Line Height",
+      "default": "1.35",
+      "precision": "2"
+    },
+    {
+      "fieldname": "paragraph_line_height",
+      "fieldtype": "Float",
+      "label": "Paragraph Line Height",
+      "default": "1.55",
+      "precision": "2"
+    },
+    {
+      "fieldname": "heading_line_height",
+      "fieldtype": "Float",
+      "label": "Heading Line Height",
+      "default": "1.25",
+      "precision": "2"
+    },
+    {
+      "fieldname": "primary_font_family",
+      "fieldtype": "Data",
+      "label": "Primary Font Family",
+      "depends_on": "eval:doc.font_source != \"Frappe Default\""
+    },
+    {
+      "fieldname": "arabic_font_family",
+      "fieldtype": "Data",
+      "label": "Arabic Font Family",
+      "depends_on": "eval:doc.font_source != \"Frappe Default\""
+    },
+    {
+      "fieldname": "fallback_font_family",
+      "fieldtype": "Data",
+      "label": "Fallback Font Family",
+      "default": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "depends_on": "eval:doc.font_source != \"Frappe Default\""
     }
   ],
   "permissions": [

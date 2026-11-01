@@ -1,1 +1,1 @@
-LOGIN_EXPERIENCE_VERSION="1.1.0-fluid-tokens-language-menu"
+LOGIN_EXPERIENCE_VERSION = "1.2.0-server-first-shared-frappe-tokens"

@@ -29,10 +29,17 @@ app_include_js = [
 
 app_include_css = [
     "/assets/qorg/css/model_policy.css",
+    "/assets/qorg/css/qorg_ui_tokens.css",
 ]
 
-web_include_css = ["qorg_login_experience.bundle.css"]
-web_include_js = ["qorg_login_experience.bundle.js"]
+web_include_css = [
+    "/assets/qorg/css/qorg_ui_tokens.css",
+    "qorg_login_experience.bundle.css",
+]
+web_include_js = [
+    "/assets/qorg/js/qorg_ui_tokens.js",
+    "qorg_login_experience.bundle.js",
+]
 
 website_route_rules = [
     {"from_route": "/opportunities/<route>", "to_route": "opportunities/detail"},
