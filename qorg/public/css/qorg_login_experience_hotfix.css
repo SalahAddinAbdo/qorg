@@ -1,0 +1,162 @@
+html[data-qorg-login-hotfix="1"],
+html[data-qorg-login-hotfix="1"] body {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 100% !important;
+}
+
+html[data-qorg-login-hotfix="1"] body .page-content-wrapper,
+html[data-qorg-login-hotfix="1"] body .page_content,
+html[data-qorg-login-hotfix="1"] body .page-content,
+html[data-qorg-login-hotfix="1"] body main.page-content {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 100svh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+html[data-qorg-login-hotfix="1"] body .page-content-wrapper > .container,
+html[data-qorg-login-hotfix="1"] body .page-content-wrapper .container,
+html[data-qorg-login-hotfix="1"] body .page_content > .container,
+html[data-qorg-login-hotfix="1"] body main.container {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 100svh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.qorg-login-shell {
+    grid-template-areas: "visual form" !important;
+    align-items: stretch;
+    margin: 0 !important;
+}
+
+.qorg-login-shell[data-qorg-direction="rtl"] {
+    direction: rtl;
+    grid-template-areas: "form visual" !important;
+}
+
+.qorg-login-shell[data-qorg-direction="ltr"] {
+    direction: ltr;
+    grid-template-areas: "visual form" !important;
+}
+
+.qorg-login-shell .qorg-login-visual {
+    grid-area: visual !important;
+    order: initial !important;
+}
+
+.qorg-login-shell .qorg-login-form-panel {
+    grid-area: form !important;
+    order: initial !important;
+}
+
+.qorg-login-shell[data-qorg-direction="rtl"] .qorg-login-form-panel,
+.qorg-login-shell[data-qorg-direction="rtl"] .qorg-login-form-host,
+.qorg-login-shell[data-qorg-direction="rtl"] .page-card,
+.qorg-login-shell[data-qorg-direction="rtl"] .page-card-head,
+.qorg-login-shell[data-qorg-direction="rtl"] .page-card-body,
+.qorg-login-shell[data-qorg-direction="rtl"] .page-card-actions {
+    direction: rtl;
+    text-align: right;
+}
+
+.qorg-login-shell[data-qorg-direction="ltr"] .qorg-login-form-panel,
+.qorg-login-shell[data-qorg-direction="ltr"] .qorg-login-form-host,
+.qorg-login-shell[data-qorg-direction="ltr"] .page-card,
+.qorg-login-shell[data-qorg-direction="ltr"] .page-card-head,
+.qorg-login-shell[data-qorg-direction="ltr"] .page-card-body,
+.qorg-login-shell[data-qorg-direction="ltr"] .page-card-actions {
+    direction: ltr;
+    text-align: left;
+}
+
+.qorg-login-form-host > .for-login,
+.qorg-login-form-host > .for-forgot,
+.qorg-login-form-host > .for-signup,
+.qorg-login-form-host > .for-email-login,
+.qorg-login-form-panel > .for-login,
+.qorg-login-form-panel > .for-forgot,
+.qorg-login-form-panel > .for-signup,
+.qorg-login-form-panel > .for-email-login {
+    width: 100% !important;
+    max-width: 590px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+}
+
+.qorg-login-form-host .for-forgot .page-card,
+.qorg-login-form-host .for-signup .page-card,
+.qorg-login-form-host .for-email-login .page-card,
+.qorg-login-form-panel .for-forgot .page-card,
+.qorg-login-form-panel .for-signup .page-card,
+.qorg-login-form-panel .for-email-login .page-card {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.qorg-login-form-host .for-forgot .form-control,
+.qorg-login-form-host .for-signup .form-control,
+.qorg-login-form-host .for-email-login .form-control,
+.qorg-login-form-panel .for-forgot .form-control,
+.qorg-login-form-panel .for-signup .form-control,
+.qorg-login-form-panel .for-email-login .form-control {
+    min-height: 56px !important;
+    padding: 14px 18px !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    background: var(--control-bg) !important;
+    color: var(--text-color) !important;
+    font-family: inherit !important;
+    font-size: var(--font-size-base) !important;
+    box-shadow: none !important;
+}
+
+.qorg-login-form-host .for-forgot .form-control:focus,
+.qorg-login-form-host .for-signup .form-control:focus,
+.qorg-login-form-host .for-email-login .form-control:focus,
+.qorg-login-form-panel .for-forgot .form-control:focus,
+.qorg-login-form-panel .for-signup .form-control:focus,
+.qorg-login-form-panel .for-email-login .form-control:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 20%, transparent) !important;
+}
+
+.qorg-login-form-host .for-forgot .btn,
+.qorg-login-form-host .for-signup .btn,
+.qorg-login-form-host .for-email-login .btn,
+.qorg-login-form-panel .for-forgot .btn,
+.qorg-login-form-panel .for-signup .btn,
+.qorg-login-form-panel .for-email-login .btn {
+    min-height: 56px !important;
+    border-radius: var(--border-radius) !important;
+    font-family: inherit !important;
+    font-size: var(--font-size-base) !important;
+    font-weight: 600 !important;
+}
+
+.qorg-login-form-host .for-forgot .btn-primary,
+.qorg-login-form-host .for-signup .btn-primary,
+.qorg-login-form-host .for-email-login .btn-primary,
+.qorg-login-form-panel .for-forgot .btn-primary,
+.qorg-login-form-panel .for-signup .btn-primary,
+.qorg-login-form-panel .for-email-login .btn-primary {
+    border-color: var(--primary-color) !important;
+    background: var(--primary-color) !important;
+    color: #fff !important;
+}
+
+@media (max-width: 920px) {
+    .qorg-login-shell,
+    .qorg-login-shell[data-qorg-direction="rtl"],
+    .qorg-login-shell[data-qorg-direction="ltr"] {
+        grid-template-areas: "form" "visual" !important;
+    }
+}
