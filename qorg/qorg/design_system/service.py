@@ -190,3 +190,35 @@ def get_login_configuration():
     config["ui_tokens"] = get_ui_tokens(getattr(frappe.local, "lang", None))
     config["font_stylesheet_url"] = get_font_stylesheet_url()
     return config
+
+THEME_COLOR_PREFIXES = ("desk_light_", "desk_dark_", "web_light_", "web_dark_", "light_sidebar_", "dark_sidebar_", "light_menu_", "dark_menu_")
+THEME_SIZE_FIELDS = (
+    "default_field_radius", "default_button_radius", "default_card_radius", "default_menu_radius",
+    "desk_field_radius", "desk_field_height", "desk_button_radius", "desk_button_height", "desk_card_radius",
+    "web_field_radius", "web_field_height", "web_button_radius", "web_button_height", "web_card_radius",
+    "sidebar_item_height", "sidebar_item_radius", "sidebar_item_padding", "menu_radius", "menu_item_height",
+    "menu_item_radius", "menu_item_padding",
+)
+
+
+def get_theme_configuration():
+    doc = frappe.get_single(SETTINGS)
+    colors = {}
+    sizes = {}
+    for field in doc.meta.fields:
+        name = field.fieldname
+        if field.fieldtype == "Color" and name.startswith(THEME_COLOR_PREFIXES):
+            value = str(doc.get(name) or field.default or "").strip()
+            if HEX_RE.fullmatch(value):
+                colors[name] = value.upper()
+        elif name in THEME_SIZE_FIELDS:
+            try:
+                sizes[name] = int(doc.get(name) or field.default or 0)
+            except (TypeError, ValueError):
+                sizes[name] = 0
+    return {
+        "colors": colors,
+        "sizes": sizes,
+        "primary_color": _color(doc, "primary_color"),
+        "secondary_color": _color(doc, "secondary_color"),
+    }

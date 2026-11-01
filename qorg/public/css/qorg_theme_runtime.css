@@ -1,0 +1,38 @@
+/* Desk surfaces */
+html[data-qorg-theme-runtime="1"] body[data-route^="desk"],
+html[data-qorg-theme-runtime="1"] .layout-main-section,
+html[data-qorg-theme-runtime="1"] .page-container { background: var(--qorg-page-bg) !important; color: var(--qorg-text) !important; }
+html[data-qorg-theme-runtime="1"] .widget,
+html[data-qorg-theme-runtime="1"] .frappe-card,
+html[data-qorg-theme-runtime="1"] .form-layout,
+html[data-qorg-theme-runtime="1"] .modal-content { background: var(--qorg-surface-bg) !important; border-color: var(--qorg-border) !important; border-radius: var(--qorg-desk-card-radius) !important; }
+html[data-qorg-theme-runtime="1"] .form-control,
+html[data-qorg-theme-runtime="1"] .control-input,
+html[data-qorg-theme-runtime="1"] .input-with-feedback { background: var(--qorg-field-bg) !important; color: var(--qorg-field-text) !important; border-color: var(--qorg-field-border) !important; border-radius: var(--qorg-desk-field-radius) !important; min-height: var(--qorg-desk-field-height) !important; }
+html[data-qorg-theme-runtime="1"] .form-control::placeholder { color: var(--qorg-field-placeholder) !important; }
+html[data-qorg-theme-runtime="1"] .form-control:focus { border-color: var(--qorg-field-focus) !important; }
+html[data-qorg-theme-runtime="1"] .btn-primary { background: var(--qorg-button-bg) !important; border-color: var(--qorg-button-bg) !important; color: var(--qorg-button-text) !important; border-radius: var(--qorg-desk-button-radius) !important; min-height: var(--qorg-desk-button-height) !important; }
+html[data-qorg-theme-runtime="1"] .btn-primary:hover { background: var(--qorg-button-hover) !important; border-color: var(--qorg-button-hover) !important; }
+
+/* Sidebar */
+html[data-qorg-theme-runtime="1"] .body-sidebar { background: var(--qorg-sidebar-bg) !important; border-color: var(--qorg-sidebar-border) !important; color: var(--qorg-sidebar-text) !important; }
+html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item { min-height: var(--qorg-sidebar-item-height) !important; padding-inline: var(--qorg-sidebar-item-padding) !important; border-radius: var(--qorg-sidebar-item-radius) !important; color: var(--qorg-sidebar-text) !important; }
+html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item .icon { color: var(--qorg-sidebar-icon) !important; }
+html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item:hover { background: var(--qorg-sidebar-hover-bg) !important; color: var(--qorg-sidebar-hover-text) !important; }
+html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item.selected,
+html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item.active { background: var(--qorg-sidebar-active-bg) !important; color: var(--qorg-sidebar-active-text) !important; }
+
+/* Espresso menus and classic dropdowns */
+html[data-qorg-theme-runtime="1"] .es-menu,
+html[data-qorg-theme-runtime="1"] .dropdown-menu { background: var(--qorg-menu-bg) !important; border-color: var(--qorg-menu-border) !important; border-radius: var(--qorg-menu-radius) !important; }
+html[data-qorg-theme-runtime="1"] .es-menu__item,
+html[data-qorg-theme-runtime="1"] .dropdown-item { min-height: var(--qorg-menu-item-height) !important; padding-inline: var(--qorg-menu-item-padding) !important; border-radius: var(--qorg-menu-item-radius) !important; color: var(--qorg-menu-text) !important; }
+html[data-qorg-theme-runtime="1"] .es-menu__item:hover,
+html[data-qorg-theme-runtime="1"] .dropdown-item:hover { background: var(--qorg-menu-hover-bg) !important; color: var(--qorg-menu-hover-text) !important; }
+html[data-qorg-theme-runtime="1"] .es-menu__item.active,
+html[data-qorg-theme-runtime="1"] .dropdown-item.active { background: var(--qorg-menu-active-bg) !important; color: var(--qorg-menu-active-text) !important; }
+
+/* Website scope, including Web Forms and Login */
+html[data-qorg-theme-runtime="1"] body:not([data-route^="desk"]) { background: var(--qorg-page-bg) !important; color: var(--qorg-text) !important; }
+html[data-qorg-theme-runtime="1"] body:not([data-route^="desk"]) .form-control { background: var(--qorg-field-bg) !important; color: var(--qorg-field-text) !important; border-color: var(--qorg-field-border) !important; border-radius: var(--qorg-web-field-radius) !important; min-height: var(--qorg-web-field-height) !important; }
+html[data-qorg-theme-runtime="1"] body:not([data-route^="desk"]) .btn-primary { background: var(--qorg-button-bg) !important; color: var(--qorg-button-text) !important; border-radius: var(--qorg-web-button-radius) !important; min-height: var(--qorg-web-button-height) !important; }

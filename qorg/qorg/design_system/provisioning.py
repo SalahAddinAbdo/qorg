@@ -34,3 +34,20 @@ def provision_login_experience():
         doc.flags.ignore_permissions = True
         doc.save()
     frappe.clear_cache()
+
+
+def provision_theme_tokens():
+    if not frappe.db.exists("DocType", SETTINGS):
+        return
+    doc = frappe.get_single(SETTINGS)
+    changed = False
+    for field in doc.meta.fields:
+        if field.default in (None, "") or doc.get(field.fieldname) not in (None, ""):
+            continue
+        if field.fieldtype in ("Color", "Int", "Float", "Data", "Select", "Check"):
+            doc.set(field.fieldname, field.default)
+            changed = True
+    if changed:
+        doc.flags.ignore_permissions = True
+        doc.save()
+    frappe.clear_cache()

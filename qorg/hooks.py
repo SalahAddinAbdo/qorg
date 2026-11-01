@@ -25,17 +25,21 @@ app_include_js = [
     "/assets/qorg/js/model_policy.js",
     "/assets/qorg/js/qorg_language_action.js",
     "/assets/qorg/js/qorg_ui_tokens.js",
+    "/assets/qorg/js/qorg_theme_runtime.js",
 ]
 
 app_include_css = [
     "/assets/qorg/css/model_policy.css",
+    "/assets/qorg/css/qorg_theme_runtime.css",
 ]
 
 web_include_css = [
+    "/assets/qorg/css/qorg_theme_runtime.css",
     "qorg_login_experience.bundle.css",
     "/assets/qorg/css/qorg_login_experience_hotfix.css",
 ]
 web_include_js = [
+    "/assets/qorg/js/qorg_theme_runtime.js",
     "qorg_login_experience.bundle.js",
     "/assets/qorg/js/qorg_login_experience_hotfix.js",
 ]

@@ -6,24 +6,163 @@
   "issingle": 1,
   "track_changes": 1,
   "field_order": [
-    "baseline_tab",
-    "global_tokens_section",
+    "theme_general_tab",
+    "theme_brand_section",
     "primary_color",
     "secondary_color",
-    "tokens_column",
-    "border_radius",
+    "theme_general_col",
+    "default_field_radius",
+    "default_button_radius",
+    "default_card_radius",
+    "default_menu_radius",
     "language_section",
     "show_language_action",
     "quick_create_items",
-    "theme_surfaces_section",
-    "page_background_color",
-    "surface_color",
-    "control_background_color",
-    "surface_column",
-    "primary_text_color",
-    "muted_text_color",
-    "border_color",
-    "large_border_radius",
+    "desk_theme_tab",
+    "desk_light_section",
+    "desk_light_page_bg",
+    "desk_light_surface_bg",
+    "desk_light_elevated_bg",
+    "desk_light_control_bg",
+    "desk_light_border",
+    "desk_light_text",
+    "desk_light_muted_text",
+    "desk_light_icon",
+    "desk_light_link",
+    "desk_light_link_hover",
+    "desk_light_field_bg",
+    "desk_light_field_text",
+    "desk_light_field_placeholder",
+    "desk_light_field_border",
+    "desk_light_field_focus",
+    "desk_light_button_bg",
+    "desk_light_button_text",
+    "desk_light_button_hover",
+    "desk_light_secondary_button_bg",
+    "desk_light_secondary_button_text",
+    "desk_light_secondary_button_hover",
+    "desk_dark_section",
+    "desk_dark_page_bg",
+    "desk_dark_surface_bg",
+    "desk_dark_elevated_bg",
+    "desk_dark_control_bg",
+    "desk_dark_border",
+    "desk_dark_text",
+    "desk_dark_muted_text",
+    "desk_dark_icon",
+    "desk_dark_link",
+    "desk_dark_link_hover",
+    "desk_dark_field_bg",
+    "desk_dark_field_text",
+    "desk_dark_field_placeholder",
+    "desk_dark_field_border",
+    "desk_dark_field_focus",
+    "desk_dark_button_bg",
+    "desk_dark_button_text",
+    "desk_dark_button_hover",
+    "desk_dark_secondary_button_bg",
+    "desk_dark_secondary_button_text",
+    "desk_dark_secondary_button_hover",
+    "desk_shape_section",
+    "desk_field_radius",
+    "desk_field_height",
+    "desk_button_radius",
+    "desk_button_height",
+    "desk_card_radius",
+    "desk_navigation_tab",
+    "navigation_light_section",
+    "light_sidebar_bg",
+    "light_sidebar_border",
+    "light_sidebar_text",
+    "light_sidebar_icon",
+    "light_sidebar_hover_bg",
+    "light_sidebar_hover_text",
+    "light_sidebar_active_bg",
+    "light_sidebar_active_text",
+    "light_menu_bg",
+    "light_menu_border",
+    "light_menu_text",
+    "light_menu_icon",
+    "light_menu_hover_bg",
+    "light_menu_hover_text",
+    "light_menu_active_bg",
+    "light_menu_active_text",
+    "navigation_dark_section",
+    "dark_sidebar_bg",
+    "dark_sidebar_border",
+    "dark_sidebar_text",
+    "dark_sidebar_icon",
+    "dark_sidebar_hover_bg",
+    "dark_sidebar_hover_text",
+    "dark_sidebar_active_bg",
+    "dark_sidebar_active_text",
+    "dark_menu_bg",
+    "dark_menu_border",
+    "dark_menu_text",
+    "dark_menu_icon",
+    "dark_menu_hover_bg",
+    "dark_menu_hover_text",
+    "dark_menu_active_bg",
+    "dark_menu_active_text",
+    "navigation_shape_section",
+    "sidebar_item_height",
+    "sidebar_item_radius",
+    "sidebar_item_padding",
+    "menu_radius",
+    "menu_item_height",
+    "menu_item_radius",
+    "menu_item_padding",
+    "web_theme_tab",
+    "web_light_section",
+    "web_light_page_bg",
+    "web_light_surface_bg",
+    "web_light_elevated_bg",
+    "web_light_control_bg",
+    "web_light_border",
+    "web_light_text",
+    "web_light_muted_text",
+    "web_light_icon",
+    "web_light_link",
+    "web_light_link_hover",
+    "web_light_field_bg",
+    "web_light_field_text",
+    "web_light_field_placeholder",
+    "web_light_field_border",
+    "web_light_field_focus",
+    "web_light_button_bg",
+    "web_light_button_text",
+    "web_light_button_hover",
+    "web_light_secondary_button_bg",
+    "web_light_secondary_button_text",
+    "web_light_secondary_button_hover",
+    "web_dark_section",
+    "web_dark_page_bg",
+    "web_dark_surface_bg",
+    "web_dark_elevated_bg",
+    "web_dark_control_bg",
+    "web_dark_border",
+    "web_dark_text",
+    "web_dark_muted_text",
+    "web_dark_icon",
+    "web_dark_link",
+    "web_dark_link_hover",
+    "web_dark_field_bg",
+    "web_dark_field_text",
+    "web_dark_field_placeholder",
+    "web_dark_field_border",
+    "web_dark_field_focus",
+    "web_dark_button_bg",
+    "web_dark_button_text",
+    "web_dark_button_hover",
+    "web_dark_secondary_button_bg",
+    "web_dark_secondary_button_text",
+    "web_dark_secondary_button_hover",
+    "web_shape_section",
+    "web_field_radius",
+    "web_field_height",
+    "web_button_radius",
+    "web_button_height",
+    "web_card_radius",
     "login_tab",
     "login_enable_section",
     "enable_login_experience",
@@ -75,18 +214,27 @@
     "heading_line_height",
     "primary_font_family",
     "arabic_font_family",
-    "fallback_font_family"
+    "fallback_font_family",
+    "legacy_theme_section",
+    "border_radius",
+    "large_border_radius",
+    "page_background_color",
+    "surface_color",
+    "control_background_color",
+    "primary_text_color",
+    "muted_text_color",
+    "border_color"
   ],
   "fields": [
     {
-      "fieldname": "baseline_tab",
+      "fieldname": "theme_general_tab",
       "fieldtype": "Tab Break",
-      "label": "Baseline"
+      "label": "Theme General"
     },
     {
-      "fieldname": "global_tokens_section",
+      "fieldname": "theme_brand_section",
       "fieldtype": "Section Break",
-      "label": "Global Interface Tokens"
+      "label": "Brand and Global Defaults"
     },
     {
       "fieldname": "primary_color",
@@ -101,15 +249,32 @@
       "default": "#CBAE66"
     },
     {
-      "fieldname": "tokens_column",
+      "fieldname": "theme_general_col",
       "fieldtype": "Column Break"
     },
     {
-      "fieldname": "border_radius",
+      "fieldname": "default_field_radius",
       "fieldtype": "Int",
-      "label": "Border Radius (px)",
-      "default": "4",
-      "non_negative": 1
+      "label": "Default Field Radius (px)",
+      "default": "6"
+    },
+    {
+      "fieldname": "default_button_radius",
+      "fieldtype": "Int",
+      "label": "Default Button Radius (px)",
+      "default": "6"
+    },
+    {
+      "fieldname": "default_card_radius",
+      "fieldtype": "Int",
+      "label": "Default Card Radius (px)",
+      "default": "10"
+    },
+    {
+      "fieldname": "default_menu_radius",
+      "fieldtype": "Int",
+      "label": "Default Menu Radius (px)",
+      "default": "8"
     },
     {
       "fieldname": "language_section",
@@ -129,56 +294,862 @@
       "options": "Q Org Quick Create Item"
     },
     {
-      "fieldname": "theme_surfaces_section",
+      "fieldname": "desk_theme_tab",
+      "fieldtype": "Tab Break",
+      "label": "Desk Theme"
+    },
+    {
+      "fieldname": "desk_light_section",
       "fieldtype": "Section Break",
-      "label": "Surfaces and Text"
+      "label": "Desk Light Mode"
     },
     {
-      "fieldname": "page_background_color",
+      "fieldname": "desk_light_page_bg",
       "fieldtype": "Color",
-      "label": "Page Background Color",
+      "label": "Page Background",
+      "default": "#F7F8FA"
+    },
+    {
+      "fieldname": "desk_light_surface_bg",
+      "fieldtype": "Color",
+      "label": "Surface Background",
       "default": "#FFFFFF"
     },
     {
-      "fieldname": "surface_color",
+      "fieldname": "desk_light_elevated_bg",
       "fieldtype": "Color",
-      "label": "Surface Color",
+      "label": "Elevated Surface",
       "default": "#FFFFFF"
     },
     {
-      "fieldname": "control_background_color",
+      "fieldname": "desk_light_control_bg",
       "fieldtype": "Color",
-      "label": "Control Background Color",
+      "label": "Control Background",
       "default": "#F4F5F6"
     },
     {
-      "fieldname": "surface_column",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "primary_text_color",
-      "fieldtype": "Color",
-      "label": "Primary Text Color",
-      "default": "#1F272E"
-    },
-    {
-      "fieldname": "muted_text_color",
-      "fieldtype": "Color",
-      "label": "Muted Text Color",
-      "default": "#687178"
-    },
-    {
-      "fieldname": "border_color",
+      "fieldname": "desk_light_border",
       "fieldtype": "Color",
       "label": "Border Color",
       "default": "#DFE2E5"
     },
     {
-      "fieldname": "large_border_radius",
+      "fieldname": "desk_light_text",
+      "fieldtype": "Color",
+      "label": "Primary Text",
+      "default": "#1F272E"
+    },
+    {
+      "fieldname": "desk_light_muted_text",
+      "fieldtype": "Color",
+      "label": "Muted Text",
+      "default": "#687178"
+    },
+    {
+      "fieldname": "desk_light_icon",
+      "fieldtype": "Color",
+      "label": "Icon Color",
+      "default": "#687178"
+    },
+    {
+      "fieldname": "desk_light_link",
+      "fieldtype": "Color",
+      "label": "Link Color",
+      "default": "#137690"
+    },
+    {
+      "fieldname": "desk_light_link_hover",
+      "fieldtype": "Color",
+      "label": "Link Hover Color",
+      "default": "#0F6278"
+    },
+    {
+      "fieldname": "desk_light_field_bg",
+      "fieldtype": "Color",
+      "label": "Field Background",
+      "default": "#F4F5F6"
+    },
+    {
+      "fieldname": "desk_light_field_text",
+      "fieldtype": "Color",
+      "label": "Field Text",
+      "default": "#1F272E"
+    },
+    {
+      "fieldname": "desk_light_field_placeholder",
+      "fieldtype": "Color",
+      "label": "Field Placeholder",
+      "default": "#98A1A8"
+    },
+    {
+      "fieldname": "desk_light_field_border",
+      "fieldtype": "Color",
+      "label": "Field Border",
+      "default": "#DFE2E5"
+    },
+    {
+      "fieldname": "desk_light_field_focus",
+      "fieldtype": "Color",
+      "label": "Field Focus",
+      "default": "#137690"
+    },
+    {
+      "fieldname": "desk_light_button_bg",
+      "fieldtype": "Color",
+      "label": "Primary Button Background",
+      "default": "#137690"
+    },
+    {
+      "fieldname": "desk_light_button_text",
+      "fieldtype": "Color",
+      "label": "Primary Button Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "fieldname": "desk_light_button_hover",
+      "fieldtype": "Color",
+      "label": "Primary Button Hover",
+      "default": "#0F6278"
+    },
+    {
+      "fieldname": "desk_light_secondary_button_bg",
+      "fieldtype": "Color",
+      "label": "Secondary Button Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "fieldname": "desk_light_secondary_button_text",
+      "fieldtype": "Color",
+      "label": "Secondary Button Text",
+      "default": "#1F272E"
+    },
+    {
+      "fieldname": "desk_light_secondary_button_hover",
+      "fieldtype": "Color",
+      "label": "Secondary Button Hover",
+      "default": "#F0F2F4"
+    },
+    {
+      "fieldname": "desk_dark_section",
+      "fieldtype": "Section Break",
+      "label": "Desk Dark Mode"
+    },
+    {
+      "fieldname": "desk_dark_page_bg",
+      "fieldtype": "Color",
+      "label": "Dark Page Background",
+      "default": "#1F2329"
+    },
+    {
+      "fieldname": "desk_dark_surface_bg",
+      "fieldtype": "Color",
+      "label": "Dark Surface Background",
+      "default": "#252A31"
+    },
+    {
+      "fieldname": "desk_dark_elevated_bg",
+      "fieldtype": "Color",
+      "label": "Dark Elevated Surface",
+      "default": "#2D333B"
+    },
+    {
+      "fieldname": "desk_dark_control_bg",
+      "fieldtype": "Color",
+      "label": "Dark Control Background",
+      "default": "#30363D"
+    },
+    {
+      "fieldname": "desk_dark_border",
+      "fieldtype": "Color",
+      "label": "Dark Border Color",
+      "default": "#444C56"
+    },
+    {
+      "fieldname": "desk_dark_text",
+      "fieldtype": "Color",
+      "label": "Dark Primary Text",
+      "default": "#E6EDF3"
+    },
+    {
+      "fieldname": "desk_dark_muted_text",
+      "fieldtype": "Color",
+      "label": "Dark Muted Text",
+      "default": "#9DA7B3"
+    },
+    {
+      "fieldname": "desk_dark_icon",
+      "fieldtype": "Color",
+      "label": "Dark Icon Color",
+      "default": "#AAB4C0"
+    },
+    {
+      "fieldname": "desk_dark_link",
+      "fieldtype": "Color",
+      "label": "Dark Link Color",
+      "default": "#58A6FF"
+    },
+    {
+      "fieldname": "desk_dark_link_hover",
+      "fieldtype": "Color",
+      "label": "Dark Link Hover Color",
+      "default": "#79B8FF"
+    },
+    {
+      "fieldname": "desk_dark_field_bg",
+      "fieldtype": "Color",
+      "label": "Dark Field Background",
+      "default": "#2D333B"
+    },
+    {
+      "fieldname": "desk_dark_field_text",
+      "fieldtype": "Color",
+      "label": "Dark Field Text",
+      "default": "#E6EDF3"
+    },
+    {
+      "fieldname": "desk_dark_field_placeholder",
+      "fieldtype": "Color",
+      "label": "Dark Field Placeholder",
+      "default": "#8B949E"
+    },
+    {
+      "fieldname": "desk_dark_field_border",
+      "fieldtype": "Color",
+      "label": "Dark Field Border",
+      "default": "#4B5563"
+    },
+    {
+      "fieldname": "desk_dark_field_focus",
+      "fieldtype": "Color",
+      "label": "Dark Field Focus",
+      "default": "#3B82F6"
+    },
+    {
+      "fieldname": "desk_dark_button_bg",
+      "fieldtype": "Color",
+      "label": "Dark Primary Button Background",
+      "default": "#137690"
+    },
+    {
+      "fieldname": "desk_dark_button_text",
+      "fieldtype": "Color",
+      "label": "Dark Primary Button Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "fieldname": "desk_dark_button_hover",
+      "fieldtype": "Color",
+      "label": "Dark Primary Button Hover",
+      "default": "#0F6278"
+    },
+    {
+      "fieldname": "desk_dark_secondary_button_bg",
+      "fieldtype": "Color",
+      "label": "Dark Secondary Button Background",
+      "default": "#30363D"
+    },
+    {
+      "fieldname": "desk_dark_secondary_button_text",
+      "fieldtype": "Color",
+      "label": "Dark Secondary Button Text",
+      "default": "#E6EDF3"
+    },
+    {
+      "fieldname": "desk_dark_secondary_button_hover",
+      "fieldtype": "Color",
+      "label": "Dark Secondary Button Hover",
+      "default": "#3B434D"
+    },
+    {
+      "fieldname": "desk_shape_section",
+      "fieldtype": "Section Break",
+      "label": "Desk Shape and Density"
+    },
+    {
+      "fieldname": "desk_field_radius",
       "fieldtype": "Int",
-      "label": "Large Border Radius",
-      "default": "8",
-      "description": "Applied to cards and large surfaces."
+      "label": "Desk Field Radius (px)",
+      "default": "6"
+    },
+    {
+      "fieldname": "desk_field_height",
+      "fieldtype": "Int",
+      "label": "Desk Field Height (px)",
+      "default": "36"
+    },
+    {
+      "fieldname": "desk_button_radius",
+      "fieldtype": "Int",
+      "label": "Desk Button Radius (px)",
+      "default": "6"
+    },
+    {
+      "fieldname": "desk_button_height",
+      "fieldtype": "Int",
+      "label": "Desk Button Height (px)",
+      "default": "32"
+    },
+    {
+      "fieldname": "desk_card_radius",
+      "fieldtype": "Int",
+      "label": "Desk Card Radius (px)",
+      "default": "10"
+    },
+    {
+      "fieldname": "desk_navigation_tab",
+      "fieldtype": "Tab Break",
+      "label": "Desk Navigation"
+    },
+    {
+      "fieldname": "navigation_light_section",
+      "fieldtype": "Section Break",
+      "label": "Sidebar and Menus - Light"
+    },
+    {
+      "fieldname": "light_sidebar_bg",
+      "fieldtype": "Color",
+      "label": "Sidebar Bg",
+      "default": "#FFFFFF"
+    },
+    {
+      "fieldname": "light_sidebar_border",
+      "fieldtype": "Color",
+      "label": "Sidebar Border",
+      "default": "#E5E7EB"
+    },
+    {
+      "fieldname": "light_sidebar_text",
+      "fieldtype": "Color",
+      "label": "Sidebar Text",
+      "default": "#313B44"
+    },
+    {
+      "fieldname": "light_sidebar_icon",
+      "fieldtype": "Color",
+      "label": "Sidebar Icon",
+      "default": "#687178"
+    },
+    {
+      "fieldname": "light_sidebar_hover_bg",
+      "fieldtype": "Color",
+      "label": "Sidebar Hover Bg",
+      "default": "#F0F4F6"
+    },
+    {
+      "fieldname": "light_sidebar_hover_text",
+      "fieldtype": "Color",
+      "label": "Sidebar Hover Text",
+      "default": "#1F272E"
+    },
+    {
+      "fieldname": "light_sidebar_active_bg",
+      "fieldtype": "Color",
+      "label": "Sidebar Active Bg",
+      "default": "#E5F3F6"
+    },
+    {
+      "fieldname": "light_sidebar_active_text",
+      "fieldtype": "Color",
+      "label": "Sidebar Active Text",
+      "default": "#137690"
+    },
+    {
+      "fieldname": "light_menu_bg",
+      "fieldtype": "Color",
+      "label": "Menu Bg",
+      "default": "#FFFFFF"
+    },
+    {
+      "fieldname": "light_menu_border",
+      "fieldtype": "Color",
+      "label": "Menu Border",
+      "default": "#DFE2E5"
+    },
+    {
+      "fieldname": "light_menu_text",
+      "fieldtype": "Color",
+      "label": "Menu Text",
+      "default": "#313B44"
+    },
+    {
+      "fieldname": "light_menu_icon",
+      "fieldtype": "Color",
+      "label": "Menu Icon",
+      "default": "#687178"
+    },
+    {
+      "fieldname": "light_menu_hover_bg",
+      "fieldtype": "Color",
+      "label": "Menu Hover Bg",
+      "default": "#EDF6F7"
+    },
+    {
+      "fieldname": "light_menu_hover_text",
+      "fieldtype": "Color",
+      "label": "Menu Hover Text",
+      "default": "#137690"
+    },
+    {
+      "fieldname": "light_menu_active_bg",
+      "fieldtype": "Color",
+      "label": "Menu Active Bg",
+      "default": "#DCEFF3"
+    },
+    {
+      "fieldname": "light_menu_active_text",
+      "fieldtype": "Color",
+      "label": "Menu Active Text",
+      "default": "#0F6278"
+    },
+    {
+      "fieldname": "navigation_dark_section",
+      "fieldtype": "Section Break",
+      "label": "Sidebar and Menus - Dark"
+    },
+    {
+      "fieldname": "dark_sidebar_bg",
+      "fieldtype": "Color",
+      "label": "Dark Sidebar Bg",
+      "default": "#20252B"
+    },
+    {
+      "fieldname": "dark_sidebar_border",
+      "fieldtype": "Color",
+      "label": "Dark Sidebar Border",
+      "default": "#39414A"
+    },
+    {
+      "fieldname": "dark_sidebar_text",
+      "fieldtype": "Color",
+      "label": "Dark Sidebar Text",
+      "default": "#D7DEE7"
+    },
+    {
+      "fieldname": "dark_sidebar_icon",
+      "fieldtype": "Color",
+      "label": "Dark Sidebar Icon",
+      "default": "#AAB4C0"
+    },
+    {
+      "fieldname": "dark_sidebar_hover_bg",
+      "fieldtype": "Color",
+      "label": "Dark Sidebar Hover Bg",
+      "default": "#303740"
+    },
+    {
+      "fieldname": "dark_sidebar_hover_text",
+      "fieldtype": "Color",
+      "label": "Dark Sidebar Hover Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "fieldname": "dark_sidebar_active_bg",
+      "fieldtype": "Color",
+      "label": "Dark Sidebar Active Bg",
+      "default": "#137690"
+    },
+    {
+      "fieldname": "dark_sidebar_active_text",
+      "fieldtype": "Color",
+      "label": "Dark Sidebar Active Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "fieldname": "dark_menu_bg",
+      "fieldtype": "Color",
+      "label": "Dark Menu Bg",
+      "default": "#252A31"
+    },
+    {
+      "fieldname": "dark_menu_border",
+      "fieldtype": "Color",
+      "label": "Dark Menu Border",
+      "default": "#444C56"
+    },
+    {
+      "fieldname": "dark_menu_text",
+      "fieldtype": "Color",
+      "label": "Dark Menu Text",
+      "default": "#E6EDF3"
+    },
+    {
+      "fieldname": "dark_menu_icon",
+      "fieldtype": "Color",
+      "label": "Dark Menu Icon",
+      "default": "#AAB4C0"
+    },
+    {
+      "fieldname": "dark_menu_hover_bg",
+      "fieldtype": "Color",
+      "label": "Dark Menu Hover Bg",
+      "default": "#343B44"
+    },
+    {
+      "fieldname": "dark_menu_hover_text",
+      "fieldtype": "Color",
+      "label": "Dark Menu Hover Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "fieldname": "dark_menu_active_bg",
+      "fieldtype": "Color",
+      "label": "Dark Menu Active Bg",
+      "default": "#137690"
+    },
+    {
+      "fieldname": "dark_menu_active_text",
+      "fieldtype": "Color",
+      "label": "Dark Menu Active Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "fieldname": "navigation_shape_section",
+      "fieldtype": "Section Break",
+      "label": "Navigation Shape and Density"
+    },
+    {
+      "fieldname": "sidebar_item_height",
+      "fieldtype": "Int",
+      "label": "Sidebar Item Height (px)",
+      "default": "36"
+    },
+    {
+      "fieldname": "sidebar_item_radius",
+      "fieldtype": "Int",
+      "label": "Sidebar Item Radius (px)",
+      "default": "6"
+    },
+    {
+      "fieldname": "sidebar_item_padding",
+      "fieldtype": "Int",
+      "label": "Sidebar Item Horizontal Padding (px)",
+      "default": "10"
+    },
+    {
+      "fieldname": "menu_radius",
+      "fieldtype": "Int",
+      "label": "Menu Radius (px)",
+      "default": "8"
+    },
+    {
+      "fieldname": "menu_item_height",
+      "fieldtype": "Int",
+      "label": "Menu Item Height (px)",
+      "default": "36"
+    },
+    {
+      "fieldname": "menu_item_radius",
+      "fieldtype": "Int",
+      "label": "Menu Item Radius (px)",
+      "default": "6"
+    },
+    {
+      "fieldname": "menu_item_padding",
+      "fieldtype": "Int",
+      "label": "Menu Item Horizontal Padding (px)",
+      "default": "12"
+    },
+    {
+      "fieldname": "web_theme_tab",
+      "fieldtype": "Tab Break",
+      "label": "Web Theme"
+    },
+    {
+      "fieldname": "web_light_section",
+      "fieldtype": "Section Break",
+      "label": "Web Light Mode"
+    },
+    {
+      "fieldname": "web_light_page_bg",
+      "fieldtype": "Color",
+      "label": "Page Background",
+      "default": "#F7F8FA"
+    },
+    {
+      "fieldname": "web_light_surface_bg",
+      "fieldtype": "Color",
+      "label": "Surface Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "fieldname": "web_light_elevated_bg",
+      "fieldtype": "Color",
+      "label": "Elevated Surface",
+      "default": "#FFFFFF"
+    },
+    {
+      "fieldname": "web_light_control_bg",
+      "fieldtype": "Color",
+      "label": "Control Background",
+      "default": "#F4F5F6"
+    },
+    {
+      "fieldname": "web_light_border",
+      "fieldtype": "Color",
+      "label": "Border Color",
+      "default": "#DFE2E5"
+    },
+    {
+      "fieldname": "web_light_text",
+      "fieldtype": "Color",
+      "label": "Primary Text",
+      "default": "#1F272E"
+    },
+    {
+      "fieldname": "web_light_muted_text",
+      "fieldtype": "Color",
+      "label": "Muted Text",
+      "default": "#687178"
+    },
+    {
+      "fieldname": "web_light_icon",
+      "fieldtype": "Color",
+      "label": "Icon Color",
+      "default": "#687178"
+    },
+    {
+      "fieldname": "web_light_link",
+      "fieldtype": "Color",
+      "label": "Link Color",
+      "default": "#137690"
+    },
+    {
+      "fieldname": "web_light_link_hover",
+      "fieldtype": "Color",
+      "label": "Link Hover Color",
+      "default": "#0F6278"
+    },
+    {
+      "fieldname": "web_light_field_bg",
+      "fieldtype": "Color",
+      "label": "Field Background",
+      "default": "#F4F5F6"
+    },
+    {
+      "fieldname": "web_light_field_text",
+      "fieldtype": "Color",
+      "label": "Field Text",
+      "default": "#1F272E"
+    },
+    {
+      "fieldname": "web_light_field_placeholder",
+      "fieldtype": "Color",
+      "label": "Field Placeholder",
+      "default": "#98A1A8"
+    },
+    {
+      "fieldname": "web_light_field_border",
+      "fieldtype": "Color",
+      "label": "Field Border",
+      "default": "#DFE2E5"
+    },
+    {
+      "fieldname": "web_light_field_focus",
+      "fieldtype": "Color",
+      "label": "Field Focus",
+      "default": "#137690"
+    },
+    {
+      "fieldname": "web_light_button_bg",
+      "fieldtype": "Color",
+      "label": "Primary Button Background",
+      "default": "#137690"
+    },
+    {
+      "fieldname": "web_light_button_text",
+      "fieldtype": "Color",
+      "label": "Primary Button Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "fieldname": "web_light_button_hover",
+      "fieldtype": "Color",
+      "label": "Primary Button Hover",
+      "default": "#0F6278"
+    },
+    {
+      "fieldname": "web_light_secondary_button_bg",
+      "fieldtype": "Color",
+      "label": "Secondary Button Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "fieldname": "web_light_secondary_button_text",
+      "fieldtype": "Color",
+      "label": "Secondary Button Text",
+      "default": "#1F272E"
+    },
+    {
+      "fieldname": "web_light_secondary_button_hover",
+      "fieldtype": "Color",
+      "label": "Secondary Button Hover",
+      "default": "#F0F2F4"
+    },
+    {
+      "fieldname": "web_dark_section",
+      "fieldtype": "Section Break",
+      "label": "Web Dark Mode"
+    },
+    {
+      "fieldname": "web_dark_page_bg",
+      "fieldtype": "Color",
+      "label": "Dark Page Background",
+      "default": "#1F2329"
+    },
+    {
+      "fieldname": "web_dark_surface_bg",
+      "fieldtype": "Color",
+      "label": "Dark Surface Background",
+      "default": "#252A31"
+    },
+    {
+      "fieldname": "web_dark_elevated_bg",
+      "fieldtype": "Color",
+      "label": "Dark Elevated Surface",
+      "default": "#2D333B"
+    },
+    {
+      "fieldname": "web_dark_control_bg",
+      "fieldtype": "Color",
+      "label": "Dark Control Background",
+      "default": "#30363D"
+    },
+    {
+      "fieldname": "web_dark_border",
+      "fieldtype": "Color",
+      "label": "Dark Border Color",
+      "default": "#444C56"
+    },
+    {
+      "fieldname": "web_dark_text",
+      "fieldtype": "Color",
+      "label": "Dark Primary Text",
+      "default": "#E6EDF3"
+    },
+    {
+      "fieldname": "web_dark_muted_text",
+      "fieldtype": "Color",
+      "label": "Dark Muted Text",
+      "default": "#9DA7B3"
+    },
+    {
+      "fieldname": "web_dark_icon",
+      "fieldtype": "Color",
+      "label": "Dark Icon Color",
+      "default": "#AAB4C0"
+    },
+    {
+      "fieldname": "web_dark_link",
+      "fieldtype": "Color",
+      "label": "Dark Link Color",
+      "default": "#58A6FF"
+    },
+    {
+      "fieldname": "web_dark_link_hover",
+      "fieldtype": "Color",
+      "label": "Dark Link Hover Color",
+      "default": "#79B8FF"
+    },
+    {
+      "fieldname": "web_dark_field_bg",
+      "fieldtype": "Color",
+      "label": "Dark Field Background",
+      "default": "#2D333B"
+    },
+    {
+      "fieldname": "web_dark_field_text",
+      "fieldtype": "Color",
+      "label": "Dark Field Text",
+      "default": "#E6EDF3"
+    },
+    {
+      "fieldname": "web_dark_field_placeholder",
+      "fieldtype": "Color",
+      "label": "Dark Field Placeholder",
+      "default": "#8B949E"
+    },
+    {
+      "fieldname": "web_dark_field_border",
+      "fieldtype": "Color",
+      "label": "Dark Field Border",
+      "default": "#4B5563"
+    },
+    {
+      "fieldname": "web_dark_field_focus",
+      "fieldtype": "Color",
+      "label": "Dark Field Focus",
+      "default": "#3B82F6"
+    },
+    {
+      "fieldname": "web_dark_button_bg",
+      "fieldtype": "Color",
+      "label": "Dark Primary Button Background",
+      "default": "#137690"
+    },
+    {
+      "fieldname": "web_dark_button_text",
+      "fieldtype": "Color",
+      "label": "Dark Primary Button Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "fieldname": "web_dark_button_hover",
+      "fieldtype": "Color",
+      "label": "Dark Primary Button Hover",
+      "default": "#0F6278"
+    },
+    {
+      "fieldname": "web_dark_secondary_button_bg",
+      "fieldtype": "Color",
+      "label": "Dark Secondary Button Background",
+      "default": "#30363D"
+    },
+    {
+      "fieldname": "web_dark_secondary_button_text",
+      "fieldtype": "Color",
+      "label": "Dark Secondary Button Text",
+      "default": "#E6EDF3"
+    },
+    {
+      "fieldname": "web_dark_secondary_button_hover",
+      "fieldtype": "Color",
+      "label": "Dark Secondary Button Hover",
+      "default": "#3B434D"
+    },
+    {
+      "fieldname": "web_shape_section",
+      "fieldtype": "Section Break",
+      "label": "Web Shape and Density"
+    },
+    {
+      "fieldname": "web_field_radius",
+      "fieldtype": "Int",
+      "label": "Web Field Radius (px)",
+      "default": "6"
+    },
+    {
+      "fieldname": "web_field_height",
+      "fieldtype": "Int",
+      "label": "Web Field Height (px)",
+      "default": "44"
+    },
+    {
+      "fieldname": "web_button_radius",
+      "fieldtype": "Int",
+      "label": "Web Button Radius (px)",
+      "default": "6"
+    },
+    {
+      "fieldname": "web_button_height",
+      "fieldtype": "Int",
+      "label": "Web Button Height (px)",
+      "default": "44"
+    },
+    {
+      "fieldname": "web_card_radius",
+      "fieldtype": "Int",
+      "label": "Web Card Radius (px)",
+      "default": "10"
     },
     {
       "fieldname": "login_tab",
@@ -501,6 +1472,85 @@
       "label": "Fallback Font Family",
       "default": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
       "depends_on": "eval:doc.font_source != \"Frappe Default\""
+    },
+    {
+      "fieldname": "legacy_theme_section",
+      "fieldtype": "Section Break",
+      "label": "Legacy Theme Values",
+      "depends_on": "eval:false"
+    },
+    {
+      "fieldname": "border_radius",
+      "fieldtype": "Int",
+      "label": "Border Radius (px)",
+      "default": "4",
+      "non_negative": 1,
+      "hidden": 1,
+      "read_only": 1,
+      "description": "Legacy value retained for migration to Desk and Web theme tokens."
+    },
+    {
+      "fieldname": "large_border_radius",
+      "fieldtype": "Int",
+      "label": "Large Border Radius",
+      "default": "8",
+      "description": "Legacy value retained for migration to Desk and Web theme tokens.",
+      "hidden": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "page_background_color",
+      "fieldtype": "Color",
+      "label": "Page Background Color",
+      "default": "#FFFFFF",
+      "hidden": 1,
+      "read_only": 1,
+      "description": "Legacy value retained for migration to Desk and Web theme tokens."
+    },
+    {
+      "fieldname": "surface_color",
+      "fieldtype": "Color",
+      "label": "Surface Color",
+      "default": "#FFFFFF",
+      "hidden": 1,
+      "read_only": 1,
+      "description": "Legacy value retained for migration to Desk and Web theme tokens."
+    },
+    {
+      "fieldname": "control_background_color",
+      "fieldtype": "Color",
+      "label": "Control Background Color",
+      "default": "#F4F5F6",
+      "hidden": 1,
+      "read_only": 1,
+      "description": "Legacy value retained for migration to Desk and Web theme tokens."
+    },
+    {
+      "fieldname": "primary_text_color",
+      "fieldtype": "Color",
+      "label": "Primary Text Color",
+      "default": "#1F272E",
+      "hidden": 1,
+      "read_only": 1,
+      "description": "Legacy value retained for migration to Desk and Web theme tokens."
+    },
+    {
+      "fieldname": "muted_text_color",
+      "fieldtype": "Color",
+      "label": "Muted Text Color",
+      "default": "#687178",
+      "hidden": 1,
+      "read_only": 1,
+      "description": "Legacy value retained for migration to Desk and Web theme tokens."
+    },
+    {
+      "fieldname": "border_color",
+      "fieldtype": "Color",
+      "label": "Border Color",
+      "default": "#DFE2E5",
+      "hidden": 1,
+      "read_only": 1,
+      "description": "Legacy value retained for migration to Desk and Web theme tokens."
     }
   ],
   "permissions": [

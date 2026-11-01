@@ -1,1 +1,1 @@
-LOGIN_EXPERIENCE_VERSION = "1.2.0-server-first-shared-frappe-tokens"
+LOGIN_EXPERIENCE_VERSION = "1.3.0-desk-web-light-dark-tokens"
