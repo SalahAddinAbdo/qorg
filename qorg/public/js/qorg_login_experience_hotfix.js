@@ -1,46 +1,43 @@
 (() => {
     "use strict";
 
-    const AUTH_SELECTOR = ".for-login, .for-forgot, .for-signup, .for-email-login";
-    const HASHES = new Set(["#login", "#forgot", "#signup", "#login-with-email-link"]);
+    const AUTH_SELECTOR = ".for-login, .for-forgot, .for-signup, .for-email-login, .for-login-with-email-link, .for-reset-password";
+    const HASHES = new Set(["#login", "#forgot", "#signup", "#login-with-email-link", "#reset-password"]);
 
-    function getDirection() {
+    function direction() {
         const html = document.documentElement;
-        const language = (html.lang || document.body?.lang || "").toLowerCase();
         const declared = html.getAttribute("dir") || document.body?.getAttribute("dir");
         if (declared === "rtl" || declared === "ltr") return declared;
-        if (/^(ar|fa|he|ur)(-|$)/.test(language)) return "rtl";
-        return document.body && getComputedStyle(document.body).direction === "rtl" ? "rtl" : "ltr";
+        const language = (html.lang || document.body?.lang || "").toLowerCase();
+        return /^(ar|fa|he|ur)(-|$)/.test(language) ? "rtl" : "ltr";
     }
 
-    function getShell() {
+    function shell() {
         return document.querySelector(".qorg-login-shell");
     }
 
-    function getFormHost(shell) {
-        return shell?.querySelector(".qorg-login-form-host") || shell?.querySelector(".qorg-login-form-panel");
+    function formHost(loginShell) {
+        return loginShell?.querySelector(".qorg-login-form-host") || loginShell?.querySelector(".qorg-login-form-panel");
     }
 
-    function applyDirection(shell) {
-        const direction = getDirection();
-        shell.dataset.qorgDirection = direction;
-        shell.setAttribute("dir", "ltr");
-        const panel = shell.querySelector(".qorg-login-form-panel");
-        const visual = shell.querySelector(".qorg-login-visual");
-        if (panel) panel.setAttribute("dir", direction);
-        if (visual) visual.setAttribute("dir", direction);
+    function applyDirection(loginShell) {
+        const value = direction();
+        loginShell.dataset.qorgDirection = value;
+        loginShell.setAttribute("dir", "ltr");
+        loginShell.querySelector(".qorg-login-form-panel")?.setAttribute("dir", value);
+        loginShell.querySelector(".qorg-login-visual")?.setAttribute("dir", value);
     }
 
-    function moveAuthSections(shell) {
-        const host = getFormHost(shell);
+    function moveAuthenticationSections(loginShell) {
+        const host = formHost(loginShell);
         if (!host) return;
         document.querySelectorAll(AUTH_SELECTOR).forEach((section) => {
             if (!host.contains(section)) host.append(section);
-            section.setAttribute("dir", shell.dataset.qorgDirection || getDirection());
+            section.setAttribute("dir", loginShell.dataset.qorgDirection || direction());
         });
     }
 
-    function normalizeAuthLinks(root = document) {
+    function normalizeLinks(root = document) {
         root.querySelectorAll('a[href^="#"]').forEach((link) => {
             const hash = new URL(link.href, location.href).hash;
             if (!HASHES.has(hash)) return;
@@ -50,12 +47,12 @@
     }
 
     function repair() {
-        const shell = getShell();
-        if (!shell) return false;
-        applyDirection(shell);
-        moveAuthSections(shell);
-        normalizeAuthLinks(shell);
-        document.documentElement.dataset.qorgLoginHotfix = "1";
+        const loginShell = shell();
+        if (!loginShell) return false;
+        applyDirection(loginShell);
+        moveAuthenticationSections(loginShell);
+        normalizeLinks(loginShell);
+        document.documentElement.dataset.qorgLoginReady = "1";
         return true;
     }
 
@@ -79,7 +76,7 @@
         let attempts = 0;
         const timer = setInterval(() => {
             attempts += 1;
-            if (repair() || attempts >= 20) clearInterval(timer);
-        }, 50);
+            if (repair() || attempts >= 40) clearInterval(timer);
+        }, 25);
     }
 })();

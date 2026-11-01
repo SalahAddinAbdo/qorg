@@ -1,18 +1,37 @@
-html[data-qorg-login-hotfix="1"],
-html[data-qorg-login-hotfix="1"] body {
-    min-height: 100% !important;
+/* Hide Frappe's original authentication card before the Q Org shell is mounted.
+   The page background remains visible, so the legacy card cannot flash on a cold load. */
+html:not([data-qorg-login-ready="1"]) body:has(.for-login) .for-login,
+html:not([data-qorg-login-ready="1"]) body:has(.for-forgot) .for-forgot,
+html:not([data-qorg-login-ready="1"]) body:has(.for-signup) .for-signup,
+html:not([data-qorg-login-ready="1"]) body:has(.for-email-login) .for-email-login,
+html:not([data-qorg-login-ready="1"]) body:has(.for-login-with-email-link) .for-login-with-email-link,
+html:not([data-qorg-login-ready="1"]) body:has(.for-reset-password) .for-reset-password {
+    visibility: hidden !important;
+}
+
+html[data-qorg-login-ready="1"] .qorg-login-shell .for-login,
+html[data-qorg-login-ready="1"] .qorg-login-shell .for-forgot,
+html[data-qorg-login-ready="1"] .qorg-login-shell .for-signup,
+html[data-qorg-login-ready="1"] .qorg-login-shell .for-email-login,
+html[data-qorg-login-ready="1"] .qorg-login-shell .for-login-with-email-link,
+html[data-qorg-login-ready="1"] .qorg-login-shell .for-reset-password {
+    visibility: visible !important;
+}
+
+html,
+body {
     margin: 0 !important;
     padding: 0 !important;
 }
 
-html[data-qorg-login-hotfix="1"] body .page-content-wrapper,
-html[data-qorg-login-hotfix="1"] body .page_content,
-html[data-qorg-login-hotfix="1"] body .page-content,
-html[data-qorg-login-hotfix="1"] body main.page-content,
-html[data-qorg-login-hotfix="1"] body .page-content-wrapper > .container,
-html[data-qorg-login-hotfix="1"] body .page-content-wrapper .container,
-html[data-qorg-login-hotfix="1"] body .page_content > .container,
-html[data-qorg-login-hotfix="1"] body main.container {
+body .page-content-wrapper,
+body .page_content,
+body .page-content,
+body main.page-content,
+body .page-content-wrapper > .container,
+body .page-content-wrapper .container,
+body .page_content > .container,
+body main.container {
     width: 100% !important;
     max-width: none !important;
     min-height: 100svh !important;
@@ -20,7 +39,6 @@ html[data-qorg-login-hotfix="1"] body main.container {
     padding: 0 !important;
 }
 
-/* Keep the grid physically LTR, then explicitly swap its areas for RTL. */
 .qorg-login-shell,
 .qorg-login-shell[data-qorg-direction="rtl"],
 .qorg-login-shell[data-qorg-direction="ltr"] {
@@ -66,33 +84,19 @@ html[data-qorg-login-hotfix="1"] body main.container {
     text-align: left !important;
 }
 
-.qorg-login-shell[data-qorg-direction="rtl"] label,
-.qorg-login-shell[data-qorg-direction="rtl"] .page-card-head,
-.qorg-login-shell[data-qorg-direction="rtl"] .page-card-head h1,
-.qorg-login-shell[data-qorg-direction="rtl"] .page-card-head h2,
-.qorg-login-shell[data-qorg-direction="rtl"] .page-card-head h4,
-.qorg-login-shell[data-qorg-direction="rtl"] .page-card-head p {
-    width: 100%;
-    text-align: right !important;
-}
-
-.qorg-login-form-host > .for-login,
-.qorg-login-form-host > .for-forgot,
-.qorg-login-form-host > .for-signup,
-.qorg-login-form-host > .for-email-login,
-.qorg-login-form-panel > .for-login,
-.qorg-login-form-panel > .for-forgot,
-.qorg-login-form-panel > .for-signup,
-.qorg-login-form-panel > .for-email-login {
+.qorg-login-shell .for-login,
+.qorg-login-shell .for-forgot,
+.qorg-login-shell .for-signup,
+.qorg-login-shell .for-email-login,
+.qorg-login-shell .for-login-with-email-link,
+.qorg-login-shell .for-reset-password {
     width: 100% !important;
     max-width: 590px !important;
     margin: 0 auto !important;
     padding: 0 !important;
 }
 
-.qorg-login-shell .for-forgot .page-card,
-.qorg-login-shell .for-signup .page-card,
-.qorg-login-shell .for-email-login .page-card {
+.qorg-login-shell .page-card {
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -102,39 +106,22 @@ html[data-qorg-login-hotfix="1"] body main.container {
     box-shadow: none !important;
 }
 
-.qorg-login-shell .for-forgot .form-control,
-.qorg-login-shell .for-signup .form-control,
-.qorg-login-shell .for-email-login .form-control {
-    min-height: 56px !important;
-    padding: 14px 18px !important;
-    border: 1px solid var(--border-color) !important;
+.qorg-login-shell .form-control {
+    border-color: var(--border-color) !important;
     border-radius: var(--border-radius) !important;
     background: var(--control-bg) !important;
     color: var(--text-color) !important;
-    font-family: inherit !important;
-    font-size: var(--font-size-base) !important;
-    box-shadow: none !important;
 }
 
-.qorg-login-shell .for-forgot .form-control:focus,
-.qorg-login-shell .for-signup .form-control:focus,
-.qorg-login-shell .for-email-login .form-control:focus {
-    border-color: var(--primary-color) !important;
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 20%, transparent) !important;
-}
-
-/* All alternative authentication actions inherit the same primary token and radius as Login. */
 .qorg-login-shell .for-forgot .page-card-actions .btn,
 .qorg-login-shell .for-forgot .page-card-actions button,
 .qorg-login-shell .for-forgot button[type="submit"],
 .qorg-login-shell .for-forgot .btn-forgot,
 .qorg-login-shell .for-forgot .es-button[data-variant="solid"],
-.qorg-login-shell .for-signup .page-card-actions .btn,
-.qorg-login-shell .for-signup .page-card-actions button,
 .qorg-login-shell .for-signup button[type="submit"],
-.qorg-login-shell .for-email-login .page-card-actions .btn,
-.qorg-login-shell .for-email-login .page-card-actions button,
-.qorg-login-shell .for-email-login button[type="submit"] {
+.qorg-login-shell .for-email-login button[type="submit"],
+.qorg-login-shell .for-login-with-email-link button[type="submit"],
+.qorg-login-shell .for-reset-password button[type="submit"] {
     width: 100% !important;
     min-height: 56px !important;
     border: 1px solid var(--primary-color) !important;
@@ -145,31 +132,7 @@ html[data-qorg-login-hotfix="1"] body main.container {
     font-family: var(--qorg-font-family, inherit) !important;
     font-size: var(--font-size-base, 14px) !important;
     font-weight: 600 !important;
-    opacity: 1;
     box-shadow: none !important;
-}
-
-.qorg-login-shell .for-forgot .page-card-actions .btn:hover,
-.qorg-login-shell .for-forgot .page-card-actions button:hover,
-.qorg-login-shell .for-forgot button[type="submit"]:hover,
-.qorg-login-shell .for-forgot .btn-forgot:hover,
-.qorg-login-shell .for-signup button[type="submit"]:hover,
-.qorg-login-shell .for-email-login button[type="submit"]:hover {
-    filter: brightness(.93);
-}
-
-.qorg-login-shell .for-forgot button:focus-visible,
-.qorg-login-shell .for-signup button:focus-visible,
-.qorg-login-shell .for-email-login button:focus-visible {
-    outline: 3px solid color-mix(in srgb, var(--primary-color) 28%, transparent) !important;
-    outline-offset: 2px;
-}
-
-.qorg-login-shell .for-forgot button:disabled,
-.qorg-login-shell .for-signup button:disabled,
-.qorg-login-shell .for-email-login button:disabled {
-    opacity: .55 !important;
-    cursor: not-allowed;
 }
 
 @media (max-width: 920px) {
@@ -177,5 +140,111 @@ html[data-qorg-login-hotfix="1"] body main.container {
     .qorg-login-shell[data-qorg-direction="rtl"],
     .qorg-login-shell[data-qorg-direction="ltr"] {
         grid-template-areas: "form" "visual" !important;
+        min-height: 100svh !important;
+        overflow-x: clip;
+    }
+
+    .qorg-login-form-panel {
+        min-height: auto !important;
+        padding: 86px 20px 28px !important;
+    }
+
+    /* The shell owns viewport height on mobile. Authentication cards must size to content,
+       otherwise Frappe's page-card min-height adds an empty screen below the action button. */
+    .qorg-login-shell .for-login .page-card,
+    .qorg-login-shell .for-forgot .page-card,
+    .qorg-login-shell .for-login-with-email-link .page-card,
+    .qorg-login-shell .for-signup .page-card,
+    .qorg-login-shell .for-email-login .page-card,
+    .qorg-login-shell .for-reset-password .page-card {
+        min-height: 0 !important;
+        height: auto !important;
+        padding: 0 !important;
+    }
+
+    .qorg-login-form-host .page-card-head,
+    .qorg-login-form-panel .page-card-head {
+        display: flex;
+        flex-direction: column;
+        align-items: center !important;
+        margin-bottom: 0 !important;
+        text-align: center !important;
+    }
+
+    .qorg-login-form-host .page-card-head h1,
+    .qorg-login-form-host .page-card-head h2,
+    .qorg-login-form-host .page-card-head h4,
+    .qorg-login-form-host .page-card-head p,
+    .qorg-login-form-panel .page-card-head h1,
+    .qorg-login-form-panel .page-card-head h2,
+    .qorg-login-form-panel .page-card-head h4,
+    .qorg-login-form-panel .page-card-head p {
+        width: 100%;
+        margin-inline: auto !important;
+        text-align: center !important;
+    }
+
+    .qorg-login-form-host .page-card-head img,
+    .qorg-login-form-panel .page-card-head img,
+    .qorg-login-form-host .page-card-head .app-logo,
+    .qorg-login-form-panel .page-card-head .app-logo {
+        margin-inline: auto !important;
+        align-self: center !important;
+    }
+
+    .qorg-login-utility {
+        inset-block-start: 16px !important;
+        inset-inline: 16px !important;
+        width: auto !important;
+        max-width: calc(100vw - 32px);
+    }
+
+    .qorg-language-menu {
+        width: min(100%, 260px);
+        margin-inline-start: auto;
+    }
+
+    .qorg-language-trigger {
+        width: 100%;
+        min-width: 0 !important;
+    }
+
+    .qorg-language-options {
+        position: absolute;
+        inset-inline: auto 0 !important;
+        width: min(260px, calc(100vw - 32px)) !important;
+        max-width: calc(100vw - 32px) !important;
+        box-sizing: border-box;
+    }
+
+    .qorg-login-visual {
+        position: relative !important;
+        margin-bottom: 0 !important;
+    }
+
+    .qorg-login-visual__header {
+        position: absolute !important;
+        inset-block-start: 18px !important;
+        inset-inline: 18px !important;
+        align-items: flex-start !important;
+        transform: none !important;
+    }
+
+    .qorg-login-return {
+        position: relative !important;
+        inset: auto !important;
+        margin: 0 !important;
+        transform: none !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .qorg-login-form-panel {
+        padding: 82px 16px 24px !important;
+    }
+
+    .qorg-language-options {
+        inset-inline-end: 0 !important;
+        inset-inline-start: auto !important;
     }
 }
