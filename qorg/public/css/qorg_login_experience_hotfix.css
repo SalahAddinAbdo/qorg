@@ -1,21 +1,14 @@
 html[data-qorg-login-hotfix="1"],
 html[data-qorg-login-hotfix="1"] body {
+    min-height: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    min-height: 100% !important;
 }
 
 html[data-qorg-login-hotfix="1"] body .page-content-wrapper,
 html[data-qorg-login-hotfix="1"] body .page_content,
 html[data-qorg-login-hotfix="1"] body .page-content,
-html[data-qorg-login-hotfix="1"] body main.page-content {
-    width: 100% !important;
-    max-width: none !important;
-    min-height: 100svh !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
+html[data-qorg-login-hotfix="1"] body main.page-content,
 html[data-qorg-login-hotfix="1"] body .page-content-wrapper > .container,
 html[data-qorg-login-hotfix="1"] body .page-content-wrapper .container,
 html[data-qorg-login-hotfix="1"] body .page_content > .container,
@@ -27,20 +20,18 @@ html[data-qorg-login-hotfix="1"] body main.container {
     padding: 0 !important;
 }
 
-.qorg-login-shell {
+/* Keep the grid physically LTR, then explicitly swap its areas for RTL. */
+.qorg-login-shell,
+.qorg-login-shell[data-qorg-direction="rtl"],
+.qorg-login-shell[data-qorg-direction="ltr"] {
+    direction: ltr !important;
     grid-template-areas: "visual form" !important;
     align-items: stretch;
     margin: 0 !important;
 }
 
 .qorg-login-shell[data-qorg-direction="rtl"] {
-    direction: rtl;
     grid-template-areas: "form visual" !important;
-}
-
-.qorg-login-shell[data-qorg-direction="ltr"] {
-    direction: ltr;
-    grid-template-areas: "visual form" !important;
 }
 
 .qorg-login-shell .qorg-login-visual {
@@ -58,9 +49,10 @@ html[data-qorg-login-hotfix="1"] body main.container {
 .qorg-login-shell[data-qorg-direction="rtl"] .page-card,
 .qorg-login-shell[data-qorg-direction="rtl"] .page-card-head,
 .qorg-login-shell[data-qorg-direction="rtl"] .page-card-body,
-.qorg-login-shell[data-qorg-direction="rtl"] .page-card-actions {
-    direction: rtl;
-    text-align: right;
+.qorg-login-shell[data-qorg-direction="rtl"] .page-card-actions,
+.qorg-login-shell[data-qorg-direction="rtl"] .form-group {
+    direction: rtl !important;
+    text-align: right !important;
 }
 
 .qorg-login-shell[data-qorg-direction="ltr"] .qorg-login-form-panel,
@@ -68,9 +60,20 @@ html[data-qorg-login-hotfix="1"] body main.container {
 .qorg-login-shell[data-qorg-direction="ltr"] .page-card,
 .qorg-login-shell[data-qorg-direction="ltr"] .page-card-head,
 .qorg-login-shell[data-qorg-direction="ltr"] .page-card-body,
-.qorg-login-shell[data-qorg-direction="ltr"] .page-card-actions {
-    direction: ltr;
-    text-align: left;
+.qorg-login-shell[data-qorg-direction="ltr"] .page-card-actions,
+.qorg-login-shell[data-qorg-direction="ltr"] .form-group {
+    direction: ltr !important;
+    text-align: left !important;
+}
+
+.qorg-login-shell[data-qorg-direction="rtl"] label,
+.qorg-login-shell[data-qorg-direction="rtl"] .page-card-head,
+.qorg-login-shell[data-qorg-direction="rtl"] .page-card-head h1,
+.qorg-login-shell[data-qorg-direction="rtl"] .page-card-head h2,
+.qorg-login-shell[data-qorg-direction="rtl"] .page-card-head h4,
+.qorg-login-shell[data-qorg-direction="rtl"] .page-card-head p {
+    width: 100%;
+    text-align: right !important;
 }
 
 .qorg-login-form-host > .for-login,
@@ -87,12 +90,9 @@ html[data-qorg-login-hotfix="1"] body main.container {
     padding: 0 !important;
 }
 
-.qorg-login-form-host .for-forgot .page-card,
-.qorg-login-form-host .for-signup .page-card,
-.qorg-login-form-host .for-email-login .page-card,
-.qorg-login-form-panel .for-forgot .page-card,
-.qorg-login-form-panel .for-signup .page-card,
-.qorg-login-form-panel .for-email-login .page-card {
+.qorg-login-shell .for-forgot .page-card,
+.qorg-login-shell .for-signup .page-card,
+.qorg-login-shell .for-email-login .page-card {
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -102,12 +102,9 @@ html[data-qorg-login-hotfix="1"] body main.container {
     box-shadow: none !important;
 }
 
-.qorg-login-form-host .for-forgot .form-control,
-.qorg-login-form-host .for-signup .form-control,
-.qorg-login-form-host .for-email-login .form-control,
-.qorg-login-form-panel .for-forgot .form-control,
-.qorg-login-form-panel .for-signup .form-control,
-.qorg-login-form-panel .for-email-login .form-control {
+.qorg-login-shell .for-forgot .form-control,
+.qorg-login-shell .for-signup .form-control,
+.qorg-login-shell .for-email-login .form-control {
     min-height: 56px !important;
     padding: 14px 18px !important;
     border: 1px solid var(--border-color) !important;
@@ -119,38 +116,60 @@ html[data-qorg-login-hotfix="1"] body main.container {
     box-shadow: none !important;
 }
 
-.qorg-login-form-host .for-forgot .form-control:focus,
-.qorg-login-form-host .for-signup .form-control:focus,
-.qorg-login-form-host .for-email-login .form-control:focus,
-.qorg-login-form-panel .for-forgot .form-control:focus,
-.qorg-login-form-panel .for-signup .form-control:focus,
-.qorg-login-form-panel .for-email-login .form-control:focus {
+.qorg-login-shell .for-forgot .form-control:focus,
+.qorg-login-shell .for-signup .form-control:focus,
+.qorg-login-shell .for-email-login .form-control:focus {
     border-color: var(--primary-color) !important;
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 20%, transparent) !important;
 }
 
-.qorg-login-form-host .for-forgot .btn,
-.qorg-login-form-host .for-signup .btn,
-.qorg-login-form-host .for-email-login .btn,
-.qorg-login-form-panel .for-forgot .btn,
-.qorg-login-form-panel .for-signup .btn,
-.qorg-login-form-panel .for-email-login .btn {
+/* All alternative authentication actions inherit the same primary token and radius as Login. */
+.qorg-login-shell .for-forgot .page-card-actions .btn,
+.qorg-login-shell .for-forgot .page-card-actions button,
+.qorg-login-shell .for-forgot button[type="submit"],
+.qorg-login-shell .for-forgot .btn-forgot,
+.qorg-login-shell .for-forgot .es-button[data-variant="solid"],
+.qorg-login-shell .for-signup .page-card-actions .btn,
+.qorg-login-shell .for-signup .page-card-actions button,
+.qorg-login-shell .for-signup button[type="submit"],
+.qorg-login-shell .for-email-login .page-card-actions .btn,
+.qorg-login-shell .for-email-login .page-card-actions button,
+.qorg-login-shell .for-email-login button[type="submit"] {
+    width: 100% !important;
     min-height: 56px !important;
+    border: 1px solid var(--primary-color) !important;
     border-radius: var(--border-radius) !important;
-    font-family: inherit !important;
-    font-size: var(--font-size-base) !important;
+    background: var(--primary-color) !important;
+    background-image: none !important;
+    color: var(--primary-btn-color, #fff) !important;
+    font-family: var(--qorg-font-family, inherit) !important;
+    font-size: var(--font-size-base, 14px) !important;
     font-weight: 600 !important;
+    opacity: 1;
+    box-shadow: none !important;
 }
 
-.qorg-login-form-host .for-forgot .btn-primary,
-.qorg-login-form-host .for-signup .btn-primary,
-.qorg-login-form-host .for-email-login .btn-primary,
-.qorg-login-form-panel .for-forgot .btn-primary,
-.qorg-login-form-panel .for-signup .btn-primary,
-.qorg-login-form-panel .for-email-login .btn-primary {
-    border-color: var(--primary-color) !important;
-    background: var(--primary-color) !important;
-    color: #fff !important;
+.qorg-login-shell .for-forgot .page-card-actions .btn:hover,
+.qorg-login-shell .for-forgot .page-card-actions button:hover,
+.qorg-login-shell .for-forgot button[type="submit"]:hover,
+.qorg-login-shell .for-forgot .btn-forgot:hover,
+.qorg-login-shell .for-signup button[type="submit"]:hover,
+.qorg-login-shell .for-email-login button[type="submit"]:hover {
+    filter: brightness(.93);
+}
+
+.qorg-login-shell .for-forgot button:focus-visible,
+.qorg-login-shell .for-signup button:focus-visible,
+.qorg-login-shell .for-email-login button:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--primary-color) 28%, transparent) !important;
+    outline-offset: 2px;
+}
+
+.qorg-login-shell .for-forgot button:disabled,
+.qorg-login-shell .for-signup button:disabled,
+.qorg-login-shell .for-email-login button:disabled {
+    opacity: .55 !important;
+    cursor: not-allowed;
 }
 
 @media (max-width: 920px) {
