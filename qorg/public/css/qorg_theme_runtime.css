@@ -858,8 +858,7 @@ html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item .item-anc
 
 /* ========================================================================== 
    Query Report filter-condition Select
-   Narrow addition only: styles select.condition.form-control.input-xs without
-   changing the existing Select, Link, MultiSelect or runtime behavior.
+   Narrow addition only for select.condition.form-control.input-xs.
    ========================================================================== */
 html[data-qorg-theme-runtime="1"] select.condition.form-control.input-xs {
     min-height: var(--qorg-desk-field-height) !important;
@@ -886,7 +885,19 @@ html[dir="rtl"][data-qorg-theme-runtime="1"] select.condition.form-control.input
         appearance: base-select;
     }
 
+    /* Keep the selected text and picker arrow on one horizontal row. */
+    html[data-qorg-theme-runtime="1"] select.condition.form-control.input-xs {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-wrap: nowrap !important;
+        white-space: nowrap !important;
+    }
+
     html[data-qorg-theme-runtime="1"] select.condition.form-control.input-xs::picker-icon {
+        flex: 0 0 auto;
+        align-self: center;
+        margin-inline-start: 8px;
         color: var(--qorg-icon);
     }
 
