@@ -76,7 +76,7 @@ def get_quick_create_menu():
         seen.add(doctype)
         items.append({
             "doctype": doctype,
-            "label": row.display_label or frappe._(doctype),
+            "label": row.display_label or meta.get_label(),
             "group": row.menu_group or "Create",
             "description": row.description or "",
             "icon": row.icon or "add",
