@@ -31,9 +31,6 @@ app_include_js = [
 app_include_css = [
     "/assets/qorg/css/model_policy.css",
     "/assets/qorg/css/qorg_theme_runtime.css",
-    "/assets/qorg/css/qorg_theme_runtime_v133_fix.css",
-    "/assets/qorg/css/qorg_native_select_v134.css",
-    "/assets/qorg/css/qorg_theme_runtime_v135_fix.css",
 ]
 
 web_include_css = [
