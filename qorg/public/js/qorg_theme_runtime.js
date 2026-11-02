@@ -1,7 +1,7 @@
 (() => {
     "use strict";
 
-    const CACHE_KEY = "qorg-theme-runtime-v1.3";
+    const CACHE_KEY = "qorg-theme-runtime-v1.3.1";
     const root = document.documentElement;
     let paletteTimer = null;
 
@@ -55,7 +55,8 @@
         const navDark = declaration(colors, "dark_");
         const webLight = declaration(colors, "web_light_");
         const webDark = declaration(colors, "web_dark_");
-        const scope = location.pathname.startsWith("/app") || !!window.frappe?.boot ? "desk" : "web";
+        const path = location.pathname.replace(/\/+$/, "") || "/";
+        const scope = path === "/app" || path.startsWith("/app/") ? "desk" : "web";
 
         root.dataset.qorgScope = scope;
         style.textContent = `
@@ -132,8 +133,14 @@
             const config = response.message || {};
             localStorage.setItem(CACHE_KEY, JSON.stringify(config));
             render(config);
+            return config;
         });
     }
+
+    window.qorg_refresh_theme = () => {
+        localStorage.removeItem(CACHE_KEY);
+        return load();
+    };
 
     try { render(JSON.parse(localStorage.getItem(CACHE_KEY) || "null")); } catch (_) {}
     scheduleQueryReportCompatibility();

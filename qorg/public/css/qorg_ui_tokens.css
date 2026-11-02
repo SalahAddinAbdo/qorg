@@ -53,3 +53,15 @@ html[data-qorg-tokens="1"] .help-box,
 html[data-qorg-tokens="1"] .help-block,
 html[data-qorg-tokens="1"] .form-text { font-size: var(--font-size-sm, 12px); }
 html[data-qorg-tokens="1"] a { font-size: inherit; }
+
+
+/* Configured font weights */
+body, .form-control, .btn, .dropdown-item, .standard-sidebar-item {
+    font-weight: var(--qorg-font-weight-regular, 400);
+}
+label, .control-label, .btn-primary, .es-button[data-variant="solid"], .widget-title, .page-title {
+    font-weight: var(--qorg-font-weight-semibold, 600);
+}
+h1, h2, h3, h4, h5, h6, .page-head .title-text {
+    font-weight: var(--qorg-font-weight-bold, 700);
+}
