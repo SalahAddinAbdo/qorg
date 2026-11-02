@@ -357,10 +357,6 @@ standard_portal_menu_items = [
     },
 ]
 
-role_home_page = {
-    "External Applicant": "opportunities",
-}
-
 permission_query_conditions = {
     "Task": "qorg.qorg.task_management.permissions.task_query_condition",
     "Task Assignment Request": (
