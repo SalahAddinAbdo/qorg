@@ -237,7 +237,16 @@ html[data-qorg-theme-runtime="1"] .es-button[data-variant="solid"]:hover {
 }
 
 /* Menus and Sidebar. */
-html[data-qorg-theme-runtime="1"] .body-sidebar { background: var(--qorg-sidebar-bg) !important; border-color: var(--qorg-sidebar-border) !important; }
+/* Sidebar surface colors are desktop-only. On mobile, Frappe must own the
+   drawer surface so opening, outside-click closing and repeated toggling stay native. */
+@media (min-width: 992px) {
+    html[data-qorg-theme-runtime="1"] .body-sidebar {
+        background: var(--qorg-sidebar-bg) !important;
+        border-color: var(--qorg-sidebar-border) !important;
+        min-height: 100dvh;
+        align-self: stretch;
+    }
+}
 html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item {
     min-height: var(--qorg-sidebar-item-height) !important;
     padding-inline: var(--qorg-sidebar-item-padding) !important;
@@ -681,4 +690,20 @@ html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelectLis
     left: 8px !important;
     right: 8px !important;
     margin: 0 !important;
+}
+
+/* Preserve Frappe's natural row sizing. A fixed 28px anchor height displaces
+   labels on leaf items and becomes stale after a mobile/desktop viewport switch. */
+html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item .item-anchor {
+    height: auto !important;
+    min-height: inherit;
+}
+
+/* Re-establish a full-height desktop sidebar when the viewport returns from
+   mobile to desktop without creating a separate JavaScript sidebar state. */
+@media (min-width: 992px) {
+    html[data-qorg-theme-runtime="1"] .body-sidebar,
+    html[data-qorg-theme-runtime="1"] .body-sidebar > .body-sidebar-container {
+        min-height: 100dvh;
+    }
 }
