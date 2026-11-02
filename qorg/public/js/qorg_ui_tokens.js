@@ -1,7 +1,7 @@
 (() => {
     "use strict";
     const root = document.documentElement;
-    const cacheKey = "qorg-ui-tokens-v1.2";
+    const cacheKey = "qorg-ui-tokens-v1.2.1";
 
     function apply(tokens = {}) {
         const map = {
@@ -32,6 +32,10 @@
             "--qorg-body-line-height": tokens.body_line_height,
             "--qorg-paragraph-line-height": tokens.paragraph_line_height,
             "--qorg-heading-line-height": tokens.heading_line_height,
+            "--qorg-font-weight-regular": tokens.font_weights?.[0],
+            "--qorg-font-weight-medium": tokens.font_weights?.[Math.min(1, (tokens.font_weights?.length || 1) - 1)],
+            "--qorg-font-weight-semibold": tokens.font_weights?.[Math.min(2, (tokens.font_weights?.length || 1) - 1)],
+            "--qorg-font-weight-bold": tokens.font_weights?.[(tokens.font_weights?.length || 1) - 1],
         };
         Object.entries(map).forEach(([name, value]) => {
             if (value !== null && value !== undefined && value !== "") root.style.setProperty(name, value);

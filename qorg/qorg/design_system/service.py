@@ -45,20 +45,39 @@ def _color(doc, fieldname):
     return value.upper() if HEX_RE.fullmatch(value) else DEFAULTS[fieldname]
 
 
+def _value_or_default(doc, fieldname, default=None):
+    value = _value(doc, fieldname)
+    if value in (None, ""):
+        return DEFAULTS.get(fieldname, default)
+    return value
+
+
 def _int(doc, fieldname, minimum, maximum):
     try:
-        value = int(_value(doc, fieldname) or DEFAULTS[fieldname])
+        value = int(_value_or_default(doc, fieldname, minimum))
     except (TypeError, ValueError):
-        value = DEFAULTS[fieldname]
+        value = int(DEFAULTS.get(fieldname, minimum))
     return max(minimum, min(maximum, value))
 
 
 def _float(doc, fieldname, minimum, maximum):
     try:
-        value = float(_value(doc, fieldname) or DEFAULTS[fieldname])
+        value = float(_value_or_default(doc, fieldname, minimum))
     except (TypeError, ValueError):
-        value = DEFAULTS[fieldname]
+        value = float(DEFAULTS.get(fieldname, minimum))
     return max(minimum, min(maximum, value))
+
+
+def _font_weights(doc):
+    values = []
+    for part in str(_value(doc, "font_weights") or "400,500,600,700").split(","):
+        try:
+            value = int(part.strip())
+        except (TypeError, ValueError):
+            continue
+        if 100 <= value <= 900 and value % 100 == 0 and value not in values:
+            values.append(value)
+    return sorted(values) or [400, 500, 600, 700]
 
 
 def _font_stack(doc, language=None):
@@ -102,6 +121,7 @@ def get_ui_tokens(language=None):
         "heading_line_height": _float(doc, "heading_line_height", 1.0, 2.0),
     }
     tokens["font_family"] = _font_stack(doc, language)
+    tokens["font_weights"] = _font_weights(doc)
     return tokens
 
 
@@ -212,8 +232,11 @@ def get_theme_configuration():
             if HEX_RE.fullmatch(value):
                 colors[name] = value.upper()
         elif name in THEME_SIZE_FIELDS:
+            raw_value = doc.get(name)
+            if raw_value in (None, ""):
+                raw_value = field.default
             try:
-                sizes[name] = int(doc.get(name) or field.default or 0)
+                sizes[name] = int(raw_value if raw_value not in (None, "") else 0)
             except (TypeError, ValueError):
                 sizes[name] = 0
     return {

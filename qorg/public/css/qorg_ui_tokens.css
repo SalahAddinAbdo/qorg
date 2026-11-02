@@ -53,3 +53,115 @@ html[data-qorg-tokens="1"] .help-box,
 html[data-qorg-tokens="1"] .help-block,
 html[data-qorg-tokens="1"] .form-text { font-size: var(--font-size-sm, 12px); }
 html[data-qorg-tokens="1"] a { font-size: inherit; }
+
+/* Configured font weights. This file is loaded only after Q Org tokens are ready. */
+html[data-qorg-tokens="1"] body,
+html[data-qorg-tokens="1"] button,
+html[data-qorg-tokens="1"] input,
+html[data-qorg-tokens="1"] select,
+html[data-qorg-tokens="1"] textarea {
+    font-weight: var(--qorg-font-weight-regular, 400);
+}
+
+html[data-qorg-tokens="1"] label,
+html[data-qorg-tokens="1"] .control-label,
+html[data-qorg-tokens="1"] .btn-primary,
+html[data-qorg-tokens="1"] .widget-title,
+html[data-qorg-tokens="1"] .page-title {
+    font-weight: var(--qorg-font-weight-semibold, 600);
+}
+
+html[data-qorg-tokens="1"] h1,
+html[data-qorg-tokens="1"] h2,
+html[data-qorg-tokens="1"] h3,
+html[data-qorg-tokens="1"] h4,
+html[data-qorg-tokens="1"] h5,
+html[data-qorg-tokens="1"] h6 {
+    font-weight: var(--qorg-font-weight-bold, 700);
+}
+
+/* Semantic consumers for settings that previously produced tokens without effects. */
+html[data-qorg-theme-runtime="1"] .text-muted,
+html[data-qorg-theme-runtime="1"] .text-extra-muted,
+html[data-qorg-theme-runtime="1"] .help-box,
+html[data-qorg-theme-runtime="1"] .help-block,
+html[data-qorg-theme-runtime="1"] .form-text {
+    color: var(--qorg-muted-text) !important;
+}
+
+html[data-qorg-theme-runtime="1"] a:not(.btn):not(.dropdown-item):hover {
+    color: var(--qorg-link-hover) !important;
+}
+
+html[data-qorg-theme-runtime="1"] .btn-secondary,
+html[data-qorg-theme-runtime="1"] .btn-default {
+    background: var(--qorg-secondary-button-bg) !important;
+    color: var(--qorg-secondary-button-text) !important;
+    border-color: var(--qorg-border) !important;
+}
+
+html[data-qorg-theme-runtime="1"] .btn-secondary:hover,
+html[data-qorg-theme-runtime="1"] .btn-default:hover {
+    background: var(--qorg-secondary-button-hover) !important;
+    color: var(--qorg-secondary-button-text) !important;
+}
+
+html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item .icon,
+html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item svg {
+    color: var(--qorg-sidebar-icon) !important;
+}
+
+html[data-qorg-theme-runtime="1"] :is(.es-menu__item,.dropdown-item) .icon,
+html[data-qorg-theme-runtime="1"] :is(.es-menu__item,.dropdown-item) svg {
+    color: var(--qorg-menu-icon) !important;
+}
+
+html[data-qorg-theme-runtime="1"] :is(.es-menu__item,.dropdown-item).active,
+html[data-qorg-theme-runtime="1"] :is(.es-menu__item,.dropdown-item)[aria-selected="true"] {
+    background: var(--qorg-menu-active-bg) !important;
+    color: var(--qorg-menu-active-text) !important;
+}
+
+html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget) {
+    color: var(--qorg-number-widget-text) !important;
+}
+
+html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget) {
+    color: var(--qorg-shortcut-widget-text) !important;
+}
+
+html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget)[data-qorg-palette="1"]:hover { background: var(--qorg-shortcut-widget-1-hover) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget)[data-qorg-palette="2"]:hover { background: var(--qorg-shortcut-widget-2-hover) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget)[data-qorg-palette="3"]:hover { background: var(--qorg-shortcut-widget-3-hover) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget)[data-qorg-palette="4"]:hover { background: var(--qorg-shortcut-widget-4-hover) !important; }
+
+/* Default radii continue to affect unclassified Frappe elements while Desk/Web-specific radii remain authoritative. */
+html[data-qorg-theme-runtime="1"] {
+    --border-radius: var(--qorg-default-field-radius, 4px);
+    --btn-border-radius: var(--qorg-default-button-radius, 4px);
+    --card-border-radius: var(--qorg-default-card-radius, 8px);
+    --menu-border-radius: var(--qorg-default-menu-radius, 8px);
+}
+
+html[data-qorg-theme-runtime="1"][data-qorg-scope="web"] .web-form-wrapper,
+html[data-qorg-theme-runtime="1"][data-qorg-scope="web"] .page-card,
+html[data-qorg-theme-runtime="1"][data-qorg-scope="web"] .portal-page {
+    border-radius: var(--qorg-web-card-radius) !important;
+}
+
+html[data-qorg-theme-runtime="1"] .modal-content,
+html[data-qorg-theme-runtime="1"] .popover,
+html[data-qorg-theme-runtime="1"] .dropdown-menu,
+html[data-qorg-theme-runtime="1"] .es-menu {
+    background-color: var(--qorg-elevated-bg) !important;
+}
+
+html[data-qorg-theme-runtime="1"] .btn .icon,
+html[data-qorg-theme-runtime="1"] .control-value .icon,
+html[data-qorg-theme-runtime="1"] .page-actions .icon {
+    color: var(--qorg-icon);
+}
+
+html[data-qorg-theme-runtime="1"] ::selection {
+    background: color-mix(in srgb, var(--qorg-brand-secondary) 40%, transparent);
+}

@@ -1,1 +1,53 @@
-(()=>{const c=(m,a={})=>frappe.call({method:m,args:a}).then(r=>r.message||{});async function o(){const d=await c("qorg.qorg.design_system.api.get_available_languages"),x=new frappe.ui.Dialog({title:__("Language"),fields:[{fieldname:"language",fieldtype:"Select",label:__("Language"),options:d.languages.map(i=>({label:i.language_name,value:i.language_code})),default:d.current,reqd:1}],primary_action_label:__("Apply"),primary_action:async v=>{await c("qorg.qorg.design_system.api.set_current_user_language",v);location.reload()}});x.show()}function m(){if(document.querySelector("[data-qorg-language-action]"))return;const h=document.querySelector(".desk-sidebar .sidebar-header,.module-sidebar .sidebar-header,.page-head .page-actions,.navbar .navbar-nav");if(!h)return;const b=document.createElement("button");b.type="button";b.className="btn btn-default btn-sm";b.dataset.qorgLanguageAction="1";b.textContent=__("Language");b.onclick=o;h.append(b)}frappe.router?.on?.("change",()=>requestAnimationFrame(m));document.readyState==="loading"?document.addEventListener("DOMContentLoaded",m,{once:true}):m()})();
+(() => {
+    "use strict";
+
+    const call = (method, args = {}) => frappe.call({method, args}).then((response) => response.message || {});
+    let config = null;
+
+    async function getConfig() {
+        if (!config) config = await call("qorg.qorg.design_system.api.get_available_languages");
+        return config;
+    }
+
+    async function openDialog() {
+        const data = await getConfig();
+        const dialog = new frappe.ui.Dialog({
+            title: __("Language"),
+            fields: [{
+                fieldname: "language",
+                fieldtype: "Select",
+                label: __("Language"),
+                options: data.languages.map((item) => ({label: item.language_name, value: item.language_code})),
+                default: data.current,
+                reqd: 1,
+            }],
+            primary_action_label: __("Apply"),
+            primary_action: async (values) => {
+                await call("qorg.qorg.design_system.api.set_current_user_language", values);
+                location.reload();
+            },
+        });
+        dialog.show();
+    }
+
+    async function mount() {
+        if (document.querySelector("[data-qorg-language-action]")) return;
+        const data = await getConfig();
+        if (!data.show_language_action) return;
+
+        const host = document.querySelector(".desk-sidebar .sidebar-header,.module-sidebar .sidebar-header,.page-head .page-actions,.navbar .navbar-nav");
+        if (!host) return;
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "btn btn-default btn-sm";
+        button.dataset.qorgLanguageAction = "1";
+        button.textContent = __("Language");
+        button.addEventListener("click", openDialog);
+        host.append(button);
+    }
+
+    frappe.router?.on?.("change", () => requestAnimationFrame(mount));
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount, {once: true});
+    else mount();
+})();
