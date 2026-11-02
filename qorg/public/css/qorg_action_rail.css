@@ -1,0 +1,97 @@
+/* Q Org compact floating action rail. It stays below Frappe dialogs and overlays. */
+.qorg-action-rail {
+    position: fixed;
+    inset-inline-end: 14px;
+    top: 50%;
+    z-index: 1035;
+    display: flex;
+    align-items: center;
+    transform: translateY(-50%);
+    filter: drop-shadow(0 10px 24px rgb(0 0 0 / 16%));
+}
+
+.qorg-action-rail[hidden] {
+    display: none !important;
+}
+
+.qorg-action-rail__items {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px;
+    background: var(--qorg-elevated-bg, var(--card-bg, #fff));
+    border: 1px solid var(--qorg-border, var(--border-color));
+    border-radius: var(--qorg-menu-radius, 8px);
+}
+
+.qorg-action-rail__items[hidden] {
+    display: none !important;
+}
+
+.qorg-action-rail__toggle,
+.qorg-action-rail__action {
+    width: var(--qorg-desk-button-height, 32px);
+    min-width: var(--qorg-desk-button-height, 32px);
+    height: var(--qorg-desk-button-height, 32px);
+    min-height: var(--qorg-desk-button-height, 32px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    color: var(--qorg-icon, var(--text-muted));
+    background: var(--qorg-control-bg, var(--control-bg));
+    border: 1px solid var(--qorg-border, var(--border-color));
+    border-radius: var(--qorg-desk-button-radius, 4px);
+    cursor: pointer;
+}
+
+.qorg-action-rail__toggle {
+    position: absolute;
+    inset-inline-end: 100%;
+    margin-inline-end: 6px;
+}
+
+.qorg-action-rail.is-collapsed .qorg-action-rail__toggle {
+    position: static;
+    margin: 0;
+}
+
+.qorg-action-rail__toggle :is(.icon,.es-icon,svg),
+.qorg-action-rail__action :is(.icon,.es-icon,svg) {
+    color: currentColor !important;
+}
+
+.qorg-action-rail__toggle:hover,
+.qorg-action-rail__action:hover,
+.qorg-action-rail__toggle:focus-visible,
+.qorg-action-rail__action:focus-visible {
+    color: var(--qorg-button-text, #fff);
+    background: var(--qorg-button-bg, var(--primary));
+    border-color: var(--qorg-button-bg, var(--primary));
+    outline: none;
+}
+
+.qorg-action-rail__toggle :is(.icon,.es-icon,svg) {
+    transition: transform .18s ease;
+}
+
+.qorg-action-rail:not(.is-collapsed) .qorg-action-rail__toggle :is(.icon,.es-icon,svg) {
+    transform: rotate(180deg);
+}
+
+html[dir="rtl"] .qorg-action-rail:not(.is-collapsed) .qorg-action-rail__toggle :is(.icon,.es-icon,svg) {
+    transform: none;
+}
+
+html[dir="rtl"] .qorg-action-rail.is-collapsed .qorg-action-rail__toggle :is(.icon,.es-icon,svg) {
+    transform: rotate(180deg);
+}
+
+@media (max-width: 767px) {
+    .qorg-action-rail {
+        inset-inline-end: 10px;
+        top: auto;
+        bottom: 72px;
+        transform: none;
+    }
+}

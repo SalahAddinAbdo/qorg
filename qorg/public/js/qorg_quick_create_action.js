@@ -1,22 +1,26 @@
 (() => {
     "use strict";
 
+    let items = null;
+
     async function getItems() {
+        if (items) return items;
         try {
             const response = await frappe.call({method: "qorg.qorg.design_system.api.get_quick_create_menu"});
-            return response.message?.items || [];
+            items = response.message?.items || [];
+            return items;
         } catch (error) {
             console.error("Q Org: unable to load Quick Create menu.", error);
             return [];
         }
     }
 
-    function openCreateDialog(items) {
+    function openCreateDialog(availableItems) {
         const dialog = new frappe.ui.Dialog({title: __("Create"), size: "small", fields: [{fieldname: "items", fieldtype: "HTML"}]});
         const container = dialog.fields_dict.items.$wrapper.empty();
         let currentGroup = null;
 
-        items.forEach((item) => {
+        availableItems.forEach((item) => {
             if (item.group !== currentGroup) {
                 currentGroup = item.group;
                 container.append($("<div>", {class: "text-muted small mt-3 mb-1", text: __(currentGroup)}));
@@ -34,22 +38,23 @@
         dialog.show();
     }
 
-    async function mount() {
-        const host = document.querySelector(".page-head .page-actions") || document.querySelector(".navbar .navbar-nav");
-        if (!host || host.querySelector("[data-qorg-create-action]")) return;
-        const items = await getItems();
-        if (!items.length) return;
-
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "btn btn-primary btn-sm";
-        button.dataset.qorgCreateAction = "1";
-        button.textContent = __("Create");
-        button.addEventListener("click", () => openCreateDialog(items));
-        host.append(button);
+    async function register() {
+        document.querySelectorAll("[data-qorg-create-action]").forEach((element) => element.remove());
+        const availableItems = await getItems();
+        if (!availableItems.length) {
+            window.qorgActionRail?.unregister("create");
+            return;
+        }
+        window.qorgActionRail?.register({
+            id: "create",
+            label: "Create",
+            icon: "add",
+            order: 10,
+            onClick: () => openCreateDialog(availableItems),
+        });
     }
 
-    frappe.router?.on?.("change", () => requestAnimationFrame(mount));
-    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount, {once: true});
-    else mount();
+    frappe.router?.on?.("change", () => requestAnimationFrame(register));
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", register, {once: true});
+    else register();
 })();

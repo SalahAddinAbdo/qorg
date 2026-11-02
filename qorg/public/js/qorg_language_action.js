@@ -30,24 +30,23 @@
         dialog.show();
     }
 
-    async function mount() {
-        if (document.querySelector("[data-qorg-language-action]")) return;
+    async function register() {
+        document.querySelectorAll("[data-qorg-language-action]").forEach((element) => element.remove());
         const data = await getConfig();
-        if (!data.show_language_action) return;
-
-        const host = document.querySelector(".desk-sidebar .sidebar-header,.module-sidebar .sidebar-header,.page-head .page-actions,.navbar .navbar-nav");
-        if (!host) return;
-
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "btn btn-default btn-sm";
-        button.dataset.qorgLanguageAction = "1";
-        button.textContent = __("Language");
-        button.addEventListener("click", openDialog);
-        host.append(button);
+        if (!data.show_language_action) {
+            window.qorgActionRail?.unregister("language");
+            return;
+        }
+        window.qorgActionRail?.register({
+            id: "language",
+            label: "Language",
+            icon: "language",
+            order: 20,
+            onClick: openDialog,
+        });
     }
 
-    frappe.router?.on?.("change", () => requestAnimationFrame(mount));
-    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount, {once: true});
-    else mount();
+    frappe.router?.on?.("change", () => requestAnimationFrame(register));
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", register, {once: true});
+    else register();
 })();
