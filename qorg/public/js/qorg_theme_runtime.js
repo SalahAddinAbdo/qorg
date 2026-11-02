@@ -125,13 +125,10 @@
         if (typeof original !== "function") return false;
 
         prototype.render_chart = function (...args) {
-            const page = this.page?.main?.[0] || this.page?.wrapper?.[0] || document.querySelector(".page-container");
-            const chartHost = page?.querySelector?.(
-                ".report-chart, .chart-wrapper, .chart-container, .frappe-chart, [data-chart]"
-            );
-            const hostWidth = chartHost?.getBoundingClientRect?.().width;
+            const pageMain = this.page?.main?.[0] || this.page?.wrapper?.[0];
+            const width = pageMain?.getBoundingClientRect?.().width;
 
-            if (chartHost && (!Number.isFinite(hostWidth) || hostWidth < 80)) {
+            if (!Number.isFinite(width) || width < 120) {
                 clearTimeout(this.__qorgChartRetryTimer);
                 const retries = Number(this.__qorgChartRetries || 0);
                 if (retries < 12) {
