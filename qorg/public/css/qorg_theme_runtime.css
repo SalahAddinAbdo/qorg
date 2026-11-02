@@ -1,58 +1,44 @@
-/* Desk surfaces */
-html[data-qorg-theme-runtime="1"] body[data-route^="desk"],
+/* Q Org Design Tokens v1.3.2 - full runtime replacement */
+
+/* Structural surfaces */
 html[data-qorg-theme-runtime="1"] .layout-main-section,
-html[data-qorg-theme-runtime="1"] .page-container { background: var(--qorg-page-bg) !important; color: var(--qorg-text) !important; }
-html[data-qorg-theme-runtime="1"] .widget,
+html[data-qorg-theme-runtime="1"] .page-container {
+    background: var(--qorg-page-bg) !important;
+    color: var(--qorg-text) !important;
+}
+
 html[data-qorg-theme-runtime="1"] .frappe-card,
-html[data-qorg-theme-runtime="1"] .form-layout,
-html[data-qorg-theme-runtime="1"] .modal-content { background: var(--qorg-surface-bg) !important; border-color: var(--qorg-border) !important; border-radius: var(--qorg-desk-card-radius) !important; }
-html[data-qorg-theme-runtime="1"] .form-control,
-html[data-qorg-theme-runtime="1"] .control-input,
-html[data-qorg-theme-runtime="1"] .input-with-feedback { background: var(--qorg-field-bg) !important; color: var(--qorg-field-text) !important; border-color: var(--qorg-field-border) !important; border-radius: var(--qorg-desk-field-radius) !important; min-height: var(--qorg-desk-field-height) !important; }
-html[data-qorg-theme-runtime="1"] .form-control::placeholder { color: var(--qorg-field-placeholder) !important; }
-html[data-qorg-theme-runtime="1"] .form-control:focus { border-color: var(--qorg-field-focus) !important; }
-html[data-qorg-theme-runtime="1"] .btn-primary { background: var(--qorg-button-bg) !important; border-color: var(--qorg-button-bg) !important; color: var(--qorg-button-text) !important; border-radius: var(--qorg-desk-button-radius) !important; min-height: var(--qorg-desk-button-height) !important; }
-html[data-qorg-theme-runtime="1"] .btn-primary:hover { background: var(--qorg-button-hover) !important; border-color: var(--qorg-button-hover) !important; }
+html[data-qorg-theme-runtime="1"] .modal-content {
+    background: var(--qorg-surface-bg) !important;
+    border-color: var(--qorg-border) !important;
+    border-radius: var(--qorg-desk-card-radius) !important;
+}
 
-/* Sidebar */
-html[data-qorg-theme-runtime="1"] .body-sidebar { background: var(--qorg-sidebar-bg) !important; border-color: var(--qorg-sidebar-border) !important; color: var(--qorg-sidebar-text) !important; }
-html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item { min-height: var(--qorg-sidebar-item-height) !important; padding-inline: var(--qorg-sidebar-item-padding) !important; border-radius: var(--qorg-sidebar-item-radius) !important; color: var(--qorg-sidebar-text) !important; }
-html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item .icon { color: var(--qorg-sidebar-icon) !important; }
-html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item:hover { background: var(--qorg-sidebar-hover-bg) !important; color: var(--qorg-sidebar-hover-text) !important; }
-html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item.selected,
-html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item.active { background: var(--qorg-sidebar-active-bg) !important; color: var(--qorg-sidebar-active-text) !important; }
-
-/* Espresso menus and classic dropdowns */
-html[data-qorg-theme-runtime="1"] .es-menu,
-html[data-qorg-theme-runtime="1"] .dropdown-menu { background: var(--qorg-menu-bg) !important; border-color: var(--qorg-menu-border) !important; border-radius: var(--qorg-menu-radius) !important; }
-html[data-qorg-theme-runtime="1"] .es-menu__item,
-html[data-qorg-theme-runtime="1"] .dropdown-item { min-height: var(--qorg-menu-item-height) !important; padding-inline: var(--qorg-menu-item-padding) !important; border-radius: var(--qorg-menu-item-radius) !important; color: var(--qorg-menu-text) !important; }
-html[data-qorg-theme-runtime="1"] .es-menu__item:hover,
-html[data-qorg-theme-runtime="1"] .dropdown-item:hover { background: var(--qorg-menu-hover-bg) !important; color: var(--qorg-menu-hover-text) !important; }
-html[data-qorg-theme-runtime="1"] .es-menu__item.active,
-html[data-qorg-theme-runtime="1"] .dropdown-item.active { background: var(--qorg-menu-active-bg) !important; color: var(--qorg-menu-active-text) !important; }
-
-/* Website scope, including Web Forms and Login */
-html[data-qorg-theme-runtime="1"] body:not([data-route^="desk"]) { background: var(--qorg-page-bg) !important; color: var(--qorg-text) !important; }
-html[data-qorg-theme-runtime="1"] body:not([data-route^="desk"]) .form-control { background: var(--qorg-field-bg) !important; color: var(--qorg-field-text) !important; border-color: var(--qorg-field-border) !important; border-radius: var(--qorg-web-field-radius) !important; min-height: var(--qorg-web-field-height) !important; }
-html[data-qorg-theme-runtime="1"] body:not([data-route^="desk"]) .btn-primary { background: var(--qorg-button-bg) !important; color: var(--qorg-button-text) !important; border-radius: var(--qorg-web-button-radius) !important; min-height: var(--qorg-web-button-height) !important; }
-
-/* v1.3.1 controls: apply field surfaces only to editable text-like controls. */
-html[data-qorg-theme-runtime="1"] .control-input,
-html[data-qorg-theme-runtime="1"] .control-input-wrapper,
-html[data-qorg-theme-runtime="1"] .checkbox,
-html[data-qorg-theme-runtime="1"] .checkbox .control-input,
-html[data-qorg-theme-runtime="1"] .attach-control,
-html[data-qorg-theme-runtime="1"] .attach-control .control-input,
-html[data-qorg-theme-runtime="1"] [data-fieldtype="Check"] .control-input,
-html[data-qorg-theme-runtime="1"] [data-fieldtype="Attach"] .control-input,
-html[data-qorg-theme-runtime="1"] [data-fieldtype="Attach Image"] .control-input {
-    min-height: auto !important;
+html[data-qorg-theme-runtime="1"] .form-layout {
     background: transparent !important;
     border-color: transparent !important;
     border-radius: 0 !important;
+    box-shadow: none !important;
 }
 
+/* Do not paint structural containers used by Check, Attach, Link and grouped controls. */
+html[data-qorg-theme-runtime="1"] .control-input,
+html[data-qorg-theme-runtime="1"] .control-input-wrapper,
+html[data-qorg-theme-runtime="1"] .checkbox,
+html[data-qorg-theme-runtime="1"] .attach-control,
+html[data-qorg-theme-runtime="1"] .link-field,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Check"] .control-input,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Attach"] .control-input,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Attach Image"] .control-input,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Link"] .control-input {
+    min-height: auto !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+/* Real editable surfaces only. */
 html[data-qorg-theme-runtime="1"] input.form-control:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
 html[data-qorg-theme-runtime="1"] textarea.form-control,
 html[data-qorg-theme-runtime="1"] select.form-control,
@@ -60,54 +46,92 @@ html[data-qorg-theme-runtime="1"] .awesomplete > input,
 html[data-qorg-theme-runtime="1"] .multiselect-input,
 html[data-qorg-theme-runtime="1"] .input-with-feedback:not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
     min-height: var(--qorg-desk-field-height) !important;
+    height: var(--qorg-desk-field-height) !important;
     background: var(--qorg-field-bg) !important;
     color: var(--qorg-field-text) !important;
     border: 1px solid var(--qorg-field-border) !important;
     border-radius: var(--qorg-desk-field-radius) !important;
+    box-shadow: none !important;
+}
+
+html[data-qorg-theme-runtime="1"] input.form-control::placeholder,
+html[data-qorg-theme-runtime="1"] textarea.form-control::placeholder,
+html[data-qorg-theme-runtime="1"] .multiselect-input::placeholder {
+    color: var(--qorg-field-placeholder) !important;
+}
+
+html[data-qorg-theme-runtime="1"] input.form-control:focus,
+html[data-qorg-theme-runtime="1"] textarea.form-control:focus,
+html[data-qorg-theme-runtime="1"] select.form-control:focus,
+html[data-qorg-theme-runtime="1"] .awesomplete > input:focus {
+    border-color: var(--qorg-field-focus) !important;
 }
 
 html[data-qorg-theme-runtime="1"] input[type="checkbox"],
 html[data-qorg-theme-runtime="1"] input[type="radio"] {
     min-height: auto !important;
-    background: transparent;
     accent-color: var(--qorg-brand-primary);
 }
 
-html[data-qorg-theme-runtime="1"] [data-fieldtype="Attach"] .btn-attach,
-html[data-qorg-theme-runtime="1"] [data-fieldtype="Attach Image"] .btn-attach {
-    border-radius: var(--qorg-desk-button-radius) !important;
-    min-height: var(--qorg-desk-button-height) !important;
+/* Link controls: one unified field plus one adjacent action, no duplicate rear surface. */
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Link"] .control-input,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Dynamic Link"] .control-input,
+html[data-qorg-theme-runtime="1"] .link-field .input-group {
+    display: flex !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
 }
 
-/* Buttons from Frappe UI / Espresso use es-button rather than Bootstrap btn-primary. */
-html[data-qorg-theme-runtime="1"] {
-    --bt-solid-bg: var(--qorg-button-bg);
-    --bt-solid-fg: var(--qorg-button-text);
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Link"] .awesomplete,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Dynamic Link"] .awesomplete,
+html[data-qorg-theme-runtime="1"] .link-field .awesomplete {
+    flex: 1 1 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    background: transparent !important;
 }
 
-html[data-qorg-theme-runtime="1"] .es-button[data-variant="solid"],
-html[data-qorg-theme-runtime="1"] button.es-button[data-variant="solid"] {
-    --bt-solid-bg: var(--qorg-button-bg);
-    --bt-solid-fg: var(--qorg-button-text);
-    min-height: var(--qorg-desk-button-height) !important;
-    background: var(--qorg-button-bg) !important;
-    color: var(--qorg-button-text) !important;
-    border-color: var(--qorg-button-bg) !important;
-    border-radius: var(--qorg-desk-button-radius) !important;
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Link"] .awesomplete > input,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Dynamic Link"] .awesomplete > input,
+html[data-qorg-theme-runtime="1"] .link-field .awesomplete > input {
+    width: 100% !important;
+    border-start-end-radius: 0 !important;
+    border-end-end-radius: 0 !important;
 }
 
-html[data-qorg-theme-runtime="1"] .es-button[data-variant="solid"]:hover {
-    --bt-solid-bg: var(--qorg-button-hover);
-    background: var(--qorg-button-hover) !important;
-    border-color: var(--qorg-button-hover) !important;
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Link"] .input-group-btn,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Dynamic Link"] .input-group-btn,
+html[data-qorg-theme-runtime="1"] .link-field .input-group-btn {
+    display: inline-flex !important;
+    flex: 0 0 var(--qorg-desk-field-height) !important;
+    width: var(--qorg-desk-field-height) !important;
+    height: var(--qorg-desk-field-height) !important;
+    margin: 0 !important;
+    background: transparent !important;
 }
 
-/* Input groups keep text fields and adjacent operators/actions vertically aligned. */
-html[data-qorg-theme-runtime="1"] .input-group {
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Link"] .input-group-btn > .btn,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Dynamic Link"] .input-group-btn > .btn,
+html[data-qorg-theme-runtime="1"] .link-field .input-group-btn > .btn {
+    width: 100% !important;
+    height: 100% !important;
+    display: inline-flex !important;
     align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    background: var(--qorg-control-bg) !important;
+    border: 1px solid var(--qorg-field-border) !important;
+    border-inline-start: 0 !important;
+    border-start-start-radius: 0 !important;
+    border-end-start-radius: 0 !important;
+    border-start-end-radius: var(--qorg-desk-field-radius) !important;
+    border-end-end-radius: var(--qorg-desk-field-radius) !important;
 }
 
-html[data-qorg-theme-runtime="1"] .input-group > .form-control,
+/* Input groups align all actions and icons to the configured field height. */
+html[data-qorg-theme-runtime="1"] .input-group { align-items: center !important; }
 html[data-qorg-theme-runtime="1"] .input-group .input-group-btn,
 html[data-qorg-theme-runtime="1"] .input-group .input-group-btn.mr-0,
 html[data-qorg-theme-runtime="1"] .input-group .input-group-btn > .btn,
@@ -116,52 +140,70 @@ html[data-qorg-theme-runtime="1"] .input-group .input-group-btn > button {
     height: var(--qorg-desk-field-height) !important;
 }
 
-html[data-qorg-theme-runtime="1"] .input-group .input-group-btn,
-html[data-qorg-theme-runtime="1"] .input-group .input-group-btn.mr-0 {
-    display: inline-flex !important;
-    align-items: center !important;
+/* Select and MultiSelect vertical alignment follows field height automatically. */
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] .control-input,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelect"] .control-input,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelectList"] .control-input {
+    position: relative;
+    min-height: var(--qorg-desk-field-height) !important;
 }
 
-html[data-qorg-theme-runtime="1"] .input-group .input-group-btn > .btn,
-html[data-qorg-theme-runtime="1"] .input-group .input-group-btn > button {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    border-radius: var(--qorg-desk-button-radius) !important;
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] .control-input .placeholder.xs,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"].form-group .placeholder.xs,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelect"] .control-input .placeholder.xs,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelectList"] .control-input .placeholder.xs {
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin: 0 !important;
+    line-height: 1 !important;
 }
 
-/* Select and multi-select controls align text and arrows consistently. */
-html[data-qorg-theme-runtime="1"] select.form-control,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] .control-input .select-icon.xs,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"].form-group .select-icon.xs,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelect"] .control-input .select-icon.xs,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelectList"] .control-input .select-icon.xs {
+    top: 50% !important;
+    inset-inline-end: 10px !important;
+    right: auto !important;
+    transform: translateY(-50%) !important;
+    margin: 0 !important;
+}
+
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Select"] select.form-control,
 html[data-qorg-theme-runtime="1"] [data-fieldtype="Select"] .form-control,
 html[data-qorg-theme-runtime="1"] [data-fieldtype="MultiSelect"] .form-control,
 html[data-qorg-theme-runtime="1"] [data-fieldtype="MultiSelectList"] .form-control,
 html[data-qorg-theme-runtime="1"] .multiselect-input {
+    display: flex !important;
+    align-items: center !important;
     text-align: center !important;
-    text-align-last: center;
-    padding-inline: 36px !important;
+    text-align-last: center !important;
+    padding-inline: 34px !important;
 }
 
-html[data-qorg-theme-runtime="1"] select.form-control option {
-    background: var(--qorg-menu-bg);
-    color: var(--qorg-menu-text);
-}
-
+/* Frappe suggestion/select dropdowns. */
 html[data-qorg-theme-runtime="1"] .awesomplete > ul,
 html[data-qorg-theme-runtime="1"] .select-options,
-html[data-qorg-theme-runtime="1"] .multiselect-list {
+html[data-qorg-theme-runtime="1"] .multiselect-list,
+html[data-qorg-theme-runtime="1"] .autocomplete-list {
+    z-index: 1100 !important;
+    min-width: 100% !important;
+    max-height: min(360px, 55vh) !important;
+    overflow-y: auto !important;
     padding: 6px !important;
     background: var(--qorg-menu-bg) !important;
     color: var(--qorg-menu-text) !important;
     border: 1px solid var(--qorg-menu-border) !important;
     border-radius: var(--qorg-menu-radius) !important;
-    box-shadow: 0 12px 30px rgb(0 0 0 / .16) !important;
+    box-shadow: 0 14px 34px rgb(0 0 0 / .18) !important;
 }
 
 html[data-qorg-theme-runtime="1"] .awesomplete > ul > li,
 html[data-qorg-theme-runtime="1"] .select-options > div,
-html[data-qorg-theme-runtime="1"] .multiselect-list .list-item {
-    display: flex;
-    align-items: center;
+html[data-qorg-theme-runtime="1"] .multiselect-list .list-item,
+html[data-qorg-theme-runtime="1"] .autocomplete-list .list-item {
+    display: flex !important;
+    align-items: center !important;
     min-height: var(--qorg-menu-item-height) !important;
     padding-inline: var(--qorg-menu-item-padding) !important;
     border-radius: var(--qorg-menu-item-radius) !important;
@@ -172,30 +214,65 @@ html[data-qorg-theme-runtime="1"] .multiselect-list .list-item {
 html[data-qorg-theme-runtime="1"] .awesomplete > ul > li:hover,
 html[data-qorg-theme-runtime="1"] .awesomplete > ul > li[aria-selected="true"],
 html[data-qorg-theme-runtime="1"] .select-options > div:hover,
-html[data-qorg-theme-runtime="1"] .multiselect-list .list-item:hover {
+html[data-qorg-theme-runtime="1"] .multiselect-list .list-item:hover,
+html[data-qorg-theme-runtime="1"] .autocomplete-list .list-item:hover {
     background: var(--qorg-menu-hover-bg) !important;
     color: var(--qorg-menu-hover-text) !important;
 }
 
-/* Form layout is structural and must inherit its parent surface. */
-html[data-qorg-theme-runtime="1"] .form-layout {
-    background: transparent !important;
-    border-color: transparent !important;
-    box-shadow: none !important;
+/* Buttons, including Espresso. */
+html[data-qorg-theme-runtime="1"] { --bt-solid-bg: var(--qorg-button-bg); --bt-solid-fg: var(--qorg-button-text); }
+html[data-qorg-theme-runtime="1"] .btn-primary,
+html[data-qorg-theme-runtime="1"] .es-button[data-variant="solid"] {
+    min-height: var(--qorg-desk-button-height) !important;
+    background: var(--qorg-button-bg) !important;
+    color: var(--qorg-button-text) !important;
+    border-color: var(--qorg-button-bg) !important;
+    border-radius: var(--qorg-desk-button-radius) !important;
+}
+html[data-qorg-theme-runtime="1"] .btn-primary:hover,
+html[data-qorg-theme-runtime="1"] .es-button[data-variant="solid"]:hover {
+    background: var(--qorg-button-hover) !important;
+    border-color: var(--qorg-button-hover) !important;
 }
 
-/* Workspace widget families. */
-html[data-qorg-theme-runtime="1"] .widget {
-    border-radius: var(--qorg-workspace-widget-radius) !important;
-    transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease;
+/* Menus and Sidebar. */
+html[data-qorg-theme-runtime="1"] .body-sidebar { background: var(--qorg-sidebar-bg) !important; border-color: var(--qorg-sidebar-border) !important; }
+html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item {
+    min-height: var(--qorg-sidebar-item-height) !important;
+    padding-inline: var(--qorg-sidebar-item-padding) !important;
+    border-radius: var(--qorg-sidebar-item-radius) !important;
+    color: var(--qorg-sidebar-text) !important;
 }
+html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item:hover { background: var(--qorg-sidebar-hover-bg) !important; color: var(--qorg-sidebar-hover-text) !important; }
+html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item.selected,
+html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item.active { background: var(--qorg-sidebar-active-bg) !important; color: var(--qorg-sidebar-active-text) !important; }
 
+html[data-qorg-theme-runtime="1"] .es-menu,
+html[data-qorg-theme-runtime="1"] .dropdown-menu { background: var(--qorg-menu-bg) !important; border-color: var(--qorg-menu-border) !important; border-radius: var(--qorg-menu-radius) !important; }
+html[data-qorg-theme-runtime="1"] .es-menu__item,
+html[data-qorg-theme-runtime="1"] .dropdown-item { min-height: var(--qorg-menu-item-height) !important; padding-inline: var(--qorg-menu-item-padding) !important; border-radius: var(--qorg-menu-item-radius) !important; color: var(--qorg-menu-text) !important; }
+html[data-qorg-theme-runtime="1"] .es-menu__item:hover,
+html[data-qorg-theme-runtime="1"] .dropdown-item:hover { background: var(--qorg-menu-hover-bg) !important; color: var(--qorg-menu-hover-text) !important; }
+
+/* Workspace links receive the configured menu-item height and comfortable side margins. */
 html[data-qorg-theme-runtime="1"] .widget.links-widget-box {
     background: var(--qorg-links-widget-bg) !important;
     color: var(--qorg-links-widget-text) !important;
+    border-radius: var(--qorg-workspace-widget-radius) !important;
 }
 html[data-qorg-theme-runtime="1"] .widget.links-widget-box:hover { background: var(--qorg-links-widget-hover) !important; }
-html[data-qorg-theme-runtime="1"] .widget.links-widget-box .link-item { color: inherit !important; text-decoration: none !important; border-radius: var(--qorg-menu-item-radius); }
+html[data-qorg-theme-runtime="1"] .widget.links-widget-box .link-item {
+    display: flex !important;
+    align-items: center !important;
+    min-height: var(--qorg-menu-item-height) !important;
+    margin-inline: 6px !important;
+    margin-block: 2px !important;
+    padding-inline: var(--qorg-menu-item-padding) !important;
+    border-radius: var(--qorg-menu-item-radius) !important;
+    color: inherit !important;
+    text-decoration: none !important;
+}
 html[data-qorg-theme-runtime="1"] .widget.links-widget-box .link-item:hover {
     background: var(--qorg-links-item-hover-bg) !important;
     color: var(--qorg-links-item-hover-text) !important;
@@ -203,52 +280,34 @@ html[data-qorg-theme-runtime="1"] .widget.links-widget-box .link-item:hover {
 }
 html[data-qorg-theme-runtime="1"] .widget.links-widget-box .link-item:hover * { text-decoration: none !important; }
 
-html[data-qorg-theme-runtime="1"] .widget.dashboard-widget-box {
-    background: var(--qorg-dashboard-widget-bg) !important;
-    color: var(--qorg-dashboard-widget-text) !important;
+/* Colored widget palettes. data-qorg-palette is assigned on every route/ajax redraw. */
+html[data-qorg-theme-runtime="1"] .widget.dashboard-widget-box { background: var(--qorg-dashboard-widget-bg) !important; color: var(--qorg-dashboard-widget-text) !important; border-radius: var(--qorg-workspace-widget-radius) !important; }
+html[data-qorg-theme-runtime="1"] .widget.dashboard-widget-box:hover { background: var(--qorg-dashboard-widget-hover) !important; }
+
+html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget),
+html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget) {
+    border-radius: var(--qorg-workspace-widget-radius) !important;
+    transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease;
 }
-html[data-qorg-theme-runtime="1"] .widget.dashboard-widget-box:hover { background: var(--qorg-dashboard-widget-hover) !important; transform: translateY(calc(-1 * var(--qorg-workspace-widget-hover-lift))); }
 
-html[data-qorg-theme-runtime="1"] .widget.number-widget-box { color: var(--qorg-number-widget-text) !important; }
-html[data-qorg-theme-runtime="1"] .widget.number-widget-box:nth-of-type(4n + 1) { background: var(--qorg-number-widget-1-bg) !important; }
-html[data-qorg-theme-runtime="1"] .widget.number-widget-box:nth-of-type(4n + 2) { background: var(--qorg-number-widget-2-bg) !important; }
-html[data-qorg-theme-runtime="1"] .widget.number-widget-box:nth-of-type(4n + 3) { background: var(--qorg-number-widget-3-bg) !important; }
-html[data-qorg-theme-runtime="1"] .widget.number-widget-box:nth-of-type(4n) { background: var(--qorg-number-widget-4-bg) !important; }
-html[data-qorg-theme-runtime="1"] .widget.number-widget-box:nth-of-type(4n + 1):hover { background: var(--qorg-number-widget-1-hover) !important; }
-html[data-qorg-theme-runtime="1"] .widget.number-widget-box:nth-of-type(4n + 2):hover { background: var(--qorg-number-widget-2-hover) !important; }
-html[data-qorg-theme-runtime="1"] .widget.number-widget-box:nth-of-type(4n + 3):hover { background: var(--qorg-number-widget-3-hover) !important; }
-html[data-qorg-theme-runtime="1"] .widget.number-widget-box:nth-of-type(4n):hover { background: var(--qorg-number-widget-4-hover) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget)[data-qorg-palette="1"] { background: var(--qorg-number-widget-1-bg) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget)[data-qorg-palette="2"] { background: var(--qorg-number-widget-2-bg) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget)[data-qorg-palette="3"] { background: var(--qorg-number-widget-3-bg) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget)[data-qorg-palette="4"] { background: var(--qorg-number-widget-4-bg) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget)[data-qorg-palette="1"]:hover { background: var(--qorg-number-widget-1-hover) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget)[data-qorg-palette="2"]:hover { background: var(--qorg-number-widget-2-hover) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget)[data-qorg-palette="3"]:hover { background: var(--qorg-number-widget-3-hover) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget)[data-qorg-palette="4"]:hover { background: var(--qorg-number-widget-4-hover) !important; }
 
-html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box { color: var(--qorg-shortcut-widget-text) !important; }
-html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box:nth-of-type(4n + 1) { background: var(--qorg-shortcut-widget-1-bg) !important; }
-html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box:nth-of-type(4n + 2) { background: var(--qorg-shortcut-widget-2-bg) !important; }
-html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box:nth-of-type(4n + 3) { background: var(--qorg-shortcut-widget-3-bg) !important; }
-html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box:nth-of-type(4n) { background: var(--qorg-shortcut-widget-4-bg) !important; }
-html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box:nth-of-type(4n + 1):hover { background: var(--qorg-shortcut-widget-1-hover) !important; }
-html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box:nth-of-type(4n + 2):hover { background: var(--qorg-shortcut-widget-2-hover) !important; }
-html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box:nth-of-type(4n + 3):hover { background: var(--qorg-shortcut-widget-3-hover) !important; }
-html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box:nth-of-type(4n):hover { background: var(--qorg-shortcut-widget-4-hover) !important; }
-
-html[data-qorg-theme-runtime="1"] .widget.number-widget-box:hover,
-html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box:hover {
+html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget)[data-qorg-palette="1"] { background: var(--qorg-shortcut-widget-1-bg) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget)[data-qorg-palette="2"] { background: var(--qorg-shortcut-widget-2-bg) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget)[data-qorg-palette="3"] { background: var(--qorg-shortcut-widget-3-bg) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget)[data-qorg-palette="4"] { background: var(--qorg-shortcut-widget-4-bg) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget):hover {
     transform: translateY(calc(-1 * var(--qorg-workspace-widget-hover-lift)));
     box-shadow: 0 10px 24px rgb(0 0 0 / .12);
 }
 
-/* Stable palette assignment when workspace wrappers change element order. */
-html[data-qorg-theme-runtime="1"] .widget.number-widget-box[data-qorg-palette="1"] { background: var(--qorg-number-widget-1-bg) !important; }
-html[data-qorg-theme-runtime="1"] .widget.number-widget-box[data-qorg-palette="2"] { background: var(--qorg-number-widget-2-bg) !important; }
-html[data-qorg-theme-runtime="1"] .widget.number-widget-box[data-qorg-palette="3"] { background: var(--qorg-number-widget-3-bg) !important; }
-html[data-qorg-theme-runtime="1"] .widget.number-widget-box[data-qorg-palette="4"] { background: var(--qorg-number-widget-4-bg) !important; }
-html[data-qorg-theme-runtime="1"] .widget.number-widget-box[data-qorg-palette="1"]:hover { background: var(--qorg-number-widget-1-hover) !important; }
-html[data-qorg-theme-runtime="1"] .widget.number-widget-box[data-qorg-palette="2"]:hover { background: var(--qorg-number-widget-2-hover) !important; }
-html[data-qorg-theme-runtime="1"] .widget.number-widget-box[data-qorg-palette="3"]:hover { background: var(--qorg-number-widget-3-hover) !important; }
-html[data-qorg-theme-runtime="1"] .widget.number-widget-box[data-qorg-palette="4"]:hover { background: var(--qorg-number-widget-4-hover) !important; }
-html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box[data-qorg-palette="1"] { background: var(--qorg-shortcut-widget-1-bg) !important; }
-html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box[data-qorg-palette="2"] { background: var(--qorg-shortcut-widget-2-bg) !important; }
-html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box[data-qorg-palette="3"] { background: var(--qorg-shortcut-widget-3-bg) !important; }
-html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box[data-qorg-palette="4"] { background: var(--qorg-shortcut-widget-4-bg) !important; }
-html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box[data-qorg-palette="1"]:hover { background: var(--qorg-shortcut-widget-1-hover) !important; }
-html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box[data-qorg-palette="2"]:hover { background: var(--qorg-shortcut-widget-2-hover) !important; }
-html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box[data-qorg-palette="3"]:hover { background: var(--qorg-shortcut-widget-3-hover) !important; }
-html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box[data-qorg-palette="4"]:hover { background: var(--qorg-shortcut-widget-4-hover) !important; }
+/* Website uses Web-specific dimensions. */
+html[data-qorg-theme-runtime="1"][data-qorg-scope="web"] .form-control { border-radius: var(--qorg-web-field-radius) !important; min-height: var(--qorg-web-field-height) !important; }
+html[data-qorg-theme-runtime="1"][data-qorg-scope="web"] .btn-primary { border-radius: var(--qorg-web-button-radius) !important; min-height: var(--qorg-web-button-height) !important; }
