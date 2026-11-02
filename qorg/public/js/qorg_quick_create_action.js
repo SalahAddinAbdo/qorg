@@ -2,8 +2,13 @@
     "use strict";
 
     async function getItems() {
-        const response = await frappe.call({method: "qorg.qorg.design_system.api.get_quick_create_menu"});
-        return response.message?.items || [];
+        try {
+            const response = await frappe.call({method: "qorg.qorg.design_system.api.get_quick_create_menu"});
+            return response.message?.items || [];
+        } catch (error) {
+            console.error("Q Org: unable to load Quick Create menu.", error);
+            return [];
+        }
     }
 
     function closeMenus(except) {
