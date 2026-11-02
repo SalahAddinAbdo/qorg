@@ -84,16 +84,18 @@
 
     try { render(JSON.parse(localStorage.getItem(CACHE_KEY) || "null")); } catch (_) {}
 
-    if (window.frappe?.after_ajax) frappe.after_ajax(() => {
+    if (window.frappe?.after_ajax) {
+        frappe.after_ajax(() => {
+            load();
+            scheduleWidgetPalettes();
+        });
+    } else if (window.frappe?.call) {
         load();
-        scheduleWidgetPalettes();
-    });
-    else if (window.frappe?.call) load();
+    }
 
     window.addEventListener("hashchange", scheduleWidgetPalettes);
     window.addEventListener("popstate", scheduleWidgetPalettes);
     window.addEventListener("pageshow", scheduleWidgetPalettes);
-    document.addEventListener("click", () => setTimeout(scheduleWidgetPalettes, 80), true);
 
     if (window.frappe?.router?.on) {
         frappe.router.on("change", scheduleWidgetPalettes);
