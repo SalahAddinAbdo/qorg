@@ -236,9 +236,55 @@ html[data-qorg-theme-runtime="1"] .es-button[data-variant="solid"]:hover {
     border-color: var(--qorg-button-hover) !important;
 }
 
+/* Grouped controls keep one continuous outline. The field owns only the outer
+   start corners; the adjoining selector/action owns only the outer end corners. */
+html[data-qorg-theme-runtime="1"] .input-group > :is(.form-control,.input-with-feedback) {
+    border-start-start-radius: var(--qorg-desk-field-radius) !important;
+    border-end-start-radius: var(--qorg-desk-field-radius) !important;
+    border-start-end-radius: 0 !important;
+    border-end-end-radius: 0 !important;
+}
+
+html[data-qorg-theme-runtime="1"] .input-group > .input-group-btn,
+html[data-qorg-theme-runtime="1"] .input-group > .input-group-append {
+    min-height: var(--qorg-desk-field-height) !important;
+    margin-inline-start: -1px !important;
+}
+
+html[data-qorg-theme-runtime="1"] .input-group > :is(.input-group-btn,.input-group-append) > :is(.btn,.es-button) {
+    min-height: var(--qorg-desk-field-height) !important;
+    height: var(--qorg-desk-field-height) !important;
+    border-start-start-radius: 0 !important;
+    border-end-start-radius: 0 !important;
+    border-start-end-radius: var(--qorg-desk-field-radius) !important;
+    border-end-end-radius: var(--qorg-desk-field-radius) !important;
+}
+
+/* Espresso and grouped buttons use the same dimensions as adjacent Frappe buttons. */
+html[data-qorg-theme-runtime="1"] .es-button,
+html[data-qorg-theme-runtime="1"] .btn-group > .btn,
+html[data-qorg-theme-runtime="1"] .btn-group > .es-button,
+html[data-qorg-theme-runtime="1"] .inner-group-button > .es-button {
+    min-height: var(--qorg-desk-button-height) !important;
+    height: var(--qorg-desk-button-height) !important;
+    padding-block: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: var(--qorg-desk-button-radius) !important;
+}
+
+html[data-qorg-theme-runtime="1"] .btn-group > :is(.btn,.es-button):not(:first-child) {
+    border-start-start-radius: 0 !important;
+    border-end-start-radius: 0 !important;
+}
+
+html[data-qorg-theme-runtime="1"] .btn-group > :is(.btn,.es-button):not(:last-child) {
+    border-start-end-radius: 0 !important;
+    border-end-end-radius: 0 !important;
+}
+
 /* Menus and Sidebar. */
-/* Sidebar surface colors are desktop-only. On mobile, Frappe must own the
-   drawer surface so opening, outside-click closing and repeated toggling stay native. */
 @media (min-width: 992px) {
     html[data-qorg-theme-runtime="1"] .body-sidebar {
         background: var(--qorg-sidebar-bg) !important;
@@ -299,27 +345,14 @@ html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widg
     transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease;
 }
 
-/* First-paint palette fallback. Frappe creates workspace cards before the runtime
-   script can attach data-qorg-palette. These selectors color only unassigned cards
-   immediately; the existing data attribute rules remain authoritative afterwards. */
 html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget):not([data-qorg-palette]):nth-child(4n + 1) { background: var(--qorg-number-widget-1-bg) !important; }
 html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget):not([data-qorg-palette]):nth-child(4n + 2) { background: var(--qorg-number-widget-2-bg) !important; }
 html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget):not([data-qorg-palette]):nth-child(4n + 3) { background: var(--qorg-number-widget-3-bg) !important; }
 html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget):not([data-qorg-palette]):nth-child(4n) { background: var(--qorg-number-widget-4-bg) !important; }
-
-/* Number-card rows use a wrapper per card. In that structure each inner card is
-   usually the first child, so palette position must be read from the wrapper. */
 html[data-qorg-theme-runtime="1"] .number-card-container:nth-child(4n + 1) :is(.number-card,.widget):not([data-qorg-palette]) { background: var(--qorg-number-widget-1-bg) !important; }
 html[data-qorg-theme-runtime="1"] .number-card-container:nth-child(4n + 2) :is(.number-card,.widget):not([data-qorg-palette]) { background: var(--qorg-number-widget-2-bg) !important; }
 html[data-qorg-theme-runtime="1"] .number-card-container:nth-child(4n + 3) :is(.number-card,.widget):not([data-qorg-palette]) { background: var(--qorg-number-widget-3-bg) !important; }
 html[data-qorg-theme-runtime="1"] .number-card-container:nth-child(4n) :is(.number-card,.widget):not([data-qorg-palette]) { background: var(--qorg-number-widget-4-bg) !important; }
-
-/* Some dashboard layouts paint the wrapper itself instead of the inner card. */
-html[data-qorg-theme-runtime="1"] .number-card-container:not([data-qorg-palette]):nth-child(4n + 1) { background: var(--qorg-number-widget-1-bg) !important; }
-html[data-qorg-theme-runtime="1"] .number-card-container:not([data-qorg-palette]):nth-child(4n + 2) { background: var(--qorg-number-widget-2-bg) !important; }
-html[data-qorg-theme-runtime="1"] .number-card-container:not([data-qorg-palette]):nth-child(4n + 3) { background: var(--qorg-number-widget-3-bg) !important; }
-html[data-qorg-theme-runtime="1"] .number-card-container:not([data-qorg-palette]):nth-child(4n) { background: var(--qorg-number-widget-4-bg) !important; }
-
 html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget):not([data-qorg-palette]):nth-child(4n + 1) { background: var(--qorg-shortcut-widget-1-bg) !important; }
 html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget):not([data-qorg-palette]):nth-child(4n + 2) { background: var(--qorg-shortcut-widget-2-bg) !important; }
 html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget):not([data-qorg-palette]):nth-child(4n + 3) { background: var(--qorg-shortcut-widget-3-bg) !important; }
@@ -718,18 +751,11 @@ html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelectLis
     margin: 0 !important;
 }
 
-/* Preserve Frappe's natural row sizing. A fixed 28px anchor height displaces
-   labels on leaf items and becomes stale after a mobile/desktop viewport switch. */
 html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item .item-anchor {
     height: auto !important;
     min-height: inherit;
 }
-
-/* Re-establish a full-height desktop sidebar when the viewport returns from
-   mobile to desktop without creating a separate JavaScript sidebar state. */
 @media (min-width: 992px) {
     html[data-qorg-theme-runtime="1"] .body-sidebar,
-    html[data-qorg-theme-runtime="1"] .body-sidebar > .body-sidebar-container {
-        min-height: 100dvh;
-    }
+    html[data-qorg-theme-runtime="1"] .body-sidebar > .body-sidebar-container { min-height: 100dvh; }
 }

@@ -117,11 +117,45 @@
         return true;
     }
 
+    function installQueryReportChartCompatibility() {
+        const prototype = window.frappe?.views?.QueryReport?.prototype;
+        if (!prototype || prototype.__qorgChartCompatibility) return !!prototype;
+
+        const original = prototype.render_chart;
+        if (typeof original !== "function") return false;
+
+        prototype.render_chart = function (...args) {
+            const page = this.page?.main?.[0] || this.page?.wrapper?.[0] || document.querySelector(".page-container");
+            const chartHost = page?.querySelector?.(
+                ".report-chart, .chart-wrapper, .chart-container, .frappe-chart, [data-chart]"
+            );
+            const hostWidth = chartHost?.getBoundingClientRect?.().width;
+
+            if (chartHost && (!Number.isFinite(hostWidth) || hostWidth < 80)) {
+                clearTimeout(this.__qorgChartRetryTimer);
+                const retries = Number(this.__qorgChartRetries || 0);
+                if (retries < 12) {
+                    this.__qorgChartRetries = retries + 1;
+                    this.__qorgChartRetryTimer = window.setTimeout(() => this.render_chart(...args), 60);
+                    return;
+                }
+            }
+
+            this.__qorgChartRetries = 0;
+            return original.apply(this, args);
+        };
+
+        prototype.__qorgChartCompatibility = true;
+        return true;
+    }
+
     function scheduleQueryReportCompatibility() {
         let attempts = 0;
         const timer = window.setInterval(() => {
             attempts += 1;
-            if (installQueryReportCollapseCompatibility() || attempts >= 40) {
+            const collapseReady = installQueryReportCollapseCompatibility();
+            const chartReady = installQueryReportChartCompatibility();
+            if ((collapseReady && chartReady) || attempts >= 40) {
                 window.clearInterval(timer);
             }
         }, 50);
