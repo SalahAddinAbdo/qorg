@@ -112,6 +112,74 @@
     "menu_item_height",
     "menu_item_radius",
     "menu_item_padding",
+    "workspace_widgets_tab",
+    "workspace_light_core_section",
+    "desk_light_links_widget_bg",
+    "desk_light_links_widget_hover",
+    "desk_light_links_widget_text",
+    "desk_light_links_item_hover_bg",
+    "desk_light_links_item_hover_text",
+    "workspace_light_core_col",
+    "desk_light_dashboard_widget_bg",
+    "desk_light_dashboard_widget_hover",
+    "desk_light_dashboard_widget_text",
+    "workspace_light_number_section",
+    "desk_light_number_widget_1_bg",
+    "desk_light_number_widget_1_hover",
+    "desk_light_number_widget_2_bg",
+    "desk_light_number_widget_2_hover",
+    "workspace_light_number_col",
+    "desk_light_number_widget_3_bg",
+    "desk_light_number_widget_3_hover",
+    "desk_light_number_widget_4_bg",
+    "desk_light_number_widget_4_hover",
+    "desk_light_number_widget_text",
+    "workspace_light_shortcut_section",
+    "desk_light_shortcut_widget_1_bg",
+    "desk_light_shortcut_widget_1_hover",
+    "desk_light_shortcut_widget_2_bg",
+    "desk_light_shortcut_widget_2_hover",
+    "workspace_light_shortcut_col",
+    "desk_light_shortcut_widget_3_bg",
+    "desk_light_shortcut_widget_3_hover",
+    "desk_light_shortcut_widget_4_bg",
+    "desk_light_shortcut_widget_4_hover",
+    "desk_light_shortcut_widget_text",
+    "workspace_dark_core_section",
+    "desk_dark_links_widget_bg",
+    "desk_dark_links_widget_hover",
+    "desk_dark_links_widget_text",
+    "desk_dark_links_item_hover_bg",
+    "desk_dark_links_item_hover_text",
+    "workspace_dark_core_col",
+    "desk_dark_dashboard_widget_bg",
+    "desk_dark_dashboard_widget_hover",
+    "desk_dark_dashboard_widget_text",
+    "workspace_dark_number_section",
+    "desk_dark_number_widget_1_bg",
+    "desk_dark_number_widget_1_hover",
+    "desk_dark_number_widget_2_bg",
+    "desk_dark_number_widget_2_hover",
+    "workspace_dark_number_col",
+    "desk_dark_number_widget_3_bg",
+    "desk_dark_number_widget_3_hover",
+    "desk_dark_number_widget_4_bg",
+    "desk_dark_number_widget_4_hover",
+    "desk_dark_number_widget_text",
+    "workspace_dark_shortcut_section",
+    "desk_dark_shortcut_widget_1_bg",
+    "desk_dark_shortcut_widget_1_hover",
+    "desk_dark_shortcut_widget_2_bg",
+    "desk_dark_shortcut_widget_2_hover",
+    "workspace_dark_shortcut_col",
+    "desk_dark_shortcut_widget_3_bg",
+    "desk_dark_shortcut_widget_3_hover",
+    "desk_dark_shortcut_widget_4_bg",
+    "desk_dark_shortcut_widget_4_hover",
+    "desk_dark_shortcut_widget_text",
+    "workspace_widgets_shape_section",
+    "workspace_widget_radius",
+    "workspace_widget_hover_lift",
     "web_theme_tab",
     "web_light_section",
     "web_light_page_bg",
@@ -848,6 +916,394 @@
       "fieldtype": "Int",
       "label": "Menu Item Horizontal Padding (px)",
       "default": "12"
+    },
+    {
+      "fieldname": "workspace_widgets_tab",
+      "fieldtype": "Tab Break",
+      "label": "Workspace Widgets"
+    },
+    {
+      "fieldname": "workspace_light_core_section",
+      "fieldtype": "Section Break",
+      "label": "Light Mode: Links and Dashboard"
+    },
+    {
+      "fieldname": "desk_light_links_widget_bg",
+      "fieldtype": "Color",
+      "label": "Links Widget Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "fieldname": "desk_light_links_widget_hover",
+      "fieldtype": "Color",
+      "label": "Links Widget Hover",
+      "default": "#F5F9FA"
+    },
+    {
+      "fieldname": "desk_light_links_widget_text",
+      "fieldtype": "Color",
+      "label": "Links Widget Text",
+      "default": "#1F272E"
+    },
+    {
+      "fieldname": "desk_light_links_item_hover_bg",
+      "fieldtype": "Color",
+      "label": "Link Item Hover Background",
+      "default": "#E7F2F5"
+    },
+    {
+      "fieldname": "desk_light_links_item_hover_text",
+      "fieldtype": "Color",
+      "label": "Link Item Hover Text",
+      "default": "#137690"
+    },
+    {
+      "fieldname": "workspace_light_core_col",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "desk_light_dashboard_widget_bg",
+      "fieldtype": "Color",
+      "label": "Dashboard Widget Background",
+      "default": "#F7F9FB"
+    },
+    {
+      "fieldname": "desk_light_dashboard_widget_hover",
+      "fieldtype": "Color",
+      "label": "Dashboard Widget Hover",
+      "default": "#EEF4F6"
+    },
+    {
+      "fieldname": "desk_light_dashboard_widget_text",
+      "fieldtype": "Color",
+      "label": "Dashboard Widget Text",
+      "default": "#1F272E"
+    },
+    {
+      "fieldname": "workspace_light_number_section",
+      "fieldtype": "Section Break",
+      "label": "Light Mode: Number Card Palette"
+    },
+    {
+      "fieldname": "desk_light_number_widget_1_bg",
+      "fieldtype": "Color",
+      "label": "Number Widget 1 background",
+      "default": "#E8F4F7"
+    },
+    {
+      "fieldname": "desk_light_number_widget_1_hover",
+      "fieldtype": "Color",
+      "label": "Number Widget 1 hover",
+      "default": "#D5EBF0"
+    },
+    {
+      "fieldname": "desk_light_number_widget_2_bg",
+      "fieldtype": "Color",
+      "label": "Number Widget 2 background",
+      "default": "#F7EFD9"
+    },
+    {
+      "fieldname": "desk_light_number_widget_2_hover",
+      "fieldtype": "Color",
+      "label": "Number Widget 2 hover",
+      "default": "#EFE1B8"
+    },
+    {
+      "fieldname": "workspace_light_number_col",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "desk_light_number_widget_3_bg",
+      "fieldtype": "Color",
+      "label": "Number Widget 3 background",
+      "default": "#EDE8F7"
+    },
+    {
+      "fieldname": "desk_light_number_widget_3_hover",
+      "fieldtype": "Color",
+      "label": "Number Widget 3 hover",
+      "default": "#DDD3F0"
+    },
+    {
+      "fieldname": "desk_light_number_widget_4_bg",
+      "fieldtype": "Color",
+      "label": "Number Widget 4 background",
+      "default": "#E8F5EC"
+    },
+    {
+      "fieldname": "desk_light_number_widget_4_hover",
+      "fieldtype": "Color",
+      "label": "Number Widget 4 hover",
+      "default": "#D4EADA"
+    },
+    {
+      "fieldname": "desk_light_number_widget_text",
+      "fieldtype": "Color",
+      "label": "Number Widget Text",
+      "default": "#1F272E"
+    },
+    {
+      "fieldname": "workspace_light_shortcut_section",
+      "fieldtype": "Section Break",
+      "label": "Light Mode: Shortcut Card Palette"
+    },
+    {
+      "fieldname": "desk_light_shortcut_widget_1_bg",
+      "fieldtype": "Color",
+      "label": "Shortcut Widget 1 background",
+      "default": "#EDF6F7"
+    },
+    {
+      "fieldname": "desk_light_shortcut_widget_1_hover",
+      "fieldtype": "Color",
+      "label": "Shortcut Widget 1 hover",
+      "default": "#DCEFF2"
+    },
+    {
+      "fieldname": "desk_light_shortcut_widget_2_bg",
+      "fieldtype": "Color",
+      "label": "Shortcut Widget 2 background",
+      "default": "#FFF3E6"
+    },
+    {
+      "fieldname": "desk_light_shortcut_widget_2_hover",
+      "fieldtype": "Color",
+      "label": "Shortcut Widget 2 hover",
+      "default": "#FFE3C2"
+    },
+    {
+      "fieldname": "workspace_light_shortcut_col",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "desk_light_shortcut_widget_3_bg",
+      "fieldtype": "Color",
+      "label": "Shortcut Widget 3 background",
+      "default": "#F3ECFA"
+    },
+    {
+      "fieldname": "desk_light_shortcut_widget_3_hover",
+      "fieldtype": "Color",
+      "label": "Shortcut Widget 3 hover",
+      "default": "#E6D8F5"
+    },
+    {
+      "fieldname": "desk_light_shortcut_widget_4_bg",
+      "fieldtype": "Color",
+      "label": "Shortcut Widget 4 background",
+      "default": "#EAF5EE"
+    },
+    {
+      "fieldname": "desk_light_shortcut_widget_4_hover",
+      "fieldtype": "Color",
+      "label": "Shortcut Widget 4 hover",
+      "default": "#D7EBDD"
+    },
+    {
+      "fieldname": "desk_light_shortcut_widget_text",
+      "fieldtype": "Color",
+      "label": "Shortcut Widget Text",
+      "default": "#1F272E"
+    },
+    {
+      "fieldname": "workspace_dark_core_section",
+      "fieldtype": "Section Break",
+      "label": "Dark Mode: Links and Dashboard"
+    },
+    {
+      "fieldname": "desk_dark_links_widget_bg",
+      "fieldtype": "Color",
+      "label": "Dark Links Widget Background",
+      "default": "#252A31"
+    },
+    {
+      "fieldname": "desk_dark_links_widget_hover",
+      "fieldtype": "Color",
+      "label": "Dark Links Widget Hover",
+      "default": "#303740"
+    },
+    {
+      "fieldname": "desk_dark_links_widget_text",
+      "fieldtype": "Color",
+      "label": "Dark Links Widget Text",
+      "default": "#E6EDF3"
+    },
+    {
+      "fieldname": "desk_dark_links_item_hover_bg",
+      "fieldtype": "Color",
+      "label": "Dark Link Item Hover Background",
+      "default": "#34424A"
+    },
+    {
+      "fieldname": "desk_dark_links_item_hover_text",
+      "fieldtype": "Color",
+      "label": "Dark Link Item Hover Text",
+      "default": "#8AD3E2"
+    },
+    {
+      "fieldname": "workspace_dark_core_col",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "desk_dark_dashboard_widget_bg",
+      "fieldtype": "Color",
+      "label": "Dark Dashboard Widget Background",
+      "default": "#2A3037"
+    },
+    {
+      "fieldname": "desk_dark_dashboard_widget_hover",
+      "fieldtype": "Color",
+      "label": "Dark Dashboard Widget Hover",
+      "default": "#353D46"
+    },
+    {
+      "fieldname": "desk_dark_dashboard_widget_text",
+      "fieldtype": "Color",
+      "label": "Dark Dashboard Widget Text",
+      "default": "#E6EDF3"
+    },
+    {
+      "fieldname": "workspace_dark_number_section",
+      "fieldtype": "Section Break",
+      "label": "Dark Mode: Number Card Palette"
+    },
+    {
+      "fieldname": "desk_dark_number_widget_1_bg",
+      "fieldtype": "Color",
+      "label": "Dark Number Widget 1 background",
+      "default": "#183B45"
+    },
+    {
+      "fieldname": "desk_dark_number_widget_1_hover",
+      "fieldtype": "Color",
+      "label": "Dark Number Widget 1 hover",
+      "default": "#20515E"
+    },
+    {
+      "fieldname": "desk_dark_number_widget_2_bg",
+      "fieldtype": "Color",
+      "label": "Dark Number Widget 2 background",
+      "default": "#463A20"
+    },
+    {
+      "fieldname": "desk_dark_number_widget_2_hover",
+      "fieldtype": "Color",
+      "label": "Dark Number Widget 2 hover",
+      "default": "#5B4A27"
+    },
+    {
+      "fieldname": "workspace_dark_number_col",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "desk_dark_number_widget_3_bg",
+      "fieldtype": "Color",
+      "label": "Dark Number Widget 3 background",
+      "default": "#372A4A"
+    },
+    {
+      "fieldname": "desk_dark_number_widget_3_hover",
+      "fieldtype": "Color",
+      "label": "Dark Number Widget 3 hover",
+      "default": "#49375F"
+    },
+    {
+      "fieldname": "desk_dark_number_widget_4_bg",
+      "fieldtype": "Color",
+      "label": "Dark Number Widget 4 background",
+      "default": "#203E2A"
+    },
+    {
+      "fieldname": "desk_dark_number_widget_4_hover",
+      "fieldtype": "Color",
+      "label": "Dark Number Widget 4 hover",
+      "default": "#2B5238"
+    },
+    {
+      "fieldname": "desk_dark_number_widget_text",
+      "fieldtype": "Color",
+      "label": "Dark Number Widget Text",
+      "default": "#F0F4F8"
+    },
+    {
+      "fieldname": "workspace_dark_shortcut_section",
+      "fieldtype": "Section Break",
+      "label": "Dark Mode: Shortcut Card Palette"
+    },
+    {
+      "fieldname": "desk_dark_shortcut_widget_1_bg",
+      "fieldtype": "Color",
+      "label": "Dark Shortcut Widget 1 background",
+      "default": "#1D3A42"
+    },
+    {
+      "fieldname": "desk_dark_shortcut_widget_1_hover",
+      "fieldtype": "Color",
+      "label": "Dark Shortcut Widget 1 hover",
+      "default": "#28505A"
+    },
+    {
+      "fieldname": "desk_dark_shortcut_widget_2_bg",
+      "fieldtype": "Color",
+      "label": "Dark Shortcut Widget 2 background",
+      "default": "#49331F"
+    },
+    {
+      "fieldname": "desk_dark_shortcut_widget_2_hover",
+      "fieldtype": "Color",
+      "label": "Dark Shortcut Widget 2 hover",
+      "default": "#614429"
+    },
+    {
+      "fieldname": "workspace_dark_shortcut_col",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "desk_dark_shortcut_widget_3_bg",
+      "fieldtype": "Color",
+      "label": "Dark Shortcut Widget 3 background",
+      "default": "#38284A"
+    },
+    {
+      "fieldname": "desk_dark_shortcut_widget_3_hover",
+      "fieldtype": "Color",
+      "label": "Dark Shortcut Widget 3 hover",
+      "default": "#4A3561"
+    },
+    {
+      "fieldname": "desk_dark_shortcut_widget_4_bg",
+      "fieldtype": "Color",
+      "label": "Dark Shortcut Widget 4 background",
+      "default": "#203D2A"
+    },
+    {
+      "fieldname": "desk_dark_shortcut_widget_4_hover",
+      "fieldtype": "Color",
+      "label": "Dark Shortcut Widget 4 hover",
+      "default": "#2C5339"
+    },
+    {
+      "fieldname": "desk_dark_shortcut_widget_text",
+      "fieldtype": "Color",
+      "label": "Dark Shortcut Widget Text",
+      "default": "#F0F4F8"
+    },
+    {
+      "fieldname": "workspace_widgets_shape_section",
+      "fieldtype": "Section Break",
+      "label": "Widget Shape and Motion"
+    },
+    {
+      "fieldname": "workspace_widget_radius",
+      "fieldtype": "Int",
+      "label": "Widget Radius (px)",
+      "default": "10"
+    },
+    {
+      "fieldname": "workspace_widget_hover_lift",
+      "fieldtype": "Int",
+      "label": "Widget Hover Lift (px)",
+      "default": "2"
     },
     {
       "fieldname": "web_theme_tab",

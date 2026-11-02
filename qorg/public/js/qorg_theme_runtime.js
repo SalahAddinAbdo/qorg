@@ -17,6 +17,14 @@
         return Object.entries(sizes || {}).map(([key, value]) => `--qorg-${kebab(key)}:${px(value)}`).join(";");
     }
 
+    function assignWidgetPalettes() {
+        ["number-widget-box", "shortcut-widget-box"].forEach((className) => {
+            document.querySelectorAll(`.widget.${className}`).forEach((widget, index) => {
+                widget.dataset.qorgPalette = String((index % 4) + 1);
+            });
+        });
+    }
+
     function render(config) {
         const theme = config?.theme;
         if (!theme) return;
@@ -46,6 +54,8 @@
 }
 `;
         root.dataset.qorgThemeRuntime = "1";
+        requestAnimationFrame(assignWidgetPalettes);
+        setTimeout(assignWidgetPalettes, 250);
     }
 
     try { render(JSON.parse(localStorage.getItem(CACHE_KEY) || "null")); } catch (_) {}

@@ -37,6 +37,8 @@ class QOrgDesignSystemSettings(Document):
                 frappe.throw(_("{0} must be between 0 and 48 pixels.").format(field.label))
             if name in padding_fields and not 0 <= value <= 32:
                 frappe.throw(_("{0} must be between 0 and 32 pixels.").format(field.label))
+            if name == "workspace_widget_hover_lift" and not 0 <= value <= 8:
+                frappe.throw(_("{0} must be between 0 and 8 pixels.").format(field.label))
 
     def _validate_typography(self):
         ordered = ["font_size_xs", "font_size_sm", "font_size_base", "font_size_h6", "font_size_lg", "font_size_h5", "font_size_h4", "font_size_h3", "font_size_h2", "font_size_h1", "font_size_display"]

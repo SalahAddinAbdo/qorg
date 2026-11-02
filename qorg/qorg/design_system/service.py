@@ -197,7 +197,7 @@ THEME_SIZE_FIELDS = (
     "desk_field_radius", "desk_field_height", "desk_button_radius", "desk_button_height", "desk_card_radius",
     "web_field_radius", "web_field_height", "web_button_radius", "web_button_height", "web_card_radius",
     "sidebar_item_height", "sidebar_item_radius", "sidebar_item_padding", "menu_radius", "menu_item_height",
-    "menu_item_radius", "menu_item_padding",
+    "menu_item_radius", "menu_item_padding", "workspace_widget_radius", "workspace_widget_hover_lift",
 )
 
 

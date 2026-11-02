@@ -36,3 +36,219 @@ html[data-qorg-theme-runtime="1"] .dropdown-item.active { background: var(--qorg
 html[data-qorg-theme-runtime="1"] body:not([data-route^="desk"]) { background: var(--qorg-page-bg) !important; color: var(--qorg-text) !important; }
 html[data-qorg-theme-runtime="1"] body:not([data-route^="desk"]) .form-control { background: var(--qorg-field-bg) !important; color: var(--qorg-field-text) !important; border-color: var(--qorg-field-border) !important; border-radius: var(--qorg-web-field-radius) !important; min-height: var(--qorg-web-field-height) !important; }
 html[data-qorg-theme-runtime="1"] body:not([data-route^="desk"]) .btn-primary { background: var(--qorg-button-bg) !important; color: var(--qorg-button-text) !important; border-radius: var(--qorg-web-button-radius) !important; min-height: var(--qorg-web-button-height) !important; }
+
+/* v1.3.1 controls: apply field surfaces only to editable text-like controls. */
+html[data-qorg-theme-runtime="1"] .control-input,
+html[data-qorg-theme-runtime="1"] .control-input-wrapper,
+html[data-qorg-theme-runtime="1"] .checkbox,
+html[data-qorg-theme-runtime="1"] .checkbox .control-input,
+html[data-qorg-theme-runtime="1"] .attach-control,
+html[data-qorg-theme-runtime="1"] .attach-control .control-input,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Check"] .control-input,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Attach"] .control-input,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Attach Image"] .control-input {
+    min-height: auto !important;
+    background: transparent !important;
+    border-color: transparent !important;
+    border-radius: 0 !important;
+}
+
+html[data-qorg-theme-runtime="1"] input.form-control:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+html[data-qorg-theme-runtime="1"] textarea.form-control,
+html[data-qorg-theme-runtime="1"] select.form-control,
+html[data-qorg-theme-runtime="1"] .awesomplete > input,
+html[data-qorg-theme-runtime="1"] .multiselect-input,
+html[data-qorg-theme-runtime="1"] .input-with-feedback:not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
+    min-height: var(--qorg-desk-field-height) !important;
+    background: var(--qorg-field-bg) !important;
+    color: var(--qorg-field-text) !important;
+    border: 1px solid var(--qorg-field-border) !important;
+    border-radius: var(--qorg-desk-field-radius) !important;
+}
+
+html[data-qorg-theme-runtime="1"] input[type="checkbox"],
+html[data-qorg-theme-runtime="1"] input[type="radio"] {
+    min-height: auto !important;
+    background: transparent;
+    accent-color: var(--qorg-brand-primary);
+}
+
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Attach"] .btn-attach,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Attach Image"] .btn-attach {
+    border-radius: var(--qorg-desk-button-radius) !important;
+    min-height: var(--qorg-desk-button-height) !important;
+}
+
+/* Buttons from Frappe UI / Espresso use es-button rather than Bootstrap btn-primary. */
+html[data-qorg-theme-runtime="1"] {
+    --bt-solid-bg: var(--qorg-button-bg);
+    --bt-solid-fg: var(--qorg-button-text);
+}
+
+html[data-qorg-theme-runtime="1"] .es-button[data-variant="solid"],
+html[data-qorg-theme-runtime="1"] button.es-button[data-variant="solid"] {
+    --bt-solid-bg: var(--qorg-button-bg);
+    --bt-solid-fg: var(--qorg-button-text);
+    min-height: var(--qorg-desk-button-height) !important;
+    background: var(--qorg-button-bg) !important;
+    color: var(--qorg-button-text) !important;
+    border-color: var(--qorg-button-bg) !important;
+    border-radius: var(--qorg-desk-button-radius) !important;
+}
+
+html[data-qorg-theme-runtime="1"] .es-button[data-variant="solid"]:hover {
+    --bt-solid-bg: var(--qorg-button-hover);
+    background: var(--qorg-button-hover) !important;
+    border-color: var(--qorg-button-hover) !important;
+}
+
+/* Input groups keep text fields and adjacent operators/actions vertically aligned. */
+html[data-qorg-theme-runtime="1"] .input-group {
+    align-items: center !important;
+}
+
+html[data-qorg-theme-runtime="1"] .input-group > .form-control,
+html[data-qorg-theme-runtime="1"] .input-group .input-group-btn,
+html[data-qorg-theme-runtime="1"] .input-group .input-group-btn.mr-0,
+html[data-qorg-theme-runtime="1"] .input-group .input-group-btn > .btn,
+html[data-qorg-theme-runtime="1"] .input-group .input-group-btn > button {
+    min-height: var(--qorg-desk-field-height) !important;
+    height: var(--qorg-desk-field-height) !important;
+}
+
+html[data-qorg-theme-runtime="1"] .input-group .input-group-btn,
+html[data-qorg-theme-runtime="1"] .input-group .input-group-btn.mr-0 {
+    display: inline-flex !important;
+    align-items: center !important;
+}
+
+html[data-qorg-theme-runtime="1"] .input-group .input-group-btn > .btn,
+html[data-qorg-theme-runtime="1"] .input-group .input-group-btn > button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: var(--qorg-desk-button-radius) !important;
+}
+
+/* Select and multi-select controls align text and arrows consistently. */
+html[data-qorg-theme-runtime="1"] select.form-control,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Select"] .form-control,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="MultiSelect"] .form-control,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="MultiSelectList"] .form-control,
+html[data-qorg-theme-runtime="1"] .multiselect-input {
+    text-align: center !important;
+    text-align-last: center;
+    padding-inline: 36px !important;
+}
+
+html[data-qorg-theme-runtime="1"] select.form-control option {
+    background: var(--qorg-menu-bg);
+    color: var(--qorg-menu-text);
+}
+
+html[data-qorg-theme-runtime="1"] .awesomplete > ul,
+html[data-qorg-theme-runtime="1"] .select-options,
+html[data-qorg-theme-runtime="1"] .multiselect-list {
+    padding: 6px !important;
+    background: var(--qorg-menu-bg) !important;
+    color: var(--qorg-menu-text) !important;
+    border: 1px solid var(--qorg-menu-border) !important;
+    border-radius: var(--qorg-menu-radius) !important;
+    box-shadow: 0 12px 30px rgb(0 0 0 / .16) !important;
+}
+
+html[data-qorg-theme-runtime="1"] .awesomplete > ul > li,
+html[data-qorg-theme-runtime="1"] .select-options > div,
+html[data-qorg-theme-runtime="1"] .multiselect-list .list-item {
+    display: flex;
+    align-items: center;
+    min-height: var(--qorg-menu-item-height) !important;
+    padding-inline: var(--qorg-menu-item-padding) !important;
+    border-radius: var(--qorg-menu-item-radius) !important;
+    background: transparent !important;
+    color: var(--qorg-menu-text) !important;
+}
+
+html[data-qorg-theme-runtime="1"] .awesomplete > ul > li:hover,
+html[data-qorg-theme-runtime="1"] .awesomplete > ul > li[aria-selected="true"],
+html[data-qorg-theme-runtime="1"] .select-options > div:hover,
+html[data-qorg-theme-runtime="1"] .multiselect-list .list-item:hover {
+    background: var(--qorg-menu-hover-bg) !important;
+    color: var(--qorg-menu-hover-text) !important;
+}
+
+/* Form layout is structural and must inherit its parent surface. */
+html[data-qorg-theme-runtime="1"] .form-layout {
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Workspace widget families. */
+html[data-qorg-theme-runtime="1"] .widget {
+    border-radius: var(--qorg-workspace-widget-radius) !important;
+    transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease;
+}
+
+html[data-qorg-theme-runtime="1"] .widget.links-widget-box {
+    background: var(--qorg-links-widget-bg) !important;
+    color: var(--qorg-links-widget-text) !important;
+}
+html[data-qorg-theme-runtime="1"] .widget.links-widget-box:hover { background: var(--qorg-links-widget-hover) !important; }
+html[data-qorg-theme-runtime="1"] .widget.links-widget-box .link-item { color: inherit !important; text-decoration: none !important; border-radius: var(--qorg-menu-item-radius); }
+html[data-qorg-theme-runtime="1"] .widget.links-widget-box .link-item:hover {
+    background: var(--qorg-links-item-hover-bg) !important;
+    color: var(--qorg-links-item-hover-text) !important;
+    text-decoration: none !important;
+}
+html[data-qorg-theme-runtime="1"] .widget.links-widget-box .link-item:hover * { text-decoration: none !important; }
+
+html[data-qorg-theme-runtime="1"] .widget.dashboard-widget-box {
+    background: var(--qorg-dashboard-widget-bg) !important;
+    color: var(--qorg-dashboard-widget-text) !important;
+}
+html[data-qorg-theme-runtime="1"] .widget.dashboard-widget-box:hover { background: var(--qorg-dashboard-widget-hover) !important; transform: translateY(calc(-1 * var(--qorg-workspace-widget-hover-lift))); }
+
+html[data-qorg-theme-runtime="1"] .widget.number-widget-box { color: var(--qorg-number-widget-text) !important; }
+html[data-qorg-theme-runtime="1"] .widget.number-widget-box:nth-of-type(4n + 1) { background: var(--qorg-number-widget-1-bg) !important; }
+html[data-qorg-theme-runtime="1"] .widget.number-widget-box:nth-of-type(4n + 2) { background: var(--qorg-number-widget-2-bg) !important; }
+html[data-qorg-theme-runtime="1"] .widget.number-widget-box:nth-of-type(4n + 3) { background: var(--qorg-number-widget-3-bg) !important; }
+html[data-qorg-theme-runtime="1"] .widget.number-widget-box:nth-of-type(4n) { background: var(--qorg-number-widget-4-bg) !important; }
+html[data-qorg-theme-runtime="1"] .widget.number-widget-box:nth-of-type(4n + 1):hover { background: var(--qorg-number-widget-1-hover) !important; }
+html[data-qorg-theme-runtime="1"] .widget.number-widget-box:nth-of-type(4n + 2):hover { background: var(--qorg-number-widget-2-hover) !important; }
+html[data-qorg-theme-runtime="1"] .widget.number-widget-box:nth-of-type(4n + 3):hover { background: var(--qorg-number-widget-3-hover) !important; }
+html[data-qorg-theme-runtime="1"] .widget.number-widget-box:nth-of-type(4n):hover { background: var(--qorg-number-widget-4-hover) !important; }
+
+html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box { color: var(--qorg-shortcut-widget-text) !important; }
+html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box:nth-of-type(4n + 1) { background: var(--qorg-shortcut-widget-1-bg) !important; }
+html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box:nth-of-type(4n + 2) { background: var(--qorg-shortcut-widget-2-bg) !important; }
+html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box:nth-of-type(4n + 3) { background: var(--qorg-shortcut-widget-3-bg) !important; }
+html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box:nth-of-type(4n) { background: var(--qorg-shortcut-widget-4-bg) !important; }
+html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box:nth-of-type(4n + 1):hover { background: var(--qorg-shortcut-widget-1-hover) !important; }
+html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box:nth-of-type(4n + 2):hover { background: var(--qorg-shortcut-widget-2-hover) !important; }
+html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box:nth-of-type(4n + 3):hover { background: var(--qorg-shortcut-widget-3-hover) !important; }
+html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box:nth-of-type(4n):hover { background: var(--qorg-shortcut-widget-4-hover) !important; }
+
+html[data-qorg-theme-runtime="1"] .widget.number-widget-box:hover,
+html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box:hover {
+    transform: translateY(calc(-1 * var(--qorg-workspace-widget-hover-lift)));
+    box-shadow: 0 10px 24px rgb(0 0 0 / .12);
+}
+
+/* Stable palette assignment when workspace wrappers change element order. */
+html[data-qorg-theme-runtime="1"] .widget.number-widget-box[data-qorg-palette="1"] { background: var(--qorg-number-widget-1-bg) !important; }
+html[data-qorg-theme-runtime="1"] .widget.number-widget-box[data-qorg-palette="2"] { background: var(--qorg-number-widget-2-bg) !important; }
+html[data-qorg-theme-runtime="1"] .widget.number-widget-box[data-qorg-palette="3"] { background: var(--qorg-number-widget-3-bg) !important; }
+html[data-qorg-theme-runtime="1"] .widget.number-widget-box[data-qorg-palette="4"] { background: var(--qorg-number-widget-4-bg) !important; }
+html[data-qorg-theme-runtime="1"] .widget.number-widget-box[data-qorg-palette="1"]:hover { background: var(--qorg-number-widget-1-hover) !important; }
+html[data-qorg-theme-runtime="1"] .widget.number-widget-box[data-qorg-palette="2"]:hover { background: var(--qorg-number-widget-2-hover) !important; }
+html[data-qorg-theme-runtime="1"] .widget.number-widget-box[data-qorg-palette="3"]:hover { background: var(--qorg-number-widget-3-hover) !important; }
+html[data-qorg-theme-runtime="1"] .widget.number-widget-box[data-qorg-palette="4"]:hover { background: var(--qorg-number-widget-4-hover) !important; }
+html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box[data-qorg-palette="1"] { background: var(--qorg-shortcut-widget-1-bg) !important; }
+html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box[data-qorg-palette="2"] { background: var(--qorg-shortcut-widget-2-bg) !important; }
+html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box[data-qorg-palette="3"] { background: var(--qorg-shortcut-widget-3-bg) !important; }
+html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box[data-qorg-palette="4"] { background: var(--qorg-shortcut-widget-4-bg) !important; }
+html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box[data-qorg-palette="1"]:hover { background: var(--qorg-shortcut-widget-1-hover) !important; }
+html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box[data-qorg-palette="2"]:hover { background: var(--qorg-shortcut-widget-2-hover) !important; }
+html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box[data-qorg-palette="3"]:hover { background: var(--qorg-shortcut-widget-3-hover) !important; }
+html[data-qorg-theme-runtime="1"] .widget.shortcut-widget-box[data-qorg-palette="4"]:hover { background: var(--qorg-shortcut-widget-4-hover) !important; }
