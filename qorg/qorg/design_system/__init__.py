@@ -1,1 +1,1 @@
-LOGIN_EXPERIENCE_VERSION = "1.3.1-complete-theme-binding-audit"
+LOGIN_EXPERIENCE_VERSION = "1.3.2-mobile-sidebar-state-fix"
