@@ -16,25 +16,44 @@
     }
 
     function openCreateDialog(availableItems) {
-        const dialog = new frappe.ui.Dialog({title: __("Create"), size: "small", fields: [{fieldname: "items", fieldtype: "HTML"}]});
-        const container = dialog.fields_dict.items.$wrapper.empty();
+        const dialog = new frappe.ui.Dialog({
+            title: __("Create"),
+            size: "large",
+            fields: [{fieldname: "items", fieldtype: "HTML"}],
+        });
+        const wrapper = dialog.fields_dict.items.$wrapper.empty();
+        const grid = $("<div>", {class: "qorg-quick-create-grid"});
         let currentGroup = null;
 
         availableItems.forEach((item) => {
             if (item.group !== currentGroup) {
                 currentGroup = item.group;
-                container.append($("<div>", {class: "text-muted small mt-3 mb-1", text: __(currentGroup)}));
+                grid.append($("<div>", {class: "qorg-quick-create-group", text: __(currentGroup)}));
             }
-            const button = $("<button>", {type: "button", class: "btn btn-default btn-sm w-100 text-start mb-1"});
-            if (item.icon && frappe.utils?.icon) button.append($(frappe.utils.icon(item.icon, "sm")).addClass("me-2"));
-            button.append(document.createTextNode(__(item.label)));
-            if (item.description) button.attr("title", item.description);
+
+            const button = $("<button>", {
+                type: "button",
+                class: "qorg-quick-create-item",
+                title: item.description || __(item.label),
+            });
+            const icon = $("<span>", {class: "qorg-quick-create-item__icon"});
+            if (item.icon && frappe.utils?.icon) icon.html(frappe.utils.icon(item.icon, "sm"));
+
+            const text = $("<span>", {class: "qorg-quick-create-item__text"});
+            text.append($("<span>", {class: "qorg-quick-create-item__label", text: __(item.label)}));
+            if (item.description) {
+                text.append($("<span>", {class: "qorg-quick-create-item__description", text: __(item.description)}));
+            }
+
+            button.append(icon, text);
             button.on("click", () => {
                 dialog.hide();
                 frappe.new_doc(item.doctype);
             });
-            container.append(button);
+            grid.append(button);
         });
+
+        wrapper.append(grid);
         dialog.show();
     }
 
@@ -47,8 +66,10 @@
         }
         window.qorgActionRail?.register({
             id: "create",
-            label: "Create",
+            label: "New",
+            tooltip: "Create",
             icon: "add",
+            variant: "create",
             order: 10,
             onClick: () => openCreateDialog(availableItems),
         });

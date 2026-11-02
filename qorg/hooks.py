@@ -23,7 +23,6 @@ extend_bootinfo = "qorg.qorg.enterprise_foundation.boot.extend_bootinfo"
 app_include_js = [
     "/assets/qorg/js/qorg_form_bootstrap.js",
     "/assets/qorg/js/model_policy.js",
-    "/assets/qorg/js/qorg_action_rail.js",
     "/assets/qorg/js/qorg_language_action.js",
     "/assets/qorg/js/qorg_quick_create_action.js",
     "/assets/qorg/js/qorg_ui_tokens.js",
@@ -32,7 +31,6 @@ app_include_js = [
 
 app_include_css = [
     "/assets/qorg/css/model_policy.css",
-    "/assets/qorg/css/qorg_action_rail.css",
     "/assets/qorg/css/qorg_ui_tokens.css",
     "/assets/qorg/css/qorg_theme_runtime.css",
 ]
@@ -358,6 +356,10 @@ standard_portal_menu_items = [
         "role": "External Applicant",
     },
 ]
+
+role_home_page = {
+    "External Applicant": "opportunities",
+}
 
 permission_query_conditions = {
     "Task": "qorg.qorg.task_management.permissions.task_query_condition",

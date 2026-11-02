@@ -39,8 +39,10 @@
         }
         window.qorgActionRail?.register({
             id: "language",
-            label: "Language",
+            label: "Lang",
+            tooltip: "Language",
             icon: "language",
+            variant: "language",
             order: 20,
             onClick: openDialog,
         });
