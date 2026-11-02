@@ -1,0 +1,127 @@
+/* Q Org Design Tokens v1.3.4
+   Progressive enhancement for native Frappe Select controls.
+   Loaded after qorg_theme_runtime.css and qorg_theme_runtime_v133_fix.css. */
+
+/* Baseline closed control. This remains active in every browser. */
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] .control-input {
+    position: relative;
+    min-height: var(--qorg-desk-field-height) !important;
+}
+
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select.form-control,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select.input-with-feedback {
+    width: 100% !important;
+    min-height: var(--qorg-desk-field-height) !important;
+    height: var(--qorg-desk-field-height) !important;
+    padding-block: 0 !important;
+    padding-inline: 12px 34px !important;
+    background: var(--qorg-field-bg) !important;
+    color: var(--qorg-field-text) !important;
+    border: 1px solid var(--qorg-field-border) !important;
+    border-radius: var(--qorg-desk-field-radius) !important;
+    font: inherit;
+    line-height: calc(var(--qorg-desk-field-height) - 2px) !important;
+    text-align: center !important;
+    text-align-last: center !important;
+    cursor: pointer;
+}
+
+html[dir="rtl"][data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select.form-control,
+html[dir="rtl"][data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select.input-with-feedback {
+    padding-inline: 34px 12px !important;
+}
+
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select.form-control:focus,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select.input-with-feedback:focus {
+    border-color: var(--qorg-field-focus) !important;
+    outline: 3px solid color-mix(in srgb, var(--qorg-field-focus) 22%, transparent) !important;
+    outline-offset: 1px;
+    box-shadow: none !important;
+}
+
+/* Keep the Frappe arrow aligned to the configured height. */
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] .control-input .select-icon.xs,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"].form-group .select-icon.xs {
+    top: calc((var(--qorg-desk-field-height) - 20px) / 2) !important;
+    right: 10px !important;
+    left: auto !important;
+    transform: none !important;
+    pointer-events: none;
+}
+
+html[dir="rtl"][data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] .control-input .select-icon.xs,
+html[dir="rtl"][data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"].form-group .select-icon.xs {
+    right: auto !important;
+    left: 10px !important;
+}
+
+/* Placeholder follows field height rather than a hard-coded top value. */
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] .control-input .placeholder.xs,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"].form-group .placeholder.xs {
+    top: calc((var(--qorg-desk-field-height) - 22px) / 2) !important;
+    left: 12px !important;
+    right: 34px !important;
+    margin: 0 !important;
+    line-height: 22px !important;
+    text-align: center !important;
+    pointer-events: none;
+}
+
+html[dir="rtl"][data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] .control-input .placeholder.xs,
+html[dir="rtl"][data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"].form-group .placeholder.xs {
+    left: 34px !important;
+    right: 12px !important;
+}
+
+/* Full picker styling only when the browser supports customizable native select.
+   Unsupported browsers keep the usable native picker. */
+@supports (appearance: base-select) {
+    html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select.form-control,
+    html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select.input-with-feedback,
+    html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select.form-control::picker(select),
+    html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select.input-with-feedback::picker(select) {
+        appearance: base-select;
+    }
+
+    /* Frappe already supplies the visible select icon. */
+    html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select::picker-icon {
+        opacity: 0;
+        width: 0;
+    }
+
+    html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select::picker(select) {
+        margin-block-start: 6px;
+        padding: 6px;
+        background: var(--qorg-menu-bg);
+        color: var(--qorg-menu-text);
+        border: 1px solid var(--qorg-menu-border);
+        border-radius: var(--qorg-menu-radius);
+        box-shadow: 0 14px 34px rgb(0 0 0 / .18);
+        max-height: min(360px, 55vh);
+        overflow-y: auto;
+    }
+
+    html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select option {
+        min-height: var(--qorg-menu-item-height);
+        padding-block: max(7px, calc((var(--qorg-menu-item-height) - 20px) / 2));
+        padding-inline: var(--qorg-menu-item-padding);
+        background: transparent;
+        color: var(--qorg-menu-text);
+        border: 0;
+        border-radius: var(--qorg-menu-item-radius);
+        font: inherit;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select option:hover,
+    html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select option:focus,
+    html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select option:checked {
+        background: var(--qorg-menu-hover-bg);
+        color: var(--qorg-menu-hover-text);
+    }
+
+    html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select option::checkmark {
+        color: var(--qorg-brand-primary);
+    }
+}

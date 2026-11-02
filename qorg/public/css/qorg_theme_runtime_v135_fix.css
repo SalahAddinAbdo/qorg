@@ -1,0 +1,162 @@
+/* Q Org Design Tokens v1.3.5
+   Focused correction for Select positioning and Link/Awesomplete stacking.
+   Load after qorg_theme_runtime.css, v1.3.3 and v1.3.4. */
+
+/* --------------------------------------------------------------------------
+   1. Native Select: let Frappe own placeholder vertical positioning.
+   The explicit top value caused the label to be vertically displaced.
+   -------------------------------------------------------------------------- */
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] .control-input .placeholder.xs,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"].form-group .placeholder.xs {
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+    line-height: normal !important;
+    text-align: center !important;
+    pointer-events: none;
+}
+
+/* The closed native select itself owns vertical centering. */
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select.form-control,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] select.input-with-feedback {
+    min-height: var(--qorg-desk-field-height) !important;
+    height: var(--qorg-desk-field-height) !important;
+    padding-block: 0 !important;
+    line-height: normal !important;
+    text-align: center !important;
+    text-align-last: center !important;
+}
+
+/* Arrow stays on the natural side for each document direction. */
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] .control-input .select-icon.xs,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"].form-group .select-icon.xs {
+    top: calc((var(--qorg-desk-field-height) - 20px) / 2) !important;
+    right: 10px !important;
+    left: auto !important;
+    transform: none !important;
+}
+
+html[dir="rtl"][data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] .control-input .select-icon.xs,
+html[dir="rtl"][data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"].form-group .select-icon.xs {
+    right: auto !important;
+    left: 10px !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. Link and Dynamic Link: restore Frappe's native DOM geometry.
+   No generic menu surface is applied to Awesomplete containers.
+   -------------------------------------------------------------------------- */
+html[data-qorg-theme-runtime="1"] .awesomplete > ul,
+html[data-qorg-theme-runtime="1"] .autocomplete-list {
+    min-width: revert !important;
+    width: revert !important;
+    max-width: revert !important;
+    max-height: revert !important;
+    overflow: revert !important;
+    padding: revert !important;
+    background: revert !important;
+    color: revert !important;
+    border: revert !important;
+    border-radius: revert !important;
+    box-shadow: revert !important;
+}
+
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Link"] .control-input,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Dynamic Link"] .control-input,
+html[data-qorg-theme-runtime="1"] .link-field .control-input,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Link"] .input-group,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Dynamic Link"] .input-group,
+html[data-qorg-theme-runtime="1"] .link-field .input-group {
+    display: block !important;
+    min-height: auto !important;
+    height: auto !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Link"] .awesomplete,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Dynamic Link"] .awesomplete,
+html[data-qorg-theme-runtime="1"] .link-field .awesomplete {
+    display: block !important;
+    position: relative;
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Link"] .awesomplete > input,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Dynamic Link"] .awesomplete > input,
+html[data-qorg-theme-runtime="1"] .link-field .awesomplete > input {
+    width: 100% !important;
+    min-height: var(--qorg-desk-field-height) !important;
+    height: var(--qorg-desk-field-height) !important;
+    background: var(--qorg-field-bg) !important;
+    color: var(--qorg-field-text) !important;
+    border: 1px solid var(--qorg-field-border) !important;
+    border-radius: var(--qorg-desk-field-radius) !important;
+}
+
+/* Do not force the Link action segment to look like a second input. */
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Link"] .input-group-btn,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Dynamic Link"] .input-group-btn,
+html[data-qorg-theme-runtime="1"] .link-field .input-group-btn {
+    width: auto !important;
+    height: auto !important;
+    min-height: auto !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. Link popup stacking: raise only the focused Link control.
+   This prevents unrelated Link inputs from drawing above the active popup.
+   -------------------------------------------------------------------------- */
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Link"],
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Dynamic Link"] {
+    position: relative;
+    z-index: auto;
+}
+
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Link"]:focus-within,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Dynamic Link"]:focus-within {
+    z-index: 40;
+}
+
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Link"]:focus-within .awesomplete > ul,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Dynamic Link"]:focus-within .awesomplete > ul {
+    z-index: 41 !important;
+}
+
+/* Filter areas must not create a higher stacking context than an open Link list. */
+html[data-qorg-theme-runtime="1"] .report-filter-item,
+html[data-qorg-theme-runtime="1"] .filter-field,
+html[data-qorg-theme-runtime="1"] .form-group {
+    isolation: auto !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. MultiSelect-specific popup only. Keep geometry local and do not touch Link.
+   -------------------------------------------------------------------------- */
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelect"] .multiselect-list,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelectList"] .multiselect-list {
+    max-height: min(360px, 55vh) !important;
+    overflow-y: auto !important;
+    padding: 6px !important;
+    background: var(--qorg-menu-bg) !important;
+    color: var(--qorg-menu-text) !important;
+    border: 1px solid var(--qorg-menu-border) !important;
+    border-radius: var(--qorg-menu-radius) !important;
+    box-shadow: 0 14px 34px rgb(0 0 0 / .18) !important;
+}
+
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelect"] .multiselect-list .status-text,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelectList"] .multiselect-list .status-text {
+    position: absolute;
+    top: 7px !important;
+    left: 8px !important;
+    right: 8px !important;
+    margin: 0 !important;
+}
