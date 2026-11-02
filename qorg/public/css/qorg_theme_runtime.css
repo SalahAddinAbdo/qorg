@@ -576,11 +576,9 @@ html[dir="rtl"][data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Sel
    -------------------------------------------------------------------------- */
 html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] .control-input .placeholder.xs,
 html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"].form-group .placeholder.xs {
-    top: auto !important;
     bottom: auto !important;
     transform: none !important;
     margin: 0 !important;
-    line-height: normal !important;
     text-align: center !important;
     pointer-events: none;
 }

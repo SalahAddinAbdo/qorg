@@ -74,6 +74,59 @@
         scheduleWidgetPalettes();
     }
 
+
+
+    function findQueryReportCheckArea(report) {
+        const controls = (report.filters || [])
+            .map((control) => control?.wrapper || control?.$wrapper?.get?.(0))
+            .filter(Boolean);
+
+        if (!controls.length) return null;
+
+        const firstTop = controls[0].getBoundingClientRect().top;
+        const nextRow = controls.find((element) => {
+            const rect = element.getBoundingClientRect();
+            return rect.height > 0 && rect.top > firstTop + 4;
+        });
+
+        return nextRow || controls.find((element) => getComputedStyle(element).display === "none") || null;
+    }
+
+    function installQueryReportCollapseCompatibility() {
+        const prototype = window.frappe?.views?.QueryReport?.prototype;
+        if (!prototype || prototype.__qorgCollapseCompatibility) return !!prototype;
+
+        const original = prototype.toggle_filter_visiblity;
+        if (typeof original !== "function") return false;
+
+        prototype.toggle_filter_visiblity = function (...args) {
+            if (!this.check_filter_area?.css) {
+                const element = findQueryReportCheckArea(this);
+                if (element && window.jQuery) this.check_filter_area = window.jQuery(element);
+            }
+
+            if (!this.check_filter_area?.css) {
+                console.warn("Q Org: Query Report collapse area is unavailable; preserving report filters.");
+                return;
+            }
+
+            return original.apply(this, args);
+        };
+
+        prototype.__qorgCollapseCompatibility = true;
+        return true;
+    }
+
+    function scheduleQueryReportCompatibility() {
+        let attempts = 0;
+        const timer = window.setInterval(() => {
+            attempts += 1;
+            if (installQueryReportCollapseCompatibility() || attempts >= 40) {
+                window.clearInterval(timer);
+            }
+        }, 50);
+    }
+
     function load() {
         return frappe.call({method: "qorg.qorg.design_system.api.get_ui_configuration"}).then((response) => {
             const config = response.message || {};
@@ -83,10 +136,12 @@
     }
 
     try { render(JSON.parse(localStorage.getItem(CACHE_KEY) || "null")); } catch (_) {}
+    scheduleQueryReportCompatibility();
 
     if (window.frappe?.after_ajax) frappe.after_ajax(() => {
         load();
         scheduleWidgetPalettes();
+        scheduleQueryReportCompatibility();
     });
     else if (window.frappe?.call) load();
 
@@ -96,6 +151,9 @@
     document.addEventListener("click", () => setTimeout(scheduleWidgetPalettes, 80), true);
 
     if (window.frappe?.router?.on) {
-        frappe.router.on("change", scheduleWidgetPalettes);
+        frappe.router.on("change", () => {
+            scheduleWidgetPalettes();
+            scheduleQueryReportCompatibility();
+        });
     }
 })();
