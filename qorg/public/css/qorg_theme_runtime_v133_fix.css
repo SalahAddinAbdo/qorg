@@ -1,0 +1,138 @@
+/* Q Org Design Tokens v1.3.3
+   Focused compatibility layer loaded after qorg_theme_runtime.css. */
+
+/* 1. Restore Frappe's native suggestion containers.
+   The broad v1.3.2 menu rule interfered with Link/Awesomplete positioning. */
+html[data-qorg-theme-runtime="1"] .awesomplete > ul,
+html[data-qorg-theme-runtime="1"] .autocomplete-list {
+    min-width: unset !important;
+    max-height: unset !important;
+    overflow-y: unset !important;
+    padding: unset !important;
+    background: unset !important;
+    color: unset !important;
+    border: unset !important;
+    border-radius: unset !important;
+    box-shadow: unset !important;
+}
+
+/* Keep Frappe's own stacking and width calculations for Link menus. */
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Link"] .awesomplete > ul,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Dynamic Link"] .awesomplete > ul,
+html[data-qorg-theme-runtime="1"] .link-field .awesomplete > ul {
+    z-index: auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+}
+
+/* 2. Link controls retain their native Frappe structure.
+   Only dimensions and visual tokens are inherited. */
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Link"] .control-input,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Dynamic Link"] .control-input,
+html[data-qorg-theme-runtime="1"] .link-field .control-input,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Link"] .input-group,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Dynamic Link"] .input-group,
+html[data-qorg-theme-runtime="1"] .link-field .input-group {
+    display: block !important;
+    min-height: auto !important;
+    height: auto !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Link"] .awesomplete,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Dynamic Link"] .awesomplete,
+html[data-qorg-theme-runtime="1"] .link-field .awesomplete {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Link"] .awesomplete > input,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Dynamic Link"] .awesomplete > input,
+html[data-qorg-theme-runtime="1"] .link-field .awesomplete > input {
+    width: 100% !important;
+    min-height: var(--qorg-desk-field-height) !important;
+    height: var(--qorg-desk-field-height) !important;
+    background: var(--qorg-field-bg) !important;
+    color: var(--qorg-field-text) !important;
+    border: 1px solid var(--qorg-field-border) !important;
+    border-radius: var(--qorg-desk-field-radius) !important;
+}
+
+/* Remove the forced square secondary Link segment introduced by v1.3.2. */
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Link"] .input-group-btn,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Dynamic Link"] .input-group-btn,
+html[data-qorg-theme-runtime="1"] .link-field .input-group-btn {
+    width: auto !important;
+    height: auto !important;
+    min-height: auto !important;
+    margin: 0 !important;
+    background: transparent !important;
+}
+
+/* 3. Select and MultiSelect: do not force an inline-end/right override.
+   Frappe keeps the arrow on the correct side for the active language. */
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] .control-input .select-icon.xs,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"].form-group .select-icon.xs,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelect"] .control-input .select-icon.xs,
+html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelectList"] .control-input .select-icon.xs {
+    top: calc((var(--qorg-desk-field-height) - 20px) / 2) !important;
+    right: 10px !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+}
+
+[dir="rtl"] html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] .control-input .select-icon.xs,
+[dir="rtl"] html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"].form-group .select-icon.xs,
+[dir="rtl"] html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelect"] .control-input .select-icon.xs,
+[dir="rtl"] html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelectList"] .control-input .select-icon.xs,
+html[dir="rtl"][data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="Select"] .control-input .select-icon.xs,
+html[dir="rtl"][data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelect"] .control-input .select-icon.xs,
+html[dir="rtl"][data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelectList"] .control-input .select-icon.xs {
+    right: auto !important;
+    left: 10px !important;
+}
+
+/* Preserve centered content without the previous 34px logical padding. */
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Select"] select.form-control,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="Select"] .form-control,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="MultiSelect"] .form-control,
+html[data-qorg-theme-runtime="1"] [data-fieldtype="MultiSelectList"] .form-control,
+html[data-qorg-theme-runtime="1"] .multiselect-input {
+    display: flex !important;
+    align-items: center !important;
+    min-height: var(--qorg-desk-field-height) !important;
+    height: var(--qorg-desk-field-height) !important;
+    padding-inline: 12px !important;
+    text-align: center !important;
+    text-align-last: center !important;
+}
+
+/* Status text tracks the configured field height.
+   At the default 36px height this resolves to 7px. */
+html[data-qorg-theme-runtime="1"] .multiselect-list .status-text {
+    position: absolute;
+    top: calc((var(--qorg-desk-field-height) - 22px) / 2) !important;
+    left: 8px !important;
+    right: 8px !important;
+    margin: 0 !important;
+}
+
+/* Leave option list geometry to Frappe; style only individual choices when safe. */
+html[data-qorg-theme-runtime="1"] .multiselect-list .list-item,
+html[data-qorg-theme-runtime="1"] .select-options > div {
+    min-height: var(--qorg-menu-item-height) !important;
+    padding-inline: var(--qorg-menu-item-padding) !important;
+    border-radius: var(--qorg-menu-item-radius) !important;
+}
+
+html[data-qorg-theme-runtime="1"] .multiselect-list .list-item:hover,
+html[data-qorg-theme-runtime="1"] .select-options > div:hover {
+    background: var(--qorg-menu-hover-bg) !important;
+    color: var(--qorg-menu-hover-text) !important;
+}
