@@ -55,8 +55,7 @@
         const navDark = declaration(colors, "dark_");
         const webLight = declaration(colors, "web_light_");
         const webDark = declaration(colors, "web_dark_");
-        const path = location.pathname.replace(/\/+$/, "") || "/";
-        const scope = path === "/app" || path.startsWith("/app/") ? "desk" : "web";
+        const scope = location.pathname.startsWith("/app") || !!window.frappe?.boot ? "desk" : "web";
 
         root.dataset.qorgScope = scope;
         style.textContent = `
@@ -127,12 +126,7 @@
 
         prototype.render_chart = function (...args) {
             const pageMain = this.page?.main?.[0] || this.page?.wrapper?.[0];
-            const chartHost = pageMain?.querySelector?.(
-                ".report-chart, .chart-wrapper, .chart-container, .frappe-chart, [data-chart]"
-            );
-            const chartWidth = chartHost?.getBoundingClientRect?.().width;
-            const pageWidth = pageMain?.getBoundingClientRect?.().width;
-            const width = Number.isFinite(chartWidth) ? chartWidth : pageWidth;
+            const width = pageMain?.getBoundingClientRect?.().width;
 
             if (!Number.isFinite(width) || width < 120) {
                 clearTimeout(this.__qorgChartRetryTimer);
