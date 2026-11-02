@@ -56,8 +56,44 @@ html[data-qorg-theme-runtime="1"] .input-with-feedback:not([type="checkbox"]):no
     background: var(--qorg-field-bg) !important;
     color: var(--qorg-field-text) !important;
     border: 1px solid var(--qorg-field-border) !important;
-    border-radius: var(--qorg-desk-field-radius) !important;
     box-shadow: none !important;
+}
+
+/* Radius ownership: standalone fields keep all corners. Fields inside an
+   input-group leave the adjoining edge square so the selector/action segment
+   forms one continuous control. Logical corners work in both LTR and RTL. */
+html[data-qorg-theme-runtime="1"] input.form-control:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not(.input-group *),
+html[data-qorg-theme-runtime="1"] textarea.form-control:not(.input-group *),
+html[data-qorg-theme-runtime="1"] select.form-control:not(.input-group *),
+html[data-qorg-theme-runtime="1"] .awesomplete:not(.input-group *) > input,
+html[data-qorg-theme-runtime="1"] .multiselect-input:not(.input-group *),
+html[data-qorg-theme-runtime="1"] .input-with-feedback:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not(.input-group *) {
+    border-radius: var(--qorg-desk-field-radius) !important;
+}
+
+html[data-qorg-theme-runtime="1"] .input-group > input.form-control,
+html[data-qorg-theme-runtime="1"] .input-group > textarea.form-control,
+html[data-qorg-theme-runtime="1"] .input-group > select.form-control,
+html[data-qorg-theme-runtime="1"] .input-group > .input-with-feedback,
+html[data-qorg-theme-runtime="1"] .input-group > .awesomplete > input {
+    border-start-start-radius: var(--qorg-desk-field-radius) !important;
+    border-end-start-radius: var(--qorg-desk-field-radius) !important;
+    border-start-end-radius: 0 !important;
+    border-end-end-radius: 0 !important;
+}
+
+html[data-qorg-theme-runtime="1"] .input-group > :is(.input-group-btn,.input-group-append) {
+    min-height: var(--qorg-desk-field-height) !important;
+    margin-inline-start: -1px !important;
+}
+
+html[data-qorg-theme-runtime="1"] .input-group > :is(.input-group-btn,.input-group-append) > :is(.btn,.es-button) {
+    min-height: var(--qorg-desk-field-height) !important;
+    height: var(--qorg-desk-field-height) !important;
+    border-start-start-radius: 0 !important;
+    border-end-start-radius: 0 !important;
+    border-start-end-radius: var(--qorg-desk-field-radius) !important;
+    border-end-end-radius: var(--qorg-desk-field-radius) !important;
 }
 
 html[data-qorg-theme-runtime="1"] input.form-control::placeholder,
@@ -236,63 +272,102 @@ html[data-qorg-theme-runtime="1"] .es-button[data-variant="solid"]:hover {
     border-color: var(--qorg-button-hover) !important;
 }
 
-/* Grouped controls keep one continuous outline. The field owns only the outer
-   start corners; the adjoining selector/action owns only the outer end corners. */
-html[data-qorg-theme-runtime="1"] .input-group > :is(.form-control,.input-with-feedback) {
-    border-start-start-radius: var(--qorg-desk-field-radius) !important;
-    border-end-start-radius: var(--qorg-desk-field-radius) !important;
-    border-start-end-radius: 0 !important;
-    border-end-end-radius: 0 !important;
-}
-
-html[data-qorg-theme-runtime="1"] .input-group > .input-group-btn,
-html[data-qorg-theme-runtime="1"] .input-group > .input-group-append {
-    min-height: var(--qorg-desk-field-height) !important;
-    margin-inline-start: -1px !important;
-}
-
-html[data-qorg-theme-runtime="1"] .input-group > :is(.input-group-btn,.input-group-append) > :is(.btn,.es-button) {
-    min-height: var(--qorg-desk-field-height) !important;
-    height: var(--qorg-desk-field-height) !important;
-    border-start-start-radius: 0 !important;
-    border-end-start-radius: 0 !important;
-    border-start-end-radius: var(--qorg-desk-field-radius) !important;
-    border-end-end-radius: var(--qorg-desk-field-radius) !important;
-}
-
-/* Espresso and grouped buttons use the same dimensions as adjacent Frappe buttons. */
-html[data-qorg-theme-runtime="1"] .es-button,
-html[data-qorg-theme-runtime="1"] .btn-group > .btn,
-html[data-qorg-theme-runtime="1"] .btn-group > .es-button,
-html[data-qorg-theme-runtime="1"] .inner-group-button > .es-button {
+/* Button dimension parity without reviving elements that Frappe hides. */
+html[data-qorg-theme-runtime="1"] .es-button:not(.hide):not([hidden]),
+html[data-qorg-theme-runtime="1"] .btn-group > :is(.btn,.es-button):not(.hide):not([hidden]),
+html[data-qorg-theme-runtime="1"] .inner-group-button > .es-button:not(.hide):not([hidden]) {
     min-height: var(--qorg-desk-button-height) !important;
     height: var(--qorg-desk-button-height) !important;
     padding-block: 0 !important;
-    display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     border-radius: var(--qorg-desk-button-radius) !important;
+}
+
+/* Preserve native hidden state. A broad display:flex rule must never make an
+   empty secondary action or an empty action group visible. */
+html[data-qorg-theme-runtime="1"] :is(.es-button,.btn,.btn-group,.actions-btn-group).hide,
+html[data-qorg-theme-runtime="1"] :is(.es-button,.btn,.btn-group,.actions-btn-group)[hidden] {
+    display: none !important;
 }
 
 html[data-qorg-theme-runtime="1"] .btn-group > :is(.btn,.es-button):not(:first-child) {
     border-start-start-radius: 0 !important;
     border-end-start-radius: 0 !important;
 }
-
 html[data-qorg-theme-runtime="1"] .btn-group > :is(.btn,.es-button):not(:last-child) {
     border-start-end-radius: 0 !important;
     border-end-end-radius: 0 !important;
 }
 
-/* Menus and Sidebar. */
-@media (min-width: 992px) {
-    html[data-qorg-theme-runtime="1"] .body-sidebar {
-        background: var(--qorg-sidebar-bg) !important;
-        border-color: var(--qorg-sidebar-border) !important;
-        min-height: 100dvh;
-        align-self: stretch;
-    }
+/* Reload and other square icon actions inherit the configured button size. */
+html[data-qorg-theme-runtime="1"] .page-icon-group :is(.icon-btn,.btn),
+html[data-qorg-theme-runtime="1"] .page-actions :is(.icon-btn,.btn-icon) {
+    min-width: var(--qorg-desk-button-height) !important;
+    width: var(--qorg-desk-button-height) !important;
+    min-height: var(--qorg-desk-button-height) !important;
+    height: var(--qorg-desk-button-height) !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: var(--qorg-desk-button-radius) !important;
 }
+
+/* Icon color ownership. Icons inherit the text color of their interactive
+   surface, so primary, neutral, hover and active states stay visually coherent. */
+html[data-qorg-theme-runtime="1"] :is(.btn,.es-button,.icon-btn,.btn-icon) {
+    --qorg-effective-icon-color: var(--qorg-icon);
+}
+
+html[data-qorg-theme-runtime="1"] :is(.btn,.es-button,.icon-btn,.btn-icon) :is(.icon,.es-icon,svg),
+html[data-qorg-theme-runtime="1"] :is(.btn,.es-button,.icon-btn,.btn-icon) > :is(.icon,.es-icon,svg) {
+    color: var(--qorg-effective-icon-color, currentColor) !important;
+}
+
+/* Neutral icon actions use the configured Icon Color. */
+html[data-qorg-theme-runtime="1"] :is(.btn-default,.btn-secondary,.secondary-action,.icon-btn,.btn-icon) {
+    --qorg-effective-icon-color: var(--qorg-icon);
+}
+
+/* Solid/primary actions make icons inherit the configured button text color. */
+html[data-qorg-theme-runtime="1"] :is(.btn-primary,.primary-action,.es-button[data-variant="solid"]) {
+    --qorg-effective-icon-color: var(--qorg-button-text);
+}
+
+html[data-qorg-theme-runtime="1"] :is(.btn-primary,.primary-action,.es-button[data-variant="solid"]):hover {
+    --qorg-effective-icon-color: var(--qorg-button-text);
+}
+
+/* Icons drawn with currentColor follow the color above without forcing fills on
+   logos or decorative SVG artwork. */
+html[data-qorg-theme-runtime="1"] :is(.btn,.es-button,.icon-btn,.btn-icon) :is(svg.icon,svg.es-icon) {
+    stroke: currentColor;
+}
+
+/* Sidebar and menu icons use their dedicated settings and inherit state colors. */
+html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item :is(.icon,.es-icon,svg) {
+    color: var(--qorg-sidebar-icon) !important;
+}
+html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item:hover :is(.icon,.es-icon,svg) {
+    color: var(--qorg-sidebar-hover-text) !important;
+}
+html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item:is(.selected,.active) :is(.icon,.es-icon,svg) {
+    color: var(--qorg-sidebar-active-text) !important;
+}
+
+html[data-qorg-theme-runtime="1"] :is(.es-menu__item,.dropdown-item) :is(.icon,.es-icon,svg) {
+    color: var(--qorg-menu-icon) !important;
+}
+html[data-qorg-theme-runtime="1"] :is(.es-menu__item,.dropdown-item):hover :is(.icon,.es-icon,svg) {
+    color: var(--qorg-menu-hover-text) !important;
+}
+html[data-qorg-theme-runtime="1"] :is(.es-menu__item,.dropdown-item):is(.active,[aria-selected="true"]) :is(.icon,.es-icon,svg) {
+    color: var(--qorg-menu-active-text) !important;
+}
+
+/* Menus and Sidebar. */
+html[data-qorg-theme-runtime="1"] .body-sidebar { background: var(--qorg-sidebar-bg) !important; border-color: var(--qorg-sidebar-border) !important; }
 html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item {
     min-height: var(--qorg-sidebar-item-height) !important;
     padding-inline: var(--qorg-sidebar-item-padding) !important;
@@ -344,19 +419,6 @@ html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widg
     border-radius: var(--qorg-workspace-widget-radius) !important;
     transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease;
 }
-
-html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget):not([data-qorg-palette]):nth-child(4n + 1) { background: var(--qorg-number-widget-1-bg) !important; }
-html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget):not([data-qorg-palette]):nth-child(4n + 2) { background: var(--qorg-number-widget-2-bg) !important; }
-html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget):not([data-qorg-palette]):nth-child(4n + 3) { background: var(--qorg-number-widget-3-bg) !important; }
-html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget):not([data-qorg-palette]):nth-child(4n) { background: var(--qorg-number-widget-4-bg) !important; }
-html[data-qorg-theme-runtime="1"] .number-card-container:nth-child(4n + 1) :is(.number-card,.widget):not([data-qorg-palette]) { background: var(--qorg-number-widget-1-bg) !important; }
-html[data-qorg-theme-runtime="1"] .number-card-container:nth-child(4n + 2) :is(.number-card,.widget):not([data-qorg-palette]) { background: var(--qorg-number-widget-2-bg) !important; }
-html[data-qorg-theme-runtime="1"] .number-card-container:nth-child(4n + 3) :is(.number-card,.widget):not([data-qorg-palette]) { background: var(--qorg-number-widget-3-bg) !important; }
-html[data-qorg-theme-runtime="1"] .number-card-container:nth-child(4n) :is(.number-card,.widget):not([data-qorg-palette]) { background: var(--qorg-number-widget-4-bg) !important; }
-html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget):not([data-qorg-palette]):nth-child(4n + 1) { background: var(--qorg-shortcut-widget-1-bg) !important; }
-html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget):not([data-qorg-palette]):nth-child(4n + 2) { background: var(--qorg-shortcut-widget-2-bg) !important; }
-html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget):not([data-qorg-palette]):nth-child(4n + 3) { background: var(--qorg-shortcut-widget-3-bg) !important; }
-html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget):not([data-qorg-palette]):nth-child(4n) { background: var(--qorg-shortcut-widget-4-bg) !important; }
 
 html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget)[data-qorg-palette="1"] { background: var(--qorg-number-widget-1-bg) !important; }
 html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget)[data-qorg-palette="2"] { background: var(--qorg-number-widget-2-bg) !important; }
@@ -749,13 +811,4 @@ html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelectLis
     left: 8px !important;
     right: 8px !important;
     margin: 0 !important;
-}
-
-html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item .item-anchor {
-    height: auto !important;
-    min-height: inherit;
-}
-@media (min-width: 992px) {
-    html[data-qorg-theme-runtime="1"] .body-sidebar,
-    html[data-qorg-theme-runtime="1"] .body-sidebar > .body-sidebar-container { min-height: 100dvh; }
 }
