@@ -237,13 +237,7 @@ html[data-qorg-theme-runtime="1"] .es-button[data-variant="solid"]:hover {
 }
 
 /* Menus and Sidebar. */
-/* Keep Frappe's native mobile open/close state authoritative. Do not force the
-   sidebar surface with !important, because Frappe clears it when the mobile
-   drawer closes. */
-html[data-qorg-theme-runtime="1"] .body-sidebar {
-    background: var(--qorg-sidebar-bg);
-    border-color: var(--qorg-sidebar-border);
-}
+html[data-qorg-theme-runtime="1"] .body-sidebar { background: var(--qorg-sidebar-bg) !important; border-color: var(--qorg-sidebar-border) !important; }
 html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item {
     min-height: var(--qorg-sidebar-item-height) !important;
     padding-inline: var(--qorg-sidebar-item-padding) !important;
