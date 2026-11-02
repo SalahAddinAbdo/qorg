@@ -14,7 +14,6 @@ class QOrgDesignSystemSettings(Document):
         self._validate_dimensions()
         self._validate_typography()
         self._validate_font_source()
-        self._validate_font_weights()
         self._validate_login_slides()
 
     def _validate_colors(self):
@@ -53,20 +52,6 @@ class QOrgDesignSystemSettings(Document):
         for name in ("body_line_height", "paragraph_line_height", "heading_line_height"):
             if self.meta.has_field(name) and not 1.0 <= float(self.get(name) or 0) <= 2.0:
                 frappe.throw(_("{0} must be between 1.0 and 2.0.").format(self.meta.get_label(name)))
-
-    def _validate_font_weights(self):
-        if not self.meta.has_field("font_weights"):
-            return
-        values = []
-        for part in str(self.font_weights or "").split(","):
-            part = part.strip()
-            if not part:
-                continue
-            if not part.isdigit() or int(part) < 100 or int(part) > 900 or int(part) % 100:
-                frappe.throw(_("Font Weights must be comma-separated values from 100 to 900 in increments of 100."))
-            values.append(int(part))
-        if not values:
-            frappe.throw(_("At least one Font Weight is required."))
 
     def _validate_font_source(self):
         if not self.meta.has_field("font_source"):

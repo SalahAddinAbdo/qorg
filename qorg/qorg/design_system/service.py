@@ -61,20 +61,6 @@ def _float(doc, fieldname, minimum, maximum):
     return max(minimum, min(maximum, value))
 
 
-def _font_weights(doc):
-    raw = str(_value(doc, "font_weights") or "400,500,600,700")
-    values = []
-    for part in raw.split(","):
-        try:
-            value = int(part.strip())
-        except (TypeError, ValueError):
-            continue
-        if 100 <= value <= 900 and value % 100 == 0 and value not in values:
-            values.append(value)
-    values.sort()
-    return values or [400, 500, 600, 700]
-
-
 def _font_stack(doc, language=None):
     source = _value(doc, "font_source") or "Frappe Default"
     if source == "Frappe Default":
@@ -116,7 +102,6 @@ def get_ui_tokens(language=None):
         "heading_line_height": _float(doc, "heading_line_height", 1.0, 2.0),
     }
     tokens["font_family"] = _font_stack(doc, language)
-    tokens["font_weights"] = _font_weights(doc)
     return tokens
 
 
@@ -166,11 +151,6 @@ def tokens_to_css(tokens=None):
     }
     if t.get("font_family"):
         values["--qorg-font-family"] = t["font_family"]
-    weights = t.get("font_weights") or [400, 500, 600, 700]
-    values["--qorg-font-weight-regular"] = str(weights[0])
-    values["--qorg-font-weight-medium"] = str(weights[min(1, len(weights) - 1)])
-    values["--qorg-font-weight-semibold"] = str(weights[min(2, len(weights) - 1)])
-    values["--qorg-font-weight-bold"] = str(weights[-1])
     return ";".join(f"{key}:{value}" for key, value in values.items())
 
 
@@ -232,16 +212,10 @@ def get_theme_configuration():
             if HEX_RE.fullmatch(value):
                 colors[name] = value.upper()
         elif name in THEME_SIZE_FIELDS:
-            raw_value = doc.get(name)
-            if raw_value in (None, ""):
-                raw_value = field.default
             try:
-                sizes[name] = int(raw_value if raw_value not in (None, "") else 0)
+                sizes[name] = int(doc.get(name) or field.default or 0)
             except (TypeError, ValueError):
-                try:
-                    sizes[name] = int(field.default or 0)
-                except (TypeError, ValueError):
-                    sizes[name] = 0
+                sizes[name] = 0
     return {
         "colors": colors,
         "sizes": sizes,

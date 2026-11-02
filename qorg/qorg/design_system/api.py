@@ -36,17 +36,7 @@ def set_login_language(language):
 
 @frappe.whitelist()
 def get_available_languages():
-    settings = frappe.get_single("Q Org Design System Settings")
-    return {
-        "current": frappe.local.lang,
-        "show_language_action": bool(settings.show_language_action),
-        "languages": frappe.get_all(
-            "Language",
-            filters={"enabled": 1},
-            fields=["language_code", "language_name"],
-            order_by="language_name",
-        ),
-    }
+    return {"current": frappe.local.lang, "languages": frappe.get_all("Language", filters={"enabled": 1}, fields=["language_code", "language_name"], order_by="language_name")}
 
 
 @frappe.whitelist(methods=["POST"])
@@ -60,29 +50,4 @@ def set_current_user_language(language):
 
 @frappe.whitelist()
 def get_quick_create_menu():
-    settings = frappe.get_single("Q Org Design System Settings")
-    items = []
-    seen = set()
-
-    for row in settings.quick_create_items or []:
-        doctype = row.reference_doctype
-        if not row.enabled or not doctype or doctype in seen or not frappe.db.exists("DocType", doctype):
-            continue
-
-        meta = frappe.get_meta(doctype)
-        if meta.istable or meta.issingle or not frappe.has_permission(doctype, "create"):
-            continue
-
-        seen.add(doctype)
-        items.append({
-            "doctype": doctype,
-            "label": row.display_label or meta.get_label(),
-            "group": row.menu_group or "Create",
-            "description": row.description or "",
-            "icon": row.icon or "add",
-            "favorite": bool(row.is_favorite),
-            "sequence": int(row.sequence or 10),
-        })
-
-    items.sort(key=lambda item: (not item["favorite"], item["sequence"], item["group"], item["label"]))
-    return {"items": items}
+    return {"items": []}
