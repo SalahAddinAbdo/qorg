@@ -892,12 +892,13 @@ html[dir="rtl"][data-qorg-theme-runtime="1"] select.condition.form-control.input
         justify-content: space-between !important;
         flex-wrap: nowrap !important;
         white-space: nowrap !important;
+        overflow-x: hidden;
     }
 
     html[data-qorg-theme-runtime="1"] select.condition.form-control.input-xs::picker-icon {
         flex: 0 0 auto;
         align-self: center;
-        margin-inline-start: 8px;
+        margin-inline-start: 0px;
         color: var(--qorg-icon);
     }
 
