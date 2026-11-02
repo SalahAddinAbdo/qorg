@@ -429,6 +429,26 @@ html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widg
     transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease;
 }
 
+/* First-paint palette fallback. Frappe creates Workspace cards before the
+   runtime script adds data-qorg-palette. These rules color only cards that have
+   not yet received the runtime attribute, preventing the brief uniform color. */
+html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget):not([data-qorg-palette]):nth-child(4n + 1) { background: var(--qorg-number-widget-1-bg) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget):not([data-qorg-palette]):nth-child(4n + 2) { background: var(--qorg-number-widget-2-bg) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget):not([data-qorg-palette]):nth-child(4n + 3) { background: var(--qorg-number-widget-3-bg) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget):not([data-qorg-palette]):nth-child(4n) { background: var(--qorg-number-widget-4-bg) !important; }
+
+/* KPI/Number Card layouts use a wrapper per card, so the palette position must
+   also be read from number-card-container. */
+html[data-qorg-theme-runtime="1"] .number-card-container:nth-child(4n + 1) :is(.number-card,.widget):not([data-qorg-palette]) { background: var(--qorg-number-widget-1-bg) !important; }
+html[data-qorg-theme-runtime="1"] .number-card-container:nth-child(4n + 2) :is(.number-card,.widget):not([data-qorg-palette]) { background: var(--qorg-number-widget-2-bg) !important; }
+html[data-qorg-theme-runtime="1"] .number-card-container:nth-child(4n + 3) :is(.number-card,.widget):not([data-qorg-palette]) { background: var(--qorg-number-widget-3-bg) !important; }
+html[data-qorg-theme-runtime="1"] .number-card-container:nth-child(4n) :is(.number-card,.widget):not([data-qorg-palette]) { background: var(--qorg-number-widget-4-bg) !important; }
+
+html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget):not([data-qorg-palette]):nth-child(4n + 1) { background: var(--qorg-shortcut-widget-1-bg) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget):not([data-qorg-palette]):nth-child(4n + 2) { background: var(--qorg-shortcut-widget-2-bg) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget):not([data-qorg-palette]):nth-child(4n + 3) { background: var(--qorg-shortcut-widget-3-bg) !important; }
+html[data-qorg-theme-runtime="1"] :is(.widget.shortcut-widget-box,.shortcut-widget-box,.shortcut-widget):not([data-qorg-palette]):nth-child(4n) { background: var(--qorg-shortcut-widget-4-bg) !important; }
+
 html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget)[data-qorg-palette="1"] { background: var(--qorg-number-widget-1-bg) !important; }
 html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget)[data-qorg-palette="2"] { background: var(--qorg-number-widget-2-bg) !important; }
 html[data-qorg-theme-runtime="1"] :is(.widget.number-widget-box,.number-card,.number-card-container .widget)[data-qorg-palette="3"] { background: var(--qorg-number-widget-3-bg) !important; }
