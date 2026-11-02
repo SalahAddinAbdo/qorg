@@ -367,7 +367,16 @@ html[data-qorg-theme-runtime="1"] :is(.es-menu__item,.dropdown-item):is(.active,
 }
 
 /* Menus and Sidebar. */
-html[data-qorg-theme-runtime="1"] .body-sidebar { background: var(--qorg-sidebar-bg) !important; border-color: var(--qorg-sidebar-border) !important; }
+/* Sidebar surface colors are desktop-only. On mobile, Frappe owns the drawer
+   surface and its native open/close/outside-click state. */
+@media (min-width: 992px) {
+    html[data-qorg-theme-runtime="1"] .body-sidebar {
+        background: var(--qorg-sidebar-bg) !important;
+        border-color: var(--qorg-sidebar-border) !important;
+        min-height: 100dvh;
+        align-self: stretch;
+    }
+}
 html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item {
     min-height: var(--qorg-sidebar-item-height) !important;
     padding-inline: var(--qorg-sidebar-item-padding) !important;
@@ -811,4 +820,18 @@ html[data-qorg-theme-runtime="1"] .frappe-control[data-fieldtype="MultiSelectLis
     left: 8px !important;
     right: 8px !important;
     margin: 0 !important;
+}
+
+/* Preserve natural alignment for leaf and parent sidebar rows. */
+html[data-qorg-theme-runtime="1"] .body-sidebar .standard-sidebar-item .item-anchor {
+    height: auto !important;
+    min-height: inherit;
+}
+
+/* Restore full desktop height after switching from mobile viewport. */
+@media (min-width: 992px) {
+    html[data-qorg-theme-runtime="1"] .body-sidebar,
+    html[data-qorg-theme-runtime="1"] .body-sidebar > .body-sidebar-container {
+        min-height: 100dvh;
+    }
 }
