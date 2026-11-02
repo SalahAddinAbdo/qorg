@@ -15,8 +15,11 @@
     gap: 5px;
     padding: 6px;
     background: var(--qorg-elevated-bg, var(--card-bg, #fff));
-    border: 1px solid var(--qorg-border, var(--border-color));
+    background: color-mix(in srgb, var(--qorg-elevated-bg, var(--card-bg, #fff)) 86%, transparent);
+    border: 1px solid color-mix(in srgb, var(--qorg-border, var(--border-color)) 72%, transparent);
     border-radius: var(--qorg-menu-radius, 8px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 .qorg-action-rail__toggle, .qorg-action-rail__action {
     min-height: var(--qorg-desk-button-height, 32px);
@@ -41,9 +44,9 @@
     min-width: var(--qorg-desk-button-height, 32px);
     padding: 0;
     margin-inline-end: 6px;
-    color: var(--qorg-icon, var(--text-muted));
-    background: var(--qorg-control-bg, var(--control-bg));
-    border-color: var(--qorg-border, var(--border-color));
+    color: var(--qorg-primary-text, var(--text-color));
+    background: var(--qorg-brand-secondary, var(--secondary));
+    border-color: var(--qorg-brand-secondary, var(--secondary));
 }
 .qorg-action-rail.is-collapsed .qorg-action-rail__toggle { position: static; margin: 0; }
 .qorg-action-rail__action.is-create { color: var(--qorg-button-text, #fff); background: var(--qorg-button-bg, var(--primary)); border-color: var(--qorg-button-bg, var(--primary)); }
