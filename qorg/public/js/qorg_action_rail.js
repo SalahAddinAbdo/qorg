@@ -2,27 +2,14 @@
     "use strict";
 
     const ROOT_ID = "qorg-action-rail";
-    const STORAGE_KEY = "qorg-action-rail-collapsed-v2";
+    const STORAGE_KEY = "qorg-action-rail-collapsed-v1";
     const actions = new Map();
 
-    const fallbackIcons = {
+    const icons = {
         add: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
         language: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 12h17M12 3c2.6 2.5 4 5.5 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.5-4-9s1.4-6.5 4-9Z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>',
         toggle: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     };
-
-    function iconMarkup(name, size = "sm") {
-        const frappeIconName = name === "toggle" ? "chevron-right" : name;
-        try {
-            if (window.frappe?.utils?.icon) {
-                const markup = frappe.utils.icon(frappeIconName, size);
-                if (markup && !markup.includes("undefined")) return markup;
-            }
-        } catch (error) {
-            console.warn(`Q Org: icon ${frappeIconName} is unavailable; using fallback.`, error);
-        }
-        return fallbackIcons[name] || fallbackIcons.add;
-    }
 
     const isCollapsed = () => localStorage.getItem(STORAGE_KEY) === "1";
 
@@ -34,7 +21,6 @@
     function ensureRoot() {
         let root = document.getElementById(ROOT_ID);
         if (root) return root;
-
         root = document.createElement("aside");
         root.id = ROOT_ID;
         root.className = "qorg-action-rail";
@@ -62,7 +48,7 @@
         toggle.setAttribute("aria-expanded", String(!collapsed));
         toggle.setAttribute("aria-controls", "qorg-action-rail-items");
         toggle.title = collapsed ? __("Show quick actions") : __("Hide quick actions");
-        toggle.innerHTML = iconMarkup("toggle", "sm");
+        toggle.innerHTML = icons.toggle;
         toggle.addEventListener("click", () => setCollapsed(!collapsed));
         root.append(toggle);
 
@@ -78,20 +64,10 @@
             button.dataset.qorgAction = action.id;
             button.title = __(action.tooltip || action.label);
             button.setAttribute("aria-label", __(action.tooltip || action.label));
-
-            const icon = document.createElement("span");
-            icon.className = "qorg-action-rail__icon";
-            icon.innerHTML = iconMarkup(action.icon || "add", "sm");
-
-            const label = document.createElement("span");
-            label.className = "qorg-action-rail__label";
-            label.textContent = __(action.label);
-
-            button.append(icon, label);
+            button.innerHTML = `<span class="qorg-action-rail__icon">${icons[action.icon] || icons.add}</span><span class="qorg-action-rail__label">${__(action.label)}</span>`;
             button.addEventListener("click", action.onClick);
             items.append(button);
         });
-
         root.append(items);
     }
 
@@ -107,10 +83,8 @@
     }
 
     window.qorgActionRail = {register, unregister, render};
+    window.dispatchEvent(new CustomEvent("qorg-action-rail-ready"));
 
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", render, {once: true});
-    } else {
-        render();
-    }
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", render, {once: true});
+    else render();
 })();
