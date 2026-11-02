@@ -12,9 +12,14 @@
     };
 
     function iconMarkup(name, size = "sm") {
-        if (window.frappe?.utils?.icon) {
-            const markup = frappe.utils.icon(name, size);
-            if (markup) return markup;
+        const frappeIconName = name === "toggle" ? "chevron-right" : name;
+        try {
+            if (window.frappe?.utils?.icon) {
+                const markup = frappe.utils.icon(frappeIconName, size);
+                if (markup && !markup.includes("undefined")) return markup;
+            }
+        } catch (error) {
+            console.warn(`Q Org: icon ${frappeIconName} is unavailable; using fallback.`, error);
         }
         return fallbackIcons[name] || fallbackIcons.add;
     }
