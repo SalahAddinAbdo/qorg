@@ -126,14 +126,19 @@
 
         prototype.render_chart = function (...args) {
             const pageMain = this.page?.main?.[0] || this.page?.wrapper?.[0];
-            const width = pageMain?.getBoundingClientRect?.().width;
+            const chartHost = pageMain?.querySelector?.(
+                ".report-chart, .chart-wrapper, .chart-container, .frappe-chart, [data-chart]"
+            );
+            const chartWidth = chartHost?.getBoundingClientRect?.().width;
+            const pageWidth = pageMain?.getBoundingClientRect?.().width;
+            const width = Number.isFinite(chartWidth) ? chartWidth : pageWidth;
 
-            if (!Number.isFinite(width) || width < 120) {
+            if (!Number.isFinite(width) || width < 160) {
                 clearTimeout(this.__qorgChartRetryTimer);
                 const retries = Number(this.__qorgChartRetries || 0);
-                if (retries < 12) {
+                if (retries < 16) {
                     this.__qorgChartRetries = retries + 1;
-                    this.__qorgChartRetryTimer = window.setTimeout(() => this.render_chart(...args), 60);
+                    this.__qorgChartRetryTimer = window.setTimeout(() => this.render_chart(...args), 75);
                     return;
                 }
             }
