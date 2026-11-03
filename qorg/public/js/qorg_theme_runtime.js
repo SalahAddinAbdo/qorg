@@ -72,7 +72,6 @@
 [data-qorg-scope="web"][data-theme="dark"]{${webDark}}
 @media (prefers-color-scheme:dark){
  [data-qorg-scope="desk"]:not([data-theme="light"]):not([data-theme="dark"]){${deskDark};${navDark}}
- [data-qorg-scope="web"]:not([data-theme="light"]):not([data-theme="dark"]){${webDark}}
 }`;
         root.dataset.qorgThemeRuntime = "1";
         scheduleWidgetPalettes();
