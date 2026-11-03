@@ -3,6 +3,22 @@
     const root = document.documentElement;
     const cacheKey = "qorg-ui-tokens-v1.2.1";
 
+    function resolveScope() {
+        const path = window.location.pathname.replace(/\/+$/, "") || "/";
+        return path === "/app" || path.startsWith("/app/") ||
+            path === "/desk" || path.startsWith("/desk/")
+            ? "desk"
+            : "web";
+    }
+
+    // qorg_ui_tokens.js is the first Q Org runtime file in both app_include_js
+    // and web_include_js. Correct the scope synchronously before any cached
+    // tokens, theme requests, widgets, or route callbacks can paint.
+    root.dataset.qorgScope = resolveScope();
+    if (root.dataset.qorgScope === "desk") {
+        root.dataset.qorgThemeMode = "desk";
+    }
+
     function apply(tokens = {}) {
         const map = {
             "--primary-color": tokens.primary_color,
