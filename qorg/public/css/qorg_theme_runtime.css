@@ -938,3 +938,33 @@ html[dir="rtl"][data-qorg-theme-runtime="1"] select.condition.form-control.input
         color: var(--qorg-brand-primary);
     }
 }
+
+/* ========================================================================== 
+   Stable first paint for color-sensitive widgets
+   Hide only the surfaces that visibly flash before asynchronous theme tokens
+   arrive. Their layout remains reserved, and they are revealed without a
+   transition after the cached or server configuration has been installed.
+   ========================================================================== */
+html:not([data-qorg-theme-boot="ready"]) :is(
+    .widget.number-widget-box,
+    .number-card,
+    .number-card-container .widget,
+    .widget.shortcut-widget-box,
+    .shortcut-widget-box,
+    .shortcut-widget,
+    .qorg-action-rail
+) {
+    visibility: hidden !important;
+}
+
+html[data-qorg-theme-boot="ready"] :is(
+    .widget.number-widget-box,
+    .number-card,
+    .number-card-container .widget,
+    .widget.shortcut-widget-box,
+    .shortcut-widget-box,
+    .shortcut-widget,
+    .qorg-action-rail
+) {
+    visibility: visible;
+}

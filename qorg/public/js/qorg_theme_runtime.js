@@ -5,6 +5,10 @@
     const root = document.documentElement;
     let paletteTimer = null;
 
+    function releaseFirstPaint() {
+        root.dataset.qorgThemeBoot = "ready";
+    }
+
     const kebab = (value) => value.replaceAll("_", "-");
     const px = (value) => `${Math.max(0, Number(value) || 0)}px`;
 
@@ -72,6 +76,7 @@
 }`;
         root.dataset.qorgThemeRuntime = "1";
         scheduleWidgetPalettes();
+        requestAnimationFrame(releaseFirstPaint);
     }
 
 
@@ -164,14 +169,24 @@
     }
 
     function load() {
-        return frappe.call({method: "qorg.qorg.design_system.api.get_ui_configuration"}).then((response) => {
-            const config = response.message || {};
-            localStorage.setItem(CACHE_KEY, JSON.stringify(config));
-            render(config);
-        });
+        return frappe.call({method: "qorg.qorg.design_system.api.get_ui_configuration"})
+            .then((response) => {
+                const config = response.message || {};
+                localStorage.setItem(CACHE_KEY, JSON.stringify(config));
+                render(config);
+            })
+            .catch((error) => {
+                console.error("Q Org: unable to load theme configuration.", error);
+                releaseFirstPaint();
+            });
     }
 
-    try { render(JSON.parse(localStorage.getItem(CACHE_KEY) || "null")); } catch (_) {}
+    try {
+        const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || "null");
+        if (cached?.theme) render(cached);
+    } catch (_) {
+        localStorage.removeItem(CACHE_KEY);
+    }
     scheduleQueryReportCompatibility();
 
     if (window.frappe?.after_ajax) frappe.after_ajax(() => {
@@ -180,6 +195,13 @@
         scheduleQueryReportCompatibility();
     });
     else if (window.frappe?.call) load();
+    else releaseFirstPaint();
+
+    // Safety release only: a network or framework startup failure must not keep
+    // the affected controls hidden indefinitely.
+    window.setTimeout(() => {
+        if (root.dataset.qorgThemeBoot !== "ready") releaseFirstPaint();
+    }, 4000);
 
     window.addEventListener("hashchange", scheduleWidgetPalettes);
     window.addEventListener("popstate", scheduleWidgetPalettes);
