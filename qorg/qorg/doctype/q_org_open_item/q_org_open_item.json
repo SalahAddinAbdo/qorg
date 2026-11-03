@@ -1,0 +1,117 @@
+{
+  "doctype": "DocType",
+  "name": "Q Org Open Item",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "editable_grid": 1,
+  "field_order": [
+    "enabled",
+    "resource_type",
+    "page",
+    "report",
+    "reference_doctype",
+    "display_label",
+    "menu_group",
+    "is_favorite",
+    "description",
+    "icon",
+    "sequence"
+  ],
+  "fields": [
+    {
+      "fieldname": "enabled",
+      "fieldtype": "Check",
+      "label": "Enabled",
+      "default": "1",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "resource_type",
+      "fieldtype": "Select",
+      "label": "Resource Type",
+      "options": "Page\nReport\nDocType",
+      "default": "Page",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "page",
+      "fieldtype": "Link",
+      "label": "Page",
+      "options": "Page",
+      "depends_on": "eval:doc.resource_type == 'Page'",
+      "mandatory_depends_on": "eval:doc.resource_type == 'Page'",
+      "in_list_view": 1,
+      "columns": 3
+    },
+    {
+      "fieldname": "report",
+      "fieldtype": "Link",
+      "label": "Report",
+      "options": "Report",
+      "depends_on": "eval:doc.resource_type == 'Report'",
+      "mandatory_depends_on": "eval:doc.resource_type == 'Report'",
+      "in_list_view": 1,
+      "columns": 3
+    },
+    {
+      "fieldname": "reference_doctype",
+      "fieldtype": "Link",
+      "label": "Document Type",
+      "options": "DocType",
+      "depends_on": "eval:doc.resource_type == 'DocType'",
+      "mandatory_depends_on": "eval:doc.resource_type == 'DocType'",
+      "in_list_view": 1,
+      "columns": 3
+    },
+    {
+      "fieldname": "display_label",
+      "fieldtype": "Data",
+      "label": "Display Label",
+      "in_list_view": 1,
+      "columns": 2,
+      "description": "Optional translated label. Leave blank to use the standard Page, Report or DocType label."
+    },
+    {
+      "fieldname": "menu_group",
+      "fieldtype": "Data",
+      "label": "Group",
+      "in_list_view": 1,
+      "columns": 1,
+      "description": "Optional group such as Favorites, Operations, Finance, Projects or Reports."
+    },
+    {
+      "fieldname": "is_favorite",
+      "fieldtype": "Check",
+      "label": "Highlight as Favorite",
+      "default": "0"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Small Text",
+      "label": "Description",
+      "description": "Optional short description shown in the Open dialog."
+    },
+    {
+      "fieldname": "icon",
+      "fieldtype": "Data",
+      "label": "Icon",
+      "description": "Optional Frappe icon name, for example folder-open, chart, file or list."
+    },
+    {
+      "fieldname": "sequence",
+      "fieldtype": "Int",
+      "label": "Sequence",
+      "default": "10",
+      "in_list_view": 1,
+      "columns": 1
+    }
+  ],
+  "permissions": [],
+  "sort_field": "idx",
+  "sort_order": "ASC",
+  "track_changes": 1
+}

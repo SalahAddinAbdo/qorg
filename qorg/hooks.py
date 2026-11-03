@@ -26,6 +26,7 @@ app_include_js = [
     "/assets/qorg/js/qorg_action_rail.js",
     "/assets/qorg/js/qorg_language_action.js",
     "/assets/qorg/js/qorg_quick_create_action.js",
+    "/assets/qorg/js/qorg_open_action.js",
     "/assets/qorg/js/qorg_ui_tokens.js",
     "/assets/qorg/js/qorg_theme_runtime.js",
 ]

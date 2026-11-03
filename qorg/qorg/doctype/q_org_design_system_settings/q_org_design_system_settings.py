@@ -16,6 +16,7 @@ class QOrgDesignSystemSettings(Document):
         self._validate_font_source()
         self._validate_font_weights()
         self._validate_login_slides()
+        self._validate_quick_actions()
 
     def _validate_colors(self):
         for field in self.meta.fields:
@@ -89,3 +90,48 @@ class QOrgDesignSystemSettings(Document):
             frappe.throw(_("Image Panel Width must be between 35% and 60%."))
         if self.meta.has_field("login_slide_interval") and not 3 <= int(self.login_slide_interval or 6) <= 30:
             frappe.throw(_("Slide Interval must be between 3 and 30 seconds."))
+
+    def _validate_quick_actions(self):
+        self._validate_unique_quick_create_items()
+        self._validate_open_items()
+
+    def _validate_unique_quick_create_items(self):
+        seen = set()
+        for row in self.quick_create_items or []:
+            if not row.reference_doctype:
+                continue
+            if row.reference_doctype in seen:
+                frappe.throw(
+                    _("Document Type {0} is duplicated in Quick Create Items.").format(
+                        frappe.bold(row.reference_doctype)
+                    )
+                )
+            seen.add(row.reference_doctype)
+
+    def _validate_open_items(self):
+        reference_fields = {"Page": "page", "Report": "report", "DocType": "reference_doctype"}
+        seen = set()
+
+        for row in self.open_items or []:
+            fieldname = reference_fields.get(row.resource_type)
+            if not fieldname:
+                frappe.throw(_("Open Item row {0} has an invalid Resource Type.").format(row.idx))
+
+            reference = row.get(fieldname)
+            if not reference:
+                frappe.throw(
+                    _("{0} is required in Open Item row {1}.").format(_(row.resource_type), row.idx)
+                )
+
+            for other_field in set(reference_fields.values()) - {fieldname}:
+                row.set(other_field, None)
+
+            key = (row.resource_type, reference)
+            if key in seen:
+                frappe.throw(
+                    _("{0} {1} is duplicated in Open Items.").format(
+                        _(row.resource_type), frappe.bold(reference)
+                    )
+                )
+            seen.add(key)
+

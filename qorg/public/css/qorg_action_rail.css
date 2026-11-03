@@ -67,3 +67,10 @@ html[dir="rtl"] .qorg-action-rail.is-collapsed .qorg-action-rail__toggle svg { t
 .qorg-quick-create-item__label { display: block; font-weight: 600; }
 .qorg-quick-create-item__description { display: block; margin-top: 3px; color: var(--qorg-muted-text, var(--text-muted)); font-size: var(--font-size-xs, 11px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 @media (max-width: 767px) { .qorg-action-rail { inset-inline-end: 10px; top: auto; bottom: 72px; transform: none; } .qorg-quick-create-grid { grid-template-columns: 1fr; } }
+
+/* Open action uses the secondary brand as a distinct middle action. */
+.qorg-action-rail__action.is-open {
+    color: var(--qorg-primary-text, var(--text-color));
+    background: color-mix(in srgb, var(--qorg-brand-secondary, var(--secondary)) 78%, var(--qorg-control-bg, transparent));
+    border-color: var(--qorg-brand-secondary, var(--secondary));
+}

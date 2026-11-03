@@ -15,9 +15,15 @@
     "default_button_radius",
     "default_card_radius",
     "default_menu_radius",
-    "language_section",
+    "quick_actions_tab",
+    "quick_actions_preferences_section",
     "show_language_action",
+    "quick_actions_preferences_col",
+    "open_action_help",
+    "quick_create_section",
     "quick_create_items",
+    "open_items_section",
+    "open_items",
     "desk_theme_tab",
     "desk_light_section",
     "desk_light_page_bg",
@@ -27,12 +33,14 @@
     "desk_light_border",
     "desk_light_text",
     "desk_light_muted_text",
+    "desk_light_col_2",
     "desk_light_icon",
     "desk_light_link",
     "desk_light_link_hover",
     "desk_light_field_bg",
     "desk_light_field_text",
     "desk_light_field_placeholder",
+    "desk_light_col_3",
     "desk_light_field_border",
     "desk_light_field_focus",
     "desk_light_button_bg",
@@ -49,12 +57,14 @@
     "desk_dark_border",
     "desk_dark_text",
     "desk_dark_muted_text",
+    "desk_dark_col_2",
     "desk_dark_icon",
     "desk_dark_link",
     "desk_dark_link_hover",
     "desk_dark_field_bg",
     "desk_dark_field_text",
     "desk_dark_field_placeholder",
+    "desk_dark_col_3",
     "desk_dark_field_border",
     "desk_dark_field_focus",
     "desk_dark_button_bg",
@@ -66,6 +76,7 @@
     "desk_shape_section",
     "desk_field_radius",
     "desk_field_height",
+    "desk_shape_col_2",
     "desk_button_radius",
     "desk_button_height",
     "desk_card_radius",
@@ -79,6 +90,7 @@
     "light_sidebar_hover_text",
     "light_sidebar_active_bg",
     "light_sidebar_active_text",
+    "navigation_light_col_2",
     "light_menu_bg",
     "light_menu_border",
     "light_menu_text",
@@ -96,6 +108,7 @@
     "dark_sidebar_hover_text",
     "dark_sidebar_active_bg",
     "dark_sidebar_active_text",
+    "navigation_dark_col_2",
     "dark_menu_bg",
     "dark_menu_border",
     "dark_menu_text",
@@ -108,6 +121,7 @@
     "sidebar_item_height",
     "sidebar_item_radius",
     "sidebar_item_padding",
+    "navigation_shape_col_2",
     "menu_radius",
     "menu_item_height",
     "menu_item_radius",
@@ -179,6 +193,7 @@
     "desk_dark_shortcut_widget_text",
     "workspace_widgets_shape_section",
     "workspace_widget_radius",
+    "workspace_motion_col_2",
     "workspace_widget_hover_lift",
     "web_theme_tab",
     "web_light_section",
@@ -189,12 +204,14 @@
     "web_light_border",
     "web_light_text",
     "web_light_muted_text",
+    "web_light_col_2",
     "web_light_icon",
     "web_light_link",
     "web_light_link_hover",
     "web_light_field_bg",
     "web_light_field_text",
     "web_light_field_placeholder",
+    "web_light_col_3",
     "web_light_field_border",
     "web_light_field_focus",
     "web_light_button_bg",
@@ -211,12 +228,14 @@
     "web_dark_border",
     "web_dark_text",
     "web_dark_muted_text",
+    "web_dark_col_2",
     "web_dark_icon",
     "web_dark_link",
     "web_dark_link_hover",
     "web_dark_field_bg",
     "web_dark_field_text",
     "web_dark_field_placeholder",
+    "web_dark_col_3",
     "web_dark_field_border",
     "web_dark_field_focus",
     "web_dark_button_bg",
@@ -228,12 +247,14 @@
     "web_shape_section",
     "web_field_radius",
     "web_field_height",
+    "web_shape_col_2",
     "web_button_radius",
     "web_button_height",
     "web_card_radius",
     "login_tab",
     "login_enable_section",
     "enable_login_experience",
+    "login_enable_col_2",
     "show_login_language_switcher",
     "login_visual_section",
     "login_background_image",
@@ -249,12 +270,15 @@
     "login_form_subtitle",
     "login_brand_section",
     "login_brand_logo",
+    "login_brand_col_2",
     "login_footer_text",
     "login_slides_section",
     "login_image_panel_width",
     "login_slide_interval",
+    "login_slides_col_2",
     "login_return_label",
     "login_return_url",
+    "login_slides_table_section",
     "login_slides",
     "theme_typography_tab",
     "font_source_section",
@@ -345,9 +369,14 @@
       "default": "8"
     },
     {
-      "fieldname": "language_section",
+      "fieldname": "quick_actions_tab",
+      "fieldtype": "Tab Break",
+      "label": "Quick Actions"
+    },
+    {
+      "fieldname": "quick_actions_preferences_section",
       "fieldtype": "Section Break",
-      "label": "Language and Quick Create"
+      "label": "Action Rail"
     },
     {
       "fieldname": "show_language_action",
@@ -356,10 +385,36 @@
       "default": "1"
     },
     {
+      "fieldname": "quick_actions_preferences_col",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "open_action_help",
+      "fieldtype": "HTML",
+      "options": "<p class=\"text-muted\">Configure the New, Open and Language actions shown in the floating action rail.</p>"
+    },
+    {
+      "fieldname": "quick_create_section",
+      "fieldtype": "Section Break",
+      "label": "New Action"
+    },
+    {
       "fieldname": "quick_create_items",
       "fieldtype": "Table",
       "label": "Quick Create Items",
       "options": "Q Org Quick Create Item"
+    },
+    {
+      "fieldname": "open_items_section",
+      "fieldtype": "Section Break",
+      "label": "Open Action"
+    },
+    {
+      "fieldname": "open_items",
+      "fieldtype": "Table",
+      "label": "Open Items",
+      "options": "Q Org Open Item",
+      "description": "Pages, reports and document types available from the Open action. Users only see resources they are permitted to access."
     },
     {
       "fieldname": "desk_theme_tab",
@@ -414,6 +469,10 @@
       "default": "#687178"
     },
     {
+      "fieldname": "desk_light_col_2",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "desk_light_icon",
       "fieldtype": "Color",
       "label": "Icon Color",
@@ -448,6 +507,10 @@
       "fieldtype": "Color",
       "label": "Field Placeholder",
       "default": "#98A1A8"
+    },
+    {
+      "fieldname": "desk_light_col_3",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "desk_light_field_border",
@@ -545,6 +608,10 @@
       "default": "#9DA7B3"
     },
     {
+      "fieldname": "desk_dark_col_2",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "desk_dark_icon",
       "fieldtype": "Color",
       "label": "Dark Icon Color",
@@ -579,6 +646,10 @@
       "fieldtype": "Color",
       "label": "Dark Field Placeholder",
       "default": "#8B949E"
+    },
+    {
+      "fieldname": "desk_dark_col_3",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "desk_dark_field_border",
@@ -644,6 +715,10 @@
       "fieldtype": "Int",
       "label": "Desk Field Height (px)",
       "default": "36"
+    },
+    {
+      "fieldname": "desk_shape_col_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "desk_button_radius",
@@ -720,6 +795,10 @@
       "fieldtype": "Color",
       "label": "Sidebar Active Text",
       "default": "#137690"
+    },
+    {
+      "fieldname": "navigation_light_col_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "light_menu_bg",
@@ -823,6 +902,10 @@
       "default": "#FFFFFF"
     },
     {
+      "fieldname": "navigation_dark_col_2",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "dark_menu_bg",
       "fieldtype": "Color",
       "label": "Dark Menu Bg",
@@ -892,6 +975,10 @@
       "fieldtype": "Int",
       "label": "Sidebar Item Horizontal Padding (px)",
       "default": "10"
+    },
+    {
+      "fieldname": "navigation_shape_col_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "menu_radius",
@@ -1300,6 +1387,10 @@
       "default": "10"
     },
     {
+      "fieldname": "workspace_motion_col_2",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "workspace_widget_hover_lift",
       "fieldtype": "Int",
       "label": "Widget Hover Lift (px)",
@@ -1358,6 +1449,10 @@
       "default": "#687178"
     },
     {
+      "fieldname": "web_light_col_2",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "web_light_icon",
       "fieldtype": "Color",
       "label": "Icon Color",
@@ -1392,6 +1487,10 @@
       "fieldtype": "Color",
       "label": "Field Placeholder",
       "default": "#98A1A8"
+    },
+    {
+      "fieldname": "web_light_col_3",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "web_light_field_border",
@@ -1489,6 +1588,10 @@
       "default": "#9DA7B3"
     },
     {
+      "fieldname": "web_dark_col_2",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "web_dark_icon",
       "fieldtype": "Color",
       "label": "Dark Icon Color",
@@ -1523,6 +1626,10 @@
       "fieldtype": "Color",
       "label": "Dark Field Placeholder",
       "default": "#8B949E"
+    },
+    {
+      "fieldname": "web_dark_col_3",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "web_dark_field_border",
@@ -1590,6 +1697,10 @@
       "default": "44"
     },
     {
+      "fieldname": "web_shape_col_2",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "web_button_radius",
       "fieldtype": "Int",
       "label": "Web Button Radius (px)",
@@ -1622,6 +1733,10 @@
       "fieldtype": "Check",
       "label": "Enable Full Width Login Experience",
       "default": "1"
+    },
+    {
+      "fieldname": "login_enable_col_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "show_login_language_switcher",
@@ -1726,6 +1841,10 @@
       "label": "Login Logo"
     },
     {
+      "fieldname": "login_brand_col_2",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "login_footer_text",
       "fieldtype": "Small Text",
       "label": "Footer Text"
@@ -1751,6 +1870,10 @@
       "depends_on": "enable_login_experience"
     },
     {
+      "fieldname": "login_slides_col_2",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "login_return_label",
       "fieldtype": "Data",
       "label": "Return to Website Label",
@@ -1763,6 +1886,11 @@
       "label": "Return to Website URL",
       "default": "/",
       "depends_on": "enable_login_experience"
+    },
+    {
+      "fieldname": "login_slides_table_section",
+      "fieldtype": "Section Break",
+      "label": "Slides"
     },
     {
       "fieldname": "login_slides",
