@@ -253,3 +253,151 @@ html[data-qorg-scope="web"]:has(:is(.web-form-container, .web-form-wrapper, .qor
 ) {
     min-height: 0 !important;
 }
+
+/* --------------------------------------------------------------------------
+   7. Q Org accessible Web Select enhancement
+   -------------------------------------------------------------------------- */
+html[data-qorg-scope="web"] .qorg-web-select {
+    position: relative;
+    width: 100%;
+}
+
+html[data-qorg-scope="web"] .qorg-web-select > select.qorg-web-select__native {
+    position: absolute !important;
+    inline-size: 1px !important;
+    block-size: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+html[data-qorg-scope="web"] .qorg-web-select__trigger {
+    width: 100%;
+    min-height: var(--qorg-web-control-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-block: 0;
+    padding-inline: 14px 16px;
+    color: var(--qorg-field-text, var(--text-color));
+    background: var(--qorg-field-bg, var(--control-bg));
+    border: 1px solid var(--qorg-field-border, var(--border-color));
+    border-radius: var(--qorg-web-control-radius);
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+html[data-qorg-scope="web"] .qorg-web-select__trigger:is(:hover, :focus-visible),
+html[data-qorg-scope="web"] .qorg-web-select.is-open .qorg-web-select__trigger {
+    border-color: var(--qorg-field-focus, var(--primary-color));
+    outline: 0;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--qorg-field-focus, var(--primary-color)) 18%, transparent);
+}
+
+html[data-qorg-scope="web"] .qorg-web-select__trigger:disabled {
+    opacity: .62;
+    cursor: not-allowed;
+}
+
+html[data-qorg-scope="web"] .qorg-web-select__value {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+html[data-qorg-scope="web"] .qorg-web-select__arrow {
+    width: 9px;
+    height: 9px;
+    flex: 0 0 9px;
+    margin-inline-start: auto;
+    border-inline-end: 2px solid var(--qorg-web-popup-icon);
+    border-block-end: 2px solid var(--qorg-web-popup-icon);
+    transform: rotate(45deg) translateY(-2px);
+    transform-origin: center;
+    transition: transform .14s ease;
+}
+
+html[data-qorg-scope="web"] .qorg-web-select.is-open .qorg-web-select__arrow {
+    transform: rotate(225deg) translate(-1px, -1px);
+}
+
+html[data-qorg-scope="web"] .qorg-web-select__list {
+    position: absolute;
+    inset-block-start: calc(100% + 6px);
+    inset-inline: 0;
+    z-index: 1080;
+    max-height: min(360px, 55vh);
+    margin: 0;
+    padding: 6px;
+    overflow-y: auto;
+    list-style: none;
+    color: var(--qorg-web-popup-text);
+    background: var(--qorg-web-popup-bg);
+    border: 1px solid var(--qorg-web-popup-border);
+    border-radius: var(--qorg-web-popup-radius);
+    box-shadow: 0 14px 34px rgb(0 0 0 / 18%);
+}
+
+html[data-qorg-scope="web"] .qorg-web-select__list[hidden] {
+    display: none;
+}
+
+html[data-qorg-scope="web"] .qorg-web-select__option {
+    min-height: var(--qorg-web-popup-item-height);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px var(--qorg-web-popup-item-padding);
+    color: var(--qorg-web-popup-text);
+    background: transparent;
+    border-radius: var(--qorg-web-popup-item-radius);
+    cursor: pointer;
+}
+
+html[data-qorg-scope="web"] .qorg-web-select__option:is(:hover, [data-active="1"]) {
+    color: var(--qorg-web-popup-hover-text);
+    background: var(--qorg-web-popup-hover-bg);
+}
+
+html[data-qorg-scope="web"] .qorg-web-select__option[aria-selected="true"] {
+    color: var(--qorg-web-popup-active-text);
+    background: var(--qorg-web-popup-active-bg);
+}
+
+html[data-qorg-scope="web"] .qorg-web-select__option[aria-disabled="true"] {
+    opacity: .48;
+    cursor: not-allowed;
+}
+
+html[data-qorg-scope="web"] .qorg-web-select__check {
+    width: 16px;
+    flex: 0 0 16px;
+    color: var(--qorg-link, var(--primary-color));
+    font-weight: 700;
+    visibility: hidden;
+}
+
+html[data-qorg-scope="web"] .qorg-web-select__option[aria-selected="true"] .qorg-web-select__check {
+    visibility: visible;
+}
+
+/* Filters align vertically after the select is enhanced. */
+html[data-qorg-scope="web"] .qorg-filter-grid {
+    align-items: center;
+}
+
+/* The custom popup is the single visible arrow/menu owner. */
+html[data-qorg-scope="web"] .qorg-web-select + .select-icon,
+html[data-qorg-scope="web"] .qorg-web-select ~ .select-icon,
+html[data-qorg-scope="web"] .frappe-control[data-fieldtype="Select"]:has(.qorg-web-select) .select-icon,
+html[data-qorg-scope="web"] .qorg-filter-card label:has(.qorg-web-select)::after {
+    display: none !important;
+}
