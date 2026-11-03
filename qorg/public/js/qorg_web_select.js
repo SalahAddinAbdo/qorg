@@ -5,8 +5,14 @@
     const SELECTOR = 'select.form-control:not([multiple]):not([size]), select.input-with-feedback:not([multiple]):not([size])';
     let counter = 0;
 
+    function isDeskRoute() {
+        const path = window.location.pathname.replace(/\/+$/, "") || "/";
+        return path === "/app" || path.startsWith("/app/") ||
+            path === "/desk" || path.startsWith("/desk/");
+    }
+
     function isWeb() {
-        return document.documentElement.matches(ROOT_SELECTOR);
+        return !isDeskRoute() && document.documentElement.matches(ROOT_SELECTOR);
     }
 
     function closeAll(except = null) {
@@ -192,11 +198,18 @@
     });
 
     const start = () => {
+        if (isDeskRoute()) return;
+
         enhanceAll();
 
         let scopeObserver = null;
         if (!isWeb()) {
             scopeObserver = new MutationObserver(() => {
+                if (isDeskRoute()) {
+                    scopeObserver.disconnect();
+                    scopeObserver = null;
+                    return;
+                }
                 if (!isWeb()) return;
                 enhanceAll(document);
                 scopeObserver.disconnect();
@@ -209,6 +222,7 @@
         }
 
         new MutationObserver((records) => {
+            if (isDeskRoute()) return;
             records.forEach((record) => record.addedNodes.forEach((node) => {
                 if (node.nodeType === Node.ELEMENT_NODE) enhanceAll(node);
             }));
