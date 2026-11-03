@@ -64,11 +64,11 @@
     },
     {
       "fieldname": "icon",
-      "fieldtype": "Data",
+      "fieldtype": "Icon",
       "label": "Icon",
       "in_list_view": 0,
       "columns": 0,
-      "description": "Optional Frappe icon name, for example add, file, task or users."
+      "description": "Choose an icon from the Frappe icon picker. Leave blank to use the default icon."
     },
     {
       "fieldname": "sequence",

@@ -97,9 +97,11 @@
     },
     {
       "fieldname": "icon",
-      "fieldtype": "Data",
+      "fieldtype": "Icon",
       "label": "Icon",
-      "description": "Optional Frappe icon name, for example folder-open, chart, file or list."
+      "description": "Choose an icon from the Frappe icon picker. Leave blank to use the default icon.",
+      "in_list_view": 0,
+      "columns": 0
     },
     {
       "fieldname": "sequence",
