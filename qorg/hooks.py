@@ -41,6 +41,7 @@ app_include_css = [
 web_include_css = [
     "/assets/qorg/css/qorg_ui_tokens.css",
     "/assets/qorg/css/qorg_theme_runtime.css",
+    "/assets/qorg/css/opportunities_portal.css",
     "qorg_login_experience.bundle.css",
     "/assets/qorg/css/qorg_login_experience_hotfix.css",
 ]
