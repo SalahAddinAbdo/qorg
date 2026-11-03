@@ -278,10 +278,10 @@ html[data-qorg-scope="web"] .qorg-web-select > select.qorg-web-select__native {
 html[data-qorg-scope="web"] .qorg-web-select__trigger {
     width: 100%;
     min-height: var(--qorg-web-control-height);
-    display: flex;
+    display: grid;
+    grid-template-columns: 16px minmax(0, 1fr) 16px;
     align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+    gap: 8px;
     padding-block: 0;
     padding-inline: 14px 16px;
     color: var(--qorg-field-text, var(--text-color));
@@ -307,17 +307,19 @@ html[data-qorg-scope="web"] .qorg-web-select__trigger:disabled {
 }
 
 html[data-qorg-scope="web"] .qorg-web-select__value {
+    grid-column: 2;
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: center;
 }
 
 html[data-qorg-scope="web"] .qorg-web-select__arrow {
     width: 9px;
     height: 9px;
-    flex: 0 0 9px;
-    margin-inline-start: auto;
+    grid-column: 3;
+    justify-self: end;
     border-inline-end: 2px solid var(--qorg-web-popup-icon);
     border-block-end: 2px solid var(--qorg-web-popup-icon);
     transform: rotate(45deg) translateY(-2px);
