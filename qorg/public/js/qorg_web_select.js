@@ -241,12 +241,17 @@
             });
         }
 
-        new MutationObserver((records) => {
-            if (isDesk()) return;
+        const contentObserver = new MutationObserver((records) => {
+            if (isDesk()) {
+                contentObserver.disconnect();
+                closeAll();
+                return;
+            }
             records.forEach((record) => record.addedNodes.forEach((node) => {
                 if (node.nodeType === Node.ELEMENT_NODE) enhanceAll(node);
             }));
-        }).observe(document.body, {childList: true, subtree: true});
+        });
+        contentObserver.observe(document.body, {childList: true, subtree: true});
     };
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once: true});
