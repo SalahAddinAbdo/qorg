@@ -6,12 +6,20 @@
     let paletteTimer = null;
     let activeConfig = null;
 
+    function hasDeskShell() {
+        const body = document.body;
+        return !!body && (
+            body.classList.contains("desktop-page") ||
+            body.classList.contains("desk-page") ||
+            !!document.querySelector("#page-desktop, .layout-side-section, .desk-sidebar, .body-sidebar")
+        );
+    }
+
     function resolveScope() {
         const path = window.location.pathname.replace(/\/+$/, "") || "/";
-        return path === "/app" || path.startsWith("/app/") ||
-            path === "/desk" || path.startsWith("/desk/")
-            ? "desk"
-            : "web";
+        const deskPath = path === "/app" || path.startsWith("/app/") ||
+            path === "/desk" || path.startsWith("/desk/");
+        return deskPath || hasDeskShell() ? "desk" : "web";
     }
 
     function syncRuntimeScope(config = activeConfig) {
@@ -258,6 +266,16 @@
 
     installHistoryScopeSync();
     syncRouteRuntime();
+
+    if (document.body) {
+        new MutationObserver(() => {
+            if (root.dataset.qorgScope !== "desk" && hasDeskShell()) syncRouteRuntime();
+        }).observe(document.body, {
+            attributes: true,
+            attributeFilter: ["class"],
+            childList: true
+        });
+    }
     window.addEventListener("hashchange", syncRouteRuntime);
     window.addEventListener("popstate", syncRouteRuntime);
     window.addEventListener("pageshow", syncRouteRuntime);
