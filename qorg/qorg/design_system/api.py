@@ -14,7 +14,16 @@ def get_ui_configuration():
     config = get_ui_tokens(getattr(frappe.local, "lang", None))
     config["font_stylesheet_url"] = get_font_stylesheet_url()
     config["theme"] = get_theme_configuration()
+    config["user_theme_mode"] = _get_user_theme_mode()
     return config
+
+
+def _get_user_theme_mode():
+    if frappe.session.user == "Guest":
+        return "Light"
+
+    mode = frappe.db.get_value("User", frappe.session.user, "desk_theme") or "Light"
+    return mode if mode in {"Light", "Dark", "Automatic"} else "Light"
 
 
 @frappe.whitelist(allow_guest=True)
