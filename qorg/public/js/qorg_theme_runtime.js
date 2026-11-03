@@ -3,6 +3,7 @@
 
     const CACHE_KEY = "qorg-theme-runtime-v1.4";
     const root = document.documentElement;
+    let paletteFrame = null;
     let paletteTimer = null;
     let activeConfig = null;
 
@@ -61,16 +62,61 @@
         });
     }
 
+    const PALETTE_WIDGET_SELECTOR = [
+        ".widget.number-widget-box",
+        ".number-card",
+        ".number-card-container .widget",
+        ".widget.shortcut-widget-box",
+        ".shortcut-widget-box",
+        ".shortcut-widget"
+    ].join(", ");
+
     function assignWidgetPalettes() {
         assignPalette(".widget.number-widget-box, .number-card, .number-card-container .widget");
         assignPalette(".widget.shortcut-widget-box, .shortcut-widget-box, .shortcut-widget");
     }
 
+    function nodeContainsPaletteWidget(node) {
+        return node?.nodeType === Node.ELEMENT_NODE && (
+            node.matches?.(PALETTE_WIDGET_SELECTOR) ||
+            !!node.querySelector?.(PALETTE_WIDGET_SELECTOR)
+        );
+    }
+
     function scheduleWidgetPalettes() {
+        if (resolveScope() !== "desk") return;
+        if (paletteFrame !== null) cancelAnimationFrame(paletteFrame);
         clearTimeout(paletteTimer);
-        requestAnimationFrame(assignWidgetPalettes);
-        paletteTimer = setTimeout(assignWidgetPalettes, 180);
-        setTimeout(assignWidgetPalettes, 650);
+
+        paletteFrame = requestAnimationFrame(() => {
+            paletteFrame = null;
+            assignWidgetPalettes();
+        });
+        paletteTimer = window.setTimeout(assignWidgetPalettes, 250);
+    }
+
+    function installRuntimeObserver() {
+        if (!document.body || document.body.dataset.qorgRuntimeObserver === "1") return;
+        document.body.dataset.qorgRuntimeObserver = "1";
+
+        new MutationObserver((records) => {
+            const deskMounted = hasDeskShell();
+            if (root.dataset.qorgScope !== "desk" && deskMounted) {
+                syncRouteRuntime();
+                return;
+            }
+            if (resolveScope() !== "desk") return;
+
+            const hasNewWidgets = records.some((record) =>
+                [...record.addedNodes].some(nodeContainsPaletteWidget)
+            );
+            if (hasNewWidgets) scheduleWidgetPalettes();
+        }).observe(document.body, {
+            attributes: true,
+            attributeFilter: ["class"],
+            childList: true,
+            subtree: true
+        });
     }
 
     function resolveWebsiteThemeMode(config) {
@@ -265,21 +311,11 @@
     }
 
     installHistoryScopeSync();
+    installRuntimeObserver();
     syncRouteRuntime();
-
-    if (document.body) {
-        new MutationObserver(() => {
-            if (root.dataset.qorgScope !== "desk" && hasDeskShell()) syncRouteRuntime();
-        }).observe(document.body, {
-            attributes: true,
-            attributeFilter: ["class"],
-            childList: true
-        });
-    }
     window.addEventListener("hashchange", syncRouteRuntime);
     window.addEventListener("popstate", syncRouteRuntime);
     window.addEventListener("pageshow", syncRouteRuntime);
-    document.addEventListener("click", () => window.setTimeout(syncRouteRuntime, 80), true);
 
     if (window.frappe?.router?.on) {
         frappe.router.on("change", () => {
