@@ -4,6 +4,24 @@
     const CACHE_KEY = "qorg-theme-runtime-v1.4";
     const root = document.documentElement;
     let paletteTimer = null;
+    let activeConfig = null;
+
+    function resolveScope() {
+        const path = window.location.pathname.replace(/\/+$/, "") || "/";
+        return path === "/app" || path.startsWith("/app/") ||
+            path === "/desk" || path.startsWith("/desk/")
+            ? "desk"
+            : "web";
+    }
+
+    function syncRuntimeScope(config = activeConfig) {
+        const scope = resolveScope();
+        root.dataset.qorgScope = scope;
+        root.dataset.qorgThemeMode = scope === "web"
+            ? resolveWebsiteThemeMode(config || {})
+            : "desk";
+        return scope;
+    }
 
     function releaseFirstPaint() {
         root.dataset.qorgThemeBoot = "ready";
@@ -68,12 +86,8 @@
         const navDark = declaration(colors, "dark_");
         const webLight = declaration(colors, "web_light_");
         const webDark = declaration(colors, "web_dark_");
-        const path = location.pathname.replace(/\/+$/, "") || "/";
-        const isDeskPath = path === "/app" || path.startsWith("/app/") || path === "/desk" || path.startsWith("/desk/");
-        const scope = isDeskPath ? "desk" : "web";
-
-        root.dataset.qorgScope = scope;
-        root.dataset.qorgThemeMode = scope === "web" ? resolveWebsiteThemeMode(config) : "desk";
+        activeConfig = config;
+        syncRuntimeScope(config);
         style.textContent = `
 :root{${shared}}
 [data-qorg-scope="desk"]{${deskLight};${navLight}}
@@ -214,14 +228,40 @@
         if (root.dataset.qorgThemeBoot !== "ready") releaseFirstPaint();
     }, 4000);
 
-    window.addEventListener("hashchange", scheduleWidgetPalettes);
-    window.addEventListener("popstate", scheduleWidgetPalettes);
-    window.addEventListener("pageshow", scheduleWidgetPalettes);
-    document.addEventListener("click", () => setTimeout(scheduleWidgetPalettes, 80), true);
+    function syncRouteRuntime() {
+        syncRuntimeScope();
+        scheduleWidgetPalettes();
+    }
+
+    function installHistoryScopeSync() {
+        if (window.history.__qorgScopeSyncInstalled) return;
+        ["pushState", "replaceState"].forEach((method) => {
+            const original = window.history[method];
+            if (typeof original !== "function") return;
+            window.history[method] = function (...args) {
+                const result = original.apply(this, args);
+                queueMicrotask(syncRouteRuntime);
+                return result;
+            };
+        });
+        Object.defineProperty(window.history, "__qorgScopeSyncInstalled", {
+            value: true,
+            configurable: false,
+            enumerable: false,
+            writable: false
+        });
+    }
+
+    installHistoryScopeSync();
+    syncRouteRuntime();
+    window.addEventListener("hashchange", syncRouteRuntime);
+    window.addEventListener("popstate", syncRouteRuntime);
+    window.addEventListener("pageshow", syncRouteRuntime);
+    document.addEventListener("click", () => window.setTimeout(syncRouteRuntime, 80), true);
 
     if (window.frappe?.router?.on) {
         frappe.router.on("change", () => {
-            scheduleWidgetPalettes();
+            syncRouteRuntime();
             scheduleQueryReportCompatibility();
         });
     }
