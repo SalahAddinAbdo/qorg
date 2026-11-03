@@ -1,0 +1,47 @@
+/* Q Org Desk Controls v1.1
+   Loaded in Desk only through app_include_css. */
+body .filter-action-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+body .filter-action-buttons > button.btn.btn-xs.clear-filters,
+body .filter-action-buttons > button.btn.btn-xs.apply-filters {
+    width: auto !important;
+    min-width: max-content !important;
+    min-height: var(--qorg-desk-button-height, 32px) !important;
+    height: var(--qorg-desk-button-height, 32px) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 auto !important;
+    padding: 0 12px !important;
+    margin: 0 !important;
+    border-radius: var(--qorg-desk-button-radius, var(--border-radius, 6px)) !important;
+    font-size: var(--font-size-sm, 12px) !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    vertical-align: middle !important;
+    white-space: nowrap !important;
+}
+body .filter-action-buttons > button.btn.btn-xs.clear-filters {
+    color: var(--qorg-secondary-button-text, var(--text-color)) !important;
+    background: var(--qorg-secondary-button-bg, var(--card-bg)) !important;
+    border: 1px solid var(--qorg-border, var(--border-color)) !important;
+}
+body .filter-action-buttons > button.btn.btn-xs.clear-filters:is(:hover, :focus-visible) {
+    color: var(--qorg-secondary-button-text, var(--text-color)) !important;
+    background: var(--qorg-secondary-button-hover, var(--control-bg)) !important;
+    border-color: var(--qorg-field-focus, var(--primary-color)) !important;
+}
+body .filter-action-buttons > button.btn.btn-xs.apply-filters {
+    color: var(--qorg-button-text, #fff) !important;
+    background: var(--qorg-button-bg, var(--primary-color)) !important;
+    border: 1px solid var(--qorg-button-bg, var(--primary-color)) !important;
+}
+body .filter-action-buttons > button.btn.btn-xs.apply-filters:is(:hover, :focus-visible) {
+    color: var(--qorg-button-text, #fff) !important;
+    background: var(--qorg-button-hover, var(--primary-color)) !important;
+    border-color: var(--qorg-button-hover, var(--primary-color)) !important;
+}
