@@ -193,6 +193,21 @@
 
     const start = () => {
         enhanceAll();
+
+        let scopeObserver = null;
+        if (!isWeb()) {
+            scopeObserver = new MutationObserver(() => {
+                if (!isWeb()) return;
+                enhanceAll(document);
+                scopeObserver.disconnect();
+                scopeObserver = null;
+            });
+            scopeObserver.observe(document.documentElement, {
+                attributes: true,
+                attributeFilter: ['data-qorg-scope']
+            });
+        }
+
         new MutationObserver((records) => {
             records.forEach((record) => record.addedNodes.forEach((node) => {
                 if (node.nodeType === Node.ELEMENT_NODE) enhanceAll(node);
