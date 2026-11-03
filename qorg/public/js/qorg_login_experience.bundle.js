@@ -228,7 +228,7 @@
 
     const cached = safeJSON(localStorage.getItem(cacheKey), null);
     render(cached || fallback);
-    frappe.call({method: "qorg.qorg.design_system.api.get_login_experience"})
+    frappe.call({method: "qorg.qorg.design_system.api.get_login_experience", type: "GET"})
         .then((response) => {
             const config = response.message || fallback;
             localStorage.setItem(cacheKey, JSON.stringify(config));

@@ -55,7 +55,7 @@
 
     try { apply(JSON.parse(localStorage.getItem(cacheKey) || "null") || {}); } catch (_) {}
 
-    const load = () => frappe.call({method: "qorg.qorg.design_system.api.get_ui_configuration"})
+    const load = () => frappe.call({method: "qorg.qorg.design_system.api.get_ui_configuration", type: "GET"})
         .then((response) => {
             const tokens = response.message || {};
             localStorage.setItem(cacheKey, JSON.stringify(tokens));

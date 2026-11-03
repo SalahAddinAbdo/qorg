@@ -169,7 +169,7 @@
     }
 
     function load() {
-        return frappe.call({method: "qorg.qorg.design_system.api.get_ui_configuration"})
+        return frappe.call({method: "qorg.qorg.design_system.api.get_ui_configuration", type: "GET"})
             .then((response) => {
                 const config = response.message || {};
                 localStorage.setItem(CACHE_KEY, JSON.stringify(config));
