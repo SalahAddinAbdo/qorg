@@ -36,6 +36,7 @@ app_include_css = [
     "/assets/qorg/css/qorg_action_rail.css",
     "/assets/qorg/css/qorg_ui_tokens.css",
     "/assets/qorg/css/qorg_theme_runtime.css",
+    "/assets/qorg/css/qorg_desk_controls.css",
 ]
 
 web_include_css = [
