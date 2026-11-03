@@ -23,6 +23,10 @@
         return scope;
     }
 
+    // Correct stale Web -> Desk state before cached configuration or async
+    // configuration loading runs. Route listeners below keep it synchronized.
+    syncRuntimeScope();
+
     function releaseFirstPaint() {
         root.dataset.qorgThemeBoot = "ready";
     }
