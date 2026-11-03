@@ -59,8 +59,7 @@
         const navDark = declaration(colors, "dark_");
         const webLight = declaration(colors, "web_light_");
         const webDark = declaration(colors, "web_dark_");
-        const path = location.pathname.replace(/\/+$/, "") || "/";
-        const scope = path === "/app" || path.startsWith("/app/") ? "desk" : "web";
+        const scope = location.pathname.startsWith("/app") || !!window.frappe?.boot ? "desk" : "web";
 
         root.dataset.qorgScope = scope;
         style.textContent = `
