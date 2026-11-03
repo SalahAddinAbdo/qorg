@@ -403,3 +403,18 @@ html[data-qorg-scope="web"] .frappe-control[data-fieldtype="Select"]:has(.qorg-w
 html[data-qorg-scope="web"] .qorg-filter-card label:has(.qorg-web-select)::after {
     display: none !important;
 }
+
+/* --------------------------------------------------------------------------
+   8. Web Form action button alignment
+   Scope only the two native Web Form action locations. Do not target .btn,
+   buttons, dropdown items, Desk menus, or sidebar controls globally.
+   -------------------------------------------------------------------------- */
+html[data-qorg-scope="web"] .web-list-actions > a.btn.button-new,
+html[data-qorg-scope="web"] .text-center > a.btn.btn-new-doc {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    line-height: normal !important;
+    vertical-align: middle !important;
+}
