@@ -5,14 +5,34 @@
     const SELECTOR = 'select.form-control:not([multiple]):not([size]), select.input-with-feedback:not([multiple]):not([size])';
     let counter = 0;
 
+    function hasDeskShell() {
+        const body = document.body;
+        return !!body && (
+            body.classList.contains("desktop-page") ||
+            body.classList.contains("desk-page") ||
+            !!document.querySelector("#page-desktop, .layout-side-section, .desk-sidebar, .body-sidebar")
+        );
+    }
+
     function isDeskRoute() {
         const path = window.location.pathname.replace(/\/+$/, "") || "/";
         return path === "/app" || path.startsWith("/app/") ||
             path === "/desk" || path.startsWith("/desk/");
     }
 
+    function isDesk() {
+        return isDeskRoute() || hasDeskShell();
+    }
+
     function isWeb() {
-        return !isDeskRoute() && document.documentElement.matches(ROOT_SELECTOR);
+        return !isDesk() && document.documentElement.matches(ROOT_SELECTOR);
+    }
+
+    function isExcludedSurface(select) {
+        return !!select.closest(
+            '.modal, .modal-dialog, .frappe-dialog, .msgprint-dialog, [role="dialog"], ' +
+            '#page-desktop, .desktop-page, .desk-page, .layout-side-section, .desk-sidebar, .body-sidebar'
+        );
     }
 
     function closeAll(except = null) {
@@ -120,7 +140,7 @@
     }
 
     function enhance(select) {
-        if (!isWeb() || select.dataset.qorgWebSelect === '1' || select.closest('.qorg-web-select')) return;
+        if (!isWeb() || isExcludedSurface(select) || select.dataset.qorgWebSelect === '1' || select.closest('.qorg-web-select')) return;
         if (select.multiple || Number(select.size || 0) > 1) return;
 
         const wrapper = document.createElement('div');
@@ -198,14 +218,14 @@
     });
 
     const start = () => {
-        if (isDeskRoute()) return;
+        if (isDesk()) return;
 
         enhanceAll();
 
         let scopeObserver = null;
         if (!isWeb()) {
             scopeObserver = new MutationObserver(() => {
-                if (isDeskRoute()) {
+                if (isDesk()) {
                     scopeObserver.disconnect();
                     scopeObserver = null;
                     return;
@@ -222,7 +242,7 @@
         }
 
         new MutationObserver((records) => {
-            if (isDeskRoute()) return;
+            if (isDesk()) return;
             records.forEach((record) => record.addedNodes.forEach((node) => {
                 if (node.nodeType === Node.ELEMENT_NODE) enhanceAll(node);
             }));
