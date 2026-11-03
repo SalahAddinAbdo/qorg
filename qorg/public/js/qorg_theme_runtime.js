@@ -1,7 +1,7 @@
 (() => {
     "use strict";
 
-    const CACHE_KEY = "qorg-theme-runtime-v1.3";
+    const CACHE_KEY = "qorg-theme-runtime-v1.4";
     const root = document.documentElement;
     let paletteTimer = null;
 
@@ -43,6 +43,15 @@
         setTimeout(assignWidgetPalettes, 650);
     }
 
+    function resolveWebsiteThemeMode(config) {
+        const configured = String(config?.user_theme_mode || "Light").toLowerCase();
+        if (configured === "dark" || configured === "light") return configured;
+        if (configured === "automatic") {
+            return window.matchMedia?.("(prefers-color-scheme: dark)")?.matches ? "dark" : "light";
+        }
+        return "light";
+    }
+
     function render(config) {
         const theme = config?.theme;
         if (!theme) return;
@@ -64,14 +73,15 @@
         const scope = isDeskPath ? "desk" : "web";
 
         root.dataset.qorgScope = scope;
+        root.dataset.qorgThemeMode = scope === "web" ? resolveWebsiteThemeMode(config) : "desk";
         style.textContent = `
 :root{${shared}}
 [data-qorg-scope="desk"]{${deskLight};${navLight}}
 [data-qorg-scope="desk"][data-theme="light"]{${deskLight};${navLight}}
 [data-qorg-scope="desk"][data-theme="dark"]{${deskDark};${navDark}}
 [data-qorg-scope="web"]{${webLight}}
-[data-qorg-scope="web"][data-theme="light"]{${webLight}}
-[data-qorg-scope="web"][data-theme="dark"]{${webDark}}
+[data-qorg-scope="web"][data-qorg-theme-mode="light"]{${webLight}}
+[data-qorg-scope="web"][data-qorg-theme-mode="dark"]{${webDark}}
 @media (prefers-color-scheme:dark){
  [data-qorg-scope="desk"]:not([data-theme="light"]):not([data-theme="dark"]){${deskDark};${navDark}}
 }`;
