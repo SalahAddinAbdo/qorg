@@ -8,7 +8,6 @@
     const BUDGET_FIELDS = ["budget_line", "custom_budget_line"];
     const STANDARD_DIMENSIONS = ["cost_center", "custom_cost_center"];
     const DIMENSION_CONTROLLER = "/assets/qorg/js/transaction_controller.js";
-    const WORKFLOW_CONTROLLER = "/assets/qorg/js/document_workflow.js";
     let run_token = 0;
 
     const has_field = (meta, fieldname) =>
@@ -74,14 +73,11 @@
 
     async function initialize_current_form() {
         const token = ++run_token;
-        await new Promise((resolve) => setTimeout(resolve, 80));
         const frm = window.cur_frm;
         if (!frm?.doctype || token !== run_token) return;
 
-        // Workflow is initialized independently for every form. The workflow
-        // controller itself exits cleanly when no active workflow is configured.
-        await require_asset(WORKFLOW_CONTROLLER);
-        if (token !== run_token || window.cur_frm !== frm) return;
+        // The workflow controller is loaded before this bootstrap from hooks.py,
+        // so interception of the native Workflow menu is available immediately.
         if (typeof window.qorg_initialize_document_workflow === "function") {
             window.qorg_initialize_document_workflow(frm);
         }

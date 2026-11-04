@@ -1,8 +1,12 @@
 // ============================================================
 // Unified Workflow Handler for Frappe 16
+// Uses the native Frappe Workflow actions menu and routes execution through Q Org.
 // Change only the DocType name when copying this script.
 // ============================================================
+wf_install_standard_workflow_actions();
+
 window.qorg_initialize_document_workflow = function (frm) {
+    wf_install_standard_workflow_actions();
     frm = frm || window.cur_frm;
     if (!frm || frm.__qorg_workflow_handler_registered) return;
     frm.__qorg_workflow_handler_registered = true;
@@ -16,16 +20,13 @@ window.qorg_initialize_document_workflow = function (frm) {
         },
         refresh(current) {
             wf_restrict_employee_signatures(current);
-            if (current.is_new() || !wf_protect_document(current)) return;
-            setTimeout(() => wf_setup(current), 500);
+            wf_protect_document(current);
         }
     });
 
     wf_restrict_employee_signatures(frm);
     wf_prepare_new_document(frm);
-    if (!frm.is_new() && wf_protect_document(frm)) {
-        setTimeout(() => wf_setup(frm), 150);
-    }
+    if (!frm.is_new()) wf_protect_document(frm);
 };
 
 window.qorg_initialize_document_workflow(window.cur_frm);
@@ -61,57 +62,125 @@ function wf_restrict_employee_signatures(frm) {
         });
 }
 
-async function wf_setup(frm) {
-    if (frm.__wf_setup_running || frm.__wf_processing) return;
+function wf_install_standard_workflow_actions() {
+    const States = frappe?.ui?.form?.States;
+    const prototype = States?.prototype;
+    if (!prototype?.show_actions || prototype.__qorg_standard_actions_installed) return false;
 
-    const workflow = frappe.workflow?.workflows?.[frm.doctype];
-    if (!workflow?.transitions?.length) return;
+    const original_show_actions = prototype.show_actions;
+    Object.defineProperty(prototype, "__qorg_standard_actions_installed", {
+        value: true,
+        configurable: false,
+        enumerable: false,
+        writable: false
+    });
 
-    frm.__wf_setup_running = true;
-    try {
-        let allowed = [];
-        try {
-            allowed = await frappe.xcall(
-                "frappe.model.workflow.get_transitions",
-                { doc: frm.doc }
-            );
-        } catch (error) {
-            console.error("Unable to load workflow transitions", error);
-            frappe.show_alert({
-                message: __("Workflow actions could not be loaded. Please refresh the page."),
-                indicator: "orange"
-            });
-            return;
+    prototype.show_actions = function (...args) {
+        const frm = this.frm;
+        const workflow = frm && frappe.workflow?.workflows?.[frm.doctype];
+        if (!wf_is_qorg_workflow(workflow)) {
+            return original_show_actions.apply(this, args);
         }
+        return wf_show_standard_actions(this, workflow);
+    };
+    return true;
+}
 
-        const allowed_actions = new Set(
-            (allowed || []).map(row => wf_normalize(row.action))
-        );
-        const processed = new Set();
+function wf_is_qorg_workflow(workflow) {
+    return Boolean(
+        workflow?.transitions?.some((row) =>
+            Object.prototype.hasOwnProperty.call(row, "custom_responsibility_routing")
+        )
+    );
+}
 
-        workflow.transitions.forEach(transition => {
-            const action = String(transition.action || "").trim();
-            const key = wf_normalize(action);
-            const state_matches =
-                wf_normalize(transition.state) ===
-                wf_normalize(frm.doc.workflow_state);
+async function wf_show_standard_actions(states, workflow) {
+    const frm = states?.frm;
+    if (!frm || frm.is_new()) return;
 
-            if (!action || !state_matches || !allowed_actions.has(key) || processed.has(key)) return;
+    const request_id = (states.__qorg_actions_request_id || 0) + 1;
+    states.__qorg_actions_request_id = request_id;
+    frm.page?.clear_actions_menu?.();
+    if (frm.is_dirty()) return;
 
-            processed.add(key);
-            wf_hide_standard_action(frm, action);
-            frm.remove_custom_button(__(action), __("Actions"));
-            frm.add_custom_button(
-                __(action),
-                () => wf_open_action_dialog(frm, transition),
-                __("Actions")
-            );
+    let allowed;
+    try {
+        allowed = await frappe.xcall("frappe.model.workflow.get_transitions", {doc: frm.doc});
+    } catch (error) {
+        console.error("Unable to load workflow transitions", error);
+        frappe.show_alert({
+            message: __("Workflow actions could not be loaded. Please refresh the page."),
+            indicator: "orange"
         });
-
-        wf_style_actions(frm);
-    } finally {
-        frm.__wf_setup_running = false;
+        return;
     }
+
+    if (
+        window.cur_frm !== frm ||
+        frm.is_dirty() ||
+        states.__qorg_actions_request_id !== request_id
+    ) return;
+    const configured = workflow.transitions || [];
+    const state_field = workflow.workflow_state_field || workflow.state_fieldname || "workflow_state";
+    const current_state = wf_normalize(frm.doc[state_field]);
+    const can_execute = wf_can_execute_workflow(frm);
+
+    (allowed || []).forEach((allowed_transition) => {
+        const action = String(allowed_transition.action || "").trim();
+        if (!action) return;
+        const transition = configured.find((row) =>
+            wf_normalize(row.action) === wf_normalize(action) &&
+            wf_normalize(row.state) === current_state
+        );
+        if (!transition || !can_execute) return;
+
+        frm.page.add_action_item(__(action), () =>
+            wf_run_standard_action(frm, workflow, transition)
+        );
+    });
+}
+
+async function wf_run_standard_action(frm, workflow, transition) {
+    if (frm.__wf_processing) {
+        frappe.show_alert({
+            message: __("A workflow action is already being processed. Please wait."),
+            indicator: "orange"
+        });
+        return;
+    }
+    if (frm.is_dirty()) {
+        wf_message(
+            __("Unsaved Changes"),
+            __("The document contains unsaved changes. Please save it before continuing.")
+        );
+        return;
+    }
+
+    const proceed = async () => {
+        try {
+            await wf_open_action_dialog(frm, transition);
+        } catch (error) {
+            console.error("Workflow action dialog failed", error);
+            wf_show_error(error);
+        }
+    };
+
+    if (workflow?.enable_action_confirmation) {
+        frappe.confirm(
+            __("Are you sure you want to perform the workflow action {0}?", [__(transition.action || "")]),
+            proceed
+        );
+        return;
+    }
+    await proceed();
+}
+
+function wf_can_execute_workflow(frm) {
+    const responsible = String(frm.doc.custom_current_responsible_user || "").trim();
+    const current = String(frappe.session.user || "").trim();
+    if (!responsible || responsible === current) return true;
+    const roles = new Set(frappe.user_roles || []);
+    return current === "Administrator" || roles.has("System Manager") || roles.has("Workflow Admin");
 }
 
 async function wf_open_action_dialog(frm, transition) {
@@ -290,9 +359,14 @@ async function wf_run_transition(frm, transition, selected_user = "", signature_
     }
 
     frm.__wf_processing = true;
-    frappe.dom.freeze(__("Processing workflow action..."));
+    frm.selected_workflow_action = String(transition.action || "").trim();
+    let frozen = false;
 
     try {
+        await frm.script_manager.trigger("before_workflow_action");
+        frappe.dom.freeze(__("Processing workflow action..."));
+        frozen = true;
+
         const result = await frappe.xcall(
             "qorg.qorg.workflow.actions.apply_assigned_workflow_action",
             {
@@ -312,6 +386,7 @@ async function wf_run_transition(frm, transition, selected_user = "", signature_
 
         frappe.model.sync(result.doc);
         await frm.reload_doc();
+        await frm.script_manager.trigger("after_workflow_action");
 
         frappe.show_alert({
             message: result.comment_recorded
@@ -325,7 +400,8 @@ async function wf_run_transition(frm, transition, selected_user = "", signature_
         wf_show_error(error);
         return false;
     } finally {
-        frappe.dom.unfreeze();
+        if (frozen) frappe.dom.unfreeze();
+        frm.selected_workflow_action = null;
         frm.__wf_processing = false;
     }
 }
@@ -413,76 +489,6 @@ function wf_unlock_document_fields(frm) {
     });
     frm.__wf_fields_locked = false;
     frm.refresh_fields();
-}
-
-function wf_current_transition_labels(frm) {
-    const workflow = frappe.workflow?.workflows?.[frm.doctype];
-    const state = wf_normalize(frm.doc.workflow_state);
-    return new Set(
-        (workflow?.transitions || [])
-            .filter(row => wf_normalize(row.state) === state)
-            .flatMap(row => [wf_normalize(row.action), wf_normalize(__(row.action || ""))])
-            .filter(Boolean)
-    );
-}
-
-function wf_hide_workflow_actions_only(frm) {
-    const labels = wf_current_transition_labels(frm);
-    if (!labels.size) return;
-    const hide = () => {
-        const wrapper = $(frm.page?.wrapper || frm.wrapper);
-        // Dedicated workflow controls may be hidden as a group.
-        wrapper.find(".workflow-button-group").hide();
-        // In shared Actions menus, hide only entries whose label is a current
-        // workflow transition. Preserve Create and all standard ERPNext actions.
-        wrapper.find(".custom-actions li, .custom-actions .dropdown-item, .actions-btn-group li").each(function () {
-            const item = $(this);
-            const control = item.find("a,button").first();
-            const candidates = [
-                item.attr("data-label"), control.attr("data-label"),
-                control.text(), item.clone().children().remove().end().text(), item.text()
-            ].map(wf_normalize).filter(Boolean);
-            if (candidates.some(label => labels.has(label))) item.hide();
-        });
-    };
-    hide();
-    [200, 500, 1000].forEach(delay => setTimeout(hide, delay));
-}
-
-function wf_hide_standard_action(frm, action) {
-    const labels = new Set([wf_normalize(action), wf_normalize(__(action))]);
-    const hide = () => {
-        frm.page?.actions?.find("li").each(function () {
-            const $item = $(this);
-            const $control = $item.find("a,button").first();
-            const values = [
-                $item.text(),
-                $item.attr("data-label"),
-                $control.text(),
-                $control.attr("data-label")
-            ];
-            if (values.some(value => value && labels.has(wf_normalize(value)))) {
-                $item.hide();
-            }
-        });
-    };
-    hide();
-    [200, 500, 1000].forEach(delay => setTimeout(hide, delay));
-}
-
-function wf_style_actions(frm) {
-    const apply = () => {
-        $(frm.page?.wrapper || frm.wrapper)
-            .find(".custom-actions .inner-group-button > button")
-            .filter(function () {
-                return wf_normalize($(this).text()) === wf_normalize(__("Actions"));
-            })
-            .removeClass("btn-default")
-            .addClass("btn-primary")
-            ;
-    };
-    apply();
-    [200, 500, 1000].forEach(delay => setTimeout(apply, delay));
 }
 
 function wf_show_error(error) {

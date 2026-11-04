@@ -21,6 +21,7 @@ required_apps = ["erpnext", "hrms"]
 extend_bootinfo = "qorg.qorg.enterprise_foundation.boot.extend_bootinfo"
 
 app_include_js = [
+    "/assets/qorg/js/document_workflow.js",
     "/assets/qorg/js/qorg_form_bootstrap.js",
     "/assets/qorg/js/model_policy.js",
     "/assets/qorg/js/qorg_action_rail.js",
