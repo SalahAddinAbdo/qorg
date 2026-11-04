@@ -13,21 +13,38 @@ class TestLegacyIntegrity(FrappeTestCase):
         package_root = Path(frappe.get_app_path("qorg", "qorg"))
         offenders = []
         for path in package_root.rglob("*.py"):
-            tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+            tree = ast.parse(
+                path.read_text(encoding="utf-8"),
+                filename=str(path),
+            )
             for node in ast.walk(tree):
                 if isinstance(node, ast.Import):
-                    if any(alias.name == "qfap_adds" or alias.name.startswith("qfap_adds.") for alias in node.names):
+                    if any(
+                        alias.name == "qfap_adds"
+                        or alias.name.startswith("qfap_adds.")
+                        for alias in node.names
+                    ):
                         offenders.append(f"{path}:{node.lineno}")
                 elif isinstance(node, ast.ImportFrom):
-                    if node.module and (node.module == "qfap_adds" or node.module.startswith("qfap_adds.")):
+                    if node.module and (
+                        node.module == "qfap_adds"
+                        or node.module.startswith("qfap_adds.")
+                    ):
                         offenders.append(f"{path}:{node.lineno}")
         self.assertEqual(offenders, [])
 
     def test_workflow_sample_uses_current_responsibility_routing(self):
-        path = Path(frappe.get_app_path("qorg", "reference_sources", "Workflow Sample.json"))
+        # Build the path from the app package root without passing the filename
+        # through frappe.get_app_path, because that helper scrubs path segments.
+        app_package_root = Path(frappe.get_app_path("qorg"))
+        path = app_package_root / "reference_sources" / "Workflow Sample.json"
+
+        self.assertTrue(path.is_file(), f"Workflow sample was not found: {path}")
+
         payload = json.loads(path.read_text(encoding="utf-8"))
         transitions = payload.get("transitions") or []
         self.assertTrue(transitions)
+
         allowed = {
             "Keep Current Responsible",
             "Select Next User",
