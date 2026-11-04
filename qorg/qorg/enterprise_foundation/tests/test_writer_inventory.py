@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ast
 import inspect
 from pathlib import Path
 
@@ -20,18 +21,31 @@ class TestManagedStateWriterInventory(FrappeTestCase):
         "enterprise_foundation/workflow_manager.py",
     }
 
-    def test_all_document_api_writers_are_known_and_guarded(self):
+    @staticmethod
+    def _is_managed_state_literal(node):
+        return isinstance(node, ast.Constant) and node.value == "Managed Configuration State"
+
+    def _has_document_api_write(self, path):
+        tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Call) or not isinstance(node.func, ast.Attribute):
+                continue
+            if node.func.attr not in {"new_doc", "delete_doc"} or not node.args:
+                continue
+            if self._is_managed_state_literal(node.args[0]):
+                return True
+        return False
+
+    def test_all_production_document_api_writers_are_known_and_guarded(self):
         package_root = Path(frappe.get_app_path("qorg", "qorg"))
         writers = set()
         for path in package_root.rglob("*.py"):
-            source = path.read_text(encoding="utf-8", errors="ignore")
-            if "Managed Configuration State" not in source:
+            relative = path.relative_to(package_root)
+            if "tests" in relative.parts or path.name.startswith("test_"):
                 continue
-            if any(token in source for token in (
-                'new_doc("Managed Configuration State")',
-                'delete_doc("Managed Configuration State"',
-            )):
-                writers.add(path.relative_to(package_root).as_posix())
+            if self._has_document_api_write(path):
+                writers.add(relative.as_posix())
+                source = path.read_text(encoding="utf-8")
                 self.assertIn("managed_state_write", source, path.as_posix())
                 self.assertIn("with managed_state_write():", source, path.as_posix())
         self.assertEqual(writers, self.EXPECTED_WRITERS)

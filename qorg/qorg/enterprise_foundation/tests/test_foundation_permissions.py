@@ -25,7 +25,10 @@ class TestEnterpriseFoundationPermissions(FrappeTestCase):
         self.assertFalse(managed_state_has_permission(user="test@example.com"))
 
     def test_require_administrator_rejects_other_users(self):
-        with patch("qorg.qorg.enterprise_foundation.permissions.frappe.session.user", "test@example.com"):
+        with patch(
+            "qorg.qorg.enterprise_foundation.permissions.is_administrator",
+            return_value=False,
+        ):
             with self.assertRaises(frappe.PermissionError):
                 require_administrator()
 
