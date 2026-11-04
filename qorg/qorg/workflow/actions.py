@@ -13,14 +13,20 @@ from frappe.model.workflow import (
 )
 from frappe.utils import cint, get_datetime
 
-from qfap_adds.qfap_adds.api.signatures import apply_signature_values
-from qfap_adds.qfap_adds.workflow.permissions import (
+from qorg.qorg.api.signatures import apply_signature_values
+from qorg.qorg.workflow.permissions import (
     RESPONSIBLE_FIELD,
     can_override_responsibility,
 )
 
 MAX_COMMENT_LENGTH = 10000
 DEFAULT_WORKFLOW_TASKS = {"Webhook", "Server Script"}
+PREVIOUS_RESPONSIBLE_FIELD = "custom_previous_responsible_user"
+ROUTING_KEEP = "Keep Current Responsible"
+ROUTING_SELECT = "Select Next User"
+ROUTING_PREVIOUS = "Return to Previous Responsible"
+ROUTING_CREATOR = "Return to Document Creator"
+ROUTING_CLEAR = "Clear Responsibility"
 
 
 @frappe.whitelist()
@@ -215,46 +221,53 @@ def _get_allowed_transition(doc, action: str):
 
 
 def _prepare_assignment(doc, transition, next_user: str) -> dict[str, Any]:
-    assignment_required = cint(transition.get("custom_assignment_required")) == 1
-    target_field = _clean(transition.get("custom_target_user_field"))
+    """Resolve and apply the responsibility handoff on the in-memory document."""
+    routing = _clean(transition.get("custom_responsibility_routing")) or ROUTING_KEEP
     target_role = _clean(transition.get("custom_target_role"))
+    current_user = _clean(doc.get(RESPONSIBLE_FIELD))
+    previous_user = _clean(doc.get(PREVIOUS_RESPONSIBLE_FIELD))
+    actor = frappe.session.user
 
-    if assignment_required and not next_user:
-        frappe.throw(_("The next responsible user is required for this action."))
-
-    if not next_user:
-        return {"assigned": False, "next_user": "", "target_field": target_field}
-
-    if not target_field:
-        frappe.throw(
-            _("Target User Field is not configured for workflow action {0}.").format(
-                frappe.bold(transition.get("action"))
-            )
-        )
-    if not doc.meta.has_field(target_field):
-        frappe.throw(
-            _("Configured Target User Field does not exist in {0}: {1}").format(
-                frappe.bold(doc.doctype),
-                frappe.bold(target_field),
-            )
-        )
     if not doc.meta.has_field(RESPONSIBLE_FIELD):
-        frappe.throw(
-            _("Required workflow responsibility field is missing: {0}").format(
-                frappe.bold(RESPONSIBLE_FIELD)
-            )
-        )
+        frappe.throw(_("Required workflow responsibility field is missing: {0}").format(frappe.bold(RESPONSIBLE_FIELD)))
+    if not doc.meta.has_field(PREVIOUS_RESPONSIBLE_FIELD):
+        frappe.throw(_("Required workflow responsibility field is missing: {0}").format(frappe.bold(PREVIOUS_RESPONSIBLE_FIELD)))
 
-    _validate_next_user(next_user, target_role)
-    doc.set(target_field, next_user)
-    doc.set(RESPONSIBLE_FIELD, next_user)
+    if routing == ROUTING_KEEP:
+        resolved = current_user
+    elif routing == ROUTING_SELECT:
+        resolved = next_user
+        if not resolved:
+            frappe.throw(_("The next responsible user is required for this action."))
+    elif routing == ROUTING_PREVIOUS:
+        resolved = previous_user
+        if not resolved:
+            frappe.throw(_("This document does not have a previous responsible user. Use Forward to Another User instead."))
+    elif routing == ROUTING_CREATOR:
+        resolved = _clean(doc.owner)
+    elif routing == ROUTING_CLEAR:
+        resolved = ""
+    else:
+        frappe.throw(_("Unsupported Responsibility Routing: {0}").format(frappe.bold(routing)))
+
+    if routing not in {ROUTING_SELECT} and next_user and next_user != resolved:
+        frappe.throw(_("The next user is resolved automatically for this workflow action."))
+    if resolved:
+        _validate_next_user(resolved, target_role)
+        if resolved == current_user and routing in {ROUTING_SELECT, ROUTING_PREVIOUS, ROUTING_CREATOR}:
+            frappe.throw(_("The resolved user is already the current responsible user."))
+
+    changed = resolved != current_user
+    if changed:
+        doc.set(PREVIOUS_RESPONSIBLE_FIELD, actor)
+        doc.set(RESPONSIBLE_FIELD, resolved)
 
     return {
-        "assigned": True,
-        "next_user": next_user,
-        "target_field": target_field,
+        "assigned": bool(resolved),
+        "next_user": resolved,
+        "routing": routing,
+        "changed": changed,
     }
-
 
 def _prepare_signature(doc, transition, signature_notes: str) -> dict[str, Any]:
     if cint(transition.get("custom_apply_employee_signature")) != 1:
@@ -279,11 +292,13 @@ def _prepare_signature(doc, transition, signature_notes: str) -> dict[str, Any]:
 
 
 def _validate_next_user(user: str, required_role: str) -> None:
-    enabled = frappe.db.get_value("User", user, "enabled")
-    if enabled is None:
+    user_values = frappe.db.get_value("User", user, ["enabled", "user_type"], as_dict=True)
+    if not user_values:
         frappe.throw(_("Selected next responsible user does not exist: {0}").format(user))
-    if not cint(enabled):
+    if not cint(user_values.enabled):
         frappe.throw(_("Selected next responsible user is disabled: {0}").format(user))
+    if user in {"Guest", "Administrator"} or user_values.user_type != "System User":
+        frappe.throw(_("Selected next responsible user must be an enabled System User: {0}").format(user))
 
     if required_role and not frappe.db.exists(
         "Has Role",

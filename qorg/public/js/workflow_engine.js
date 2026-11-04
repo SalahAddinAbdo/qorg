@@ -20,9 +20,21 @@ frappe.ui.form.on("Workflow", {
 
 
 frappe.ui.form.on("Workflow Transition", {
-    custom_assignment_required(frm, cdt, cdn) {
+    custom_responsibility_routing(frm, cdt, cdn) {
         const row = locals[cdt][cdn];
-        frappe.model.set_value(cdt, cdn, "custom_target_user_field", row.custom_assignment_required ? "custom_current_responsible_user" : "");
+        if (row.custom_responsibility_routing !== "Select Next User") {
+            frappe.model.set_value(cdt, cdn, "custom_target_role", "");
+        }
+        const explanations = {
+            "Keep Current Responsible": __("Keep the current responsible user unchanged."),
+            "Select Next User": __("Require the acting user to select the next responsible user."),
+            "Return to Previous Responsible": __("Return to the user who sent the previous handoff."),
+            "Return to Document Creator": __("Return to the document owner."),
+            "Clear Responsibility": __("Clear responsibility, normally for a final workflow state.")
+        };
+        if (explanations[row.custom_responsibility_routing]) {
+            frappe.show_alert({message: explanations[row.custom_responsibility_routing], indicator: "blue"});
+        }
     },
     custom_apply_employee_signature(frm, cdt, cdn) {
         const row = locals[cdt][cdn];
@@ -49,10 +61,7 @@ async function workflow_load_dynamic_options(frm) {
         return;
     }
 
-    await Promise.all([
-        workflow_load_user_fields(frm),
-        workflow_load_signature_mappings(frm)
-    ]);
+    await workflow_load_signature_mappings(frm);
 
     frm.refresh_field("transitions");
 }
@@ -66,85 +75,6 @@ async function workflow_handle_document_type_change(frm) {
     workflow_clear_invalid_transition_values(frm);
 
     await workflow_load_dynamic_options(frm);
-}
-
-
-// ============================================================
-// Load User Link Fields
-// ============================================================
-
-async function workflow_load_user_fields(frm) {
-    const document_type = frm.doc.document_type;
-
-    if (!document_type) {
-        workflow_set_grid_options(
-            frm,
-            "custom_target_user_field",
-            [""]
-        );
-
-        return;
-    }
-
-    try {
-        await frappe.model.with_doctype(
-            document_type
-        );
-
-        const meta = frappe.get_meta(
-            document_type
-        );
-
-        const user_fields = [""];
-
-        (meta.fields || []).forEach(function (df) {
-            if (
-                df.fieldname &&
-                df.fieldtype === "Link" &&
-                df.options === "User" &&
-                !df.hidden
-            ) {
-                user_fields.push(
-                    df.fieldname
-                );
-            }
-        });
-
-        user_fields.sort(
-            workflow_sort_empty_first
-        );
-
-        workflow_set_grid_options(
-            frm,
-            "custom_target_user_field",
-            user_fields
-        );
-
-        workflow_clear_invalid_user_fields(
-            frm,
-            user_fields
-        );
-
-    } catch (error) {
-        console.error(
-            "Failed to load User fields",
-            error
-        );
-
-        workflow_set_grid_options(
-            frm,
-            "custom_target_user_field",
-            [""]
-        );
-
-        frappe.msgprint({
-            title: __("Workflow Configuration"),
-            message: __(
-                "The User fields could not be loaded from the selected Document Type."
-            ),
-            indicator: "red"
-        });
-    }
 }
 
 
@@ -293,12 +223,6 @@ function workflow_set_grid_options(
 function workflow_clear_invalid_transition_values(frm) {
     (frm.doc.transitions || []).forEach(
         function (row) {
-            frappe.model.set_value(
-                row.doctype,
-                row.name,
-                "custom_target_user_field",
-                ""
-            );
 
             frappe.model.set_value(
                 row.doctype,
@@ -306,35 +230,6 @@ function workflow_clear_invalid_transition_values(frm) {
                 "custom_employee_signature_mapping_key",
                 ""
             );
-        }
-    );
-}
-
-
-function workflow_clear_invalid_user_fields(
-    frm,
-    valid_options
-) {
-    const valid = new Set(
-        valid_options || []
-    );
-
-    (frm.doc.transitions || []).forEach(
-        function (row) {
-            const value =
-                row.custom_target_user_field;
-
-            if (
-                value &&
-                !valid.has(value)
-            ) {
-                frappe.model.set_value(
-                    row.doctype,
-                    row.name,
-                    "custom_target_user_field",
-                    ""
-                );
-            }
         }
     );
 }
@@ -374,11 +269,6 @@ function workflow_clear_invalid_signature_mappings(
 // ============================================================
 
 function workflow_clear_dynamic_options(frm) {
-    workflow_set_grid_options(
-        frm,
-        "custom_target_user_field",
-        [""]
-    );
 
     workflow_set_grid_options(
         frm,
@@ -399,17 +289,12 @@ function workflow_validate_transition_settings(frm) {
         function (row, index) {
             const row_number = index + 1;
 
-            const assignment_required = Boolean(Number(row.custom_assignment_required || 0));
-            if (assignment_required) {
-                row.custom_target_user_field = "custom_current_responsible_user";
-                if (!row.custom_target_role) {
-                    frappe.throw(__("Target Role is required in Workflow Transition row {0}.", [row_number]));
-                }
-                if (!row.custom_workflow_prompt) {
-                    frappe.throw(__("Workflow Prompt is required in Workflow Transition row {0}.", [row_number]));
-                }
-            } else {
-                row.custom_target_user_field = "";
+            const routing = String(row.custom_responsibility_routing || "Keep Current Responsible");
+            if (routing === "Select Next User" && !row.custom_target_role) {
+                frappe.throw(__("Target Role is required in Workflow Transition row {0}.", [row_number]));
+            }
+            if (routing === "Select Next User" && !row.custom_workflow_prompt) {
+                frappe.throw(__("Workflow Prompt is required in Workflow Transition row {0}.", [row_number]));
             }
 
             const apply_signature =

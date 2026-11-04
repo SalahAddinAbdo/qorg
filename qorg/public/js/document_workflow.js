@@ -35,11 +35,7 @@ window.qorg_initialize_document_workflow(window.cur_frm);
 function wf_prepare_new_document(frm) {
     if (!frm.is_new() || frm.__wf_new_document_prepared) return;
     const workflow = frappe.workflow?.workflows?.[frm.doctype];
-    const fields = new Set(["custom_current_responsible_user"]);
-    (workflow?.transitions || []).forEach(transition => {
-        const fieldname = String(transition.custom_target_user_field || "").trim();
-        if (fieldname) fields.add(fieldname);
-    });
+    const fields = new Set(["custom_current_responsible_user", "custom_previous_responsible_user"]);
     fields.forEach(fieldname => {
         if (frm.fields_dict?.[fieldname] && frm.doc[fieldname]) {
             frappe.model.set_value(frm.doc.doctype, frm.doc.name, fieldname, "");
@@ -127,36 +123,44 @@ async function wf_open_action_dialog(frm, transition) {
         return;
     }
 
-    const assignment_required = wf_checked(transition.custom_assignment_required);
+    const routing = String(transition.custom_responsibility_routing || "Keep Current Responsible").trim();
+    const assignment_required = routing === "Select Next User";
     const apply_signature = wf_checked(transition.custom_apply_employee_signature);
-    const target_field = String(transition.custom_target_user_field || "").trim();
     const target_role = String(transition.custom_target_role || "").trim();
-    const show_user = assignment_required || Boolean(target_field);
+    const show_user = assignment_required;
     const signature_context = apply_signature
         ? await wf_get_signature_dialog_context(frm, transition)
         : { include_signature_notes: false, signature_notes: "" };
 
-    if (show_user && !target_field) {
-        return wf_message(
-            __("Incomplete Workflow Configuration"),
-            __("Action {0} requires assignment, but Target User Field is not configured.", [transition.action || ""])
-        );
-    }
-    if (show_user && !frm.fields_dict?.[target_field]) {
-        return wf_message(
-            __("Invalid Workflow Configuration"),
-            __("Field {0} does not exist in {1}.", [target_field, frm.doctype])
-        );
-    }
 
     const fields = [];
+    const automatic_user = routing === "Return to Previous Responsible"
+        ? String(frm.doc.custom_previous_responsible_user || "").trim()
+        : routing === "Return to Document Creator"
+            ? String(frm.doc.owner || "").trim()
+            : "";
+
+    if (["Return to Previous Responsible", "Return to Document Creator"].includes(routing)) {
+        fields.push({
+            fieldname: "resolved_user",
+            label: __("Next Responsible User"),
+            fieldtype: "Link",
+            options: "User",
+            default: automatic_user,
+            read_only: 1,
+            description: routing === "Return to Previous Responsible"
+                ? __("Resolved automatically from the user who sent the previous handoff.")
+                : __("Resolved automatically from the document owner.")
+        });
+    }
+
     if (show_user) {
         fields.push({
             fieldname: "user",
             label: __("Next Responsible User"),
             fieldtype: "Link",
             options: "User",
-            reqd: assignment_required ? 1 : 0,
+            reqd: 1,
             description: target_role
                 ? __("Select an enabled user with role") + " " + __(target_role) + "."
                 : __("Select the user responsible for the next stage."),

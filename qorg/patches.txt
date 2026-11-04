@@ -15,3 +15,5 @@ qorg.qorg.patches.v1_0.fix_web_form_first_page_and_header_v3_0_2
 qorg.qorg.patches.v2_2.migrate_design_system_and_web_forms
 
 qorg.qorg.patches.v2_3.align_qorg_visible_branding
+
+qorg.qorg.patches.v2_5.provision_workflow_responsibility_routing

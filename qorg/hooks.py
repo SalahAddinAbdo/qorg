@@ -258,16 +258,14 @@ fixtures = [
         "Workflow Transition-custom_column_break_6mqhf",
         "Workflow Transition-custom_section_break_h8b1r",
         "Workflow Transition-custom_target_role",
-        "Workflow Transition-custom_target_user_field",
+        "Workflow Transition-custom_responsibility_routing",
         "Workflow Transition-custom_workflow_prompt",
-        "Workflow Transition-custom_assignment_required",
         "Employee-custom_welcome_email_sent_by",
         "Employee-custom_column_break_pihk4",
         "Employee-custom_welcome_email_sent_on",
         "Employee-custom_column_break_eqtxt",
         "Employee-custom_welcome_email_sent_for_joining_date",
         "Employee-custom_welcome_email_information",
-        "Workflow-custom_current_responsible_user_field",
         "Company-custom_print_identity_and_colors",
         "Company-custom_print_document_header_color",
         "Company-custom_print_primary_color",
@@ -285,6 +283,7 @@ before_migrate = [
 ]
 
 after_install = [
+    "qorg.qorg.workflow.provisioning.provision_workflow_responsibility_routing",
     "qorg.qorg.recruitment_extensions.settings_provisioning.provision_recruitment_settings",
 
     "qorg.qorg.recruitment_extensions.provisioning.provision_recruitment_extensions",
@@ -304,6 +303,7 @@ after_install = [
 ]
 
 after_migrate = [
+    "qorg.qorg.workflow.provisioning.provision_workflow_responsibility_routing",
     "qorg.qorg.recruitment_extensions.settings_provisioning.provision_recruitment_settings",
 
     "qorg.qorg.recruitment_extensions.provisioning.provision_recruitment_extensions",
