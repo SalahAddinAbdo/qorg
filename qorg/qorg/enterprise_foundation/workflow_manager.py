@@ -6,6 +6,10 @@ import json
 import frappe
 from frappe.utils import now_datetime
 
+from qorg.qorg.doctype.managed_configuration_state.managed_configuration_state import (
+    managed_state_write,
+)
+
 
 def _normalized_workflow(doc_or_dict) -> dict:
     if hasattr(doc_or_dict, "as_dict"):
@@ -76,4 +80,5 @@ def _save_state(key, version, desired, actual, status, details):
     doc.management_status=status
     doc.last_checked_on=now_datetime()
     doc.details=json.dumps(details, sort_keys=True)
-    doc.save(ignore_permissions=True)
+    with managed_state_write():
+        doc.save(ignore_permissions=True)
