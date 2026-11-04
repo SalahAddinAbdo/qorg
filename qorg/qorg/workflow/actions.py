@@ -254,8 +254,20 @@ def _prepare_assignment(doc, transition, next_user: str) -> dict[str, Any]:
         frappe.throw(_("The next user is resolved automatically for this workflow action."))
     if resolved:
         _validate_next_user(resolved, target_role)
-        if resolved == current_user and routing in {ROUTING_SELECT, ROUTING_PREVIOUS, ROUTING_CREATOR}:
-            frappe.throw(_("The resolved user is already the current responsible user."))
+        if resolved == current_user and routing == ROUTING_PREVIOUS:
+            frappe.throw(
+                _(
+                    "The previous responsible user is already the current responsible user. "
+                    "Use another workflow action if the document needs to move forward."
+                )
+            )
+        if resolved == current_user and routing == ROUTING_CREATOR:
+            frappe.throw(
+                _(
+                    "The document creator is already the current responsible user. "
+                    "Use another workflow action if the document needs to move forward."
+                )
+            )
 
     changed = resolved != current_user
     if changed:

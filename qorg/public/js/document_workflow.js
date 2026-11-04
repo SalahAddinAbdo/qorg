@@ -162,8 +162,13 @@ async function wf_open_action_dialog(frm, transition) {
             options: "User",
             reqd: 1,
             description: target_role
-                ? __("Select an enabled user with role") + " " + __(target_role) + "."
-                : __("Select the user responsible for the next stage."),
+                ? __(
+                    "Select an enabled user with role {0}. You may select yourself if you hold this role.",
+                    [__(target_role)]
+                )
+                : __(
+                    "Select the user responsible for the next stage. You may select yourself when appropriate."
+                ),
             get_query() {
                 const filters = { enabled: 1 };
                 if (target_role) filters.role = target_role;
