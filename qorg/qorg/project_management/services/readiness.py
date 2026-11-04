@@ -1,7 +1,7 @@
 from __future__ import annotations
 import frappe
 from frappe.utils import flt
-from qfap_adds.qfap_adds.project_management.settings import get_project_cycle_settings
+from qorg.qorg.project_management.settings import get_project_cycle_settings
 
 def assess(project):
     checks=[]

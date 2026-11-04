@@ -165,20 +165,7 @@
   "name": "Feature Control Center",
   "naming_rule": "",
   "owner": "Administrator",
-  "permissions": [
-    {
-      "create": 1,
-      "delete": 0,
-      "email": 0,
-      "export": 1,
-      "print": 0,
-      "read": 1,
-      "report": 1,
-      "role": "System Manager",
-      "share": 0,
-      "write": 1
-    }
-  ],
+  "permissions": [],
   "row_format": "Dynamic",
   "rows_threshold_for_grid_search": 20,
   "sort_field": "modified",

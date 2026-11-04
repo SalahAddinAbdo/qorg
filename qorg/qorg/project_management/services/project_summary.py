@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from qfap_adds.qfap_adds.project_management.services.project_reconciliation import reconcile_project
+from qorg.qorg.project_management.services.project_reconciliation import reconcile_project
 
 
 def rebuild_project_summary(project):

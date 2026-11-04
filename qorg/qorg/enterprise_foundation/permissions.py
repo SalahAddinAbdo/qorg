@@ -1,4 +1,5 @@
 from __future__ import annotations
+from frappe import _
 
 import frappe
 
@@ -9,7 +10,7 @@ def is_administrator(user: str | None = None) -> bool:
 
 def require_administrator() -> None:
     if not is_administrator():
-        frappe.throw("Only Administrator can use Feature Control Center.", frappe.PermissionError)
+        frappe.throw(_("Only Administrator can use Feature Control Center."), frappe.PermissionError)
 
 
 def feature_control_center_has_permission(doc=None, user=None, permission_type=None):

@@ -1,4 +1,5 @@
 from __future__ import annotations
+from frappe import _
 
 import hashlib
 import json
@@ -7,6 +8,7 @@ import frappe
 from frappe.utils import has_common, now_datetime
 
 from qorg.qorg.enterprise_foundation.constants import CONFIGURATION_VERSION
+from qorg.qorg.doctype.managed_configuration_state.managed_configuration_state import managed_state_write
 
 INTERFACE_PREFIX = "Interface Policy::"
 DENY_ROLE = "QOrg Disabled Component"
@@ -86,7 +88,8 @@ def _save_state(
     ).hexdigest()
     state.details = json.dumps(details, sort_keys=True)
     state.flags.ignore_permissions = True
-    state.save()
+    with managed_state_write():
+        state.save()
 
 
 def _set_custom_roles(component_type: str, component_name: str, roles: list[str]) -> None:
@@ -120,12 +123,13 @@ def restore_interface_policy(component_type: str, component_name: str) -> str:
             )
         else:
             _remove_custom_role(component_type, component_name)
-        frappe.delete_doc(
-            "Managed Configuration State",
-            key,
-            ignore_permissions=True,
-            force=True,
-        )
+        with managed_state_write():
+            frappe.delete_doc(
+                "Managed Configuration State",
+                key,
+                ignore_permissions=True,
+                force=True,
+            )
     frappe.clear_cache()
     return "Visible"
 
@@ -138,12 +142,12 @@ def apply_interface_policy(
 ) -> str:
     if frappe.session.user != "Administrator":
         frappe.throw(
-            "Only Administrator can apply interface policies.",
+            _("Only Administrator can apply interface policies."),
             frappe.PermissionError,
         )
     if component_type not in SUPPORTED_TYPES:
         frappe.throw(
-            f"Policy application for {component_type} is not enabled yet."
+            _("Policy application for {0} is not enabled yet.").format(component_type)
         )
     if visibility == "Visible":
         return restore_interface_policy(component_type, component_name)
@@ -166,7 +170,7 @@ def apply_interface_policy(
     ]
     for role in requested_roles:
         if not frappe.db.exists("Role", role):
-            frappe.throw(f"Role {role} does not exist.")
+            frappe.throw(_("Role {0} does not exist.").format(role))
 
     effective_roles = (
         requested_roles

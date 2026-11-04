@@ -1,4 +1,5 @@
 from __future__ import annotations
+from frappe import _
 
 import json
 
@@ -128,7 +129,7 @@ def apply_model_changes():
     preview = _build_model_changes(doc)
     blocked = [change for change in preview if not change["allowed"]]
     if blocked:
-        frappe.throw("Blocked or critical model changes must be removed before applying.")
+        frappe.throw(_("Blocked or critical model changes must be removed before applying."))
 
     from qorg.qorg.enterprise_foundation.model_policy_engine import (
         active_action_policies,
@@ -145,7 +146,7 @@ def apply_model_changes():
         if not access_changed and not action_changed:
             continue
         if not row.change_reason:
-            frappe.throw(f"Change reason is required for {row.document_type}.")
+            frappe.throw(_("Change reason is required for {0}.").format(row.document_type))
 
         current_action = _current_action_config(row, applied_actions)
         native_utility_changed = any((

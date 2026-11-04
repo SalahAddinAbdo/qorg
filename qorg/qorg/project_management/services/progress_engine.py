@@ -2,7 +2,7 @@ from __future__ import annotations
 import frappe
 from frappe import _
 from frappe.utils import flt
-from qfap_adds.qfap_adds.project_management.settings import get_project_cycle_settings
+from qorg.qorg.project_management.settings import get_project_cycle_settings
 
 def achievement(actual, target, direction="Higher is Better", settings=None):
     settings=settings or get_project_cycle_settings()
@@ -44,5 +44,5 @@ def apply_approved_update(doc):
     if meta.has_field("custom_latest_progress_update_date"): updates["custom_latest_progress_update_date"]=doc.period_end_date
     if meta.has_field("custom_latest_reporting_period"): updates["custom_latest_reporting_period"]=doc.reporting_period_label
     if updates: frappe.db.set_value("Project",doc.project,updates,update_modified=False)
-    from qfap_adds.qfap_adds.project_management.services.project_summary import rebuild_project_summary
+    from qorg.qorg.project_management.services.project_summary import rebuild_project_summary
     rebuild_project_summary(doc.project)

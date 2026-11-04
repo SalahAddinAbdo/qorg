@@ -4,7 +4,7 @@ import frappe
 from frappe import _
 from frappe.utils import cint
 
-from qfap_adds.qfap_adds.project_management.settings import get_project_cycle_settings
+from qorg.qorg.project_management.settings import get_project_cycle_settings
 
 ACTIVITY_DOCTYPE = "Project Workplan Activity"
 TASK_DOCTYPE = "Task"

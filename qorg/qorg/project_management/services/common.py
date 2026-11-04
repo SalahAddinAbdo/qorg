@@ -3,7 +3,7 @@ import re
 import frappe
 from frappe import _
 from frappe.utils import flt, getdate, nowdate
-from qfap_adds.qfap_adds.project_management.api import validate_project_team_employee
+from qorg.qorg.project_management.api import validate_project_team_employee
 
 _SCORE_RE = re.compile(r"^\s*([1-5])")
 

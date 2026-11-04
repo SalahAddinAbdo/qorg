@@ -1,3 +1,4 @@
+from frappe import _
 import frappe
 from qorg.qorg.enterprise_foundation.interface_policy_engine import active_interface_policies,apply_interface_policy
 from qorg.qorg.enterprise_foundation.permissions import require_administrator
@@ -14,6 +15,6 @@ def apply_interface_changes():
  for row in center.interface_components or []:
   effective=active.get((row.component_type,row.component_name),{}).get("visibility","Visible")
   if effective==row.requested_visibility: row.current_visibility=effective; continue
-  if not row.change_reason: frappe.throw(f"Change reason is required for {row.component_type} {row.component_name}.")
+  if not row.change_reason: frappe.throw(_("Change reason is required for {0} {1}.").format(row.component_type, row.component_name))
   row.current_visibility=apply_interface_policy(row.component_type,row.component_name,row.requested_visibility,row.allowed_roles); row.requested_visibility=row.current_visibility; applied.append(f"{row.component_type}: {row.component_name}")
  center.flags.ignore_permissions=True; center.save(); frappe.clear_cache(); return {"applied":applied}

@@ -2,7 +2,7 @@ from __future__ import annotations
 import json
 import frappe
 from frappe import _
-from qfap_adds.qfap_adds.project_management.settings import get_project_cycle_settings
+from qorg.qorg.project_management.settings import get_project_cycle_settings
 
 ALLOWED_FIELDS={
  "Project":{"expected_start_date","expected_end_date","custom_project_health"},

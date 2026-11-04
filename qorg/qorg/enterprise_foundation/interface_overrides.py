@@ -1,4 +1,5 @@
 from __future__ import annotations
+from frappe import _
 
 import frappe
 from frappe.desk.query_report import get_report_doc as core_get_report_doc
@@ -12,7 +13,7 @@ from qorg.qorg.enterprise_foundation.interface_policy_engine import (
 def _check(report_name: str | None) -> None:
     if report_name and not is_interface_allowed("Report", report_name):
         frappe.throw(
-            f"Report {report_name} is not available.",
+            _("Report {0} is not available.").format(report_name),
             frappe.PermissionError,
         )
 
