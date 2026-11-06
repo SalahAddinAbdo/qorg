@@ -7,7 +7,7 @@ BANK_FIELDS = {"bank_name", "account_name", "account_number", "iban", "swift_cod
 
 
 def validate_supplier_registration(doc, method=None):
-    settings = frappe.get_single("Procurement and Contracting Settings")
+    settings = frappe.get_single("Procure Settings")
     old = None if doc.is_new() else frappe.get_doc(doc.doctype, doc.name)
     should_lock = (
         (settings.lock_profile_during_review and doc.registration_status in {"Submitted", "Under Review", "Due Diligence"})

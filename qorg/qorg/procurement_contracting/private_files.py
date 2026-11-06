@@ -26,4 +26,4 @@ def has_file_permission(file_doc, user=None):
     if submission.owner==user:
         return True
     probe=frappe._dict(procurement_process=submission.procurement_process)
-    return bool(financial_evaluation_has_permission(probe,user=user,permission_type="read") or frappe.db.exists("Procurement Committee Member",{"user":user,"active":1,"recused":0}))
+    return bool(financial_evaluation_has_permission(probe,user=user,permission_type="read") or frappe.db.exists("Committee Member",{"user":user,"active":1,"recused":0}))

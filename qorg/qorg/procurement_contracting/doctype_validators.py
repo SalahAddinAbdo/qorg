@@ -60,7 +60,7 @@ def validate_preliminary(doc):
 
 
 def validate_award_recommendation(doc):
-    summary=frappe.get_doc("Procurement Evaluation Summary",doc.evaluation_summary)
+    summary=frappe.get_doc("Evaluation Summary",doc.evaluation_summary)
     if doc.recommended_supplier and summary.recommended_supplier and doc.recommended_supplier!=summary.recommended_supplier:
         frappe.throw(_("Recommended Supplier must match the approved evaluation summary."))
 

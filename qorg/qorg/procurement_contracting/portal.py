@@ -19,7 +19,7 @@ def request_supplier_profile_update(registration, reason):
     doc = frappe.get_doc("Supplier Registration", registration)
     if doc.owner != frappe.session.user:
         frappe.throw(_("Not permitted"), frappe.PermissionError)
-    if not frappe.get_single_value("Procurement and Contracting Settings", "allow_update_request_after_approval"):
+    if not frappe.get_single_value("Procure Settings", "allow_update_request_after_approval"):
         frappe.throw(_("Supplier profile update requests are disabled."))
     doc.db_set("update_requested", 1)
     doc.add_comment("Comment", _("Supplier requested a profile update: {0}").format(reason))

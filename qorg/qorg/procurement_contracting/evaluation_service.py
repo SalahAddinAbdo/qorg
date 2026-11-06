@@ -39,13 +39,13 @@ def calculate_financial(doc):
 
 def rebuild_summary(process_name):
     process=frappe.get_doc("Procurement Process",process_name)
-    name=frappe.db.get_value("Procurement Evaluation Summary",{"procurement_process":process.name})
-    summary=frappe.get_doc("Procurement Evaluation Summary",name) if name else frappe.new_doc("Procurement Evaluation Summary")
+    name=frappe.db.get_value("Evaluation Summary",{"procurement_process":process.name})
+    summary=frappe.get_doc("Evaluation Summary",name) if name else frappe.new_doc("Evaluation Summary")
     summary.procurement_process=process.name; summary.technical_weight=process.technical_weight; summary.financial_weight=process.financial_weight; summary.set("rows",[])
     submissions=frappe.get_all("Procurement Submission",filters={"procurement_process":process.name,"docstatus":1},fields=["name","supplier"])
     for sub in submissions:
-        tech=frappe.db.get_value("Procurement Technical Evaluation",{"submission":sub.name,"docstatus":1},["raw_technical_score","result"],as_dict=True) or {}
-        fin=frappe.db.get_value("Procurement Financial Evaluation",{"submission":sub.name,"docstatus":1},["evaluated_price","financial_score"],as_dict=True) or {}
+        tech=frappe.db.get_value("Technical Evaluation",{"submission":sub.name,"docstatus":1},["raw_technical_score","result"],as_dict=True) or {}
+        fin=frappe.db.get_value("Financial Evaluation",{"submission":sub.name,"docstatus":1},["evaluated_price","financial_score"],as_dict=True) or {}
         tw=float(weighted_result(tech.get("raw_technical_score",0),process.technical_weight or 0)); fw=float(weighted_result(fin.get("financial_score",0),process.financial_weight or 0))
         summary.append("rows",{"supplier":sub.supplier,"submission":sub.name,"preliminary_result":"Responsive","technical_score":tech.get("raw_technical_score",0),"technical_weighted":tw,"evaluated_price":fin.get("evaluated_price",0),"financial_score":fin.get("financial_score",0),"financial_weighted":fw,"total_score":tw+fw})
     ordered=sorted(summary.rows,key=lambda r:(-(r.total_score or 0),r.evaluated_price or 0))

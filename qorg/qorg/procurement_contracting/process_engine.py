@@ -4,9 +4,9 @@ from frappe import _
 from .decimal_utils import require_exact_hundred
 
 EVALUATION_DOCTYPES = {
-    "Preliminary": "Procurement Preliminary Examination",
-    "Technical": "Procurement Technical Evaluation",
-    "Financial": "Procurement Financial Evaluation",
+    "Preliminary": "Bid Precheck",
+    "Technical": "Technical Evaluation",
+    "Financial": "Financial Evaluation",
 }
 
 def snapshot_payload(doc):
@@ -54,7 +54,7 @@ def assert_not_frozen(doc):
 
 def copy_template(process, template_name, component):
     if not template_name: return
-    template=frappe.get_doc("Procurement Evaluation Template",template_name)
+    template=frappe.get_doc("Eval Template",template_name)
     process.set("criteria", [r for r in process.get("criteria") if r.component != component])
     for row in template.criteria:
         process.append("criteria", {"component":component,"criterion":row.criterion,"scoring_method":row.scoring_method,"maximum_score":row.maximum_score,"weight":row.weight,"mandatory":row.mandatory,"minimum_passing_score":row.minimum_passing_score,"description":row.description})
@@ -65,8 +65,8 @@ def generate_evaluation_documents(process_name):
     method=frappe.get_doc("Procurement Method",process.procurement_method)
     created=[]
     for item in submissions:
-        if not frappe.db.exists("Procurement Preliminary Examination",{"procurement_process":process.name,"submission":item.name}):
-            d=frappe.get_doc({"doctype":"Procurement Preliminary Examination","procurement_process":process.name,"submission":item.name,"result":"Pending"}).insert(ignore_permissions=True); created.append(d.name)
-        if method.requires_technical_evaluation and not frappe.db.exists("Procurement Technical Evaluation",{"procurement_process":process.name,"submission":item.name}):
-            d=frappe.get_doc({"doctype":"Procurement Technical Evaluation","procurement_process":process.name,"submission":item.name,"supplier":item.supplier,"evaluation_mode":"Individual","technical_threshold":process.technical_threshold,"result":"Pending"}).insert(ignore_permissions=True); created.append(d.name)
+        if not frappe.db.exists("Bid Precheck",{"procurement_process":process.name,"submission":item.name}):
+            d=frappe.get_doc({"doctype":"Bid Precheck","procurement_process":process.name,"submission":item.name,"result":"Pending"}).insert(ignore_permissions=True); created.append(d.name)
+        if method.requires_technical_evaluation and not frappe.db.exists("Technical Evaluation",{"procurement_process":process.name,"submission":item.name}):
+            d=frappe.get_doc({"doctype":"Technical Evaluation","procurement_process":process.name,"submission":item.name,"supplier":item.supplier,"evaluation_mode":"Individual","technical_threshold":process.technical_threshold,"result":"Pending"}).insert(ignore_permissions=True); created.append(d.name)
     return created

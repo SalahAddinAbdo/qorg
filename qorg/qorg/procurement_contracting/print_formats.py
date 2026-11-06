@@ -1,11 +1,11 @@
 import frappe
 FORMATS={
  "Q Universal - Procurement Bid Opening Minutes":"Procurement Bid Opening",
- "Q Universal - Procurement Technical Evaluation":"Procurement Technical Evaluation",
- "Q Universal - Procurement Financial Evaluation":"Procurement Financial Evaluation",
- "Q Universal - Procurement Award Decision":"Procurement Award Decision",
+ "Q Universal - Technical Evaluation":"Technical Evaluation",
+ "Q Universal - Financial Evaluation":"Financial Evaluation",
+ "Q Universal - Award Decision":"Award Decision",
  "Q Universal - Procurement Contract":"Procurement Contract",
- "Q Universal - Procurement Acceptance":"Procurement Completion and Acceptance",
+ "Q Universal - Procurement Acceptance":"Procure Acceptance",
 }
 FALLBACK="""<div class='qorg-print'><h2>{{ _(doc.doctype) }}</h2><p><b>{{ _('Reference') }}:</b> {{ doc.name }}</p><p><b>{{ _('Status') }}:</b> {{ doc.workflow_state or doc.status or '' }}</p><hr>{% for field in doc.meta.fields %}{% if field.fieldtype not in ['Section Break','Column Break','Tab Break','HTML','Button'] and doc.get(field.fieldname) not in [None,''] %}<div><b>{{ _(field.label) }}:</b> {{ frappe.format_value(doc.get(field.fieldname), field, doc) }}</div>{% endif %}{% endfor %}</div>"""
 def _managed_html():

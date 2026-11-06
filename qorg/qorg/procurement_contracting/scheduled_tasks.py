@@ -26,7 +26,7 @@ def _alert_expiring_contracts():
 
 def _alert_expiring_guarantees():
     target = add_days(nowdate(), 30)
-    rows = frappe.get_all("Procurement Guarantee Row", filters={"status": "Active", "valid_to": ["between", [nowdate(), target]]}, fields=["parent", "parenttype", "valid_to"])
+    rows = frappe.get_all("Guarantee Row", filters={"status": "Active", "valid_to": ["between", [nowdate(), target]]}, fields=["parent", "parenttype", "valid_to"])
     for row in rows:
         manager = frappe.db.get_value(row.parenttype, row.parent, "contract_manager") if row.parenttype == "Procurement Contract" else None
         _create_todo(manager, row.parenttype, row.parent, f"Guarantee expires on {row.valid_to}", "High")
@@ -37,5 +37,5 @@ def _alert_due_evaluations():
         mandate = row.financial_committee if row.status in ("Technical Evaluation Approved", "Financial Evaluation In Progress") else row.technical_committee
         if not mandate:
             continue
-        for member in frappe.get_all("Procurement Committee Member", filters={"parent": mandate, "active": 1, "recused": 0}, pluck="user"):
+        for member in frappe.get_all("Committee Member", filters={"parent": mandate, "active": 1, "recused": 0}, pluck="user"):
             _create_todo(member, "Procurement Process", row.name, f"Procurement evaluation action required for {row.name}")

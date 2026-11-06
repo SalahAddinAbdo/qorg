@@ -40,7 +40,7 @@ def invoice_submit(doc, method=None):
     process = None
     for row in doc.items:
         if row.purchase_order:
-            process = frappe.db.get_value("Procurement Award Decision", {"purchase_order": row.purchase_order, "docstatus": 1}, "procurement_process")
+            process = frappe.db.get_value("Award Decision", {"purchase_order": row.purchase_order, "docstatus": 1}, "procurement_process")
             if process:
                 break
     if process:
@@ -55,7 +55,7 @@ def payment_submit(doc, method=None):
         invoice = frappe.get_doc("Purchase Invoice", ref.reference_name)
         for row in invoice.items:
             if row.purchase_order:
-                process = frappe.db.get_value("Procurement Award Decision", {"purchase_order": row.purchase_order, "docstatus": 1}, "procurement_process")
+                process = frappe.db.get_value("Award Decision", {"purchase_order": row.purchase_order, "docstatus": 1}, "procurement_process")
                 if process:
                     break
         if process:
@@ -93,7 +93,7 @@ def invoice_cancel(doc, method=None):
     process = None
     for row in doc.items:
         if row.purchase_order:
-            process = frappe.db.get_value("Procurement Award Decision", {"purchase_order": row.purchase_order}, "procurement_process")
+            process = frappe.db.get_value("Award Decision", {"purchase_order": row.purchase_order}, "procurement_process")
             if process:
                 break
     _reverse(doc.doctype, doc.name, "Invoiced", process, doc.grand_total)
@@ -107,7 +107,7 @@ def payment_cancel(doc, method=None):
         process = None
         for row in invoice.items:
             if row.purchase_order:
-                process = frappe.db.get_value("Procurement Award Decision", {"purchase_order": row.purchase_order}, "procurement_process")
+                process = frappe.db.get_value("Award Decision", {"purchase_order": row.purchase_order}, "procurement_process")
                 if process:
                     break
         _reverse(doc.doctype, doc.name, "Paid", process, ref.allocated_amount)

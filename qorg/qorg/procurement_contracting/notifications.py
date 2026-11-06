@@ -27,7 +27,7 @@ def provision_email_templates():
         }).insert(ignore_permissions=True)
 NOTIFICATIONS=[
  ("QOrg - Approved Purchase Request Assigned","Material Request","doc.docstatus == 1 and doc.material_request_type == 'Purchase'","Approved Purchase Request","custom_current_responsible_user"),
- ("QOrg - Procurement Award Decision Required","Procurement Award Recommendation","doc.docstatus == 1","Award Decision Required","owner"),
+ ("QOrg - Award Decision Required","Award Recommendation","doc.docstatus == 1","Award Decision Required","owner"),
  ("QOrg - Contract Expiry Reminder","Procurement Contract","doc.status == 'Active'","Contract Expiry Reminder","contract_manager"),
 ]
 def provision_notifications():
