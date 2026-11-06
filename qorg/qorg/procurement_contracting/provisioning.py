@@ -1,6 +1,6 @@
 import frappe
 from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
-ROLES=['Procurement Officer','Procurement Manager','Bid Opening Committee Member','Technical Evaluation Committee Member','Financial Evaluation Committee Member','Main Committee Member','Procurement Award Approver','Budget Controller']
+ROLES=['Procurement Officer','Procurement Manager','Bid Opening Committee Member','Technical Evaluation Committee Member','Financial Evaluation Committee Member','Main Committee Member','Procurement Award Approver','Budget Controller','Contract Manager']
 METHODS=[('Direct Purchase','Direct',0,0,1),('Request for Quotations','RFQ',0,1,0),('Restricted Tender','Restricted',1,0,0),('Open Tender','Open',1,0,0),('Request for Proposals','RFP',1,0,0),('Single Source','Single Source',1,0,0),('Emergency Procurement','Emergency',1,0,0),('Framework Call-off','Framework',0,0,1)]
 def provision_procurement_contracting():
  for role in ROLES:
