@@ -1,0 +1,264 @@
+{
+  "doctype": "DocType",
+  "name": "Supplier Registration",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "field_order": [
+    "section_1_section",
+    "naming_series",
+    "legal_name",
+    "country",
+    "section_1_column",
+    "registration_number",
+    "tax_id",
+    "email",
+    "section_2_section",
+    "supplier",
+    "section_2_column",
+    "registration_status",
+    "section_3_section",
+    "documents",
+    "section_4_section",
+    "declarations",
+    "profile_control_section",
+    "profile_locked",
+    "update_requested",
+    "reviewer",
+    "risk_rating",
+    "review_expiry_date",
+    "bank_section",
+    "bank_name",
+    "account_name",
+    "account_number",
+    "iban",
+    "swift_code",
+    "bank_currency",
+    "bank_confirmation"
+  ],
+  "fields": [
+    {
+      "fieldname": "section_1_section",
+      "fieldtype": "Section Break",
+      "label": "Details 1"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "SUP-.YYYY.-.#####",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "legal_name",
+      "label": "Legal Name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "country",
+      "label": "Country",
+      "fieldtype": "Link",
+      "options": "Country",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_1_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "registration_number",
+      "label": "Registration Number",
+      "fieldtype": "Data",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "tax_id",
+      "label": "Tax Id",
+      "fieldtype": "Data",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "email",
+      "label": "Email",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_2_section",
+      "fieldtype": "Section Break",
+      "label": "Details 2"
+    },
+    {
+      "fieldname": "supplier",
+      "label": "Supplier",
+      "fieldtype": "Link",
+      "options": "Supplier",
+      "read_only": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "section_2_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "registration_status",
+      "label": "Registration Status",
+      "fieldtype": "Select",
+      "options": "Draft\nSubmitted\nUnder Due Diligence\nApproved\nRejected",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_3_section",
+      "fieldtype": "Section Break",
+      "label": "Documents"
+    },
+    {
+      "fieldname": "documents",
+      "label": "Documents",
+      "fieldtype": "Attach",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_4_section",
+      "fieldtype": "Section Break",
+      "label": "Declarations"
+    },
+    {
+      "fieldname": "declarations",
+      "label": "Declarations",
+      "fieldtype": "Small Text",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "profile_control_section",
+      "fieldtype": "Section Break",
+      "label": "Profile Control"
+    },
+    {
+      "fieldname": "profile_locked",
+      "fieldtype": "Check",
+      "label": "Profile Locked",
+      "read_only": 1
+    },
+    {
+      "fieldname": "update_requested",
+      "fieldtype": "Check",
+      "label": "Update Requested",
+      "read_only": 1
+    },
+    {
+      "fieldname": "reviewer",
+      "fieldtype": "Link",
+      "label": "Reviewer",
+      "options": "User"
+    },
+    {
+      "fieldname": "risk_rating",
+      "fieldtype": "Select",
+      "label": "Risk Rating",
+      "options": "Low\nMedium\nHigh\nCritical"
+    },
+    {
+      "fieldname": "review_expiry_date",
+      "fieldtype": "Date",
+      "label": "Review Expiry Date"
+    },
+    {
+      "fieldname": "bank_section",
+      "fieldtype": "Section Break",
+      "label": "Bank Information"
+    },
+    {
+      "fieldname": "bank_name",
+      "fieldtype": "Data",
+      "label": "Bank Name"
+    },
+    {
+      "fieldname": "account_name",
+      "fieldtype": "Data",
+      "label": "Account Name"
+    },
+    {
+      "fieldname": "account_number",
+      "fieldtype": "Data",
+      "label": "Account Number"
+    },
+    {
+      "fieldname": "iban",
+      "fieldtype": "Data",
+      "label": "IBAN"
+    },
+    {
+      "fieldname": "swift_code",
+      "fieldtype": "Data",
+      "label": "SWIFT Code"
+    },
+    {
+      "fieldname": "bank_currency",
+      "fieldtype": "Link",
+      "label": "Bank Currency",
+      "options": "Currency"
+    },
+    {
+      "fieldname": "bank_confirmation",
+      "fieldtype": "Attach",
+      "label": "Bank Confirmation"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "is_submittable": 1
+}

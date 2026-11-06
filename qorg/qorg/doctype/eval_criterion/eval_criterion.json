@@ -1,0 +1,68 @@
+{
+  "doctype": "DocType",
+  "name": "Eval Criterion",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "issingle": 0,
+  "editable_grid": 1,
+  "track_changes": 1,
+  "field_order": [
+    "component",
+    "criterion",
+    "scoring_method",
+    "maximum_score",
+    "weight",
+    "mandatory",
+    "minimum_passing_score",
+    "description"
+  ],
+  "fields": [
+    {
+      "fieldname": "component",
+      "label": "Component",
+      "fieldtype": "Select",
+      "options": "Preliminary\nTechnical\nFinancial\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "criterion",
+      "label": "Criterion",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "scoring_method",
+      "label": "Scoring Method",
+      "fieldtype": "Select",
+      "options": "Individual Average\nWeighted Member Average\nConsensus Score\nIndividual then Consensus\nIndividual Pass Fail\nConsensus Pass Fail\nSystem Calculated\nSingle Authorized Assessor\nMeasured Value to Score",
+      "reqd": 1
+    },
+    {
+      "fieldname": "maximum_score",
+      "label": "Maximum Score",
+      "fieldtype": "Float"
+    },
+    {
+      "fieldname": "weight",
+      "label": "Weight",
+      "fieldtype": "Percent"
+    },
+    {
+      "fieldname": "mandatory",
+      "label": "Mandatory",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "minimum_passing_score",
+      "label": "Minimum Passing Score",
+      "fieldtype": "Float"
+    },
+    {
+      "fieldname": "description",
+      "label": "Description",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "permissions": []
+}

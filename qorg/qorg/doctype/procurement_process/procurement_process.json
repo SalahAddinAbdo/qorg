@@ -1,0 +1,357 @@
+{
+  "doctype": "DocType",
+  "name": "Procurement Process",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "field_order": [
+    "identity_section",
+    "naming_series",
+    "title",
+    "company",
+    "material_request",
+    "project",
+    "identity_column",
+    "currency",
+    "estimated_value",
+    "procurement_type",
+    "status",
+    "policy_section",
+    "policy_rule",
+    "policy_column",
+    "procurement_method",
+    "policy_snapshot",
+    "evaluation_section",
+    "technical_template",
+    "financial_template",
+    "technical_weight",
+    "evaluation_column",
+    "financial_weight",
+    "technical_threshold",
+    "two_envelope",
+    "criteria",
+    "committees_section",
+    "main_committee",
+    "opening_committee",
+    "committees_column",
+    "technical_committee",
+    "financial_committee",
+    "timeline_section",
+    "submission_deadline",
+    "setup_frozen",
+    "timeline_column",
+    "frozen_hash"
+  ],
+  "fields": [
+    {
+      "fieldname": "identity_section",
+      "fieldtype": "Section Break",
+      "label": "Process Identity"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "PRO-.YYYY.-.#####",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "title",
+      "label": "Title",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 0,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "material_request",
+      "label": "Material Request",
+      "fieldtype": "Link",
+      "options": "Material Request",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "identity_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "currency",
+      "label": "Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "estimated_value",
+      "label": "Estimated Value",
+      "fieldtype": "Currency",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 0,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "procurement_type",
+      "label": "Procurement Type",
+      "fieldtype": "Select",
+      "options": "Goods\nServices\nWorks\nConsultancy\nMixed",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft Setup\nSetup Approved\nPublished or Invited\nSubmission Closed\nOpening Completed\nTechnical Evaluation Approved\nFinancial Evaluation Approved\nCombined Evaluation Completed\nAward Approved\nClosed",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "policy_section",
+      "fieldtype": "Section Break",
+      "label": "Policy and Route"
+    },
+    {
+      "fieldname": "policy_rule",
+      "label": "Policy Rule",
+      "fieldtype": "Link",
+      "options": "Procurement Policy Rule",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "policy_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "procurement_method",
+      "label": "Procurement Method",
+      "fieldtype": "Link",
+      "options": "Procurement Method",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "policy_snapshot",
+      "label": "Policy Snapshot",
+      "fieldtype": "Long Text",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "evaluation_section",
+      "fieldtype": "Section Break",
+      "label": "Evaluation Setup"
+    },
+    {
+      "fieldname": "technical_template",
+      "label": "Technical Template",
+      "fieldtype": "Link",
+      "options": "Eval Template",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "financial_template",
+      "label": "Financial Template",
+      "fieldtype": "Link",
+      "options": "Eval Template",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "technical_weight",
+      "label": "Technical Weight",
+      "fieldtype": "Percent",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "evaluation_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "financial_weight",
+      "label": "Financial Weight",
+      "fieldtype": "Percent",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "technical_threshold",
+      "label": "Technical Threshold",
+      "fieldtype": "Percent",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "two_envelope",
+      "label": "Two Envelope",
+      "fieldtype": "Check",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "criteria",
+      "label": "Criteria",
+      "fieldtype": "Table",
+      "options": "Eval Criterion",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "committees_section",
+      "fieldtype": "Section Break",
+      "label": "Committee Assignments"
+    },
+    {
+      "fieldname": "main_committee",
+      "fieldtype": "Link",
+      "label": "Main Procurement Committee",
+      "options": "Procure Committee",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "opening_committee",
+      "fieldtype": "Link",
+      "label": "Bid Opening Committee",
+      "options": "Procure Committee",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "committees_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "technical_committee",
+      "fieldtype": "Link",
+      "label": "Technical Evaluation Committee",
+      "options": "Procure Committee",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "financial_committee",
+      "fieldtype": "Link",
+      "label": "Financial Evaluation Committee",
+      "options": "Procure Committee",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "timeline_section",
+      "fieldtype": "Section Break",
+      "label": "Timeline and Freeze"
+    },
+    {
+      "fieldname": "submission_deadline",
+      "label": "Submission Deadline",
+      "fieldtype": "Datetime",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "setup_frozen",
+      "label": "Setup Frozen",
+      "fieldtype": "Check",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "timeline_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "frozen_hash",
+      "label": "Frozen Hash",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "is_submittable": 1
+}

@@ -1,0 +1,187 @@
+{
+  "doctype": "DocType",
+  "name": "Framework Agreement",
+  "module": "QOrg",
+  "custom": 0,
+  "autoname": "naming_series:",
+  "is_submittable": 1,
+  "track_changes": 1,
+  "field_order": [
+    "section_1",
+    "naming_series",
+    "agreement_title",
+    "procurement_process",
+    "company",
+    "project",
+    "currency",
+    "column_1_5",
+    "valid_from",
+    "valid_to",
+    "total_ceiling",
+    "consumed_amount",
+    "status",
+    "section_2",
+    "selection_method",
+    "suppliers",
+    "items",
+    "section_3",
+    "call_off_rules",
+    "agreement_document"
+  ],
+  "fields": [
+    {
+      "fieldname": "section_1",
+      "label": "Agreement Identity",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "FRA-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "agreement_title",
+      "label": "Agreement Title",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "procurement_process",
+      "label": "Procurement Process",
+      "fieldtype": "Link",
+      "options": "Procurement Process",
+      "reqd": 1
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project"
+    },
+    {
+      "fieldname": "currency",
+      "label": "Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_1_5",
+      "label": "Column 1 5",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "valid_from",
+      "label": "Valid From",
+      "fieldtype": "Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "valid_to",
+      "label": "Valid To",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "total_ceiling",
+      "label": "Total Ceiling",
+      "fieldtype": "Currency",
+      "reqd": 1
+    },
+    {
+      "fieldname": "consumed_amount",
+      "label": "Consumed Amount",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nUnder Approval\nActive\nSuspended\nExpired\nClosed",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "section_2",
+      "label": "Suppliers and Items",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "selection_method",
+      "label": "Selection Method",
+      "fieldtype": "Select",
+      "options": "Direct Allocation\nRanked Cascade\nMini Competition\nRotational",
+      "reqd": 1
+    },
+    {
+      "fieldname": "suppliers",
+      "label": "Suppliers",
+      "fieldtype": "Table",
+      "options": "Framework Supplier",
+      "read_only": 1
+    },
+    {
+      "fieldname": "items",
+      "label": "Items",
+      "fieldtype": "Table",
+      "options": "Framework Item",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_3",
+      "label": "Controls",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "call_off_rules",
+      "label": "Call Off Rules",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "agreement_document",
+      "label": "Agreement Document",
+      "fieldtype": "Attach",
+      "reqd": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ]
+}

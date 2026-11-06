@@ -1,0 +1,128 @@
+{
+  "doctype": "DocType",
+  "name": "Eval Template",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "field_order": [
+    "section_1_section",
+    "naming_series",
+    "template_title",
+    "section_1_column",
+    "evaluation_component",
+    "procurement_type",
+    "section_2_section",
+    "criteria",
+    "section_3_section",
+    "disabled"
+  ],
+  "fields": [
+    {
+      "fieldname": "section_1_section",
+      "fieldtype": "Section Break",
+      "label": "Details 1"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "PRO-.YYYY.-.#####",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "template_title",
+      "label": "Template Title",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_1_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "evaluation_component",
+      "label": "Evaluation Component",
+      "fieldtype": "Select",
+      "options": "Preliminary\nTechnical\nFinancial",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "procurement_type",
+      "label": "Procurement Type",
+      "fieldtype": "Select",
+      "options": "Goods\nServices\nWorks\nConsultancy\nMixed",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_2_section",
+      "fieldtype": "Section Break",
+      "label": "Criteria"
+    },
+    {
+      "fieldname": "criteria",
+      "label": "Criteria",
+      "fieldtype": "Table",
+      "options": "Eval Criterion",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_3_section",
+      "fieldtype": "Section Break",
+      "label": "Details 3"
+    },
+    {
+      "fieldname": "disabled",
+      "label": "Disabled",
+      "fieldtype": "Check",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "is_submittable": 1
+}

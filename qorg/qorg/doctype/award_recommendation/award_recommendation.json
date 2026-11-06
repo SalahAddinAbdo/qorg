@@ -1,0 +1,152 @@
+{
+  "doctype": "DocType",
+  "name": "Award Recommendation",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "field_order": [
+    "section_1_section",
+    "naming_series",
+    "procurement_process",
+    "evaluation_summary",
+    "section_1_column",
+    "recommended_supplier",
+    "recommended_amount",
+    "recommendation",
+    "section_2_section",
+    "best_value_rationale",
+    "section_3_section",
+    "main_committee"
+  ],
+  "fields": [
+    {
+      "fieldname": "section_1_section",
+      "fieldtype": "Section Break",
+      "label": "Details 1"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "PRO-.YYYY.-.#####",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "procurement_process",
+      "label": "Procurement Process",
+      "fieldtype": "Link",
+      "options": "Procurement Process",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "evaluation_summary",
+      "label": "Evaluation Summary",
+      "fieldtype": "Link",
+      "options": "Evaluation Summary",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_1_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "recommended_supplier",
+      "label": "Recommended Supplier",
+      "fieldtype": "Link",
+      "options": "Supplier",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "recommended_amount",
+      "label": "Recommended Amount",
+      "fieldtype": "Currency",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "recommendation",
+      "label": "Recommendation",
+      "fieldtype": "Select",
+      "options": "Recommend Award\nRecommend Reserve\nRecommend Re-evaluation\nRecommend Cancellation",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_2_section",
+      "fieldtype": "Section Break",
+      "label": "Best Value Rationale"
+    },
+    {
+      "fieldname": "best_value_rationale",
+      "label": "Best Value Rationale",
+      "fieldtype": "Text Editor",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_3_section",
+      "fieldtype": "Section Break",
+      "label": "Details 3"
+    },
+    {
+      "fieldname": "main_committee",
+      "label": "Main Committee",
+      "fieldtype": "Link",
+      "options": "Procure Committee",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "is_submittable": 1
+}

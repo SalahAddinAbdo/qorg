@@ -1,0 +1,240 @@
+{
+  "doctype": "DocType",
+  "name": "Financial Evaluation",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "field_order": [
+    "identity_section",
+    "naming_series",
+    "procurement_process",
+    "submission",
+    "identity_column",
+    "supplier",
+    "committee",
+    "currency",
+    "price_section",
+    "original_price",
+    "arithmetic_corrections",
+    "discounts",
+    "taxes",
+    "other_evaluated_costs",
+    "price_column",
+    "evaluated_price",
+    "lowest_evaluated_price",
+    "financial_score",
+    "abnormally_low",
+    "analysis_section",
+    "scores",
+    "rationale"
+  ],
+  "fields": [
+    {
+      "fieldname": "identity_section",
+      "fieldtype": "Section Break",
+      "label": "Evaluation Context"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "PRO-.YYYY.-.#####",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "procurement_process",
+      "label": "Procurement Process",
+      "fieldtype": "Link",
+      "options": "Procurement Process",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "submission",
+      "label": "Submission",
+      "fieldtype": "Link",
+      "options": "Procurement Submission",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "identity_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "supplier",
+      "label": "Supplier",
+      "fieldtype": "Link",
+      "options": "Supplier",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "committee",
+      "label": "Committee",
+      "fieldtype": "Link",
+      "options": "Procure Committee",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "currency",
+      "label": "Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "price_section",
+      "fieldtype": "Section Break",
+      "label": "Evaluated Price"
+    },
+    {
+      "fieldname": "original_price",
+      "label": "Original Price",
+      "fieldtype": "Currency",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "arithmetic_corrections",
+      "label": "Arithmetic Corrections",
+      "fieldtype": "Currency",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "discounts",
+      "label": "Discounts",
+      "fieldtype": "Currency",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "taxes",
+      "label": "Taxes",
+      "fieldtype": "Currency",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "other_evaluated_costs",
+      "label": "Other Evaluated Costs",
+      "fieldtype": "Currency",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "price_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "evaluated_price",
+      "label": "Evaluated Price",
+      "fieldtype": "Currency",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "lowest_evaluated_price",
+      "label": "Lowest Evaluated Price",
+      "fieldtype": "Currency",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "financial_score",
+      "label": "Financial Score",
+      "fieldtype": "Float",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "abnormally_low",
+      "label": "Abnormally Low",
+      "fieldtype": "Check",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "analysis_section",
+      "fieldtype": "Section Break",
+      "label": "Financial Analysis"
+    },
+    {
+      "fieldname": "scores",
+      "label": "Scores",
+      "fieldtype": "Table",
+      "options": "Eval Score",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "rationale",
+      "label": "Rationale",
+      "fieldtype": "Text Editor",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "is_submittable": 1
+}

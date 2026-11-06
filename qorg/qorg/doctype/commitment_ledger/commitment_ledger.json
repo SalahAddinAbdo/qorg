@@ -1,0 +1,186 @@
+{
+  "doctype": "DocType",
+  "name": "Commitment Ledger",
+  "module": "QOrg",
+  "custom": 0,
+  "autoname": "naming_series:",
+  "is_submittable": 1,
+  "track_changes": 1,
+  "field_order": [
+    "naming_series",
+    "section_1",
+    "company",
+    "project",
+    "budget_line",
+    "column_1_3",
+    "currency",
+    "procurement_process",
+    "material_request",
+    "section_2",
+    "requested",
+    "reserved",
+    "ordered",
+    "contracted",
+    "column_2_4",
+    "accepted",
+    "invoiced",
+    "paid",
+    "available_balance",
+    "section_3",
+    "entries"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "PRO-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "section_1",
+      "label": "Context",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project"
+    },
+    {
+      "fieldname": "budget_line",
+      "label": "Budget Line",
+      "fieldtype": "Link",
+      "options": "Budget Line"
+    },
+    {
+      "fieldname": "column_1_3",
+      "label": "Column 1 3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "currency",
+      "label": "Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "reqd": 1
+    },
+    {
+      "fieldname": "procurement_process",
+      "label": "Procurement Process",
+      "fieldtype": "Link",
+      "options": "Procurement Process"
+    },
+    {
+      "fieldname": "material_request",
+      "label": "Material Request",
+      "fieldtype": "Link",
+      "options": "Material Request"
+    },
+    {
+      "fieldname": "section_2",
+      "label": "Balances",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "requested",
+      "label": "Requested",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "reserved",
+      "label": "Reserved",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "ordered",
+      "label": "Ordered",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "contracted",
+      "label": "Contracted",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_2_4",
+      "label": "Column 2 4",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "accepted",
+      "label": "Accepted",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "invoiced",
+      "label": "Invoiced",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "paid",
+      "label": "Paid",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "available_balance",
+      "label": "Available Balance",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_3",
+      "label": "Entries",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "entries",
+      "label": "Entries",
+      "fieldtype": "Table",
+      "options": "Commitment Entry",
+      "reqd": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ]
+}

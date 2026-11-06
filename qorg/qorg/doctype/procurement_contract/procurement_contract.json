@@ -1,0 +1,347 @@
+{
+  "doctype": "DocType",
+  "name": "Procurement Contract",
+  "module": "QOrg",
+  "custom": 0,
+  "autoname": "naming_series:",
+  "is_submittable": 1,
+  "track_changes": 1,
+  "field_order": [
+    "section_1",
+    "naming_series",
+    "contract_title",
+    "contract_type",
+    "procurement_process",
+    "award_decision",
+    "column_1_4",
+    "supplier",
+    "company",
+    "project",
+    "budget_line",
+    "section_2",
+    "currency",
+    "contract_value",
+    "ceiling_amount",
+    "effective_date",
+    "start_date",
+    "column_2_5",
+    "end_date",
+    "contract_manager",
+    "technical_manager",
+    "status",
+    "section_3",
+    "advance_payment_percent",
+    "retention_percent",
+    "liquidated_damages_percent",
+    "column_3_3",
+    "warranty_end_date",
+    "defects_liability_end_date",
+    "milestones",
+    "guarantees",
+    "section_4",
+    "scope_of_work",
+    "payment_terms",
+    "termination_terms",
+    "contract_document",
+    "financial_control_section",
+    "advance_payment_amount",
+    "advance_recovered_amount",
+    "retention_amount",
+    "retention_released_amount",
+    "invoiced_amount",
+    "paid_amount",
+    "remaining_contract_value"
+  ],
+  "fields": [
+    {
+      "fieldname": "section_1",
+      "label": "Contract Identity",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "PRO-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "contract_title",
+      "label": "Contract Title",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "contract_type",
+      "label": "Contract Type",
+      "fieldtype": "Select",
+      "options": "Goods Supply\nService Contract\nWorks Contract\nConsultancy Contract\nFramework Agreement Call-off",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "procurement_process",
+      "label": "Procurement Process",
+      "fieldtype": "Link",
+      "options": "Procurement Process",
+      "reqd": 1
+    },
+    {
+      "fieldname": "award_decision",
+      "label": "Award Decision",
+      "fieldtype": "Link",
+      "options": "Award Decision",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_1_4",
+      "label": "Column 1 4",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "supplier",
+      "label": "Supplier",
+      "fieldtype": "Link",
+      "options": "Supplier",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project"
+    },
+    {
+      "fieldname": "budget_line",
+      "label": "Budget Line",
+      "fieldtype": "Link",
+      "options": "Budget Line"
+    },
+    {
+      "fieldname": "section_2",
+      "label": "Commercial Terms",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "currency",
+      "label": "Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "reqd": 1
+    },
+    {
+      "fieldname": "contract_value",
+      "label": "Contract Value",
+      "fieldtype": "Currency",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "ceiling_amount",
+      "label": "Ceiling Amount",
+      "fieldtype": "Currency"
+    },
+    {
+      "fieldname": "effective_date",
+      "label": "Effective Date",
+      "fieldtype": "Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "start_date",
+      "label": "Start Date",
+      "fieldtype": "Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_2_5",
+      "label": "Column 2 5",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "end_date",
+      "label": "End Date",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "contract_manager",
+      "label": "Contract Manager",
+      "fieldtype": "Link",
+      "options": "User",
+      "reqd": 1
+    },
+    {
+      "fieldname": "technical_manager",
+      "label": "Technical Manager",
+      "fieldtype": "Link",
+      "options": "User"
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nUnder Approval\nActive\nSuspended\nCompleted\nTerminated\nExpired",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "section_3",
+      "label": "Performance and Payment",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "advance_payment_percent",
+      "label": "Advance Payment Percent",
+      "fieldtype": "Percent"
+    },
+    {
+      "fieldname": "retention_percent",
+      "label": "Retention Percent",
+      "fieldtype": "Percent"
+    },
+    {
+      "fieldname": "liquidated_damages_percent",
+      "label": "Liquidated Damages Percent",
+      "fieldtype": "Percent"
+    },
+    {
+      "fieldname": "column_3_3",
+      "label": "Column 3 3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "warranty_end_date",
+      "label": "Warranty End Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "defects_liability_end_date",
+      "label": "Defects Liability End Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "milestones",
+      "label": "Milestones",
+      "fieldtype": "Table",
+      "options": "Contract Milestone"
+    },
+    {
+      "fieldname": "guarantees",
+      "label": "Guarantees",
+      "fieldtype": "Table",
+      "options": "Guarantee Row"
+    },
+    {
+      "fieldname": "section_4",
+      "label": "Scope and Controls",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "scope_of_work",
+      "label": "Scope Of Work",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "payment_terms",
+      "label": "Payment Terms",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "termination_terms",
+      "label": "Termination Terms",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "contract_document",
+      "label": "Contract Document",
+      "fieldtype": "Attach",
+      "reqd": 1
+    },
+    {
+      "fieldname": "financial_control_section",
+      "fieldtype": "Section Break",
+      "label": "Financial Control and Reconciliation"
+    },
+    {
+      "fieldname": "advance_payment_amount",
+      "fieldtype": "Currency",
+      "label": "Advance Payment Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "advance_recovered_amount",
+      "fieldtype": "Currency",
+      "label": "Advance Recovered Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "retention_amount",
+      "fieldtype": "Currency",
+      "label": "Retention Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "retention_released_amount",
+      "fieldtype": "Currency",
+      "label": "Retention Released Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "invoiced_amount",
+      "fieldtype": "Currency",
+      "label": "Invoiced Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "paid_amount",
+      "fieldtype": "Currency",
+      "label": "Paid Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "remaining_contract_value",
+      "fieldtype": "Currency",
+      "label": "Remaining Contract Value",
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ]
+}

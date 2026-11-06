@@ -1,0 +1,150 @@
+{
+  "doctype": "DocType",
+  "name": "Procurement Complaint",
+  "module": "QOrg",
+  "custom": 0,
+  "autoname": "naming_series:",
+  "is_submittable": 1,
+  "track_changes": 1,
+  "field_order": [
+    "section_1",
+    "naming_series",
+    "procurement_process",
+    "supplier",
+    "complaint_type",
+    "column_1_3",
+    "received_on",
+    "status",
+    "assigned_to",
+    "section_2",
+    "complaint_details",
+    "evidence",
+    "investigation_findings",
+    "decision",
+    "corrective_action",
+    "closed_on"
+  ],
+  "fields": [
+    {
+      "fieldname": "section_1",
+      "label": "Complaint Identity",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "PRO-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "procurement_process",
+      "label": "Procurement Process",
+      "fieldtype": "Link",
+      "options": "Procurement Process",
+      "reqd": 1
+    },
+    {
+      "fieldname": "supplier",
+      "label": "Supplier",
+      "fieldtype": "Link",
+      "options": "Supplier"
+    },
+    {
+      "fieldname": "complaint_type",
+      "label": "Complaint Type",
+      "fieldtype": "Select",
+      "options": "Solicitation\nEligibility\nEvaluation\nAward\nContracting\nOther",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_1_3",
+      "label": "Column 1 3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "received_on",
+      "label": "Received On",
+      "fieldtype": "Datetime",
+      "reqd": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Received\nUnder Review\nAdditional Information Required\nDecision Issued\nClosed",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "assigned_to",
+      "label": "Assigned To",
+      "fieldtype": "Link",
+      "options": "User"
+    },
+    {
+      "fieldname": "section_2",
+      "label": "Details and Resolution",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "complaint_details",
+      "label": "Complaint Details",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "evidence",
+      "label": "Evidence",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "investigation_findings",
+      "label": "Investigation Findings",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "decision",
+      "label": "Decision",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "corrective_action",
+      "label": "Corrective Action",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "closed_on",
+      "label": "Closed On",
+      "fieldtype": "Datetime"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ]
+}

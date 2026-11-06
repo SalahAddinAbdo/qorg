@@ -1,0 +1,138 @@
+{
+  "doctype": "DocType",
+  "name": "Bid Precheck",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "field_order": [
+    "section_1_section",
+    "naming_series",
+    "procurement_process",
+    "submission",
+    "section_1_column",
+    "committee",
+    "result",
+    "section_2_section",
+    "reasons",
+    "section_3_section",
+    "criteria"
+  ],
+  "fields": [
+    {
+      "fieldname": "section_1_section",
+      "fieldtype": "Section Break",
+      "label": "Details 1"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "PRO-.YYYY.-.#####",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "procurement_process",
+      "label": "Procurement Process",
+      "fieldtype": "Link",
+      "options": "Procurement Process",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "submission",
+      "label": "Submission",
+      "fieldtype": "Link",
+      "options": "Procurement Submission",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_1_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "committee",
+      "label": "Committee",
+      "fieldtype": "Link",
+      "options": "Procure Committee",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "result",
+      "label": "Result",
+      "fieldtype": "Select",
+      "options": "Pending\nResponsive\nConditionally Responsive\nNon-Responsive\nClarification Required\nDisqualified",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "section_2_section",
+      "fieldtype": "Section Break",
+      "label": "Reasons"
+    },
+    {
+      "fieldname": "reasons",
+      "label": "Reasons",
+      "fieldtype": "Small Text",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_3_section",
+      "fieldtype": "Section Break",
+      "label": "Criteria"
+    },
+    {
+      "fieldname": "criteria",
+      "label": "Criteria",
+      "fieldtype": "Table",
+      "options": "Eval Score",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "is_submittable": 1
+}

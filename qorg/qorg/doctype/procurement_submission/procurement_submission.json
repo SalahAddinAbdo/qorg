@@ -1,0 +1,273 @@
+{
+  "doctype": "DocType",
+  "name": "Procurement Submission",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "field_order": [
+    "section_1_section",
+    "naming_series",
+    "procurement_process",
+    "procurement_notice",
+    "section_1_column",
+    "supplier",
+    "submitted_at",
+    "submission_status",
+    "section_2_section",
+    "technical_proposal",
+    "section_3_section",
+    "financial_proposal",
+    "section_4_section",
+    "bid_security",
+    "section_5_section",
+    "declaration",
+    "technical_opened",
+    "section_5_column",
+    "financial_opened",
+    "version_control_section",
+    "submission_version",
+    "supersedes_submission",
+    "withdrawn_on",
+    "withdrawal_reason",
+    "supplier_profile_section",
+    "supplier_registration",
+    "profile_current_confirmation",
+    "profile_confirmation_on",
+    "profile_snapshot"
+  ],
+  "fields": [
+    {
+      "fieldname": "section_1_section",
+      "fieldtype": "Section Break",
+      "label": "Details 1"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "PRO-.YYYY.-.#####",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "procurement_process",
+      "label": "Procurement Process",
+      "fieldtype": "Link",
+      "options": "Procurement Process",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "procurement_notice",
+      "label": "Procurement Notice",
+      "fieldtype": "Link",
+      "options": "Procurement Notice",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_1_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "supplier",
+      "label": "Supplier",
+      "fieldtype": "Link",
+      "options": "Supplier",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "submitted_at",
+      "label": "Submitted At",
+      "fieldtype": "Datetime",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "submission_status",
+      "label": "Submission Status",
+      "fieldtype": "Select",
+      "options": "Draft\nSubmitted\nWithdrawn\nLate\nOpened\nUnder Evaluation\nDisqualified\nAccepted",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_2_section",
+      "fieldtype": "Section Break",
+      "label": "Technical Proposal"
+    },
+    {
+      "fieldname": "technical_proposal",
+      "label": "Technical Proposal",
+      "fieldtype": "Attach",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_3_section",
+      "fieldtype": "Section Break",
+      "label": "Financial Proposal"
+    },
+    {
+      "fieldname": "financial_proposal",
+      "label": "Financial Proposal",
+      "fieldtype": "Attach",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_4_section",
+      "fieldtype": "Section Break",
+      "label": "Bid Security"
+    },
+    {
+      "fieldname": "bid_security",
+      "label": "Bid Security",
+      "fieldtype": "Attach",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_5_section",
+      "fieldtype": "Section Break",
+      "label": "Details 5"
+    },
+    {
+      "fieldname": "declaration",
+      "label": "Declaration",
+      "fieldtype": "Check",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "technical_opened",
+      "label": "Technical Opened",
+      "fieldtype": "Check",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_5_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "financial_opened",
+      "label": "Financial Opened",
+      "fieldtype": "Check",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "version_control_section",
+      "fieldtype": "Section Break",
+      "label": "Version Control"
+    },
+    {
+      "fieldname": "submission_version",
+      "fieldtype": "Int",
+      "label": "Submission Version",
+      "default": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "supersedes_submission",
+      "fieldtype": "Link",
+      "label": "Supersedes Submission",
+      "options": "Procurement Submission",
+      "read_only": 1
+    },
+    {
+      "fieldname": "withdrawn_on",
+      "fieldtype": "Datetime",
+      "label": "Withdrawn On",
+      "read_only": 1
+    },
+    {
+      "fieldname": "withdrawal_reason",
+      "fieldtype": "Small Text",
+      "label": "Withdrawal Reason"
+    },
+    {
+      "fieldname": "supplier_profile_section",
+      "fieldtype": "Section Break",
+      "label": "Supplier Profile Confirmation"
+    },
+    {
+      "fieldname": "supplier_registration",
+      "fieldtype": "Link",
+      "label": "Supplier Profile",
+      "options": "Supplier Registration",
+      "reqd": 1
+    },
+    {
+      "fieldname": "profile_current_confirmation",
+      "fieldtype": "Check",
+      "label": "I confirm that my supplier profile is complete and up to date for this submission",
+      "reqd": 1
+    },
+    {
+      "fieldname": "profile_confirmation_on",
+      "fieldtype": "Datetime",
+      "label": "Profile Confirmed On",
+      "read_only": 1
+    },
+    {
+      "fieldname": "profile_snapshot",
+      "fieldtype": "Long Text",
+      "label": "Supplier Profile Snapshot",
+      "read_only": 1,
+      "hidden": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "is_submittable": 1
+}

@@ -1,0 +1,185 @@
+{
+  "doctype": "DocType",
+  "name": "Procure Settings",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 1,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "field_order": [
+    "enable_extended_procurement",
+    "enable_procurement_portal",
+    "enable_supplier_registration",
+    "enable_two_envelope",
+    "enable_contract_management",
+    "require_receipt_before_goods_invoice",
+    "require_acceptance_before_service_invoice",
+    "require_certification_before_works_invoice",
+    "supplier_portal_section",
+    "allow_supplier_profile_creation",
+    "allow_supplier_profile_editing",
+    "lock_profile_during_review",
+    "lock_profile_after_approval",
+    "allow_update_request_after_approval",
+    "lock_bank_information",
+    "profile_validity_days",
+    "routing_section",
+    "default_procurement_officer",
+    "default_logistics_officer",
+    "default_stock_manager",
+    "default_contract_manager",
+    "default_acceptance_officer"
+  ],
+  "fields": [
+    {
+      "fieldname": "enable_extended_procurement",
+      "label": "Enable Extended Procurement",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "enable_procurement_portal",
+      "label": "Enable Procurement Portal",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "enable_supplier_registration",
+      "label": "Enable Supplier Registration",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "enable_two_envelope",
+      "label": "Enable Two Envelope",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "enable_contract_management",
+      "label": "Enable Contract Management",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "require_receipt_before_goods_invoice",
+      "label": "Require Receipt Before Goods Invoice",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "require_acceptance_before_service_invoice",
+      "label": "Require Acceptance Before Service Invoice",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "require_certification_before_works_invoice",
+      "label": "Require Certification Before Works Invoice",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "supplier_portal_section",
+      "fieldtype": "Section Break",
+      "label": "Supplier Portal and Profile"
+    },
+    {
+      "fieldname": "allow_supplier_profile_creation",
+      "fieldtype": "Check",
+      "label": "Allow Supplier Profile Creation",
+      "default": 1
+    },
+    {
+      "fieldname": "allow_supplier_profile_editing",
+      "fieldtype": "Check",
+      "label": "Allow Supplier Profile Editing",
+      "default": 1
+    },
+    {
+      "fieldname": "lock_profile_during_review",
+      "fieldtype": "Check",
+      "label": "Lock Profile During Review",
+      "default": 1
+    },
+    {
+      "fieldname": "lock_profile_after_approval",
+      "fieldtype": "Check",
+      "label": "Lock Profile After Approval",
+      "default": 1
+    },
+    {
+      "fieldname": "allow_update_request_after_approval",
+      "fieldtype": "Check",
+      "label": "Allow Update Request After Approval",
+      "default": 1
+    },
+    {
+      "fieldname": "lock_bank_information",
+      "fieldtype": "Check",
+      "label": "Lock Bank Information",
+      "default": 1
+    },
+    {
+      "fieldname": "profile_validity_days",
+      "fieldtype": "Int",
+      "label": "Supplier Profile Validity Days",
+      "default": 365
+    },
+    {
+      "fieldname": "routing_section",
+      "fieldtype": "Section Break",
+      "label": "Default Responsibility Routing"
+    },
+    {
+      "fieldname": "default_procurement_officer",
+      "fieldtype": "Link",
+      "label": "Default Procurement Officer",
+      "options": "User"
+    },
+    {
+      "fieldname": "default_logistics_officer",
+      "fieldtype": "Link",
+      "label": "Default Logistics Officer",
+      "options": "User"
+    },
+    {
+      "fieldname": "default_stock_manager",
+      "fieldtype": "Link",
+      "label": "Default Stock Manager",
+      "options": "User"
+    },
+    {
+      "fieldname": "default_contract_manager",
+      "fieldtype": "Link",
+      "label": "Default Contract Manager",
+      "options": "User"
+    },
+    {
+      "fieldname": "default_acceptance_officer",
+      "fieldtype": "Link",
+      "label": "Default Acceptance Officer",
+      "options": "User"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ]
+}

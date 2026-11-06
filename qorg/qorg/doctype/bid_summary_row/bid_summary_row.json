@@ -1,0 +1,92 @@
+{
+  "doctype": "DocType",
+  "name": "Bid Summary Row",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "issingle": 0,
+  "editable_grid": 1,
+  "track_changes": 1,
+  "field_order": [
+    "supplier",
+    "submission",
+    "preliminary_result",
+    "technical_score",
+    "technical_weighted",
+    "evaluated_price",
+    "financial_score",
+    "financial_weighted",
+    "total_score",
+    "rank",
+    "recommendation",
+    "rationale"
+  ],
+  "fields": [
+    {
+      "fieldname": "supplier",
+      "label": "Supplier",
+      "fieldtype": "Link",
+      "options": "Supplier",
+      "reqd": 1
+    },
+    {
+      "fieldname": "submission",
+      "label": "Submission",
+      "fieldtype": "Link",
+      "options": "Procurement Submission"
+    },
+    {
+      "fieldname": "preliminary_result",
+      "label": "Preliminary Result",
+      "fieldtype": "Select",
+      "options": "Pending\nResponsive\nConditionally Responsive\nNon-Responsive\nDisqualified"
+    },
+    {
+      "fieldname": "technical_score",
+      "label": "Technical Score",
+      "fieldtype": "Float"
+    },
+    {
+      "fieldname": "technical_weighted",
+      "label": "Technical Weighted",
+      "fieldtype": "Float"
+    },
+    {
+      "fieldname": "evaluated_price",
+      "label": "Evaluated Price",
+      "fieldtype": "Currency"
+    },
+    {
+      "fieldname": "financial_score",
+      "label": "Financial Score",
+      "fieldtype": "Float"
+    },
+    {
+      "fieldname": "financial_weighted",
+      "label": "Financial Weighted",
+      "fieldtype": "Float"
+    },
+    {
+      "fieldname": "total_score",
+      "label": "Total Score",
+      "fieldtype": "Float"
+    },
+    {
+      "fieldname": "rank",
+      "label": "Rank",
+      "fieldtype": "Int"
+    },
+    {
+      "fieldname": "recommendation",
+      "label": "Recommendation",
+      "fieldtype": "Select",
+      "options": "Pending\nRecommended\nReserve\nNot Recommended\nDisqualified"
+    },
+    {
+      "fieldname": "rationale",
+      "label": "Rationale",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "permissions": []
+}

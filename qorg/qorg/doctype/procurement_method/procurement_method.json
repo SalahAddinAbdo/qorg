@@ -1,0 +1,234 @@
+{
+  "doctype": "DocType",
+  "name": "Procurement Method",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "field_order": [
+    "identity_section",
+    "naming_series",
+    "method_name",
+    "identity_column",
+    "procurement_mode",
+    "disabled",
+    "requirements_section",
+    "requires_procurement_process",
+    "uses_standard_rfq",
+    "requires_public_notice",
+    "requires_opening_committee",
+    "requires_technical_evaluation",
+    "requirements_column",
+    "requires_financial_evaluation",
+    "requires_two_envelope",
+    "requires_main_committee",
+    "allows_direct_purchase_order",
+    "defaults_section",
+    "default_minimum_quotations",
+    "default_technical_weight",
+    "defaults_column",
+    "default_financial_weight",
+    "default_technical_threshold"
+  ],
+  "fields": [
+    {
+      "fieldname": "identity_section",
+      "fieldtype": "Section Break",
+      "label": "Method and Route"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "PRO-.YYYY.-.#####",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "method_name",
+      "label": "Method Name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "identity_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "procurement_mode",
+      "label": "Procurement Mode",
+      "fieldtype": "Select",
+      "options": "Direct\nRFQ\nRestricted\nOpen\nRFP\nSingle Source\nEmergency\nFramework",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "disabled",
+      "label": "Disabled",
+      "fieldtype": "Check",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "requirements_section",
+      "fieldtype": "Section Break",
+      "label": "Route Requirements"
+    },
+    {
+      "fieldname": "requires_procurement_process",
+      "label": "Requires Procurement Process",
+      "fieldtype": "Check",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "uses_standard_rfq",
+      "label": "Uses Standard Rfq",
+      "fieldtype": "Check",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "requires_public_notice",
+      "label": "Requires Public Notice",
+      "fieldtype": "Check",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "requires_opening_committee",
+      "label": "Requires Opening Committee",
+      "fieldtype": "Check",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "requires_technical_evaluation",
+      "label": "Requires Technical Evaluation",
+      "fieldtype": "Check",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "requirements_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "requires_financial_evaluation",
+      "label": "Requires Financial Evaluation",
+      "fieldtype": "Check",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "requires_two_envelope",
+      "label": "Requires Two Envelope",
+      "fieldtype": "Check",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "requires_main_committee",
+      "label": "Requires Main Committee",
+      "fieldtype": "Check",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "allows_direct_purchase_order",
+      "label": "Allows Direct Purchase Order",
+      "fieldtype": "Check",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "defaults_section",
+      "fieldtype": "Section Break",
+      "label": "Defaults"
+    },
+    {
+      "fieldname": "default_minimum_quotations",
+      "label": "Default Minimum Quotations",
+      "fieldtype": "Int",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "default_technical_weight",
+      "label": "Default Technical Weight",
+      "fieldtype": "Percent",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "defaults_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "default_financial_weight",
+      "label": "Default Financial Weight",
+      "fieldtype": "Percent",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "default_technical_threshold",
+      "label": "Default Technical Threshold",
+      "fieldtype": "Percent",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "is_submittable": 1
+}

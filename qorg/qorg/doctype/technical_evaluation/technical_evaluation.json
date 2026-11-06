@@ -1,0 +1,205 @@
+{
+  "doctype": "DocType",
+  "name": "Technical Evaluation",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "field_order": [
+    "identity_section",
+    "naming_series",
+    "procurement_process",
+    "submission",
+    "supplier",
+    "identity_column",
+    "committee",
+    "evaluation_mode",
+    "result",
+    "score_section",
+    "scores",
+    "raw_technical_score",
+    "score_column",
+    "technical_threshold",
+    "analysis_section",
+    "strengths",
+    "weaknesses",
+    "rationale"
+  ],
+  "fields": [
+    {
+      "fieldname": "identity_section",
+      "fieldtype": "Section Break",
+      "label": "Evaluation Context"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "PRO-.YYYY.-.#####",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "procurement_process",
+      "label": "Procurement Process",
+      "fieldtype": "Link",
+      "options": "Procurement Process",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "submission",
+      "label": "Submission",
+      "fieldtype": "Link",
+      "options": "Procurement Submission",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "supplier",
+      "label": "Supplier",
+      "fieldtype": "Link",
+      "options": "Supplier",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "identity_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "committee",
+      "label": "Committee",
+      "fieldtype": "Link",
+      "options": "Procure Committee",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "evaluation_mode",
+      "label": "Evaluation Mode",
+      "fieldtype": "Select",
+      "options": "Individual\nConsensus\nIndividual then Consensus",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "result",
+      "label": "Result",
+      "fieldtype": "Select",
+      "options": "Pending\nPassed\nFailed\nClarification Required",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "score_section",
+      "fieldtype": "Section Break",
+      "label": "Technical Assessment"
+    },
+    {
+      "fieldname": "scores",
+      "label": "Scores",
+      "fieldtype": "Table",
+      "options": "Eval Score",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "raw_technical_score",
+      "label": "Raw Technical Score",
+      "fieldtype": "Float",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "score_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "technical_threshold",
+      "label": "Technical Threshold",
+      "fieldtype": "Percent",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "analysis_section",
+      "fieldtype": "Section Break",
+      "label": "Committee Analysis"
+    },
+    {
+      "fieldname": "strengths",
+      "label": "Strengths",
+      "fieldtype": "Small Text",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "weaknesses",
+      "label": "Weaknesses",
+      "fieldtype": "Small Text",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "rationale",
+      "label": "Rationale",
+      "fieldtype": "Text Editor",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "is_submittable": 1
+}

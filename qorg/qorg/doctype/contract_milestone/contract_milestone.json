@@ -1,0 +1,62 @@
+{
+  "doctype": "DocType",
+  "name": "Contract Milestone",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "editable_grid": 1,
+  "field_order": [
+    "milestone",
+    "due_date",
+    "amount",
+    "percentage",
+    "acceptance_criteria",
+    "payment_linked",
+    "status"
+  ],
+  "fields": [
+    {
+      "fieldname": "milestone",
+      "label": "Milestone",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "due_date",
+      "label": "Due Date",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "amount",
+      "label": "Amount",
+      "fieldtype": "Currency",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "percentage",
+      "label": "Percentage",
+      "fieldtype": "Percent"
+    },
+    {
+      "fieldname": "acceptance_criteria",
+      "label": "Acceptance Criteria",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "payment_linked",
+      "label": "Payment Linked",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Pending\nDue\nSubmitted\nAccepted\nRejected",
+      "in_list_view": 1
+    }
+  ],
+  "permissions": []
+}

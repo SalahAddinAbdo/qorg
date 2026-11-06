@@ -1,0 +1,228 @@
+{
+  "doctype": "DocType",
+  "name": "Procure Acceptance",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "field_order": [
+    "section_1_section",
+    "naming_series",
+    "procurement_process",
+    "purchase_order",
+    "section_1_column",
+    "acceptance_type",
+    "milestone",
+    "acceptance_date",
+    "section_2_section",
+    "accepted_amount",
+    "completion_percent",
+    "section_2_column",
+    "retention_percent",
+    "accepted",
+    "section_3_section",
+    "technical_remarks",
+    "section_4_section",
+    "evidence",
+    "payment_control_section",
+    "eligible_invoice_amount",
+    "advance_recovery_amount",
+    "retention_amount",
+    "net_payable_amount"
+  ],
+  "fields": [
+    {
+      "fieldname": "section_1_section",
+      "fieldtype": "Section Break",
+      "label": "Details 1"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "PRO-.YYYY.-.#####",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "procurement_process",
+      "label": "Procurement Process",
+      "fieldtype": "Link",
+      "options": "Procurement Process",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "purchase_order",
+      "label": "Purchase Order",
+      "fieldtype": "Link",
+      "options": "Purchase Order",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_1_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "acceptance_type",
+      "label": "Acceptance Type",
+      "fieldtype": "Select",
+      "options": "Goods Acceptance\nService Completion\nWorks Milestone\nPractical Completion\nFinal Acceptance",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "milestone",
+      "label": "Milestone",
+      "fieldtype": "Data",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "acceptance_date",
+      "label": "Acceptance Date",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_2_section",
+      "fieldtype": "Section Break",
+      "label": "Details 2"
+    },
+    {
+      "fieldname": "accepted_amount",
+      "label": "Accepted Amount",
+      "fieldtype": "Currency",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "completion_percent",
+      "label": "Completion Percent",
+      "fieldtype": "Percent",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_2_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "retention_percent",
+      "label": "Retention Percent",
+      "fieldtype": "Percent",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "accepted",
+      "label": "Accepted",
+      "fieldtype": "Check",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_3_section",
+      "fieldtype": "Section Break",
+      "label": "Technical Remarks"
+    },
+    {
+      "fieldname": "technical_remarks",
+      "label": "Technical Remarks",
+      "fieldtype": "Text Editor",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_4_section",
+      "fieldtype": "Section Break",
+      "label": "Evidence"
+    },
+    {
+      "fieldname": "evidence",
+      "label": "Evidence",
+      "fieldtype": "Attach",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "payment_control_section",
+      "fieldtype": "Section Break",
+      "label": "Payment Control"
+    },
+    {
+      "fieldname": "eligible_invoice_amount",
+      "fieldtype": "Currency",
+      "label": "Eligible Invoice Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "advance_recovery_amount",
+      "fieldtype": "Currency",
+      "label": "Advance Recovery Amount"
+    },
+    {
+      "fieldname": "retention_amount",
+      "fieldtype": "Currency",
+      "label": "Retention Amount"
+    },
+    {
+      "fieldname": "net_payable_amount",
+      "fieldtype": "Currency",
+      "label": "Net Payable Amount",
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "is_submittable": 1
+}

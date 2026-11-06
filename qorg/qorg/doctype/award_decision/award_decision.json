@@ -1,0 +1,164 @@
+{
+  "doctype": "DocType",
+  "name": "Award Decision",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "field_order": [
+    "section_1_section",
+    "naming_series",
+    "procurement_process",
+    "award_recommendation",
+    "section_1_column",
+    "decision",
+    "awarded_supplier",
+    "awarded_amount",
+    "section_2_section",
+    "decision_rationale",
+    "section_3_section",
+    "purchase_order",
+    "section_4_section",
+    "decision_attachment"
+  ],
+  "fields": [
+    {
+      "fieldname": "section_1_section",
+      "fieldtype": "Section Break",
+      "label": "Details 1"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "PRO-.YYYY.-.#####",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "procurement_process",
+      "label": "Procurement Process",
+      "fieldtype": "Link",
+      "options": "Procurement Process",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "award_recommendation",
+      "label": "Award Recommendation",
+      "fieldtype": "Link",
+      "options": "Award Recommendation",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_1_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "decision",
+      "label": "Decision",
+      "fieldtype": "Select",
+      "options": "Approved\nRejected\nReturned for Re-evaluation\nCancelled",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "awarded_supplier",
+      "label": "Awarded Supplier",
+      "fieldtype": "Link",
+      "options": "Supplier",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "awarded_amount",
+      "label": "Awarded Amount",
+      "fieldtype": "Currency",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_2_section",
+      "fieldtype": "Section Break",
+      "label": "Decision Rationale"
+    },
+    {
+      "fieldname": "decision_rationale",
+      "label": "Decision Rationale",
+      "fieldtype": "Text Editor",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_3_section",
+      "fieldtype": "Section Break",
+      "label": "Details 3"
+    },
+    {
+      "fieldname": "purchase_order",
+      "label": "Purchase Order",
+      "fieldtype": "Link",
+      "options": "Purchase Order",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_4_section",
+      "fieldtype": "Section Break",
+      "label": "Decision Attachment"
+    },
+    {
+      "fieldname": "decision_attachment",
+      "label": "Decision Attachment",
+      "fieldtype": "Attach",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "is_submittable": 1
+}

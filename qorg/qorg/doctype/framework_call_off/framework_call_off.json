@@ -1,0 +1,158 @@
+{
+  "doctype": "DocType",
+  "name": "Framework Call Off",
+  "module": "QOrg",
+  "custom": 0,
+  "autoname": "naming_series:",
+  "is_submittable": 1,
+  "track_changes": 1,
+  "field_order": [
+    "section_1",
+    "naming_series",
+    "framework_agreement",
+    "supplier",
+    "company",
+    "project",
+    "material_request",
+    "column_1_5",
+    "call_off_date",
+    "currency",
+    "amount",
+    "purchase_order",
+    "status",
+    "section_2",
+    "selection_justification",
+    "validation_summary"
+  ],
+  "fields": [
+    {
+      "fieldname": "section_1",
+      "label": "Call-off Identity",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "FRA-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "framework_agreement",
+      "label": "Framework Agreement",
+      "fieldtype": "Link",
+      "options": "Framework Agreement",
+      "reqd": 1
+    },
+    {
+      "fieldname": "supplier",
+      "label": "Supplier",
+      "fieldtype": "Link",
+      "options": "Supplier",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project"
+    },
+    {
+      "fieldname": "material_request",
+      "label": "Material Request",
+      "fieldtype": "Link",
+      "options": "Material Request"
+    },
+    {
+      "fieldname": "column_1_5",
+      "label": "Column 1 5",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "call_off_date",
+      "label": "Call Off Date",
+      "fieldtype": "Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "currency",
+      "label": "Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "reqd": 1
+    },
+    {
+      "fieldname": "amount",
+      "label": "Amount",
+      "fieldtype": "Currency",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "purchase_order",
+      "label": "Purchase Order",
+      "fieldtype": "Link",
+      "options": "Purchase Order",
+      "read_only": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nValidated\nPurchase Order Created\nCompleted\nCancelled",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "section_2",
+      "label": "Justification and Control",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "selection_justification",
+      "label": "Selection Justification",
+      "fieldtype": "Small Text",
+      "reqd": 1
+    },
+    {
+      "fieldname": "validation_summary",
+      "label": "Validation Summary",
+      "fieldtype": "Long Text",
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ]
+}

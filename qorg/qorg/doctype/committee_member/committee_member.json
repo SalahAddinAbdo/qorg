@@ -1,0 +1,62 @@
+{
+  "doctype": "DocType",
+  "name": "Committee Member",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "issingle": 0,
+  "editable_grid": 1,
+  "track_changes": 1,
+  "field_order": [
+    "user",
+    "committee_role",
+    "voting_member",
+    "alternate_for",
+    "member_weight",
+    "recused",
+    "active"
+  ],
+  "fields": [
+    {
+      "fieldname": "user",
+      "label": "User",
+      "fieldtype": "Link",
+      "options": "User",
+      "reqd": 1
+    },
+    {
+      "fieldname": "committee_role",
+      "label": "Committee Role",
+      "fieldtype": "Select",
+      "options": "Chair\nSecretary\nMember\nObserver\nTechnical Expert",
+      "reqd": 1
+    },
+    {
+      "fieldname": "voting_member",
+      "label": "Voting Member",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "alternate_for",
+      "label": "Alternate For",
+      "fieldtype": "Link",
+      "options": "User"
+    },
+    {
+      "fieldname": "member_weight",
+      "label": "Member Weight",
+      "fieldtype": "Percent"
+    },
+    {
+      "fieldname": "recused",
+      "label": "Recused",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "active",
+      "label": "Active",
+      "fieldtype": "Check"
+    }
+  ],
+  "permissions": []
+}

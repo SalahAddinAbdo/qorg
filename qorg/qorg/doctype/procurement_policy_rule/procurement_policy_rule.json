@@ -1,0 +1,261 @@
+{
+  "doctype": "DocType",
+  "name": "Procurement Policy Rule",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "field_order": [
+    "identity_section",
+    "naming_series",
+    "rule_title",
+    "company",
+    "currency",
+    "identity_column",
+    "procurement_type",
+    "project",
+    "risk_level",
+    "emergency_only",
+    "threshold_section",
+    "minimum_amount",
+    "maximum_amount",
+    "procurement_method",
+    "priority",
+    "threshold_column",
+    "effective_from",
+    "effective_to",
+    "disabled",
+    "evaluation_section",
+    "minimum_quotations",
+    "technical_weight",
+    "evaluation_column",
+    "financial_weight",
+    "technical_threshold"
+  ],
+  "fields": [
+    {
+      "fieldname": "identity_section",
+      "fieldtype": "Section Break",
+      "label": "Policy Scope"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "PRO-.YYYY.-.#####",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "rule_title",
+      "label": "Rule Title",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "currency",
+      "label": "Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "identity_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "procurement_type",
+      "label": "Procurement Type",
+      "fieldtype": "Select",
+      "options": "Goods\nServices\nWorks\nConsultancy\nMixed",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "risk_level",
+      "label": "Risk Level",
+      "fieldtype": "Select",
+      "options": "Low\nMedium\nHigh\nCritical",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "emergency_only",
+      "label": "Emergency Only",
+      "fieldtype": "Check",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "threshold_section",
+      "fieldtype": "Section Break",
+      "label": "Financial Threshold and Method"
+    },
+    {
+      "fieldname": "minimum_amount",
+      "label": "Minimum Amount",
+      "fieldtype": "Currency",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "maximum_amount",
+      "label": "Maximum Amount",
+      "fieldtype": "Currency",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "procurement_method",
+      "label": "Procurement Method",
+      "fieldtype": "Link",
+      "options": "Procurement Method",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "priority",
+      "label": "Priority",
+      "fieldtype": "Int",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "threshold_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "effective_from",
+      "label": "Effective From",
+      "fieldtype": "Date",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "effective_to",
+      "label": "Effective To",
+      "fieldtype": "Date",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "disabled",
+      "label": "Disabled",
+      "fieldtype": "Check",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "evaluation_section",
+      "fieldtype": "Section Break",
+      "label": "Competition and Evaluation"
+    },
+    {
+      "fieldname": "minimum_quotations",
+      "label": "Minimum Quotations",
+      "fieldtype": "Int",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "technical_weight",
+      "label": "Technical Weight",
+      "fieldtype": "Percent",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "evaluation_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "financial_weight",
+      "label": "Financial Weight",
+      "fieldtype": "Percent",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "technical_threshold",
+      "label": "Technical Threshold",
+      "fieldtype": "Percent",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "is_submittable": 1
+}
