@@ -1,0 +1,20 @@
+{
+  "doctype": "Report",
+  "name": "Award Summary",
+  "report_name": "Award Summary",
+  "ref_doctype": "Bid Summary Row",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "module": "QOrg",
+  "roles": [
+    {
+      "role": "Procurement Manager"
+    },
+    {
+      "role": "Procurement Officer"
+    },
+    {
+      "role": "System Manager"
+    }
+  ]
+}

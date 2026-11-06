@@ -1,0 +1,20 @@
+{
+  "doctype": "Report",
+  "name": "Guarantee Expiry",
+  "report_name": "Guarantee Expiry",
+  "ref_doctype": "Guarantee Row",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "module": "QOrg",
+  "roles": [
+    {
+      "role": "Procurement Manager"
+    },
+    {
+      "role": "Procurement Officer"
+    },
+    {
+      "role": "System Manager"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "doctype": "Report",
+  "name": "Framework Utilization",
+  "report_name": "Framework Utilization",
+  "ref_doctype": "Framework Agreement",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "module": "QOrg",
+  "roles": [
+    {
+      "role": "Procurement Manager"
+    },
+    {
+      "role": "Procurement Officer"
+    },
+    {
+      "role": "System Manager"
+    }
+  ]
+}

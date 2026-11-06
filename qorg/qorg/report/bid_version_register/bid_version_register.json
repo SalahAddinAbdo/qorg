@@ -1,0 +1,20 @@
+{
+  "doctype": "Report",
+  "name": "Bid Version Register",
+  "report_name": "Bid Version Register",
+  "ref_doctype": "Procurement Submission",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "module": "QOrg",
+  "roles": [
+    {
+      "role": "Procurement Manager"
+    },
+    {
+      "role": "Procurement Officer"
+    },
+    {
+      "role": "System Manager"
+    }
+  ]
+}

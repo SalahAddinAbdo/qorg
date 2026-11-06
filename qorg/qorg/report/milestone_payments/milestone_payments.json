@@ -1,0 +1,20 @@
+{
+  "doctype": "Report",
+  "name": "Milestone Payments",
+  "report_name": "Milestone Payments",
+  "ref_doctype": "Contract Milestone",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "module": "QOrg",
+  "roles": [
+    {
+      "role": "Procurement Manager"
+    },
+    {
+      "role": "Procurement Officer"
+    },
+    {
+      "role": "System Manager"
+    }
+  ]
+}

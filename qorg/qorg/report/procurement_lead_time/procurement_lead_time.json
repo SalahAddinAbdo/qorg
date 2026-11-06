@@ -1,0 +1,20 @@
+{
+  "doctype": "Report",
+  "name": "Procurement Lead Time",
+  "report_name": "Procurement Lead Time",
+  "ref_doctype": "Procurement Process",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "module": "QOrg",
+  "roles": [
+    {
+      "role": "Procurement Manager"
+    },
+    {
+      "role": "Procurement Officer"
+    },
+    {
+      "role": "System Manager"
+    }
+  ]
+}

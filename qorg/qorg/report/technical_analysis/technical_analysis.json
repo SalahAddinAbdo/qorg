@@ -1,0 +1,20 @@
+{
+  "doctype": "Report",
+  "name": "Technical Analysis",
+  "report_name": "Technical Analysis",
+  "ref_doctype": "Technical Evaluation",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "module": "QOrg",
+  "roles": [
+    {
+      "role": "Procurement Manager"
+    },
+    {
+      "role": "Procurement Officer"
+    },
+    {
+      "role": "System Manager"
+    }
+  ]
+}
