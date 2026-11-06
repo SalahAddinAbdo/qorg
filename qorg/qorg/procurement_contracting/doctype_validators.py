@@ -12,7 +12,9 @@ def validate_method(doc):
     if any(weights): require_exact_hundred(weights,"default technical and financial weights")
     if doc.requires_two_envelope and not (doc.requires_technical_evaluation and doc.requires_financial_evaluation):
         frappe.throw(_("Two-envelope submission requires both technical and financial evaluation."))
-    if doc.allows_direct_purchase_order and doc.requires_competition:
+    allows_direct_purchase_order = getattr(doc, "allows_direct_purchase_order", 0)
+    requires_competition = getattr(doc, "requires_competition", 0)
+    if allows_direct_purchase_order and requires_competition:
         frappe.throw(_("A method cannot allow direct Purchase Order and require competition simultaneously."))
 
 
@@ -46,7 +48,10 @@ def validate_evaluation_template(doc):
 
 
 def validate_notice(doc):
-    if doc.deadline and doc.publish_on and doc.deadline<=doc.publish_on: frappe.throw(_("Submission deadline must be after publication date."))
+    deadline = getattr(doc, "deadline", None)
+    publish_on = getattr(doc, "publish_on", None)
+    if deadline and publish_on and deadline <= publish_on:
+        frappe.throw(_("Submission deadline must be after publication date."))
     if doc.published and not doc.route: doc.route=re.sub(r"[^a-z0-9]+","-",(doc.title or doc.name).lower()).strip("-")
 
 
