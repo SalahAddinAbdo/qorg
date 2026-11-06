@@ -1,0 +1,1 @@
+{% extends "templates/web.html" %}{% block page_content %}<div class="container qorg-procurement-page"><h1>{{ _("My Clarifications") }}</h1>{% for i in items %}<div class="qorg-procurement-card"><div ><b>{{ i.subject }}</b><br>{{ i.procurement_process }} · {{ i.due_date or '' }}</div></div>{% else %}<p>{{ _("No clarifications found.") }}</p>{% endfor %}</div>{% endblock %}

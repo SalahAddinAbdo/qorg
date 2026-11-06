@@ -380,3 +380,45 @@ has_permission = {
         "qorg.qorg.task_management.permissions.has_request_permission"
     ),
 }
+
+# QOrg Procurement and Contracting v1.0
+extend_doctype_class.setdefault("Material Request", []).append("qorg.qorg.procurement_contracting.material_request.MaterialRequestProcurementMixin")
+doctype_js.setdefault("Material Request", "public/js/material_request_procurement.js")
+after_install = list(after_install) if isinstance(after_install, (list, tuple)) else [after_install]
+after_install.append("qorg.qorg.procurement_contracting.provisioning.provision_procurement_contracting_v13_final")
+after_migrate = list(after_migrate) if isinstance(after_migrate, (list, tuple)) else [after_migrate]
+after_migrate.append("qorg.qorg.procurement_contracting.provisioning.provision_procurement_contracting_v13_final")
+
+# QOrg Procurement security and transaction gates
+has_permission.setdefault("Procurement Submission", "qorg.qorg.procurement_contracting.permissions.submission_has_permission")
+has_permission.setdefault("Procurement Financial Evaluation", "qorg.qorg.procurement_contracting.permissions.financial_evaluation_has_permission")
+permission_query_conditions.setdefault("Procurement Technical Evaluation", "qorg.qorg.procurement_contracting.permissions.technical_query")
+doc_events.setdefault("Purchase Invoice", {}).setdefault("validate", []).append("qorg.qorg.procurement_contracting.acceptance.validate_purchase_invoice")
+has_permission.setdefault("Procurement Technical Evaluation", "qorg.qorg.procurement_contracting.permissions.technical_evaluation_has_permission")
+permission_query_conditions.setdefault("Procurement Financial Evaluation", "qorg.qorg.procurement_contracting.permissions.financial_query")
+doc_events.setdefault("Supplier Registration", {}).setdefault("validate", []).append("qorg.qorg.procurement_contracting.supplier_profile.validate_supplier_registration")
+doc_events.setdefault("Material Request", {}).setdefault("on_submit", []).append("qorg.qorg.procurement_contracting.routing.route_material_request")
+doc_events.setdefault("Procurement Contract", {}).setdefault("validate", []).append("qorg.qorg.procurement_contracting.contract_engine.validate_contract")
+doc_events.setdefault("Framework Call Off", {}).setdefault("validate", []).append("qorg.qorg.procurement_contracting.contract_engine.validate_framework_call_off")
+doc_events.setdefault("Procurement Submission", {}).setdefault("validate", []).append("qorg.qorg.procurement_contracting.submission_service.validate_submission")
+
+# QOrg Procurement v1.3 commitments and scheduled controls
+scheduler_events.setdefault("daily", []).append("qorg.qorg.procurement_contracting.scheduled_tasks.daily_procurement_alerts")
+doc_events.setdefault("Material Request", {}).setdefault("on_submit", []).append("qorg.qorg.procurement_contracting.commitment_hooks.material_request_submit")
+doc_events.setdefault("Purchase Order", {}).setdefault("on_submit", []).append("qorg.qorg.procurement_contracting.commitment_hooks.purchase_order_submit")
+doc_events.setdefault("Procurement Contract", {}).setdefault("on_submit", []).append("qorg.qorg.procurement_contracting.commitment_hooks.contract_submit")
+doc_events.setdefault("Procurement Completion and Acceptance", {}).setdefault("on_submit", []).append("qorg.qorg.procurement_contracting.commitment_hooks.acceptance_submit")
+doc_events.setdefault("Purchase Invoice", {}).setdefault("on_submit", []).append("qorg.qorg.procurement_contracting.commitment_hooks.invoice_submit")
+doc_events.setdefault("Payment Entry", {}).setdefault("on_submit", []).append("qorg.qorg.procurement_contracting.commitment_hooks.payment_submit")
+app_include_css.append("/assets/qorg/css/procurement_reports.css")
+app_include_js.append("/assets/qorg/js/procurement_reports.js")
+doc_events.setdefault("Material Request", {}).setdefault("on_cancel", []).append("qorg.qorg.procurement_contracting.commitment_hooks.material_request_cancel")
+doc_events.setdefault("Purchase Order", {}).setdefault("on_cancel", []).append("qorg.qorg.procurement_contracting.commitment_hooks.purchase_order_cancel")
+doc_events.setdefault("Procurement Contract", {}).setdefault("on_cancel", []).append("qorg.qorg.procurement_contracting.commitment_hooks.contract_cancel")
+doc_events.setdefault("Procurement Completion and Acceptance", {}).setdefault("on_cancel", []).append("qorg.qorg.procurement_contracting.commitment_hooks.acceptance_cancel")
+doc_events.setdefault("Purchase Invoice", {}).setdefault("on_cancel", []).append("qorg.qorg.procurement_contracting.commitment_hooks.invoice_cancel")
+doc_events.setdefault("Payment Entry", {}).setdefault("on_cancel", []).append("qorg.qorg.procurement_contracting.commitment_hooks.payment_cancel")
+doc_events.setdefault("Procurement Completion and Acceptance", {}).setdefault("validate", []).append("qorg.qorg.procurement_contracting.contract_engine.validate_acceptance")
+file_permission = ["qorg.qorg.procurement_contracting.private_files.has_file_permission"]
+
+web_include_css.append("/assets/qorg/css/procurement_portal.css")

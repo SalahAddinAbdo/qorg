@@ -1,0 +1,1 @@
+{% extends "templates/web.html" %}{% block page_content %}<div class="container qorg-procurement-page"><h1>{{ _("My Contracts") }}</h1>{% for c in contracts %}<div class="qorg-procurement-card"><div ><b>{{ c.contract_title }}</b><br>{{ c.status }} · {{ c.contract_value }} · {{ c.end_date }}</div></div>{% else %}<p>{{ _("No contracts found.") }}</p>{% endfor %}</div>{% endblock %}

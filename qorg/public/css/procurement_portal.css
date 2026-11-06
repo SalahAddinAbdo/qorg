@@ -1,0 +1,6 @@
+.qorg-procurement-page{color:var(--qorg-text,var(--text-color));padding-block:var(--qorg-web-section-gap,2rem)}
+.qorg-procurement-hero,.qorg-procurement-card{background:var(--qorg-surface-bg,var(--card-bg));border:1px solid var(--qorg-border,var(--border-color));border-radius:var(--qorg-radius,var(--border-radius));box-shadow:var(--qorg-web-soft-shadow,0 4px 18px rgba(0,0,0,.06))}
+.qorg-procurement-hero{padding:clamp(1.25rem,3vw,2.5rem);margin-bottom:1.5rem}.qorg-procurement-card{padding:1.25rem;margin-block:1rem}
+.qorg-procurement-card h2,.qorg-procurement-card h3{color:var(--qorg-text,var(--text-color))}.qorg-procurement-meta{color:var(--qorg-muted-text,var(--text-muted));display:flex;gap:.75rem;flex-wrap:wrap}
+.qorg-procurement-actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem}.qorg-procurement-page .btn-primary{background:var(--qorg-brand-primary,var(--primary-color));border-color:var(--qorg-brand-primary,var(--primary-color))}
+@media(max-width:576px){.qorg-procurement-page{padding-block:1rem}.qorg-procurement-hero,.qorg-procurement-card{padding:1rem}.qorg-procurement-actions .btn{width:100%}}
