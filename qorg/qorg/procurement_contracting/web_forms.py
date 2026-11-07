@@ -47,7 +47,7 @@ def _apply_settings(doc, definition):
   if doc.meta.has_field(k): doc.set(k,v)
  if doc.meta.has_field("key_required"): doc.key_required=definition["key_required"]
  # Inherit the same managed design architecture used by opportunity forms.
- for k,v in {"qorg_web_form_design_enabled":1,"qorg_inherit_global_web_form_design":1,"qorg_header_style":"Default"}.items():
+ for k,v in {"qorg_web_form_design_enabled":1,"qorg_inherit_global_web_form_design":1,"qorg_header_style":"Default","qorg_web_form_design_version":"3.0.0"}.items():
   if doc.meta.has_field(k): doc.set(k,v)
 
 def _rebuild_fields(doc, definition):

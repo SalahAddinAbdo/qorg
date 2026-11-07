@@ -17,7 +17,17 @@ def provision_procurement_contracting():
        {'fieldname':'custom_technical_threshold','label':'Technical Threshold %','fieldtype':'Percent','read_only':1,'insert_after':'custom_financial_weight'},
        {'fieldname':'custom_requires_contract','label':'Requires Contract','fieldtype':'Check','read_only':1,'insert_after':'custom_technical_threshold'},
        {'fieldname':'custom_procurement_exception_reason','label':'Procurement Exception Reason','fieldtype':'Small Text','insert_after':'custom_requires_contract'},
-       {'fieldname':'custom_procurement_policy_snapshot','label':'Procurement Policy Snapshot','fieldtype':'Long Text','read_only':1,'hidden':1,'insert_after':'custom_procurement_exception_reason'}],'Material Request Item':[{'fieldname':'custom_estimated_unit_cost','label':'Estimated Unit Cost','fieldtype':'Currency','insert_after':'rate'},
+       {'fieldname':'custom_procurement_policy_snapshot','label':'Procurement Policy Snapshot','fieldtype':'Long Text','read_only':1,'hidden':1,'insert_after':'custom_procurement_exception_reason'}],'Purchase Order':[
+ {'fieldname':'custom_procurement_contract','label':'Procurement Contract','fieldtype':'Link','options':'Procurement Contract','insert_after':'project','read_only':1,'no_copy':1},
+ {'fieldname':'custom_procurement_process','label':'Procurement Process','fieldtype':'Link','options':'Procurement Process','insert_after':'custom_procurement_contract','read_only':1,'no_copy':1},
+],
+'Purchase Receipt':[
+ {'fieldname':'custom_procurement_contract','label':'Procurement Contract','fieldtype':'Link','options':'Procurement Contract','insert_after':'project','read_only':1,'no_copy':1},
+],
+'Purchase Invoice':[
+ {'fieldname':'custom_procurement_contract','label':'Procurement Contract','fieldtype':'Link','options':'Procurement Contract','insert_after':'project','read_only':1,'no_copy':1},
+],
+'Material Request Item':[{'fieldname':'custom_estimated_unit_cost','label':'Estimated Unit Cost','fieldtype':'Currency','insert_after':'rate'},
        {'fieldname':'custom_estimated_amount','label':'Estimated Amount','fieldtype':'Currency','read_only':1,'insert_after':'custom_estimated_unit_cost'},
        {'fieldname':'custom_estimate_currency','label':'Estimate Currency','fieldtype':'Link','options':'Currency','insert_after':'custom_estimated_amount'},
        {'fieldname':'custom_estimate_source','label':'Estimate Source','fieldtype':'Select','options':'Market Survey\nPrevious Purchase\nSupplier Budgetary Quote\nFramework Agreement\nCatalogue\nProfessional Estimate\nOther','insert_after':'custom_estimate_currency'},

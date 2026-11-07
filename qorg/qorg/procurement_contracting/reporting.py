@@ -1,0 +1,88 @@
+from statistics import median
+import frappe
+from frappe import _
+from frappe.utils import date_diff,flt,getdate,nowdate
+
+FINANCIAL_ROLES={"Administrator","System Manager","Procurement Manager","Financial Evaluation Committee Member","Procurement Award Approver","Budget Controller","Contract Manager"}
+def require_financial():
+ if not (set(frappe.get_roles())&FINANCIAL_ROLES):frappe.throw(_("You are not permitted to view procurement financial information."),frappe.PermissionError)
+def col(label,fieldname,fieldtype="Data",options=None,width=140):
+ d={"label":_(label),"fieldname":fieldname,"fieldtype":fieldtype,"width":width}
+ if options:d["options"]=options
+ return d
+def summary(label,value,datatype="Int",indicator="Blue",currency=None):
+ d={"label":_(label),"value":value,"datatype":datatype,"indicator":indicator}
+ if currency:d["currency"]=currency
+ return d
+def chart(labels,values,name,kind="bar"):
+ return {"data":{"labels":labels,"datasets":[{"name":_(name),"values":values}]},"type":kind} if labels else None
+def clean(filters,allowed):return {k:v for k,v in (filters or {}).items() if k in allowed and v not in (None,"",[])}
+def pipeline(filters=None):
+ cols=[col("Process","name","Link","Procurement Process",180),col("Title","title",width=220),col("Company","company","Link","Company",150),col("Project","project","Link","Project",150),col("Method","procurement_method","Link","Procurement Method",160),col("Status","status",width=180),col("Estimated Value","estimated_value","Currency",width=140),col("Created","creation","Datetime",width=150),col("Deadline","submission_deadline","Datetime",width=150),col("Age Days","age_days","Int",width=90),col("Overdue","overdue","Check",width=80)]
+ fs=clean(filters,{"company","project","procurement_method","status","creation"});rows=frappe.get_list("Procurement Process",fields=["name","title","company","project","procurement_method","status","estimated_value","creation","submission_deadline"],filters=fs,limit_page_length=1000)
+ today=getdate(nowdate());ages=[];counts={};overdue=0
+ for r in rows:
+  r.age_days=date_diff(today,getdate(r.creation));ages.append(r.age_days);r.overdue=int(bool(r.submission_deadline and getdate(r.submission_deadline)<today and r.status not in ("Closed","Award Approved")));overdue+=r.overdue;counts[r.procurement_method or _("Not Set")]=counts.get(r.procurement_method or _("Not Set"),0)+1
+ rows.sort(key=lambda x:(not x.overdue,-x.age_days))
+ sm=[summary("Processes",len(rows)),summary("Estimated Value",sum(flt(r.estimated_value) for r in rows),"Currency","Blue"),summary("Overdue",overdue,"Int","Red"),summary("Average Age",round(sum(ages)/len(ages),1) if ages else 0,"Float","Orange")]
+ return cols,rows,None,chart(list(counts),list(counts.values()),"Processes by Method","bar"),sm
+def bids(filters=None,versions=False):
+ if not versions:require_financial()
+ fields=["name","procurement_process","supplier","submission_version","supersedes_submission","submission_status","submitted_at","withdrawn_on","withdrawal_reason","technical_opened","financial_opened","creation","modified"]
+ fs=clean(filters,{"procurement_process","supplier","submission_status"});rows=frappe.get_list("Procurement Submission",fields=fields,filters=fs,limit_page_length=1000,order_by="modified desc")
+ if versions:
+  nextmap={r.supersedes_submission:r.name for r in rows if r.supersedes_submission}
+  cols=[col("Submission","name","Link","Procurement Submission",180),col("Process","procurement_process","Link","Procurement Process",170),col("Supplier","supplier","Link","Supplier",150),col("Version","submission_version","Int",width=70),col("Previous","supersedes_submission","Link","Procurement Submission",170),col("Next","next_submission","Link","Procurement Submission",170),col("Created","creation","Datetime",width=145),col("Submitted","submitted_at","Datetime",width=145),col("Status","submission_status",width=110),col("Effective","effective","Check",width=75),col("Reason","withdrawal_reason",width=220)]
+  for r in rows:r.next_submission=nextmap.get(r.name);r.effective=int(not r.next_submission and r.submission_status not in ("Withdrawn","Disqualified"))
+  counts={};[counts.__setitem__(r.submission_status,counts.get(r.submission_status,0)+1) for r in rows]
+  return cols,rows,None,chart(list(counts),list(counts.values()),"Versions by Status","bar"),[summary("Versions",len(rows)),summary("Effective",sum(r.effective for r in rows),"Int","Green"),summary("Withdrawn",sum(r.submission_status=="Withdrawn" for r in rows),"Int","Red")]
+ cols=[col("Submission","name","Link","Procurement Submission",180),col("Process","procurement_process","Link","Procurement Process",170),col("Supplier","supplier","Link","Supplier",150),col("Version","submission_version","Int",width=70),col("Submitted","submitted_at","Datetime",width=145),col("Status","submission_status",width=110),col("Technical Opened","technical_opened","Check",width=100),col("Financial Opened","financial_opened","Check",width=100),col("Withdrawal Reason","withdrawal_reason",width=220)]
+ counts={};[counts.__setitem__(r.submission_status,counts.get(r.submission_status,0)+1) for r in rows]
+ return cols,rows,None,chart(list(counts),list(counts.values()),"Bids by Status","bar"),[summary("Bids",len(rows)),summary("Submitted",sum(r.submission_status=="Submitted" for r in rows),"Int","Green"),summary("Withdrawn",sum(r.submission_status=="Withdrawn" for r in rows),"Int","Red")]
+def awards(filters=None):
+ require_financial();fs=clean(filters,{"parent","supplier","preliminary_result","recommendation"});rows=frappe.get_all("Bid Summary Row",fields=["parent as evaluation_summary","supplier","submission","preliminary_result","technical_score","financial_score","total_score","rank","recommendation","rationale"],filters=fs,order_by="parent asc, rank asc",limit_page_length=1000)
+ decisions={d.procurement_process:d for d in frappe.get_list("Award Decision",fields=["procurement_process","awarded_supplier","decision","decision_rationale"],limit_page_length=1000)}
+ for r in rows:
+  proc=frappe.db.get_value("Evaluation Summary",r.evaluation_summary,"procurement_process");d=decisions.get(proc);r.procurement_process=proc;r.awarded_supplier=d.awarded_supplier if d else None;r.deviation_reason=d.decision_rationale if d else None
+ cols=[col("Process","procurement_process","Link","Procurement Process",170),col("Supplier","supplier","Link","Supplier",150),col("Precheck","preliminary_result",width=120),col("Technical","technical_score","Float",width=90),col("Financial","financial_score","Float",width=90),col("Combined","total_score","Float",width=90),col("Rank","rank","Int",width=65),col("Recommendation","recommendation",width=140),col("Awarded Supplier","awarded_supplier","Link","Supplier",150),col("Deviation Reason","deviation_reason",width=220)]
+ return cols,rows,None,chart([str(r.rank) for r in rows[:10]],[flt(r.total_score) for r in rows[:10]],"Top Combined Scores","bar"),[summary("Evaluated Bids",len(rows)),summary("Recommended",sum(r.recommendation=="Recommended" for r in rows),"Int","Green")]
+def commitments(filters=None,budget=False):
+ require_financial();fs=clean(filters,{"company","project","budget_line","procurement_process"});rows=frappe.get_list("Commitment Ledger",fields=["name","company","project","budget_line","currency","procurement_process","requested","reserved","ordered","contracted","accepted","invoiced","paid","available_balance"],filters=fs,limit_page_length=1000)
+ if budget:
+  cols=[col("Ledger","name","Link","Commitment Ledger",180),col("Project","project","Link","Project",150),col("Budget Line","budget_line","Link","Budget Line",170),col("Currency","currency","Link","Currency",90),col("Requested","requested","Currency",width=120),col("Reserved","reserved","Currency",width=120),col("Invoiced","invoiced","Currency",width=120),col("Paid","paid","Currency",width=120),col("Available","available_balance","Currency",width=120),col("Utilization %","utilization","Percent",width=100),col("Projected Overrun","overrun","Currency",width=130)]
+  for r in rows:r.utilization=(flt(r.paid)/flt(r.requested)*100) if flt(r.requested) else 0;r.overrun=max(0,flt(r.reserved)+flt(r.ordered)+flt(r.contracted)-flt(r.requested))
+  return cols,rows,None,chart([r.budget_line or r.name for r in rows[:15]],[flt(r.available_balance) for r in rows[:15]],"Available Balance","bar"),[summary("Approved / Requested",sum(flt(r.requested) for r in rows),"Currency"),summary("Reserved",sum(flt(r.reserved) for r in rows),"Currency","Orange"),summary("Available",sum(flt(r.available_balance) for r in rows),"Currency","Green"),summary("Projected Overrun",sum(flt(r.overrun) for r in rows),"Currency","Red")]
+ contracts={c.procurement_process:c for c in frappe.get_list("Procurement Contract",fields=["name","procurement_process","contract_value","invoiced_amount","paid_amount","remaining_contract_value"],limit_page_length=1000)}
+ for r in rows:
+  c=contracts.get(r.procurement_process);r.contract=c.name if c else None;r.contract_value=flt(c.contract_value) if c else flt(r.contracted);r.invoiced_amount=flt(c.invoiced_amount) if c else flt(r.invoiced);r.paid_amount=flt(c.paid_amount) if c else flt(r.paid);r.remaining_contract_value=flt(c.remaining_contract_value) if c else max(0,r.contract_value-r.invoiced_amount);r.execution=(r.invoiced_amount/r.contract_value*100) if r.contract_value else 0;r.overrun=max(0,r.invoiced_amount-r.contract_value)
+ cols=[col("Contract","contract","Link","Procurement Contract",170),col("Process","procurement_process","Link","Procurement Process",170),col("Contract Value","contract_value","Currency",width=125),col("Committed","contracted","Currency",width=120),col("Invoiced","invoiced_amount","Currency",width=120),col("Paid","paid_amount","Currency",width=120),col("Remaining","remaining_contract_value","Currency",width=120),col("Execution %","execution","Percent",width=100),col("Overrun","overrun","Currency",width=110)]
+ return cols,rows,None,chart([r.contract or r.name for r in rows[:15]],[r.execution for r in rows[:15]],"Contract Execution %","bar"),[summary("Contract Value",sum(r.contract_value for r in rows),"Currency"),summary("Invoiced",sum(r.invoiced_amount for r in rows),"Currency","Orange"),summary("Paid",sum(r.paid_amount for r in rows),"Currency","Green"),summary("Remaining",sum(r.remaining_contract_value for r in rows),"Currency")]
+def guarantees(filters=None):
+ require_financial();rows=frappe.get_all("Guarantee Row",fields=["parent as contract","guarantee_type","issuer","amount","currency","valid_from","valid_to","status"],filters=clean(filters,{"guarantee_type","status"}),limit_page_length=1000);today=getdate(nowdate())
+ for r in rows:r.supplier=frappe.db.get_value("Procurement Contract",r.contract,"supplier");r.days_remaining=date_diff(getdate(r.valid_to),today) if r.valid_to else None;r.urgency="Expired" if r.days_remaining is not None and r.days_remaining<0 else "Critical" if r.days_remaining is not None and r.days_remaining<=7 else "Due Soon" if r.days_remaining is not None and r.days_remaining<=30 else "Normal"
+ order={"Expired":0,"Critical":1,"Due Soon":2,"Normal":3};rows.sort(key=lambda r:(order[r.urgency],r.days_remaining if r.days_remaining is not None else 999999))
+ cols=[col("Contract","contract","Link","Procurement Contract",170),col("Supplier","supplier","Link","Supplier",150),col("Type","guarantee_type",width=130),col("Issuer","issuer",width=150),col("Amount","amount","Currency",width=120),col("Expiry","valid_to","Date",width=105),col("Days Remaining","days_remaining","Int",width=105),col("Urgency","urgency",width=100),col("Status","status",width=100)]
+ counts={x:sum(r.urgency==x for r in rows) for x in order}
+ return cols,rows,None,chart(list(counts),list(counts.values()),"Guarantees by Urgency","bar"),[summary("Expired",counts["Expired"],"Int","Red"),summary("Within 7 Days",counts["Critical"],"Int","Red"),summary("Within 30 Days",counts["Due Soon"],"Int","Orange"),summary("Guarantee Value",sum(flt(r.amount) for r in rows),"Currency")]
+def leadtime(filters=None):
+ rows=frappe.get_list("Procurement Process",fields=["name","material_request","creation","submission_deadline","status"],filters=clean(filters,{"status"}),limit_page_length=1000)
+ decisions={d.procurement_process:d.creation for d in frappe.get_list("Award Decision",fields=["procurement_process","creation"],limit_page_length=1000)};contracts={c.procurement_process:c.creation for c in frappe.get_list("Procurement Contract",fields=["procurement_process","creation"],limit_page_length=1000)};durations=[]
+ for r in rows:
+  r.request_approved=frappe.db.get_value("Material Request",r.material_request,"modified") if r.material_request else None;r.process_started=r.creation;r.published=frappe.db.get_value("Procurement Notice",{"procurement_process":r.name,"published":1},"creation");r.closed=r.submission_deadline;r.awarded=decisions.get(r.name);r.contracted=contracts.get(r.name);end=r.contracted or r.awarded or r.closed or nowdate();r.total_days=date_diff(getdate(end),getdate(r.request_approved or r.creation));durations.append(r.total_days)
+ cols=[col("Process","name","Link","Procurement Process",170),col("Request Approved","request_approved","Datetime",width=145),col("Process Started","process_started","Datetime",width=145),col("Published","published","Datetime",width=145),col("Submission Closed","closed","Datetime",width=145),col("Awarded","awarded","Datetime",width=145),col("Contracted","contracted","Datetime",width=145),col("Total Days","total_days","Int",width=90),col("Status","status",width=150)]
+ ordered=sorted(durations)
+ return cols,rows,None,chart([r.name for r in sorted(rows,key=lambda x:x.total_days,reverse=True)[:15]],[r.total_days for r in sorted(rows,key=lambda x:x.total_days,reverse=True)[:15]],"Longest Procurement Cycles","bar"),[summary("Average Days",round(sum(durations)/len(durations),1) if durations else 0,"Float","Orange"),summary("Median Days",median(durations) if durations else 0,"Float"),summary("Longest Cycle",max(durations) if durations else 0,"Int","Red"),summary("Processes",len(rows))]
+def exceptions(filters=None):
+ rows=frappe.get_list("Procurement Process",fields=["name","company","project","procurement_method","estimated_value","policy_rule","status","creation","owner"],filters=clean(filters,{"company","project","procurement_method","status"}),limit_page_length=1000)
+ for r in rows:
+  rule=frappe.db.get_value("Procurement Policy Rule",r.policy_rule,["risk_level","emergency_only"],as_dict=True) if r.policy_rule else None;r.exception_type="Emergency" if rule and rule.emergency_only else "Policy / Method Review";r.risk_level=rule.risk_level if rule else "High";r.reason="Emergency procurement" if rule and rule.emergency_only else "Review policy-method compliance";r.approved_by=frappe.db.get_value("Version",{"ref_doctype":"Procurement Process","docname":r.name},"owner",order_by="creation desc")
+ cols=[col("Process","name","Link","Procurement Process",170),col("Company","company","Link","Company",150),col("Project","project","Link","Project",150),col("Exception Type","exception_type",width=150),col("Reason","reason",width=220),col("Approved By","approved_by","Link","User",150),col("Created By","owner","Link","User",150),col("Amount","estimated_value","Currency",width=120),col("Method","procurement_method","Link","Procurement Method",150),col("Risk","risk_level",width=90)]
+ counts={};[counts.__setitem__(r.exception_type,counts.get(r.exception_type,0)+1) for r in rows]
+ return cols,rows,None,chart(list(counts),list(counts.values()),"Exceptions by Type","bar"),[summary("Exceptions",len(rows)),summary("Critical / High",sum(r.risk_level in ("Critical","High") for r in rows),"Int","Red"),summary("Exception Value",sum(flt(r.estimated_value) for r in rows),"Currency","Orange")]
+def due_diligence(filters=None):
+ rows=frappe.get_list("Supplier Registration",fields=["name","legal_name","supplier","registration_status","risk_rating","review_expiry_date","profile_locked","modified","documents"],filters=clean(filters,{"supplier","registration_status","risk_rating"}),limit_page_length=1000);today=getdate(nowdate())
+ for r in rows:r.days_to_review=date_diff(getdate(r.review_expiry_date),today) if r.review_expiry_date else None;r.missing_documents=int(not bool(r.documents));r.needs_review=int(r.days_to_review is None or r.days_to_review<=30 or r.risk_rating in ("High","Critical") or r.missing_documents)
+ rows.sort(key=lambda r:(not r.needs_review,r.days_to_review if r.days_to_review is not None else -999))
+ cols=[col("Registration","name","Link","Supplier Registration",180),col("Legal Name","legal_name",width=200),col("Supplier","supplier","Link","Supplier",150),col("Status","registration_status",width=120),col("Risk","risk_rating",width=90),col("Review Expiry","review_expiry_date","Date",width=110),col("Days to Review","days_to_review","Int",width=100),col("Missing Documents","missing_documents","Check",width=100),col("Profile Locked","profile_locked","Check",width=95),col("Last Updated","modified","Datetime",width=145),col("Needs Review","needs_review","Check",width=90)]
+ counts={};[counts.__setitem__(r.risk_rating or _("Not Rated"),counts.get(r.risk_rating or _("Not Rated"),0)+1) for r in rows]
+ return cols,rows,None,chart(list(counts),list(counts.values()),"Suppliers by Risk","bar"),[summary("Suppliers",len(rows)),summary("Needs Review",sum(r.needs_review for r in rows),"Int","Orange"),summary("High / Critical",sum(r.risk_rating in ("High","Critical") for r in rows),"Int","Red"),summary("Missing Documents",sum(r.missing_documents for r in rows),"Int","Red")]
