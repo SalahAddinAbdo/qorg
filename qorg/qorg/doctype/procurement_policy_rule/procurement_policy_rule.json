@@ -8,6 +8,7 @@
   "editable_grid": 0,
   "track_changes": 1,
   "field_order": [
+    "qorg_usage_guidance",
     "identity_section",
     "naming_series",
     "rule_title",
@@ -35,6 +36,12 @@
     "technical_threshold"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_usage_guidance",
+      "fieldtype": "HTML",
+      "label": "Usage Guidance",
+      "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Selects the procurement method using company, currency, nature, and value bands.<br><strong>When and impact:</strong> The matched policy is snapshotted into the request and process for audit. This is a rule table, not a duplicate settings page.</div>"
+    },
     {
       "fieldname": "identity_section",
       "fieldtype": "Section Break",

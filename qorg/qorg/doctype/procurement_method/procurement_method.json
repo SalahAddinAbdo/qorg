@@ -8,6 +8,7 @@
   "editable_grid": 0,
   "track_changes": 1,
   "field_order": [
+    "qorg_usage_guidance",
     "identity_section",
     "naming_series",
     "method_name",
@@ -33,6 +34,12 @@
     "default_technical_threshold"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_usage_guidance",
+      "fieldtype": "HTML",
+      "label": "Usage Guidance",
+      "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Defines an approved procurement route and its system behavior.<br><strong>When and impact:</strong> Used by policy rules to control direct purchase, RFQ, competition, and framework processing.</div>"
+    },
     {
       "fieldname": "identity_section",
       "fieldtype": "Section Break",

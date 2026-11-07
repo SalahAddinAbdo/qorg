@@ -8,6 +8,7 @@
   "editable_grid": 0,
   "track_changes": 1,
   "field_order": [
+    "qorg_usage_guidance",
     "identity_section",
     "naming_series",
     "title",
@@ -32,6 +33,7 @@
     "financial_weight",
     "technical_threshold",
     "two_envelope",
+    "qorg_criteria_section",
     "criteria",
     "committees_section",
     "main_committee",
@@ -46,6 +48,12 @@
     "frozen_hash"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_usage_guidance",
+      "fieldtype": "HTML",
+      "label": "Usage Guidance",
+      "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Manages an approved competitive procurement through setup, publication, opening, evaluation, award, and closure.<br><strong>When and impact:</strong> Create from an approved Material Request when the policy requires a process.</div>"
+    },
     {
       "fieldname": "identity_section",
       "fieldtype": "Section Break",
@@ -237,13 +245,19 @@
       "in_preview": 0
     },
     {
+      "fieldname": "qorg_criteria_section",
+      "fieldtype": "Section Break",
+      "label": "Criteria"
+    },
+    {
       "fieldname": "criteria",
       "label": "Criteria",
       "fieldtype": "Table",
       "options": "Eval Criterion",
       "in_list_view": 0,
       "in_standard_filter": 0,
-      "in_preview": 0
+      "in_preview": 0,
+      "description": "Use the full-width grid for key values. Open a row for complete details."
     },
     {
       "fieldname": "committees_section",

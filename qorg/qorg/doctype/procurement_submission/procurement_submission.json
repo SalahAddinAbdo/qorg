@@ -8,6 +8,7 @@
   "editable_grid": 0,
   "track_changes": 1,
   "field_order": [
+    "qorg_usage_guidance",
     "section_1_section",
     "naming_series",
     "procurement_process",
@@ -39,6 +40,12 @@
     "profile_snapshot"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_usage_guidance",
+      "fieldtype": "HTML",
+      "label": "Usage Guidance",
+      "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Stores a protected supplier offer and its technical and financial envelopes.<br><strong>When and impact:</strong> Created through the Tender Submission Web Form and validated against deadline, duplication, and supplier eligibility.</div>"
+    },
     {
       "fieldname": "section_1_section",
       "fieldtype": "Section Break",

@@ -8,6 +8,7 @@
   "editable_grid": 0,
   "track_changes": 1,
   "field_order": [
+    "qorg_usage_guidance",
     "section_1_section",
     "naming_series",
     "procurement_process",
@@ -24,6 +25,12 @@
     "documents"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_usage_guidance",
+      "fieldtype": "HTML",
+      "label": "Usage Guidance",
+      "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Publishes the invitation or tender notice for an approved process.<br><strong>When and impact:</strong> Controls supplier visibility, deadline, and eligibility to submit.</div>"
+    },
     {
       "fieldname": "section_1_section",
       "fieldtype": "Section Break",
