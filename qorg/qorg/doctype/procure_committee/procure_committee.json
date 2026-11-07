@@ -8,6 +8,7 @@
   "editable_grid": 0,
   "track_changes": 1,
   "field_order": [
+    "qorg_usage_guidance",
     "section_1_section",
     "naming_series",
     "mandate_title",
@@ -24,11 +25,18 @@
     "section_3_section",
     "decision_attachment",
     "section_4_section",
+    "qorg_members_section",
     "members",
     "section_5_section",
     "disabled"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_usage_guidance",
+      "fieldtype": "HTML",
+      "label": "Usage Guidance",
+      "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Defines a reusable committee and its authorized members.<br><strong>When and impact:</strong> Selected by processes for opening, technical, financial, and award responsibilities.</div>"
+    },
     {
       "fieldname": "section_1_section",
       "fieldtype": "Section Break",
@@ -150,6 +158,11 @@
       "label": "Members"
     },
     {
+      "fieldname": "qorg_members_section",
+      "fieldtype": "Section Break",
+      "label": "Members"
+    },
+    {
       "fieldname": "members",
       "label": "Members",
       "fieldtype": "Table",
@@ -157,7 +170,8 @@
       "reqd": 1,
       "in_list_view": 0,
       "in_standard_filter": 0,
-      "in_preview": 0
+      "in_preview": 0,
+      "description": "Use the full-width grid for key values. Open a row for complete details."
     },
     {
       "fieldname": "section_5_section",

@@ -7,6 +7,7 @@
   "is_submittable": 1,
   "track_changes": 1,
   "field_order": [
+    "qorg_usage_guidance",
     "section_1",
     "naming_series",
     "procurement_process",
@@ -25,6 +26,12 @@
     "closed_on"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_usage_guidance",
+      "fieldtype": "HTML",
+      "label": "Usage Guidance",
+      "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Records complaint review, decision, and closure.<br><strong>When and impact:</strong> Supports accountability without rewriting evaluation history.</div>"
+    },
     {
       "fieldname": "section_1",
       "label": "Complaint Identity",

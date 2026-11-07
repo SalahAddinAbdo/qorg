@@ -647,5 +647,17 @@
   "actions": [],
   "links": [],
   "states": [],
-  "name": "Partner"
+  "name": "Partner",
+  "field_order": [
+    "name1",
+    "partner_name",
+    "hq_address",
+    "joining_date",
+    "fax",
+    "telephone",
+    "column_break_r5cjo",
+    "contact_name",
+    "contact_phone",
+    "contact_email"
+  ]
 }

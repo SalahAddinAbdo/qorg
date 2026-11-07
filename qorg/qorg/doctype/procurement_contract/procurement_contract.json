@@ -7,6 +7,7 @@
   "is_submittable": 1,
   "track_changes": 1,
   "field_order": [
+    "qorg_usage_guidance",
     "section_1",
     "naming_series",
     "contract_title",
@@ -36,7 +37,9 @@
     "column_3_3",
     "warranty_end_date",
     "defects_liability_end_date",
+    "qorg_milestones_section",
     "milestones",
+    "qorg_guarantees_section",
     "guarantees",
     "section_4",
     "scope_of_work",
@@ -53,6 +56,12 @@
     "remaining_contract_value"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_usage_guidance",
+      "fieldtype": "HTML",
+      "label": "Usage Guidance",
+      "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Manages awarded scope, value, dates, milestones, guarantees, commitments, and closure.<br><strong>When and impact:</strong> Create from an approved award; operational tables feed monitoring and reminders.</div>"
+    },
     {
       "fieldname": "section_1",
       "label": "Contract Identity",
@@ -231,16 +240,28 @@
       "fieldtype": "Date"
     },
     {
+      "fieldname": "qorg_milestones_section",
+      "fieldtype": "Section Break",
+      "label": "Milestones"
+    },
+    {
       "fieldname": "milestones",
       "label": "Milestones",
       "fieldtype": "Table",
-      "options": "Contract Milestone"
+      "options": "Contract Milestone",
+      "description": "Use the full-width grid for key values. Open a row for complete details."
+    },
+    {
+      "fieldname": "qorg_guarantees_section",
+      "fieldtype": "Section Break",
+      "label": "Guarantees"
     },
     {
       "fieldname": "guarantees",
       "label": "Guarantees",
       "fieldtype": "Table",
-      "options": "Guarantee Row"
+      "options": "Guarantee Row",
+      "description": "Use the full-width grid for key values. Open a row for complete details."
     },
     {
       "fieldname": "section_4",

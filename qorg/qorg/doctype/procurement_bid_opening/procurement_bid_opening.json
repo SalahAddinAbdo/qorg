@@ -8,6 +8,7 @@
   "editable_grid": 0,
   "track_changes": 1,
   "field_order": [
+    "qorg_usage_guidance",
     "section_1_section",
     "naming_series",
     "procurement_process",
@@ -21,6 +22,12 @@
     "attachment"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_usage_guidance",
+      "fieldtype": "HTML",
+      "label": "Usage Guidance",
+      "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Records the formal bid-opening session.<br><strong>When and impact:</strong> Creates the auditable hand-off to preliminary examination.</div>"
+    },
     {
       "fieldname": "section_1_section",
       "fieldtype": "Section Break",
