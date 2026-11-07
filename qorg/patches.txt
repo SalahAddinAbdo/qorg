@@ -17,3 +17,5 @@ qorg.qorg.patches.v2_2.migrate_design_system_and_web_forms
 qorg.qorg.patches.v2_3.align_qorg_visible_branding
 
 qorg.qorg.patches.v2_5.provision_workflow_responsibility_routing
+
+qorg.qorg.patches.v2_6.migrate_procure_settings_to_buying_settings

@@ -422,3 +422,10 @@ doc_events.setdefault("Procure Acceptance", {}).setdefault("validate", []).appen
 file_permission = ["qorg.qorg.procurement_contracting.private_files.has_file_permission"]
 
 web_include_css.append("/assets/qorg/css/procurement_portal.css")
+
+# QOrg procurement settings extension
+doc_events.setdefault("Buying Settings", {}).setdefault("validate", []).append("qorg.qorg.procurement_contracting.settings.validate_buying_settings")
+
+# QOrg procurement communication preview
+app_include_js = list(app_include_js) if isinstance(app_include_js, (list, tuple)) else [app_include_js]
+app_include_js.append("/assets/qorg/js/procurement_communications.js")
