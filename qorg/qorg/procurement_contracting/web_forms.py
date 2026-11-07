@@ -1,75 +1,58 @@
 from __future__ import annotations
 import frappe
-from frappe import _
 
-LAYOUT_TYPES = {"Page Break", "Section Break", "Column Break"}
 
 def section(label): return {"fieldtype":"Section Break","label":label}
 def column(): return {"fieldtype":"Column Break"}
 def page(label): return {"fieldtype":"Page Break","label":label}
 def field(fieldname, required=False, read_only=False, label=None): return {"fieldname":fieldname,"required":required,"read_only":read_only,"label":label}
 
-WEB_FORMS = [
- {
-  "title":"Supplier Registration","route":"supplier-registration","doc_type":"Supplier Registration",
-  "allow_multiple":0,"allow_edit":1,"show_list":0,"allow_print":1,"key_required":0,
-  "introduction_text":"Create and maintain one supplier profile for procurement opportunities. Approved profiles may be locked and updated only through a controlled request.",
-  "success_message":"Your supplier profile has been saved successfully.","submit_button_label":"Save Supplier Profile",
+WEB_FORMS=[
+ {"title":"Supplier Registration","route":"supplier-registration","doc_type":"Supplier Registration","allow_multiple":0,"allow_edit":1,"show_list":0,"allow_print":1,"key_required":0,
+  "introduction_text":"Complete the supplier profile in full. Information is used for eligibility, due diligence, tendering, contracting and payment controls.","success_message":"Your supplier profile has been saved successfully.","submit_button_label":"Save Supplier Profile",
   "layout":[
-   section("Legal Identity"),field("legal_name",True),field("country"),column(),field("registration_number"),field("tax_id"),
-   section("Contact Details"),field("email",True),column(),
-   page("Documents and Declarations"),section("Supporting Documents"),field("documents"),section("Declarations"),field("declarations"),
+   page("Organization"),section("Legal Identity"),field("legal_name",True),field("trade_name"),column(),field("supplier_type",True),field("country",True),section("Registration Details"),field("registration_number",True),field("tax_id"),column(),field("year_established"),field("employee_count"),
+   page("Contact and Address"),section("Registered Address"),field("address_line_1",True),field("address_line_2"),field("city",True),column(),field("phone",True),field("email",True),field("website"),section("Primary Contact"),field("contact_person",True),field("contact_designation"),column(),field("contact_phone",True),field("contact_email",True),
+   page("Capabilities"),section("Business Capability"),field("business_sectors",True),field("geographic_coverage"),section("Experience and Past Performance"),field("experience_summary"),
+   page("Documents"),section("Mandatory and Supporting Documents"),field("registration_certificate",True),field("tax_certificate"),column(),field("licenses_certificates"),field("company_profile"),field("references_document"),field("documents"),
+   page("Compliance"),section("Supplier Declarations"),field("conflict_of_interest",True),field("sanctions_declaration",True),column(),field("anti_fraud_declaration",True),field("data_consent",True),section("Additional Declaration"),field("declarations"),
    page("Bank Information"),section("Settlement Account"),field("bank_name"),field("account_name"),field("account_number"),column(),field("iban"),field("swift_code"),field("bank_currency"),field("bank_confirmation"),
-   section("Review Status"),field("registration_status",read_only=True),field("risk_rating",read_only=True),column(),field("review_expiry_date",read_only=True),field("supplier",read_only=True)
-  ]
- },
- {
-  "title":"Tender Submission","route":"tender-submission","doc_type":"Procurement Submission",
-  "allow_multiple":1,"allow_edit":1,"show_list":1,"allow_print":1,"key_required":1,
-  "introduction_text":"Submit a protected offer for an open procurement process. Technical and financial files remain separate and submitted bids cannot be edited.",
-  "success_message":"Your tender submission has been received successfully.","submit_button_label":"Submit Tender",
+   page("Review"),section("Profile Review Status"),field("registration_status",read_only=True),field("risk_rating",read_only=True),column(),field("review_expiry_date",read_only=True),field("supplier",read_only=True)]},
+ {"title":"Tender Submission","route":"tender-submission","doc_type":"Procurement Submission","allow_multiple":1,"allow_edit":1,"show_list":1,"allow_print":1,"key_required":0,"login_required":1,
+  "introduction_text":"Submit a protected tender for the selected opportunity. Technical and financial files are stored separately and remain subject to opening controls.","success_message":"Your tender submission has been saved successfully.","submit_button_label":"Save Tender Submission",
   "layout":[
-   section("Opportunity and Supplier Profile"),field("procurement_process",True,True),field("procurement_notice",False,True),column(),field("supplier_registration",True),field("supplier",False,True),
-   page("Technical Offer"),section("Technical Envelope"),field("technical_proposal",True),
-   page("Financial Offer and Security"),section("Financial Envelope"),field("financial_proposal",True),column(),field("bid_security"),
-   section("Confirmation"),field("profile_current_confirmation",True),field("declaration",True),
-   section("Submission Status"),field("submission_status",False,True),field("submitted_at",False,True)
-  ]
- }
+   page("Opportunity"),section("Opportunity and Supplier"),field("procurement_process",True,True),field("procurement_notice",True,True),column(),field("supplier_registration",True,True),field("supplier",True,True),
+   page("Technical Offer"),section("Technical Proposal"),field("technical_proposal",True),field("technical_notes"),
+   page("Financial Offer"),section("Financial Proposal"),field("financial_proposal",True),field("currency",True),column(),field("bid_amount",True),field("bid_security"),
+   page("Confirmation"),section("Supplier Confirmation"),field("declaration_accepted",True),field("authorized_signatory",True),column(),field("signatory_designation"),field("contact_email",True),
+   page("Submission Status"),section("Status and Version"),field("submission_status",read_only=True),field("submission_version",read_only=True),column(),field("submitted_at",read_only=True),field("withdrawn_on",read_only=True),field("withdrawal_reason",read_only=True)]}
 ]
 
-def _set(row, meta, fieldname, value):
- if meta.has_field(fieldname): row.set(fieldname,value)
+def _set(doc,field,value):
+ if doc.meta.has_field(field): setattr(doc,field,value)
 
-def _apply_settings(doc, definition):
- values={"title":definition["title"],"route":definition["route"],"doc_type":definition["doc_type"],"module":"QOrg","is_standard":0,"published":1,"login_required":1,"anonymous":0,"allow_multiple":definition["allow_multiple"],"allow_edit":definition["allow_edit"],"show_list":definition["show_list"],"allow_print":definition["allow_print"],"introduction_text":definition["introduction_text"],"success_message":definition["success_message"],"submit_button_label":definition["submit_button_label"]}
- for k,v in values.items():
-  if doc.meta.has_field(k): doc.set(k,v)
- if doc.meta.has_field("key_required"): doc.key_required=definition["key_required"]
- # Inherit the same managed design architecture used by opportunity forms.
- for k,v in {"qorg_web_form_design_enabled":1,"qorg_inherit_global_web_form_design":1,"qorg_header_style":"Default","qorg_web_form_design_version":"3.0.0"}.items():
-  if doc.meta.has_field(k): doc.set(k,v)
+def _apply_settings(doc,d):
+ for k in ("title","route","doc_type","allow_multiple","allow_edit","show_list","allow_print","key_required","login_required","introduction_text","success_message","submit_button_label"):
+  if k in d:_set(doc,k,d[k])
+ for k,v in {"published":1,"is_standard":0,"qorg_web_form_design_enabled":1,"qorg_inherit_global_web_form_design":1,"qorg_header_style":"Default","qorg_web_form_design_version":"3.0.0"}.items():_set(doc,k,v)
+ if doc.meta.has_field("custom_css"):doc.custom_css=""
 
-def _rebuild_fields(doc, definition):
- table=next((f.fieldname for f in doc.meta.fields if f.fieldtype=="Table" and f.options=="Web Form Field"),None)
- if not table: frappe.throw(_("Web Form Field table was not found."))
- child_meta=frappe.get_meta(doc.meta.get_field(table).options); target_meta=frappe.get_meta(definition["doc_type"]); doc.set(table,[]); idx=0
- for item in definition["layout"]:
-  row=doc.append(table,{})
-  if item.get("fieldtype") in LAYOUT_TYPES:
-   idx+=1; ft=item["fieldtype"]
-   if ft!="Page Break": _set(row,child_meta,"fieldname",f"qorg_procurement_layout_{idx}")
-   _set(row,child_meta,"fieldtype",ft); _set(row,child_meta,"label",item.get("label") or ""); continue
-  target=target_meta.get_field(item["fieldname"])
-  if not target: frappe.throw(_("{0} is missing managed field {1}").format(definition["doc_type"],item["fieldname"]))
-  for k,v in {"fieldname":target.fieldname,"fieldtype":target.fieldtype,"label":item.get("label") or target.label or target.fieldname,"options":target.options,"description":target.description,"reqd":int(item.get("required",False)),"read_only":int(item.get("read_only",False))}.items(): _set(row,child_meta,k,v)
-  if target.fieldtype=="Link": _set(row,child_meta,"allow_read_on_all_link_options",1)
+def _rebuild_fields(doc,d):
+ doc.set("web_form_fields",[]);meta=frappe.get_meta(d["doc_type"])
+ for item in d["layout"]:
+  row=doc.append("web_form_fields",{})
+  if item.get("fieldtype") in {"Page Break","Section Break","Column Break"}:
+   row.fieldtype=item["fieldtype"];row.label=item.get("label") or "";continue
+  df=meta.get_field(item["fieldname"])
+  if not df:frappe.throw(f"Missing field {d['doc_type']}.{item['fieldname']}")
+  row.fieldname=df.fieldname;row.fieldtype=df.fieldtype;row.label=item.get("label") or df.label;row.options=df.options;row.req=item.get("required",False) or df.reqd;row.read_only=item.get("read_only",False) or df.read_only
+  if df.fieldtype=="Link" and row.meta.has_field("allow_read_on_all_link_options"):row.allow_read_on_all_link_options=1
 
 def provision_procurement_web_forms():
- if not frappe.db.exists("DocType","Web Form"): return
- for definition in WEB_FORMS:
-  name=frappe.db.get_value("Web Form",{"route":definition["route"]},"name"); doc=frappe.get_doc("Web Form",name) if name else frappe.new_doc("Web Form")
-  _apply_settings(doc,definition); _rebuild_fields(doc,definition)
-  if doc.meta.has_field("client_script"): doc.client_script=""
+ if not frappe.db.exists("DocType","Web Form"):return
+ for d in WEB_FORMS:
+  name=frappe.db.get_value("Web Form",{"route":d["route"]},"name");doc=frappe.get_doc("Web Form",name) if name else frappe.new_doc("Web Form")
+  _apply_settings(doc,d);_rebuild_fields(doc,d)
+  if doc.meta.has_field("client_script"):doc.client_script=""
   doc.save(ignore_permissions=True) if name else doc.insert(ignore_permissions=True)
  frappe.clear_cache(doctype="Web Form")

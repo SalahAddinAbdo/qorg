@@ -20,6 +20,31 @@
     "section_2_section",
     "supplier",
     "section_2_column",
+    "supplier_type",
+    "trade_name",
+    "year_established",
+    "employee_count",
+    "website",
+    "phone",
+    "address_line_1",
+    "address_line_2",
+    "city",
+    "contact_person",
+    "contact_designation",
+    "contact_phone",
+    "contact_email",
+    "business_sectors",
+    "geographic_coverage",
+    "experience_summary",
+    "registration_certificate",
+    "tax_certificate",
+    "licenses_certificates",
+    "company_profile",
+    "references_document",
+    "conflict_of_interest",
+    "sanctions_declaration",
+    "anti_fraud_declaration",
+    "data_consent",
     "registration_status",
     "section_3_section",
     "documents",
@@ -127,6 +152,152 @@
     {
       "fieldname": "section_2_column",
       "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "supplier_type",
+      "label": "Supplier Type",
+      "fieldtype": "Select",
+      "options": "Company\nOrganization\nIndividual\nConsultant",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "trade_name",
+      "label": "Trade Name",
+      "fieldtype": "Data",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "year_established",
+      "label": "Year Established",
+      "fieldtype": "Int"
+    },
+    {
+      "fieldname": "employee_count",
+      "label": "Number of Employees",
+      "fieldtype": "Int"
+    },
+    {
+      "fieldname": "website",
+      "label": "Website",
+      "fieldtype": "Data",
+      "options": "URL"
+    },
+    {
+      "fieldname": "phone",
+      "label": "Primary Phone",
+      "fieldtype": "Data",
+      "options": "Phone",
+      "reqd": 1
+    },
+    {
+      "fieldname": "address_line_1",
+      "label": "Address Line 1",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "address_line_2",
+      "label": "Address Line 2",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "city",
+      "label": "City",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "contact_person",
+      "label": "Primary Contact Person",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "contact_designation",
+      "label": "Contact Designation",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "contact_phone",
+      "label": "Contact Phone",
+      "fieldtype": "Data",
+      "options": "Phone",
+      "reqd": 1
+    },
+    {
+      "fieldname": "contact_email",
+      "label": "Contact Email",
+      "fieldtype": "Data",
+      "options": "Email",
+      "reqd": 1
+    },
+    {
+      "fieldname": "business_sectors",
+      "label": "Goods, Services and Works Offered",
+      "fieldtype": "Small Text",
+      "reqd": 1
+    },
+    {
+      "fieldname": "geographic_coverage",
+      "label": "Geographic Coverage",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "experience_summary",
+      "label": "Relevant Experience and Major Clients",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "registration_certificate",
+      "label": "Registration Certificate",
+      "fieldtype": "Attach",
+      "reqd": 1
+    },
+    {
+      "fieldname": "tax_certificate",
+      "label": "Tax Certificate",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "licenses_certificates",
+      "label": "Licenses and Quality Certificates",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "company_profile",
+      "label": "Company Profile",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "references_document",
+      "label": "References and Past Performance",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "conflict_of_interest",
+      "label": "No Conflict of Interest Declaration",
+      "fieldtype": "Check",
+      "reqd": 1
+    },
+    {
+      "fieldname": "sanctions_declaration",
+      "label": "Sanctions and Debarment Declaration",
+      "fieldtype": "Check",
+      "reqd": 1
+    },
+    {
+      "fieldname": "anti_fraud_declaration",
+      "label": "Anti-Fraud and Anti-Corruption Declaration",
+      "fieldtype": "Check",
+      "reqd": 1
+    },
+    {
+      "fieldname": "data_consent",
+      "label": "Data Processing Consent",
+      "fieldtype": "Check",
+      "reqd": 1
     },
     {
       "fieldname": "registration_status",
