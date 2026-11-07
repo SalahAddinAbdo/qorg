@@ -666,5 +666,18 @@
   "actions": [],
   "links": [],
   "states": [],
-  "name": "Employee Signature"
+  "name": "Employee Signature",
+  "field_order": [
+    "full_name",
+    "is_employee",
+    "employee_ref",
+    "designation",
+    "phone_number",
+    "column_break_5",
+    "disabled",
+    "is_default",
+    "user_id",
+    "signature1",
+    "stamp"
+  ]
 }

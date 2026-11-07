@@ -7,6 +7,7 @@
   "is_submittable": 1,
   "track_changes": 1,
   "field_order": [
+    "qorg_usage_guidance",
     "naming_series",
     "section_1",
     "company",
@@ -27,9 +28,16 @@
     "paid",
     "available_balance",
     "section_3",
+    "qorg_entries_section",
     "entries"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_usage_guidance",
+      "fieldtype": "HTML",
+      "label": "Usage Guidance",
+      "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Tracks procurement commitments and releases.<br><strong>When and impact:</strong> Prevents uncontrolled over-commitment and supports invoice eligibility.</div>"
+    },
     {
       "fieldname": "naming_series",
       "label": "Naming Series",
@@ -149,11 +157,17 @@
       "fieldtype": "Section Break"
     },
     {
+      "fieldname": "qorg_entries_section",
+      "fieldtype": "Section Break",
+      "label": "Entries"
+    },
+    {
       "fieldname": "entries",
       "label": "Entries",
       "fieldtype": "Table",
       "options": "Commitment Entry",
-      "reqd": 1
+      "reqd": 1,
+      "description": "Use the full-width grid for key values. Open a row for complete details."
     }
   ],
   "permissions": [

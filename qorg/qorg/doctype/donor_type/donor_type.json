@@ -188,5 +188,8 @@
   "actions": [],
   "links": [],
   "states": [],
-  "name": "Donor Type"
+  "name": "Donor Type",
+  "field_order": [
+    "donor_type"
+  ]
 }

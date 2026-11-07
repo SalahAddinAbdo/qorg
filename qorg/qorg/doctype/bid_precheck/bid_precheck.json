@@ -8,6 +8,7 @@
   "editable_grid": 0,
   "track_changes": 1,
   "field_order": [
+    "qorg_usage_guidance",
     "section_1_section",
     "naming_series",
     "procurement_process",
@@ -18,9 +19,16 @@
     "section_2_section",
     "reasons",
     "section_3_section",
+    "qorg_criteria_section",
     "criteria"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_usage_guidance",
+      "fieldtype": "HTML",
+      "label": "Usage Guidance",
+      "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Records preliminary responsiveness and compliance.<br><strong>When and impact:</strong> Non-responsive bids require reasons and do not proceed.</div>"
+    },
     {
       "fieldname": "section_1_section",
       "fieldtype": "Section Break",
@@ -97,13 +105,19 @@
       "label": "Criteria"
     },
     {
+      "fieldname": "qorg_criteria_section",
+      "fieldtype": "Section Break",
+      "label": "Criteria"
+    },
+    {
       "fieldname": "criteria",
       "label": "Criteria",
       "fieldtype": "Table",
       "options": "Eval Score",
       "in_list_view": 0,
       "in_standard_filter": 0,
-      "in_preview": 0
+      "in_preview": 0,
+      "description": "Use the full-width grid for key values. Open a row for complete details."
     }
   ],
   "permissions": [

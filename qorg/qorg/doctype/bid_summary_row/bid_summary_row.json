@@ -19,7 +19,8 @@
     "total_score",
     "rank",
     "recommendation",
-    "rationale"
+    "rationale",
+    "page_break"
   ],
   "fields": [
     {
@@ -86,6 +87,16 @@
       "fieldname": "rationale",
       "label": "Rationale",
       "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "page_break",
+      "label": "Page Break After This Row",
+      "fieldtype": "Check",
+      "default": "0",
+      "allow_on_submit": 1,
+      "print_hide": 1,
+      "in_list_view": 0,
+      "description": "Starts a new printed page after this row in managed print formats."
     }
   ],
   "permissions": []

@@ -395,5 +395,12 @@
   "actions": [],
   "links": [],
   "states": [],
-  "name": "District"
+  "name": "District",
+  "field_order": [
+    "district_name",
+    "arabic_name",
+    "column_break_governorate",
+    "governorate",
+    "disabled"
+  ]
 }

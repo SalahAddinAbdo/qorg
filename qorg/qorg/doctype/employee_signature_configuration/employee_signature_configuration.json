@@ -603,5 +603,17 @@
   "actions": [],
   "links": [],
   "states": [],
-  "name": "Employee Signature Configuration"
+  "name": "Employee Signature Configuration",
+  "field_order": [
+    "configuration_tab",
+    "configuration_name",
+    "document_type",
+    "configuration_column",
+    "enabled",
+    "print_all_signatures_as_manual",
+    "signature_mappings_section",
+    "signature_mappings",
+    "additional_settings_section",
+    "notes"
+  ]
 }

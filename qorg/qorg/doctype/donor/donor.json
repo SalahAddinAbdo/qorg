@@ -451,5 +451,13 @@
   "actions": [],
   "links": [],
   "states": [],
-  "name": "Donor"
+  "name": "Donor",
+  "field_order": [
+    "donor_name",
+    "pan_number",
+    "disabled",
+    "column_break_excg",
+    "donor_type",
+    "email"
+  ]
 }
