@@ -429,3 +429,17 @@ doc_events.setdefault("Buying Settings", {}).setdefault("validate", []).append("
 # QOrg procurement communication preview
 app_include_js = list(app_include_js) if isinstance(app_include_js, (list, tuple)) else [app_include_js]
 app_include_js.append("/assets/qorg/js/procurement_communications.js")
+
+# QOrg procurement standard buying guards
+doc_events.setdefault("Request for Quotation", {}).setdefault("validate", []).append("qorg.qorg.procurement_contracting.standard_guards.validate_rfq")
+doc_events.setdefault("Purchase Order", {}).setdefault("validate", []).extend(["qorg.qorg.procurement_contracting.standard_guards.validate_purchase_order", "qorg.qorg.procurement_contracting.standard_guards.validate_contract_links"])
+doc_events.setdefault("Purchase Receipt", {}).setdefault("validate", []).append("qorg.qorg.procurement_contracting.standard_guards.validate_contract_links")
+doc_events.setdefault("Purchase Invoice", {}).setdefault("validate", []).append("qorg.qorg.procurement_contracting.standard_guards.validate_contract_links")
+scheduler_events.setdefault("daily", []).append("qorg.qorg.procurement_contracting.scheduled_tasks.send_procurement_reminders")
+
+# QOrg Material Request dashboard extension
+override_doctype_dashboards = globals().get("override_doctype_dashboards", {})
+override_doctype_dashboards["Material Request"] = "qorg.qorg.dashboards.material_request.get_data"
+
+# Exact procurement committee recipients
+doc_events.setdefault("Procurement Process", {}).setdefault("on_update", []).append("qorg.qorg.procurement_contracting.event_handlers.notify_assigned_committee")

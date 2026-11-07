@@ -1,11 +1,1 @@
-.report-wrapper .datatable .dt-scrollable .dt-row .dt-cell:nth-child(1),
-.report-wrapper .datatable .dt-scrollable .dt-row .dt-cell:nth-child(2) {
-  position: sticky;
-  z-index: 3;
-  background: var(--fg-color);
-}
-.report-wrapper .datatable .dt-scrollable .dt-row .dt-cell:nth-child(1) { inset-inline-start: 0; }
-.report-wrapper .datatable .dt-scrollable .dt-row .dt-cell:nth-child(2) { inset-inline-start: var(--qorg-report-first-column-width, 180px); }
-.report-wrapper .datatable .dt-header .dt-cell:nth-child(1),
-.report-wrapper .datatable .dt-header .dt-cell:nth-child(2) { z-index: 5; background: var(--subtle-fg); }
-.report-wrapper .indicator-pill { white-space: nowrap; }
+.report-wrapper .datatable .dt-scrollable .dt-row .dt-cell:nth-child(1),.report-wrapper .datatable .dt-scrollable .dt-row .dt-cell:nth-child(2){position:sticky;z-index:3;background:var(--fg-color)}.report-wrapper .datatable .dt-scrollable .dt-row .dt-cell:nth-child(1){inset-inline-start:0}.report-wrapper .datatable .dt-scrollable .dt-row .dt-cell:nth-child(2){inset-inline-start:180px}.report-wrapper .datatable .dt-header .dt-cell:nth-child(1),.report-wrapper .datatable .dt-header .dt-cell:nth-child(2){z-index:5;background:var(--subtle-fg)}.report-wrapper .indicator-pill{white-space:nowrap}
