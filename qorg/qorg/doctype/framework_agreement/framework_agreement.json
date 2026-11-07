@@ -7,6 +7,7 @@
   "is_submittable": 1,
   "track_changes": 1,
   "field_order": [
+    "qorg_usage_guidance",
     "section_1",
     "naming_series",
     "agreement_title",
@@ -22,13 +23,21 @@
     "status",
     "section_2",
     "selection_method",
+    "qorg_suppliers_section",
     "suppliers",
+    "qorg_items_section",
     "items",
     "section_3",
     "call_off_rules",
     "agreement_document"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_usage_guidance",
+      "fieldtype": "HTML",
+      "label": "Usage Guidance",
+      "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Defines an approved framework, suppliers, items, ceilings, and validity.<br><strong>When and impact:</strong> Supports controlled call-offs without repeating a full competition.</div>"
+    },
     {
       "fieldname": "section_1",
       "label": "Agreement Identity",
@@ -126,18 +135,30 @@
       "reqd": 1
     },
     {
+      "fieldname": "qorg_suppliers_section",
+      "fieldtype": "Section Break",
+      "label": "Suppliers"
+    },
+    {
       "fieldname": "suppliers",
       "label": "Suppliers",
       "fieldtype": "Table",
       "options": "Framework Supplier",
-      "read_only": 1
+      "read_only": 1,
+      "description": "Use the full-width grid for key values. Open a row for complete details."
+    },
+    {
+      "fieldname": "qorg_items_section",
+      "fieldtype": "Section Break",
+      "label": "Items"
     },
     {
       "fieldname": "items",
       "label": "Items",
       "fieldtype": "Table",
       "options": "Framework Item",
-      "read_only": 1
+      "read_only": 1,
+      "description": "Use the full-width grid for key values. Open a row for complete details."
     },
     {
       "fieldname": "section_3",

@@ -286,5 +286,10 @@
   "actions": [],
   "links": [],
   "states": [],
-  "name": "Governorate"
+  "name": "Governorate",
+  "field_order": [
+    "name1",
+    "column_break_yrgp",
+    "arabic_name"
+  ]
 }

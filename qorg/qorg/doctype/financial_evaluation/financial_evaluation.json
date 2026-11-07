@@ -8,6 +8,7 @@
   "editable_grid": 0,
   "track_changes": 1,
   "field_order": [
+    "qorg_usage_guidance",
     "identity_section",
     "naming_series",
     "procurement_process",
@@ -28,10 +29,17 @@
     "financial_score",
     "abnormally_low",
     "analysis_section",
+    "qorg_scores_section",
     "scores",
     "rationale"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_usage_guidance",
+      "fieldtype": "HTML",
+      "label": "Usage Guidance",
+      "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Records evaluated financial offers for technically qualified bids.<br><strong>When and impact:</strong> Feeds the combined evaluation after technical approval.</div>"
+    },
     {
       "fieldname": "identity_section",
       "fieldtype": "Section Break",
@@ -191,13 +199,19 @@
       "label": "Financial Analysis"
     },
     {
+      "fieldname": "qorg_scores_section",
+      "fieldtype": "Section Break",
+      "label": "Scores"
+    },
+    {
       "fieldname": "scores",
       "label": "Scores",
       "fieldtype": "Table",
       "options": "Eval Score",
       "in_list_view": 0,
       "in_standard_filter": 0,
-      "in_preview": 0
+      "in_preview": 0,
+      "description": "Use the full-width grid for key values. Open a row for complete details."
     },
     {
       "fieldname": "rationale",

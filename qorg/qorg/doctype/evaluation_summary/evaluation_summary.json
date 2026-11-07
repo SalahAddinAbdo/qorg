@@ -8,6 +8,7 @@
   "editable_grid": 0,
   "track_changes": 1,
   "field_order": [
+    "qorg_usage_guidance",
     "section_1_section",
     "naming_series",
     "procurement_process",
@@ -15,6 +16,7 @@
     "technical_weight",
     "financial_weight",
     "section_2_section",
+    "qorg_rows_section",
     "rows",
     "section_3_section",
     "recommended_supplier",
@@ -22,6 +24,12 @@
     "summary"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_usage_guidance",
+      "fieldtype": "HTML",
+      "label": "Usage Guidance",
+      "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Combines approved technical and financial results.<br><strong>When and impact:</strong> Provides the ranked basis for award recommendation.</div>"
+    },
     {
       "fieldname": "section_1_section",
       "fieldtype": "Section Break",
@@ -75,6 +83,11 @@
       "label": "Rows"
     },
     {
+      "fieldname": "qorg_rows_section",
+      "fieldtype": "Section Break",
+      "label": "Rows"
+    },
+    {
       "fieldname": "rows",
       "label": "Rows",
       "fieldtype": "Table",
@@ -82,7 +95,8 @@
       "reqd": 1,
       "in_list_view": 0,
       "in_standard_filter": 0,
-      "in_preview": 0
+      "in_preview": 0,
+      "description": "Use the full-width grid for key values. Open a row for complete details."
     },
     {
       "fieldname": "section_3_section",

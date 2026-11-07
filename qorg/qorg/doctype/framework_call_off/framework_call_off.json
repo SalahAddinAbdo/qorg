@@ -7,6 +7,7 @@
   "is_submittable": 1,
   "track_changes": 1,
   "field_order": [
+    "qorg_usage_guidance",
     "section_1",
     "naming_series",
     "framework_agreement",
@@ -25,6 +26,12 @@
     "validation_summary"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_usage_guidance",
+      "fieldtype": "HTML",
+      "label": "Usage Guidance",
+      "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Records an individual purchase under an active framework.<br><strong>When and impact:</strong> Must remain within agreement scope, value, and validity.</div>"
+    },
     {
       "fieldname": "section_1",
       "label": "Call-off Identity",
