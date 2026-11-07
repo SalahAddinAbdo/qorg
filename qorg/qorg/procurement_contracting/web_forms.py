@@ -19,13 +19,13 @@ WEB_FORMS=[
    page("Bank Information"),section("Settlement Account"),field("bank_name"),field("account_name"),field("account_number"),column(),field("iban"),field("swift_code"),field("bank_currency"),field("bank_confirmation"),
    page("Review"),section("Profile Review Status"),field("registration_status",read_only=True),field("risk_rating",read_only=True),column(),field("review_expiry_date",read_only=True),field("supplier",read_only=True)]},
  {"title":"Tender Submission","route":"tender-submission","doc_type":"Procurement Submission","allow_multiple":1,"allow_edit":1,"show_list":1,"allow_print":1,"key_required":0,"login_required":1,
-  "introduction_text":"Submit a protected tender for the selected opportunity. Technical and financial files are stored separately and remain subject to opening controls.","success_message":"Your tender submission has been saved successfully.","submit_button_label":"Save Tender Submission",
+  "introduction_text":"Submit a protected tender for the selected opportunity. Keep the supplier profile current and upload technical and financial proposals separately.","success_message":"Your tender submission has been saved successfully.","submit_button_label":"Save Tender Submission",
   "layout":[
-   page("Opportunity"),section("Opportunity and Supplier"),field("procurement_process",True,True),field("procurement_notice",True,True),column(),field("supplier_registration",True,True),field("supplier",True,True),
-   page("Technical Offer"),section("Technical Proposal"),field("technical_proposal",True),field("technical_notes"),
-   page("Financial Offer"),section("Financial Proposal"),field("financial_proposal",True),field("currency",True),column(),field("bid_amount",True),field("bid_security"),
-   page("Confirmation"),section("Supplier Confirmation"),field("declaration_accepted",True),field("authorized_signatory",True),column(),field("signatory_designation"),field("contact_email",True),
-   page("Submission Status"),section("Status and Version"),field("submission_status",read_only=True),field("submission_version",read_only=True),column(),field("submitted_at",read_only=True),field("withdrawn_on",read_only=True),field("withdrawal_reason",read_only=True)]}
+   page("Opportunity"),section("Opportunity and Supplier"),field("procurement_process",True,True),field("procurement_notice",read_only=True),column(),field("supplier_registration",True,True),field("supplier",True,True),
+   page("Technical Offer"),section("Technical Proposal"),field("technical_proposal",True),
+   page("Financial Offer"),section("Financial Proposal and Security"),field("financial_proposal",True),column(),field("bid_security"),
+   page("Confirmation"),section("Supplier Profile Confirmation"),field("profile_current_confirmation",True),field("profile_confirmation_on",read_only=True),section("Declaration"),field("declaration",True),
+   page("Submission Status"),section("Status and Version"),field("submission_status",read_only=True),field("submission_version",read_only=True),column(),field("submitted_at",read_only=True),field("supersedes_submission",read_only=True),section("Withdrawal"),field("withdrawn_on",read_only=True),field("withdrawal_reason",read_only=True)]}
 ]
 
 def _set(doc,field,value):
