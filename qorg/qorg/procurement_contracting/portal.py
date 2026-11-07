@@ -1,6 +1,7 @@
 import frappe
 from frappe import _
 from frappe.utils import now_datetime
+from qorg.qorg.procurement_contracting.settings import get_setting
 
 @frappe.whitelist(allow_guest=True)
 def get_notice(route):
@@ -19,7 +20,7 @@ def request_supplier_profile_update(registration, reason):
     doc = frappe.get_doc("Supplier Registration", registration)
     if doc.owner != frappe.session.user:
         frappe.throw(_("Not permitted"), frappe.PermissionError)
-    if not frappe.get_single_value("Procure Settings", "allow_update_request_after_approval"):
+    if not get_setting( "allow_update_request_after_approval"):
         frappe.throw(_("Supplier profile update requests are disabled."))
     doc.db_set("update_requested", 1)
     doc.add_comment("Comment", _("Supplier requested a profile update: {0}").format(reason))

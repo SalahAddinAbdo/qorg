@@ -2,10 +2,15 @@ import json
 import frappe
 from frappe import _
 from frappe.utils import now_datetime
+from qorg.qorg.procurement_contracting.settings import get_setting
 
 PROFILE_ALLOWED_STATUSES = {"Approved"}
 
 def validate_submission(doc, method=None):
+    if not doc.submitted_at:
+        doc.submitted_at = now_datetime()
+    if not doc.submission_status:
+        doc.submission_status = "Draft"
     notice=frappe.get_doc("Procurement Notice",doc.procurement_notice) if doc.procurement_notice else None
     if notice and notice.deadline and now_datetime()>notice.deadline and doc.is_new():
         frappe.throw(_("Submission deadline has passed."))
@@ -16,7 +21,7 @@ def validate_submission(doc, method=None):
         frappe.throw(_("The supplier profile does not belong to the current portal user."),frappe.PermissionError)
     if profile.registration_status not in PROFILE_ALLOWED_STATUSES or not profile.supplier:
         frappe.throw(_("The supplier profile must be approved and linked to a Supplier before bid submission."))
-    if profile.profile_locked == 0 and frappe.get_single_value("Procure Settings","lock_profile_after_approval"):
+    if profile.profile_locked == 0 and get_setting("lock_profile_after_approval"):
         frappe.throw(_("The approved supplier profile must be locked before bid submission."))
     if not doc.profile_current_confirmation:
         frappe.throw(_("Confirm that the supplier profile is complete and up to date for this submission."))

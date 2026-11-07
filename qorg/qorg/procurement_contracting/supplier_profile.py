@@ -1,17 +1,18 @@
 import frappe
 from frappe import _
 from frappe.utils import add_days, nowdate
+from qorg.qorg.procurement_contracting.settings import get_setting
 
 LOCKED_STATUSES = {"Submitted", "Under Review", "Due Diligence", "Approved", "Suspended", "Expired"}
 BANK_FIELDS = {"bank_name", "account_name", "account_number", "iban", "swift_code", "bank_currency", "bank_confirmation"}
 
 
 def validate_supplier_registration(doc, method=None):
-    settings = frappe.get_single("Procure Settings")
+    settings = frappe.get_single("Buying Settings")
     old = None if doc.is_new() else frappe.get_doc(doc.doctype, doc.name)
     should_lock = (
-        (settings.lock_profile_during_review and doc.registration_status in {"Submitted", "Under Review", "Due Diligence"})
-        or (settings.lock_profile_after_approval and doc.registration_status == "Approved")
+        (settings.qorg_lock_profile_during_review and doc.registration_status in {"Submitted", "Under Review", "Due Diligence"})
+        or (settings.qorg_lock_profile_after_approval and doc.registration_status == "Approved")
     )
     doc.profile_locked = int(bool(should_lock))
     if old and old.profile_locked and not doc.update_requested:
@@ -20,12 +21,12 @@ def validate_supplier_registration(doc, method=None):
         forbidden = [f for f in changed if f not in allowed]
         if forbidden:
             frappe.throw(_("Supplier profile is locked. Request an update before changing: {0}").format(", ".join(forbidden)))
-    if old and settings.lock_bank_information and old.registration_status == "Approved":
+    if old and settings.qorg_lock_bank_information and old.registration_status == "Approved":
         changed_bank = [f for f in BANK_FIELDS if doc.get(f) != old.get(f)]
         if changed_bank and not doc.update_requested:
             frappe.throw(_("Approved bank information requires a controlled update request."))
     if doc.registration_status == "Approved" and not doc.review_expiry_date:
-        doc.review_expiry_date = add_days(nowdate(), settings.profile_validity_days or 365)
+        doc.review_expiry_date = add_days(nowdate(), settings.qorg_profile_validity_days or 365)
 
 
 def create_or_link_supplier(doc, method=None):

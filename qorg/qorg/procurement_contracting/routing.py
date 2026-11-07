@@ -1,19 +1,20 @@
 import frappe
 from frappe import _
+from qorg.qorg.procurement_contracting.settings import get_setting
 
 
 def route_material_request(doc, method=None):
     if doc.docstatus != 1:
         return
-    if not frappe.db.exists("DocType", "Procure Settings"):
+    if not get_setting("enable_extended_procurement", 1):
         return
-    settings = frappe.get_single("Procure Settings")
+    settings = frappe.get_single("Buying Settings")
     request_type = doc.material_request_type
     if request_type == "Purchase":
-        target = settings.default_procurement_officer or settings.default_logistics_officer
+        target = settings.qorg_default_procurement_officer or settings.qorg_default_logistics_officer
         subject = _("Approved purchase request requires procurement action")
     elif request_type in ("Material Transfer", "Material Issue"):
-        target = settings.default_stock_manager
+        target = settings.qorg_default_stock_manager
         subject = _("Approved stock request requires warehouse action")
     else:
         return

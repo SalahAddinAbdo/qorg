@@ -2,11 +2,12 @@ import frappe
 from frappe.utils import flt,getdate,nowdate
 from .classification import resolve_procurement_type
 from .policy_engine import PolicyContext,PolicyRule,resolve_policy
+from qorg.qorg.procurement_contracting.settings import get_setting
 class MaterialRequestProcurementMixin:
  def validate(self):
   super().validate()
-  if self.material_request_type!='Purchase' or not frappe.db.exists('DocType','Procure Settings'): return
-  if not frappe.get_single_value('Procure Settings','enable_extended_procurement'): return
+  if self.material_request_type!='Purchase' or not True: return
+  if not get_setting('enable_extended_procurement'): return
   if frappe.db.exists('DocType','Company Feature Settings'):
    enabled=frappe.db.get_value('Company Feature Settings',{'company':self.company},'extended_procurement')
    if enabled is not None and not int(enabled or 0): return

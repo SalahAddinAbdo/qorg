@@ -12,4 +12,5 @@ class TestProcurementRuntime(FrappeTestCase):
         for dt in ["Procurement Process","Procurement Notice","Supplier Registration","Procurement Submission","Technical Evaluation","Financial Evaluation","Procurement Contract","Framework Agreement","Commitment Ledger"]:
             self.assertTrue(frappe.db.exists("DocType",dt),dt)
     def test_settings_exists(self):
-        self.assertTrue(frappe.db.exists("DocType","Procure Settings"))
+        self.assertTrue(frappe.db.exists("DocType", "Buying Settings"))
+        self.assertTrue(frappe.db.exists("Custom Field", "Buying Settings-qorg_procurement_tab"))

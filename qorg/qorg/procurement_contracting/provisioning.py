@@ -57,7 +57,13 @@ def provision_procurement_contracting_v13():
     provision_email_templates()
 def provision_procurement_contracting_v13_final():
     provision_procurement_contracting_v13()
+    from qorg.qorg.procurement_contracting.settings import provision_buying_settings_extension
     from qorg.qorg.procurement_contracting.notifications import provision_notifications
     from qorg.qorg.procurement_contracting.workflows import provision_workflows
     from qorg.qorg.procurement_contracting.print_formats import provision_print_formats
-    provision_notifications(); provision_workflows(); provision_print_formats()
+    from qorg.qorg.procurement_contracting.web_forms import provision_procurement_web_forms
+    provision_buying_settings_extension()
+    provision_notifications()
+    provision_workflows()
+    provision_print_formats()
+    provision_procurement_web_forms()
