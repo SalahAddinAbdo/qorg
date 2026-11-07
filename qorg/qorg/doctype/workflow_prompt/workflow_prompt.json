@@ -196,5 +196,9 @@
   "actions": [],
   "links": [],
   "states": [],
-  "name": "Workflow Prompt"
+  "name": "Workflow Prompt",
+  "field_order": [
+    "prompt_name",
+    "prompt_text"
+  ]
 }

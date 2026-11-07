@@ -8,6 +8,7 @@
   "editable_grid": 0,
   "track_changes": 1,
   "field_order": [
+    "qorg_usage_guidance",
     "section_1_section",
     "naming_series",
     "procurement_process",
@@ -22,6 +23,12 @@
     "main_committee"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_usage_guidance",
+      "fieldtype": "HTML",
+      "label": "Usage Guidance",
+      "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Documents the committee award recommendation.<br><strong>When and impact:</strong> Provides the controlled input to the authorized decision.</div>"
+    },
     {
       "fieldname": "section_1_section",
       "fieldtype": "Section Break",

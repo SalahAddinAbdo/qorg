@@ -8,6 +8,7 @@
   "editable_grid": 0,
   "track_changes": 1,
   "field_order": [
+    "qorg_usage_guidance",
     "section_1_section",
     "naming_series",
     "legal_name",
@@ -40,6 +41,12 @@
     "bank_confirmation"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_usage_guidance",
+      "fieldtype": "HTML",
+      "label": "Usage Guidance",
+      "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Maintains a supplier portal profile and due-diligence status.<br><strong>When and impact:</strong> Approval controls eligibility to participate; portal editing is controlled from Buying Settings.</div>"
+    },
     {
       "fieldname": "section_1_section",
       "fieldtype": "Section Break",
