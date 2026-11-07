@@ -159,7 +159,7 @@
     {
       "fieldname": "qorg_entries_section",
       "fieldtype": "Section Break",
-      "label": "Entries"
+      "label": "Commitment Entries"
     },
     {
       "fieldname": "entries",

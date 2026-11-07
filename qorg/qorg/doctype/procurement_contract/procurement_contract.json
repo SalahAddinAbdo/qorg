@@ -242,7 +242,7 @@
     {
       "fieldname": "qorg_milestones_section",
       "fieldtype": "Section Break",
-      "label": "Milestones"
+      "label": "Contract Milestones"
     },
     {
       "fieldname": "milestones",
@@ -254,7 +254,7 @@
     {
       "fieldname": "qorg_guarantees_section",
       "fieldtype": "Section Break",
-      "label": "Guarantees"
+      "label": "Contract Guarantees"
     },
     {
       "fieldname": "guarantees",

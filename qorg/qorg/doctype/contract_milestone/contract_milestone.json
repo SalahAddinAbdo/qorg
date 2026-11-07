@@ -21,42 +21,51 @@
       "label": "Milestone",
       "fieldtype": "Data",
       "reqd": 1,
-      "in_list_view": 1
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "due_date",
       "label": "Due Date",
       "fieldtype": "Date",
       "reqd": 1,
-      "in_list_view": 1
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "amount",
       "label": "Amount",
       "fieldtype": "Currency",
-      "in_list_view": 1
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "percentage",
       "label": "Percentage",
-      "fieldtype": "Percent"
+      "fieldtype": "Percent",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "acceptance_criteria",
       "label": "Acceptance Criteria",
-      "fieldtype": "Small Text"
+      "fieldtype": "Small Text",
+      "in_list_view": 0
     },
     {
       "fieldname": "payment_linked",
       "label": "Payment Linked",
-      "fieldtype": "Check"
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "status",
       "label": "Status",
       "fieldtype": "Select",
       "options": "Pending\nDue\nSubmitted\nAccepted\nRejected",
-      "in_list_view": 1
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "page_break",

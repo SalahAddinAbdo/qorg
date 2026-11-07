@@ -36,7 +36,7 @@
     {
       "fieldname": "section_1_section",
       "fieldtype": "Section Break",
-      "label": "Details 1"
+      "label": "Identity and Reference"
     },
     {
       "fieldname": "naming_series",
@@ -102,7 +102,7 @@
     {
       "fieldname": "section_2_section",
       "fieldtype": "Section Break",
-      "label": "Details 2"
+      "label": "Additional Information"
     },
     {
       "fieldname": "accepted_amount",
@@ -144,7 +144,7 @@
     {
       "fieldname": "section_3_section",
       "fieldtype": "Section Break",
-      "label": "Technical Remarks"
+      "label": "Supporting Information"
     },
     {
       "fieldname": "technical_remarks",
@@ -158,7 +158,7 @@
     {
       "fieldname": "section_4_section",
       "fieldtype": "Section Break",
-      "label": "Evidence"
+      "label": "Dates and Attachments"
     },
     {
       "fieldname": "evidence",

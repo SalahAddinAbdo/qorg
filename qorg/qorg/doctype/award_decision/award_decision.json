@@ -34,7 +34,7 @@
     {
       "fieldname": "section_1_section",
       "fieldtype": "Section Break",
-      "label": "Details 1"
+      "label": "Identity and Reference"
     },
     {
       "fieldname": "naming_series",
@@ -100,7 +100,7 @@
     {
       "fieldname": "section_2_section",
       "fieldtype": "Section Break",
-      "label": "Decision Rationale"
+      "label": "Additional Information"
     },
     {
       "fieldname": "decision_rationale",
@@ -114,7 +114,7 @@
     {
       "fieldname": "section_3_section",
       "fieldtype": "Section Break",
-      "label": "Details 3"
+      "label": "Supporting Information"
     },
     {
       "fieldname": "purchase_order",
@@ -128,7 +128,7 @@
     {
       "fieldname": "section_4_section",
       "fieldtype": "Section Break",
-      "label": "Decision Attachment"
+      "label": "Dates and Attachments"
     },
     {
       "fieldname": "decision_attachment",

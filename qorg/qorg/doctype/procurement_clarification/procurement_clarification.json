@@ -37,7 +37,7 @@
     {
       "fieldname": "section_1_section",
       "fieldtype": "Section Break",
-      "label": "Details 1"
+      "label": "Identity and Reference"
     },
     {
       "fieldname": "naming_series",
@@ -94,7 +94,7 @@
     {
       "fieldname": "section_2_section",
       "fieldtype": "Section Break",
-      "label": "Question"
+      "label": "Additional Information"
     },
     {
       "fieldname": "question",
@@ -108,7 +108,7 @@
     {
       "fieldname": "section_3_section",
       "fieldtype": "Section Break",
-      "label": "Response"
+      "label": "Supporting Information"
     },
     {
       "fieldname": "response",
@@ -121,7 +121,7 @@
     {
       "fieldname": "section_4_section",
       "fieldtype": "Section Break",
-      "label": "Details 4"
+      "label": "Dates and Attachments"
     },
     {
       "fieldname": "due_date",
@@ -147,7 +147,7 @@
     {
       "fieldname": "section_5_section",
       "fieldtype": "Section Break",
-      "label": "Attachment"
+      "label": "Status and Internal Controls"
     },
     {
       "fieldname": "attachment",

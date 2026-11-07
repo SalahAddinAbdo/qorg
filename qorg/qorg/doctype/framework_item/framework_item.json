@@ -20,34 +20,42 @@
       "label": "Item Code",
       "fieldtype": "Link",
       "options": "Item",
-      "in_list_view": 1
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "description",
       "label": "Description",
-      "fieldtype": "Small Text"
+      "fieldtype": "Small Text",
+      "in_list_view": 0
     },
     {
       "fieldname": "uom",
       "label": "Uom",
       "fieldtype": "Link",
-      "options": "UOM"
+      "options": "UOM",
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "rate",
       "label": "Rate",
       "fieldtype": "Currency",
-      "in_list_view": 1
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "maximum_quantity",
       "label": "Maximum Quantity",
-      "fieldtype": "Float"
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "region",
       "label": "Region",
-      "fieldtype": "Data"
+      "fieldtype": "Data",
+      "in_list_view": 0
     },
     {
       "fieldname": "page_break",

@@ -49,7 +49,7 @@
     {
       "fieldname": "section_1_section",
       "fieldtype": "Section Break",
-      "label": "Details 1"
+      "label": "Identity and Reference"
     },
     {
       "fieldname": "naming_series",
@@ -115,7 +115,7 @@
     {
       "fieldname": "section_2_section",
       "fieldtype": "Section Break",
-      "label": "Technical Proposal"
+      "label": "Additional Information"
     },
     {
       "fieldname": "technical_proposal",
@@ -128,7 +128,7 @@
     {
       "fieldname": "section_3_section",
       "fieldtype": "Section Break",
-      "label": "Financial Proposal"
+      "label": "Supporting Information"
     },
     {
       "fieldname": "financial_proposal",
@@ -141,7 +141,7 @@
     {
       "fieldname": "section_4_section",
       "fieldtype": "Section Break",
-      "label": "Bid Security"
+      "label": "Dates and Attachments"
     },
     {
       "fieldname": "bid_security",
@@ -154,7 +154,7 @@
     {
       "fieldname": "section_5_section",
       "fieldtype": "Section Break",
-      "label": "Details 5"
+      "label": "Status and Internal Controls"
     },
     {
       "fieldname": "declaration",

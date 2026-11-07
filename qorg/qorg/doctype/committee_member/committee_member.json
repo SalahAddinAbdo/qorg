@@ -9,6 +9,7 @@
   "track_changes": 1,
   "field_order": [
     "user",
+    "member_name",
     "committee_role",
     "voting_member",
     "alternate_for",
@@ -23,40 +24,62 @@
       "label": "User",
       "fieldtype": "Link",
       "options": "User",
-      "reqd": 1
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "member_name",
+      "label": "Member Name",
+      "fieldtype": "Data",
+      "fetch_from": "user.full_name",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "committee_role",
       "label": "Committee Role",
       "fieldtype": "Select",
       "options": "Chair\nSecretary\nMember\nObserver\nTechnical Expert",
-      "reqd": 1
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "voting_member",
       "label": "Voting Member",
-      "fieldtype": "Check"
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "alternate_for",
       "label": "Alternate For",
       "fieldtype": "Link",
-      "options": "User"
+      "options": "User",
+      "in_list_view": 0
     },
     {
       "fieldname": "member_weight",
       "label": "Member Weight",
-      "fieldtype": "Percent"
+      "fieldtype": "Percent",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "recused",
       "label": "Recused",
-      "fieldtype": "Check"
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "active",
       "label": "Active",
-      "fieldtype": "Check"
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "page_break",

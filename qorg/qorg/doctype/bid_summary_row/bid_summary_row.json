@@ -28,65 +28,84 @@
       "label": "Supplier",
       "fieldtype": "Link",
       "options": "Supplier",
-      "reqd": 1
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "submission",
       "label": "Submission",
       "fieldtype": "Link",
-      "options": "Procurement Submission"
+      "options": "Procurement Submission",
+      "in_list_view": 0
     },
     {
       "fieldname": "preliminary_result",
       "label": "Preliminary Result",
       "fieldtype": "Select",
-      "options": "Pending\nResponsive\nConditionally Responsive\nNon-Responsive\nDisqualified"
+      "options": "Pending\nResponsive\nConditionally Responsive\nNon-Responsive\nDisqualified",
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "technical_score",
       "label": "Technical Score",
-      "fieldtype": "Float"
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "technical_weighted",
-      "label": "Technical Weighted",
-      "fieldtype": "Float"
+      "label": "Weighted Technical Score",
+      "fieldtype": "Float",
+      "in_list_view": 0
     },
     {
       "fieldname": "evaluated_price",
       "label": "Evaluated Price",
-      "fieldtype": "Currency"
+      "fieldtype": "Currency",
+      "in_list_view": 0
     },
     {
       "fieldname": "financial_score",
       "label": "Financial Score",
-      "fieldtype": "Float"
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "financial_weighted",
-      "label": "Financial Weighted",
-      "fieldtype": "Float"
+      "label": "Weighted Financial Score",
+      "fieldtype": "Float",
+      "in_list_view": 0
     },
     {
       "fieldname": "total_score",
-      "label": "Total Score",
-      "fieldtype": "Float"
+      "label": "Combined Score",
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "rank",
       "label": "Rank",
-      "fieldtype": "Int"
+      "fieldtype": "Int",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "recommendation",
       "label": "Recommendation",
       "fieldtype": "Select",
-      "options": "Pending\nRecommended\nReserve\nNot Recommended\nDisqualified"
+      "options": "Pending\nRecommended\nReserve\nNot Recommended\nDisqualified",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "rationale",
       "label": "Rationale",
-      "fieldtype": "Small Text"
+      "fieldtype": "Small Text",
+      "in_list_view": 0
     },
     {
       "fieldname": "page_break",

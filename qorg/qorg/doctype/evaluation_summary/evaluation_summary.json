@@ -33,7 +33,7 @@
     {
       "fieldname": "section_1_section",
       "fieldtype": "Section Break",
-      "label": "Details 1"
+      "label": "Identity and Reference"
     },
     {
       "fieldname": "naming_series",
@@ -80,16 +80,16 @@
     {
       "fieldname": "section_2_section",
       "fieldtype": "Section Break",
-      "label": "Rows"
+      "label": "Additional Information"
     },
     {
       "fieldname": "qorg_rows_section",
       "fieldtype": "Section Break",
-      "label": "Rows"
+      "label": "Ranked Bid Results"
     },
     {
       "fieldname": "rows",
-      "label": "Rows",
+      "label": "Ranked Bid Results",
       "fieldtype": "Table",
       "options": "Bid Summary Row",
       "reqd": 1,
@@ -101,7 +101,7 @@
     {
       "fieldname": "section_3_section",
       "fieldtype": "Section Break",
-      "label": "Details 3"
+      "label": "Supporting Information"
     },
     {
       "fieldname": "recommended_supplier",
@@ -116,7 +116,7 @@
     {
       "fieldname": "section_4_section",
       "fieldtype": "Section Break",
-      "label": "Summary"
+      "label": "Dates and Attachments"
     },
     {
       "fieldname": "summary",

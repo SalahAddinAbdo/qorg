@@ -32,7 +32,7 @@
     {
       "fieldname": "section_1_section",
       "fieldtype": "Section Break",
-      "label": "Details 1"
+      "label": "Identity and Reference"
     },
     {
       "fieldname": "naming_series",
@@ -89,7 +89,7 @@
     {
       "fieldname": "section_2_section",
       "fieldtype": "Section Break",
-      "label": "Reasons"
+      "label": "Additional Information"
     },
     {
       "fieldname": "reasons",
@@ -102,12 +102,12 @@
     {
       "fieldname": "section_3_section",
       "fieldtype": "Section Break",
-      "label": "Criteria"
+      "label": "Supporting Information"
     },
     {
       "fieldname": "qorg_criteria_section",
       "fieldtype": "Section Break",
-      "label": "Criteria"
+      "label": "Evaluation Criteria"
     },
     {
       "fieldname": "criteria",

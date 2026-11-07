@@ -92,7 +92,7 @@
     },
     {
       "fieldname": "section_2",
-      "label": "Details and Resolution",
+      "label": "Additional Information",
       "fieldtype": "Section Break"
     },
     {

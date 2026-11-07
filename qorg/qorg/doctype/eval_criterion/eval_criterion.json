@@ -24,45 +24,60 @@
       "label": "Component",
       "fieldtype": "Select",
       "options": "Preliminary\nTechnical\nFinancial\nOther",
-      "reqd": 1
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "criterion",
       "label": "Criterion",
       "fieldtype": "Data",
-      "reqd": 1
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "scoring_method",
       "label": "Scoring Method",
       "fieldtype": "Select",
       "options": "Individual Average\nWeighted Member Average\nConsensus Score\nIndividual then Consensus\nIndividual Pass Fail\nConsensus Pass Fail\nSystem Calculated\nSingle Authorized Assessor\nMeasured Value to Score",
-      "reqd": 1
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "maximum_score",
       "label": "Maximum Score",
-      "fieldtype": "Float"
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "weight",
       "label": "Weight",
-      "fieldtype": "Percent"
+      "fieldtype": "Percent",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "mandatory",
       "label": "Mandatory",
-      "fieldtype": "Check"
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "minimum_passing_score",
       "label": "Minimum Passing Score",
-      "fieldtype": "Float"
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "description",
       "label": "Description",
-      "fieldtype": "Small Text"
+      "fieldtype": "Small Text",
+      "in_list_view": 0
     },
     {
       "fieldname": "page_break",

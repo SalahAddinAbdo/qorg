@@ -34,7 +34,7 @@
     {
       "fieldname": "section_1_section",
       "fieldtype": "Section Break",
-      "label": "Details 1"
+      "label": "Identity and Reference"
     },
     {
       "fieldname": "naming_series",
@@ -98,7 +98,7 @@
     {
       "fieldname": "section_2_section",
       "fieldtype": "Section Break",
-      "label": "Details 2"
+      "label": "Additional Information"
     },
     {
       "fieldname": "deadline",
@@ -112,7 +112,7 @@
     {
       "fieldname": "section_3_section",
       "fieldtype": "Section Break",
-      "label": "Summary"
+      "label": "Supporting Information"
     },
     {
       "fieldname": "summary",
@@ -125,7 +125,7 @@
     {
       "fieldname": "section_4_section",
       "fieldtype": "Section Break",
-      "label": "Documents"
+      "label": "Dates and Attachments"
     },
     {
       "fieldname": "documents",

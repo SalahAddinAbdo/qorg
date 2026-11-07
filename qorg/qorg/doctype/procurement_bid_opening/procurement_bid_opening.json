@@ -31,7 +31,7 @@
     {
       "fieldname": "section_1_section",
       "fieldtype": "Section Break",
-      "label": "Details 1"
+      "label": "Identity and Reference"
     },
     {
       "fieldname": "naming_series",
@@ -88,7 +88,7 @@
     {
       "fieldname": "section_2_section",
       "fieldtype": "Section Break",
-      "label": "Minutes"
+      "label": "Additional Information"
     },
     {
       "fieldname": "minutes",
@@ -102,7 +102,7 @@
     {
       "fieldname": "section_3_section",
       "fieldtype": "Section Break",
-      "label": "Attachment"
+      "label": "Supporting Information"
     },
     {
       "fieldname": "attachment",

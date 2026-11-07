@@ -50,7 +50,7 @@
     {
       "fieldname": "section_1_section",
       "fieldtype": "Section Break",
-      "label": "Details 1"
+      "label": "Identity and Reference"
     },
     {
       "fieldname": "naming_series",
@@ -112,7 +112,7 @@
     {
       "fieldname": "section_2_section",
       "fieldtype": "Section Break",
-      "label": "Details 2"
+      "label": "Additional Information"
     },
     {
       "fieldname": "supplier",
@@ -140,7 +140,7 @@
     {
       "fieldname": "section_3_section",
       "fieldtype": "Section Break",
-      "label": "Documents"
+      "label": "Supporting Information"
     },
     {
       "fieldname": "documents",
@@ -153,7 +153,7 @@
     {
       "fieldname": "section_4_section",
       "fieldtype": "Section Break",
-      "label": "Declarations"
+      "label": "Dates and Attachments"
     },
     {
       "fieldname": "declarations",

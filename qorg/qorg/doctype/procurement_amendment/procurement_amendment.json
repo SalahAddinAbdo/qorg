@@ -37,7 +37,7 @@
     {
       "fieldname": "section_1_section",
       "fieldtype": "Section Break",
-      "label": "Details 1"
+      "label": "Identity and Reference"
     },
     {
       "fieldname": "naming_series",
@@ -75,7 +75,7 @@
     {
       "fieldname": "section_2_section",
       "fieldtype": "Section Break",
-      "label": "Reason"
+      "label": "Additional Information"
     },
     {
       "fieldname": "reason",
@@ -89,7 +89,7 @@
     {
       "fieldname": "section_3_section",
       "fieldtype": "Section Break",
-      "label": "Impact On Submissions"
+      "label": "Supporting Information"
     },
     {
       "fieldname": "impact_on_submissions",
@@ -102,7 +102,7 @@
     {
       "fieldname": "section_4_section",
       "fieldtype": "Section Break",
-      "label": "Details 4"
+      "label": "Dates and Attachments"
     },
     {
       "fieldname": "extend_deadline",
@@ -143,7 +143,7 @@
     {
       "fieldname": "section_5_section",
       "fieldtype": "Section Break",
-      "label": "Attachment"
+      "label": "Status and Internal Controls"
     },
     {
       "fieldname": "attachment",

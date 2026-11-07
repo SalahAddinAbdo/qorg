@@ -247,7 +247,7 @@
     {
       "fieldname": "qorg_criteria_section",
       "fieldtype": "Section Break",
-      "label": "Criteria"
+      "label": "Evaluation Criteria"
     },
     {
       "fieldname": "criteria",

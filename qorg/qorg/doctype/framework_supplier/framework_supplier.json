@@ -21,34 +21,44 @@
       "fieldtype": "Link",
       "options": "Supplier",
       "reqd": 1,
-      "in_list_view": 1
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "rank",
       "label": "Rank",
       "fieldtype": "Int",
-      "in_list_view": 1
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "allocation_percent",
       "label": "Allocation Percent",
-      "fieldtype": "Percent"
+      "fieldtype": "Percent",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "ceiling_amount",
       "label": "Ceiling Amount",
-      "fieldtype": "Currency"
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "consumed_amount",
       "label": "Consumed Amount",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "active",
       "label": "Active",
-      "fieldtype": "Check"
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "page_break",
