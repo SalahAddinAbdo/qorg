@@ -40,7 +40,7 @@ WEB_FORMS = [
         "success_message": "Your supplier profile has been saved successfully.",
         "submit_button_label": "Save Supplier Profile",
         "layout": [
-            page("Organization"),
+            section("Organization"),
             section("Legal Identity"), field("legal_name", True), field("trade_name"), column(), field("supplier_type", True), field("country", True),
             section("Registration Details"), field("registration_number", True), field("tax_id", True), column(), field("year_established"), field("employee_count"),
             page("Contact and Address"),
@@ -79,7 +79,7 @@ WEB_FORMS = [
         "success_message": "Your tender submission has been saved successfully.",
         "submit_button_label": "Save Tender Submission",
         "layout": [
-            page("Opportunity"), section("Procurement Opportunity"), field("procurement_process", True), field("procurement_notice", True), column(), field("supplier_registration", True), field("supplier", read_only=True),
+            section("Opportunity"), section("Procurement Opportunity"), field("procurement_process", True), field("procurement_notice", True), column(), field("supplier_registration", True), field("supplier", read_only=True),
             page("Technical Offer"), section("Technical Proposal"), field("technical_proposal", True), field("bid_security"),
             page("Financial Offer"), section("Financial Proposal"), field("financial_proposal", True),
             page("Confirmation"), section("Supplier Profile Confirmation"), field("profile_current_confirmation", True), field("profile_confirmation_on", read_only=True), section("Declaration"), field("declaration", True),
@@ -128,17 +128,26 @@ def _rebuild_fields(doc, definition):
     doc.set(table_field, [])
     layout_index = 0
 
+    has_renderable_content = False
     for item in definition["layout"]:
-        row = doc.append(table_field, {})
         fieldtype = item.get("fieldtype")
+        # A leading Page Break creates an empty Page 1 in Frappe Web Forms.
+        # Ignore it defensively for every managed form, including future definitions.
+        if fieldtype == "Page Break" and not has_renderable_content:
+            continue
+
+        row = doc.append(table_field, {})
         if fieldtype in {"Page Break", "Section Break", "Column Break"}:
             layout_index += 1
             if fieldtype != "Page Break":
                 _set(row, child_meta, "fieldname", f"qorg_layout_{layout_index}")
             _set(row, child_meta, "fieldtype", fieldtype)
             _set(row, child_meta, "label", item.get("label") or "")
+            if fieldtype != "Page Break":
+                has_renderable_content = True
             continue
 
+        has_renderable_content = True
         target = target_meta.get_field(item["fieldname"])
         if not target:
             frappe.throw(f"Missing field {definition['doc_type']}.{item['fieldname']}")
