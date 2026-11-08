@@ -1,5 +1,6 @@
 from __future__ import annotations
 import frappe
+from qorg.qorg.people_and_opportunities.web_form_policy import apply_managed_web_form_settings
 
 
 def section(label): return {"fieldtype":"Section Break","label":label}
@@ -31,11 +32,29 @@ WEB_FORMS=[
 def _set(doc,field,value):
  if doc.meta.has_field(field): setattr(doc,field,value)
 
-def _apply_settings(doc,d):
- for k in ("title","route","doc_type","allow_multiple","allow_edit","show_list","allow_print","key_required","login_required","introduction_text","success_message","submit_button_label"):
-  if k in d:_set(doc,k,d[k])
- for k,v in {"published":1,"is_standard":0,"qorg_web_form_design_enabled":1,"qorg_inherit_global_web_form_design":1,"qorg_header_style":"Default","qorg_web_form_design_version":"3.0.0"}.items():_set(doc,k,v)
- if doc.meta.has_field("custom_css"):doc.custom_css=""
+def _apply_settings(doc, d):
+ apply_managed_web_form_settings(doc, {
+  **d,
+  "published": 1,
+  "is_standard": 0,
+  "anonymous": 0,
+  "allow_delete": 0,
+  "apply_document_permissions": 1,
+  "show_attachments": 1,
+  "custom_css": "",
+  "client_script": "",
+  "design": {
+   "qorg_web_form_design_mode": "Use Global Setting",
+   "qorg_web_form_header_style_override": "Use Global Setting",
+   "qorg_web_form_max_content_width_override": None,
+   "qorg_web_form_privacy_notice_mode": "Use Global Setting",
+   "qorg_web_form_sticky_actions_mode": "Use Global Setting",
+   "qorg_web_form_child_name_mode": "Use Global Setting",
+   "qorg_apply_managed_web_form_design": 1,
+   "qorg_managed_css_version": "4.0.0",
+   "qorg_managed_css_update_available": 0,
+  },
+ })
 
 def _rebuild_fields(doc,d):
  doc.set("web_form_fields",[]);meta=frappe.get_meta(d["doc_type"])
@@ -53,6 +72,5 @@ def provision_procurement_web_forms():
  for d in WEB_FORMS:
   name=frappe.db.get_value("Web Form",{"route":d["route"]},"name");doc=frappe.get_doc("Web Form",name) if name else frappe.new_doc("Web Form")
   _apply_settings(doc,d);_rebuild_fields(doc,d)
-  if doc.meta.has_field("client_script"):doc.client_script=""
   doc.save(ignore_permissions=True) if name else doc.insert(ignore_permissions=True)
  frappe.clear_cache(doctype="Web Form")

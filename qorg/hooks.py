@@ -43,7 +43,7 @@ app_include_css = [
 web_include_css = [
     "/assets/qorg/css/qorg_ui_tokens.css",
     "/assets/qorg/css/qorg_theme_runtime.css",
-    "/assets/qorg/css/opportunities_portal.css",
+    "/assets/qorg/css/qorg_portal.css",
     "qorg_login_experience.bundle.css",
     "/assets/qorg/css/qorg_login_experience_hotfix.css",
     "/assets/qorg/css/qorg_field_controls.css",
@@ -89,6 +89,9 @@ doctype_js = {
 }
 
 doc_events = {
+    "Web Form": {
+        "before_validate": "qorg.qorg.people_and_opportunities.web_form_policy.validate_web_form_policy",
+    },
     "Designation": {"validate": [
         "qorg.qorg.recruitment_extensions.events.designation_validate",
         "qorg.qorg.recruitment_extensions.validation.validate_designation",
@@ -291,6 +294,7 @@ after_install = [
     "qorg.qorg.people_and_opportunities.provisioning.provision_people_opportunities_core",
     "qorg.qorg.people_and_opportunities.portal_provisioning.provision_opportunity_portal",
     "qorg.qorg.people_and_opportunities.web_form_provisioning.provision_standard_opportunity_web_forms",
+    "qorg.qorg.people_and_opportunities.web_form_policy.reconcile_web_form_policy",
     "qorg.qorg.volunteer_management.provisioning.provision_volunteer_management",
     "qorg.qorg.project_management.print_settings_integration.provision_print_settings",
     "qorg.qorg.install.after_install",
@@ -311,6 +315,7 @@ after_migrate = [
     "qorg.qorg.people_and_opportunities.provisioning.provision_people_opportunities_core",
     "qorg.qorg.people_and_opportunities.portal_provisioning.provision_opportunity_portal",
     "qorg.qorg.people_and_opportunities.web_form_provisioning.provision_standard_opportunity_web_forms",
+    "qorg.qorg.people_and_opportunities.web_form_policy.reconcile_web_form_policy",
     "qorg.qorg.doctype.participation_application.participation_application.reconcile_all_opportunity_application_stats",
     "qorg.qorg.volunteer_management.provisioning.provision_volunteer_management",
     "qorg.qorg.project_management.print_settings_integration.provision_print_settings",
