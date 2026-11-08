@@ -589,3 +589,10 @@ html[dir="rtl"] .web-form-container { text-align: start; }
     max-width:none;
     margin-inline:auto;
 }
+
+/* Central user-owned record lists. */
+.qorg-record-list-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))}
+.qorg-record-card{display:flex;flex-direction:column;min-height:260px}
+.qorg-record-card .qorg-meta-list{margin-top:auto}
+.qorg-record-card .qorg-card-actions{padding-top:16px}
+@media(max-width:767px){.qorg-record-list-grid{grid-template-columns:1fr}}

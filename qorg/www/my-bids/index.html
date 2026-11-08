@@ -1,9 +1,3 @@
 {% extends "templates/web.html" %}
 {% block title %}{{ _("My Bids") }}{% endblock %}
-{% block page_content %}
-<div class="qorg-portal qorg-list-page">
-  <section class="qorg-hero"><div><span class="qorg-eyebrow">{{ _("Supplier Portal") }}</span><h1>{{ _("My Bids") }}</h1><p>{{ _("Review draft, submitted, withdrawn and evaluated bids linked to your supplier account.") }}</p></div><div class="qorg-hero-actions"><a class="btn btn-primary" href="/procurement">{{ _("Browse Opportunities") }}</a><a class="btn btn-default" href="/supplier-profile">{{ _("Supplier Profile") }}</a></div></section>
-  <div class="qorg-results-heading"><h2>{{ _("Bid History") }}</h2><span>{{ bids|length }} {{ _("record(s)") }}</span></div>
-  {% if bids %}<div class="qorg-card-grid">{% for bid in bids %}<article class="qorg-opportunity-card"><div class="qorg-card-topline"><span class="qorg-status-badge">{{ _(bid.submission_status or "Draft") }}</span>{% if bid.submission_version %}<span class="qorg-pill">{{ _("Version") }} {{ bid.submission_version }}</span>{% endif %}</div><h3>{{ bid.opportunity_title or bid.procurement_process or bid.name }}</h3><dl class="qorg-meta-list"><div><dt>{{ _("Reference") }}</dt><dd>{{ bid.name }}</dd></div>{% if bid.submitted_at %}<div><dt>{{ _("Submitted") }}</dt><dd>{{ frappe.utils.format_datetime(bid.submitted_at) }}</dd></div>{% endif %}</dl><div class="qorg-card-actions"><a class="btn btn-primary" href="/tender-submission/{{ bid.name|urlencode }}">{{ _("Open Bid") }}</a>{% if bid.opportunity_route %}<a class="btn btn-default" href="/procurement-opportunity?route={{ bid.opportunity_route|urlencode }}">{{ _("View Opportunity") }}</a>{% endif %}</div></article>{% endfor %}</div>{% else %}<div class="qorg-empty-state"><h3>{{ _("No bids yet") }}</h3><p>{{ _("Open a published procurement opportunity to start the tender form directly.") }}</p><a class="btn btn-primary" href="/procurement">{{ _("Browse Opportunities") }}</a></div>{% endif %}
-</div>
-{% endblock %}
+{% block page_content %}{% include "qorg/templates/includes/portal_record_list.html" %}{% endblock %}

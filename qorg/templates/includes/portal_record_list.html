@@ -1,0 +1,53 @@
+<div class="qorg-portal qorg-list-page">
+  <section class="qorg-hero">
+    <div>
+      <span class="qorg-eyebrow">{{ portal_list.eyebrow }}</span>
+      <h1>{{ portal_list.title }}</h1>
+      <p>{{ portal_list.description }}</p>
+    </div>
+    <div class="qorg-hero-actions">
+      <a class="btn btn-primary" href="{{ portal_list.browse_url }}">{{ portal_list.browse_label }}</a>
+      <a class="btn btn-default" href="{{ portal_list.profile_url }}">{{ portal_list.profile_label }}</a>
+    </div>
+  </section>
+
+  <div class="qorg-results-heading">
+    <h2>{{ portal_list.history_title }}</h2>
+    <span>{{ portal_list.count }} {{ _("record(s)") }}</span>
+  </div>
+
+  {% if portal_list.records %}
+  <div class="qorg-card-grid qorg-record-list-grid">
+    {% for record in portal_list.records %}
+    <article class="qorg-opportunity-card qorg-record-card">
+      <div class="qorg-card-topline">
+        <span class="qorg-pill">{{ record.type }}</span>
+        <span class="qorg-status-badge">{{ _(record.status) }}</span>
+      </div>
+      <h3>{{ record.title }}</h3>
+      <dl class="qorg-meta-list">
+        {% if record.date %}<div><dt>{{ record.date_label }}</dt><dd>{{ frappe.utils.formatdate(record.date) }}</dd></div>{% endif %}
+        <div><dt>{{ _("Reference") }}</dt><dd>{{ record.reference }}</dd></div>
+      </dl>
+      <div class="qorg-card-actions">
+        <a class="btn btn-primary" href="{{ record.open_url }}">{{ record.open_label }}</a>
+        {% if record.source_url %}<a class="btn btn-default" href="{{ record.source_url }}">{{ record.source_label }}</a>{% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="qorg-empty-state">
+    <h3>{{ portal_list.empty_title }}</h3>
+    <p>{{ portal_list.empty_description }}</p>
+    <a class="btn btn-primary" href="{{ portal_list.browse_url }}">{{ portal_list.browse_label }}</a>
+  </div>
+  {% endif %}
+
+  {% if portal_list.previous_start is not none or portal_list.next_start is not none %}
+  <nav class="qorg-pagination" aria-label="{{ _('List pages') }}">
+    {% if portal_list.previous_start is not none %}<a href="?start={{ portal_list.previous_start }}">{{ _("Previous") }}</a>{% endif %}
+    {% if portal_list.next_start is not none %}<a href="?start={{ portal_list.next_start }}">{{ _("Next") }}</a>{% endif %}
+  </nav>
+  {% endif %}
+</div>

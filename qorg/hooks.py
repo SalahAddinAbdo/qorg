@@ -58,6 +58,8 @@ web_include_js = [
 
 website_route_rules = [
     {"from_route": "/opportunities/<route>", "to_route": "opportunities/detail"},
+    {"from_route": "/participation-application/list", "to_route": "my-applications"},
+    {"from_route": "/tender-submission/list", "to_route": "my-bids"},
 ]
 
 override_whitelisted_methods = {
