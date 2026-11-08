@@ -38,8 +38,8 @@ def provision_email_templates():
   doc.save(ignore_permissions=True) if existing else doc.insert(ignore_permissions=True)
 
 def _portal_link(doc):
- if doc.doctype=="Supplier Registration":return frappe.utils.get_url(f"/supplier-registration?name={doc.name}")
- if doc.doctype=="Procurement Submission":return frappe.utils.get_url(f"/tender-submission?name={doc.name}")
+ if doc.doctype=="Supplier Registration":return frappe.utils.get_url(f"/supplier-registration/{doc.name}")
+ if doc.doctype=="Procurement Submission":return frappe.utils.get_url(f"/tender-submission/{doc.name}")
  if doc.doctype=="Procurement Notice":return frappe.utils.get_url(f"/procurement-opportunity?route={doc.route}")
  return frappe.utils.get_url_to_form(doc.doctype,doc.name)
 
