@@ -111,3 +111,33 @@ def start_tender_submission(notice: str | None = None, route: str | None = None)
     }
     request = _create_web_form_request(values)
     _redirect(_submission_path(request))
+
+
+@frappe.whitelist()
+def open_tender_submission(submission: str | None = None):
+    """Open an existing tender through its protected standard Web Form route."""
+    if frappe.session.user == "Guest":
+        frappe.throw(_("Please sign in to open your bid."), frappe.PermissionError)
+
+    submission_name = (
+        submission
+        or frappe.form_dict.get("submission")
+        or frappe.form_dict.get("name")
+        or ""
+    ).strip()
+    if not submission_name or not frappe.db.exists("Procurement Submission", submission_name):
+        frappe.throw(_("The selected bid does not exist."))
+
+    submission_doc = frappe.get_doc("Procurement Submission", submission_name)
+    profile_names = frappe.get_all(
+        "Supplier Registration", filters={"owner": frappe.session.user}, pluck="name"
+    )
+    permitted = submission_doc.owner == frappe.session.user or (
+        submission_doc.supplier_registration
+        and submission_doc.supplier_registration in profile_names
+    )
+    if not permitted:
+        frappe.throw(_("You are not permitted to open this bid."), frappe.PermissionError)
+
+    request = _create_web_form_request({}, submission_doc.name)
+    _redirect(_submission_path(request, submission_doc.name))

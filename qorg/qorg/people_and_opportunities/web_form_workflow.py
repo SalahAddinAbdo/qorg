@@ -161,3 +161,34 @@ def _redirect_to_participation_form(request, docname: str | None = None):
 
     frappe.local.response["type"] = "redirect"
     frappe.local.response["location"] = f"{path}?web_form_request_key={key}"
+
+
+@frappe.whitelist()
+def open_participation_application(application: str | None = None):
+    """Open an existing application through the protected standard Web Form route."""
+    if frappe.session.user == "Guest":
+        frappe.throw(_("Please sign in to open your application."), frappe.PermissionError)
+
+    application_name = (
+        application
+        or frappe.form_dict.get("application")
+        or frappe.form_dict.get("name")
+        or ""
+    ).strip()
+    if not application_name or not frappe.db.exists("Participation Application", application_name):
+        frappe.throw(_("The selected application does not exist."))
+
+    application_doc = frappe.get_doc("Participation Application", application_name)
+    person_names = _get_external_person_names_for_user(frappe.session.user)
+    permitted = application_doc.owner == frappe.session.user or (
+        application_doc.external_person and application_doc.external_person in person_names
+    )
+    if not permitted:
+        frappe.throw(_("You are not permitted to open this application."), frappe.PermissionError)
+
+    request = _create_web_form_request(
+        values={},
+        reference_doctype="Participation Application",
+        reference_docname=application_doc.name,
+    )
+    _redirect_to_participation_form(request, application_doc.name)

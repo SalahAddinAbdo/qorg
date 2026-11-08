@@ -84,7 +84,10 @@ def _application_rows(start, page_length):
             "date": row.application_date,
             "reference": row.name,
             "open_label": _("Open Application"),
-            "open_url": f"/participation-application/{quote(row.name, safe='')}",
+            "open_url": (
+                "/api/method/qorg.qorg.people_and_opportunities.web_form_workflow."
+                f"open_participation_application?application={quote(row.name, safe='')}"
+            ),
             "source_label": _("View Opportunity"),
             "source_url": f"/opportunities/{quote(opportunity.route, safe='')}" if opportunity and opportunity.route else None,
         })
@@ -125,7 +128,10 @@ def _bid_rows(start, page_length):
             "date": row.submitted_at,
             "reference": row.name,
             "open_label": _("Open Bid"),
-            "open_url": f"/tender-submission/{quote(row.name, safe='')}",
+            "open_url": (
+                "/api/method/qorg.qorg.procurement_contracting.portal_workflow."
+                f"open_tender_submission?submission={quote(row.name, safe='')}"
+            ),
             "source_label": _("View Opportunity"),
             "source_url": f"/procurement-opportunity?route={quote(notice.route, safe='')}" if notice and notice.route else None,
         })

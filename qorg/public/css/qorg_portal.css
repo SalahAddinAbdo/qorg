@@ -596,3 +596,16 @@ html[dir="rtl"] .web-form-container { text-align: start; }
 .qorg-record-card .qorg-meta-list{margin-top:auto}
 .qorg-record-card .qorg-card-actions{padding-top:16px}
 @media(max-width:767px){.qorg-record-list-grid{grid-template-columns:1fr}}
+
+/* Compact central record cards: balanced density without losing mobile readability. */
+.qorg-record-list-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:14px}
+.qorg-record-card{min-height:0;padding:18px 20px;gap:10px}
+.qorg-record-card .qorg-card-topline{margin:0}
+.qorg-record-card h3{margin:2px 0 4px;font-size:var(--font-size-xl,18px);line-height:1.35}
+.qorg-record-card .qorg-meta-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:4px 0 0}
+.qorg-record-card .qorg-meta-list>div{display:block;padding:10px 12px;border:1px solid var(--qorg-border,var(--border-color));border-radius:var(--qorg-web-field-radius,var(--border-radius));background:var(--qorg-control-bg,var(--control-bg))}
+.qorg-record-card .qorg-meta-list dt{margin-bottom:3px;font-size:var(--font-size-xs,11px)}
+.qorg-record-card .qorg-meta-list dd{text-align:start;overflow-wrap:anywhere}
+.qorg-record-card .qorg-card-actions{margin-top:2px;padding-top:8px;border-top:1px solid var(--qorg-border,var(--border-color))}
+.qorg-record-card .qorg-card-actions .btn{min-height:38px;padding-inline:14px}
+@media(max-width:767px){.qorg-record-card{padding:16px}.qorg-record-card .qorg-meta-list{grid-template-columns:1fr}.qorg-record-card .qorg-card-actions{align-items:stretch}}
