@@ -24,15 +24,20 @@ html[data-qorg-scope="web"] :is(.web-page, .page_content, main) {
 }
 
 .qorg-portal,
+.qorg-page-shell,
+.qorg-list-page,
 .web-form-container,
 .web-form-wrapper,
 .web-form-list-container {
-    width: min(100%, var(--qorg-web-content-width));
+    width: min(var(--qorg-web-content-width), calc(100% - (2 * var(--qorg-web-content-gutter))));
+    max-width: none;
     margin-inline: auto;
 }
 
-.qorg-portal {
-    padding: clamp(20px, 4vw, 48px) var(--qorg-web-content-gutter) clamp(40px, 6vw, 72px);
+.qorg-portal,
+.qorg-page-shell,
+.qorg-list-page {
+    padding-block: clamp(20px, 4vw, 48px) clamp(40px, 6vw, 72px);
     color: var(--qorg-text, var(--text-color));
 }
 
@@ -533,18 +538,54 @@ html[dir="rtl"] .web-form-container { text-align: start; }
 }
 
 
-/* Unified portal extensions */
-.qorg-page-heading{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin:0 0 var(--qorg-web-section-gap)}
-.qorg-page-heading h2{margin:0;color:var(--qorg-text,var(--text-color));font-size:var(--font-size-xl,18px)}
-.qorg-result-count{color:var(--qorg-muted-text,var(--text-muted));font-size:var(--font-size-sm,12px)}
-.qorg-card-summary{color:var(--qorg-muted-text,var(--text-muted))}
+/* QOrg central page and list contract. Use qorg-page-shell on every future website page
+   and qorg-list-page on every future list page. Standard Web Form pages are included automatically. */
+.qorg-page-heading,.qorg-results-heading{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin:0 0 var(--qorg-web-section-gap)}
+.qorg-page-heading h2,.qorg-results-heading h2{margin:0;color:var(--qorg-text,var(--text-color));font-size:var(--font-size-xl,18px)}
+.qorg-result-count,.qorg-results-heading>span{color:var(--qorg-muted-text,var(--text-muted));font-size:var(--font-size-sm,12px)}
+.qorg-filter-grid.qorg-filter-grid-wide{grid-template-columns:minmax(240px,1.5fr) repeat(2,minmax(170px,1fr)) auto}
 .qorg-status-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:10px;margin-top:16px}
 .qorg-status-item{min-width:0;padding:12px 14px;background:var(--qorg-control-bg,var(--control-bg));border:1px solid var(--qorg-border,var(--border-color));border-radius:var(--qorg-web-field-radius,var(--border-radius))}
 .qorg-status-item span{display:block;margin-bottom:4px;color:var(--qorg-muted-text,var(--text-muted));font-size:var(--font-size-xs,11px)}
 .qorg-status-item strong{display:block;overflow-wrap:anywhere;color:var(--qorg-text,var(--text-color))}
 .qorg-card-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px}
-.qorg-summary-card{padding:clamp(18px,2.5vw,28px)}
 .qorg-inline-alert{margin-bottom:var(--qorg-web-section-gap);padding:14px 16px;color:var(--qorg-text,var(--text-color));background:color-mix(in srgb,var(--qorg-brand-secondary,var(--secondary-color)) 10%,var(--qorg-surface-bg,var(--card-bg)));border:1px solid color-mix(in srgb,var(--qorg-brand-secondary,var(--secondary-color)) 28%,var(--qorg-border,var(--border-color)));border-radius:var(--qorg-web-field-radius,var(--border-radius))}
-.web-form-list-container{padding-block:clamp(20px,4vw,48px)}
+
+/* Native Web Form and list normalization. */
+.web-form-container,.web-form-list-container{padding-block:clamp(20px,4vw,48px) clamp(40px,6vw,72px)}
 .web-form-list-container .web-form-list-row{margin-bottom:12px;padding:16px 18px}
-@media(max-width:767px){.qorg-page-heading{align-items:flex-start}.qorg-card-actions .btn{width:100%}}
+.web-form-container .form-section{margin-bottom:16px}
+.web-form-container .form-column{min-width:0}
+.web-form-container .control-label{color:var(--qorg-text,var(--text-color));font-weight:600}
+.web-form-container .control-label .reqd,
+.web-form-container .control-label .mandatory,
+.web-form-container .control-label .text-danger,
+.web-form-container .control-label .required{color:var(--red-500,#dc3545);font-weight:800}
+.web-form-container [data-fieldname].has-error .control-label{color:var(--red-600,#c92a2a)}
+.web-form-container .help-box,.web-form-container .description{color:var(--qorg-muted-text,var(--text-muted));font-size:var(--font-size-sm,12px)}
+.web-form-container .web-form-actions{gap:10px}
+@media(max-width:991px){.qorg-filter-grid.qorg-filter-grid-wide{grid-template-columns:repeat(2,minmax(0,1fr))}.qorg-filter-grid.qorg-filter-grid-wide .qorg-filter-actions{grid-column:1/-1}}
+@media(max-width:767px){:root{--qorg-web-content-gutter:12px}.qorg-filter-grid.qorg-filter-grid-wide{grid-template-columns:1fr}.qorg-filter-grid.qorg-filter-grid-wide .qorg-filter-actions{grid-column:auto}.qorg-page-heading,.qorg-results-heading{align-items:flex-start}.qorg-card-actions .btn{width:100%}}
+
+/* Compatibility aliases while legacy portal templates migrate to qorg-page-shell. */
+.qorg-procurement-page{
+    width:min(var(--qorg-web-content-width),calc(100% - (2 * var(--qorg-web-content-gutter))));
+    max-width:none;
+    margin-inline:auto;
+    padding-block:clamp(20px,4vw,48px) clamp(40px,6vw,72px);
+    color:var(--qorg-text,var(--text-color));
+}
+.qorg-procurement-card{
+    margin-bottom:12px;
+    padding:18px;
+    color:var(--qorg-text,var(--text-color));
+    background:var(--qorg-surface-bg,var(--card-bg));
+    border:1px solid var(--qorg-border,var(--border-color));
+    border-radius:var(--qorg-web-card-radius,var(--card-border-radius));
+    box-shadow:var(--qorg-web-soft-shadow);
+}
+.web-list-container,.web-form-list,.web-list{
+    width:min(var(--qorg-web-content-width),calc(100% - (2 * var(--qorg-web-content-gutter))));
+    max-width:none;
+    margin-inline:auto;
+}
