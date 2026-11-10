@@ -8,6 +8,7 @@
     "filter_type",
     "status",
     "priority",
+    "qorg_layout_column",
     "task_type",
     "project",
     "enabled"
@@ -41,6 +42,10 @@
       "mandatory_depends_on": "eval:doc.filter_type == \"Priority\"",
       "in_list_view": 1,
       "columns": 2
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "task_type",

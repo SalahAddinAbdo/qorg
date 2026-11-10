@@ -33,7 +33,9 @@
     "completion_date",
     "scope_section",
     "responsibilities",
+    "qorg_layout_section",
     "scope_col_2",
+    "qorg_layout_section_2",
     "deliverables",
     "completion_section",
     "completion_notes"
@@ -192,9 +194,19 @@
       "reqd": 1
     },
     {
+      "fieldname": "qorg_layout_section",
+      "fieldtype": "Section Break",
+      "label": "Details"
+    },
+    {
       "fieldname": "scope_col_2",
       "label": "",
       "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "qorg_layout_section_2",
+      "fieldtype": "Section Break",
+      "label": "Expected Deliverables"
     },
     {
       "fieldname": "deliverables",

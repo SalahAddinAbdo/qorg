@@ -1,6 +1,6 @@
 import json
 import frappe
-from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+from qorg.qorg.enterprise_foundation.idempotent_provisioning import create_custom_fields_if_changed
 
 INITIAL_DEFAULTS = {
     "qorg_default_screening_weight": 20,
@@ -40,7 +40,7 @@ def _load(name):
 
 def _provision_fields():
     fields = _load("hr_settings_custom_fields.json")
-    create_custom_fields({"HR Settings": fields}, update=True)
+    create_custom_fields_if_changed({"HR Settings": fields}, update=True)
 
     grouped = {}
     for row in _load("recruitment_settings_operational_fields.json"):
@@ -49,7 +49,7 @@ def _provision_fields():
         if frappe.db.exists("DocType", doctype):
             grouped.setdefault(doctype, []).append(row)
     if grouped:
-        create_custom_fields(grouped, update=True)
+        create_custom_fields_if_changed(grouped, update=True)
 
 
 def _force_hr_settings_layout():

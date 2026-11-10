@@ -15,6 +15,7 @@
     "technical_weighted",
     "evaluated_price",
     "financial_score",
+    "qorg_layout_column",
     "financial_weighted",
     "total_score",
     "rank",
@@ -72,6 +73,10 @@
       "fieldtype": "Float",
       "in_list_view": 1,
       "columns": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "financial_weighted",

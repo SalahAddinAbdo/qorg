@@ -57,6 +57,7 @@
     "career_objective",
     "expertise_section",
     "sectors_of_expertise",
+    "qorg_layout_section",
     "key_achievements",
     "education_section",
     "education",
@@ -390,6 +391,11 @@
       "fieldtype": "Small Text"
     },
     {
+      "fieldname": "qorg_layout_section",
+      "fieldtype": "Section Break",
+      "label": "Key Achievements"
+    },
+    {
       "fieldname": "key_achievements",
       "label": "Key Achievements",
       "fieldtype": "Text Editor"
@@ -546,6 +552,33 @@
       "options": "User"
     },
     {
+      "fieldname": "allow_portal_editing",
+      "label": "Allow Portal Editing",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "portal_edit_lock_reason",
+      "label": "Portal Edit Lock Reason",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:doc.allow_portal_editing==0"
+    },
+    {
+      "fieldname": "portal_edit_locked_by",
+      "label": "Portal Editing Locked By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "portal_edit_locked_on",
+      "label": "Portal Editing Locked On",
+      "fieldtype": "Datetime",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
       "fieldname": "employee",
       "label": "Employee",
       "fieldtype": "Link",
@@ -589,33 +622,6 @@
       "fieldtype": "Dynamic Link",
       "options": "source_reference_doctype",
       "read_only": 1
-    },
-    {
-      "fieldname": "allow_portal_editing",
-      "label": "Allow Portal Editing",
-      "fieldtype": "Check",
-      "default": "1"
-    },
-    {
-      "fieldname": "portal_edit_lock_reason",
-      "label": "Portal Edit Lock Reason",
-      "fieldtype": "Small Text",
-      "depends_on": "eval:doc.allow_portal_editing==0"
-    },
-    {
-      "fieldname": "portal_edit_locked_by",
-      "label": "Portal Editing Locked By",
-      "fieldtype": "Link",
-      "options": "User",
-      "read_only": 1,
-      "no_copy": 1
-    },
-    {
-      "fieldname": "portal_edit_locked_on",
-      "label": "Portal Editing Locked On",
-      "fieldtype": "Datetime",
-      "read_only": 1,
-      "no_copy": 1
     }
   ],
   "grid_page_length": 50,

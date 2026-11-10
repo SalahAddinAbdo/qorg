@@ -38,6 +38,7 @@
     "emergency_contact_verified",
     "onboarding_section",
     "onboarding_activities",
+    "qorg_layout_section",
     "onboarding_completion",
     "performance_section",
     "midterm_rating",
@@ -60,6 +61,7 @@
     "allowances",
     "clearance_section",
     "clearance_items",
+    "qorg_layout_section_2",
     "latest_midterm_evaluation",
     "latest_final_evaluation",
     "certificate"
@@ -268,6 +270,11 @@
       "options": "Participation Onboarding Activity"
     },
     {
+      "fieldname": "qorg_layout_section",
+      "fieldtype": "Section Break",
+      "label": "Details"
+    },
+    {
       "fieldname": "onboarding_completion",
       "label": "Onboarding Completion %",
       "fieldtype": "Percent",
@@ -387,6 +394,11 @@
       "label": "Clearance Items",
       "fieldtype": "Table",
       "options": "Participation Clearance Item"
+    },
+    {
+      "fieldname": "qorg_layout_section_2",
+      "fieldtype": "Section Break",
+      "label": "Details"
     },
     {
       "fieldname": "latest_midterm_evaluation",

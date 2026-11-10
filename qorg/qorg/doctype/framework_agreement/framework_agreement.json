@@ -29,6 +29,7 @@
     "items",
     "section_3",
     "call_off_rules",
+    "qorg_layout_section",
     "agreement_document"
   ],
   "fields": [
@@ -170,6 +171,11 @@
       "label": "Call Off Rules",
       "fieldtype": "Text Editor",
       "reqd": 1
+    },
+    {
+      "fieldname": "qorg_layout_section",
+      "fieldtype": "Section Break",
+      "label": "Details"
     },
     {
       "fieldname": "agreement_document",

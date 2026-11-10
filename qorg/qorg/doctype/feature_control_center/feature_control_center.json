@@ -15,23 +15,37 @@
     "last_synchronized_on",
     "last_synchronized_by",
     "pending_change_count",
+    "qorg_layout_column",
     "model_count",
     "interface_count",
     "active_policy_count",
     "tab_packages",
+    "qorg_layout_section",
     "site_features",
+    "qorg_layout_section_2",
     "tab_models",
+    "qorg_layout_section_3",
     "models",
+    "qorg_layout_section_4",
     "tab_interface",
+    "qorg_layout_section_5",
     "interface_components",
+    "qorg_layout_section_6",
     "tab_audit",
+    "qorg_layout_section_7",
     "audit_results",
+    "qorg_layout_section_8",
     "last_preview",
     "last_apply_summary",
     "tab_applied",
     "applied_configuration"
   ],
   "fields": [
+    {
+      "fieldname": "tab_overview",
+      "label": "Overview",
+      "fieldtype": "Tab Break"
+    },
     {
       "fieldname": "overview_section",
       "label": "Control Center",
@@ -63,54 +77,8 @@
       "read_only": 1
     },
     {
-      "fieldname": "tab_packages",
-      "label": "Feature Packages",
-      "fieldtype": "Tab Break"
-    },
-    {
-      "fieldname": "site_features",
-      "label": "Site Feature Defaults",
-      "fieldtype": "Table",
-      "options": "Feature Configuration"
-    },
-    {
-      "fieldname": "tab_models",
-      "label": "Advanced Model Control",
-      "fieldtype": "Tab Break"
-    },
-    {
-      "fieldname": "models",
-      "label": "Models",
-      "fieldtype": "Table",
-      "options": "Model Control Entry"
-    },
-    {
-      "fieldname": "tab_audit",
-      "label": "Audit Results",
-      "fieldtype": "Tab Break"
-    },
-    {
-      "fieldname": "audit_results",
-      "label": "Audit Results",
-      "fieldtype": "Table",
-      "options": "Configuration Audit Result"
-    },
-    {
-      "fieldname": "last_preview",
-      "label": "Last Preview",
-      "fieldtype": "JSON",
-      "read_only": 1
-    },
-    {
-      "fieldname": "last_apply_summary",
-      "label": "Last Apply Summary",
-      "fieldtype": "Small Text",
-      "read_only": 1
-    },
-    {
-      "fieldname": "tab_overview",
-      "label": "Overview",
-      "fieldtype": "Tab Break"
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "model_count",
@@ -131,15 +99,100 @@
       "read_only": 1
     },
     {
+      "fieldname": "tab_packages",
+      "label": "Feature Packages",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "qorg_layout_section",
+      "fieldtype": "Section Break",
+      "label": "Site Feature Defaults"
+    },
+    {
+      "fieldname": "site_features",
+      "label": "Site Feature Defaults",
+      "fieldtype": "Table",
+      "options": "Feature Configuration"
+    },
+    {
+      "fieldname": "qorg_layout_section_2",
+      "fieldtype": "Section Break",
+      "label": "Details"
+    },
+    {
+      "fieldname": "tab_models",
+      "label": "Advanced Model Control",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "qorg_layout_section_3",
+      "fieldtype": "Section Break",
+      "label": "Models"
+    },
+    {
+      "fieldname": "models",
+      "label": "Models",
+      "fieldtype": "Table",
+      "options": "Model Control Entry"
+    },
+    {
+      "fieldname": "qorg_layout_section_4",
+      "fieldtype": "Section Break",
+      "label": "Details"
+    },
+    {
       "fieldname": "tab_interface",
       "label": "Interface Components",
       "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "qorg_layout_section_5",
+      "fieldtype": "Section Break",
+      "label": "Interface Components"
     },
     {
       "fieldname": "interface_components",
       "label": "Interface Components",
       "fieldtype": "Table",
       "options": "Interface Control Entry"
+    },
+    {
+      "fieldname": "qorg_layout_section_6",
+      "fieldtype": "Section Break",
+      "label": "Details"
+    },
+    {
+      "fieldname": "tab_audit",
+      "label": "Audit Results",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "qorg_layout_section_7",
+      "fieldtype": "Section Break",
+      "label": "Audit Results"
+    },
+    {
+      "fieldname": "audit_results",
+      "label": "Audit Results",
+      "fieldtype": "Table",
+      "options": "Configuration Audit Result"
+    },
+    {
+      "fieldname": "qorg_layout_section_8",
+      "fieldtype": "Section Break",
+      "label": "Details"
+    },
+    {
+      "fieldname": "last_preview",
+      "label": "Last Preview",
+      "fieldtype": "JSON",
+      "read_only": 1
+    },
+    {
+      "fieldname": "last_apply_summary",
+      "label": "Last Apply Summary",
+      "fieldtype": "Small Text",
+      "read_only": 1
     },
     {
       "fieldname": "tab_applied",

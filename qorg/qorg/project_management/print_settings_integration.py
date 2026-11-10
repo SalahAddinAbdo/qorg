@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import frappe
 from frappe import _
-from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+from qorg.qorg.enterprise_foundation.idempotent_provisioning import create_custom_fields_if_changed
 
 # Print Settings is a standard Frappe Single DocType. Q Org adds only owned
 # Custom Fields and never edits the standard DocType JSON.
@@ -95,7 +95,7 @@ OBSOLETE_LAYOUT_FIELDS = (
 def provision_print_settings():
     """Provision Q Org fields on the standard Print Settings DocType safely."""
     _remove_obsolete_layout_fields()
-    create_custom_fields(CUSTOM_FIELDS, update=True)
+    create_custom_fields_if_changed(CUSTOM_FIELDS, update=True)
     _force_owned_field_definitions()
     _configure_rule_fields()
     frappe.clear_cache(doctype="Print Settings")

@@ -15,6 +15,7 @@
     "module_name",
     "reference_doctype",
     "current_visibility",
+    "qorg_layout_column",
     "requested_visibility",
     "risk_level",
     "roles_summary",
@@ -72,6 +73,10 @@
       "options": "Visible\nHidden from Navigation\nRestricted\nDisabled\nDeprecated",
       "read_only": 1,
       "in_list_view": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "requested_visibility",

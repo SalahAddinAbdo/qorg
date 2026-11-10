@@ -11,6 +11,7 @@
     "amount",
     "currency",
     "valid_from",
+    "qorg_layout_column",
     "valid_to",
     "status",
     "document",
@@ -55,6 +56,10 @@
       "label": "Valid From",
       "fieldtype": "Date",
       "in_list_view": 0
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "valid_to",

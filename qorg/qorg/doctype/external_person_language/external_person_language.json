@@ -11,6 +11,7 @@
     "language",
     "reading",
     "writing",
+    "qorg_layout_column",
     "speaking",
     "page_break"
   ],
@@ -45,6 +46,10 @@
       "print_hide": 0,
       "in_list_view": 1,
       "columns": 2
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "speaking",

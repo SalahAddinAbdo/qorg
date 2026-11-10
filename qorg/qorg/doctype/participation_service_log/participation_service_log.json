@@ -11,6 +11,7 @@
     "external_person",
     "service_date",
     "hours",
+    "qorg_layout_column",
     "activity",
     "location",
     "status",
@@ -19,6 +20,7 @@
     "verification_section",
     "verified_by",
     "verified_on",
+    "qorg_layout_column_2",
     "verification_remarks",
     "rejection_reason"
   ],
@@ -62,6 +64,10 @@
       "fieldtype": "Float",
       "reqd": 1,
       "in_list_view": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "activity",
@@ -113,6 +119,10 @@
       "label": "Verified On",
       "fieldtype": "Datetime",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_layout_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "verification_remarks",

@@ -3,6 +3,10 @@ from __future__ import annotations
 import frappe
 
 from qorg.qorg.people_and_opportunities.web_form_policy import apply_managed_web_form_settings
+from qorg.qorg.enterprise_foundation.idempotent_provisioning import (
+    normalized_document_state,
+    save_document_if_changed,
+)
 
 
 def section(label):
@@ -171,7 +175,11 @@ def provision_procurement_web_forms():
     for definition in WEB_FORMS:
         name = frappe.db.get_value("Web Form", {"route": definition["route"]}, "name")
         doc = frappe.get_doc("Web Form", name) if name else frappe.new_doc("Web Form")
+        before_state = normalized_document_state(doc) if name else None
         _apply_settings(doc, definition)
         _rebuild_fields(doc, definition)
-        doc.save(ignore_permissions=True) if name else doc.insert(ignore_permissions=True)
+        if name:
+            save_document_if_changed(doc, before_state)
+        else:
+            doc.insert(ignore_permissions=True)
     frappe.clear_cache(doctype="Web Form")

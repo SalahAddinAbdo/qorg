@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import frappe
-from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+from qorg.qorg.enterprise_foundation.idempotent_provisioning import create_custom_fields_if_changed
 
 WORKFLOWS = {
     "Project Progress Update": {
@@ -93,7 +93,7 @@ def provision_project_workflows():
                 "insert_after": "amended_from" if frappe.get_meta(dt).has_field("amended_from") else None,
             })
     if custom:
-        create_custom_fields(custom, update=True)
+        create_custom_fields_if_changed(custom, update=True)
 
     from qorg.qorg.enterprise_foundation.project_workflow_upgrade import upgrade_project_workflows
 

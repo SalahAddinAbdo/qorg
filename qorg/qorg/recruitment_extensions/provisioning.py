@@ -2,7 +2,7 @@ import hashlib
 import json
 import os
 import frappe
-from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+from qorg.qorg.enterprise_foundation.idempotent_provisioning import create_custom_fields_if_changed
 from .constants import CONFIGURATION_VERSION
 
 
@@ -25,7 +25,7 @@ def _custom_fields():
     for row in rows:
         row=dict(row);dt=row.pop("dt");grouped.setdefault(dt,[]).append(row)
     for dt,definitions in grouped.items():
-        if frappe.db.exists("DocType",dt):create_custom_fields({dt:definitions},update=True)
+        if frappe.db.exists("DocType",dt):create_custom_fields_if_changed({dt:definitions},update=True)
 
 def _email_templates():
     folder=frappe.get_app_path("qorg","qorg","recruitment_extensions","data","email_templates")

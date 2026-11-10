@@ -43,14 +43,18 @@
     "guarantees",
     "section_4",
     "scope_of_work",
+    "qorg_layout_section",
     "payment_terms",
+    "qorg_layout_section_2",
     "termination_terms",
+    "qorg_layout_section_3",
     "contract_document",
     "financial_control_section",
     "advance_payment_amount",
     "advance_recovered_amount",
     "retention_amount",
     "retention_released_amount",
+    "qorg_layout_column",
     "invoiced_amount",
     "paid_amount",
     "remaining_contract_value"
@@ -275,14 +279,29 @@
       "reqd": 1
     },
     {
+      "fieldname": "qorg_layout_section",
+      "fieldtype": "Section Break",
+      "label": "Payment Terms"
+    },
+    {
       "fieldname": "payment_terms",
       "label": "Payment Terms",
       "fieldtype": "Text Editor"
     },
     {
+      "fieldname": "qorg_layout_section_2",
+      "fieldtype": "Section Break",
+      "label": "Termination Terms"
+    },
+    {
       "fieldname": "termination_terms",
       "label": "Termination Terms",
       "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "qorg_layout_section_3",
+      "fieldtype": "Section Break",
+      "label": "Details"
     },
     {
       "fieldname": "contract_document",
@@ -318,6 +337,10 @@
       "fieldtype": "Currency",
       "label": "Retention Released Amount",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "invoiced_amount",

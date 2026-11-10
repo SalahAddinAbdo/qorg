@@ -10,6 +10,7 @@
     "required",
     "status",
     "due_date",
+    "qorg_layout_column",
     "evidence",
     "verified_by",
     "verified_on",
@@ -48,6 +49,10 @@
       "fieldtype": "Date",
       "in_list_view": 1,
       "columns": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "evidence",

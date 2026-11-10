@@ -14,6 +14,7 @@
     "feature_state",
     "enabled",
     "operating_mode",
+    "qorg_layout_column",
     "effective_from",
     "effective_to",
     "configuration",
@@ -61,6 +62,10 @@
       "options": "Inherit\nStandard Only\nExtensions\nFull Portal / Extended Cycle",
       "default": "Inherit",
       "in_list_view": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "effective_from",

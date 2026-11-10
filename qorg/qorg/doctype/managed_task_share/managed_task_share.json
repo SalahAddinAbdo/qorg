@@ -9,6 +9,7 @@
     "user",
     "employee",
     "reason",
+    "qorg_layout_column",
     "docshare",
     "active",
     "last_reconciled_on"
@@ -40,6 +41,10 @@
       "fieldtype": "Select",
       "options": "Assignee\nAssigner\nSupervisor Chain\nAssignment Request",
       "reqd": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "docshare",

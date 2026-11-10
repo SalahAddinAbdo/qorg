@@ -19,10 +19,15 @@
     "assigned_to",
     "section_2",
     "complaint_details",
+    "qorg_layout_section",
     "evidence",
+    "qorg_layout_section_2",
     "investigation_findings",
+    "qorg_layout_section_3",
     "decision",
+    "qorg_layout_section_4",
     "corrective_action",
+    "qorg_layout_section_5",
     "closed_on"
   ],
   "fields": [
@@ -102,9 +107,19 @@
       "reqd": 1
     },
     {
+      "fieldname": "qorg_layout_section",
+      "fieldtype": "Section Break",
+      "label": "Details"
+    },
+    {
       "fieldname": "evidence",
       "label": "Evidence",
       "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "qorg_layout_section_2",
+      "fieldtype": "Section Break",
+      "label": "Investigation Findings"
     },
     {
       "fieldname": "investigation_findings",
@@ -112,14 +127,29 @@
       "fieldtype": "Text Editor"
     },
     {
+      "fieldname": "qorg_layout_section_3",
+      "fieldtype": "Section Break",
+      "label": "Decision"
+    },
+    {
       "fieldname": "decision",
       "label": "Decision",
       "fieldtype": "Text Editor"
     },
     {
+      "fieldname": "qorg_layout_section_4",
+      "fieldtype": "Section Break",
+      "label": "Corrective Action"
+    },
+    {
       "fieldname": "corrective_action",
       "label": "Corrective Action",
       "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "qorg_layout_section_5",
+      "fieldtype": "Section Break",
+      "label": "Details"
     },
     {
       "fieldname": "closed_on",

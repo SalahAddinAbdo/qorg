@@ -12,6 +12,7 @@
     "report",
     "reference_doctype",
     "display_label",
+    "qorg_layout_column",
     "menu_group",
     "is_favorite",
     "description",
@@ -74,6 +75,10 @@
       "in_list_view": 1,
       "columns": 2,
       "description": "Optional translated label. Leave blank to use the standard Page, Report or DocType label."
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "menu_group",

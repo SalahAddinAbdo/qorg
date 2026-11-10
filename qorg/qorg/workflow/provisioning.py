@@ -1,7 +1,7 @@
 from __future__ import annotations
 import frappe
 from frappe import _
-from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+from qorg.qorg.enterprise_foundation.idempotent_provisioning import create_custom_fields_if_changed
 
 RESPONSIBLE_FIELD = "custom_current_responsible_user"
 PREVIOUS_RESPONSIBLE_FIELD = "custom_previous_responsible_user"
@@ -43,7 +43,7 @@ def ensure_workflow_responsibility_fields(doctype, insert_after="workflow_state"
     if not meta.has_field(PREVIOUS_RESPONSIBLE_FIELD):
         fields.append({"fieldname": PREVIOUS_RESPONSIBLE_FIELD, "label": "Previous Responsible User", "fieldtype": "Link", "options": "User", "insert_after": RESPONSIBLE_FIELD, "read_only": 1, "hidden": 1, "print_hide": 1, "allow_on_submit": 1, "no_copy": 1, "is_system_generated": 1, "module": "QOrg"})
     if fields:
-        create_custom_fields({doctype: fields}, update=True)
+        create_custom_fields_if_changed({doctype: fields}, update=True)
     for fieldname in (RESPONSIBLE_FIELD, PREVIOUS_RESPONSIBLE_FIELD):
         name = f"{doctype}-{fieldname}"
         if frappe.db.exists("Custom Field", name):
@@ -51,7 +51,7 @@ def ensure_workflow_responsibility_fields(doctype, insert_after="workflow_state"
 
 
 def provision_workflow_responsibility_routing():
-    create_custom_fields({"Workflow Transition": [{"fieldname": ROUTING_FIELD, "label": "Responsibility Routing", "fieldtype": "Select", "options": ROUTING_OPTIONS, "default": "Keep Current Responsible", "insert_after": "next_state", "reqd": 1, "in_list_view": 1, "is_system_generated": 1, "module": "QOrg", "description": "Keep Current Responsible: keep the same user. Select Next User: choose the next user manually. Return to Previous Responsible: return to the user who sent the previous handoff. Return to Document Creator: return to the document owner. Clear Responsibility: remove responsibility for a final state."}]}, update=True)
+    create_custom_fields_if_changed({"Workflow Transition": [{"fieldname": ROUTING_FIELD, "label": "Responsibility Routing", "fieldtype": "Select", "options": ROUTING_OPTIONS, "default": "Keep Current Responsible", "insert_after": "next_state", "reqd": 1, "in_list_view": 1, "is_system_generated": 1, "module": "QOrg", "description": "Keep Current Responsible: keep the same user. Select Next User: choose the next user manually. Return to Previous Responsible: return to the user who sent the previous handoff. Return to Document Creator: return to the document owner. Clear Responsibility: remove responsibility for a final state."}]}, update=True)
     frappe.clear_cache(doctype="Workflow Transition")
     for name in frappe.get_all("Workflow", filters={"is_active": 1}, pluck="name"):
         workflow = frappe.get_doc("Workflow", name)

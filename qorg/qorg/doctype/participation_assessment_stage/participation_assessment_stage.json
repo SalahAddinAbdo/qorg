@@ -12,6 +12,7 @@
     "weight",
     "passing_score",
     "mandatory",
+    "qorg_layout_column",
     "allow_retry",
     "maximum_attempts",
     "retry_requires_approval",
@@ -68,6 +69,10 @@
       "default": "1",
       "in_list_view": 1,
       "columns": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "allow_retry",

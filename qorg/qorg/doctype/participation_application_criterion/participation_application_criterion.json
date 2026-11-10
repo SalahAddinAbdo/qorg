@@ -11,6 +11,7 @@
     "weight",
     "mandatory",
     "result",
+    "qorg_layout_column",
     "score",
     "evidence",
     "reviewed_by",
@@ -58,6 +59,10 @@
       "default": "Pending",
       "in_list_view": 1,
       "columns": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "score",

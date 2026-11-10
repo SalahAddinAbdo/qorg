@@ -11,6 +11,7 @@
   "field_order": [
     "naming_series",
     "company",
+    "qorg_layout_column",
     "operating_mode",
     "enabled",
     "features_section",
@@ -20,6 +21,7 @@
     "require_geolocation",
     "allow_off_site_checkin",
     "review_off_site_checkin",
+    "qorg_layout_column_2",
     "minimum_gps_accuracy",
     "show_daily_activity",
     "home_screen_shortcut",
@@ -45,6 +47,10 @@
       "reqd": 1,
       "unique": 1,
       "in_list_view": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "operating_mode",
@@ -101,6 +107,10 @@
       "label": "Review Off-Site Check-in",
       "fieldtype": "Check",
       "default": "1"
+    },
+    {
+      "fieldname": "qorg_layout_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "minimum_gps_accuracy",

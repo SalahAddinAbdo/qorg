@@ -1,6 +1,6 @@
 import frappe
 from frappe import _
-from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+from qorg.qorg.enterprise_foundation.idempotent_provisioning import create_custom_fields_if_changed
 from frappe.utils import cint, flt
 
 PREFIX = "qorg_"
@@ -58,7 +58,7 @@ FIELDS = {"Buying Settings": [
 ]}
 
 def provision_buying_settings_extension():
-    create_custom_fields(FIELDS, update=True)
+    create_custom_fields_if_changed(FIELDS, update=True)
 
 def get_setting(fieldname, default=None):
     value = frappe.db.get_single_value("Buying Settings", PREFIX + fieldname)

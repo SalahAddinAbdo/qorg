@@ -13,6 +13,7 @@
     "committee_role",
     "voting_member",
     "alternate_for",
+    "qorg_layout_column",
     "member_weight",
     "recused",
     "active",
@@ -59,6 +60,10 @@
       "fieldtype": "Link",
       "options": "User",
       "in_list_view": 0
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "member_weight",

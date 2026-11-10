@@ -16,6 +16,7 @@
     "cc",
     "additional_users",
     "subject",
+    "qorg_layout_column",
     "sent_by",
     "sent_on",
     "delivery_status",
@@ -77,6 +78,10 @@
       "fieldname": "subject",
       "label": "Subject",
       "fieldtype": "Data"
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "sent_by",

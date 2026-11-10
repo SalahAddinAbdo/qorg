@@ -10,6 +10,7 @@
     "rank",
     "allocation_percent",
     "ceiling_amount",
+    "qorg_layout_column",
     "consumed_amount",
     "active",
     "page_break"
@@ -44,6 +45,10 @@
       "fieldtype": "Currency",
       "in_list_view": 1,
       "columns": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "consumed_amount",

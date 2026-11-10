@@ -1,6 +1,6 @@
 import json
 import frappe
-from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+from qorg.qorg.enterprise_foundation.idempotent_provisioning import create_custom_fields_if_changed
 
 def provision_volunteer_management():
     required=("External Person","External Opportunity","HR Settings")
@@ -11,7 +11,7 @@ def provision_volunteer_management():
     for row in rows:
         row=dict(row);dt=row.pop("dt")
         if frappe.db.exists("DocType",dt):grouped.setdefault(dt,[]).append(row)
-    if grouped:create_custom_fields(grouped,update=True)
+    if grouped:create_custom_fields_if_changed(grouped,update=True)
     for role in ("Volunteer Coordinator","Volunteer Manager"):
         if not frappe.db.exists("Role",role):frappe.get_doc({"doctype":"Role","role_name":role,"desk_access":1}).insert(ignore_permissions=True)
     _email_templates()

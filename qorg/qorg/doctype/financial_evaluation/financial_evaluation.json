@@ -31,6 +31,7 @@
     "analysis_section",
     "qorg_scores_section",
     "scores",
+    "qorg_layout_section",
     "rationale"
   ],
   "fields": [
@@ -212,6 +213,11 @@
       "in_standard_filter": 0,
       "in_preview": 0,
       "description": "Use the full-width grid for key values. Open a row for complete details."
+    },
+    {
+      "fieldname": "qorg_layout_section",
+      "fieldtype": "Section Break",
+      "label": "Rationale"
     },
     {
       "fieldname": "rationale",

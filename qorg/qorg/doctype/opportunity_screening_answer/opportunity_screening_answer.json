@@ -12,6 +12,7 @@
     "question",
     "answer_type",
     "answer",
+    "qorg_layout_column",
     "attachment",
     "score",
     "reviewer_remarks",
@@ -55,6 +56,10 @@
       "print_hide": 0,
       "in_list_view": 1,
       "columns": 2
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "attachment",

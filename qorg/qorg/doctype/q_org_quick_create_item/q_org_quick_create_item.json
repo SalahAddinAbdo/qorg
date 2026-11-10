@@ -10,6 +10,7 @@
     "reference_doctype",
     "display_label",
     "menu_group",
+    "qorg_layout_column",
     "is_favorite",
     "description",
     "icon",
@@ -49,6 +50,10 @@
       "in_list_view": 1,
       "columns": 2,
       "description": "Optional group such as Favorites, Projects, People, Procurement or Finance."
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "is_favorite",

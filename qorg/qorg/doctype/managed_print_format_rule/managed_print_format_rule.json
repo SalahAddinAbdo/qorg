@@ -9,6 +9,7 @@
     "print_profile",
     "set_as_default",
     "include_letter_head",
+    "qorg_layout_column",
     "include_workflow_status",
     "include_signatures",
     "include_audit_information",
@@ -58,6 +59,10 @@
       "label": "Letter Head",
       "in_list_view": 1,
       "columns": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "default": "1",

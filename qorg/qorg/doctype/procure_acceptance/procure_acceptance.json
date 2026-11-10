@@ -29,6 +29,7 @@
     "payment_control_section",
     "eligible_invoice_amount",
     "advance_recovery_amount",
+    "qorg_layout_column",
     "retention_amount",
     "net_payable_amount"
   ],
@@ -183,6 +184,10 @@
       "fieldname": "advance_recovery_amount",
       "fieldtype": "Currency",
       "label": "Advance Recovery Amount"
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "retention_amount",

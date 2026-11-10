@@ -4,7 +4,7 @@ import re
 
 import frappe
 from frappe import _
-from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+from qorg.qorg.enterprise_foundation.idempotent_provisioning import create_custom_fields_if_changed
 
 
 MAPPING_FIELDS = (
@@ -122,7 +122,7 @@ def _provision_row(doctype, row, anchor):
     meta = frappe.get_meta(doctype)
     missing = [spec for spec in specs if not meta.has_field(spec["fieldname"])]
     if missing:
-        create_custom_fields({doctype: missing}, update=True)
+        create_custom_fields_if_changed({doctype: missing}, update=True)
         frappe.clear_cache(doctype=doctype)
 
     _sync_generated_fields(doctype, specs)

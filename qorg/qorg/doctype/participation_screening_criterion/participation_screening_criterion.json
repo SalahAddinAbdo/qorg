@@ -10,6 +10,7 @@
     "criterion",
     "criterion_type",
     "weight",
+    "qorg_layout_column",
     "passing_score",
     "mandatory",
     "instructions",
@@ -49,6 +50,10 @@
       "default": "0",
       "in_list_view": 1,
       "columns": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "passing_score",

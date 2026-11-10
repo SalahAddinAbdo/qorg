@@ -24,6 +24,7 @@
     "decision_by",
     "screening_score",
     "assessment_score",
+    "qorg_layout_column",
     "overall_score",
     "rank",
     "rationale",
@@ -73,6 +74,10 @@
       "label": "Assessment Score %",
       "fieldtype": "Percent",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "overall_score",

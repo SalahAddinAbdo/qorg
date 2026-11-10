@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 import frappe
-from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+from qorg.qorg.enterprise_foundation.idempotent_provisioning import create_custom_fields_if_changed
 
 DEFAULTS = {
     "create_workplan_tasks_automatically": 1,
@@ -108,7 +108,7 @@ def _ensure_workplan_task_type():
 def _ensure_project_issue_custom_fields():
     path = Path(__file__).with_name("project_issue_custom_fields.json")
     definitions = json.loads(path.read_text(encoding="utf-8"))
-    create_custom_fields(definitions, update=True)
+    create_custom_fields_if_changed(definitions, update=True)
 
 
 def _ensure_configurable_policy_defaults():
@@ -148,7 +148,7 @@ def provision_project_management():
     for old in ("project_cycle_integration_section","project_cycle_integration_column"):
         name=f"Projects Settings-{old}"
         if frappe.db.exists("Custom Field",name): frappe.delete_doc("Custom Field",name,ignore_permissions=True,force=True)
-    create_custom_fields({"Projects Settings":SETTINGS_FIELDS},update=True)
+    create_custom_fields_if_changed({"Projects Settings":SETTINGS_FIELDS},update=True)
     _ensure_configurable_policy_defaults()
     settings=frappe.get_single("Projects Settings")
     if not int(settings.get("custom_project_cycle_defaults_initialized") or 0):

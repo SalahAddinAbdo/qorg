@@ -31,11 +31,13 @@
     "version_control_section",
     "submission_version",
     "supersedes_submission",
+    "qorg_layout_column",
     "withdrawn_on",
     "withdrawal_reason",
     "supplier_profile_section",
     "supplier_registration",
     "profile_current_confirmation",
+    "qorg_layout_column_2",
     "profile_confirmation_on",
     "profile_snapshot"
   ],
@@ -206,6 +208,10 @@
       "read_only": 1
     },
     {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "withdrawn_on",
       "fieldtype": "Datetime",
       "label": "Withdrawn On",
@@ -233,6 +239,10 @@
       "fieldtype": "Check",
       "label": "I confirm that my supplier profile is complete and up to date for this submission",
       "reqd": 1
+    },
+    {
+      "fieldname": "qorg_layout_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "profile_confirmation_on",

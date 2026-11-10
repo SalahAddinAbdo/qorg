@@ -35,7 +35,9 @@
     "areas_of_interest",
     "motivation_section",
     "motivation",
+    "qorg_layout_section",
     "motivation_col_2",
+    "qorg_layout_section_2",
     "relevant_experience",
     "documents_section",
     "resume",
@@ -53,12 +55,14 @@
     "screening_status",
     "screening_score",
     "screening_col_2",
+    "qorg_layout_section_3",
     "screening_remarks",
     "decision_section",
     "final_decision",
     "decision_date",
     "decision_col_2",
     "decision_by",
+    "qorg_layout_section_4",
     "decision_remarks",
     "result_section",
     "volunteer",
@@ -240,9 +244,19 @@
       "reqd": 1
     },
     {
+      "fieldname": "qorg_layout_section",
+      "fieldtype": "Section Break",
+      "label": "Details"
+    },
+    {
       "fieldname": "motivation_col_2",
       "label": "",
       "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "qorg_layout_section_2",
+      "fieldtype": "Section Break",
+      "label": "Relevant Experience"
     },
     {
       "fieldname": "relevant_experience",
@@ -340,6 +354,11 @@
       "fieldtype": "Column Break"
     },
     {
+      "fieldname": "qorg_layout_section_3",
+      "fieldtype": "Section Break",
+      "label": "Screening Remarks"
+    },
+    {
       "fieldname": "screening_remarks",
       "label": "Screening Remarks",
       "fieldtype": "Text Editor",
@@ -377,6 +396,11 @@
       "options": "User",
       "read_only": 1,
       "permlevel": 2
+    },
+    {
+      "fieldname": "qorg_layout_section_4",
+      "fieldtype": "Section Break",
+      "label": "Decision Remarks"
     },
     {
       "fieldname": "decision_remarks",

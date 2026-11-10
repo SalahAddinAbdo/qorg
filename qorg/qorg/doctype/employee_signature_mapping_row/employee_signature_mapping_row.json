@@ -177,21 +177,6 @@
       "default": "0"
     },
     {
-      "fieldname": "column_break_behavior",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "print_as_manual_signature",
-      "label": "Print as Manual Signature",
-      "fieldtype": "Check",
-      "default": "0"
-    },
-    {
-      "fieldname": "notes",
-      "label": "Notes",
-      "fieldtype": "Small Text"
-    },
-    {
       "default": "1",
       "description": "Creates and uses a persistent Signature Notes field. The previous note is loaded into the workflow action dialog.",
       "fieldname": "include_signature_notes",
@@ -206,11 +191,26 @@
       "label": "Allow Signature Date Edit After Submit"
     },
     {
+      "fieldname": "column_break_behavior",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "print_as_manual_signature",
+      "label": "Print as Manual Signature",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
       "default": "0",
       "description": "Excludes this signature from managed print formats without deleting saved signature values.",
       "fieldname": "hide_signature_from_print",
       "fieldtype": "Check",
       "label": "Hide Signature from Print"
+    },
+    {
+      "fieldname": "notes",
+      "label": "Notes",
+      "fieldtype": "Small Text"
     }
   ],
   "permissions": [],

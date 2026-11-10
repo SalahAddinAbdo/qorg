@@ -24,6 +24,7 @@
     "quick_create_items",
     "open_items_section",
     "open_items",
+    "qorg_layout_section",
     "desk_theme_tab",
     "desk_light_section",
     "desk_light_page_bg",
@@ -280,6 +281,7 @@
     "login_return_url",
     "login_slides_table_section",
     "login_slides",
+    "qorg_layout_section_2",
     "theme_typography_tab",
     "font_source_section",
     "font_source",
@@ -312,6 +314,7 @@
     "large_border_radius",
     "page_background_color",
     "surface_color",
+    "qorg_layout_column",
     "control_background_color",
     "primary_text_color",
     "muted_text_color",
@@ -415,6 +418,11 @@
       "label": "Open Items",
       "options": "Q Org Open Item",
       "description": "Pages, reports and document types available from the Open action. Users only see resources they are permitted to access."
+    },
+    {
+      "fieldname": "qorg_layout_section",
+      "fieldtype": "Section Break",
+      "label": "Details"
     },
     {
       "fieldname": "desk_theme_tab",
@@ -1900,6 +1908,11 @@
       "depends_on": "enable_login_experience"
     },
     {
+      "fieldname": "qorg_layout_section_2",
+      "fieldtype": "Section Break",
+      "label": "Details"
+    },
+    {
       "fieldname": "theme_typography_tab",
       "fieldtype": "Tab Break",
       "label": "Typography"
@@ -2099,6 +2112,10 @@
       "hidden": 1,
       "read_only": 1,
       "description": "Legacy value retained for migration to Desk and Web theme tokens."
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "control_background_color",

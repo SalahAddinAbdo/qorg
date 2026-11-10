@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import frappe
-from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+from qorg.qorg.enterprise_foundation.idempotent_provisioning import create_custom_fields_if_changed
 from frappe.custom.doctype.property_setter.property_setter import make_property_setter
 
 RULES = {
@@ -66,7 +66,7 @@ def provision_project_notifications():
     _repair_recipient_fields()
     if not frappe.db.exists("DocType","Project Notification Rule"):
         return
-    create_custom_fields({"Project Notification Rule":CHILD_FIELDS,"Projects Settings":SETTINGS_HELP},update=True)
+    create_custom_fields_if_changed({"Project Notification Rule":CHILD_FIELDS,"Projects Settings":SETTINGS_HELP},update=True)
     if frappe.get_meta("Project Notification Rule").has_field("recipient_employee_field"):
         make_property_setter("Project Notification Rule", "recipient_employee_field", "hidden", 1, "Check", validate_fields_for_doctype=False)
     make_property_setter("Projects Settings", "project_notification_rules", "read_only", 0, "Check", validate_fields_for_doctype=False)

@@ -35,12 +35,15 @@
     "contact_email",
     "business_sectors",
     "geographic_coverage",
+    "qorg_layout_section",
     "experience_summary",
+    "qorg_layout_section_2",
     "registration_certificate",
     "tax_certificate",
     "licenses_certificates",
     "company_profile",
     "references_document",
+    "qorg_layout_column",
     "conflict_of_interest",
     "sanctions_declaration",
     "anti_fraud_declaration",
@@ -54,6 +57,7 @@
     "profile_locked",
     "update_requested",
     "reviewer",
+    "qorg_layout_column_2",
     "risk_rating",
     "review_expiry_date",
     "bank_section",
@@ -61,6 +65,7 @@
     "account_name",
     "account_number",
     "iban",
+    "qorg_layout_column_3",
     "swift_code",
     "bank_currency",
     "bank_confirmation"
@@ -245,9 +250,19 @@
       "fieldtype": "Small Text"
     },
     {
+      "fieldname": "qorg_layout_section",
+      "fieldtype": "Section Break",
+      "label": "Relevant Experience and Major Clients"
+    },
+    {
       "fieldname": "experience_summary",
       "label": "Relevant Experience and Major Clients",
       "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "qorg_layout_section_2",
+      "fieldtype": "Section Break",
+      "label": "Details"
     },
     {
       "fieldname": "registration_certificate",
@@ -274,6 +289,10 @@
       "fieldname": "references_document",
       "label": "References and Past Performance",
       "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "conflict_of_interest",
@@ -358,6 +377,10 @@
       "options": "User"
     },
     {
+      "fieldname": "qorg_layout_column_2",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "risk_rating",
       "fieldtype": "Select",
       "label": "Risk Rating",
@@ -392,6 +415,10 @@
       "fieldname": "iban",
       "fieldtype": "Data",
       "label": "IBAN"
+    },
+    {
+      "fieldname": "qorg_layout_column_3",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "swift_code",

@@ -4,7 +4,11 @@ import json
 from pathlib import Path
 
 import frappe
-from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+from qorg.qorg.enterprise_foundation.idempotent_provisioning import (
+    create_custom_fields_if_changed,
+    normalized_document_state,
+    save_document_if_changed,
+)
 
 from qorg.qorg.people_and_opportunities.web_form_definitions import WEB_FORMS
 from qorg.qorg.people_and_opportunities.web_form_grid_policies import (
@@ -15,7 +19,7 @@ LAYOUT_TYPES = {"Page Break", "Section Break", "Column Break"}
 
 
 def provision_standard_opportunity_web_forms():
-    _create_custom_fields()
+    _create_custom_fields_if_changed()
     provision_external_profile_grid_policies()
     result = {"created": [], "updated": []}
     for definition in WEB_FORMS:
@@ -25,27 +29,28 @@ def provision_standard_opportunity_web_forms():
     return result
 
 
-def _create_custom_fields():
+def _create_custom_fields_if_changed():
     data_dir = Path(__file__).resolve().parent / "data"
     for filename in ("web_form_architecture_custom_fields.json", "web_form_design_custom_fields.json"):
         path = data_dir / filename
         if path.exists():
-            create_custom_fields(json.loads(path.read_text(encoding="utf-8")), update=True)
+            create_custom_fields_if_changed(json.loads(path.read_text(encoding="utf-8")), update=True)
 
 
 def _provision_one(definition, result):
     name = frappe.db.get_value("Web Form", {"route": definition["route"]}, "name")
     doc = frappe.get_doc("Web Form", name) if name else frappe.new_doc("Web Form")
-    status = "updated" if name else "created"
+    before_state = normalized_document_state(doc) if name else None
     _apply_settings(doc, definition)
     _rebuild_fields(doc, definition)
     if doc.meta.has_field("client_script"):
         doc.client_script = ""
     if name:
-        doc.save(ignore_permissions=True)
+        if save_document_if_changed(doc, before_state):
+            result["updated"].append(definition["route"])
     else:
         doc.insert(ignore_permissions=True)
-    result[status].append(definition["route"])
+        result["created"].append(definition["route"])
 
 
 def _apply_settings(doc, definition):

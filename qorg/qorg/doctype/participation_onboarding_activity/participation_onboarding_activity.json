@@ -12,6 +12,7 @@
     "assigned_user",
     "due_date",
     "status",
+    "qorg_layout_column",
     "evidence",
     "completed_by",
     "completed_on",
@@ -68,6 +69,10 @@
       "default": "Not Started",
       "in_list_view": 1,
       "columns": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "evidence",

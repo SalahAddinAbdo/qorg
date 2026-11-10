@@ -13,6 +13,7 @@
     "scoring_method",
     "maximum_score",
     "weight",
+    "qorg_layout_column",
     "mandatory",
     "minimum_passing_score",
     "description",
@@ -58,6 +59,10 @@
       "fieldtype": "Percent",
       "in_list_view": 1,
       "columns": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "mandatory",

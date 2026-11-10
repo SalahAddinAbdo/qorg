@@ -10,6 +10,7 @@
     "posting_date",
     "reference_doctype",
     "reference_name",
+    "qorg_layout_column",
     "amount",
     "direction",
     "remarks",
@@ -49,6 +50,10 @@
       "reqd": 1,
       "in_list_view": 1,
       "columns": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "amount",

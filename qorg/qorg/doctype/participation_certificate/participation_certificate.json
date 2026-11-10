@@ -13,6 +13,7 @@
     "issue_date",
     "hours_completed",
     "role_title",
+    "qorg_layout_column",
     "start_date",
     "end_date",
     "status",
@@ -74,6 +75,10 @@
       "label": "Role / Assignment Title",
       "fieldtype": "Data",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "start_date",

@@ -4,22 +4,22 @@ import json
 from pathlib import Path
 
 import frappe
-from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+from qorg.qorg.enterprise_foundation.idempotent_provisioning import create_custom_fields_if_changed
 from frappe.website.utils import delete_page_cache
 
 
 def provision_opportunity_portal():
-    _create_custom_fields()
+    _create_custom_fields_if_changed()
     _backfill_routes()
     frappe.clear_cache(doctype="External Opportunity")
     delete_page_cache()
     return {"ok": True}
 
 
-def _create_custom_fields():
+def _create_custom_fields_if_changed():
     path = Path(__file__).resolve().parent / "data" / "portal_custom_fields.json"
     definitions = json.loads(path.read_text(encoding="utf-8"))
-    create_custom_fields(definitions, update=True)
+    create_custom_fields_if_changed(definitions, update=True)
 
 
 def _backfill_routes():

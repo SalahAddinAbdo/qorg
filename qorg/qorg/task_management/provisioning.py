@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 import frappe
-from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+from qorg.qorg.enterprise_foundation.idempotent_provisioning import create_custom_fields_if_changed
 from frappe.custom.doctype.property_setter.property_setter import make_property_setter
 
 BASE = Path(__file__).resolve().parent
@@ -321,7 +321,7 @@ def _create_or_update_task_custom_fields() -> None:
         field_definition["module"] = "QOrg"
         grouped_fields.setdefault(doctype, []).append(field_definition)
 
-    create_custom_fields(grouped_fields, update=True)
+    create_custom_fields_if_changed(grouped_fields, update=True)
 
     # Adopt compatible existing fields and reconcile ownership metadata.
     for item in _load_json("task_custom_fields.json"):

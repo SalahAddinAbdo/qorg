@@ -20,21 +20,27 @@
     "layout_full_3",
     "ui_text_section_3",
     "executive_summary",
+    "qorg_layout_section",
     "ui_text_col_4",
+    "qorg_layout_section_2",
     "challenges",
     "ui_text_section_5",
     "current_status_summary",
     "ui_text_col_6",
+    "qorg_layout_section_3",
     "achievements",
     "ui_text_section_7",
     "next_steps",
+    "qorg_layout_section_4",
     "ui_text_col_8",
     "reasons_for_delay",
     "management_actions_section",
     "layout_full_4",
     "ui_text_section_9",
     "corrective_actions",
+    "qorg_layout_section_5",
     "ui_text_col_10",
+    "qorg_layout_section_6",
     "decisions_required",
     "activity_section",
     "layout_full_5",
@@ -374,8 +380,18 @@
       "report_hide": 0
     },
     {
+      "fieldname": "qorg_layout_section",
+      "fieldtype": "Section Break",
+      "label": "Details"
+    },
+    {
       "fieldname": "ui_text_col_4",
       "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "qorg_layout_section_2",
+      "fieldtype": "Section Break",
+      "label": "Challenges and Deviations"
     },
     {
       "fieldname": "challenges",
@@ -435,6 +451,11 @@
       "fieldtype": "Column Break"
     },
     {
+      "fieldname": "qorg_layout_section_3",
+      "fieldtype": "Section Break",
+      "label": "Key Achievements"
+    },
+    {
       "fieldname": "achievements",
       "fieldtype": "Text Editor",
       "label": "Key Achievements",
@@ -485,6 +506,11 @@
       "allow_in_quick_entry": 0,
       "print_hide": 0,
       "report_hide": 0
+    },
+    {
+      "fieldname": "qorg_layout_section_4",
+      "fieldtype": "Section Break",
+      "label": "Details"
     },
     {
       "fieldname": "ui_text_col_8",
@@ -572,8 +598,18 @@
       "report_hide": 0
     },
     {
+      "fieldname": "qorg_layout_section_5",
+      "fieldtype": "Section Break",
+      "label": "Details"
+    },
+    {
       "fieldname": "ui_text_col_10",
       "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "qorg_layout_section_6",
+      "fieldtype": "Section Break",
+      "label": "Decisions Required"
     },
     {
       "fieldname": "decisions_required",

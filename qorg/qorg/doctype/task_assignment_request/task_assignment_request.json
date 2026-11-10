@@ -74,6 +74,10 @@
       "description": "Series used to generate the Task Assignment Request ID."
     },
     {
+      "fieldname": "layout_v2_column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "requested_by_user",
       "label": "Requested By User",
       "fieldtype": "Link",
@@ -86,6 +90,10 @@
       "fieldtype": "Link",
       "options": "Employee",
       "read_only": 1
+    },
+    {
+      "fieldname": "layout_v2_column_break_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "requested_on",
@@ -106,17 +114,26 @@
       "description": "Enter a clear title for the Task that will be created after approval."
     },
     {
-      "fieldname": "description",
-      "label": "Description",
-      "fieldtype": "Text Editor"
-    },
-    {
       "fieldname": "requested_assignee",
       "label": "Employee",
       "fieldtype": "Link",
       "options": "Employee",
       "reqd": 1,
       "description": "Select the Employee who will receive the approved Task."
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "fetch_from": "requested_assignee.company",
+      "fetch_if_empty": 1,
+      "description": "Company for the new Task. It is fetched from the selected Employee when available."
+    },
+    {
+      "fieldname": "layout_v2_column_break_3",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "project",
@@ -127,10 +144,12 @@
       "description": "Project to which the approved Task will belong."
     },
     {
-      "fieldname": "parent_task",
-      "label": "Main Task",
+      "fieldname": "task_type",
+      "label": "Task Type",
       "fieldtype": "Link",
-      "options": "Task"
+      "options": "Task Type",
+      "reqd": 1,
+      "description": "Select the Task Type required by the Task form."
     },
     {
       "fieldname": "priority",
@@ -140,6 +159,16 @@
       "default": "Medium",
       "reqd": 1,
       "description": "Priority assigned to the new Task."
+    },
+    {
+      "fieldname": "layout_v2_column_break_4",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "parent_task",
+      "label": "Main Task",
+      "fieldtype": "Link",
+      "options": "Task"
     },
     {
       "fieldname": "exp_start_date",
@@ -156,12 +185,40 @@
       "description": "Planned end date. It cannot be before the start date."
     },
     {
+      "fieldname": "layout_v2_section_break_5",
+      "fieldtype": "Section Break",
+      "label": "Task Schedule"
+    },
+    {
+      "fieldname": "expected_days",
+      "label": "Expected Days",
+      "fieldtype": "Float",
+      "read_only": 1,
+      "non_negative": 1,
+      "description": "Calculated automatically from the inclusive expected date range."
+    },
+    {
       "fieldname": "expected_time",
       "label": "Expected Hours",
       "fieldtype": "Float",
       "non_negative": 1,
       "reqd": 1,
       "description": "Proposed automatically from the date range and remains editable before submission."
+    },
+    {
+      "fieldname": "layout_v2_section_break_6",
+      "fieldtype": "Section Break",
+      "label": "Task Description"
+    },
+    {
+      "fieldname": "description",
+      "label": "Description",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "layout_v2_section_break_7",
+      "fieldtype": "Section Break",
+      "label": "Request Justification"
     },
     {
       "fieldname": "request_reason",
@@ -183,15 +240,26 @@
       "read_only": 1
     },
     {
+      "fieldname": "layout_v2_column_break_8",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "decision_on",
       "label": "Decision On",
       "fieldtype": "Datetime",
       "read_only": 1
     },
     {
-      "fieldname": "decision_remarks",
-      "label": "Decision Remarks",
-      "fieldtype": "Small Text"
+      "fieldname": "layout_v2_column_break_9",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "application_status",
+      "label": "Application Status",
+      "fieldtype": "Select",
+      "options": "Not Applied\nApplied\nFailed",
+      "default": "Not Applied",
+      "read_only": 1
     },
     {
       "fieldname": "created_task",
@@ -202,12 +270,20 @@
       "no_copy": 1
     },
     {
-      "fieldname": "application_status",
-      "label": "Application Status",
-      "fieldtype": "Select",
-      "options": "Not Applied\nApplied\nFailed",
-      "default": "Not Applied",
-      "read_only": 1
+      "fieldname": "layout_v2_section_break_10",
+      "fieldtype": "Section Break",
+      "label": "Decision Remarks"
+    },
+    {
+      "fieldname": "decision_remarks",
+      "label": "Decision Remarks",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "layout_v2_section_break_11",
+      "fieldtype": "Section Break",
+      "label": "Application Error",
+      "depends_on": "eval:doc.application_error"
     },
     {
       "fieldname": "application_error",
@@ -231,82 +307,6 @@
       "read_only": 1,
       "hidden": 1,
       "no_copy": 1
-    },
-    {
-      "fieldname": "company",
-      "label": "Company",
-      "fieldtype": "Link",
-      "options": "Company",
-      "reqd": 1,
-      "fetch_from": "requested_assignee.company",
-      "fetch_if_empty": 1,
-      "description": "Company for the new Task. It is fetched from the selected Employee when available."
-    },
-    {
-      "fieldname": "task_type",
-      "label": "Task Type",
-      "fieldtype": "Link",
-      "options": "Task Type",
-      "reqd": 1,
-      "description": "Select the Task Type required by the Task form."
-    },
-    {
-      "fieldname": "expected_days",
-      "label": "Expected Days",
-      "fieldtype": "Float",
-      "read_only": 1,
-      "non_negative": 1,
-      "description": "Calculated automatically from the inclusive expected date range."
-    },
-    {
-      "fieldname": "layout_v2_column_break_1",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "layout_v2_column_break_2",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "layout_v2_column_break_3",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "layout_v2_column_break_4",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "layout_v2_section_break_5",
-      "fieldtype": "Section Break",
-      "label": "Task Schedule"
-    },
-    {
-      "fieldname": "layout_v2_section_break_6",
-      "fieldtype": "Section Break",
-      "label": "Task Description"
-    },
-    {
-      "fieldname": "layout_v2_section_break_7",
-      "fieldtype": "Section Break",
-      "label": "Request Justification"
-    },
-    {
-      "fieldname": "layout_v2_column_break_8",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "layout_v2_column_break_9",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "layout_v2_section_break_10",
-      "fieldtype": "Section Break",
-      "label": "Decision Remarks"
-    },
-    {
-      "fieldname": "layout_v2_section_break_11",
-      "fieldtype": "Section Break",
-      "label": "Application Error",
-      "depends_on": "eval:doc.application_error"
     }
   ],
   "permissions": [

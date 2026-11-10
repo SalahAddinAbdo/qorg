@@ -7,6 +7,7 @@
   "field_order": [
     "recipient_type",
     "user",
+    "qorg_layout_column",
     "external_email",
     "enabled"
   ],
@@ -30,6 +31,10 @@
       "mandatory_depends_on": "eval:doc.recipient_type == \"System User\"",
       "in_list_view": 1,
       "columns": 4
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "external_email",

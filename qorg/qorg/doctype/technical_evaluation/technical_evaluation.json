@@ -18,15 +18,16 @@
     "committee",
     "evaluation_mode",
     "result",
-    "score_section",
     "qorg_scores_section",
     "scores",
+    "score_section",
     "raw_technical_score",
     "score_column",
     "technical_threshold",
     "analysis_section",
     "strengths",
     "weaknesses",
+    "rationale_section",
     "rationale"
   ],
   "fields": [
@@ -115,14 +116,9 @@
       "in_preview": 1
     },
     {
-      "fieldname": "score_section",
-      "fieldtype": "Section Break",
-      "label": "Technical Assessment"
-    },
-    {
       "fieldname": "qorg_scores_section",
       "fieldtype": "Section Break",
-      "label": "Scores"
+      "label": "Detailed Scores"
     },
     {
       "fieldname": "scores",
@@ -134,6 +130,11 @@
       "in_standard_filter": 0,
       "in_preview": 0,
       "description": "Use the full-width grid for key values. Open a row for complete details."
+    },
+    {
+      "fieldname": "score_section",
+      "fieldtype": "Section Break",
+      "label": "Score Summary"
     },
     {
       "fieldname": "raw_technical_score",
@@ -177,6 +178,11 @@
       "in_list_view": 0,
       "in_standard_filter": 0,
       "in_preview": 0
+    },
+    {
+      "fieldname": "rationale_section",
+      "fieldtype": "Section Break",
+      "label": "Evaluation Rationale"
     },
     {
       "fieldname": "rationale",

@@ -1077,6 +1077,10 @@
       "doctype": "DocField"
     },
     {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "label": "Left",
       "fieldtype": "Int",
       "fieldname": "lft",
@@ -1419,6 +1423,7 @@
     "latest_change_request",
     "sequence",
     "old_parent",
+    "qorg_layout_column",
     "lft",
     "rgt",
     "amended_from"

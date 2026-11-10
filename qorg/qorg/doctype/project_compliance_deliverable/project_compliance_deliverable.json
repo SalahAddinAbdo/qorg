@@ -38,6 +38,7 @@
     "layout_full_6",
     "ui_text_section_6",
     "description",
+    "qorg_layout_section",
     "ui_text_col_7",
     "special_instructions",
     "ui_full_section_8",
@@ -748,6 +749,11 @@
       "allow_in_quick_entry": 0,
       "print_hide": 0,
       "report_hide": 0
+    },
+    {
+      "fieldname": "qorg_layout_section",
+      "fieldtype": "Section Break",
+      "label": "Details"
     },
     {
       "fieldname": "ui_text_col_7",

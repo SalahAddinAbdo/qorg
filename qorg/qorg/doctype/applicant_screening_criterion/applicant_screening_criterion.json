@@ -23,6 +23,7 @@
     "criterion_type",
     "is_mandatory",
     "maximum_score",
+    "qorg_layout_column",
     "score",
     "result",
     "evidence_remarks",
@@ -66,6 +67,10 @@
       "label": "Maximum Score",
       "fieldtype": "Float",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "score",

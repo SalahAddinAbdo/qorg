@@ -11,6 +11,7 @@
     "skill",
     "proficiency",
     "years_of_experience",
+    "qorg_layout_column",
     "details",
     "page_break"
   ],
@@ -43,6 +44,10 @@
       "allow_on_submit": 1,
       "print_hide": 0,
       "in_list_view": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "details",

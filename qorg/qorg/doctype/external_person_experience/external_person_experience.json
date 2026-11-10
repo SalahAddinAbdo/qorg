@@ -13,12 +13,15 @@
     "project_or_program",
     "sector",
     "donor_or_client",
+    "qorg_layout_column",
     "country",
     "location",
     "from_date",
     "to_date",
     "currently_working",
+    "qorg_layout_section",
     "responsibilities",
+    "qorg_layout_section_2",
     "achievements",
     "page_break"
   ],
@@ -65,6 +68,10 @@
       "allow_on_submit": 1
     },
     {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "country",
       "label": "Country",
       "fieldtype": "Link",
@@ -108,12 +115,22 @@
       "in_list_view": 1
     },
     {
+      "fieldname": "qorg_layout_section",
+      "fieldtype": "Section Break",
+      "label": "Responsibilities and Achievements"
+    },
+    {
       "fieldname": "responsibilities",
       "label": "Responsibilities and Achievements",
       "fieldtype": "Text Editor",
       "allow_on_submit": 1,
       "print_hide": 0,
       "in_list_view": 0
+    },
+    {
+      "fieldname": "qorg_layout_section_2",
+      "fieldtype": "Section Break",
+      "label": "Details"
     },
     {
       "fieldname": "achievements",

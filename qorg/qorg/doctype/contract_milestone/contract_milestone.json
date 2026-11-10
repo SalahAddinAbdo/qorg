@@ -10,6 +10,7 @@
     "due_date",
     "amount",
     "percentage",
+    "qorg_layout_column",
     "acceptance_criteria",
     "payment_linked",
     "status",
@@ -45,6 +46,10 @@
       "fieldtype": "Percent",
       "in_list_view": 1,
       "columns": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "acceptance_criteria",

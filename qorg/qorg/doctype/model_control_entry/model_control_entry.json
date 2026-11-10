@@ -20,6 +20,7 @@
     "requested_action_policy",
     "risk_level",
     "record_count",
+    "qorg_layout_column",
     "incoming_links",
     "has_workflow",
     "has_reports",
@@ -122,6 +123,10 @@
       "fieldtype": "Int",
       "read_only": 1,
       "non_negative": 1
+    },
+    {
+      "fieldname": "qorg_layout_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "incoming_links",
