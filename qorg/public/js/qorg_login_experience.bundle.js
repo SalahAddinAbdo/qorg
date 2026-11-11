@@ -6,7 +6,8 @@
     if (!login || root.dataset.qorgLoginMounted === "1") return;
 
     root.dataset.qorgLoginMounted = "1";
-    const cacheKey = "qorg-login-experience-v1.2";
+    const cacheKey = "qorg-login-experience-v1.3";
+    const visitKey = "qorg-login-visited-v1";
     const fallback = {
         enable_login_experience: 1,
         login_image_panel_width: 48,
@@ -17,6 +18,23 @@
     function safeJSON(value, fallbackValue) {
         try { return JSON.parse(value); } catch (_) { return fallbackValue; }
     }
+
+    // Keep source strings in Frappe's standard __() form so translation extraction can discover them.
+    const __ = (message, replacements = []) => {
+        if (window.frappe?.__) return window.frappe.__(message, replacements);
+        if (typeof window.__ === "function") return window.__(message, replacements);
+        return replacements.reduce((text, value, index) => text.replace(`{${index}}`, value), message);
+    };
+
+    function isReturningVisitor() {
+        try { return localStorage.getItem(visitKey) === "1"; } catch (_) { return false; }
+    }
+
+    function rememberVisit() {
+        try { localStorage.setItem(visitKey, "1"); } catch (_) { /* storage may be unavailable */ }
+    }
+
+    const returningVisitor = isReturningVisitor();
 
     function applyTokens(tokens = {}) {
         const values = {
@@ -70,10 +88,11 @@
     visual.setAttribute("aria-label", "Organization information");
     const visualHeader = element("div", "qorg-login-visual__header");
     const brand = element("div", "qorg-login-brand");
-    const returnLink = element("a", "qorg-login-return", "Back to website");
-    returnLink.href = "/";
-    returnLink.append(element("span", "qorg-login-return__arrow", "→"));
-    visualHeader.append(brand, returnLink);
+    // The language control occupies the former return-link position.
+    // Keep the legacy node detached for backward-compatible render logic.
+    const returnLink = element("a", "qorg-login-return", "");
+    returnLink.hidden = true;
+    visualHeader.append(brand);
     const slidesHost = element("div", "qorg-login-slides");
     const dots = element("div", "qorg-login-dots");
     dots.setAttribute("role", "tablist");
@@ -85,8 +104,10 @@
     shell.style.setProperty("--qorg-login-media-width", "48%");
     login.parentNode.insertBefore(shell, login);
     shell.append(visual, formPanel);
-    formPanel.append(utility, formHost);
+    visualHeader.append(utility);
+    formPanel.append(formHost);
     formHost.append(login);
+
 
     let timer = null;
     let activeIndex = 0;
@@ -126,7 +147,12 @@
             slide.style.setProperty("--qorg-slide-position", String(item.image_position || "Center").toLowerCase());
             slide.style.setProperty("--qorg-slide-overlay", String(Math.max(0, Math.min(100, +item.overlay_opacity || 38)) / 100));
             const copy = element("div", `qorg-login-slide__copy align-${String(item.text_alignment || "Center").toLowerCase()}`);
-            if (item.title) copy.append(element("h2", "qorg-login-slide__title", item.title));
+            if (item.title) {
+                const greeting = returningVisitor
+                    ? __("Welcome back to {0}", [item.title])
+                    : __("Welcome to {0}", [item.title]);
+                copy.append(element("h2", "qorg-login-slide__title", `${returningVisitor ? "👋" : "✨"} ${greeting}`));
+            }
             if (item.subtitle) copy.append(element("p", "qorg-login-slide__subtitle", item.subtitle));
             slide.append(copy);
             if (index > 0) slide.setAttribute("aria-hidden", "true");
@@ -210,8 +236,7 @@
         applyTokens(config.ui_tokens || {});
         loadFont(config.font_stylesheet_url);
         shell.style.setProperty("--qorg-login-media-width", `${Math.max(35, Math.min(60, +config.login_image_panel_width || 48))}%`);
-        returnLink.firstChild.nodeValue = config.login_return_label || "Back to website";
-        returnLink.href = config.login_return_url || "/";
+        rememberVisit();
         brand.replaceChildren();
         if (config.login_brand_logo) {
             const image = document.createElement("img");

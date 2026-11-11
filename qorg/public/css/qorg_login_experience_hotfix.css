@@ -248,3 +248,77 @@ body main.container {
         inset-inline-start: auto !important;
     }
 }
+
+/* Login welcome and utility placement refinement. */
+
+.qorg-login-visual__header .qorg-login-utility{
+    position:relative !important;
+    inset:auto !important;
+    margin-inline-start:auto;
+    width:min(270px,46%);
+    max-width:270px;
+    z-index:8;
+}
+.qorg-login-visual__header .qorg-language-menu,
+.qorg-login-visual__header .qorg-language-trigger{width:100%;min-width:0}
+.qorg-login-return{display:none !important}
+
+@media (max-width:920px){
+    .qorg-login-shell,
+    .qorg-login-shell[data-qorg-direction="rtl"],
+    .qorg-login-shell[data-qorg-direction="ltr"]{
+        display:flex !important;
+        flex-direction:column !important;
+        gap:22px !important;
+        padding:14px 14px 26px !important;
+        min-height:100svh !important;
+    }
+    .qorg-login-visual{
+        order:1 !important;
+        display:block !important;
+        width:100% !important;
+        min-height:clamp(300px,58vw,430px) !important;
+        margin:0 !important;
+        border-radius:var(--qorg-default-card-radius,12px) !important;
+        overflow:hidden !important;
+    }
+    .qorg-login-form-panel{
+        order:2 !important;
+        width:100% !important;
+        min-height:0 !important;
+        padding:12px clamp(2px,2vw,14px) 24px !important;
+    }
+    .qorg-login-visual__header{
+        position:absolute !important;
+        inset-block-start:16px !important;
+        inset-inline:16px !important;
+        display:flex !important;
+        align-items:flex-start !important;
+        justify-content:space-between !important;
+        gap:12px !important;
+    }
+    .qorg-login-visual__header .qorg-login-utility{
+        width:min(250px,65%) !important;
+        max-width:250px !important;
+        margin-inline-start:auto !important;
+    }
+    
+    .qorg-login-form-host{width:100%;max-width:560px;margin-inline:auto}
+}
+
+@media (max-width:575.98px){
+    .qorg-login-shell,
+    .qorg-login-shell[data-qorg-direction="rtl"],
+    .qorg-login-shell[data-qorg-direction="ltr"]{
+        gap:18px !important;
+        padding:4px 14px 24px !important;
+    }
+    .qorg-login-visual{min-height:420px !important;border-radius:12px !important}
+    .qorg-login-visual__header{inset-block-start:18px !important;inset-inline:18px !important}
+    .qorg-login-brand{display:none !important}
+    .qorg-login-visual__header .qorg-login-utility{width:min(230px,72%) !important;max-width:230px !important}
+    .qorg-language-trigger{min-height:52px !important;padding-inline:14px !important;background:rgb(255 255 255 / 92%) !important;color:#1f272e !important;border-color:rgb(255 255 255 / 45%) !important;box-shadow:0 8px 24px rgb(0 0 0 / 14%) !important}
+    
+    .qorg-login-form-panel{padding:0 0 18px !important}
+    .qorg-login-form-host .page-card,.qorg-login-form-panel .page-card{padding-inline:0 !important}
+}
