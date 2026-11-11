@@ -7,6 +7,50 @@
     let repairQueued = false;
     let observer = null;
 
+
+    const HASH_SECTION = {
+        "#login": ".for-login",
+        "#forgot": ".for-forgot",
+        "#signup": ".for-signup",
+        "#login-with-email-link": ".for-login-with-email-link, .for-email-login",
+        "#reset-password": ".for-reset-password",
+    };
+
+    function activeAuthenticationSelector() {
+        if (location.pathname === "/update-password" || location.pathname === "/set-password") {
+            return ".for-reset-password";
+        }
+        return HASH_SECTION[location.hash] || ".for-login";
+    }
+
+    function revealActiveAuthenticationSection(loginShell) {
+        const host = formHost(loginShell);
+        if (!host) return false;
+        const selector = activeAuthenticationSelector();
+        let active = host.querySelector(selector);
+        if (!active && selector !== ".for-login") active = host.querySelector(".for-login");
+        host.querySelectorAll(AUTH_SELECTOR).forEach((section) => {
+            const show = section === active;
+            section.hidden = !show;
+            section.setAttribute("aria-hidden", show ? "false" : "true");
+            section.style.setProperty("display", show ? "block" : "none", "important");
+            section.style.setProperty("visibility", show ? "visible" : "hidden", "important");
+            section.style.setProperty("opacity", show ? "1" : "0", "important");
+        });
+        const panel = loginShell.querySelector(".qorg-login-form-panel");
+        if (panel) {
+            panel.hidden = false;
+            panel.style.setProperty("display", "flex", "important");
+            panel.style.setProperty("visibility", "visible", "important");
+            panel.style.setProperty("opacity", "1", "important");
+        }
+        host.hidden = false;
+        host.style.setProperty("display", "block", "important");
+        host.style.setProperty("visibility", "visible", "important");
+        host.style.setProperty("opacity", "1", "important");
+        return !!active;
+    }
+
     function direction() {
         const html = document.documentElement;
         const declared = html.getAttribute("dir") || document.body?.getAttribute("dir");
@@ -64,6 +108,7 @@
         if (!loginShell) return false;
         applyDirection(loginShell);
         moveAuthenticationSections(loginShell);
+        revealActiveAuthenticationSection(loginShell);
         normalizeLinks(loginShell);
         document.documentElement.dataset.qorgLoginReady = "1";
         return true;

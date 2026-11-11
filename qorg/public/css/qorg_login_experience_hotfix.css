@@ -426,3 +426,30 @@ body main.container {
         padding: 9px 12px !important;
     }
 }
+
+/* v1.7 definitive authentication-panel guard. The JS selects the active Frappe
+   auth section; these rules guarantee that the host and form panel remain visible. */
+.qorg-login-shell .qorg-login-form-panel{
+    display:flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    position:relative !important;
+    z-index:2 !important;
+}
+.qorg-login-shell .qorg-login-form-host{
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    width:100% !important;
+    min-width:0 !important;
+}
+.qorg-login-shell .qorg-login-form-host > .for-login:not([hidden]),
+.qorg-login-shell .qorg-login-form-host > .for-forgot:not([hidden]),
+.qorg-login-shell .qorg-login-form-host > .for-signup:not([hidden]),
+.qorg-login-shell .qorg-login-form-host > .for-email-login:not([hidden]),
+.qorg-login-shell .qorg-login-form-host > .for-login-with-email-link:not([hidden]),
+.qorg-login-shell .qorg-login-form-host > .for-reset-password:not([hidden]){
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+}
