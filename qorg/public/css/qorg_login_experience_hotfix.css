@@ -322,3 +322,107 @@ body main.container {
     .qorg-login-form-panel{padding:0 0 18px !important}
     .qorg-login-form-host .page-card,.qorg-login-form-panel .page-card{padding-inline:0 !important}
 }
+
+/* Final targeted refinement: preserve the proven login layout and adjust only
+   mobile visual height and the language control translucency. */
+.qorg-login-shell .qorg-login-visual__header .qorg-language-trigger {
+    color: var(--qorg-text, var(--text-color, #1f272e)) !important;
+    background-color: color-mix(
+        in srgb,
+        var(--qorg-surface-bg, var(--card-bg, #fff)) 78%,
+        transparent
+    ) !important;
+    background: color-mix(
+        in srgb,
+        var(--qorg-surface-bg, var(--card-bg, #fff)) 78%,
+        transparent
+    ) !important;
+    border-color: color-mix(
+        in srgb,
+        var(--qorg-border, var(--border-color, #dfe2e5)) 72%,
+        transparent
+    ) !important;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 14%) !important;
+    backdrop-filter: blur(12px) saturate(125%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(125%) !important;
+}
+
+.qorg-login-shell .qorg-login-visual__header .qorg-language-options {
+    color: var(--qorg-text, var(--text-color, #1f272e)) !important;
+    background-color: color-mix(
+        in srgb,
+        var(--qorg-elevated-bg, var(--card-bg, #fff)) 84%,
+        transparent
+    ) !important;
+    background: color-mix(
+        in srgb,
+        var(--qorg-elevated-bg, var(--card-bg, #fff)) 84%,
+        transparent
+    ) !important;
+    border-color: color-mix(
+        in srgb,
+        var(--qorg-border, var(--border-color, #dfe2e5)) 76%,
+        transparent
+    ) !important;
+    box-shadow: 0 16px 36px rgb(0 0 0 / 18%) !important;
+    backdrop-filter: blur(16px) saturate(130%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(130%) !important;
+}
+
+.qorg-login-shell .qorg-login-visual__header .qorg-language-option {
+    color: var(--qorg-text, var(--text-color, #1f272e)) !important;
+    background: transparent !important;
+}
+
+.qorg-login-shell .qorg-login-visual__header .qorg-language-option:hover,
+.qorg-login-shell .qorg-login-visual__header .qorg-language-option:focus-visible {
+    color: var(--qorg-menu-hover-text, var(--qorg-link, var(--primary-color))) !important;
+    background: color-mix(
+        in srgb,
+        var(--qorg-menu-hover-bg, var(--control-bg, #edf6f7)) 64%,
+        transparent
+    ) !important;
+}
+
+.qorg-login-shell .qorg-login-visual__header .qorg-language-option.is-active {
+    color: var(--qorg-menu-active-text, var(--qorg-link, var(--primary-color))) !important;
+    background: color-mix(
+        in srgb,
+        var(--qorg-menu-active-bg, var(--control-bg, #dceff3)) 68%,
+        transparent
+    ) !important;
+}
+
+@media (max-width: 920px) {
+    .qorg-login-shell .qorg-login-visual {
+        min-height: clamp(320px, 52vw, 380px) !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .qorg-login-shell .qorg-login-visual {
+        min-height: 350px !important;
+        height: 350px !important;
+    }
+
+    .qorg-login-shell .qorg-login-visual__header .qorg-login-utility {
+        width: min(220px, 68%) !important;
+        max-width: 220px !important;
+    }
+
+    .qorg-login-shell .qorg-login-visual__header .qorg-language-trigger {
+        min-height: 48px !important;
+        padding-inline: 13px !important;
+    }
+
+    .qorg-login-shell .qorg-login-visual__header .qorg-language-options {
+        width: min(230px, calc(100vw - 48px)) !important;
+        max-width: calc(100vw - 48px) !important;
+        padding: 7px !important;
+    }
+
+    .qorg-login-shell .qorg-login-visual__header .qorg-language-option {
+        min-height: 42px !important;
+        padding: 9px 12px !important;
+    }
+}
