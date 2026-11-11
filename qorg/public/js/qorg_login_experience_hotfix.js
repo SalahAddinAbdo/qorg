@@ -3,6 +3,9 @@
 
     const AUTH_SELECTOR = ".for-login, .for-forgot, .for-signup, .for-email-login, .for-login-with-email-link, .for-reset-password";
     const HASHES = new Set(["#login", "#forgot", "#signup", "#login-with-email-link", "#reset-password"]);
+    const AUTH_PATHS = new Set(["/login", "/update-password", "/forgot", "/set-password"]);
+    let repairQueued = false;
+    let observer = null;
 
     function direction() {
         const html = document.documentElement;
@@ -28,11 +31,19 @@
         loginShell.querySelector(".qorg-login-visual")?.setAttribute("dir", value);
     }
 
+    function safeAppend(host, section) {
+        if (!host || !section || host === section) return false;
+        if (section.contains(host)) return false;
+        if (section.parentElement === host) return false;
+        host.appendChild(section);
+        return true;
+    }
+
     function moveAuthenticationSections(loginShell) {
         const host = formHost(loginShell);
         if (!host) return;
         document.querySelectorAll(AUTH_SELECTOR).forEach((section) => {
-            if (!host.contains(section)) host.append(section);
+            safeAppend(host, section);
             section.setAttribute("dir", loginShell.dataset.qorgDirection || direction());
         });
     }
@@ -47,6 +58,8 @@
     }
 
     function repair() {
+        repairQueued = false;
+        if (!AUTH_PATHS.has(location.pathname)) return true;
         const loginShell = shell();
         if (!loginShell) return false;
         applyDirection(loginShell);
@@ -54,6 +67,12 @@
         normalizeLinks(loginShell);
         document.documentElement.dataset.qorgLoginReady = "1";
         return true;
+    }
+
+    function scheduleRepair() {
+        if (repairQueued) return;
+        repairQueued = true;
+        requestAnimationFrame(repair);
     }
 
     document.addEventListener("click", (event) => {
@@ -65,18 +84,26 @@
         link.removeAttribute("target");
         if (location.hash === hash) dispatchEvent(new HashChangeEvent("hashchange"));
         else location.hash = hash;
-        requestAnimationFrame(repair);
+        scheduleRepair();
     }, true);
 
-    addEventListener("hashchange", () => requestAnimationFrame(repair));
-    addEventListener("pageshow", repair);
-    document.addEventListener("DOMContentLoaded", repair, {once: true});
+    addEventListener("hashchange", scheduleRepair);
+    addEventListener("pageshow", scheduleRepair);
+    document.addEventListener("DOMContentLoaded", scheduleRepair, {once: true});
 
-    if (!repair()) {
+    if (AUTH_PATHS.has(location.pathname)) {
+        observer = new MutationObserver(scheduleRepair);
+        observer.observe(document.documentElement, {childList: true, subtree: true});
         let attempts = 0;
         const timer = setInterval(() => {
             attempts += 1;
-            if (repair() || attempts >= 40) clearInterval(timer);
+            const done = repair();
+            if (done || attempts >= 40) {
+                clearInterval(timer);
+                if (done && observer) {
+                    setTimeout(() => observer.disconnect(), 1000);
+                }
+            }
         }, 25);
     }
 })();

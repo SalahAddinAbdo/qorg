@@ -1,3 +1,3 @@
 {% extends "templates/web.html" %}
 {% block title %}{{ _("My Bids") }}{% endblock %}
-{% block page_content %}{% include "qorg/templates/includes/portal_record_list.html" %}{% endblock %}
+{% block page_content %}{% set supplier_nav_active = "bids" %}{% include "qorg/templates/includes/portal_record_list.html" %}{% endblock %}

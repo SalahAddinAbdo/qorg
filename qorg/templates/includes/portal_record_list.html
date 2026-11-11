@@ -1,4 +1,7 @@
 <div class="qorg-portal qorg-list-page">
+  {% if supplier_nav_active %}
+  {% include "qorg/templates/includes/supplier_portal_navigation.html" %}
+  {% endif %}
   <section class="qorg-hero">
     <div>
       <span class="qorg-eyebrow">{{ portal_list.eyebrow }}</span>

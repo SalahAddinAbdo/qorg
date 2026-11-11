@@ -53,6 +53,7 @@ web_include_js = [
     "/assets/qorg/js/qorg_theme_runtime.js",
     "qorg_login_experience.bundle.js",
     "/assets/qorg/js/qorg_login_experience_hotfix.js",
+    "/assets/qorg/js/qorg_supplier_portal_nav.js",
     "/assets/qorg/js/qorg_web_select.js",
 ]
 

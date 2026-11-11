@@ -2,6 +2,8 @@
 {% block title %}{{ _("Procurement Opportunities") }}{% endblock %}
 {% block page_content %}
 <div class="qorg-portal qorg-list-page">
+  {% set supplier_nav_active = "opportunities" %}
+  {% include "qorg/templates/includes/supplier_portal_navigation.html" %}
   <section class="qorg-hero"><div><span class="qorg-eyebrow">{{ _("Supplier and Procurement Portal") }}</span><h1>{{ _("Open procurement opportunities") }}</h1><p>{{ _("Review published opportunities, maintain your supplier profile, and submit protected technical and financial offers before the closing date.") }}</p></div><div class="qorg-hero-actions">{% if frappe.session.user == "Guest" %}<a class="btn btn-primary" href="/login?redirect-to=/procurement">{{ _("Sign in to submit") }}</a>{% else %}<a class="btn btn-primary" href="/my-bids">{{ _("My Bids") }}</a><a class="btn btn-default" href="/supplier-profile">{{ _("Supplier Profile") }}</a>{% endif %}</div></section>
 
   <form class="qorg-filter-card" method="get" action="/procurement">
