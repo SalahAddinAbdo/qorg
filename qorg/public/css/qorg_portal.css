@@ -664,3 +664,31 @@ html[dir="rtl"] .web-form-container { text-align: start; }
 .qorg-people-nav__login{margin-inline-start:auto}
 @media(max-width:991px){.qorg-people-nav{align-items:flex-start}.qorg-people-nav__brand span:last-child{display:none}.qorg-people-nav__brand{padding-inline-end:8px}}
 @media(max-width:767px){.qorg-people-nav{display:block;padding:8px;overflow:hidden}.qorg-people-nav__brand{display:none}.qorg-people-nav__inner{width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:2px}.qorg-people-nav__link{white-space:nowrap}.qorg-people-nav__login{margin-inline-start:0}}
+
+/* Final active-item contrast guard: active labels/icons stay white in every interaction state. */
+.qorg-supplier-nav__link.is-active,
+.qorg-supplier-nav__link.is-active:hover,
+.qorg-supplier-nav__link.is-active:focus,
+.qorg-supplier-nav__link.is-active:focus-visible,
+.qorg-supplier-nav__link.is-active:active,
+.qorg-supplier-nav__link.is-active > span,
+.qorg-supplier-nav__link.is-active:hover > span,
+.qorg-supplier-nav__link.is-active:focus > span,
+.qorg-people-nav__link.is-active,
+.qorg-people-nav__link.is-active:hover,
+.qorg-people-nav__link.is-active:focus,
+.qorg-people-nav__link.is-active:focus-visible,
+.qorg-people-nav__link.is-active:active,
+.qorg-people-nav__link.is-active > span,
+.qorg-people-nav__link.is-active:hover > span,
+.qorg-people-nav__link.is-active:focus > span {
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+}
+.qorg-supplier-nav__link.is-active .qorg-supplier-nav__icon,
+.qorg-supplier-nav__link.is-active:hover .qorg-supplier-nav__icon,
+.qorg-people-nav__link.is-active .qorg-people-nav__icon,
+.qorg-people-nav__link.is-active:hover .qorg-people-nav__icon {
+    color: #fff !important;
+    border-color: currentColor !important;
+}

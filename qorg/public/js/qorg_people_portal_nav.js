@@ -1,6 +1,15 @@
 (() => {
     "use strict";
     const ROUTES = new Map([["/external-profile-form", "profile"], ["/participation-application", "applications"]]);
+
+    function redirectUnscopedApplicationRoute() {
+        if (location.pathname !== "/participation-application") return false;
+        const params = new URLSearchParams(location.search);
+        if (params.get("web_form_request_key")) return false;
+        location.replace("/my-applications");
+        return true;
+    }
+
     const ITEMS = [
         ["Opportunities", "/opportunities", "opportunities", "opportunities"],
         ["My Profile", "/external-profile-form", "profile", "profile"],
@@ -37,6 +46,8 @@
         });
         nav.appendChild(inner); container.prepend(nav); return true;
     }
+    if (redirectUnscopedApplicationRoute()) return;
+
     if (!mount()) {
         let attempts = 0;
         const timer = setInterval(() => { attempts += 1; if (mount() || attempts >= 80) clearInterval(timer); }, 50);
