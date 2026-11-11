@@ -453,3 +453,52 @@ body main.container {
     visibility:visible !important;
     opacity:1 !important;
 }
+
+/* v1.8 root/hash authentication routing and viewport-height correction. */
+html:has(.qorg-login-shell),
+body:has(.qorg-login-shell),
+body:has(.qorg-login-shell) .page-content-wrapper,
+body:has(.qorg-login-shell) .page_content,
+body:has(.qorg-login-shell) .page-content,
+body:has(.qorg-login-shell) main.page-content,
+body:has(.qorg-login-shell) .page-content-wrapper > .container,
+body:has(.qorg-login-shell) .page-content-wrapper .container,
+body:has(.qorg-login-shell) .page_content > .container,
+body:has(.qorg-login-shell) main.container {
+    min-height: 100svh !important;
+    height: auto !important;
+}
+
+.qorg-login-shell,
+.qorg-login-shell[data-qorg-direction="rtl"],
+.qorg-login-shell[data-qorg-direction="ltr"] {
+    width: 100% !important;
+    min-height: 100svh !important;
+    height: auto !important;
+    align-items: stretch !important;
+}
+
+@media (min-width: 921px) {
+    .qorg-login-shell .qorg-login-visual,
+    .qorg-login-shell .qorg-login-form-panel {
+        min-height: 100svh !important;
+        height: auto !important;
+    }
+
+    .qorg-login-shell .qorg-login-form-panel {
+        align-items: center !important;
+        justify-content: center !important;
+    }
+}
+
+/* Only the JS-selected Frappe authentication section may occupy layout space. */
+.qorg-login-shell .qorg-login-form-host > [hidden] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}

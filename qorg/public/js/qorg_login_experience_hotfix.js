@@ -3,7 +3,7 @@
 
     const AUTH_SELECTOR = ".for-login, .for-forgot, .for-signup, .for-email-login, .for-login-with-email-link, .for-reset-password";
     const HASHES = new Set(["#login", "#forgot", "#signup", "#login-with-email-link", "#reset-password"]);
-    const AUTH_PATHS = new Set(["/login", "/update-password", "/forgot", "/set-password"]);
+    const AUTH_PATHS = new Set(["/", "/login", "/update-password", "/forgot", "/set-password"]);
     let repairQueued = false;
     let observer = null;
 
@@ -117,7 +117,12 @@
     function scheduleRepair() {
         if (repairQueued) return;
         repairQueued = true;
-        requestAnimationFrame(repair);
+        requestAnimationFrame(() => {
+            repair();
+            // Frappe also changes authentication visibility during hash routing.
+            // Re-apply once after its synchronous/hash handlers complete.
+            window.setTimeout(repair, 40);
+        });
     }
 
     document.addEventListener("click", (event) => {
