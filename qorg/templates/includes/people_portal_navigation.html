@@ -1,0 +1,18 @@
+{% set people_nav = [
+  {"label": _("Opportunities"), "href": "/opportunities", "key": "opportunities", "icon": "opportunities"},
+  {"label": _("My Profile"), "href": "/external-profile-form", "key": "profile", "icon": "profile"},
+  {"label": _("My Applications"), "href": "/my-applications", "key": "applications", "icon": "applications"}
+] %}
+<nav class="qorg-people-nav" aria-label="{{ _('People and opportunities portal navigation') }}">
+  <div class="qorg-people-nav__brand"><span class="qorg-people-nav__brand-mark" aria-hidden="true">Q</span><span>{{ _("People Portal") }}</span></div>
+  <div class="qorg-people-nav__inner">
+    {% for item in people_nav %}
+      {% if frappe.session.user != "Guest" or item.key == "opportunities" %}
+      <a class="qorg-people-nav__link {% if people_nav_active == item.key %}is-active{% endif %}" href="{{ item.href }}" {% if people_nav_active == item.key %}aria-current="page"{% endif %}>
+        <span class="qorg-people-nav__icon qorg-people-nav__icon--{{ item.icon }}" aria-hidden="true"></span><span>{{ item.label }}</span>
+      </a>
+      {% endif %}
+    {% endfor %}
+    {% if frappe.session.user == "Guest" %}<a class="qorg-people-nav__link qorg-people-nav__login" href="/login?redirect-to={{ frappe.request.path | urlencode }}">{{ _("Sign In") }}</a>{% endif %}
+  </div>
+</nav>

@@ -3,6 +3,8 @@
 {% block head_include %}<link rel="stylesheet" href="/assets/qorg/css/opportunities_portal.css">{% endblock %}
 {% block page_content %}
 <div class="qorg-portal qorg-detail" dir="{{ 'rtl' if page_is_rtl else 'ltr' }}">
+  {% set people_nav_active = "opportunities" %}
+  {% include "qorg/templates/includes/people_portal_navigation.html" %}
   <nav class="qorg-breadcrumbs">
     <a href="/opportunities">{{ _("Opportunities") }}</a>
     <span>/</span>

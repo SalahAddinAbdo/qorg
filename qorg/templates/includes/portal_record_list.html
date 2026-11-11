@@ -2,6 +2,9 @@
   {% if supplier_nav_active %}
   {% include "qorg/templates/includes/supplier_portal_navigation.html" %}
   {% endif %}
+  {% if people_nav_active %}
+  {% include "qorg/templates/includes/people_portal_navigation.html" %}
+  {% endif %}
   <section class="qorg-hero">
     <div>
       <span class="qorg-eyebrow">{{ portal_list.eyebrow }}</span>

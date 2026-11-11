@@ -2,6 +2,8 @@
 {% block title %}{{ _("Opportunities") }}{% endblock %}
 {% block page_content %}
 <div class="qorg-portal" dir="{{ 'rtl' if page_is_rtl else 'ltr' }}">
+  {% set people_nav_active = "opportunities" %}
+  {% include "qorg/templates/includes/people_portal_navigation.html" %}
   <section class="qorg-hero">
     <div>
       <span class="qorg-eyebrow">{{ _("People and Opportunities") }}</span>
