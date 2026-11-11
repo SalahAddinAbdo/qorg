@@ -3,11 +3,11 @@
 
     const PATHS = new Set(["/supplier-registration", "/tender-submission"]);
     const ITEMS = [
-        ["Opportunities", "/procurement", "opportunities"],
-        ["Supplier Profile", "/supplier-profile", "profile"],
-        ["My Bids", "/my-bids", "bids"],
-        ["Clarifications", "/my-clarifications", "clarifications"],
-        ["Contracts", "/my-contracts", "contracts"],
+        ["Opportunities", "/procurement", "opportunities", "briefcase"],
+        ["Supplier Profile", "/supplier-profile", "profile", "building"],
+        ["My Bids", "/my-bids", "bids", "file"],
+        ["Clarifications", "/my-clarifications", "clarifications", "message"],
+        ["Contracts", "/my-contracts", "contracts", "contract"],
     ];
 
     function basePath() {
@@ -31,15 +31,30 @@
         nav.className = "qorg-supplier-nav";
         nav.dataset.qorgInjected = "1";
         nav.setAttribute("aria-label", "Supplier portal navigation");
+        const brand = document.createElement("div");
+        brand.className = "qorg-supplier-nav__brand";
+        const brandMark = document.createElement("span");
+        brandMark.className = "qorg-supplier-nav__brand-mark";
+        brandMark.textContent = "Q";
+        const brandLabel = document.createElement("span");
+        brandLabel.textContent = typeof window.__ === "function" ? window.__("Supplier Portal") : "Supplier Portal";
+        brand.append(brandMark, brandLabel);
+        nav.appendChild(brand);
+
         const inner = document.createElement("div");
         inner.className = "qorg-supplier-nav__inner";
         const active = activeKey(path);
 
-        ITEMS.forEach(([label, href, key]) => {
+        ITEMS.forEach(([label, href, key, iconName]) => {
             const link = document.createElement("a");
             link.className = `qorg-supplier-nav__link${key === active ? " is-active" : ""}`;
             link.href = href;
-            link.textContent = typeof window.__ === "function" ? window.__(label) : label;
+            const icon = document.createElement("span");
+            icon.className = `qorg-supplier-nav__icon qorg-supplier-nav__icon--${iconName}`;
+            icon.setAttribute("aria-hidden", "true");
+            const text = document.createElement("span");
+            text.textContent = typeof window.__ === "function" ? window.__(label) : label;
+            link.append(icon, text);
             if (key === active) link.setAttribute("aria-current", "page");
             inner.appendChild(link);
         });

@@ -1,19 +1,20 @@
 {% set supplier_nav = [
-  {"label": _("Opportunities"), "href": "/procurement", "key": "opportunities"},
-  {"label": _("Supplier Profile"), "href": "/supplier-profile", "key": "profile"},
-  {"label": _("My Bids"), "href": "/my-bids", "key": "bids"},
-  {"label": _("Clarifications"), "href": "/my-clarifications", "key": "clarifications"},
-  {"label": _("Contracts"), "href": "/my-contracts", "key": "contracts"}
+  {"label": _("Opportunities"), "href": "/procurement", "key": "opportunities", "icon": "briefcase"},
+  {"label": _("Supplier Profile"), "href": "/supplier-profile", "key": "profile", "icon": "building"},
+  {"label": _("My Bids"), "href": "/my-bids", "key": "bids", "icon": "file"},
+  {"label": _("Clarifications"), "href": "/my-clarifications", "key": "clarifications", "icon": "message"},
+  {"label": _("Contracts"), "href": "/my-contracts", "key": "contracts", "icon": "contract"}
 ] %}
 <nav class="qorg-supplier-nav" aria-label="{{ _('Supplier portal navigation') }}">
+  <div class="qorg-supplier-nav__brand"><span class="qorg-supplier-nav__brand-mark" aria-hidden="true">Q</span><span>{{ _("Supplier Portal") }}</span></div>
   <div class="qorg-supplier-nav__inner">
     {% for item in supplier_nav %}
       {% if frappe.session.user != "Guest" or item.key == "opportunities" %}
-      <a class="qorg-supplier-nav__link {% if supplier_nav_active == item.key %}is-active{% endif %}" href="{{ item.href }}" {% if supplier_nav_active == item.key %}aria-current="page"{% endif %}>{{ item.label }}</a>
+      <a class="qorg-supplier-nav__link {% if supplier_nav_active == item.key %}is-active{% endif %}" href="{{ item.href }}" {% if supplier_nav_active == item.key %}aria-current="page"{% endif %}>
+        <span class="qorg-supplier-nav__icon qorg-supplier-nav__icon--{{ item.icon }}" aria-hidden="true"></span><span>{{ item.label }}</span>
+      </a>
       {% endif %}
     {% endfor %}
-    {% if frappe.session.user == "Guest" %}
-      <a class="qorg-supplier-nav__link qorg-supplier-nav__login" href="/login?redirect-to={{ frappe.request.path | urlencode }}">{{ _("Sign In") }}</a>
-    {% endif %}
+    {% if frappe.session.user == "Guest" %}<a class="qorg-supplier-nav__link qorg-supplier-nav__login" href="/login?redirect-to={{ frappe.request.path | urlencode }}">{{ _("Sign In") }}</a>{% endif %}
   </div>
 </nav>

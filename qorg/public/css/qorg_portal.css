@@ -618,3 +618,21 @@ html[dir="rtl"] .web-form-container { text-align: start; }
 .qorg-supplier-nav__link.is-active{color:var(--qorg-button-text,#fff);background:var(--qorg-button-bg,var(--primary-color));border-color:var(--qorg-button-bg,var(--primary-color))}
 .qorg-supplier-nav__login{margin-inline-start:auto}
 @media(max-width:767px){.qorg-supplier-nav{padding:5px;overflow-x:auto}.qorg-supplier-nav__inner{width:max-content;min-width:100%;flex-wrap:nowrap}.qorg-supplier-nav__link{white-space:nowrap}.qorg-supplier-nav__login{margin-inline-start:0}}
+
+/* Supplier navigation refinement: compact, token-driven, and visually aligned with Q Org portal cards. */
+.qorg-supplier-nav{display:flex;gap:14px;align-items:center;margin-bottom:var(--qorg-web-section-gap);padding:10px 12px;background:color-mix(in srgb,var(--qorg-surface-bg,var(--card-bg)) 94%,var(--qorg-brand-primary,var(--primary-color)) 6%);border:1px solid var(--qorg-border,var(--border-color));border-radius:var(--qorg-web-card-radius,var(--card-border-radius));box-shadow:0 8px 24px rgb(15 23 42 / 5%)}
+.qorg-supplier-nav__brand{display:flex;gap:8px;align-items:center;padding-inline-end:14px;color:var(--qorg-text,var(--text-color));border-inline-end:1px solid var(--qorg-border,var(--border-color));font-size:var(--font-size-sm,12px);font-weight:700;white-space:nowrap}
+.qorg-supplier-nav__brand-mark{display:grid;place-items:center;width:28px;height:28px;color:var(--qorg-button-text,#fff);background:var(--qorg-brand-primary,var(--primary-color));border-radius:9px;font-size:13px;font-weight:800}
+.qorg-supplier-nav__inner{display:flex;flex:1;flex-wrap:wrap;gap:5px;align-items:center}
+.qorg-supplier-nav__link{display:inline-flex;gap:7px;align-items:center;justify-content:center;min-height:38px;padding:7px 12px;color:var(--qorg-muted-text,var(--text-muted));background:transparent;border:1px solid transparent;border-radius:var(--qorg-web-field-radius,var(--border-radius));font-size:var(--font-size-sm,12px);font-weight:600;line-height:1;text-decoration:none}
+.qorg-supplier-nav__link:hover{color:var(--qorg-link,var(--primary-color));background:var(--qorg-control-bg,var(--control-bg));border-color:var(--qorg-border,var(--border-color));text-decoration:none}
+.qorg-supplier-nav__link.is-active{color:var(--qorg-button-text,#fff);background:var(--qorg-button-bg,var(--primary-color));border-color:var(--qorg-button-bg,var(--primary-color));box-shadow:0 4px 12px color-mix(in srgb,var(--qorg-button-bg,var(--primary-color)) 24%,transparent)}
+.qorg-supplier-nav__icon{position:relative;width:16px;height:16px;flex:0 0 16px;color:currentColor}
+.qorg-supplier-nav__icon::before{content:"";position:absolute;inset:2px;border:1.7px solid currentColor;border-radius:3px}
+.qorg-supplier-nav__icon--building::after{content:"";position:absolute;inset:5px 5px 2px;border-inline:1.5px solid currentColor}
+.qorg-supplier-nav__icon--file::before{border-radius:2px}.qorg-supplier-nav__icon--file::after{content:"";position:absolute;left:5px;right:4px;top:6px;height:1.5px;background:currentColor;box-shadow:0 3px 0 currentColor}
+.qorg-supplier-nav__icon--message::before{inset:3px 1px 4px;border-radius:5px}.qorg-supplier-nav__icon--message::after{content:"";position:absolute;left:4px;bottom:2px;width:5px;height:5px;border-left:1.7px solid currentColor;transform:skew(-25deg)}
+.qorg-supplier-nav__icon--contract::after{content:"";position:absolute;left:5px;right:4px;top:6px;height:1.5px;background:currentColor;box-shadow:0 3px 0 currentColor}
+.qorg-supplier-nav__login{margin-inline-start:auto}
+@media(max-width:991px){.qorg-supplier-nav{align-items:flex-start}.qorg-supplier-nav__brand span:last-child{display:none}.qorg-supplier-nav__brand{padding-inline-end:8px}}
+@media(max-width:767px){.qorg-supplier-nav{display:block;padding:8px;overflow:hidden}.qorg-supplier-nav__brand{display:none}.qorg-supplier-nav__inner{width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:2px}.qorg-supplier-nav__link{white-space:nowrap}.qorg-supplier-nav__login{margin-inline-start:0}}

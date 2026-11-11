@@ -1,7 +1,7 @@
 (() => {
     "use strict";
 
-    const CACHE_KEY = "qorg-theme-runtime-v1.4";
+    const CACHE_KEY = "qorg-theme-runtime-v1.5";
     const root = document.documentElement;
     let paletteFrame = null;
     let paletteTimer = null;
@@ -151,9 +151,9 @@
 [data-qorg-scope="desk"]{${deskLight};${navLight}}
 [data-qorg-scope="desk"][data-theme="light"]{${deskLight};${navLight}}
 [data-qorg-scope="desk"][data-theme="dark"]{${deskDark};${navDark}}
-[data-qorg-scope="web"]{${webLight}}
-[data-qorg-scope="web"][data-qorg-theme-mode="light"]{${webLight}}
-[data-qorg-scope="web"][data-qorg-theme-mode="dark"]{${webDark}}
+[data-qorg-scope="web"]{${webLight};${navLight}}
+[data-qorg-scope="web"][data-qorg-theme-mode="light"]{${webLight};${navLight}}
+[data-qorg-scope="web"][data-qorg-theme-mode="dark"]{${webDark};${navDark}}
 @media (prefers-color-scheme:dark){
  [data-qorg-scope="desk"]:not([data-theme="light"]):not([data-theme="dark"]){${deskDark};${navDark}}
 }`;
