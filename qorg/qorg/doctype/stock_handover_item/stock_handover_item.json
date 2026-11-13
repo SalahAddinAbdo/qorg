@@ -1,0 +1,152 @@
+{
+  "doctype": "DocType",
+  "name": "Stock Handover Item",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "issingle": 0,
+  "editable_grid": 1,
+  "track_changes": 0,
+  "field_order": [
+    "item_section",
+    "stock_entry_detail",
+    "item_code",
+    "item_name",
+    "uom",
+    "quantity_column",
+    "issued_qty",
+    "delivered_qty",
+    "received_qty",
+    "rejected_qty",
+    "short_qty",
+    "damaged_qty",
+    "trace_section",
+    "batch_no",
+    "serial_numbers",
+    "difference_column",
+    "discrepancy_type",
+    "corrective_action",
+    "page_break"
+  ],
+  "fields": [
+    {
+      "fieldname": "item_section",
+      "label": "Item",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "stock_entry_detail",
+      "label": "Stock Entry Detail",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "item_code",
+      "label": "Item Code",
+      "fieldtype": "Link",
+      "options": "Item",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "item_name",
+      "label": "Item Name",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "uom",
+      "label": "UOM",
+      "fieldtype": "Link",
+      "options": "UOM"
+    },
+    {
+      "fieldname": "quantity_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "issued_qty",
+      "label": "Issued Quantity",
+      "fieldtype": "Float",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "delivered_qty",
+      "label": "Delivered Quantity",
+      "fieldtype": "Float",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "received_qty",
+      "label": "Received Quantity",
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "rejected_qty",
+      "label": "Rejected Quantity",
+      "fieldtype": "Float"
+    },
+    {
+      "fieldname": "short_qty",
+      "label": "Short Quantity",
+      "fieldtype": "Float",
+      "read_only": 1
+    },
+    {
+      "fieldname": "damaged_qty",
+      "label": "Damaged Quantity",
+      "fieldtype": "Float"
+    },
+    {
+      "fieldname": "trace_section",
+      "label": "Traceability",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "batch_no",
+      "label": "Batch Number",
+      "fieldtype": "Link",
+      "options": "Batch"
+    },
+    {
+      "fieldname": "serial_numbers",
+      "label": "Serial Numbers",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "difference_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "discrepancy_type",
+      "label": "Discrepancy Type",
+      "fieldtype": "Select",
+      "options": "\nShortage\nDamage\nRejected\nWrong Item\nBatch or Serial Mismatch\nOther",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "corrective_action",
+      "label": "Corrective Action",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "page_break",
+      "label": "Page Break After This Row",
+      "fieldtype": "Check",
+      "default": "0",
+      "allow_on_submit": 1,
+      "print_hide": 1
+    }
+  ]
+}

@@ -1,0 +1,286 @@
+{
+  "doctype": "DocType",
+  "name": "Physical Verification",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "field_order": [
+    "naming_series",
+    "workflow_state",
+    "scope_section",
+    "company",
+    "verification_type",
+    "scope",
+    "scope_column",
+    "warehouse",
+    "asset_location",
+    "project",
+    "funding_source",
+    "schedule_section",
+    "cutoff_datetime",
+    "counting_start",
+    "counting_end",
+    "schedule_column",
+    "verification_committee",
+    "count_method",
+    "blind_count",
+    "items_section",
+    "items",
+    "status_section",
+    "snapshot_locked",
+    "recount_required",
+    "variance_status",
+    "status_column",
+    "approval_status",
+    "approved_by",
+    "approved_on",
+    "remarks_section",
+    "remarks",
+    "custom_current_responsible_user",
+    "custom_previous_responsible_user"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "PV-.YYYY.-.#####",
+      "default": "PV-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "workflow_state",
+      "label": "Workflow State",
+      "fieldtype": "Link",
+      "options": "Workflow State",
+      "read_only": 1,
+      "no_copy": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "scope_section",
+      "label": "Verification Scope",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "verification_type",
+      "label": "Verification Type",
+      "fieldtype": "Select",
+      "options": "Stock\nAssets\nCustody\nCombined",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "scope",
+      "label": "Scope",
+      "fieldtype": "Select",
+      "options": "Full Count\nCycle Count\nSpot Check\nProject Closure\nCustody Review",
+      "reqd": 1
+    },
+    {
+      "fieldname": "scope_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "warehouse",
+      "label": "Warehouse",
+      "fieldtype": "Link",
+      "options": "Warehouse"
+    },
+    {
+      "fieldname": "asset_location",
+      "label": "Asset Location",
+      "fieldtype": "Link",
+      "options": "Location"
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project"
+    },
+    {
+      "fieldname": "funding_source",
+      "label": "Funding Source",
+      "fieldtype": "Link",
+      "options": "Project Funding Source"
+    },
+    {
+      "fieldname": "schedule_section",
+      "label": "Cut-off and Counting",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "cutoff_datetime",
+      "label": "Cut-off Date and Time",
+      "fieldtype": "Datetime",
+      "reqd": 1
+    },
+    {
+      "fieldname": "counting_start",
+      "label": "Counting Start",
+      "fieldtype": "Datetime"
+    },
+    {
+      "fieldname": "counting_end",
+      "label": "Counting End",
+      "fieldtype": "Datetime"
+    },
+    {
+      "fieldname": "schedule_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "verification_committee",
+      "label": "Verification Committee",
+      "fieldtype": "Link",
+      "options": "Procure Committee"
+    },
+    {
+      "fieldname": "count_method",
+      "label": "Count Method",
+      "fieldtype": "Select",
+      "options": "Manual Count\nBarcode Scan\nSerial Scan\nImport Count",
+      "default": "Manual Count"
+    },
+    {
+      "fieldname": "blind_count",
+      "label": "Blind Count",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "items_section",
+      "label": "Verification Items",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "items",
+      "label": "Verification Items",
+      "fieldtype": "Table",
+      "options": "Verification Item",
+      "reqd": 1
+    },
+    {
+      "fieldname": "status_section",
+      "label": "Approval and Closure",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "snapshot_locked",
+      "label": "Snapshot Locked",
+      "fieldtype": "Check",
+      "read_only": 1
+    },
+    {
+      "fieldname": "recount_required",
+      "label": "Recount Required",
+      "fieldtype": "Check",
+      "read_only": 1
+    },
+    {
+      "fieldname": "variance_status",
+      "label": "Variance Status",
+      "fieldtype": "Select",
+      "options": "Not Counted\nNo Variance\nVariance Found\nUnder Review\nResolved",
+      "default": "Not Counted",
+      "read_only": 1
+    },
+    {
+      "fieldname": "status_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "approval_status",
+      "label": "Approval Status",
+      "fieldtype": "Select",
+      "options": "Draft\nCounting\nRecount Required\nPending Approval\nApproved\nClosed\nCancelled",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "approved_by",
+      "label": "Approved By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "approved_on",
+      "label": "Approved On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "remarks_section",
+      "label": "Remarks",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "remarks",
+      "label": "Remarks",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "custom_current_responsible_user",
+      "label": "Current Responsible User",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "custom_previous_responsible_user",
+      "label": "Previous Responsible User",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Stock User",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1
+    },
+    {
+      "role": "Stock Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    }
+  ],
+  "is_submittable": 1
+}

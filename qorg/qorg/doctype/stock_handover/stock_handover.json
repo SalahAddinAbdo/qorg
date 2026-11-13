@@ -1,0 +1,304 @@
+{
+  "doctype": "DocType",
+  "name": "Stock Handover",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "field_order": [
+    "naming_series",
+    "workflow_state",
+    "source_section",
+    "company",
+    "stock_entry",
+    "material_request",
+    "source_column",
+    "project",
+    "funding_source",
+    "activity_reference",
+    "party_section",
+    "handed_over_by",
+    "storekeeper",
+    "recipient_type",
+    "party_column",
+    "recipient_employee",
+    "recipient_user",
+    "external_recipient_name",
+    "external_recipient_email",
+    "delivery_section",
+    "posting_date",
+    "posting_time",
+    "handover_location",
+    "items_section",
+    "items",
+    "status_section",
+    "handover_status",
+    "discrepancy_status",
+    "fully_acknowledged",
+    "status_column",
+    "recipient_signature",
+    "evidence",
+    "remarks_section",
+    "remarks",
+    "custom_current_responsible_user",
+    "custom_previous_responsible_user"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "SH-.YYYY.-.#####",
+      "default": "SH-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "workflow_state",
+      "label": "Workflow State",
+      "fieldtype": "Link",
+      "options": "Workflow State",
+      "read_only": 1,
+      "no_copy": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "source_section",
+      "label": "Source and Context",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "stock_entry",
+      "label": "Stock Entry",
+      "fieldtype": "Link",
+      "options": "Stock Entry",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "material_request",
+      "label": "Material Request",
+      "fieldtype": "Link",
+      "options": "Material Request"
+    },
+    {
+      "fieldname": "source_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project"
+    },
+    {
+      "fieldname": "funding_source",
+      "label": "Funding Source",
+      "fieldtype": "Link",
+      "options": "Project Funding Source"
+    },
+    {
+      "fieldname": "activity_reference",
+      "label": "Activity Reference",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "party_section",
+      "label": "Handover Parties",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "handed_over_by",
+      "label": "Handed Over By",
+      "fieldtype": "Link",
+      "options": "User",
+      "reqd": 1
+    },
+    {
+      "fieldname": "storekeeper",
+      "label": "Storekeeper",
+      "fieldtype": "Link",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "recipient_type",
+      "label": "Recipient Type",
+      "fieldtype": "Select",
+      "options": "Employee\nExternal Person\nOrganization\nBeneficiary\nProject Site",
+      "reqd": 1
+    },
+    {
+      "fieldname": "party_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "recipient_employee",
+      "label": "Recipient Employee",
+      "fieldtype": "Link",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "recipient_user",
+      "label": "Recipient User",
+      "fieldtype": "Link",
+      "options": "User"
+    },
+    {
+      "fieldname": "external_recipient_name",
+      "label": "External Recipient Name",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "external_recipient_email",
+      "label": "External Recipient Email",
+      "fieldtype": "Data",
+      "options": "Email"
+    },
+    {
+      "fieldname": "delivery_section",
+      "label": "Delivery Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "posting_date",
+      "label": "Handover Date",
+      "fieldtype": "Date",
+      "default": "Today",
+      "reqd": 1
+    },
+    {
+      "fieldname": "posting_time",
+      "label": "Handover Time",
+      "fieldtype": "Time"
+    },
+    {
+      "fieldname": "handover_location",
+      "label": "Handover Location",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "items_section",
+      "label": "Items",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "items",
+      "label": "Handover Items",
+      "fieldtype": "Table",
+      "options": "Stock Handover Item",
+      "reqd": 1
+    },
+    {
+      "fieldname": "status_section",
+      "label": "Acknowledgement and Status",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "handover_status",
+      "label": "Handover Status",
+      "fieldtype": "Select",
+      "options": "Draft\nPending Handover\nAcknowledged\nDiscrepancy Review\nClosed\nCancelled",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "discrepancy_status",
+      "label": "Discrepancy Status",
+      "fieldtype": "Select",
+      "options": "None\nOpen\nUnder Review\nResolved",
+      "default": "None",
+      "read_only": 1
+    },
+    {
+      "fieldname": "fully_acknowledged",
+      "label": "Fully Acknowledged",
+      "fieldtype": "Check",
+      "read_only": 1
+    },
+    {
+      "fieldname": "status_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "recipient_signature",
+      "label": "Recipient Signature",
+      "fieldtype": "Signature"
+    },
+    {
+      "fieldname": "evidence",
+      "label": "Evidence",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "remarks_section",
+      "label": "Remarks",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "remarks",
+      "label": "Remarks",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "custom_current_responsible_user",
+      "label": "Current Responsible User",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "custom_previous_responsible_user",
+      "label": "Previous Responsible User",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Stock User",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1
+    },
+    {
+      "role": "Stock Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    }
+  ],
+  "is_submittable": 1
+}

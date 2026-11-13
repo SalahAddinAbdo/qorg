@@ -1,0 +1,207 @@
+{
+  "doctype": "DocType",
+  "name": "Verification Item",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "issingle": 0,
+  "editable_grid": 1,
+  "track_changes": 0,
+  "field_order": [
+    "record_section",
+    "record_type",
+    "item_code",
+    "asset",
+    "book_section",
+    "book_warehouse",
+    "book_location",
+    "book_custodian",
+    "book_qty",
+    "actual_column",
+    "actual_warehouse",
+    "actual_location",
+    "actual_custodian",
+    "counted_qty",
+    "variance_section",
+    "variance_qty",
+    "valuation_rate",
+    "variance_value",
+    "variance_type",
+    "resolution_column",
+    "incident",
+    "stock_reconciliation",
+    "asset_movement",
+    "resolution_status",
+    "notes",
+    "page_break"
+  ],
+  "fields": [
+    {
+      "fieldname": "record_section",
+      "label": "Record",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "record_type",
+      "label": "Record Type",
+      "fieldtype": "Select",
+      "options": "Stock Item\nAsset",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "item_code",
+      "label": "Item Code",
+      "fieldtype": "Link",
+      "options": "Item",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "asset",
+      "label": "Asset",
+      "fieldtype": "Link",
+      "options": "Asset",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "book_section",
+      "label": "Book Position",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "book_warehouse",
+      "label": "Book Warehouse",
+      "fieldtype": "Link",
+      "options": "Warehouse"
+    },
+    {
+      "fieldname": "book_location",
+      "label": "Book Location",
+      "fieldtype": "Link",
+      "options": "Location"
+    },
+    {
+      "fieldname": "book_custodian",
+      "label": "Book Custodian",
+      "fieldtype": "Link",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "book_qty",
+      "label": "Book Quantity",
+      "fieldtype": "Float",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "actual_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "actual_warehouse",
+      "label": "Actual Warehouse",
+      "fieldtype": "Link",
+      "options": "Warehouse"
+    },
+    {
+      "fieldname": "actual_location",
+      "label": "Actual Location",
+      "fieldtype": "Link",
+      "options": "Location"
+    },
+    {
+      "fieldname": "actual_custodian",
+      "label": "Actual Custodian",
+      "fieldtype": "Link",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "counted_qty",
+      "label": "Counted Quantity",
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "variance_section",
+      "label": "Variance and Resolution",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "variance_qty",
+      "label": "Variance Quantity",
+      "fieldtype": "Float",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "valuation_rate",
+      "label": "Valuation Rate",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "variance_value",
+      "label": "Variance Value",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "variance_type",
+      "label": "Variance Type",
+      "fieldtype": "Select",
+      "options": "\nSurplus\nShortage\nDamaged\nMissing\nWrong Location\nWrong Custodian\nUnregistered Asset\nSerial or Batch Mismatch",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "resolution_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "incident",
+      "label": "Asset Incident",
+      "fieldtype": "Link",
+      "options": "Asset Incident"
+    },
+    {
+      "fieldname": "stock_reconciliation",
+      "label": "Stock Reconciliation",
+      "fieldtype": "Link",
+      "options": "Stock Reconciliation"
+    },
+    {
+      "fieldname": "asset_movement",
+      "label": "Asset Movement",
+      "fieldtype": "Link",
+      "options": "Asset Movement"
+    },
+    {
+      "fieldname": "resolution_status",
+      "label": "Resolution Status",
+      "fieldtype": "Select",
+      "options": "Open\nRecount Required\nAction Planned\nResolved",
+      "default": "Open"
+    },
+    {
+      "fieldname": "notes",
+      "label": "Notes",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "page_break",
+      "label": "Page Break After This Row",
+      "fieldtype": "Check",
+      "default": "0",
+      "allow_on_submit": 1,
+      "print_hide": 1
+    }
+  ]
+}

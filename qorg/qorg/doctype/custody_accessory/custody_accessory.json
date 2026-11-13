@@ -1,0 +1,91 @@
+{
+  "doctype": "DocType",
+  "name": "Custody Accessory",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "issingle": 0,
+  "editable_grid": 1,
+  "track_changes": 0,
+  "field_order": [
+    "accessory_section",
+    "accessory",
+    "serial_no",
+    "quantity",
+    "condition_column",
+    "condition_at_issue",
+    "condition_at_return",
+    "notes_section",
+    "notes",
+    "page_break"
+  ],
+  "fields": [
+    {
+      "fieldname": "accessory_section",
+      "label": "Accessory",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "accessory",
+      "label": "Accessory",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 3
+    },
+    {
+      "fieldname": "serial_no",
+      "label": "Serial Number",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "quantity",
+      "label": "Quantity",
+      "fieldtype": "Float",
+      "default": "1",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "condition_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "condition_at_issue",
+      "label": "Issue Condition",
+      "fieldtype": "Select",
+      "options": "Good\nAcceptable\nDamaged",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "condition_at_return",
+      "label": "Return Condition",
+      "fieldtype": "Select",
+      "options": "Good\nAcceptable\nDamaged\nMissing",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "notes_section",
+      "label": "Notes",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "notes",
+      "label": "Notes",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "page_break",
+      "label": "Page Break After This Row",
+      "fieldtype": "Check",
+      "default": "0",
+      "allow_on_submit": 1,
+      "print_hide": 1
+    }
+  ]
+}

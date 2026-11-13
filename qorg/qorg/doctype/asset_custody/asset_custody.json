@@ -1,0 +1,318 @@
+{
+  "doctype": "DocType",
+  "name": "Asset Custody",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "field_order": [
+    "naming_series",
+    "workflow_state",
+    "source_section",
+    "company",
+    "asset",
+    "asset_movement",
+    "source_column",
+    "custody_type",
+    "custodian",
+    "external_custodian",
+    "assignment_section",
+    "project",
+    "location",
+    "funding_source",
+    "assignment_column",
+    "issue_date",
+    "expected_return_date",
+    "actual_return_date",
+    "condition_at_issue",
+    "condition_at_return",
+    "accessories_section",
+    "accessories",
+    "declaration_section",
+    "responsibility_terms",
+    "acknowledgement_section",
+    "recipient_declaration",
+    "signature_column",
+    "custodian_signature",
+    "handover_signature",
+    "return_signature",
+    "status_section",
+    "difference_found",
+    "incident",
+    "custody_status",
+    "status_column",
+    "closed_on",
+    "remarks",
+    "custom_current_responsible_user",
+    "custom_previous_responsible_user"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "AC-.YYYY.-.#####",
+      "default": "AC-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "workflow_state",
+      "label": "Workflow State",
+      "fieldtype": "Link",
+      "options": "Workflow State",
+      "read_only": 1,
+      "no_copy": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "source_section",
+      "label": "Asset and Movement",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "asset",
+      "label": "Asset",
+      "fieldtype": "Link",
+      "options": "Asset",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "asset_movement",
+      "label": "Asset Movement",
+      "fieldtype": "Link",
+      "options": "Asset Movement",
+      "reqd": 1
+    },
+    {
+      "fieldname": "source_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "custody_type",
+      "label": "Custody Type",
+      "fieldtype": "Select",
+      "options": "Employee Custody\nProject Custody\nLocation Custody\nTemporary Custody\nExternal Custody",
+      "reqd": 1
+    },
+    {
+      "fieldname": "custodian",
+      "label": "Custodian",
+      "fieldtype": "Link",
+      "options": "Employee",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "external_custodian",
+      "label": "External Custodian",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "assignment_section",
+      "label": "Assignment Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project"
+    },
+    {
+      "fieldname": "location",
+      "label": "Location",
+      "fieldtype": "Link",
+      "options": "Location"
+    },
+    {
+      "fieldname": "funding_source",
+      "label": "Funding Source",
+      "fieldtype": "Link",
+      "options": "Project Funding Source"
+    },
+    {
+      "fieldname": "assignment_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "issue_date",
+      "label": "Issue Date",
+      "fieldtype": "Date",
+      "default": "Today",
+      "reqd": 1
+    },
+    {
+      "fieldname": "expected_return_date",
+      "label": "Expected Return Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "actual_return_date",
+      "label": "Actual Return Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "condition_at_issue",
+      "label": "Condition at Issue",
+      "fieldtype": "Select",
+      "options": "Good\nAcceptable\nDamaged",
+      "reqd": 1
+    },
+    {
+      "fieldname": "condition_at_return",
+      "label": "Condition at Return",
+      "fieldtype": "Select",
+      "options": "Good\nAcceptable\nDamaged\nMissing"
+    },
+    {
+      "fieldname": "accessories_section",
+      "label": "Accessories",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "accessories",
+      "label": "Accessories",
+      "fieldtype": "Table",
+      "options": "Custody Accessory"
+    },
+    {
+      "fieldname": "declaration_section",
+      "label": "Responsibility and Declaration",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "responsibility_terms",
+      "label": "Responsibility Terms",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "acknowledgement_section",
+      "label": "Acknowledgement and Signatures",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "recipient_declaration",
+      "label": "Recipient Declaration",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "signature_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "custodian_signature",
+      "label": "Custodian Signature",
+      "fieldtype": "Signature"
+    },
+    {
+      "fieldname": "handover_signature",
+      "label": "Handover Signature",
+      "fieldtype": "Signature"
+    },
+    {
+      "fieldname": "return_signature",
+      "label": "Return Signature",
+      "fieldtype": "Signature"
+    },
+    {
+      "fieldname": "status_section",
+      "label": "Status and Exception",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "difference_found",
+      "label": "Difference or Damage Found",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "incident",
+      "label": "Asset Incident",
+      "fieldtype": "Link",
+      "options": "Asset Incident"
+    },
+    {
+      "fieldname": "custody_status",
+      "label": "Custody Status",
+      "fieldtype": "Select",
+      "options": "Draft\nPending Handover\nActive\nReturn Due\nOverdue\nReturned\nDamage Review\nLoss Review\nClosed\nCancelled",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "status_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "closed_on",
+      "label": "Closed On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "remarks",
+      "label": "Remarks",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "custom_current_responsible_user",
+      "label": "Current Responsible User",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "custom_previous_responsible_user",
+      "label": "Previous Responsible User",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Asset User",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1
+    },
+    {
+      "role": "Asset Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    }
+  ],
+  "is_submittable": 1
+}

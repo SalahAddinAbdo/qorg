@@ -1,0 +1,96 @@
+{
+  "doctype": "DocType",
+  "name": "Incident Action",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "issingle": 0,
+  "editable_grid": 1,
+  "track_changes": 0,
+  "field_order": [
+    "action_section",
+    "action_type",
+    "action",
+    "responsible_user",
+    "schedule_column",
+    "due_date",
+    "status",
+    "completion_date",
+    "evidence_section",
+    "evidence",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "action_section",
+      "label": "Action",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "action_type",
+      "label": "Action Type",
+      "fieldtype": "Select",
+      "options": "Immediate Control\nInvestigation\nRepair\nReplacement\nRecovery\nInsurance Claim\nStock Adjustment\nAsset Movement\nWrite Off\nOther",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "action",
+      "label": "Action",
+      "fieldtype": "Small Text",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 3
+    },
+    {
+      "fieldname": "responsible_user",
+      "label": "Responsible User",
+      "fieldtype": "Link",
+      "options": "User",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "schedule_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "due_date",
+      "label": "Due Date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Open\nIn Progress\nCompleted\nCancelled",
+      "default": "Open",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "completion_date",
+      "label": "Completion Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "evidence_section",
+      "label": "Evidence and Notes",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "evidence",
+      "label": "Evidence",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "notes",
+      "label": "Notes",
+      "fieldtype": "Small Text"
+    }
+  ]
+}

@@ -1,0 +1,349 @@
+{
+  "doctype": "DocType",
+  "name": "Asset Incident",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "field_order": [
+    "naming_series",
+    "workflow_state",
+    "identity_section",
+    "company",
+    "incident_type",
+    "incident_date",
+    "incident_location",
+    "identity_column",
+    "item_code",
+    "asset",
+    "quantity",
+    "responsible_person",
+    "source_section",
+    "stock_entry",
+    "stock_handover",
+    "asset_custody",
+    "source_column",
+    "physical_verification",
+    "project",
+    "funding_source",
+    "assessment_section",
+    "description_section",
+    "incident_description",
+    "immediate_action",
+    "assessment_column",
+    "estimated_loss",
+    "repair_estimate",
+    "insurance_claim",
+    "recovery_amount",
+    "decision_section",
+    "decision",
+    "decision_column",
+    "asset_repair",
+    "stock_reconciliation",
+    "evidence",
+    "resolution_section",
+    "corrective_action",
+    "actions_section",
+    "actions",
+    "status_section",
+    "incident_status",
+    "remarks",
+    "custom_current_responsible_user",
+    "custom_previous_responsible_user"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "AI-.YYYY.-.#####",
+      "default": "AI-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "workflow_state",
+      "label": "Workflow State",
+      "fieldtype": "Link",
+      "options": "Workflow State",
+      "read_only": 1,
+      "no_copy": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "identity_section",
+      "label": "Incident Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "incident_type",
+      "label": "Incident Type",
+      "fieldtype": "Select",
+      "options": "Damage\nLoss\nTheft\nTransit Shortage\nCustody Damage\nInventory Shortage\nUnregistered Asset\nIrreparable Asset\nSerial or Batch Mismatch",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "incident_date",
+      "label": "Incident Date",
+      "fieldtype": "Date",
+      "default": "Today",
+      "reqd": 1
+    },
+    {
+      "fieldname": "incident_location",
+      "label": "Incident Location",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "identity_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "item_code",
+      "label": "Item Code",
+      "fieldtype": "Link",
+      "options": "Item"
+    },
+    {
+      "fieldname": "asset",
+      "label": "Asset",
+      "fieldtype": "Link",
+      "options": "Asset"
+    },
+    {
+      "fieldname": "quantity",
+      "label": "Affected Quantity",
+      "fieldtype": "Float",
+      "default": "1"
+    },
+    {
+      "fieldname": "responsible_person",
+      "label": "Responsible Person",
+      "fieldtype": "Link",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "source_section",
+      "label": "Source References",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "stock_entry",
+      "label": "Stock Entry",
+      "fieldtype": "Link",
+      "options": "Stock Entry"
+    },
+    {
+      "fieldname": "stock_handover",
+      "label": "Stock Handover",
+      "fieldtype": "Link",
+      "options": "Stock Handover"
+    },
+    {
+      "fieldname": "asset_custody",
+      "label": "Asset Custody",
+      "fieldtype": "Link",
+      "options": "Asset Custody"
+    },
+    {
+      "fieldname": "source_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "physical_verification",
+      "label": "Physical Verification",
+      "fieldtype": "Link",
+      "options": "Physical Verification"
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project"
+    },
+    {
+      "fieldname": "funding_source",
+      "label": "Funding Source",
+      "fieldtype": "Link",
+      "options": "Project Funding Source"
+    },
+    {
+      "fieldname": "assessment_section",
+      "label": "Assessment and Decision",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "description_section",
+      "label": "Incident Description",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "incident_description",
+      "label": "Incident Description",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "immediate_action",
+      "label": "Immediate Action",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "assessment_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "estimated_loss",
+      "label": "Estimated Loss",
+      "fieldtype": "Currency"
+    },
+    {
+      "fieldname": "repair_estimate",
+      "label": "Repair Estimate",
+      "fieldtype": "Currency"
+    },
+    {
+      "fieldname": "insurance_claim",
+      "label": "Insurance Claim",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "recovery_amount",
+      "label": "Recovery Amount",
+      "fieldtype": "Currency"
+    },
+    {
+      "fieldname": "decision_section",
+      "label": "Decision and Resolution",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "decision",
+      "label": "Decision",
+      "fieldtype": "Select",
+      "options": "Pending\nRepair\nReplacement\nRecovery\nInsurance Claim\nStock Adjustment\nWrite Off\nNo Action",
+      "default": "Pending"
+    },
+    {
+      "fieldname": "decision_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "asset_repair",
+      "label": "Asset Repair",
+      "fieldtype": "Link",
+      "options": "Asset Repair"
+    },
+    {
+      "fieldname": "stock_reconciliation",
+      "label": "Stock Reconciliation",
+      "fieldtype": "Link",
+      "options": "Stock Reconciliation"
+    },
+    {
+      "fieldname": "evidence",
+      "label": "Evidence",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "resolution_section",
+      "label": "Corrective Action and Resolution",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "corrective_action",
+      "label": "Corrective Action",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "actions_section",
+      "label": "Action Plan",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "actions",
+      "label": "Actions",
+      "fieldtype": "Table",
+      "options": "Incident Action"
+    },
+    {
+      "fieldname": "status_section",
+      "label": "Status",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "incident_status",
+      "label": "Incident Status",
+      "fieldtype": "Select",
+      "options": "Draft\nReported\nUnder Investigation\nDecision Pending\nResolved\nClosed\nCancelled",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "remarks",
+      "label": "Remarks",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "custom_current_responsible_user",
+      "label": "Current Responsible User",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "custom_previous_responsible_user",
+      "label": "Previous Responsible User",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Stock User",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1
+    },
+    {
+      "role": "Stock Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    }
+  ],
+  "is_submittable": 1
+}
