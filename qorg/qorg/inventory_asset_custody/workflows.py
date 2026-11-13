@@ -118,6 +118,19 @@ def _ensure_workflow_state(name: str, style: str) -> None:
         )
 
 
+
+def _ensure_workflow_action(name: str) -> None:
+    if frappe.db.exists(
+        "Workflow Action Master", {"workflow_action_name": name}
+    ):
+        return
+    frappe.get_doc(
+        {
+            "doctype": "Workflow Action Master",
+            "workflow_action_name": name,
+        }
+    ).insert(ignore_permissions=True)
+
 def _routing_for(next_state: str) -> str:
     return "Clear Responsibility" if next_state in FINAL_STATES else "Select Next User"
 
@@ -162,6 +175,14 @@ def _build_workflow(name: str, definition: dict):
 def provision_workflows():
     for name, style in WORKFLOW_STATES:
         _ensure_workflow_state(name, style)
+
+    actions = {
+        action
+        for definition in WORKFLOWS.values()
+        for _state, action, _next_state, _role, _condition in definition["transitions"]
+    }
+    for action in sorted(actions):
+        _ensure_workflow_action(action)
 
     for name, definition in WORKFLOWS.items():
         if frappe.db.exists("Workflow", name):
