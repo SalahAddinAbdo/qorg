@@ -1,0 +1,22 @@
+{
+  "doctype": "Report",
+  "name": "Movement Audit",
+  "report_name": "Movement Audit",
+  "ref_doctype": "Stock Entry",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "module": "QOrg",
+  "disabled": 0,
+  "prepared_report": 0,
+  "roles": [
+    {
+      "role": "System Manager"
+    },
+    {
+      "role": "Stock Manager"
+    },
+    {
+      "role": "Asset Manager"
+    }
+  ]
+}

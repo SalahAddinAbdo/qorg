@@ -1,0 +1,7 @@
+import frappe
+DOCTYPES=('Stock Handover','Stock Handover Item','Asset Custody','Custody Accessory','Asset Incident','Incident Action','Physical Verification','Verification Item')
+REPORTS=('Procurement Receipt Trace','Purchase Receipt Status','Rejected Replacement','Stock Funding Status','Pending Material Issue','Unacknowledged Issue','Handover Discrepancy','Activity Material Usage','Donor Asset Register','Asset Custody Status','Overdue Custody','Asset Maintenance Status','Damaged Missing Assets','Physical Inventory Variance','Movement Audit')
+NOTICES=('Receipt Inspection Required','Handover Acknowledgement Pending','Handover Discrepancy Review','Incident Decision Pending','Verification Approval Pending')
+TEMPLATES=('Stock Handover Notice','Asset Custody Notice','Asset Incident Notice','Custody Return Reminder','Inspection Due Reminder','Verification Approval Notice')
+def audit_runtime_configuration():
+ result={'missing_doctypes':[x for x in DOCTYPES if not frappe.db.exists('DocType',x)],'missing_reports':[x for x in REPORTS if not frappe.db.exists('Report',x)],'missing_notifications':[x for x in NOTICES if not frappe.db.exists('Notification',x)],'missing_templates':[x for x in TEMPLATES if not frappe.db.exists('Email Template',x)],'missing_workspace':[] if frappe.db.exists('Workspace','Inventory and Assets') else ['Inventory and Assets']};result['passed']=not any(result.values());return result

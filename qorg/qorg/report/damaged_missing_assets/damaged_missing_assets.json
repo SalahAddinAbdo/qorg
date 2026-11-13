@@ -1,0 +1,31 @@
+{
+  "doctype": "Report",
+  "name": "Damaged Missing Assets",
+  "report_name": "Damaged Missing Assets",
+  "ref_doctype": "Asset Incident",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "module": "QOrg",
+  "disabled": 0,
+  "prepared_report": 0,
+  "roles": [
+    {
+      "role": "System Manager"
+    },
+    {
+      "role": "Stock Manager"
+    },
+    {
+      "role": "Asset Manager"
+    },
+    {
+      "role": "Finance Reviewer"
+    },
+    {
+      "role": "Accounts Manager"
+    },
+    {
+      "role": "Accounts User"
+    }
+  ]
+}
