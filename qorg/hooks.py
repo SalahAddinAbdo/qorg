@@ -452,3 +452,36 @@ override_doctype_dashboards["Material Request"] = "qorg.qorg.dashboards.material
 
 # Exact procurement committee recipients
 doc_events.setdefault("Procurement Process", {}).setdefault("on_update", []).append("qorg.qorg.procurement_contracting.event_handlers.notify_assigned_committee")
+
+# Inventory and asset complete cycle
+for _method in [
+    "qorg.qorg.inventory_asset_custody.custom_fields.provision_custom_fields",
+    "qorg.qorg.inventory_asset_custody.communications.provision_communications",
+    "qorg.qorg.inventory_asset_custody.workflows.provision_workflows",
+    "qorg.qorg.inventory_asset_custody.print_formats.provision_print_formats",
+]:
+    if _method not in after_install: after_install.append(_method)
+    if _method not in after_migrate: after_migrate.append(_method)
+
+def _inventory_event(dt,event,handler):
+    current=doc_events.setdefault(dt,{}).setdefault(event,[])
+    if not isinstance(current,list): current=[current];doc_events[dt][event]=current
+    if handler not in current: current.append(handler)
+
+for _dt,_event,_handler in [
+    ("Purchase Receipt","validate","qorg.qorg.inventory_asset_custody.receipt_control.reconcile_receipt"),
+    ("Quality Inspection","validate","qorg.qorg.inventory_asset_custody.inspection_control.validate_inspection"),
+    ("Stock Entry","validate","qorg.qorg.inventory_asset_custody.warehouse_policy.validate_stock_entry"),
+    ("Stock Entry","validate","qorg.qorg.inventory_asset_custody.issue_control.validate_stock_entry"),
+    ("Stock Entry","on_submit","qorg.qorg.inventory_asset_custody.issue_control.update_material_request"),
+    ("Stock Entry","on_cancel","qorg.qorg.inventory_asset_custody.issue_control.update_material_request"),
+    ("Asset","validate","qorg.qorg.inventory_asset_custody.asset_control.validate_asset"),
+    ("Asset Movement","validate","qorg.qorg.inventory_asset_custody.asset_control.validate_movement"),
+    ("Employee Separation","validate","qorg.qorg.inventory_asset_custody.asset_control.prevent_separation"),
+    ("Employee Offboarding","validate","qorg.qorg.inventory_asset_custody.asset_control.prevent_separation"),
+]: _inventory_event(_dt,_event,_handler)
+
+app_include_js = list(app_include_js) if isinstance(app_include_js,(list,tuple)) else [app_include_js]
+if "/assets/qorg/js/inventory_cycle.js" not in app_include_js: app_include_js.append("/assets/qorg/js/inventory_cycle.js")
+scheduler_events.setdefault("daily",[])
+if "qorg.qorg.inventory_asset_custody.scheduled_tasks.send_inventory_reminders" not in scheduler_events["daily"]: scheduler_events["daily"].append("qorg.qorg.inventory_asset_custody.scheduled_tasks.send_inventory_reminders")
