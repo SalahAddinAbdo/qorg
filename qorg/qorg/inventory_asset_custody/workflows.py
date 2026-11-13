@@ -119,6 +119,18 @@ def _ensure_workflow_state(name: str, style: str) -> None:
 
 
 
+def _ensure_role(name: str) -> None:
+    if frappe.db.exists("Role", name):
+        return
+    frappe.get_doc(
+        {
+            "doctype": "Role",
+            "role_name": name,
+            "desk_access": 1,
+        }
+    ).insert(ignore_permissions=True)
+
+
 def _ensure_workflow_action(name: str) -> None:
     if frappe.db.exists(
         "Workflow Action Master", {"workflow_action_name": name}
@@ -133,6 +145,10 @@ def _ensure_workflow_action(name: str) -> None:
 
 def _routing_for(next_state: str) -> str:
     return "Clear Responsibility" if next_state in FINAL_STATES else "Select Next User"
+
+
+def _state_roles(definition: dict) -> dict[str, str]:
+    return {state: role for state, _doc_status, role in definition["states"]}
 
 
 def _build_workflow(name: str, definition: dict):
@@ -153,9 +169,12 @@ def _build_workflow(name: str, definition: dict):
             },
         )
 
-    routing_enabled = frappe.get_meta("Workflow Transition").has_field(
-        "custom_responsibility_routing"
-    )
+    transition_meta = frappe.get_meta("Workflow Transition")
+    routing_enabled = transition_meta.has_field("custom_responsibility_routing")
+    target_role_enabled = transition_meta.has_field("custom_target_role")
+    prompt_enabled = transition_meta.has_field("custom_workflow_prompt")
+    state_roles = _state_roles(definition)
+
     for state, action, next_state, role, condition in definition["transitions"]:
         row = {
             "state": state,
@@ -166,13 +185,33 @@ def _build_workflow(name: str, definition: dict):
             "allow_self_approval": 0,
         }
         if routing_enabled:
-            row["custom_responsibility_routing"] = _routing_for(next_state)
+            routing = _routing_for(next_state)
+            row["custom_responsibility_routing"] = routing
+            if routing == "Select Next User":
+                if target_role_enabled:
+                    row["custom_target_role"] = state_roles[next_state]
+                if prompt_enabled:
+                    row["custom_workflow_prompt"] = (
+                        f"Select the next responsible user for {next_state}."
+                    )
         workflow.append("transitions", row)
 
     return workflow
 
 
 def provision_workflows():
+    roles = {
+        role
+        for definition in WORKFLOWS.values()
+        for _state, _doc_status, role in definition["states"]
+    } | {
+        role
+        for definition in WORKFLOWS.values()
+        for _state, _action, _next_state, role, _condition in definition["transitions"]
+    }
+    for role in sorted(roles):
+        _ensure_role(role)
+
     for name, style in WORKFLOW_STATES:
         _ensure_workflow_state(name, style)
 
