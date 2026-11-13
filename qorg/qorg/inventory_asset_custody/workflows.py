@@ -28,6 +28,8 @@ WORKFLOW_STATES = (
 )
 
 FINAL_STATES = {"Acknowledged", "Returned", "Resolved", "Approved"}
+SELECT_NEXT_USER_PROMPT = "Select Next User"
+SELECT_NEXT_USER_PROMPT_TEXT = "Select the next responsible user who has the required target role."
 
 WORKFLOWS = {
     "Stock Handover Approval": {
@@ -119,6 +121,18 @@ def _ensure_workflow_state(name: str, style: str) -> None:
 
 
 
+def _ensure_workflow_prompt(name: str, prompt_text: str) -> None:
+    if frappe.db.exists("Workflow Prompt", name):
+        return
+    frappe.get_doc(
+        {
+            "doctype": "Workflow Prompt",
+            "prompt_name": name,
+            "prompt_text": prompt_text,
+        }
+    ).insert(ignore_permissions=True)
+
+
 def _ensure_role(name: str) -> None:
     if frappe.db.exists("Role", name):
         return
@@ -191,9 +205,7 @@ def _build_workflow(name: str, definition: dict):
                 if target_role_enabled:
                     row["custom_target_role"] = state_roles[next_state]
                 if prompt_enabled:
-                    row["custom_workflow_prompt"] = (
-                        f"Select the next responsible user for {next_state}."
-                    )
+                    row["custom_workflow_prompt"] = SELECT_NEXT_USER_PROMPT
         workflow.append("transitions", row)
 
     return workflow
@@ -211,6 +223,11 @@ def provision_workflows():
     }
     for role in sorted(roles):
         _ensure_role(role)
+
+    _ensure_workflow_prompt(
+        SELECT_NEXT_USER_PROMPT,
+        SELECT_NEXT_USER_PROMPT_TEXT,
+    )
 
     for name, style in WORKFLOW_STATES:
         _ensure_workflow_state(name, style)
