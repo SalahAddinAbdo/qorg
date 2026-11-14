@@ -574,3 +574,38 @@ for _doctype in (
         ([doctype_js[_doctype]] if isinstance(doctype_js.get(_doctype), str) else list(doctype_js.get(_doctype) or []))
         + ["public/js/recruitment_communications.js"]
     ))
+
+# Volunteer, internship and participation cycle integrity.
+def _qorg_participation_add_event(doctype, event, handler):
+    current = doc_events.setdefault(doctype, {}).get(event)
+    if not current:
+        doc_events[doctype][event] = handler
+    elif isinstance(current, list):
+        if handler not in current:
+            current.append(handler)
+    elif current != handler:
+        doc_events[doctype][event] = [current, handler]
+
+for _doctype in (
+    "Participation Application", "Participation Assessment", "Participation Engagement",
+    "Participation Service Log", "Participation Evaluation", "Participation Certificate",
+):
+    _qorg_participation_add_event(
+        _doctype, "validate",
+        "qorg.qorg.volunteer_management.cycle_integrity.validate_participation_record",
+    )
+for _doctype in ("Volunteer Application", "Volunteer Profile", "Volunteer Engagement"):
+    _qorg_participation_add_event(
+        _doctype, "validate",
+        "qorg.qorg.volunteer_management.cycle_integrity.validate_volunteer_record",
+    )
+
+# Participation communication actions on operational forms.
+for _doctype in (
+    "Participation Application", "Participation Engagement",
+    "Participation Service Log", "Participation Certificate",
+):
+    doctype_js[_doctype] = list(dict.fromkeys(
+        ([doctype_js[_doctype]] if isinstance(doctype_js.get(_doctype), str) else list(doctype_js.get(_doctype) or []))
+        + ["public/js/participation_communications.js"]
+    ))
