@@ -83,10 +83,14 @@ def test_transporter_is_independent_of_recipient():
 def test_activity_reference_is_linked_to_project_cycle():
  d=json.loads((ROOT/'qorg/qorg/doctype/stock_handover/stock_handover.json').read_text())
  fields={x['fieldname']:x for x in d['fields']}
- assert fields['activity_reference']['fieldtype']=='Link'
- assert fields['activity_reference']['options']=='Workplan Activity'
+ assert 'activity_reference' not in fields
+ assert fields['workplan_activity']['fieldtype']=='Link'
+ assert fields['workplan_activity']['options']=='Project Workplan Activity'
  source=(ROOT/'qorg/qorg/inventory_asset_custody/custom_fields.py').read_text()
- assert "'Activity Reference','Link','Workplan Activity'" in source
+ assert "'custom_activity_reference','Legacy Activity Reference'" not in source
+ assert source.count("'custom_workplan_activity','Project Workplan Activity','Link','Project Workplan Activity'")>=2
+ assert '_migrate_and_remove_legacy_activity_references' in source
+ assert "frappe.delete_doc('Custom Field',legacy_name" in source
 
 def test_runtime_fieldnames_match_managed_custom_fields():
  source=(ROOT/'qorg/qorg/inventory_asset_custody/custom_fields.py').read_text()

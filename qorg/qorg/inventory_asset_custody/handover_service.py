@@ -18,7 +18,7 @@ def populate_from_stock_entry(doc):
     doc.material_request = getattr(stock_entry, "custom_material_request", None)
     doc.project = getattr(stock_entry, "project", None)
     doc.funding_source = getattr(stock_entry, "custom_funding_source", None)
-    doc.activity_reference = getattr(stock_entry, "custom_activity_reference", None)
+    doc.workplan_activity = getattr(stock_entry, "custom_workplan_activity", None)
     doc.handed_over_by = frappe.session.user
     if doc.material_request and frappe.db.exists("Material Request", doc.material_request):
         request = frappe.db.get_value(
@@ -133,8 +133,8 @@ def validate_handover(doc):
     _validate_recipient(doc)
     _validate_usage(doc)
     _validate_delivery(doc)
-    if doc.activity_reference and frappe.db.exists("DocType", "Workplan Activity"):
-        activity_project = frappe.db.get_value("Workplan Activity", doc.activity_reference, "project")
+    if doc.workplan_activity and frappe.db.exists("DocType", "Project Workplan Activity"):
+        activity_project = frappe.db.get_value("Project Workplan Activity", doc.workplan_activity, "project")
         if doc.project and activity_project and activity_project != doc.project:
             frappe.throw(_("Activity Reference must belong to Project {0}.").format(doc.project))
 

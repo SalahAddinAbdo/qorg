@@ -17,7 +17,7 @@
     "source_column",
     "project",
     "funding_source",
-    "activity_reference",
+    "workplan_activity",
     "party_section",
     "handed_over_by",
     "storekeeper",
@@ -146,10 +146,10 @@
       "options": "Project Funding Source"
     },
     {
-      "fieldname": "activity_reference",
-      "label": "Activity Reference",
+      "fieldname": "workplan_activity",
+      "label": "Project Workplan Activity",
       "fieldtype": "Link",
-      "options": "Workplan Activity",
+      "options": "Project Workplan Activity",
       "depends_on": "eval:doc.project"
     },
     {
