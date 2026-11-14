@@ -82,8 +82,14 @@ def _template(rule,doc):
     return subject,message
 
 
-def _already_sent(user,subject):
-    return frappe.db.exists("Notification Log",{"for_user":user,"subject":subject,"creation":[">=",nowdate()]})
+def _already_sent(user, subject, doc):
+    return frappe.db.exists("Notification Log", {
+        "for_user": user,
+        "subject": subject,
+        "document_type": doc.doctype,
+        "document_name": doc.name,
+        "creation": [">=", nowdate()],
+    })
 
 
 def _send(rule,doc):
@@ -93,11 +99,15 @@ def _send(rule,doc):
     subject,message=_template(rule,doc)
     count=0
     for user in users:
-        if _already_sent(user,subject): continue
+        if _already_sent(user, subject, doc): continue
         frappe.get_doc({"doctype":"Notification Log","subject":subject,"email_content":message,"for_user":user,"from_user":frappe.session.user or "Administrator","type":"Alert","document_type":doc.doctype,"document_name":doc.name}).insert(ignore_permissions=True)
         if rule.delivery_channel=="Email and System Notification":
             email=frappe.db.get_value("User",user,"email")
-            if email: frappe.sendmail(recipients=[email],subject=subject,message=message,delayed=True)
+            if email:
+                frappe.sendmail(
+                    recipients=[email], subject=subject, message=message, delayed=True,
+                    reference_doctype=doc.doctype, reference_name=doc.name,
+                )
         count+=1
     return count
 
@@ -111,8 +121,11 @@ def _matches(rule,doc,today):
     date_field=_field(meta,DATE_FIELDS.get(key,[]))
     if not date_field or not doc.get(date_field): return False
     due=getdate(doc.get(date_field)); days=int(rule.due_soon_days or 0)
-    if key=="deliverable_due_soon": return today <= due <= add_days(today,days)
-    return due < today or (days and due <= add_days(today,-days))
+    if key == "deliverable_due_soon":
+        return today <= due <= add_days(today, days)
+    # Overdue rules trigger only after the due date. due_soon_days is not
+    # subtracted here because that would delay overdue notices incorrectly.
+    return due < today
 
 
 def run_daily_project_notifications():

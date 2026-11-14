@@ -500,3 +500,48 @@ for _dt, _event, _handler in [
 
 
 doctype_js["Request for Quotation"] = "public/js/request_for_quotation.js"
+
+# Project cycle integrity validation.
+def _qorg_add_doc_event(doctype, event, handler):
+    events = doc_events.setdefault(doctype, {})
+    current = events.get(event)
+    if not current:
+        events[event] = handler
+    elif isinstance(current, list):
+        if handler not in current:
+            current.append(handler)
+    elif current != handler:
+        events[event] = [current, handler]
+
+for _doctype in (
+    "Project Result", "Project Indicator", "Indicator Target Plan",
+    "Project Workplan Activity", "Project Progress Update", "Project Risk",
+    "Project Change Request", "Project Compliance Deliverable",
+    "Project Beneficiary Plan", "Project Closure",
+):
+    _qorg_add_doc_event(
+        _doctype, "validate",
+        "qorg.qorg.project_management.cycle_integrity.validate_project_cycle_links",
+    )
+
+# Project-cycle row-level permissions. These complement DocPerm and prevent
+# cross-project list/API access while preserving manager/assignment controls.
+_project_permission_map = {
+    "Project Result": ("project_result_query", "project_result_has"),
+    "Project Indicator": ("project_indicator_query", "project_indicator_has"),
+    "Indicator Target Plan": ("indicator_target_plan_query", "indicator_target_plan_has"),
+    "Project Workplan Activity": ("project_workplan_activity_query", "project_workplan_activity_has"),
+    "Project Progress Update": ("project_progress_update_query", "project_progress_update_has"),
+    "Project Risk": ("project_risk_query", "project_risk_has"),
+    "Project Change Request": ("project_change_request_query", "project_change_request_has"),
+    "Project Compliance Deliverable": ("project_compliance_deliverable_query", "project_compliance_deliverable_has"),
+    "Project Beneficiary Plan": ("project_beneficiary_plan_query", "project_beneficiary_plan_has"),
+    "Project Closure": ("project_closure_query", "project_closure_has"),
+}
+for _doctype, (_query_method, _has_method) in _project_permission_map.items():
+    permission_query_conditions[_doctype] = (
+        "qorg.qorg.project_management.permissions." + _query_method
+    )
+    has_permission[_doctype] = (
+        "qorg.qorg.project_management.permissions." + _has_method
+    )

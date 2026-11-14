@@ -134,7 +134,7 @@ def _status_style(task, identity):
 
 def _fallback_html(context):
     cards=[("Operational",context['operational_task_count']), ("Main Tasks",context['main_task_count']), ("Overdue",context['overdue_count']), ("Due Soon",context['due_soon_count']), ("Average Progress",str(context['average_progress'])+'%'), ("Expected Hours",context['expected_hours']), ("Actual Hours",context['actual_hours'])]
-    card_html=''.join(f'<td style="padding:10px;border:1px solid #dbe4ea;background:{context['light_color']};text-align:center"><b>{frappe.utils.escape_html(str(v))}</b><br><span style="font-size:11px;color:#64748b">{frappe.utils.escape_html(k)}</span></td>' for k,v in cards)
+    card_html=''.join(f'<td style="padding:10px;border:1px solid #dbe4ea;background-color:{context["light_color"]};text-align:center"><b>{frappe.utils.escape_html(str(v))}</b><br><span style="font-size:11px;color:#64748b">{frappe.utils.escape_html(k)}</span></td>' for k,v in cards)
     return f'<div style="font-family:Arial,sans-serif;color:#1f2937"><h2 style="color:{context['primary_color']}">Task Summary</h2><p><b>{frappe.utils.escape_html(context["employee_name"])}</b><br>{frappe.utils.escape_html(context["period_label"])}</p><table style="width:100%;border-collapse:collapse"><tr>{card_html}</tr></table><p style="margin-top:20px"><a href="{context["report_url"]}">Open Employees Task Tracker</a></p></div>'
 
 

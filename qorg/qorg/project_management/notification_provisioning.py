@@ -92,3 +92,28 @@ def provision_project_notifications():
         if frappe.db.exists("DocType",doctype): row.notification_record=_ensure_template(key,label,doctype,description)
     settings.save(ignore_permissions=True)
     frappe.clear_cache(doctype="Projects Settings")
+    audit_project_notification_configuration()
+
+
+def audit_project_notification_configuration():
+    if not frappe.db.exists("DocType", "Project Notification Rule"):
+        return True
+    settings = frappe.get_single("Projects Settings")
+    failures = []
+    rows = {row.notification_key: row for row in settings.get("project_notification_rules") or []}
+    for key, spec in RULES.items():
+        row = rows.get(key)
+        if not row:
+            failures.append(f"{key}: missing rule row")
+            continue
+        expected_doctype = spec[1]
+        expected_trigger = spec[2]
+        if row.reference_doctype != expected_doctype:
+            failures.append(f"{key}: reference_doctype")
+        if row.trigger_type != expected_trigger:
+            failures.append(f"{key}: trigger_type")
+        if not row.notification_record or not frappe.db.exists("Notification", row.notification_record):
+            failures.append(f"{key}: notification_record")
+    if failures:
+        frappe.throw("Invalid project notification configuration: " + "; ".join(failures))
+    return True
