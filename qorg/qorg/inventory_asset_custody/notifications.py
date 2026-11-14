@@ -10,7 +10,7 @@ SPECS = [
 
 
 def provision_notifications():
-    body_field = "response" if frappe.get_meta("Email Template").has_field("response") else "response_html"
+    body_field = "response_html" if frappe.get_meta("Email Template").has_field("response_html") else "response"
     for name, doctype, field, value, template, receiver in SPECS:
         if not frappe.db.exists("DocType", doctype):
             continue

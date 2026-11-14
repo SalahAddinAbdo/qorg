@@ -14,6 +14,16 @@ RULES = {
     "progress_update_overdue": ("Project Progress Update Overdue", "Project Progress Update", "Daily", 7, "A required project progress update is overdue."),
 }
 
+
+def _notification_message(title, description):
+    return f"""<!-- QORG PROJECT NOTIFICATION v2.0 -->
+{{% set company_name = doc.get('company') or frappe.defaults.get_user_default('Company') or frappe.db.get_single_value('Global Defaults', 'default_company') or '' %}}
+{{% set company_title = frappe.db.get_value('Company', company_name, 'company_name') or company_name or '' %}}
+{{% set company_logo = frappe.db.get_value('Company', company_name, 'company_logo') or '' %}}
+{{% set primary = frappe.db.get_value('Company', company_name, 'custom_print_primary_color') or '#176B87' %}}
+{{% set accent = frappe.db.get_value('Company', company_name, 'custom_print_accent_color') or '#D7A83E' %}}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F3F6F8;font-family:Arial,Tahoma,sans-serif;color:#253746"><tr><td align="center" style="padding:20px"><table role="presentation" width="720" style="max-width:720px;background:#FFFFFF;border:1px solid #D8E1E6"><tr><td style="background:{{{{ primary }}}};border-bottom:4px solid {{{{ accent }}}};padding:18px 22px;color:#FFFFFF"><table role="presentation" width="100%"><tr><td>{{% if company_logo %}}<img src="{{{{ company_logo }}}}" style="max-height:52px;max-width:180px">{{% else %}}<strong>{{{{ company_title }}}}</strong>{{% endif %}}</td><td align="right"><strong>{title}<br><span dir="rtl">إشعار مشروع</span></strong></td></tr></table></td></tr><tr><td style="padding:24px;line-height:1.65"><div dir="ltr"><p>{description}</p></div><div dir="rtl" style="text-align:right"><p>يتطلب هذا السجل اطلاعكم ومتابعتكم وفقا لإجراءات المشروع المعتمدة.</p></div><table role="presentation" width="100%" style="background:#F7FAFB;border:1px solid #D8E1E6"><tr><td style="padding:8px"><strong>Reference | المرجع</strong></td><td style="padding:8px">{{{{ doc.name }}}}</td></tr><tr><td style="padding:8px"><strong>Status | الحالة</strong></td><td style="padding:8px">{{{{ doc.workflow_state or doc.status or '' }}}}</td></tr></table><p style="text-align:center;margin-top:20px"><a href="{{{{ frappe.utils.get_url_to_form(doc.doctype, doc.name) }}}}" style="background:{{{{ primary }}}};color:#FFFFFF;text-decoration:none;padding:10px 18px;border-radius:5px">Open Record | فتح السجل</a></p></td></tr></table></td></tr></table>"""
+
 CHILD_FIELDS = [
     {"fieldname":"rule_label","label":"Rule Label","fieldtype":"Data","read_only":1,"in_list_view":1,"insert_after":"notification_key"},
     {"fieldname":"description","label":"Description","fieldtype":"Small Text","read_only":1,"insert_after":"rule_label"},
@@ -40,7 +50,7 @@ def _ensure_template(key, label, doctype, description):
         "doctype":"Notification","name":name,"subject":label+" - {{ doc.name }}",
         "document_type":doctype,"event":"Save","enabled":0,
         "condition":"False",
-        "message":"<p>"+description+"</p><p><b>Document:</b> {{ doc.name }}</p><p><b>Project:</b> {{ doc.project or '' }}</p>",
+        "message": _notification_message(label, description),
         "channel":"System Notification",
     }
     data={k:v for k,v in data.items() if k in ("doctype","name") or meta.has_field(k)}
