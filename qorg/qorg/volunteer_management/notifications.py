@@ -4,6 +4,11 @@ import frappe
 from frappe import _
 from frappe.utils import now_datetime
 
+def _template_body(template_doc):
+    if template_doc.meta.has_field("response_html") and template_doc.response_html:
+        return template_doc.response_html
+    return template_doc.response or ""
+
 def _emails(value):
     if not value:return []
     if isinstance(value,list):items=value
@@ -19,7 +24,7 @@ def company_branding(reference):
     values={"company":company,"company_name":company or "Organization","company_logo":"","primary_color":"#176b87","secondary_color":"#a8d3df","accent_color":"#236b3d","background_color":"#eef2f5","text_color":"#263238","border_color":"#d9e1e5","footer_text":"","reply_to":None}
     if company and frappe.db.exists("Company",company):
         doc=frappe.get_doc("Company",company);values["company_name"]=doc.company_name or company
-        for target,candidates in {"company_logo":["company_logo","logo"],"primary_color":["custom_primary_color","primary_color"],"secondary_color":["custom_secondary_color","secondary_color"],"accent_color":["custom_accent_color","accent_color"],"footer_text":["custom_email_footer","email_footer"],"reply_to":["email","default_email"]}.items():
+        for target,candidates in {"company_logo":["company_logo","logo"],"primary_color":["custom_print_primary_color","custom_primary_color","primary_color"],"secondary_color":["custom_print_accent_color","custom_secondary_color","secondary_color"],"accent_color":["custom_print_accent_color","custom_accent_color","accent_color"],"footer_text":["custom_email_footer","email_footer"],"reply_to":["email","default_email"]}.items():
             for field in candidates:
                 if doc.meta.has_field(field) and doc.get(field):values[target]=doc.get(field);break
     return values
@@ -33,7 +38,7 @@ def preview_participation_message(notification_type,template,reference_doctype,r
     recipients=list(dict.fromkeys(x for x in recipients if x))
     if not recipients:frappe.throw(_("At least one recipient is required."))
     template_doc=frappe.get_doc("Email Template",template);context=reference.as_dict();context.update(company_branding(reference));context["notification_type"]=notification_type
-    return {"recipients":recipients,"cc":_emails(cc_json),"subject":frappe.render_template(template_doc.subject,context),"message":frappe.render_template(template_doc.response_html or template_doc.response,context),"reply_to":context.get("reply_to"),"context":context}
+    return {"recipients":recipients,"cc":_emails(cc_json),"subject":frappe.render_template(template_doc.subject,context),"message":frappe.render_template(_template_body(template_doc),context),"reply_to":context.get("reply_to"),"context":context}
 
 def send_participation_message(notification_type,template,reference_doctype,reference_name,primary_recipient=None,cc_json=None,users_json=None,force=0):
     preview=preview_participation_message(notification_type,template,reference_doctype,reference_name,primary_recipient,cc_json,users_json)
