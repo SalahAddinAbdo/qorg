@@ -13,6 +13,11 @@ ALLOWED_REFERENCES={
     "Work Commencement Internal Notice":{"Work Commencement Notice"},
 }
 
+def _template_body(template_doc):
+    if template_doc.meta.has_field("response_html") and template_doc.response_html:
+        return template_doc.response_html
+    return template_doc.response or ""
+
 def _unique(values): return list(dict.fromkeys(x for x in values if x))
 def _parse(value):
     if not value:return []
@@ -57,6 +62,7 @@ def _recipient_sets(primary=None,cc=None,additional_users=None,confirm_sender=No
     to=_unique(to+additional+sender);cc_list=[x for x in cc_list if x not in to]
     return {"to":to,"cc":cc_list,"additional_users":additional,"sender_copy":sender}
 
+@frappe.whitelist()
 def preview_recruitment_message(template,reference_doctype,reference_name,primary_recipient=None,cc_json=None,users_json=None,confirm_sender=None,notification_type=None,additional_context=None):
     if not _channel_enabled(reference_doctype):frappe.throw(_("Notifications are disabled for this channel in HR Settings."))
     _validate_mapping(notification_type,reference_doctype)
@@ -64,9 +70,10 @@ def preview_recruitment_message(template,reference_doctype,reference_name,primar
     sets=_recipient_sets(primary_recipient,cc_json,users_json,confirm_sender)
     if not sets["to"]:frappe.throw(_("At least one primary recipient is required."))
     template_doc=frappe.get_doc("Email Template",template);ctx=doc.as_dict();ctx.update(company_branding(_company_from_doc(doc)));ctx.update(additional_context or {});ctx.update({"reference_doctype":reference_doctype,"reference_name":reference_name,"reference_label":doc.get("title") or doc.get("applicant_name") or doc.get("employee_name") or reference_name,"notification_type":notification_type})
-    subject=frappe.render_template(template_doc.subject,ctx);message=frappe.render_template(template_doc.response_html or template_doc.response,ctx)
+    subject=frappe.render_template(template_doc.subject,ctx);message=frappe.render_template(_template_body(template_doc),ctx)
     return {"template":template,"notification_type":notification_type,"recipients":sets["to"],"cc":sets["cc"],"additional_users":sets["additional_users"],"sender_copy":sets["sender_copy"],"reply_to":ctx.get("reply_to"),"subject":subject,"message":message,"branding":{k:ctx.get(k) for k in ("company_name","company_logo","header","primary","accent","light","border")},"reference_doctype":reference_doctype,"reference_name":reference_name,"requires_confirmation":bool(get_settings().require_recipient_confirmation)}
 
+@frappe.whitelist()
 def send_managed_recruitment_message(notification_type,template,reference_doctype,reference_name,primary_recipient=None,cc_json=None,users_json=None,force=0,additional_context=None):
     preview=preview_recruitment_message(template,reference_doctype,reference_name,primary_recipient,cc_json,users_json,None,notification_type,additional_context)
     raw="|".join([notification_type,reference_doctype,reference_name,template,",".join(sorted(preview["recipients"])),",".join(sorted(preview["cc"]))]);key=hashlib.sha256(raw.encode()).hexdigest()

@@ -545,3 +545,32 @@ for _doctype, (_query_method, _has_method) in _project_permission_map.items():
     has_permission[_doctype] = (
         "qorg.qorg.project_management.permissions." + _has_method
     )
+
+# People, opportunities and recruitment cycle integrity.
+def _qorg_people_add_event(doctype, event, handler):
+    current = doc_events.setdefault(doctype, {}).get(event)
+    if not current:
+        doc_events[doctype][event] = handler
+    elif isinstance(current, list):
+        if handler not in current:
+            current.append(handler)
+    elif current != handler:
+        doc_events[doctype][event] = [current, handler]
+
+for _doctype, _handler in (
+    ("External Person", "qorg.qorg.people_and_opportunities.cycle_integrity.validate_external_person_links"),
+    ("External Opportunity", "qorg.qorg.people_and_opportunities.cycle_integrity.validate_external_opportunity_links"),
+    ("Job Applicant", "qorg.qorg.people_and_opportunities.cycle_integrity.validate_job_applicant_person"),
+):
+    _qorg_people_add_event(_doctype, "validate", _handler)
+
+# Recruitment communication actions on operational forms.
+for _doctype in (
+    "Job Applicant", "Interview", "Interview Feedback", "Job Offer",
+    "Appointment Letter", "Employee Onboarding", "Employee Boarding Activity",
+    "Work Commencement Notice",
+):
+    doctype_js[_doctype] = list(dict.fromkeys(
+        ([doctype_js[_doctype]] if isinstance(doctype_js.get(_doctype), str) else list(doctype_js.get(_doctype) or []))
+        + ["public/js/recruitment_communications.js"]
+    ))
