@@ -6,7 +6,7 @@ from qorg.qorg.procurement_contracting.settings import get_setting
 class MaterialRequestProcurementMixin:
  def validate(self):
   super().validate()
-  if self.material_request_type!='Purchase' or not True: return
+  if self.material_request_type!='Purchase': return
   if not get_setting('enable_extended_procurement'): return
   if frappe.db.exists('DocType','Company Feature Settings'):
    enabled=frappe.db.get_value('Company Feature Settings',{'company':self.company},'extended_procurement')

@@ -20,24 +20,28 @@ def send_inventory_reminders():
             "custody_status": ["in", ["Active", "Return Due", "Overdue"]],
             "expected_return_date": ["<=", add_days(nowdate(), days)],
         },
-        fields=["name", "custodian"],
+        fields=["name", "custodian", "company", "expected_return_date", "custody_status"],
     )
     template = frappe.get_doc("Email Template", "Custody Return Reminder")
     for row in records:
-        email = (
-            frappe.db.get_value("Employee", row.custodian, "company_email")
-            or frappe.db.get_value("Employee", row.custodian, "personal_email")
-        )
+        email = frappe.db.get_value("Employee", row.custodian, "company_email") or frappe.db.get_value("Employee", row.custodian, "personal_email")
         if not email:
             continue
-        context = {"name": row.name, "record_url": get_url_to_form("Asset Custody", row.name)}
+        doc = frappe.get_doc("Asset Custody", row.name)
+        context = {
+            "doc": doc,
+            "name": row.name,
+            "record_url": get_url_to_form("Asset Custody", row.name),
+            "company": row.company,
+        }
         subject = frappe.render_template(template.subject, context)
         if _sent_today("Asset Custody", row.name, subject):
             continue
+        body = template.response if frappe.get_meta("Email Template").has_field("response") else getattr(template, "response_html", "")
         frappe.sendmail(
             recipients=[email],
             subject=subject,
-            message=frappe.render_template(template.response_html, context),
+            message=frappe.render_template(body or "", context),
             reference_doctype="Asset Custody",
             reference_name=row.name,
         )

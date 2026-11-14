@@ -3,7 +3,6 @@ from frappe import _
 from qorg.qorg.procurement_contracting.settings import get_setting
 
 def validate_purchase_invoice(doc,method=None):
-    if not True: return
     settings=frappe.get_single("Buying Settings")
     for row in doc.items:
         if not row.purchase_order: continue

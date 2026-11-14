@@ -11,7 +11,8 @@ def validate_stock_entry(doc,method=None):
   for name,source in ((row.s_warehouse,True),(row.t_warehouse,False)):
    if not name:continue
    p=policy(name); role=p.get('custom_warehouse_role')
-   if source and doc.purpose in {'Material Issue','Material Transfer'} and (role in BLOCKED or p.get('custom_issue_allowed')==0):frappe.throw(_('Issue is not allowed from warehouse {0}.').format(name))
+   quality_release=bool(getattr(doc,'custom_quality_inspection',None) and doc.purpose=='Material Transfer' and role=='Quarantine or Inspection')
+   if source and doc.purpose in {'Material Issue','Material Transfer'} and not quality_release and (role in BLOCKED or p.get('custom_issue_allowed')==0):frappe.throw(_('Issue is not allowed from warehouse {0}.').format(name))
    if not source and p.get('custom_receipt_allowed')==0:frappe.throw(_('Receipt is not allowed into warehouse {0}.').format(name))
    if doc.purpose=='Material Transfer' and p.get('custom_transfer_allowed')==0:frappe.throw(_('Transfer is not allowed for warehouse {0}.').format(name))
    if p.get('custom_project_restricted') and project!=p.get('custom_default_project'):frappe.throw(_('Warehouse {0} is restricted to project {1}.').format(name,p.get('custom_default_project')))

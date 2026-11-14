@@ -485,3 +485,17 @@ app_include_js = list(app_include_js) if isinstance(app_include_js,(list,tuple))
 if "/assets/qorg/js/inventory_cycle.js" not in app_include_js: app_include_js.append("/assets/qorg/js/inventory_cycle.js")
 scheduler_events.setdefault("daily",[])
 if "qorg.qorg.inventory_asset_custody.scheduled_tasks.send_inventory_reminders" not in scheduler_events["daily"]: scheduler_events["daily"].append("qorg.qorg.inventory_asset_custody.scheduled_tasks.send_inventory_reminders")
+
+# Quality inspection release, return and replacement transaction integrity.
+for _dt, _event, _handler in [
+    ("Stock Entry", "validate", "qorg.qorg.inventory_asset_custody.inspection_control.validate_generated_stock_entry"),
+    ("Stock Entry", "on_submit", "qorg.qorg.inventory_asset_custody.inspection_control.register_release_stock_entry"),
+    ("Stock Entry", "on_cancel", "qorg.qorg.inventory_asset_custody.inspection_control.unregister_release_stock_entry"),
+    ("Purchase Receipt", "validate", "qorg.qorg.inventory_asset_custody.inspection_control.validate_generated_return_receipt"),
+    ("Purchase Receipt", "on_submit", "qorg.qorg.inventory_asset_custody.inspection_control.register_return_purchase_receipt"),
+    ("Purchase Receipt", "on_cancel", "qorg.qorg.inventory_asset_custody.inspection_control.unregister_return_purchase_receipt"),
+]:
+    _inventory_event(_dt, _event, _handler)
+
+
+doctype_js["Request for Quotation"] = "public/js/request_for_quotation.js"

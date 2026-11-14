@@ -1,9 +1,24 @@
 import frappe
 from frappe import _
-def _email(template,recipient,reference_doctype,reference_name,context):
- if not recipient:frappe.throw(_('Recipient email is required.'))
- t=frappe.get_doc('Email Template',template);context.update({'name':reference_name,'record_url':frappe.utils.get_url_to_form(reference_doctype,reference_name)})
- frappe.sendmail(recipients=[recipient],subject=frappe.render_template(t.subject,context),message=frappe.render_template(t.response_html,context),reference_doctype=reference_doctype,reference_name=reference_name)
+def _email(template, recipient, reference_doctype, reference_name, context):
+    if not recipient:
+        frappe.throw(_("Recipient email is required."))
+    document = frappe.get_doc(reference_doctype, reference_name)
+    template_doc = frappe.get_doc("Email Template", template)
+    body_field = "response" if template_doc.meta.has_field("response") else "response_html"
+    context.update({
+        "doc": document,
+        "name": reference_name,
+        "record_url": frappe.utils.get_url_to_form(reference_doctype, reference_name),
+    })
+    frappe.sendmail(
+        recipients=[recipient],
+        subject=frappe.render_template(template_doc.subject, context),
+        message=frappe.render_template(template_doc.get(body_field) or "", context),
+        reference_doctype=reference_doctype,
+        reference_name=reference_name,
+    )
+
 @frappe.whitelist()
 def make_stock_handover(stock_entry):
  

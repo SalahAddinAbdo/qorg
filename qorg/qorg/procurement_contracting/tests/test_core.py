@@ -98,3 +98,16 @@ class CommitteeTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def test_rfq_extension_sources_are_integrated():
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[4]
+    provisioning = (root / "qorg/qorg/procurement_contracting/provisioning.py").read_text()
+    guards = (root / "qorg/qorg/procurement_contracting/standard_guards.py").read_text()
+    hooks = (root / "qorg/hooks.py").read_text()
+    for fieldname in ("custom_contact_employee", "custom_submission_deadline", "custom_delivery_location", "custom_bid_security_required", "custom_site_visit_required", "custom_required_documents"):
+        assert fieldname in provisioning
+    assert "validate_rfq_extensions(doc)" in guards
+    assert "public/js/request_for_quotation.js" in hooks
+    assert "procurement_inventory_v2" not in hooks

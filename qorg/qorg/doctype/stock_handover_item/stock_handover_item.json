@@ -17,6 +17,7 @@
     "issued_qty",
     "delivered_qty",
     "received_qty",
+    "accepted_qty",
     "rejected_qty",
     "short_qty",
     "damaged_qty",
@@ -73,7 +74,8 @@
       "fieldtype": "Float",
       "read_only": 1,
       "in_list_view": 1,
-      "columns": 1
+      "columns": 1,
+      "precision": "stock_precision"
     },
     {
       "fieldname": "delivered_qty",
@@ -81,30 +83,43 @@
       "fieldtype": "Float",
       "reqd": 1,
       "in_list_view": 1,
-      "columns": 1
+      "columns": 1,
+      "precision": "stock_precision"
     },
     {
       "fieldname": "received_qty",
       "label": "Received Quantity",
       "fieldtype": "Float",
       "in_list_view": 1,
-      "columns": 1
+      "columns": 1,
+      "precision": "stock_precision"
+    },
+    {
+      "fieldname": "accepted_qty",
+      "label": "Accepted Quantity",
+      "fieldtype": "Float",
+      "read_only": 1,
+      "in_list_view": 1,
+      "precision": "stock_precision"
     },
     {
       "fieldname": "rejected_qty",
       "label": "Rejected Quantity",
-      "fieldtype": "Float"
+      "fieldtype": "Float",
+      "precision": "stock_precision"
     },
     {
       "fieldname": "short_qty",
       "label": "Short Quantity",
       "fieldtype": "Float",
-      "read_only": 1
+      "read_only": 1,
+      "precision": "stock_precision"
     },
     {
       "fieldname": "damaged_qty",
       "label": "Damaged Quantity",
-      "fieldtype": "Float"
+      "fieldtype": "Float",
+      "precision": "stock_precision"
     },
     {
       "fieldname": "trace_section",

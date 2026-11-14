@@ -38,9 +38,10 @@ def validate_submission(doc, method=None):
     if duplicate and not doc.get("supersedes_submission"):
         frappe.throw(_("A bid already exists for this supplier. Create a version that supersedes the previous bid."))
 
-def withdraw_submission(name):
+def withdraw_submission(name, reason=None):
     doc=frappe.get_doc("Procurement Submission",name)
     if doc.owner!=frappe.session.user and "Procurement Manager" not in frappe.get_roles(): frappe.throw(_("Not permitted"),frappe.PermissionError)
     notice=frappe.get_doc("Procurement Notice",doc.procurement_notice)
     if now_datetime()>notice.deadline: frappe.throw(_("Bid cannot be withdrawn after the deadline."))
-    doc.db_set("submission_status","Withdrawn"); return True
+    if not reason: frappe.throw(_("Withdrawal reason is required."))
+    doc.db_set({"submission_status":"Withdrawn","withdrawal_reason":reason,"withdrawn_on":now_datetime()}); return True

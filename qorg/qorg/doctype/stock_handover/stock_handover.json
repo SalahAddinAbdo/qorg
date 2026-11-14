@@ -23,14 +23,46 @@
     "storekeeper",
     "recipient_type",
     "party_column",
+    "recipient_external_person",
     "recipient_employee",
+    "recipient_partner",
+    "recipient_supplier",
+    "recipient_transporter",
     "recipient_user",
     "external_recipient_name",
     "external_recipient_email",
+    "external_recipient_phone",
+    "external_recipient_capacity",
+    "external_recipient_id",
+    "authorization_attachment",
+    "usage_section",
+    "issue_usage_type",
+    "issue_purpose",
+    "beneficiary_reference",
+    "return_context_column",
+    "return_expected",
+    "expected_return_date",
     "delivery_section",
     "posting_date",
     "posting_time",
     "handover_location",
+    "delivery_method",
+    "origin_location",
+    "destination_location",
+    "transport_column",
+    "transport_provider",
+    "driver_name",
+    "driver_phone",
+    "vehicle_type",
+    "vehicle_number",
+    "waybill_number",
+    "departure_datetime",
+    "arrival_datetime",
+    "delivery_condition",
+    "proof_of_delivery",
+    "transport_cost",
+    "transport_cost_reference",
+    "delivery_remarks",
     "items_section",
     "items",
     "status_section",
@@ -38,8 +70,12 @@
     "discrepancy_status",
     "fully_acknowledged",
     "status_column",
+    "external_confirmation_method",
     "recipient_signature",
     "evidence",
+    "confirmation_datetime",
+    "verified_by_employee",
+    "witness_name",
     "remarks_section",
     "remarks",
     "custom_current_responsible_user",
@@ -134,7 +170,7 @@
       "fieldname": "recipient_type",
       "label": "Recipient Type",
       "fieldtype": "Select",
-      "options": "Employee\nExternal Person\nOrganization\nBeneficiary\nProject Site",
+      "options": "Employee\nExternal Person\nPartner Organization\nSupplier\nTransporter\nBeneficiary\nProject Site\nOther",
       "reqd": 1
     },
     {
@@ -143,27 +179,135 @@
       "fieldtype": "Column Break"
     },
     {
+      "fieldname": "recipient_external_person",
+      "label": "External Person",
+      "fieldtype": "Link",
+      "options": "External Person",
+      "depends_on": "eval:doc.recipient_type == 'External Person'",
+      "mandatory_depends_on": "eval:doc.recipient_type == 'External Person'"
+    },
+    {
       "fieldname": "recipient_employee",
       "label": "Recipient Employee",
       "fieldtype": "Link",
-      "options": "Employee"
+      "options": "Employee",
+      "depends_on": "eval:doc.recipient_type == 'Employee'",
+      "mandatory_depends_on": "eval:doc.recipient_type == 'Employee'"
+    },
+    {
+      "fieldname": "recipient_partner",
+      "label": "Partner Organization",
+      "fieldtype": "Link",
+      "options": "Partner",
+      "depends_on": "eval:doc.recipient_type == 'Partner Organization'",
+      "mandatory_depends_on": "eval:doc.recipient_type == 'Partner Organization'"
+    },
+    {
+      "fieldname": "recipient_supplier",
+      "label": "Supplier",
+      "fieldtype": "Link",
+      "options": "Supplier",
+      "depends_on": "eval:doc.recipient_type == 'Supplier'",
+      "mandatory_depends_on": "eval:doc.recipient_type == 'Supplier'"
+    },
+    {
+      "fieldname": "recipient_transporter",
+      "label": "Transporter",
+      "fieldtype": "Link",
+      "options": "Transporter",
+      "depends_on": "eval:doc.recipient_type == 'Transporter'",
+      "mandatory_depends_on": "eval:doc.recipient_type == 'Transporter'"
     },
     {
       "fieldname": "recipient_user",
       "label": "Recipient User",
       "fieldtype": "Link",
-      "options": "User"
+      "options": "User",
+      "depends_on": "eval:doc.recipient_type == 'Employee'"
     },
     {
       "fieldname": "external_recipient_name",
       "label": "External Recipient Name",
-      "fieldtype": "Data"
+      "fieldtype": "Data",
+      "depends_on": "eval:doc.recipient_type != 'Employee'",
+      "mandatory_depends_on": "eval:doc.recipient_type != 'Employee'"
     },
     {
       "fieldname": "external_recipient_email",
       "label": "External Recipient Email",
       "fieldtype": "Data",
-      "options": "Email"
+      "options": "Email",
+      "depends_on": "eval:doc.recipient_type != 'Employee'"
+    },
+    {
+      "fieldname": "external_recipient_phone",
+      "label": "External Recipient Phone",
+      "fieldtype": "Data",
+      "options": "Phone",
+      "depends_on": "eval:doc.recipient_type != 'Employee'"
+    },
+    {
+      "fieldname": "external_recipient_capacity",
+      "label": "Representative Capacity",
+      "fieldtype": "Data",
+      "depends_on": "eval:['Partner Organization','Supplier','Transporter','Other'].includes(doc.recipient_type)"
+    },
+    {
+      "fieldname": "external_recipient_id",
+      "label": "Recipient Identification",
+      "fieldtype": "Data",
+      "depends_on": "eval:doc.recipient_type != 'Employee'"
+    },
+    {
+      "fieldname": "authorization_attachment",
+      "label": "Authorization Attachment",
+      "fieldtype": "Attach",
+      "depends_on": "eval:['Partner Organization','Supplier','Transporter'].includes(doc.recipient_type)"
+    },
+    {
+      "fieldname": "usage_section",
+      "label": "Usage and Return",
+      "fieldtype": "Section Break",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "issue_usage_type",
+      "label": "Issue Usage Type",
+      "fieldtype": "Select",
+      "options": "Operational Consumption\nProject Activity\nBeneficiary Distribution\nField Location\nEmployee Custody\nTemporary Issue\nPartner Handover\nTransfer\nExternal Delivery\nReplacement\nEmergency Issue",
+      "mandatory_depends_on": "eval:doc.stock_entry"
+    },
+    {
+      "fieldname": "issue_purpose",
+      "label": "Issue Purpose",
+      "fieldtype": "Small Text",
+      "mandatory_depends_on": "eval:doc.issue_usage_type"
+    },
+    {
+      "fieldname": "beneficiary_reference",
+      "label": "Beneficiary List or Distribution Reference",
+      "fieldtype": "Data",
+      "depends_on": "eval:doc.issue_usage_type == 'Beneficiary Distribution'",
+      "mandatory_depends_on": "eval:doc.issue_usage_type == 'Beneficiary Distribution'"
+    },
+    {
+      "fieldname": "return_context_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "return_expected",
+      "label": "Return Expected",
+      "fieldtype": "Check",
+      "default": "0",
+      "depends_on": "eval:['Employee Custody','Temporary Issue'].includes(doc.issue_usage_type)"
+    },
+    {
+      "fieldname": "expected_return_date",
+      "label": "Expected Return Date",
+      "fieldtype": "Date",
+      "depends_on": "eval:doc.return_expected == 1",
+      "mandatory_depends_on": "eval:doc.return_expected == 1"
     },
     {
       "fieldname": "delivery_section",
@@ -186,6 +330,113 @@
       "fieldname": "handover_location",
       "label": "Handover Location",
       "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "delivery_method",
+      "label": "Delivery Method",
+      "fieldtype": "Select",
+      "options": "Organization Vehicle\nSupplier Delivery\nThird-Party Transporter\nRecipient Pickup\nCourier\nOther",
+      "mandatory_depends_on": "eval:['Transfer','External Delivery','Partner Handover','Beneficiary Distribution','Field Location'].includes(doc.issue_usage_type)"
+    },
+    {
+      "fieldname": "origin_location",
+      "label": "Origin Location",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:doc.delivery_method"
+    },
+    {
+      "fieldname": "destination_location",
+      "label": "Destination Location",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:doc.delivery_method",
+      "mandatory_depends_on": "eval:doc.delivery_method"
+    },
+    {
+      "fieldname": "transport_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "transport_provider",
+      "label": "Transport Provider",
+      "fieldtype": "Data",
+      "depends_on": "eval:['Supplier Delivery','Third-Party Transporter','Courier','Other'].includes(doc.delivery_method)",
+      "mandatory_depends_on": "eval:['Third-Party Transporter','Courier'].includes(doc.delivery_method)"
+    },
+    {
+      "fieldname": "driver_name",
+      "label": "Driver or Courier Name",
+      "fieldtype": "Data",
+      "depends_on": "eval:doc.delivery_method && doc.delivery_method != 'Recipient Pickup'"
+    },
+    {
+      "fieldname": "driver_phone",
+      "label": "Driver or Courier Phone",
+      "fieldtype": "Data",
+      "options": "Phone",
+      "depends_on": "eval:doc.delivery_method && doc.delivery_method != 'Recipient Pickup'"
+    },
+    {
+      "fieldname": "vehicle_type",
+      "label": "Vehicle Type",
+      "fieldtype": "Data",
+      "depends_on": "eval:['Organization Vehicle','Supplier Delivery','Third-Party Transporter'].includes(doc.delivery_method)"
+    },
+    {
+      "fieldname": "vehicle_number",
+      "label": "Vehicle or Plate Number",
+      "fieldtype": "Data",
+      "depends_on": "eval:['Organization Vehicle','Supplier Delivery','Third-Party Transporter'].includes(doc.delivery_method)"
+    },
+    {
+      "fieldname": "waybill_number",
+      "label": "Waybill or Dispatch Note",
+      "fieldtype": "Data",
+      "depends_on": "eval:doc.delivery_method && doc.delivery_method != 'Recipient Pickup'"
+    },
+    {
+      "fieldname": "departure_datetime",
+      "label": "Departure Date and Time",
+      "fieldtype": "Datetime",
+      "depends_on": "eval:doc.delivery_method"
+    },
+    {
+      "fieldname": "arrival_datetime",
+      "label": "Arrival Date and Time",
+      "fieldtype": "Datetime",
+      "depends_on": "eval:doc.delivery_method"
+    },
+    {
+      "fieldname": "delivery_condition",
+      "label": "Delivery Condition",
+      "fieldtype": "Select",
+      "options": "Good\nDamaged\nShort\nExcess\nMixed\nUnder Review",
+      "depends_on": "eval:doc.delivery_method"
+    },
+    {
+      "fieldname": "proof_of_delivery",
+      "label": "Proof of Delivery",
+      "fieldtype": "Attach",
+      "depends_on": "eval:doc.delivery_method"
+    },
+    {
+      "fieldname": "transport_cost",
+      "label": "Transport Cost",
+      "fieldtype": "Currency",
+      "depends_on": "eval:['Third-Party Transporter','Courier'].includes(doc.delivery_method)"
+    },
+    {
+      "fieldname": "transport_cost_reference",
+      "label": "Transport Cost Reference",
+      "fieldtype": "Data",
+      "depends_on": "eval:doc.transport_cost > 0"
+    },
+    {
+      "fieldname": "delivery_remarks",
+      "label": "Delivery Remarks",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:doc.delivery_condition && doc.delivery_condition != 'Good'",
+      "mandatory_depends_on": "eval:doc.delivery_condition && doc.delivery_condition != 'Good'"
     },
     {
       "fieldname": "items_section",
@@ -233,14 +484,46 @@
       "fieldtype": "Column Break"
     },
     {
+      "fieldname": "external_confirmation_method",
+      "label": "External Confirmation Method",
+      "fieldtype": "Select",
+      "options": "Direct Signature\nSigned Document\nEmail Confirmation\nWitnessed Confirmation",
+      "depends_on": "eval:doc.recipient_type != 'Employee'",
+      "mandatory_depends_on": "eval:doc.recipient_type != 'Employee'"
+    },
+    {
       "fieldname": "recipient_signature",
-      "label": "Recipient Signature",
-      "fieldtype": "Signature"
+      "label": "External Recipient Signature",
+      "fieldtype": "Signature",
+      "depends_on": "eval:doc.recipient_type != 'Employee' && doc.external_confirmation_method == 'Direct Signature'",
+      "mandatory_depends_on": "eval:doc.recipient_type != 'Employee' && doc.external_confirmation_method == 'Direct Signature' && doc.docstatus == 1"
     },
     {
       "fieldname": "evidence",
       "label": "Evidence",
-      "fieldtype": "Attach"
+      "fieldtype": "Attach",
+      "depends_on": "eval:doc.recipient_type != 'Employee' && doc.external_confirmation_method == 'Signed Document'",
+      "mandatory_depends_on": "eval:doc.recipient_type != 'Employee' && doc.external_confirmation_method == 'Signed Document' && doc.docstatus == 1"
+    },
+    {
+      "fieldname": "confirmation_datetime",
+      "label": "Confirmation Date and Time",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "verified_by_employee",
+      "label": "Verified By Employee",
+      "fieldtype": "Link",
+      "options": "Employee",
+      "depends_on": "eval:doc.recipient_type != 'Employee'"
+    },
+    {
+      "fieldname": "witness_name",
+      "label": "Witness Name",
+      "fieldtype": "Data",
+      "depends_on": "eval:doc.external_confirmation_method == 'Witnessed Confirmation'",
+      "mandatory_depends_on": "eval:doc.external_confirmation_method == 'Witnessed Confirmation'"
     },
     {
       "fieldname": "remarks_section",

@@ -266,3 +266,57 @@ def provision_procurement_contracting_v13_final():
     provision_workflows()
     provision_print_formats()
     provision_procurement_web_forms()
+
+# Request for Quotation extensions. Kept in procurement_contracting to avoid a parallel module.
+def _rfq_field(fieldname, label, fieldtype="Data", options=None, **kwargs):
+    field = {"fieldname": fieldname, "label": label, "fieldtype": fieldtype, "module": "QOrg", "is_system_generated": 1}
+    if options:
+        field["options"] = options
+    field.update(kwargs)
+    return field
+
+
+def provision_request_for_quotation_extensions():
+    fields = {"Request for Quotation": [
+        _rfq_field("qorg_quotation_section", "Quotation Contact and Submission", "Section Break", insert_after="schedule_date"),
+        _rfq_field("custom_procurement_process", "Procurement Process", "Link", "Procurement Process", insert_after="qorg_quotation_section", read_only=1, in_standard_filter=1),
+        _rfq_field("custom_contact_employee", "Contact Employee", "Link", "Employee", insert_after="custom_procurement_process"),
+        _rfq_field("custom_contact_name", "Contact Name", insert_after="custom_contact_employee", read_only=1),
+        _rfq_field("custom_contact_designation", "Contact Designation", insert_after="custom_contact_name", read_only=1),
+        _rfq_field("qorg_contact_column", "", "Column Break", insert_after="custom_contact_designation"),
+        _rfq_field("custom_contact_phone", "Contact Phone", "Data", "Phone", insert_after="qorg_contact_column"),
+        _rfq_field("custom_contact_email", "Contact Email", "Data", "Email", insert_after="custom_contact_phone"),
+        _rfq_field("custom_submission_deadline", "Submission Deadline", "Datetime", insert_after="custom_contact_email"),
+        _rfq_field("custom_submission_method", "Submission Method", "Select", "Supplier Portal\nEmail\nSealed Envelope\nTwo Envelope\nOther", insert_after="custom_submission_deadline"),
+        _rfq_field("custom_submission_location", "Submission Location", "Small Text", insert_after="custom_submission_method", depends_on='eval:["Sealed Envelope","Two Envelope","Other"].includes(doc.custom_submission_method)'),
+        _rfq_field("custom_submission_instructions", "Submission Instructions", "Text Editor", insert_after="custom_submission_location"),
+        _rfq_field("qorg_delivery_section", "Delivery and Commercial Terms", "Section Break", insert_after="custom_submission_instructions"),
+        _rfq_field("custom_delivery_location", "Delivery Location", "Small Text", insert_after="qorg_delivery_section", mandatory_depends_on="eval:doc.docstatus == 1"),
+        _rfq_field("qorg_terms_column", "", "Column Break", insert_after="custom_delivery_location"),
+        _rfq_field("custom_offer_validity_days", "Offer Validity Days", "Int", insert_after="qorg_terms_column", default="30", non_negative=1),
+        _rfq_field("custom_payment_terms", "Payment Terms", "Small Text", insert_after="custom_offer_validity_days"),
+        _rfq_field("custom_prices_include_tax", "Prices Include Taxes", "Check", insert_after="custom_payment_terms"),
+        _rfq_field("custom_prices_include_delivery", "Prices Include Delivery", "Check", insert_after="custom_prices_include_tax"),
+        _rfq_field("qorg_requirements_section", "Security, Visit and Documents", "Section Break", insert_after="custom_prices_include_delivery"),
+        _rfq_field("custom_bid_security_required", "Bid Security Required", "Check", insert_after="qorg_requirements_section"),
+        _rfq_field("custom_bid_security_amount", "Bid Security Amount", "Currency", insert_after="custom_bid_security_required", depends_on="eval:doc.custom_bid_security_required == 1", mandatory_depends_on="eval:doc.custom_bid_security_required == 1"),
+        _rfq_field("custom_bid_security_validity", "Bid Security Validity Days", "Int", insert_after="custom_bid_security_amount", depends_on="eval:doc.custom_bid_security_required == 1", mandatory_depends_on="eval:doc.custom_bid_security_required == 1", non_negative=1),
+        _rfq_field("qorg_visit_column", "", "Column Break", insert_after="custom_bid_security_validity"),
+        _rfq_field("custom_site_visit_required", "Site Visit Required", "Check", insert_after="qorg_visit_column"),
+        _rfq_field("custom_site_visit_datetime", "Site Visit Date and Time", "Datetime", insert_after="custom_site_visit_required", depends_on="eval:doc.custom_site_visit_required == 1", mandatory_depends_on="eval:doc.custom_site_visit_required == 1"),
+        _rfq_field("custom_site_visit_location", "Site Visit Location", "Small Text", insert_after="custom_site_visit_datetime", depends_on="eval:doc.custom_site_visit_required == 1", mandatory_depends_on="eval:doc.custom_site_visit_required == 1"),
+        _rfq_field("custom_required_documents", "Required Documents", "Text Editor", insert_after="custom_site_visit_location"),
+    ]}
+    create_custom_fields_if_changed(fields, update=True)
+    frappe.clear_cache(doctype="Request for Quotation")
+
+
+# Wrap the existing final provisioner once so all procurement records converge together.
+_provision_procurement_contracting_v13_final = provision_procurement_contracting_v13_final
+def provision_procurement_contracting_v13_final():
+    _provision_procurement_contracting_v13_final()
+    provision_request_for_quotation_extensions()
+    from qorg.qorg.procurement_contracting.communications import provision_email_templates
+    from qorg.qorg.procurement_contracting.notifications import provision as provision_managed_notifications
+    provision_email_templates()
+    provision_managed_notifications()

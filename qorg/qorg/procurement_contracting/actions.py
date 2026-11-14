@@ -29,6 +29,7 @@ def create_or_open_procurement_process(material_request):
  if doc.custom_procurement_next_action!="Create Procurement Process":frappe.throw(_("The applied procurement policy does not permit a Procurement Process."))
  existing=frappe.db.get_value("Procurement Process",{"material_request":doc.name,"docstatus":["<",2]},"name")
  if existing:return existing
+ if not frappe.has_permission("Procurement Process","create"):frappe.throw(_("Not permitted to create Procurement Process."),frappe.PermissionError)
  process=frappe.get_doc({"doctype":"Procurement Process","material_request":doc.name,"company":doc.company,"project":doc.project,"currency":frappe.get_cached_value("Company",doc.company,"default_currency"),"estimated_value":doc.custom_estimated_procurement_value,"procurement_type":doc.custom_procurement_type,"policy_rule":doc.custom_procurement_policy_rule,"procurement_method":doc.custom_procurement_method,"title":doc.title or doc.name})
  process.insert();return process.name
 
@@ -37,6 +38,7 @@ def create_or_open_process_stage(process_name,target_doctype,defaults=None):
  if target_doctype not in PROCESS_STAGES:frappe.throw(_("Unsupported procurement stage."))
  process=frappe.get_doc("Procurement Process",process_name);process.check_permission("read");spec=PROCESS_STAGES[target_doctype]
  if process.status not in spec["states"]:frappe.throw(_("{0} cannot be created while the process is in {1}.").format(target_doctype,process.status))
+ if not frappe.has_permission(target_doctype,"create"):frappe.throw(_("Not permitted to create {0}.").format(target_doctype),frappe.PermissionError)
  values={"doctype":target_doctype,spec["field"]:process.name}
  if defaults:
   if isinstance(defaults,str):defaults=frappe.parse_json(defaults)
@@ -63,6 +65,7 @@ def create_or_open_contract_record(contract_name,target_doctype):
  allowed={"Commitment Ledger":"procurement_process","Procure Acceptance":"procurement_process","Procurement Amendment":"procurement_process"}
  if target_doctype not in allowed:frappe.throw(_("Unsupported contract action."))
  contract=frappe.get_doc("Procurement Contract",contract_name);contract.check_permission("read")
+ if not frappe.has_permission(target_doctype,"create"):frappe.throw(_("Not permitted to create {0}.").format(target_doctype),frappe.PermissionError)
  if contract.status not in ("Active","Under Approval"):frappe.throw(_("The contract must be active or under approval."))
  filters={allowed[target_doctype]:contract.procurement_process,"docstatus":["<",2]}
  if target_doctype=="Commitment Ledger":

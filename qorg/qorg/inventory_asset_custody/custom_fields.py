@@ -24,6 +24,71 @@ def definitions():
  add(out,'Asset Movement',[f('custody_context_section','Custody Context','Section Break',insert_after='purpose',collapsible=1),f('custom_asset_custody','Asset Custody','Link','Asset Custody',insert_after='custody_context_section',read_only=1),f('custom_project','Project','Link','Project',insert_after='custom_asset_custody'),f('custody_context_column','','Column Break',insert_after='custom_project'),f('custom_funding_source','Funding Source','Link','Project Funding Source',insert_after='custody_context_column'),f('custom_expected_return_date','Expected Return Date','Date',insert_after='custom_funding_source'),f('custom_return_against_movement','Return Against Movement','Link','Asset Movement',insert_after='custom_expected_return_date')])
  for dt in ('Employee Separation','Employee Offboarding'):
   add(out,dt,[f('custody_clearance_section','Custody Clearance','Section Break',insert_after='employee',collapsible=1),f('custom_custody_exception_approved','Custody Exception Approved','Check',insert_after='custody_clearance_section'),f('custom_custody_exception_reason','Custody Exception Reason','Small Text',insert_after='custom_custody_exception_approved')])
+
+ # Acceptance and reinspection fields added without replacing standard ERPNext fields.
+ add(out,'Purchase Receipt Item',[
+  f('custom_rejected_qty','Rejected Quantity','Float',insert_after='custom_accepted_qty',default='0'),
+ ])
+ add(out,'Stock Entry',[
+  f('custom_quality_inspection','Quality Inspection','Link','Quality Inspection',insert_after='custom_return_against_stock_entry',read_only=1),
+ ])
+ add(out,'Purchase Receipt',[
+  f('custom_quality_inspection','Quality Inspection','Link','Quality Inspection',insert_after='custom_procurement_acceptance',read_only=1),
+ ])
+ add(out,'Quality Inspection',[
+  f('custom_release_stock_entry','Release Stock Entry','Link','Stock Entry',insert_after='custom_release_action',read_only=1),
+  f('custom_return_purchase_receipt','Return Purchase Receipt','Link','Purchase Receipt',insert_after='custom_release_stock_entry',read_only=1),
+  f('custom_replacement_reference','Replacement Reference','Data',insert_after='custom_return_purchase_receipt',read_only=1),
+ ])
+ add(out,'Stock Entry Detail',[
+  f('custom_return_against_stock_entry_detail','Return Against Stock Entry Detail','Link','Stock Entry Detail',insert_after='material_request_item',depends_on='eval:parent.custom_return_against_stock_entry'),
+ ])
+ add(out,'Quality Inspection',[
+  f('custom_purchase_receipt_item','Purchase Receipt Item','Link','Purchase Receipt Item',insert_after='custom_purchase_receipt',read_only=1),
+  f('custom_previous_quality_inspection','Previous Quality Inspection','Link','Quality Inspection',insert_after='custom_purchase_receipt_item',depends_on="eval:doc.custom_qorg_result == 'Reinspection Required'",mandatory_depends_on="eval:doc.custom_qorg_result == 'Reinspection Required'"),
+  f('custom_reinspection_number','Reinspection Number','Int',insert_after='custom_previous_quality_inspection',read_only=1,default='0'),
+ ])
+ # Complete conditional behavior for issue requests without duplicating fields.
+ for row in out.get('Material Request', []):
+  if row.get('fieldname') == 'custom_issue_usage_type':
+   row['mandatory_depends_on'] = 'eval:doc.material_request_type == "Material Issue"'
+  elif row.get('fieldname') == 'custom_issue_purpose':
+   row['mandatory_depends_on'] = 'eval:doc.material_request_type == "Material Issue" && doc.custom_issue_usage_type'
+  elif row.get('fieldname') == 'custom_activity_reference':
+   row['depends_on'] = 'eval:["Project Activity","Beneficiary Distribution","Field Location"].includes(doc.custom_issue_usage_type)'
+   row['mandatory_depends_on'] = 'eval:doc.custom_issue_usage_type == "Project Activity"'
+  elif row.get('fieldname') == 'custom_delivery_location':
+   row['depends_on'] = 'eval:["Project Activity","Beneficiary Distribution","Field Location","Partner Handover","Transfer","External Delivery","Emergency Issue"].includes(doc.custom_issue_usage_type)'
+   row['mandatory_depends_on'] = 'eval:["Beneficiary Distribution","Field Location","Partner Handover","Transfer","External Delivery"].includes(doc.custom_issue_usage_type)'
+  elif row.get('fieldname') == 'custom_recipient_type':
+   row['mandatory_depends_on'] = 'eval:doc.material_request_type == "Material Issue"'
+  elif row.get('fieldname') == 'custom_recipient_employee':
+   row['depends_on'] = 'eval:doc.custom_recipient_type == "Employee"'
+   row['mandatory_depends_on'] = 'eval:doc.custom_recipient_type == "Employee"'
+  elif row.get('fieldname') == 'custom_required_delivery_date':
+   row['depends_on'] = 'eval:["Project Activity","Beneficiary Distribution","Field Location","Partner Handover","Transfer","External Delivery"].includes(doc.custom_issue_usage_type)'
+  elif row.get('fieldname') == 'custom_return_expected':
+   row['depends_on'] = 'eval:["Employee Use","Temporary Issue"].includes(doc.custom_issue_usage_type)'
+  elif row.get('fieldname') == 'custom_expected_return_date':
+   row['depends_on'] = 'eval:doc.custom_return_expected == 1'
+   row['mandatory_depends_on'] = 'eval:doc.custom_return_expected == 1'
+
+ # Transport and arrival data on the standard Purchase Receipt.
+ add(out,'Purchase Receipt',[
+  f('delivery_transport_section','Delivery and Transport','Section Break',insert_after='supplier_delivery_note',collapsible=1),
+  f('custom_delivery_method','Delivery Method','Select','Supplier Delivery\nOrganization Vehicle\nThird-Party Transporter\nRecipient Pickup\nCourier\nOther',insert_after='delivery_transport_section'),
+  f('custom_transport_provider','Transport Provider','Data',insert_after='custom_delivery_method',depends_on='eval:["Third-Party Transporter","Courier","Other"].includes(doc.custom_delivery_method)',mandatory_depends_on='eval:["Third-Party Transporter","Courier"].includes(doc.custom_delivery_method)'),
+  f('custom_driver_name','Driver or Courier Name','Data',insert_after='custom_transport_provider',depends_on='eval:doc.custom_delivery_method && doc.custom_delivery_method != "Recipient Pickup"'),
+  f('custom_driver_phone','Driver or Courier Phone','Data','Phone',insert_after='custom_driver_name',depends_on='eval:doc.custom_delivery_method && doc.custom_delivery_method != "Recipient Pickup"'),
+  f('delivery_transport_column','', 'Column Break',insert_after='custom_driver_phone'),
+  f('custom_vehicle_type','Vehicle Type','Data',insert_after='delivery_transport_column',depends_on='eval:["Supplier Delivery","Organization Vehicle","Third-Party Transporter"].includes(doc.custom_delivery_method)'),
+  f('custom_vehicle_number','Vehicle or Plate Number','Data',insert_after='custom_vehicle_type',depends_on='eval:["Supplier Delivery","Organization Vehicle","Third-Party Transporter"].includes(doc.custom_delivery_method)',mandatory_depends_on='eval:["Organization Vehicle","Third-Party Transporter"].includes(doc.custom_delivery_method)'),
+  f('custom_waybill_number','Waybill or Dispatch Note','Data',insert_after='custom_vehicle_number',depends_on='eval:doc.custom_delivery_method && doc.custom_delivery_method != "Recipient Pickup"'),
+  f('custom_arrival_datetime','Arrival Date and Time','Datetime',insert_after='custom_waybill_number',depends_on='eval:doc.custom_delivery_method'),
+  f('custom_delivery_condition','Delivery Condition','Select','Good\nDamaged\nShort\nExcess\nMixed\nUnder Review',insert_after='custom_arrival_datetime',depends_on='eval:doc.custom_delivery_method'),
+  f('custom_delivery_evidence','Delivery Evidence','Attach',insert_after='custom_delivery_condition',depends_on='eval:doc.custom_delivery_method'),
+  f('custom_delivery_remarks','Delivery Remarks','Small Text',insert_after='custom_delivery_evidence',depends_on='eval:doc.custom_delivery_condition && doc.custom_delivery_condition != "Good"',mandatory_depends_on='eval:doc.custom_delivery_condition && doc.custom_delivery_condition != "Good"'),
+ ])
  return out
 
 def provision_custom_fields():
