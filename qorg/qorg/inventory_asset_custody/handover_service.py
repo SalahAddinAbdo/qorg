@@ -20,6 +20,7 @@ def populate_from_stock_entry(doc):
     doc.funding_source = getattr(stock_entry, "custom_funding_source", None)
     doc.workplan_activity = getattr(stock_entry, "custom_workplan_activity", None)
     doc.handed_over_by = frappe.session.user
+    doc.currency = frappe.db.get_value("Company", stock_entry.company, "default_currency")
     if doc.material_request and frappe.db.exists("Material Request", doc.material_request):
         request = frappe.db.get_value(
             "Material Request",
@@ -40,6 +41,8 @@ def populate_from_stock_entry(doc):
             "item_code": row.item_code,
             "item_name": row.item_name,
             "uom": row.uom,
+            "unit_cost": flt(getattr(row, "basic_rate", None) or getattr(row, "valuation_rate", None)),
+            "total_cost": flt(row.qty) * flt(getattr(row, "basic_rate", None) or getattr(row, "valuation_rate", None)),
             "issued_qty": row.qty,
             "delivered_qty": row.qty,
             "received_qty": row.qty,
@@ -122,6 +125,8 @@ def _validate_delivery(doc):
 
 
 def validate_handover(doc):
+    if doc.show_costs_in_print and not ({"Stock Manager", "Accounts Manager", "System Manager"} & set(frappe.get_roles())):
+        frappe.throw(_("Only Stock Manager, Accounts Manager, or System Manager can enable costs in print."), frappe.PermissionError)
     duplicate = frappe.db.exists("Stock Handover", {
         "stock_entry": doc.stock_entry,
         "name": ["!=", doc.name or ""],
@@ -139,6 +144,11 @@ def validate_handover(doc):
             frappe.throw(_("Activity Reference must belong to Project {0}.").format(doc.project))
 
     difference = False
+    item_codes = set()
+    total_quantity = 0
+    total_cost = 0
+    if not doc.currency and doc.company:
+        doc.currency = frappe.db.get_value("Company", doc.company, "default_currency")
     for row in doc.items:
         issued = flt(row.issued_qty)
         delivered = flt(row.delivered_qty)
@@ -155,6 +165,17 @@ def validate_handover(doc):
             frappe.throw(_("Row {0}: accepted, rejected, damaged and short quantities must equal delivered quantity.").format(row.idx))
         row.accepted_qty = accepted
         row.short_qty = short
+        row.unit_cost = flt(row.unit_cost)
+        if row.unit_cost <= EPSILON and row.stock_entry_detail:
+            source_cost = frappe.db.get_value("Stock Entry Detail", row.stock_entry_detail, ["basic_rate", "valuation_rate"], as_dict=True) or {}
+            row.unit_cost = flt(source_cost.get("basic_rate") or source_cost.get("valuation_rate"))
+        if row.unit_cost < 0:
+            frappe.throw(_("Row {0}: Unit Cost cannot be negative.").format(row.idx))
+        row.total_cost = delivered * row.unit_cost
+        if delivered > EPSILON:
+            item_codes.add(row.item_code)
+        total_quantity += delivered
+        total_cost += row.total_cost
         if short > EPSILON:
             row.discrepancy_type = row.discrepancy_type or "Short"
         elif damaged > EPSILON:
@@ -164,6 +185,10 @@ def validate_handover(doc):
         if (short > EPSILON or rejected > EPSILON or damaged > EPSILON) and not row.corrective_action:
             frappe.throw(_("Row {0}: Corrective Action is required for discrepancies.").format(row.idx))
         difference = bool(difference or short > EPSILON or rejected > EPSILON or damaged > EPSILON)
+
+    doc.total_item_count = len(item_codes)
+    doc.total_delivered_quantity = total_quantity
+    doc.total_items_cost = total_cost
 
     if difference:
         doc.discrepancy_status = "Open"
@@ -182,3 +207,57 @@ def validate_handover(doc):
 def mark_confirmation(doc):
     if doc.recipient_type != "Employee" and not doc.confirmation_datetime:
         doc.db_set("confirmation_datetime", now_datetime(), update_modified=False)
+
+STOCK_HANDOVER_PRINT_FORMAT = "Stock Handover Record"
+STOCK_HANDOVER_PRINT_MARKER = "<!-- QORG STOCK HANDOVER PRINT v2.8 -->"
+STOCK_HANDOVER_PRINT_HTML = STOCK_HANDOVER_PRINT_MARKER + r'''
+{% set show_costs = doc.show_costs_in_print == 1 %}
+{% set company = frappe.get_doc("Company", doc.company) if doc.company else none %}
+{% set primary = (company.get('custom_print_primary_color') if company else none) or '#176B87' %}
+<div style="font-family:Arial,Tahoma,sans-serif;color:#243342">
+<table width="100%" style="border-collapse:collapse;border-bottom:4px solid {{ primary }};margin-bottom:16px"><tr>
+<td>{% if company and company.company_logo %}<img src="{{ company.company_logo }}" style="max-height:58px;max-width:190px">{% else %}<strong>{{ company.company_name if company else '' }}</strong>{% endif %}</td>
+<td style="text-align:right"><h2 style="margin:0;color:{{ primary }}">{{ _("Stock Handover Record") }}</h2><strong>{{ doc.name }}</strong></td>
+</tr></table>
+<table width="100%" style="border-collapse:collapse;margin-bottom:14px"><tr>
+<td style="padding:5px"><strong>{{ _("Company") }}:</strong> {{ doc.company or '' }}</td>
+<td style="padding:5px"><strong>{{ _("Stock Entry") }}:</strong> {{ doc.stock_entry or '' }}</td>
+<td style="padding:5px"><strong>{{ _("Handover Date") }}:</strong> {{ frappe.utils.format_date(doc.posting_date) if doc.posting_date else '' }}</td>
+</tr></table>
+<table width="100%" style="border-collapse:collapse;font-size:10px">
+<thead><tr style="background:{{ primary }};color:#fff">
+<th style="padding:6px;border:1px solid #C9D6DC">#</th><th style="padding:6px;border:1px solid #C9D6DC">{{ _("Item") }}</th><th style="padding:6px;border:1px solid #C9D6DC">{{ _("UOM") }}</th>
+<th style="padding:6px;border:1px solid #C9D6DC">{{ _("Delivered") }}</th><th style="padding:6px;border:1px solid #C9D6DC">{{ _("Accepted") }}</th><th style="padding:6px;border:1px solid #C9D6DC">{{ _("Rejected") }}</th><th style="padding:6px;border:1px solid #C9D6DC">{{ _("Damaged") }}</th><th style="padding:6px;border:1px solid #C9D6DC">{{ _("Short") }}</th>
+{% if show_costs %}<th style="padding:6px;border:1px solid #C9D6DC">{{ _("Unit Cost") }}</th><th style="padding:6px;border:1px solid #C9D6DC">{{ _("Total Cost") }}</th>{% endif %}
+</tr></thead><tbody>
+{% for row in doc.items %}<tr>
+<td style="padding:5px;border:1px solid #C9D6DC">{{ row.idx }}</td><td style="padding:5px;border:1px solid #C9D6DC">{{ row.item_code }}{% if row.item_name %}<br>{{ row.item_name }}{% endif %}</td><td style="padding:5px;border:1px solid #C9D6DC">{{ row.uom }}</td>
+<td style="padding:5px;border:1px solid #C9D6DC">{{ row.delivered_qty }}</td><td style="padding:5px;border:1px solid #C9D6DC">{{ row.accepted_qty }}</td><td style="padding:5px;border:1px solid #C9D6DC">{{ row.rejected_qty }}</td><td style="padding:5px;border:1px solid #C9D6DC">{{ row.damaged_qty }}</td><td style="padding:5px;border:1px solid #C9D6DC">{{ row.short_qty }}</td>
+{% if show_costs %}<td style="padding:5px;border:1px solid #C9D6DC">{{ frappe.utils.fmt_money(row.unit_cost, currency=doc.currency) }}</td><td style="padding:5px;border:1px solid #C9D6DC">{{ frappe.utils.fmt_money(row.total_cost, currency=doc.currency) }}</td>{% endif %}
+</tr>{% endfor %}</tbody></table>
+<table width="100%" style="border-collapse:collapse;margin-top:12px;background:#F7FAFB"><tr>
+<td style="padding:7px;border:1px solid #C9D6DC"><strong>{{ _("Total Item Count") }}:</strong> {{ doc.total_item_count }}</td>
+<td style="padding:7px;border:1px solid #C9D6DC"><strong>{{ _("Total Delivered Quantity") }}:</strong> {{ doc.total_delivered_quantity }}</td>
+{% if show_costs %}<td style="padding:7px;border:1px solid #C9D6DC"><strong>{{ _("Total Items Cost") }}:</strong> {{ frappe.utils.fmt_money(doc.total_items_cost, currency=doc.currency) }}</td>{% endif %}
+</tr></table>
+{% if not show_costs %}<p style="font-size:9px;color:#667780;text-align:right">{{ _("Cost information is intentionally hidden for this print.") }}</p>{% endif %}
+</div>'''
+
+
+def provision_stock_handover_print_format():
+    values = {
+        "doc_type": "Stock Handover",
+        "print_format_type": "Jinja",
+        "custom_format": 1,
+        "disabled": 0,
+        "html": STOCK_HANDOVER_PRINT_HTML,
+        "module": "QOrg",
+        "standard": "No",
+    }
+    if frappe.db.exists("Print Format", STOCK_HANDOVER_PRINT_FORMAT):
+        doc = frappe.get_doc("Print Format", STOCK_HANDOVER_PRINT_FORMAT)
+        for fieldname, value in values.items():
+            doc.set(fieldname, value)
+        doc.save(ignore_permissions=True)
+    else:
+        frappe.get_doc({"doctype": "Print Format", "name": STOCK_HANDOVER_PRINT_FORMAT, **values}).insert(ignore_permissions=True)

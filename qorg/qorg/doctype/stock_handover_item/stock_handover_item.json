@@ -13,6 +13,8 @@
     "item_code",
     "item_name",
     "uom",
+    "unit_cost",
+    "total_cost",
     "quantity_column",
     "issued_qty",
     "delivered_qty",
@@ -46,22 +48,42 @@
       "fieldtype": "Link",
       "options": "Item",
       "reqd": 1,
-      "in_list_view": 1,
-      "columns": 2
+      "columns": 2,
+      "in_list_view": 1
     },
     {
       "fieldname": "item_name",
       "label": "Item Name",
       "fieldtype": "Data",
       "read_only": 1,
-      "in_list_view": 1,
       "columns": 2
     },
     {
       "fieldname": "uom",
       "label": "UOM",
       "fieldtype": "Link",
-      "options": "UOM"
+      "options": "UOM",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "unit_cost",
+      "label": "Unit Cost",
+      "fieldtype": "Currency",
+      "options": "currency",
+      "read_only": 1,
+      "columns": 1,
+      "precision": "currency_precision",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "total_cost",
+      "label": "Total Cost",
+      "fieldtype": "Currency",
+      "options": "currency",
+      "read_only": 1,
+      "columns": 1,
+      "precision": "currency_precision",
+      "in_list_view": 1
     },
     {
       "fieldname": "quantity_column",
@@ -73,7 +95,6 @@
       "label": "Issued Quantity",
       "fieldtype": "Float",
       "read_only": 1,
-      "in_list_view": 1,
       "columns": 1,
       "precision": "stock_precision"
     },
@@ -82,15 +103,14 @@
       "label": "Delivered Quantity",
       "fieldtype": "Float",
       "reqd": 1,
-      "in_list_view": 1,
       "columns": 1,
-      "precision": "stock_precision"
+      "precision": "stock_precision",
+      "in_list_view": 1
     },
     {
       "fieldname": "received_qty",
       "label": "Received Quantity",
       "fieldtype": "Float",
-      "in_list_view": 1,
       "columns": 1,
       "precision": "stock_precision"
     },
@@ -99,21 +119,23 @@
       "label": "Accepted Quantity",
       "fieldtype": "Float",
       "read_only": 1,
-      "in_list_view": 1,
-      "precision": "stock_precision"
+      "precision": "stock_precision",
+      "in_list_view": 1
     },
     {
       "fieldname": "rejected_qty",
       "label": "Rejected Quantity",
       "fieldtype": "Float",
-      "precision": "stock_precision"
+      "precision": "stock_precision",
+      "in_list_view": 1
     },
     {
       "fieldname": "short_qty",
       "label": "Short Quantity",
       "fieldtype": "Float",
       "read_only": 1,
-      "precision": "stock_precision"
+      "precision": "stock_precision",
+      "in_list_view": 1
     },
     {
       "fieldname": "damaged_qty",
@@ -147,7 +169,6 @@
       "label": "Discrepancy Type",
       "fieldtype": "Select",
       "options": "\nShortage\nDamage\nRejected\nWrong Item\nBatch or Serial Mismatch\nOther",
-      "in_list_view": 1,
       "columns": 2
     },
     {

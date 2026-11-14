@@ -126,4 +126,6 @@ def _migrate_and_remove_legacy_activity_references():
 def provision_custom_fields():
  defs=definitions();create_custom_fields_if_changed(defs,update=True)
  _migrate_and_remove_legacy_activity_references()
+ from qorg.qorg.inventory_asset_custody.handover_service import provision_stock_handover_print_format
+ provision_stock_handover_print_format()
  for dt in defs:frappe.clear_cache(doctype=dt)

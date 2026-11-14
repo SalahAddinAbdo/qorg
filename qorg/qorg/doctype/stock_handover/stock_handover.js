@@ -6,12 +6,24 @@ function recalculate_handover_row(frm, cdt, cdn) {
   const damaged = flt(row.damaged_qty);
   const accepted = Math.max(received - rejected - damaged, 0);
   const short = Math.max(delivered - received, 0);
+  const totalCost = delivered * flt(row.unit_cost);
   frappe.model.set_value(cdt, cdn, "accepted_qty", accepted);
   frappe.model.set_value(cdt, cdn, "short_qty", short);
+  frappe.model.set_value(cdt, cdn, "total_cost", totalCost);
+  recalculate_handover_totals(frm);
+}
+
+function recalculate_handover_totals(frm) {
+  const rows = frm.doc.items || [];
+  const activeRows = rows.filter((row) => flt(row.delivered_qty) > 0);
+  frm.set_value("total_item_count", new Set(activeRows.map((row) => row.item_code).filter(Boolean)).size);
+  frm.set_value("total_delivered_quantity", activeRows.reduce((sum, row) => sum + flt(row.delivered_qty), 0));
+  frm.set_value("total_items_cost", activeRows.reduce((sum, row) => sum + flt(row.delivered_qty) * flt(row.unit_cost), 0));
 }
 
 frappe.ui.form.on("Stock Handover", {
   refresh(frm) {
+    recalculate_handover_totals(frm);
     if (!frm.is_new() && frm.doc.docstatus < 2 && frm.doc.recipient_type !== "Employee" && frm.doc.external_recipient_email) {
       frm.add_custom_button(__("Send Acknowledgement Email"), () => {
         frappe.call({
@@ -93,5 +105,7 @@ frappe.ui.form.on("Stock Handover Item", {
   delivered_qty: recalculate_handover_row,
   received_qty: recalculate_handover_row,
   rejected_qty: recalculate_handover_row,
-  damaged_qty: recalculate_handover_row
+  damaged_qty: recalculate_handover_row,
+  unit_cost: recalculate_handover_row,
+  items_remove(frm) { recalculate_handover_totals(frm); }
 });

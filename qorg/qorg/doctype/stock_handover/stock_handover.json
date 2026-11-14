@@ -67,6 +67,13 @@
     "delivery_remarks",
     "items_section",
     "items",
+    "items_summary_section",
+    "total_item_count",
+    "total_delivered_quantity",
+    "items_summary_column",
+    "currency",
+    "total_items_cost",
+    "show_costs_in_print",
     "status_section",
     "handover_status",
     "discrepancy_status",
@@ -469,6 +476,56 @@
       "fieldtype": "Table",
       "options": "Stock Handover Item",
       "reqd": 1
+    },
+    {
+      "fieldname": "items_summary_section",
+      "label": "Items Summary",
+      "fieldtype": "Section Break",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "total_item_count",
+      "label": "Total Item Count",
+      "fieldtype": "Int",
+      "read_only": 1,
+      "default": "0"
+    },
+    {
+      "fieldname": "total_delivered_quantity",
+      "label": "Total Delivered Quantity",
+      "fieldtype": "Float",
+      "read_only": 1,
+      "default": "0",
+      "precision": "stock_precision"
+    },
+    {
+      "fieldname": "items_summary_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "currency",
+      "label": "Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "total_items_cost",
+      "label": "Total Items Cost",
+      "fieldtype": "Currency",
+      "options": "currency",
+      "read_only": 1,
+      "default": "0",
+      "precision": "currency_precision"
+    },
+    {
+      "fieldname": "show_costs_in_print",
+      "label": "Show Item Costs in Print",
+      "fieldtype": "Check",
+      "default": "0",
+      "description": "When enabled, the Stock Handover Record print format shows unit cost and total cost.",
+      "allow_on_submit": 1
     },
     {
       "fieldname": "status_section",

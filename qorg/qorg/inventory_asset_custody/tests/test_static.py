@@ -70,7 +70,8 @@ def test_email_templates_are_raw_html_safe():
  assert 'QORG-MANAGED-COMMUNICATION-v3.0' in source
  assert 'background-color:{{{{ primary }}}}' in source
  assert 'border-bottom:4px solid {{{{ accent }}}}' in source
- assert 'if "&lt;div" in message or "&lt;table" in message or "background:{" in message' in source
+ assert 'from html import unescape' in source
+ assert '"<table" not in message' in source
  assert 'reference_doctype' in source
 
 def test_transporter_is_independent_of_recipient():
@@ -108,3 +109,25 @@ def test_notifications_preserve_managed_raw_html():
   source=(ROOT/relative).read_text()
   assert 'frappe.db.set_value("Notification"' in source
   assert '"message": template_doc.get(body_field)' in source
+
+def test_stock_handover_costs_and_totals_are_complete():
+ parent=json.loads((ROOT/'qorg/qorg/doctype/stock_handover/stock_handover.json').read_text())
+ child=json.loads((ROOT/'qorg/qorg/doctype/stock_handover_item/stock_handover_item.json').read_text())
+ parent_fields={x['fieldname']:x for x in parent['fields']}
+ child_fields={x['fieldname']:x for x in child['fields']}
+ for name in ('total_item_count','total_delivered_quantity','currency','total_items_cost','show_costs_in_print'):
+  assert name in parent_fields
+ for name in ('unit_cost','total_cost'):
+  assert name in child_fields
+  assert child_fields[name].get('read_only')==1
+ assert len([x for x in child['fields'] if x.get('in_list_view')])<=8
+ service=(ROOT/'qorg/qorg/inventory_asset_custody/handover_service.py').read_text()
+ for marker in ('basic_rate','valuation_rate','doc.total_item_count','doc.total_delivered_quantity','doc.total_items_cost','provision_stock_handover_print_format','doc.show_costs_in_print == 1'):
+  assert marker in service
+
+def test_email_templates_use_response_html_when_available():
+ source=(ROOT/'qorg/qorg/procurement_contracting/communications.py').read_text()
+ assert 'if meta.has_field("response_html")' in source
+ assert 'return "response_html"' in source
+ assert 'values["response"] = ""' in source
+ assert 'from html import unescape' in source

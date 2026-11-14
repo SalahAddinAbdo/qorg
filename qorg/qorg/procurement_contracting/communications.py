@@ -56,7 +56,10 @@ def body(title_en, title_ar, lead_en, lead_ar):
 
 
 def _body_field():
-    return "response" if frappe.get_meta("Email Template").has_field("response") else "response_html"
+    meta = frappe.get_meta("Email Template")
+    if meta.has_field("response_html"):
+        return "response_html"
+    return "response"
 
 
 def _write_raw_template(name, reference_doctype, subject, message):
@@ -73,6 +76,8 @@ def _write_raw_template(name, reference_doctype, subject, message):
     doc.set(fieldname, "")
     doc.save(ignore_permissions=True) if existing else doc.insert(ignore_permissions=True)
     values = {fieldname: message, "use_html": 1, "subject": subject}
+    if fieldname == "response_html" and doc.meta.has_field("response"):
+        values["response"] = ""
     if doc.meta.has_field("reference_doctype"):
         values["reference_doctype"] = reference_doctype
     frappe.db.set_value("Email Template", name, values, update_modified=False)
@@ -87,8 +92,10 @@ def audit_managed_templates():
     fieldname = _body_field()
     failures = []
     for name in TEMPLATES:
-        message = frappe.db.get_value("Email Template", name, fieldname) or ""
-        if "&lt;div" in message or "&lt;table" in message or "background:{" in message or TEMPLATE_VERSION not in message:
+        from html import unescape
+        stored = frappe.db.get_value("Email Template", name, fieldname) or ""
+        message = unescape(stored)
+        if "background:{" in message or TEMPLATE_VERSION not in message or "<table" not in message:
             failures.append(name)
     if failures:
         frappe.throw(_("Managed Email Templates are malformed: {0}").format(", ".join(failures)))
