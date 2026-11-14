@@ -56,14 +56,13 @@ def _validate_recipient(doc):
         "External Person": "recipient_external_person",
         "Partner Organization": "recipient_partner",
         "Supplier": "recipient_supplier",
-        "Transporter": "recipient_transporter",
     }
     fieldname = required_links.get(recipient_type)
     if fieldname and not getattr(doc, fieldname, None):
         frappe.throw(_("{0} is required for Recipient Type {1}.").format(doc.meta.get_label(fieldname), recipient_type))
     if recipient_type != "Employee" and not doc.external_recipient_name:
         frappe.throw(_("External Recipient Name is required for the selected recipient type."))
-    if recipient_type in {"Partner Organization", "Supplier", "Transporter"} and not doc.external_recipient_capacity:
+    if recipient_type in {"Partner Organization", "Supplier"} and not doc.external_recipient_capacity:
         frappe.throw(_("Representative Capacity is required for the selected recipient type."))
     if recipient_type == "Employee":
         for fieldname in ("external_recipient_name", "external_recipient_email", "external_recipient_phone", "external_recipient_capacity", "external_recipient_id", "authorization_attachment"):
@@ -96,12 +95,22 @@ def _validate_delivery(doc):
         frappe.throw(_("Delivery Method is required for the selected Issue Usage Type."))
     if not doc.delivery_method:
         return
+    if doc.delivery_method == "Recipient Pickup":
+        doc.has_transporter = 0
     if not doc.destination_location:
         frappe.throw(_("Destination Location is required when Delivery Method is selected."))
-    if doc.delivery_method in PROVIDER_METHODS and not doc.transport_provider:
-        frappe.throw(_("Transport Provider is required for the selected Delivery Method."))
-    if doc.delivery_method in VEHICLE_METHODS and not doc.vehicle_number:
-        frappe.throw(_("Vehicle or Plate Number is required for the selected Delivery Method."))
+    if doc.has_transporter:
+        if not doc.transport_provider_type:
+            frappe.throw(_("Transport Provider Type is required when a transporter is involved."))
+        if doc.transport_provider_type == "Registered Transporter" and not doc.recipient_transporter:
+            frappe.throw(_("Registered Transporter is required."))
+        if doc.transport_provider_type in {"Courier", "Other"} and not doc.transport_provider:
+            frappe.throw(_("External Transport Company is required."))
+        if doc.transport_provider_type in {"Organization Fleet", "Registered Transporter"} and not doc.vehicle_number:
+            frappe.throw(_("Vehicle or Plate Number is required."))
+    else:
+        for fieldname in ("transport_provider_type", "recipient_transporter", "transport_provider", "driver_name", "driver_phone", "vehicle_type", "vehicle_number", "waybill_number", "departure_datetime", "arrival_datetime", "transport_cost", "transport_cost_reference"):
+            setattr(doc, fieldname, None)
     if doc.departure_datetime and doc.arrival_datetime and doc.arrival_datetime < doc.departure_datetime:
         frappe.throw(_("Arrival Date and Time cannot be before Departure Date and Time."))
     if doc.delivery_condition and doc.delivery_condition != "Good" and not doc.delivery_remarks:
@@ -124,6 +133,10 @@ def validate_handover(doc):
     _validate_recipient(doc)
     _validate_usage(doc)
     _validate_delivery(doc)
+    if doc.activity_reference and frappe.db.exists("DocType", "Workplan Activity"):
+        activity_project = frappe.db.get_value("Workplan Activity", doc.activity_reference, "project")
+        if doc.project and activity_project and activity_project != doc.project:
+            frappe.throw(_("Activity Reference must belong to Project {0}.").format(doc.project))
 
     difference = False
     for row in doc.items:

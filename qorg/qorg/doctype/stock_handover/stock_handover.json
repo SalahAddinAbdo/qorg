@@ -27,7 +27,6 @@
     "recipient_employee",
     "recipient_partner",
     "recipient_supplier",
-    "recipient_transporter",
     "recipient_user",
     "external_recipient_name",
     "external_recipient_email",
@@ -50,6 +49,9 @@
     "origin_location",
     "destination_location",
     "transport_column",
+    "has_transporter",
+    "transport_provider_type",
+    "recipient_transporter",
     "transport_provider",
     "driver_name",
     "driver_phone",
@@ -146,7 +148,9 @@
     {
       "fieldname": "activity_reference",
       "label": "Activity Reference",
-      "fieldtype": "Data"
+      "fieldtype": "Link",
+      "options": "Workplan Activity",
+      "depends_on": "eval:doc.project"
     },
     {
       "fieldname": "party_section",
@@ -170,7 +174,7 @@
       "fieldname": "recipient_type",
       "label": "Recipient Type",
       "fieldtype": "Select",
-      "options": "Employee\nExternal Person\nPartner Organization\nSupplier\nTransporter\nBeneficiary\nProject Site\nOther",
+      "options": "Employee\nExternal Person\nPartner Organization\nSupplier\nBeneficiary\nProject Site\nOther",
       "reqd": 1
     },
     {
@@ -211,14 +215,6 @@
       "mandatory_depends_on": "eval:doc.recipient_type == 'Supplier'"
     },
     {
-      "fieldname": "recipient_transporter",
-      "label": "Transporter",
-      "fieldtype": "Link",
-      "options": "Transporter",
-      "depends_on": "eval:doc.recipient_type == 'Transporter'",
-      "mandatory_depends_on": "eval:doc.recipient_type == 'Transporter'"
-    },
-    {
       "fieldname": "recipient_user",
       "label": "Recipient User",
       "fieldtype": "Link",
@@ -250,7 +246,7 @@
       "fieldname": "external_recipient_capacity",
       "label": "Representative Capacity",
       "fieldtype": "Data",
-      "depends_on": "eval:['Partner Organization','Supplier','Transporter','Other'].includes(doc.recipient_type)"
+      "depends_on": "eval:['Partner Organization','Supplier','Other'].includes(doc.recipient_type)"
     },
     {
       "fieldname": "external_recipient_id",
@@ -262,7 +258,7 @@
       "fieldname": "authorization_attachment",
       "label": "Authorization Attachment",
       "fieldtype": "Attach",
-      "depends_on": "eval:['Partner Organization','Supplier','Transporter'].includes(doc.recipient_type)"
+      "depends_on": "eval:['Partner Organization','Supplier'].includes(doc.recipient_type)"
     },
     {
       "fieldname": "usage_section",
@@ -357,54 +353,78 @@
       "fieldtype": "Column Break"
     },
     {
+      "fieldname": "has_transporter",
+      "label": "Transporter Involved",
+      "fieldtype": "Check",
+      "default": "0",
+      "depends_on": "eval:doc.delivery_method && doc.delivery_method != \"Recipient Pickup\""
+    },
+    {
+      "fieldname": "transport_provider_type",
+      "label": "Transport Provider Type",
+      "fieldtype": "Select",
+      "options": "Organization Fleet\nSupplier\nRegistered Transporter\nCourier\nOther",
+      "depends_on": "eval:doc.has_transporter == 1",
+      "mandatory_depends_on": "eval:doc.has_transporter == 1"
+    },
+    {
+      "fieldname": "recipient_transporter",
+      "label": "Registered Transporter",
+      "fieldtype": "Link",
+      "options": "Transporter",
+      "depends_on": "eval:doc.has_transporter == 1 && doc.transport_provider_type == \"Registered Transporter\"",
+      "mandatory_depends_on": "eval:doc.has_transporter == 1 && doc.transport_provider_type == \"Registered Transporter\""
+    },
+    {
       "fieldname": "transport_provider",
-      "label": "Transport Provider",
+      "label": "External Transport Company",
       "fieldtype": "Data",
-      "depends_on": "eval:['Supplier Delivery','Third-Party Transporter','Courier','Other'].includes(doc.delivery_method)",
-      "mandatory_depends_on": "eval:['Third-Party Transporter','Courier'].includes(doc.delivery_method)"
+      "depends_on": "eval:doc.has_transporter == 1 && [\"Supplier\",\"Courier\",\"Other\"].includes(doc.transport_provider_type)",
+      "mandatory_depends_on": "eval:doc.has_transporter == 1 && [\"Courier\",\"Other\"].includes(doc.transport_provider_type)"
     },
     {
       "fieldname": "driver_name",
       "label": "Driver or Courier Name",
       "fieldtype": "Data",
-      "depends_on": "eval:doc.delivery_method && doc.delivery_method != 'Recipient Pickup'"
+      "depends_on": "eval:doc.has_transporter == 1"
     },
     {
       "fieldname": "driver_phone",
       "label": "Driver or Courier Phone",
       "fieldtype": "Data",
       "options": "Phone",
-      "depends_on": "eval:doc.delivery_method && doc.delivery_method != 'Recipient Pickup'"
+      "depends_on": "eval:doc.has_transporter == 1"
     },
     {
       "fieldname": "vehicle_type",
       "label": "Vehicle Type",
       "fieldtype": "Data",
-      "depends_on": "eval:['Organization Vehicle','Supplier Delivery','Third-Party Transporter'].includes(doc.delivery_method)"
+      "depends_on": "eval:doc.has_transporter == 1 && ![\"Courier\"].includes(doc.transport_provider_type)"
     },
     {
       "fieldname": "vehicle_number",
       "label": "Vehicle or Plate Number",
       "fieldtype": "Data",
-      "depends_on": "eval:['Organization Vehicle','Supplier Delivery','Third-Party Transporter'].includes(doc.delivery_method)"
+      "depends_on": "eval:doc.has_transporter == 1 && ![\"Courier\"].includes(doc.transport_provider_type)",
+      "mandatory_depends_on": "eval:doc.has_transporter == 1 && [\"Organization Fleet\",\"Registered Transporter\"].includes(doc.transport_provider_type)"
     },
     {
       "fieldname": "waybill_number",
       "label": "Waybill or Dispatch Note",
       "fieldtype": "Data",
-      "depends_on": "eval:doc.delivery_method && doc.delivery_method != 'Recipient Pickup'"
+      "depends_on": "eval:doc.has_transporter == 1"
     },
     {
       "fieldname": "departure_datetime",
       "label": "Departure Date and Time",
       "fieldtype": "Datetime",
-      "depends_on": "eval:doc.delivery_method"
+      "depends_on": "eval:doc.has_transporter == 1"
     },
     {
       "fieldname": "arrival_datetime",
       "label": "Arrival Date and Time",
       "fieldtype": "Datetime",
-      "depends_on": "eval:doc.delivery_method"
+      "depends_on": "eval:doc.has_transporter == 1"
     },
     {
       "fieldname": "delivery_condition",
@@ -423,7 +443,7 @@
       "fieldname": "transport_cost",
       "label": "Transport Cost",
       "fieldtype": "Currency",
-      "depends_on": "eval:['Third-Party Transporter','Courier'].includes(doc.delivery_method)"
+      "depends_on": "eval:doc.has_transporter == 1"
     },
     {
       "fieldname": "transport_cost_reference",

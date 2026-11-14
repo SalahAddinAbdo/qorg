@@ -27,6 +27,7 @@ def provision():
     frappe.throw(f"Managed procurement notification {name} references missing role {receiver}.")
    doc.append("recipients", {"receiver_by_role": receiver})
   doc.save(ignore_permissions=True) if exists else doc.insert(ignore_permissions=True)
+  frappe.db.set_value("Notification", name, {"subject": template_doc.subject, "message": template_doc.get(body_field) or ""}, update_modified=False)
 
 # Backward-compatible entry point used by procurement provisioning.
 provision_notifications = provision

@@ -66,7 +66,7 @@ def validate_inspection(doc, method=None):
         frappe.throw(_("Partially Accepted requires both accepted and rejected quantities."))
     if result in {"Rejected", "Replacement Required"} and rejected <= EPSILON:
         frappe.throw(_("Rejected Quantity is required for the selected result."))
-    if result == "Accepted with Minor Observations" and not getattr(doc, "custom_findings", None):
+    if result == "Accepted with Minor Observations" and not getattr(doc, "custom_detailed_findings", None):
         frappe.throw(_("Inspection Findings are required for acceptance with minor observations."))
     if result == "Reinspection Required" and not getattr(doc, "custom_previous_quality_inspection", None):
         frappe.throw(_("Previous Quality Inspection is required for reinspection."))

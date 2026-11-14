@@ -49,6 +49,7 @@ def _original_detail(row, parent_stock_entry):
 
 
 def validate_stock_entry(doc, method=None):
+    _validate_activity(getattr(doc, "project", None), getattr(doc, "custom_activity_reference", None))
     material_request = getattr(doc, "custom_material_request", None)
     if doc.purpose == "Material Issue" and material_request:
         state = frappe.db.get_value("Material Request", material_request, "workflow_state") or frappe.db.get_value("Material Request", material_request, "status")
@@ -94,3 +95,19 @@ def update_material_request(doc, method=None):
         values = [max(issued(row.name), 0) for row in rows]
         status = "Fully Issued" if rows and all(values[i] >= flt(rows[i].qty) - EPSILON for i in range(len(rows))) else "Partially Issued" if any(values) else "Not Issued"
         frappe.db.set_value("Material Request", material_request, "custom_issue_status", status, update_modified=False)
+
+
+def _validate_activity(project, activity):
+    if not activity:
+        return
+    if not frappe.db.exists("Workplan Activity", activity):
+        frappe.throw(_("Activity Reference {0} does not exist.").format(activity))
+    activity_project = frappe.db.get_value("Workplan Activity", activity, "project")
+    if project and activity_project and activity_project != project:
+        frappe.throw(_("Activity Reference must belong to Project {0}.").format(project))
+
+
+def validate_material_request_activity(doc, method=None):
+    if getattr(doc, "material_request_type", None) != "Material Issue":
+        return
+    _validate_activity(getattr(doc, "project", None), getattr(doc, "custom_activity_reference", None))

@@ -73,8 +73,19 @@ frappe.ui.form.on("Stock Handover", {
 
   delivery_method(frm) {
     if (frm.doc.delivery_method === "Recipient Pickup") {
-      ["transport_provider", "driver_name", "driver_phone", "vehicle_type", "vehicle_number", "waybill_number"].forEach((fieldname) => frm.set_value(fieldname, null));
+      frm.set_value("has_transporter", 0);
     }
+  },
+
+  has_transporter(frm) {
+    if (!frm.doc.has_transporter) {
+      ["transport_provider_type", "recipient_transporter", "transport_provider", "driver_name", "driver_phone", "vehicle_type", "vehicle_number", "waybill_number", "departure_datetime", "arrival_datetime", "transport_cost", "transport_cost_reference"].forEach((fieldname) => frm.set_value(fieldname, null));
+    }
+  },
+
+  transport_provider_type(frm) {
+    if (frm.doc.transport_provider_type !== "Registered Transporter") frm.set_value("recipient_transporter", null);
+    if (!["Supplier", "Courier", "Other"].includes(frm.doc.transport_provider_type)) frm.set_value("transport_provider", null);
   }
 });
 

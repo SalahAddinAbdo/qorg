@@ -33,3 +33,4 @@ def provision_notifications():
         else:
             doc.append("recipients", {"receiver_by_role": receiver})
         doc.save(ignore_permissions=True) if existing else doc.insert(ignore_permissions=True)
+        frappe.db.set_value("Notification", name, {"subject": template_doc.subject, "message": template_doc.get(body_field) or ""}, update_modified=False)

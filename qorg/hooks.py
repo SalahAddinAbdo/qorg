@@ -472,6 +472,7 @@ for _dt,_event,_handler in [
     ("Purchase Receipt","validate","qorg.qorg.inventory_asset_custody.receipt_control.reconcile_receipt"),
     ("Quality Inspection","validate","qorg.qorg.inventory_asset_custody.inspection_control.validate_inspection"),
     ("Stock Entry","validate","qorg.qorg.inventory_asset_custody.warehouse_policy.validate_stock_entry"),
+    ("Material Request","validate","qorg.qorg.inventory_asset_custody.issue_control.validate_material_request_activity"),
     ("Stock Entry","validate","qorg.qorg.inventory_asset_custody.issue_control.validate_stock_entry"),
     ("Stock Entry","on_submit","qorg.qorg.inventory_asset_custody.issue_control.update_material_request"),
     ("Stock Entry","on_cancel","qorg.qorg.inventory_asset_custody.issue_control.update_material_request"),

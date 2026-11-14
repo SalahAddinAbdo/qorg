@@ -79,7 +79,7 @@ def reconcile_receipt(doc, method=None):
         if ordered and prior_received + current > ordered * (1 + tolerance / 100) + EPSILON:
             frappe.throw(_("Row {0} exceeds the allowed Purchase Order quantity.").format(row.idx))
 
-        if getattr(doc, "custom_inspection_required", 0) and (accepted > EPSILON or rejected > EPSILON):
+        if getattr(doc, "custom_receipt_inspection_required", 0) and (accepted > EPSILON or rejected > EPSILON):
             inspection = _validated_inspection(row, doc.name)
             if not inspection:
                 frappe.throw(_("Row {0}: submitted Quality Inspection is required before acceptance or rejection.").format(row.idx))
@@ -96,7 +96,7 @@ def reconcile_receipt(doc, method=None):
         if hasattr(row, "custom_rejected_qty"):
             row.custom_rejected_qty = rejected
 
-    if getattr(doc, "custom_inspection_required", 0) and not accepted_total and not rejected_total:
+    if getattr(doc, "custom_receipt_inspection_required", 0) and not accepted_total and not rejected_total:
         doc.custom_receipt_acceptance_status = "Pending Inspection"
     elif rejected_total and accepted_total:
         doc.custom_receipt_acceptance_status = "Partially Accepted"
