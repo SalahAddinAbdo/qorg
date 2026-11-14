@@ -4,6 +4,23 @@ import frappe
 from qorg.qorg.enterprise_foundation.idempotent_provisioning import create_custom_fields_if_changed
 from frappe.custom.doctype.property_setter.property_setter import make_property_setter
 
+LEGACY_PROJECT_NOTIFICATIONS = (
+    "QOrg - Project Progress Update Overdue",
+    "QOrg - Closure Action Overdue",
+    "QOrg - Approved Change Pending Implementation",
+    "QOrg - Compliance Deliverable Overdue",
+    "QOrg - Compliance Deliverable Due Soon",
+    "QOrg - Risk Review Overdue",
+    "QOrg - Critical Project Risk",
+    "QFAP - Project Progress Update Overdue",
+    "QFAP - Closure Action Overdue",
+    "QFAP - Approved Change Pending Implementation",
+    "QFAP - Compliance Deliverable Overdue",
+    "QFAP - Compliance Deliverable Due Soon",
+    "QFAP - Risk Review Overdue",
+    "QFAP - Critical Project Risk",
+)
+
 RULES = {
     "critical_risk": ("Critical Project Risk", "Project Risk", "On Save", 0, "A High or Critical project risk requires attention."),
     "risk_review_overdue": ("Risk Review Overdue", "Project Risk", "Daily", 7, "A project risk review date is due or overdue."),
@@ -72,7 +89,14 @@ def _repair_recipient_fields():
         if fieldtype=="Table":
             frappe.delete_doc("Custom Field",custom_name,ignore_permissions=True,force=True)
 
+def _delete_legacy_project_notifications():
+    for name in LEGACY_PROJECT_NOTIFICATIONS:
+        if frappe.db.exists("Notification",name):
+            frappe.delete_doc("Notification",name,ignore_permissions=True,force=True)
+
+
 def provision_project_notifications():
+    _delete_legacy_project_notifications()
     _repair_recipient_fields()
     if not frappe.db.exists("DocType","Project Notification Rule"):
         return

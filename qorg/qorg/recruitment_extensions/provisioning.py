@@ -5,6 +5,12 @@ import frappe
 from qorg.qorg.enterprise_foundation.idempotent_provisioning import create_custom_fields_if_changed
 from .constants import CONFIGURATION_VERSION
 
+LEGACY_RECRUITMENT_TEMPLATES = (
+    "Recruitment Application Decision",
+    "Recruitment Offer Issued",
+    "Recruitment Interview Invitation",
+)
+
 
 def _template_hash(subject,response_html,use_html):
     payload={"subject":subject or "","response_html":response_html or "","use_html":int(use_html or 0)}
@@ -13,11 +19,20 @@ def _template_hash(subject,response_html,use_html):
 def provision_recruitment_extensions():
     _custom_fields()
     result=_email_templates()
+    result["deleted_legacy"]=_delete_legacy_templates()
     from .layout_provisioning import reconcile_recruitment_form_layouts
     reconcile_recruitment_form_layouts()
     reconcile_standard_reports()
     frappe.clear_cache()
     return result
+
+def _delete_legacy_templates():
+    deleted=[]
+    for name in LEGACY_RECRUITMENT_TEMPLATES:
+        if frappe.db.exists("Email Template",name):
+            frappe.delete_doc("Email Template",name,ignore_permissions=True,force=True)
+            deleted.append(name)
+    return deleted
 
 def _custom_fields():
     path=frappe.get_app_path("qorg","qorg","recruitment_extensions","data","custom_fields.json")

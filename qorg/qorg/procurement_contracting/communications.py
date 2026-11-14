@@ -5,9 +5,22 @@ from frappe import _
 from frappe.utils import get_url_to_form
 from frappe.utils.jinja import render_template
 
-TEMPLATE_VERSION = "QORG-MANAGED-COMMUNICATION-v3.0"
+TEMPLATE_VERSION = "QORG-MANAGED-COMMUNICATION-v3.1"
 DEFAULT_PRIMARY = "#176B87"
 DEFAULT_ACCENT = "#D7A83E"
+
+LEGACY_EMAIL_TEMPLATES = (
+    "QOrg Procurement - Not Selected",
+    "QOrg Procurement - Awarded",
+    "QOrg Procurement - Bid Submission Received",
+    "QOrg Procurement - Supplier Registration Received",
+    "QOrg Procurement - Receipt or Acceptance Required",
+    "QOrg Procurement - Award Decision Required",
+    "QOrg Procurement - Financial Evaluation Opened",
+    "QOrg Procurement - Technical Evaluation Due",
+    "QOrg Procurement - Committee Assignment",
+    "QOrg Procurement - Approved Purchase Request",
+)
 
 TEMPLATES = {
     "Procurement Complaint Acknowledgement": ("Procurement Complaint", "Complaint Acknowledgement | تأكيد استلام الشكوى", "Your procurement complaint has been received and registered for confidential review.", "تم استلام شكوى المشتريات وتسجيلها للمراجعة السرية."),
@@ -128,6 +141,9 @@ def send(template_name, doctype, name, recipients, cc=None):
 
 def provision_email_templates():
     upsert_templates()
+    for name in LEGACY_EMAIL_TEMPLATES:
+        if frappe.db.exists("Email Template", name):
+            frappe.delete_doc("Email Template", name, ignore_permissions=True, force=True)
     audit_managed_templates()
 
 
