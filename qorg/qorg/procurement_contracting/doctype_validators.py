@@ -84,7 +84,23 @@ def validate_clarification(doc):
 
 
 def validate_complaint(doc):
-    if doc.status=="Closed" and not (doc.decision and doc.closed_on): frappe.throw(_("Decision and Closed On are required before closing a complaint."))
+    if not doc.received_on:
+        doc.received_on = now_datetime()
+    if doc.status in {"Under Review", "Additional Information Required", "Decision Issued", "Closed"} and not doc.assigned_to:
+        frappe.throw(_("Assigned To is required after complaint receipt."))
+    if doc.assigned_to and doc.assigned_to == doc.owner:
+        frappe.throw(_("Complaint reviewer cannot be the complaint record owner."))
+    if doc.status in {"Decision Issued", "Closed"} and not (doc.investigation_findings or "").strip():
+        frappe.throw(_("Investigation Findings are required."))
+    if doc.status in {"Decision Issued", "Closed"} and not (doc.decision or "").strip():
+        frappe.throw(_("Decision is required."))
+    if doc.status == "Closed":
+        if not (doc.corrective_action or "").strip():
+            frappe.throw(_("Corrective Action is required before closure."))
+        if not doc.closed_on:
+            doc.closed_on = now_datetime()
+    elif doc.closed_on:
+        doc.closed_on = None
 
 
 def validate_framework(doc):

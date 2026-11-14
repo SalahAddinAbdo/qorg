@@ -34,10 +34,6 @@
     "responsibility_terms",
     "acknowledgement_section",
     "recipient_declaration",
-    "signature_column",
-    "custodian_signature",
-    "handover_signature",
-    "return_signature",
     "status_section",
     "difference_found",
     "incident",
@@ -205,26 +201,6 @@
       "fieldname": "recipient_declaration",
       "label": "Recipient Declaration",
       "fieldtype": "Check"
-    },
-    {
-      "fieldname": "signature_column",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "custodian_signature",
-      "label": "Custodian Signature",
-      "fieldtype": "Signature"
-    },
-    {
-      "fieldname": "handover_signature",
-      "label": "Handover Signature",
-      "fieldtype": "Signature"
-    },
-    {
-      "fieldname": "return_signature",
-      "label": "Return Signature",
-      "fieldtype": "Signature"
     },
     {
       "fieldname": "status_section",

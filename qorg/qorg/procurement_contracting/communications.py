@@ -10,6 +10,7 @@ DEFAULT_PRIMARY = "#176B87"
 DEFAULT_ACCENT = "#D7A83E"
 
 TEMPLATES = {
+    "Procurement Complaint Acknowledgement": ("Procurement Complaint", "Complaint Acknowledgement | تأكيد استلام الشكوى", "Your procurement complaint has been received and registered for confidential review.", "تم استلام شكوى المشتريات وتسجيلها للمراجعة السرية."),
     "Approved Purchase Request": ("Material Request", "Approved Purchase Request | طلب شراء معتمد", "An approved purchase request requires procurement action.", "يتطلب طلب الشراء المعتمد بدء إجراء المشتريات."),
     "Procurement Process Assignment": ("Procurement Process", "Procurement Process Assignment | تكليف بعملية مشتريات", "A procurement process has been assigned for setup and follow-up.", "تم تكليفكم بإعداد ومتابعة عملية المشتريات."),
     "Procurement Invitation": ("Procurement Notice", "Invitation to Participate | دعوة للمشاركة", "You are invited to review the procurement documents and submit a complete offer before the deadline.", "ندعوكم لمراجعة وثائق المنافسة وتقديم عرض مكتمل قبل الموعد النهائي."),

@@ -609,3 +609,25 @@ for _doctype in (
         ([doctype_js[_doctype]] if isinstance(doctype_js.get(_doctype), str) else list(doctype_js.get(_doctype) or []))
         + ["public/js/participation_communications.js"]
     ))
+
+# Employee lifecycle, separation and complaint confidentiality controls.
+def _qorg_employee_add_event(doctype, event, handler):
+    current = doc_events.setdefault(doctype, {}).get(event)
+    if not current:
+        doc_events[doctype][event] = handler
+    elif isinstance(current, list):
+        if handler not in current: current.append(handler)
+    elif current != handler:
+        doc_events[doctype][event] = [current, handler]
+
+_qorg_employee_add_event("Work Commencement Notice", "validate", "qorg.qorg.recruitment_extensions.employee_cycle_integrity.validate_work_commencement")
+for _doctype in ("Employee Separation", "Employee Offboarding"):
+    _qorg_employee_add_event(_doctype, "validate", "qorg.qorg.recruitment_extensions.employee_cycle_integrity.prevent_incomplete_employee_exit")
+permission_query_conditions["Procurement Complaint"] = "qorg.qorg.procurement_contracting.complaint_permissions.query"
+has_permission["Procurement Complaint"] = "qorg.qorg.procurement_contracting.complaint_permissions.has"
+
+# Procurement complaint acknowledgement action.
+doctype_js["Procurement Complaint"] = list(dict.fromkeys(
+    ([doctype_js["Procurement Complaint"]] if isinstance(doctype_js.get("Procurement Complaint"), str) else list(doctype_js.get("Procurement Complaint") or []))
+    + ["public/js/procurement_complaint.js"]
+))
