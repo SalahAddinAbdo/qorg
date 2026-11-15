@@ -1,6 +1,6 @@
 from __future__ import annotations
 import frappe
-from .communications import provision_templates
+from .communications import TEMPLATES, _body, provision_templates
 SPECS=(
  ("Finance - Funding Agreement Action Required","Under Review","Funding Agreement Action Required","Projects Manager"),
  ("Finance - Funding Agreement Activated","Active","Funding Agreement Action Required","Accounts Manager"),
@@ -12,8 +12,10 @@ def provision_notifications():
  for name,value,template,role in SPECS:
   if not frappe.db.exists("Role",role): frappe.throw(f"Required existing role is missing: {role}")
   t=frappe.get_doc("Email Template",template); exists=frappe.db.exists("Notification",name); doc=frappe.get_doc("Notification",name) if exists else frappe.new_doc("Notification")
+  _template_subject, _template_en, _template_ar = TEMPLATES[template]
+  notification_message = _body(_template_en, _template_ar)
   if not exists: doc.name=name
-  doc.document_type="Funding Agreement"; doc.channel="Email"; doc.enabled=1; doc.event="Value Change"; doc.value_changed="status"; doc.condition=f"doc.status == {value!r}"; doc.subject=t.subject; doc.message_type="HTML"; doc.message=t.response
+  doc.document_type="Funding Agreement"; doc.channel="Email"; doc.enabled=1; doc.event="Value Change"; doc.value_changed="status"; doc.condition=f"doc.status == {value!r}"; doc.subject=t.subject; doc.message_type="HTML"; doc.message=notification_message
   if nmeta.has_field("email_template"): doc.email_template=template
   doc.set("recipients",[])
   if fmeta.has_field("custom_current_responsible_user"): doc.append("recipients",{"receiver_by_document_field":"custom_current_responsible_user"})
