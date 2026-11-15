@@ -100,6 +100,20 @@ def _child_dimension_coverage(doctype):
     return coverage
 
 
+
+def _installed_app_versions():
+    """Return installed application versions without relying on removed frappe APIs."""
+    versions = {}
+    for app in frappe.get_installed_apps():
+        version = None
+        try:
+            module = frappe.get_module(app)
+            version = getattr(module, "__version__", None)
+        except Exception:
+            version = None
+        versions[app] = version or "unknown"
+    return versions
+
 def audit_runtime_configuration():
     standard = {name: _doctype_snapshot(name) for name in STANDARD_DOCTYPES}
     qorg = {name: _doctype_snapshot(name) for name in QORG_DOCTYPES}
@@ -131,7 +145,7 @@ def audit_runtime_configuration():
 
     return {
         "site": frappe.local.site,
-        "versions": frappe.get_versions(),
+        "versions": _installed_app_versions(),
         "budget_line_dimension": dimension,
         "standard_doctypes": standard,
         "qorg_doctypes": qorg,
