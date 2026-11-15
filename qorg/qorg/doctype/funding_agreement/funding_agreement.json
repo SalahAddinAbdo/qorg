@@ -1,0 +1,363 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "naming_series:",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "agreement_title",
+  "donor",
+  "agreement_reference",
+  "status",
+  "project_section",
+  "company",
+  "project",
+  "column_1",
+  "project_funding_source_row",
+  "agreement_document",
+  "financial_section",
+  "agreement_currency",
+  "agreement_amount",
+  "exchange_rate",
+  "exchange_rate_type",
+  "exchange_rate_date",
+  "exchange_rate_source",
+  "base_amount",
+  "column_2",
+  "indirect_cost_percent",
+  "flexibility_percent",
+  "requires_donor_approval_above_flexibility",
+  "dates_section",
+  "start_date",
+  "end_date",
+  "column_3",
+  "eligibility_start_date",
+  "eligibility_end_date",
+  "schedule_section",
+  "installments",
+  "reporting_schedule_section",
+  "reporting_schedule",
+  "rules_section",
+  "budget_rules",
+  "closeout_section",
+  "final_report_due_date",
+  "refundable_balance",
+  "closeout_completed",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "FAG-.YYYY.-.#####",
+   "default": "FAG-.YYYY.-.#####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "agreement_title",
+   "fieldtype": "Data",
+   "label": "Agreement Title",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_global_search": 1
+  },
+  {
+   "fieldname": "donor",
+   "fieldtype": "Link",
+   "label": "Donor",
+   "options": "Donor",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "agreement_reference",
+   "fieldtype": "Data",
+   "label": "Agreement Reference",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nUnder Review\nActive\nSuspended\nClosing\nClosed\nCancelled",
+   "default": "Draft",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "project_section",
+   "fieldtype": "Section Break",
+   "label": "Project and Company"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "project_funding_source_row",
+   "fieldtype": "Data",
+   "label": "Project Funding Source Row",
+   "hidden": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "agreement_document",
+   "fieldtype": "Attach",
+   "label": "Signed Agreement"
+  },
+  {
+   "fieldname": "financial_section",
+   "fieldtype": "Section Break",
+   "label": "Financial Terms"
+  },
+  {
+   "fieldname": "agreement_currency",
+   "fieldtype": "Link",
+   "label": "Agreement Currency",
+   "options": "Currency",
+   "reqd": 1
+  },
+  {
+   "fieldname": "agreement_amount",
+   "fieldtype": "Currency",
+   "label": "Agreement Amount",
+   "options": "agreement_currency",
+   "reqd": 1,
+   "non_negative": 1
+  },
+  {
+   "fieldname": "exchange_rate",
+   "fieldtype": "Float",
+   "label": "Budget Exchange Rate",
+   "default": "1",
+   "reqd": 1,
+   "non_negative": 1
+  },
+  {
+   "fieldname": "exchange_rate_type",
+   "label": "Exchange Rate Type",
+   "fieldtype": "Select",
+   "options": "Agreement Fixed\nTransaction Date\nManual Approved",
+   "default": "Agreement Fixed"
+  },
+  {
+   "fieldname": "exchange_rate_date",
+   "label": "Exchange Rate Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "exchange_rate_source",
+   "label": "Exchange Rate Source",
+   "fieldtype": "Data",
+   "read_only": 1
+  },
+  {
+   "fieldname": "base_amount",
+   "fieldtype": "Currency",
+   "label": "Base Amount",
+   "options": "Company:company:default_currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "indirect_cost_percent",
+   "fieldtype": "Percent",
+   "label": "Indirect Cost (%)",
+   "default": "0"
+  },
+  {
+   "fieldname": "flexibility_percent",
+   "fieldtype": "Percent",
+   "label": "Budget Flexibility (%)",
+   "default": "10"
+  },
+  {
+   "fieldname": "requires_donor_approval_above_flexibility",
+   "fieldtype": "Check",
+   "label": "Require Donor Approval Above Flexibility",
+   "default": "1"
+  },
+  {
+   "fieldname": "dates_section",
+   "fieldtype": "Section Break",
+   "label": "Dates and Eligibility"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Agreement Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "Agreement End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "eligibility_start_date",
+   "fieldtype": "Date",
+   "label": "Eligibility Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "eligibility_end_date",
+   "fieldtype": "Date",
+   "label": "Eligibility End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "schedule_section",
+   "fieldtype": "Section Break",
+   "label": "Installments and Reporting"
+  },
+  {
+   "fieldname": "installments",
+   "fieldtype": "Table",
+   "label": "Funding Installments",
+   "options": "Funding Installment"
+  },
+  {
+   "fieldname": "reporting_schedule_section",
+   "label": "Donor Reporting Schedule",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "reporting_schedule",
+   "fieldtype": "Table",
+   "label": "Funding Reporting Schedule",
+   "options": "Funding Reporting Schedule"
+  },
+  {
+   "fieldname": "rules_section",
+   "fieldtype": "Section Break",
+   "label": "Budget Rules"
+  },
+  {
+   "fieldname": "budget_rules",
+   "fieldtype": "Table",
+   "label": "Funding Budget Rules",
+   "options": "Funding Budget Rule"
+  },
+  {
+   "fieldname": "closeout_section",
+   "fieldtype": "Section Break",
+   "label": "Closeout"
+  },
+  {
+   "fieldname": "final_report_due_date",
+   "fieldtype": "Date",
+   "label": "Final Report Due Date"
+  },
+  {
+   "fieldname": "refundable_balance",
+   "fieldtype": "Currency",
+   "label": "Refundable Balance",
+   "options": "agreement_currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "closeout_completed",
+   "fieldtype": "Check",
+   "label": "Closeout Completed",
+   "default": "0"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "Funding Agreement",
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "is_submittable": 1,
+ "istable": 0,
+ "links": [],
+ "module": "QOrg",
+ "name": "Funding Agreement",
+ "naming_rule": "By fieldname",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "Accounts Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1
+  },
+  {
+   "role": "Projects Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1
+  },
+  {
+   "role": "Accounts User",
+   "read": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1,
+ "title_field": "agreement_title"
+}

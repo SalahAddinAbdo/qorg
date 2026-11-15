@@ -21,6 +21,7 @@ required_apps = ["erpnext", "hrms"]
 extend_bootinfo = "qorg.qorg.enterprise_foundation.boot.extend_bootinfo"
 
 app_include_js = [
+    "/assets/qorg/js/finance_budget_grants.js",
     "/assets/qorg/js/document_workflow.js",
     "/assets/qorg/js/qorg_form_bootstrap.js",
     "/assets/qorg/js/model_policy.js",
@@ -291,6 +292,7 @@ before_migrate = [
 ]
 
 after_install = [
+    "qorg.qorg.finance_budget_grants.provisioning.provision_finance_budget_grants",
     "qorg.qorg.workflow.provisioning.provision_workflow_responsibility_routing",
     "qorg.qorg.recruitment_extensions.settings_provisioning.provision_recruitment_settings",
 
@@ -312,6 +314,7 @@ after_install = [
 ]
 
 after_migrate = [
+    "qorg.qorg.finance_budget_grants.provisioning.provision_finance_budget_grants",
     "qorg.qorg.workflow.provisioning.provision_workflow_responsibility_routing",
     "qorg.qorg.recruitment_extensions.settings_provisioning.provision_recruitment_settings",
 
@@ -631,3 +634,53 @@ doctype_js["Procurement Complaint"] = list(dict.fromkeys(
     ([doctype_js["Procurement Complaint"]] if isinstance(doctype_js.get("Procurement Complaint"), str) else list(doctype_js.get("Procurement Complaint") or []))
     + ["public/js/procurement_complaint.js"]
 ))
+
+# QOrg finance, budgets and grants v1.5.4 integrated controls
+def _qorg_finance_add_event(doctype, event, handler):
+    current = doc_events.setdefault(doctype, {}).get(event)
+    if not current:
+        doc_events[doctype][event] = handler
+    elif isinstance(current, list):
+        if handler not in current:
+            current.append(handler)
+    elif current != handler:
+        doc_events[doctype][event] = [current, handler]
+
+for _doctype in (
+    "Material Request", "Purchase Order", "Purchase Receipt", "Purchase Invoice",
+    "Payment Entry", "Journal Entry", "Expense Claim", "Stock Entry",
+    "Asset", "Payroll Entry", "Salary Slip",
+):
+    _qorg_finance_add_event(_doctype, "validate", "qorg.qorg.finance_budget_grants.services.validate_accounting_document")
+
+_qorg_finance_add_event("Budget Line", "before_validate", "qorg.qorg.finance_budget_grants.services.apply_budget_line_defaults")
+_qorg_finance_add_event("Budget Line", "validate", "qorg.qorg.finance_budget_grants.services.validate_budget_line")
+_qorg_finance_add_event("Project", "validate", "qorg.qorg.finance_budget_grants.services.validate_project_funding_source")
+_qorg_finance_add_event("Project Closure", "before_validate", "qorg.qorg.finance_budget_grants.closeout.refresh_project_closeout")
+_qorg_finance_add_event("Project Closure", "validate", "qorg.qorg.finance_budget_grants.closeout.validate_project_closeout")
+_qorg_finance_add_event("Project Change Request", "validate", "qorg.qorg.finance_budget_grants.budget_transfers.validate_budget_transfer")
+_qorg_finance_add_event("Project Change Request", "on_update", "qorg.qorg.finance_budget_grants.budget_transfers.apply_approved_budget_transfer")
+_qorg_finance_add_event("Project Change Request", "on_cancel", "qorg.qorg.finance_budget_grants.budget_transfers.reverse_budget_transfer")
+_qorg_finance_add_event("Funding Agreement", "on_update", "qorg.qorg.finance_budget_grants.budget_transfers.sync_funding_agreement_to_project")
+
+_daily_finance_task = "qorg.qorg.finance_budget_grants.scheduled_tasks.send_funding_reminders"
+if _daily_finance_task not in scheduler_events.setdefault("daily", []):
+    scheduler_events["daily"].append(_daily_finance_task)
+
+for _migration in (
+    "qorg.qorg.finance_budget_grants.migration.migrate_finance_budget_grants_v153",
+    "qorg.qorg.finance_budget_grants.migration.migrate_finance_budget_grants_v154",
+):
+    if _migration not in after_migrate:
+        after_migrate.append(_migration)
+
+permission_query_conditions["Funding Agreement"] = "qorg.qorg.finance_budget_grants.permissions.funding_agreement_query"
+has_permission["Funding Agreement"] = "qorg.qorg.finance_budget_grants.permissions.funding_agreement_permission"
+permission_query_conditions["Budget Transfer Audit"] = "qorg.qorg.finance_budget_grants.permissions.budget_transfer_audit_query"
+has_permission["Budget Transfer Audit"] = "qorg.qorg.finance_budget_grants.permissions.budget_transfer_audit_permission"
+_qorg_finance_v155_migration = "qorg.qorg.finance_budget_grants.migration.migrate_finance_budget_grants_v155"
+if _qorg_finance_v155_migration not in after_migrate:
+    after_migrate.append(_qorg_finance_v155_migration)
+_qorg_finance_v156_migration = "qorg.qorg.finance_budget_grants.migration.migrate_finance_budget_grants_v156"
+if _qorg_finance_v156_migration not in after_migrate:
+    after_migrate.append(_qorg_finance_v156_migration)

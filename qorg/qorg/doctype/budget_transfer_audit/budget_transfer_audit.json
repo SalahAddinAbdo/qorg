@@ -1,0 +1,162 @@
+{
+ "doctype": "DocType",
+ "name": "Budget Transfer Audit",
+ "module": "QOrg",
+ "custom": 0,
+ "istable": 0,
+ "issingle": 0,
+ "editable_grid": 0,
+ "track_changes": 1,
+ "field_order": [
+  "project_change_request",
+  "project",
+  "funding_agreement",
+  "applied_on",
+  "applied_by",
+  "total_transferred",
+  "currency",
+  "donor_approval_required",
+  "donor_approval_status",
+  "donor_reference",
+  "rows",
+  "reversal_section",
+  "reversed_on",
+  "reversed_by"
+ ],
+ "fields": [
+  {
+   "fieldname": "project_change_request",
+   "label": "Project Change Request",
+   "fieldtype": "Link",
+   "options": "Project Change Request",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "project",
+   "label": "Project",
+   "fieldtype": "Link",
+   "options": "Project",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "funding_agreement",
+   "label": "Funding Agreement",
+   "fieldtype": "Link",
+   "options": "Funding Agreement",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "applied_on",
+   "label": "Applied On",
+   "fieldtype": "Datetime",
+   "reqd": 1,
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "applied_by",
+   "label": "Applied By",
+   "fieldtype": "Link",
+   "options": "User",
+   "reqd": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_transferred",
+   "label": "Total Transferred",
+   "fieldtype": "Currency",
+   "options": "currency",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "currency",
+   "label": "Currency",
+   "fieldtype": "Link",
+   "options": "Currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "donor_approval_required",
+   "label": "Donor Approval Required",
+   "fieldtype": "Check",
+   "read_only": 1
+  },
+  {
+   "fieldname": "donor_approval_status",
+   "label": "Donor Approval Status",
+   "fieldtype": "Data",
+   "read_only": 1
+  },
+  {
+   "fieldname": "donor_reference",
+   "label": "Donor Reference",
+   "fieldtype": "Data",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rows",
+   "label": "Transfer Audit Rows",
+   "fieldtype": "Table",
+   "options": "Budget Transfer Audit Row",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reversal_section",
+   "label": "Reversal",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "reversed_on",
+   "label": "Reversed On",
+   "fieldtype": "Datetime",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reversed_by",
+   "label": "Reversed By",
+   "fieldtype": "Link",
+   "options": "User",
+   "read_only": 1
+  }
+ ],
+ "autoname": "hash",
+ "title_field": "project_change_request",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0
+  },
+  {
+   "role": "Accounts Manager",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0
+  },
+  {
+   "role": "Projects Manager",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0
+  }
+ ]
+}

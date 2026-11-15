@@ -6,6 +6,8 @@ Only explicitly listed, app-owned DocTypes and Reports are integrated. No custom
 reports created from the UI are inferred or included automatically.
 """
 
+FINANCE_BUDGET_GRANTS_CARD = {"label":"Q Org - Finance, Budgets and Grants","items":(("DocType","Funding Agreement","Funding Agreements"),("DocType","Budget Line","Budget Lines"),("DocType","Project Change Request","Budget Changes"),("Report","Funding Agreement Overview","Funding Agreements Overview"),("Report","Grant Cash Forecast","Grant Cash Forecast"))}
+
 STANDARD_WORKSPACE_INTEGRATIONS = (
     {
         "workspace_candidates": ("Projects", "Project"),
