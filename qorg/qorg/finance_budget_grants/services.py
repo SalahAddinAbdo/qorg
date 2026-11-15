@@ -19,16 +19,49 @@ def _project_funding_rows(project):
  if not field or field.options!="Project Funding Source": return []
  return frappe.get_all("Project Funding Source",filters={"parent":project,"parenttype":"Project","parentfield":"custom_funding_sources"},fields=["name","donor","is_primary_donor","funding_status","funding_agreement","cost_category","allow_budget_transfer","flexibility_percent","eligibility_start_date","eligibility_end_date","funding_start_date","funding_end_date"],order_by="is_primary_donor desc, idx asc")
 
-def _select_source(project,agreement=None):
- rows=_project_funding_rows(project)
- if agreement:
-  matches=[r for r in rows if r.funding_agreement==agreement]
-  if len(matches)==1:return matches[0]
- approved=[r for r in rows if r.funding_status in ("Approved","Partially Approved")]
- primary=[r for r in approved if r.is_primary_donor]
- if len(primary)==1:return primary[0]
- if len(approved)==1:return approved[0]
- return None
+def _select_source(project, agreement=None):
+    """Return one deterministic Project Funding Source for Budget Line defaults.
+
+    A manually selected agreement always wins.  Otherwise the unique primary donor
+    row that carries an agreement is authoritative, irrespective of whether the
+    funding pipeline status is Potential, Approved, or Partially Approved.  The
+    status describes the funding lifecycle; it must not hide an agreement already
+    linked to the project's designated primary donor.
+    """
+    rows = _project_funding_rows(project)
+    if not rows:
+        return None
+
+    if agreement:
+        matches = [row for row in rows if row.funding_agreement == agreement]
+        return matches[0] if len(matches) == 1 else None
+
+    rows_with_agreement = [row for row in rows if row.funding_agreement]
+    primary_with_agreement = [row for row in rows_with_agreement if row.is_primary_donor]
+    if len(primary_with_agreement) == 1:
+        return primary_with_agreement[0]
+    if len(primary_with_agreement) > 1:
+        return None
+
+    approved_with_agreement = [
+        row for row in rows_with_agreement
+        if row.funding_status in ("Approved", "Partially Approved")
+    ]
+    if len(approved_with_agreement) == 1:
+        return approved_with_agreement[0]
+    if len(rows_with_agreement) == 1:
+        return rows_with_agreement[0]
+
+    approved = [
+        row for row in rows
+        if row.funding_status in ("Approved", "Partially Approved")
+    ]
+    primary = [row for row in approved if row.is_primary_donor]
+    if len(primary) == 1:
+        return primary[0]
+    if len(approved) == 1:
+        return approved[0]
+    return None
 
 @frappe.whitelist()
 def get_budget_line_finance_defaults(project, funding_agreement=None):
