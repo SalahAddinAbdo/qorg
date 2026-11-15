@@ -24,6 +24,12 @@ def _custom_field_differs(doctype: str, definition: dict) -> bool:
         return False
     name = f"{doctype}-{fieldname}"
     if not frappe.db.exists("Custom Field", name):
+        # A Standard field with the same fieldname is already owned by the
+        # DocType JSON. Adopt it instead of attempting to create a conflicting
+        # Custom Field. This is required for cumulative packages where a field
+        # may have moved from customization into the application-owned DocType.
+        if frappe.get_meta(doctype).has_field(fieldname):
+            return False
         return True
     current = frappe.get_cached_doc("Custom Field", name)
     for key, desired in definition.items():
