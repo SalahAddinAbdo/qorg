@@ -31,6 +31,7 @@ app_include_js = [
     "/assets/qorg/js/qorg_open_action.js",
     "/assets/qorg/js/qorg_ui_tokens.js",
     "/assets/qorg/js/qorg_theme_runtime.js",
+    "/assets/qorg/js/qorg_contextual_links.js",
 ]
 
 app_include_css = [
@@ -684,3 +685,6 @@ if _qorg_finance_v155_migration not in after_migrate:
 _qorg_finance_v156_migration = "qorg.qorg.finance_budget_grants.migration.migrate_finance_budget_grants_v156"
 if _qorg_finance_v156_migration not in after_migrate:
     after_migrate.append(_qorg_finance_v156_migration)
+_page_break_provisioner = "qorg.qorg.printing.page_break_provisioning.provision_printable_child_row_page_breaks"
+if _page_break_provisioner not in after_migrate:
+    after_migrate.append(_page_break_provisioner)

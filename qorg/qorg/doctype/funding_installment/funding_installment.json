@@ -5,21 +5,23 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "sequence",
+  "funding_installment_details_section",
   "installment_title",
   "due_date",
   "amount",
-  "condition",
+  "funding_installment_column_2",
   "received_amount",
-  "received_on",
-  "status"
+  "status",
+  "funding_installment_column_3",
+  "sequence",
+  "condition",
+  "received_on"
  ],
  "fields": [
   {
-   "fieldname": "sequence",
-   "fieldtype": "Int",
-   "label": "Sequence",
-   "in_list_view": 1
+   "fieldname": "funding_installment_details_section",
+   "label": "Funding Installment",
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "installment_title",
@@ -47,20 +49,13 @@
    "columns": 2
   },
   {
-   "fieldname": "condition",
-   "fieldtype": "Small Text",
-   "label": "Condition"
+   "fieldname": "funding_installment_column_2",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "received_amount",
    "fieldtype": "Currency",
    "label": "Received Amount",
-   "read_only": 1
-  },
-  {
-   "fieldname": "received_on",
-   "fieldtype": "Date",
-   "label": "Received On",
    "read_only": 1
   },
   {
@@ -71,6 +66,27 @@
    "default": "Planned",
    "in_list_view": 1,
    "columns": 1
+  },
+  {
+   "fieldname": "funding_installment_column_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sequence",
+   "fieldtype": "Int",
+   "label": "Sequence",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "condition",
+   "fieldtype": "Small Text",
+   "label": "Condition"
+  },
+  {
+   "fieldname": "received_on",
+   "fieldtype": "Date",
+   "label": "Received On",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 0,

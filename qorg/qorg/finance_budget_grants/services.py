@@ -83,3 +83,34 @@ def validate_accounting_document(doc,method=None):
   if cfg["eligibility"] and date:
    if data.eligibility_start_date and getdate(date)<getdate(data.eligibility_start_date): frappe.throw(_("Transaction date is before the Budget Line eligibility period."))
    if data.eligibility_end_date and getdate(date)>getdate(data.eligibility_end_date): frappe.throw(_("Transaction date is after the Budget Line eligibility period."))
+
+def apply_funding_agreement_to_source_row(row, agreement):
+    """Copy authoritative agreement values to a Project Funding Source row."""
+    mapping = {
+        "donor": "donor",
+        "agreement_reference": "agreement_reference",
+        "agreement_currency": "donor_currency",
+        "agreement_amount": "approved_amount_donor_currency",
+        "exchange_rate": "exchange_rate",
+        "start_date": "funding_start_date",
+        "end_date": "funding_end_date",
+        "eligibility_start_date": "eligibility_start_date",
+        "eligibility_end_date": "eligibility_end_date",
+        "flexibility_percent": "flexibility_percent",
+    }
+    for source, target in mapping.items():
+        if row.meta.has_field(target):
+            row.set(target, agreement.get(source))
+
+
+def validate_project_funding_source(doc, method=None):
+    """Validate and hydrate funding rows from their selected agreements."""
+    for row in doc.get("custom_funding_sources") or []:
+        if not row.get("funding_agreement"):
+            continue
+        agreement = frappe.get_doc("Funding Agreement", row.funding_agreement)
+        if agreement.project != doc.name:
+            frappe.throw(_("Funding Agreement {0} does not belong to Project {1}.").format(agreement.name, doc.name))
+        if row.donor and row.donor != agreement.donor:
+            frappe.throw(_("Funding Agreement {0} belongs to donor {1}, not {2}.").format(agreement.name, agreement.donor, row.donor))
+        apply_funding_agreement_to_source_row(row, agreement)

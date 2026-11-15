@@ -6,8 +6,22 @@ TEMPLATES={
  "Funding Obligation Reminder":("Funding Obligation Reminder | تذكير بالتزام تمويلي","A funding obligation is due or overdue.","حان موعد التزام تمويلي أو أصبح متأخرا."),
  "Financial Control Exception":("Financial Control Exception | استثناء في الرقابة المالية","A financial control exception requires action.","يوجد استثناء في الرقابة المالية يتطلب إجراء."),
 }
-def _body(en,ar):
- return MARKER+f"""<div style='font-family:Arial,sans-serif;line-height:1.6'><div dir='ltr'><h3>{en}</h3><ul><li>Agreement: {{{{ doc.agreement_title or doc.name }}}}</li><li>Project: {{{{ doc.project or '-' }}}}</li><li>Donor: {{{{ doc.donor or '-' }}}}</li><li>Status: {{{{ doc.status }}}}</li><li>Value: {{{{ doc.agreement_amount }}}} {{{{ doc.agreement_currency }}}}</li>{{% if obligation_type %}}<li>Obligation: {{{{ obligation_type }}}} - {{{{ obligation_title or '-' }}}}</li><li>Due: {{{{ obligation_due_date }}}}; overdue days: {{{{ days_overdue or 0 }}}}</li>{{% endif %}}{{% if exception_code %}}<li>Exception: {{{{ exception_code }}}}</li><li>Reason: {{{{ exception_reason or '-' }}}}</li>{{% endif %}}</ul><p><a href='{{{{ frappe.utils.get_url_to_form(doc.doctype, doc.name) }}}}'>Open record</a></p></div><hr><div dir='rtl' style='text-align:right'><h3>{ar}</h3><ul><li>الاتفاقية: {{{{ doc.agreement_title or doc.name }}}}</li><li>المشروع: {{{{ doc.project or '-' }}}}</li><li>المانح: {{{{ doc.donor or '-' }}}}</li><li>الحالة: {{{{ doc.status }}}}</li><li>القيمة: {{{{ doc.agreement_amount }}}} {{{{ doc.agreement_currency }}}}</li>{{% if obligation_type %}}<li>الالتزام: {{{{ obligation_type }}}} - {{{{ obligation_title or '-' }}}}</li><li>الاستحقاق: {{{{ obligation_due_date }}}}؛ أيام التأخير: {{{{ days_overdue or 0 }}}}</li>{{% endif %}}{{% if exception_code %}}<li>الاستثناء: {{{{ exception_code }}}}</li><li>السبب: {{{{ exception_reason or '-' }}}}</li>{{% endif %}}</ul><p><a href='{{{{ frappe.utils.get_url_to_form(doc.doctype, doc.name) }}}}'>فتح السجل</a></p></div></div>"""
+def _body(en, ar):
+    return MARKER + f"""{{% set record = doc if doc is defined else {{}} %}}
+<div style='font-family:Arial,sans-serif;line-height:1.6'>
+<div dir='ltr'><h3>{en}</h3><ul>
+<li>Agreement: {{{{ record.get('agreement_title') or record.get('name') or 'Funding Agreement' }}}}</li>
+<li>Project: {{{{ record.get('project') or '-' }}}}</li><li>Donor: {{{{ record.get('donor') or '-' }}}}</li>
+<li>Status: {{{{ record.get('status') or '-' }}}}</li><li>Value: {{{{ record.get('agreement_amount') or '-' }}}} {{{{ record.get('agreement_currency') or '' }}}}</li>
+{{% if obligation_type is defined %}}<li>Obligation: {{{{ obligation_type }}}} - {{{{ obligation_title|default('-') }}}}</li><li>Due: {{{{ obligation_due_date|default('-') }}}}</li>{{% endif %}}
+{{% if exception_code is defined %}}<li>Exception: {{{{ exception_code }}}}</li><li>Reason: {{{{ exception_reason|default('-') }}}}</li>{{% endif %}}
+</ul>{{% if record.get('doctype') and record.get('name') %}}<p><a href='{{{{ frappe.utils.get_url_to_form(record.get("doctype"), record.get("name")) }}}}'>Open record</a></p>{{% endif %}}</div>
+<hr><div dir='rtl' style='text-align:right'><h3>{ar}</h3><ul>
+<li>الاتفاقية: {{{{ record.get('agreement_title') or record.get('name') or 'اتفاقية التمويل' }}}}</li>
+<li>المشروع: {{{{ record.get('project') or '-' }}}}</li><li>المانح: {{{{ record.get('donor') or '-' }}}}</li>
+<li>الحالة: {{{{ record.get('status') or '-' }}}}</li><li>القيمة: {{{{ record.get('agreement_amount') or '-' }}}} {{{{ record.get('agreement_currency') or '' }}}}</li>
+</ul>{{% if record.get('doctype') and record.get('name') %}}<p><a href='{{{{ frappe.utils.get_url_to_form(record.get("doctype"), record.get("name")) }}}}'>فتح السجل</a></p>{{% endif %}}</div></div>"""
+
 def provision_templates():
  result={"created":[],"updated":[],"adopted":[],"skipped_manual":[]}; meta=frappe.get_meta("Email Template")
  for name,(subject,en,ar) in TEMPLATES.items():

@@ -8,19 +8,32 @@
  "editable_grid": 1,
  "track_changes": 0,
  "field_order": [
+  "transfer_details_section",
   "source_budget_line",
+  "audit_target_cb",
   "target_budget_line",
+  "audit_amount_cb",
   "transfer_amount",
   "currency",
+  "budget_impact_section",
   "source_previous_amount",
+  "audit_source_cb",
   "source_new_amount",
+  "audit_target_impact_cb",
   "target_previous_amount",
   "target_new_amount",
+  "control_section",
   "flexibility_percent",
+  "audit_control_cb",
   "transfer_percent",
   "exceeded_flexibility"
  ],
  "fields": [
+  {
+   "fieldname": "transfer_details_section",
+   "label": "Transfer Details",
+   "fieldtype": "Section Break"
+  },
   {
    "fieldname": "source_budget_line",
    "label": "Source Budget Line",
@@ -31,6 +44,10 @@
    "columns": 3
   },
   {
+   "fieldname": "audit_target_cb",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "target_budget_line",
    "label": "Target Budget Line",
    "fieldtype": "Link",
@@ -38,6 +55,10 @@
    "reqd": 1,
    "in_list_view": 1,
    "columns": 3
+  },
+  {
+   "fieldname": "audit_amount_cb",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "transfer_amount",
@@ -56,6 +77,11 @@
    "read_only": 1
   },
   {
+   "fieldname": "budget_impact_section",
+   "label": "Budget Impact",
+   "fieldtype": "Section Break"
+  },
+  {
    "fieldname": "source_previous_amount",
    "label": "Source Previous Amount",
    "fieldtype": "Currency",
@@ -65,6 +91,10 @@
    "columns": 0
   },
   {
+   "fieldname": "audit_source_cb",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "source_new_amount",
    "label": "Source New Amount",
    "fieldtype": "Currency",
@@ -72,6 +102,10 @@
    "read_only": 1,
    "in_list_view": 0,
    "columns": 0
+  },
+  {
+   "fieldname": "audit_target_impact_cb",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "target_previous_amount",
@@ -92,10 +126,19 @@
    "columns": 0
   },
   {
+   "fieldname": "control_section",
+   "label": "Transfer Control",
+   "fieldtype": "Section Break"
+  },
+  {
    "fieldname": "flexibility_percent",
    "label": "Flexibility (%)",
    "fieldtype": "Percent",
    "read_only": 1
+  },
+  {
+   "fieldname": "audit_control_cb",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "transfer_percent",

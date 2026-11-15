@@ -5,10 +5,13 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "agreement_identity_section",
   "naming_series",
   "agreement_title",
+  "agreement_identity_cb",
   "donor",
   "agreement_reference",
+  "agreement_status_cb",
   "status",
   "project_section",
   "company",
@@ -48,6 +51,11 @@
  ],
  "fields": [
   {
+   "fieldname": "agreement_identity_section",
+   "fieldtype": "Section Break",
+   "label": "Agreement Identity"
+  },
+  {
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "Series",
@@ -64,6 +72,10 @@
    "in_global_search": 1
   },
   {
+   "fieldname": "agreement_identity_cb",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "donor",
    "fieldtype": "Link",
    "label": "Donor",
@@ -78,6 +90,10 @@
    "reqd": 1,
    "unique": 1,
    "in_list_view": 1
+  },
+  {
+   "fieldname": "agreement_status_cb",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "status",
