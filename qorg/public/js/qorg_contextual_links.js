@@ -70,18 +70,5 @@
     }
   });
 
-  frappe.ui.form.on("Budget Line", {
-    project(frm) {
-      if (!frm.doc.project || !frm.is_new()) return;
-      frappe.db.get_list("Project Funding Source", {
-        filters: { parent: frm.doc.project, parenttype: "Project", primary_donor: 1 },
-        fields: ["funding_agreement", "donor_currency", "exchange_rate", "flexibility_percent"], limit: 1
-      }).then(rows => {
-        const row = rows && rows[0]; if (!row) return;
-        if (frm.fields_dict.funding_agreement && !frm.doc.funding_agreement) frm.set_value("funding_agreement", row.funding_agreement);
-        if (frm.fields_dict.currency && !frm.doc.currency) frm.set_value("currency", row.donor_currency);
-        if (frm.fields_dict.flexibility_percent && !frm.doc.flexibility_percent) frm.set_value("flexibility_percent", row.flexibility_percent);
-      });
-    }
-  });
+
 })();
