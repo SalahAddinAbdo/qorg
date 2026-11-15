@@ -688,3 +688,10 @@ if _qorg_finance_v156_migration not in after_migrate:
 _page_break_provisioner = "qorg.qorg.printing.page_break_provisioning.provision_printable_child_row_page_breaks"
 if _page_break_provisioner not in after_migrate:
     after_migrate.append(_page_break_provisioner)
+
+_email_template_hardener = (
+    "qorg.qorg.printing.email_template_hardening."
+    "harden_email_template_previews"
+)
+if _email_template_hardener not in after_migrate:
+    after_migrate.append(_email_template_hardener)
