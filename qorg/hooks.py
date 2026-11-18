@@ -60,7 +60,6 @@ app_include_js = ['/assets/qorg/js/finance_budget_grants.js',
  '/assets/qorg/js/qorg_open_action.js',
  '/assets/qorg/js/qorg_ui_tokens.js',
  '/assets/qorg/js/qorg_theme_runtime.js',
- '/assets/qorg/js/qorg_contextual_links.js',
  '/assets/qorg/js/procurement_reports.js',
  '/assets/qorg/js/procurement_communications.js',
  '/assets/qorg/js/inventory_cycle.js']
