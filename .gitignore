@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Packaging and build
+build/
+dist/
+*.egg-info/
+node_modules/
+
+# Virtual environments and local configuration
+.env
+.env.*
+.venv/
+venv/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*~
+*.swp
+
+# Runtime and temporary artifacts
+*.log
+*.tmp
+*.bak
+*.orig
