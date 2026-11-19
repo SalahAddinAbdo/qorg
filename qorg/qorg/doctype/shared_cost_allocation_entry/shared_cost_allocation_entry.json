@@ -12,6 +12,7 @@
   "source_voucher",
   "source_account",
   "source_cost_center",
+  "source_project",
   "source_amount",
   "project",
   "cost_center",
@@ -85,6 +86,13 @@
    "label": "Source Cost Center",
    "fieldtype": "Link",
    "options": "Cost Center",
+   "read_only": 1
+  },
+  {
+   "fieldname": "source_project",
+   "label": "Source Project",
+   "fieldtype": "Link",
+   "options": "Project",
    "read_only": 1
   },
   {

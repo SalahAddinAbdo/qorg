@@ -5,6 +5,12 @@ from frappe.utils import flt, getdate
 def validate_rule(doc):
     _clear_inapplicable_values(doc)
     if doc.effective_to and getdate(doc.effective_to) < getdate(doc.effective_from): frappe.throw(_("Effective To cannot be before Effective From."))
+    if doc.source_project and doc.require_unassigned_project: frappe.throw(_("Select either a Source Project or Require Unassigned Project, not both."))
+    selected_seen=set()
+    for row in doc.selected_vouchers or []:
+        key=(row.voucher_type,row.voucher_no)
+        if key in selected_seen: frappe.throw(_("Duplicate selected voucher {0} {1} at row {2}.").format(row.voucher_type,row.voucher_no,row.idx))
+        selected_seen.add(key)
     active=[r for r in doc.targets if r.allow_allocation]
     if not active: frappe.throw(_("At least one eligible allocation target is required."))
     seen=set()

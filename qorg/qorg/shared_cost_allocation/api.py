@@ -1,6 +1,8 @@
 import frappe
 from frappe import _
 from frappe.utils import flt
+from frappe.utils import cint
+
 
 @frappe.whitelist()
 def get_company_defaults(company):
@@ -33,3 +35,66 @@ def get_rule_defaults(rule):
     if not rule:return {}
     doc=frappe.get_doc("Shared Cost Allocation Rule",rule);doc.check_permission("read")
     return {"company":doc.company,"allocation_category":doc.allocation_category,"allocation_method":doc.allocation_method,"source_cost_center":doc.source_cost_center or frappe.get_cached_value("Company",doc.company,"custom_shared_cost_default_cost_center"),"period_start":doc.effective_from,"period_end":doc.effective_to,"posting_date":doc.effective_from,"currency":frappe.get_cached_value("Company",doc.company,"default_currency")}
+
+
+@frappe.whitelist()
+@frappe.validate_and_sanitize_search_inputs
+def search_eligible_source_vouchers(doctype, txt, searchfield, start, page_len, filters):
+    """Return submitted vouchers that contain at least one GL row eligible for the rule source."""
+    filters = frappe.parse_json(filters) if isinstance(filters, str) else (filters or {})
+    company = filters.get("company")
+    voucher_type = filters.get("voucher_type") or doctype
+    source_cost_center = filters.get("source_cost_center")
+    source_project = filters.get("source_project")
+    require_unassigned = cint(filters.get("require_unassigned_project"))
+    finance_book = filters.get("finance_book")
+    if not company or not voucher_type or not source_cost_center:
+        return []
+    if not frappe.has_permission(voucher_type, "read"):
+        return []
+    if source_project and require_unassigned:
+        return []
+
+    conditions = [
+        "gle.company = %(company)s",
+        "gle.voucher_type = %(voucher_type)s",
+        "gle.cost_center = %(source_cost_center)s",
+        "gle.is_cancelled = 0",
+        "(gle.debit - gle.credit) > 0.005",
+        "acc.root_type = 'Expense'",
+        "acc.is_group = 0",
+        "gle.voucher_no like %(txt)s",
+    ]
+    values = {
+        "company": company,
+        "voucher_type": voucher_type,
+        "source_cost_center": source_cost_center,
+        "txt": f"%{txt or ''}%",
+        "start": cint(start),
+        "page_len": max(1, min(cint(page_len) or 20, 100)),
+    }
+    if source_project:
+        conditions.append("gle.project = %(source_project)s")
+        values["source_project"] = source_project
+    elif require_unassigned:
+        conditions.append("coalesce(gle.project, '') = ''")
+    if finance_book:
+        conditions.append("coalesce(gle.finance_book, '') = %(finance_book)s")
+        values["finance_book"] = finance_book
+
+    # Exclude allocation-generated and reversal journals to prevent circular allocation.
+    conditions.append("not exists (select 1 from `tabShared Cost Allocation Run` r where r.docstatus = 1 and (r.journal_entry = gle.voucher_no or r.reversal_journal_entry = gle.voucher_no))")
+    sql = f"""
+        select
+            gle.voucher_no,
+            max(gle.posting_date) as posting_date,
+            group_concat(distinct gle.account order by gle.account separator ', ') as accounts,
+            round(sum(gle.debit - gle.credit), 2) as eligible_amount
+        from `tabGL Entry` gle
+        inner join `tabAccount` acc on acc.name = gle.account and acc.company = gle.company
+        where {' and '.join(conditions)}
+        group by gle.voucher_type, gle.voucher_no
+        order by max(gle.posting_date) desc, gle.voucher_no desc
+        limit %(start)s, %(page_len)s
+    """
+    return frappe.db.sql(sql, values)

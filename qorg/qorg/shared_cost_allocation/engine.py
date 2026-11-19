@@ -149,13 +149,22 @@ def _source_rows(doc,rule):
     if rule.source_project:filters["project"]=rule.source_project
     elif rule.require_unassigned_project:filters["project"]=["in",["",None]]
     if rule.finance_book:filters["finance_book"]=rule.finance_book
+    if not include:
+        include=frappe.get_all("Account",filters={"company":rule.company,"root_type":"Expense","is_group":0},pluck="name")
     if include:filters["account"]=["in",include]
     if rule.voucher_types:filters["voucher_type"]=["in",[x.strip() for x in rule.voucher_types.split(",") if x.strip()]]
-    rows=[] if rule.source_selection_mode=="Selected Vouchers Only" else frappe.get_all("GL Entry",filters=filters,fields=["name","account","cost_center","project","voucher_type","voucher_no","posting_date","debit","credit"],order_by="posting_date,name")
+    source_fields=["name","account","cost_center","project","finance_book","voucher_type","voucher_no","posting_date","debit","credit"]
+    rows=[] if rule.source_selection_mode=="Selected Vouchers Only" else frappe.get_all("GL Entry",filters=filters,fields=source_fields,order_by="posting_date,name")
     selected={(r.voucher_type,r.voucher_no) for r in rule.selected_vouchers if r.include}
     excluded_selected={(r.voucher_type,r.voucher_no) for r in rule.selected_vouchers if not r.include}
     if rule.source_selection_mode in ("Selected Vouchers Only","Filtered GL Entries plus Selected Vouchers") and selected:
-        rows.extend(frappe.get_all("GL Entry",filters={"company":doc.company,"is_cancelled":0,"voucher_no":["in",[x[1] for x in selected]]},fields=["name","account","cost_center","project","voucher_type","voucher_no","posting_date","debit","credit"]))
+        # Selected vouchers narrow the source population but never bypass the rule's
+        # company, period, cost center, project, finance book or account safeguards.
+        for voucher_type,voucher_no in selected:
+            selected_filters=dict(filters)
+            selected_filters["voucher_type"]=voucher_type
+            selected_filters["voucher_no"]=voucher_no
+            rows.extend(frappe.get_all("GL Entry",filters=selected_filters,fields=source_fields,order_by="posting_date,name"))
     submitted=frappe.get_all("Shared Cost Allocation Run",filters={"docstatus":1,"name":["!=",doc.name or ""]},pluck="name");payroll_group=frappe.get_cached_value("Company",rule.company,"custom_payroll_account_group") if rule.exclude_payroll_accounts else None;payroll_accounts=set()
     if payroll_group:
         b=frappe.db.get_value("Account",payroll_group,["lft","rgt"],as_dict=True);payroll_accounts=set(frappe.get_all("Account",filters={"lft":[">=",b.lft],"rgt":["<=",b.rgt],"company":rule.company},pluck="name"))
@@ -190,7 +199,7 @@ def _eligibility(target,date):
     return "Eligible",""
 
 def _append(doc,source,target,amount,percent,status,message,basis,value):
-    doc.append("entries",{"source_reference":source.name or source.voucher_no,"entry_type":"Indirect Recovery" if doc.allocation_category=="Indirect Cost Recovery" and doc.run_type!="Adjustment" else ("Adjustment" if doc.run_type=="Adjustment" else "Source Allocation"),"source_gl_entry":source.name or None,"source_voucher_type":source.voucher_type,"source_voucher":source.voucher_no,"source_account":source.account,"source_cost_center":source.cost_center,"source_amount":flt(source.available_amount),"project":target.project,"cost_center":target.cost_center,"budget_line":target.budget_line,"funding_agreement":target.funding_agreement,"donor":target.donor,"allocation_percentage":percent,"allocated_amount":amount,"driver_basis":basis,"driver_value":value,"eligibility_status":status,"exception_message":message})
+    doc.append("entries",{"source_reference":source.name or source.voucher_no,"entry_type":"Indirect Recovery" if doc.allocation_category=="Indirect Cost Recovery" and doc.run_type!="Adjustment" else ("Adjustment" if doc.run_type=="Adjustment" else "Source Allocation"),"source_gl_entry":source.name or None,"source_voucher_type":source.voucher_type,"source_voucher":source.voucher_no,"source_account":source.account,"source_cost_center":source.cost_center,"source_project":source.get("project"),"source_amount":flt(source.available_amount),"project":target.project,"cost_center":target.cost_center,"budget_line":target.budget_line,"funding_agreement":target.funding_agreement,"donor":target.donor,"allocation_percentage":percent,"allocated_amount":amount,"driver_basis":basis,"driver_value":value,"eligibility_status":status,"exception_message":message})
 
 def _enrich_currency_and_budget(doc,rule):
     donor_total=0;over=0
@@ -232,11 +241,11 @@ def post_run(doc):
     else:
         for row in doc.entries:
             if flt(row.allocated_amount)<=0:continue
-            grouped[(row.source_account,row.source_cost_center)]=grouped.get((row.source_account,row.source_cost_center),0)+flt(row.allocated_amount);account={"account":row.source_account,"debit_in_account_currency":row.allocated_amount,"cost_center":row.cost_center,"project":row.project}
+            grouped[(row.source_account,row.source_cost_center,row.get("source_project"))]=grouped.get((row.source_account,row.source_cost_center,row.get("source_project")),0)+flt(row.allocated_amount);account={"account":row.source_account,"debit_in_account_currency":row.allocated_amount,"cost_center":row.cost_center,"project":row.project}
             if meta.has_field("budget_line"):account["budget_line"]=row.budget_line
             if meta.has_field("funding_agreement"):account["funding_agreement"]=row.funding_agreement
             je.append("accounts",account)
-        for (account,cost_center),amount in grouped.items():je.append("accounts",{"account":account,"credit_in_account_currency":amount,"cost_center":cost_center})
+        for (account,cost_center,source_project),amount in grouped.items():je.append("accounts",{"account":account,"credit_in_account_currency":amount,"cost_center":cost_center,"project":source_project})
     je.insert();je.submit();doc.db_set("journal_entry",je.name,update_modified=False);doc.db_set("run_status","Posted",update_modified=False);doc.db_set("processed_on",now_datetime(),update_modified=False);doc.db_set("processed_by",frappe.session.user,update_modified=False);doc.db_set("reconciliation_status","Matched",update_modified=False)
     for row in doc.entries:row.db_set("journal_entry",je.name,update_modified=False)
 

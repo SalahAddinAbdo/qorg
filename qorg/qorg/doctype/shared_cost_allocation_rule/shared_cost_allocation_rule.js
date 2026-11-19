@@ -5,6 +5,10 @@ frappe.ui.form.on("Shared Cost Allocation Rule", {
  allocation_category(frm){clear_indirect_fields_if_needed(frm);if(frm.doc.company)load_company_defaults(frm);apply_rule_visibility(frm);},
  allocation_method(frm){clear_inapplicable_driver_values(frm);apply_rule_visibility(frm);frm.refresh_field("targets");},
  source_selection_mode(frm){clear_inapplicable_sources(frm);apply_rule_visibility(frm);},
+ source_cost_center: clear_selected_vouchers,
+ source_project(frm){if(frm.doc.source_project&&cint(frm.doc.require_unassigned_project))frm.set_value("require_unassigned_project",0);clear_selected_vouchers(frm);},
+ require_unassigned_project(frm){if(cint(frm.doc.require_unassigned_project)&&frm.doc.source_project)frm.set_value("source_project",null);clear_selected_vouchers(frm);},
+ finance_book: clear_selected_vouchers,
  effective_from(frm){if(frm.doc.effective_to&&frm.doc.effective_from>frm.doc.effective_to)frm.set_value("effective_to",null);},
  validate(frm){validate_client_totals(frm);}
 });
@@ -22,9 +26,10 @@ function set_rule_queries(frm){
  frm.set_query("indirect_cost_expense_account",()=>({filters:{company:frm.doc.company||"",is_group:0,root_type:"Expense"}}));
  frm.set_query("indirect_cost_recovery_account",()=>({filters:{company:frm.doc.company||"",is_group:0,root_type:["in",["Income","Equity"]]}}));
  frm.set_query("account","source_filters",()=>({filters:{company:frm.doc.company||""}}));
- frm.set_query("voucher_no","selected_vouchers",(doc,cdt,cdn)=>{const row=locals[cdt][cdn];return{filters:{docstatus:["<",2]},query:"frappe.desk.search.search_link",doctype:row.voucher_type||""};});
+ frm.set_query("voucher_no","selected_vouchers",(doc,cdt,cdn)=>{const row=locals[cdt][cdn];return{query:"qorg.qorg.shared_cost_allocation.api.search_eligible_source_vouchers",filters:{company:frm.doc.company||"",voucher_type:row.voucher_type||"",source_cost_center:frm.doc.source_cost_center||"",source_project:frm.doc.source_project||"",require_unassigned_project:cint(frm.doc.require_unassigned_project),finance_book:frm.doc.finance_book||""}};});
  frm.fields_dict.targets?.grid?.grid_rows?.forEach(r=>set_target_queries(frm,r.doc.doctype,r.doc.name));
 }
+function clear_selected_vouchers(frm){if((frm.doc.selected_vouchers||[]).length){frm.clear_table("selected_vouchers");frm.refresh_field("selected_vouchers");}}
 function set_target_queries(frm,cdt,cdn){const row=locals[cdt][cdn];
  frm.set_query("project","targets",()=>({filters:{company:frm.doc.company||"",status:["not in",["Completed","Cancelled"]]}}));
  frm.set_query("cost_center","targets",()=>({filters:{company:frm.doc.company||"",is_group:0}}));
