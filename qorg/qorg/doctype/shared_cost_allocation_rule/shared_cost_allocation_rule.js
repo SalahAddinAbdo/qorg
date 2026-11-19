@@ -1,6 +1,13 @@
 frappe.ui.form.on("Shared Cost Allocation Rule", {
  setup(frm){set_rule_queries(frm);},
- refresh(frm){set_rule_queries(frm);apply_rule_visibility(frm);if(frm.doc.docstatus===1&&frm.doc.status==="Active")frm.add_custom_button(__("Create Changed Rule"),()=>open_change_dialog(frm));},
+ refresh(frm){
+  set_rule_queries(frm);apply_rule_visibility(frm);
+  if(frm.doc.docstatus===1&&frm.doc.status==="Active"){
+   const run_button=frm.add_custom_button(__("Create Allocation Run"),()=>open_run_dialog(frm));
+   run_button.addClass("btn-primary");
+   frm.add_custom_button(__("Create Changed Rule"),()=>open_change_dialog(frm),__("Actions"));
+  }
+ },
  company(frm){clear_rule_company_dependents(frm);if(frm.doc.company)load_company_defaults(frm);set_rule_queries(frm);},
  allocation_category(frm){clear_indirect_fields_if_needed(frm);if(frm.doc.company)load_company_defaults(frm);apply_rule_visibility(frm);},
  allocation_method(frm){clear_inapplicable_driver_values(frm);apply_rule_visibility(frm);frm.refresh_field("targets");},
@@ -48,3 +55,28 @@ function clear_target_from_agreement(cdt,cdn){["donor","eligibility_start_date",
 function apply_rule_visibility(frm){frm.toggle_display("rate_periods",frm.doc.allocation_category==="Indirect Cost Recovery");}
 function validate_client_totals(frm){const active=(frm.doc.targets||[]).filter(r=>r.allow_allocation);if(frm.doc.allocation_method==="Fixed Percentage"){const total=active.reduce((s,r)=>s+flt(r.allocation_percentage),0);if(Math.abs(total-100)>.0001)frappe.throw(__("Allocation percentages must equal 100%. Current total: {0}%. Difference: {1}%.",[total,100-total]));}if(frm.doc.allocation_method==="Composite Driver"){const fields=["direct_expenditure_weight","budget_weight","headcount_weight","beneficiary_weight","manual_weight"];const total=fields.reduce((s,f)=>s+flt(frm.doc[f]),0);if(Math.abs(total-100)>.0001)frappe.throw(__("Composite driver weights must equal 100%. Current total: {0}%.",[total]));}}
 function open_change_dialog(frm){frappe.prompt([{fieldname:"change_type",label:__("Change Type"),fieldtype:"Select",options:["Prospective Change","Donor Approved Increase","Donor Approved Reduction","Correction"].join("\n"),reqd:1},{fieldname:"change_effective_date",label:__("Change Effective Date"),fieldtype:"Date",reqd:1}],v=>frappe.call({method:"qorg.qorg.shared_cost_allocation.engine.create_changed_rule",args:{source_rule:frm.doc.name,change_type:v.change_type,change_effective_date:v.change_effective_date},callback:r=>frappe.set_route("Form","Shared Cost Allocation Rule",r.message)}),__("Create Changed Rule"));}
+
+
+function open_run_dialog(frm){
+ frappe.call({method:"qorg.qorg.shared_cost_allocation.engine.get_allocation_run_defaults",args:{source_rule:frm.doc.name},freeze:true,callback:r=>{
+  const d=r.message||{};
+  const dialog=new frappe.ui.Dialog({title:__("Create Allocation Run"),fields:[
+   {fieldname:"run_type",label:__("Run Type"),fieldtype:"Data",default:__("Regular"),read_only:1},
+   {fieldname:"frequency",label:__("Frequency"),fieldtype:"Data",default:d.frequency||"",read_only:1},
+   {fieldname:"period_start",label:__("Period Start"),fieldtype:"Date",default:d.period_start,reqd:1},
+   {fieldname:"period_end",label:__("Period End"),fieldtype:"Date",default:d.period_end,reqd:1},
+   {fieldname:"posting_date",label:__("Posting Date"),fieldtype:"Date",default:d.posting_date,reqd:1},
+   {fieldname:"effective_period",label:__("Rule Effective Period"),fieldtype:"Data",default:`${d.effective_from||""} ${__("to")} ${d.effective_to||__("Open End")}`,read_only:1},
+   {fieldname:"notice",fieldtype:"HTML",options:`<div class="alert alert-info">${__("The run will be created as a draft. Review the preview and exceptions before submitting it to post the accounting entry.")}</div>`}
+  ],primary_action_label:__("Create and Open"),primary_action(values){
+   if(values.period_end<values.period_start){frappe.msgprint(__("Period End cannot be before Period Start."));return;}
+   dialog.disable_primary_action();
+   frappe.call({method:"qorg.qorg.shared_cost_allocation.engine.create_allocation_run",args:{source_rule:frm.doc.name,period_start:values.period_start,period_end:values.period_end,posting_date:values.posting_date},freeze:true,callback:res=>{
+    const out=res.message||{};dialog.hide();
+    if(out.message)frappe.show_alert({message:out.message,indicator:out.existing?"orange":"green"});
+    if(out.name)frappe.set_route("Form","Shared Cost Allocation Run",out.name);
+   },always:()=>dialog.enable_primary_action()});
+  }});
+  dialog.show();
+ }});
+}

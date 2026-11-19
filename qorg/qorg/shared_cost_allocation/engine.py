@@ -1,7 +1,7 @@
 import json
 import frappe
 from frappe import _
-from frappe.utils import flt, getdate, now_datetime
+from frappe.utils import flt, getdate, now_datetime, add_days, add_months, date_diff
 from qorg.qorg.shared_cost_allocation.validation import validate_rule
 
 PAYROLL_VOUCHERS={"Payroll Entry","Salary Slip"}
@@ -254,6 +254,118 @@ def reverse_run(doc):
     je=frappe.get_doc("Journal Entry",doc.journal_entry)
     if je.docstatus==1:je.cancel()
     doc.db_set("run_status","Reversed",update_modified=False);doc.db_set("reconciliation_status","Reversed",update_modified=False)
+
+
+@frappe.whitelist()
+def get_allocation_run_defaults(source_rule):
+    source = frappe.get_doc("Shared Cost Allocation Rule", source_rule)
+    source.check_permission("read")
+    _validate_runnable_rule(source)
+    if not frappe.has_permission("Shared Cost Allocation Run", "create"):
+        frappe.throw(_("Not permitted to create a Shared Cost Allocation Run."), frappe.PermissionError)
+
+    latest = frappe.get_all(
+        "Shared Cost Allocation Run",
+        filters={"allocation_rule": source.name, "run_type": "Regular", "docstatus": ["<", 2]},
+        fields=["name", "period_end", "docstatus", "run_status"],
+        order_by="period_end desc, creation desc",
+        limit=1,
+    )
+    start = getdate(source.effective_from)
+    if latest and latest[0].period_end:
+        start = max(start, add_days(getdate(latest[0].period_end), 1))
+    if source.effective_to and start > getdate(source.effective_to):
+        frappe.throw(_("No unprocessed period remains within this rule's effective dates. Create a changed rule for the next period or open an existing run."))
+    end = _suggest_period_end(start, source.frequency, source.effective_to)
+    return {
+        "period_start": start,
+        "period_end": end,
+        "posting_date": end,
+        "frequency": source.frequency,
+        "effective_from": source.effective_from,
+        "effective_to": source.effective_to,
+        "latest_run": latest[0].name if latest else None,
+    }
+
+
+@frappe.whitelist()
+def create_allocation_run(source_rule, period_start, period_end, posting_date):
+    source = frappe.get_doc("Shared Cost Allocation Rule", source_rule)
+    source.check_permission("read")
+    _validate_runnable_rule(source)
+    if not frappe.has_permission("Shared Cost Allocation Run", "create"):
+        frappe.throw(_("Not permitted to create a Shared Cost Allocation Run."), frappe.PermissionError)
+
+    start, end, posting = getdate(period_start), getdate(period_end), getdate(posting_date)
+    if end < start:
+        frappe.throw(_("Period End cannot be before Period Start."))
+    if start < getdate(source.effective_from) or (source.effective_to and end > getdate(source.effective_to)):
+        frappe.throw(_("The run period must be within the rule effective period {0} to {1}.").format(
+            source.effective_from, source.effective_to or _("Open End")
+        ))
+    _validate_frequency_period(source.frequency, start, end)
+
+    overlapping = frappe.db.sql(
+        """
+        select name, docstatus, run_status, period_start, period_end
+        from `tabShared Cost Allocation Run`
+        where allocation_rule=%s and run_type='Regular' and docstatus < 2
+          and period_start <= %s and period_end >= %s
+        order by docstatus desc, creation desc
+        limit 1
+        """,
+        (source.name, end, start), as_dict=True,
+    )
+    if overlapping:
+        row = overlapping[0]
+        if row.docstatus == 0 and row.period_start == start and row.period_end == end:
+            return {"name": row.name, "existing": 1, "message": _("The existing draft run was opened.")}
+        frappe.throw(_("Run {0} already overlaps this period ({1} to {2}). Open the existing run or create an Adjustment from the posted run.").format(
+            frappe.bold(row.name), row.period_start, row.period_end
+        ))
+
+    doc = frappe.new_doc("Shared Cost Allocation Run")
+    doc.update({
+        "allocation_rule": source.name,
+        "company": source.company,
+        "allocation_category": source.allocation_category,
+        "allocation_method": source.allocation_method,
+        "run_type": "Regular",
+        "period_start": start,
+        "period_end": end,
+        "posting_date": posting,
+        "source_cost_center": source.source_cost_center or frappe.get_cached_value("Company", source.company, "custom_shared_cost_default_cost_center"),
+        "company_currency": frappe.get_cached_value("Company", source.company, "default_currency"),
+        "run_status": "Draft",
+    })
+    doc.insert()
+    return {"name": doc.name, "existing": 0, "message": _("Allocation Run {0} was created.").format(doc.name)}
+
+
+def _validate_runnable_rule(source):
+    if source.docstatus != 1 or source.status != "Active":
+        frappe.throw(_("Only a submitted Active rule can create an Allocation Run."))
+    if source.effective_to and getdate(source.effective_to) < getdate():
+        # Historical rules remain runnable for their own unprocessed periods; do not block them here.
+        pass
+
+
+def _suggest_period_end(start, frequency, effective_to=None):
+    if frequency == "Monthly":
+        end = add_days(add_months(start, 1), -1)
+    elif frequency == "Quarterly":
+        end = add_days(add_months(start, 3), -1)
+    elif frequency == "Annual":
+        end = add_days(add_months(start, 12), -1)
+    else:
+        end = getdate(effective_to) if effective_to else start
+    return min(end, getdate(effective_to)) if effective_to else end
+
+
+def _validate_frequency_period(frequency, start, end):
+    maximum_days = {"Monthly": 31, "Quarterly": 92, "Annual": 366}.get(frequency)
+    if maximum_days and date_diff(end, start) + 1 > maximum_days:
+        frappe.throw(_("A {0} Regular Run cannot exceed {1} days.").format(frequency, maximum_days))
 
 @frappe.whitelist()
 def create_changed_rule(source_rule,change_type="Prospective Change",change_effective_date=None):
