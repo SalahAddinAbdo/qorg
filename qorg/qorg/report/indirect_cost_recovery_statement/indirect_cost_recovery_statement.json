@@ -1,0 +1,25 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "disable_prepared_report": 0,
+ "doctype": "Report",
+ "filters": [],
+ "is_standard": "Yes",
+ "module": "QOrg",
+ "name": "Indirect Cost Recovery Statement",
+ "prepared_report": 0,
+ "ref_doctype": "Shared Cost Allocation Run",
+ "report_name": "Indirect Cost Recovery Statement",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "Accounts User"
+  },
+  {
+   "role": "Projects Manager"
+  }
+ ]
+}

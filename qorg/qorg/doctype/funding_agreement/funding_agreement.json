@@ -26,6 +26,10 @@
   "exchange_rate_type",
   "exchange_rate_date",
   "exchange_rate_source",
+  "currency_precision",
+  "exchange_rate_locked",
+  "manual_rate_approval_reference",
+  "exchange_rate_audit",
   "base_amount",
   "column_2",
   "indirect_cost_percent",
@@ -187,6 +191,33 @@
    "fieldname": "exchange_rate_source",
    "label": "Exchange Rate Source",
    "fieldtype": "Data",
+   "read_only": 1
+  },
+  {
+   "fieldname": "currency_precision",
+   "label": "Currency Precision",
+   "fieldtype": "Int",
+   "default": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "exchange_rate_locked",
+   "label": "Exchange Rate Locked",
+   "fieldtype": "Check",
+   "default": "0",
+   "read_only": 1
+  },
+  {
+   "fieldname": "manual_rate_approval_reference",
+   "label": "Manual Rate Approval Reference",
+   "fieldtype": "Data",
+   "depends_on": "eval:doc.exchange_rate_type==\"Manual Approved\""
+  },
+  {
+   "fieldname": "exchange_rate_audit",
+   "label": "Exchange Rate Audit",
+   "fieldtype": "Table",
+   "options": "Currency Exchange Audit",
    "read_only": 1
   },
   {

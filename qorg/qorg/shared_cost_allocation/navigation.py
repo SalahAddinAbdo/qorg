@@ -1,0 +1,4 @@
+WORKSPACE_CONTRIBUTIONS={
+ "Q Management Hub":[{"label":"Shared and Indirect Costs","items":[("DocType","Shared Cost Allocation Rule","Allocation Rules"),("DocType","Shared Cost Allocation Run","Allocation Runs")]}],
+ "Reports & Analytics":[{"label":"Shared and Indirect Cost Reports","items":[("Report","Shared Cost Allocation Register","Allocation Register"),("Report","Indirect Cost Recovery Statement","Indirect Cost Recovery"),("Report","Shared Cost Allocation Reconciliation","Allocation Reconciliation"),("Report","Shared Cost Allocation Exceptions","Allocation Exceptions"),("Report","Allocation by Project and Donor","By Project and Donor"),("Report","Unallocated Shared Costs","Unallocated Costs"),("Report","Allocation Basis Analysis","Allocation Basis"),("Report","Planned Versus Actual Allocation","Planned Versus Actual")]}]
+}

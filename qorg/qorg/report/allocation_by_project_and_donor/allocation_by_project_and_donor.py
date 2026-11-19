@@ -1,0 +1,11 @@
+import frappe
+from frappe import _
+from frappe.utils import flt
+from qorg.qorg.shared_cost_allocation.reporting import in_selected,apply_view,chart_by,summary
+def execute(filters=None):
+ f=frappe._dict(filters or {});runs=frappe.get_all("Shared Cost Allocation Run",filters={"company":f.company,"posting_date":["between",[f.from_date,f.to_date]],"docstatus":1},pluck="name");data={}
+ for e in frappe.get_all("Shared Cost Allocation Entry",filters={"parent":["in",runs]},fields=["project","donor","funding_agreement","budget_line","allocated_amount","allocated_donor_amount","donor_currency"]) if runs else []:
+  if not in_selected(e.project,f,"project") or not in_selected(e.donor,f,"donor") or not in_selected(e.funding_agreement,f,"funding_agreement"):continue
+  key=(e.project,e.donor,e.funding_agreement,e.budget_line,e.donor_currency);r=data.setdefault(key,{"project":e.project,"donor":e.donor,"funding_agreement":e.funding_agreement,"budget_line":e.budget_line,"donor_currency":e.donor_currency,"allocated_amount":0,"allocated_donor_amount":0});r["allocated_amount"]+=flt(e.allocated_amount);r["allocated_donor_amount"]+=flt(e.allocated_donor_amount)
+ rows=list(data.values());cols=[{"label":_("Project"),"fieldname":"project","fieldtype":"Link","options":"Project","width":170,"sticky":1},{"label":_("Donor"),"fieldname":"donor","fieldtype":"Link","options":"Donor","width":150,"sticky":1},{"label":_("Funding Agreement"),"fieldname":"funding_agreement","fieldtype":"Link","options":"Funding Agreement","width":180},{"label":_("Budget Line"),"fieldname":"budget_line","fieldtype":"Link","options":"Budget Line","width":170},{"label":_("Company Amount"),"fieldname":"allocated_amount","fieldtype":"Currency","width":130},{"label":_("Donor Currency"),"fieldname":"donor_currency","fieldtype":"Link","options":"Currency","width":100},{"label":_("Donor Amount"),"fieldname":"allocated_donor_amount","fieldtype":"Currency","options":"donor_currency","width":130}]
+ total=sum(flt(x["allocated_amount"]) for x in rows);return apply_view(cols,f.view_mode),rows,None,chart_by(rows,"donor","allocated_amount",_("Allocated")),summary([(_("Allocated"),total,"Currency","Green"),(_("Projects"),len(set(x["project"] for x in rows)),"Int","Blue"),(_("Donors"),len(set(x["donor"] for x in rows if x["donor"])),"Int","Blue")]),1

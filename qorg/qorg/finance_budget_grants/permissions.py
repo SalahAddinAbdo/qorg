@@ -28,3 +28,18 @@ def budget_transfer_audit_query(user=None):
 def budget_transfer_audit_permission(doc,user=None,permission_type=None):
     if permission_type not in (None,"read","print","email","report","export"): return False
     return bool(_roles(user)&READ_ROLES)
+
+def finance_document_query(doctype,user=None):
+    user=user or frappe.session.user;roles=_roles(user)
+    if "System Manager" in roles:return ""
+    if not roles&READ_ROLES:return "1=0"
+    scope=_scope(doctype,user)
+    return scope or ("" if roles&PRIVILEGED_ROLES else "1=0")
+def finance_document_permission(doc,user=None,permission_type=None):
+    user=user or frappe.session.user;roles=_roles(user)
+    if permission_type in ("write","create","submit","cancel","amend","delete"):return bool(roles&PRIVILEGED_ROLES)
+    return bool(roles&READ_ROLES)
+def budget_line_query(user=None):return finance_document_query("Budget Line",user)
+def commitment_ledger_query(user=None):return finance_document_query("Commitment Ledger",user)
+def commitment_entry_query(user=None):return finance_document_query("Commitment Entry",user)
+def project_closure_query(user=None):return finance_document_query("Project Closure",user)

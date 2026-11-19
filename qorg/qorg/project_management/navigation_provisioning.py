@@ -27,6 +27,7 @@ NAVIGATION_PROVIDERS = (
     "qorg.qorg.recruitment_extensions.navigation.WORKSPACE_CONTRIBUTIONS",
     "qorg.qorg.volunteer_management.navigation.WORKSPACE_CONTRIBUTIONS",
     "qorg.qorg.project_management.navigation.WORKSPACE_CONTRIBUTIONS",
+    "qorg.qorg.shared_cost_allocation.navigation.WORKSPACE_CONTRIBUTIONS",
 )
 
 LEGACY_SIDEBAR_DEFINITIONS = [

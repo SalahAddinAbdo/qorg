@@ -1,0 +1,1 @@
+frappe.query_reports["Allocation Basis Analysis"]={filters:qorg_shared_cost_reports.filters([]),onload:r=>qorg_shared_cost_reports.onload(r),after_datatable_render:r=>qorg_shared_cost_reports.after_refresh(r),formatter:(v,row,col,data,df)=>qorg_shared_cost_reports.formatter(v,row,col,data,df)};

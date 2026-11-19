@@ -2,7 +2,7 @@ import frappe
 from frappe import _
 from frappe.model.document import Document
 from frappe.utils import flt, getdate
-from qorg.qorg.finance_budget_grants.currency import validate_agreement_currency
+from qorg.qorg.finance_budget_grants.currency import append_exchange_audit, prevent_locked_rate_change, validate_agreement_currency
 
 class FundingAgreement(Document):
     def validate(self):
@@ -12,7 +12,9 @@ class FundingAgreement(Document):
             frappe.throw(_("Eligibility Start Date cannot be after End Date."))
         if not 0 <= flt(self.flexibility_percent) <= 100:
             frappe.throw(_("Budget Flexibility must be between 0 and 100%."))
-        validate_agreement_currency(self)
+        prevent_locked_rate_change(self)
+        result = validate_agreement_currency(self)
+        append_exchange_audit(self, result)
         total = sum(flt(row.amount) for row in self.installments)
         if total > flt(self.agreement_amount):
             frappe.throw(_("Funding installments exceed the agreement amount."))
@@ -26,6 +28,7 @@ class FundingAgreement(Document):
                 frappe.throw(_("Budget Rule weights must total exactly 100%. Current total: {0}%. Difference: {1}%.").format(total, 100-total))
 
     def before_submit(self):
+        self.exchange_rate_locked = 1
         if self.status not in ("Under Review", "Active"):
             frappe.throw(_("Funding Agreement can be submitted only from Under Review through the Activate workflow action."))
 

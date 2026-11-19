@@ -1,0 +1,187 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "hash",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project",
+  "cost_center",
+  "budget_line",
+  "funding_agreement",
+  "donor",
+  "column_1",
+  "allocation_percentage",
+  "fixed_amount",
+  "driver_quantity",
+  "driver_weight",
+  "maximum_amount",
+  "indirect_rate_override",
+  "target_cap",
+  "donor_approval_required",
+  "donor_approval_reference",
+  "eligibility_start_date",
+  "eligibility_end_date",
+  "target_effective_from",
+  "target_effective_to",
+  "allow_allocation",
+  "exclusion_reason"
+ ],
+ "fields": [
+  {
+   "fieldname": "project",
+   "label": "Project",
+   "fieldtype": "Link",
+   "options": "Project",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cost_center",
+   "label": "Cost Center",
+   "fieldtype": "Link",
+   "options": "Cost Center",
+   "reqd": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "budget_line",
+   "label": "Budget Line",
+   "fieldtype": "Link",
+   "options": "Budget Line",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "funding_agreement",
+   "label": "Funding Agreement",
+   "fieldtype": "Link",
+   "options": "Funding Agreement",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "donor",
+   "label": "Donor",
+   "fieldtype": "Link",
+   "options": "Donor",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "column_1",
+   "label": "",
+   "fieldtype": "Column Break",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "allocation_percentage",
+   "label": "Allocation Percentage",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "depends_on": "eval:parent.allocation_method==\"Fixed Percentage\""
+  },
+  {
+   "fieldname": "fixed_amount",
+   "label": "Fixed Amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "depends_on": "eval:parent.allocation_method==\"Fixed Amount\""
+  },
+  {
+   "fieldname": "driver_quantity",
+   "label": "Driver Quantity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "depends_on": "eval:[\"Manual Driver\",\"Composite Driver\"].includes(parent.allocation_method)"
+  },
+  {
+   "fieldname": "driver_weight",
+   "label": "Driver Weight",
+   "fieldtype": "Percent",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "maximum_amount",
+   "label": "Maximum Amount",
+   "fieldtype": "Currency",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "indirect_rate_override",
+   "label": "Indirect Rate Override",
+   "fieldtype": "Percent",
+   "in_list_view": 0,
+   "depends_on": "eval:parent.allocation_category==\"Indirect Cost Recovery\""
+  },
+  {
+   "fieldname": "target_cap",
+   "label": "Target Cap",
+   "fieldtype": "Currency",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "donor_approval_required",
+   "label": "Donor Approval Required",
+   "fieldtype": "Check",
+   "default": "0",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "donor_approval_reference",
+   "label": "Donor Approval Reference",
+   "fieldtype": "Data",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "eligibility_start_date",
+   "label": "Eligibility Start Date",
+   "fieldtype": "Date",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "eligibility_end_date",
+   "label": "Eligibility End Date",
+   "fieldtype": "Date",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "target_effective_from",
+   "label": "Target Effective From",
+   "fieldtype": "Date",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "target_effective_to",
+   "label": "Target Effective To",
+   "fieldtype": "Date",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "allow_allocation",
+   "label": "Allow Allocation",
+   "fieldtype": "Check",
+   "default": "1",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "exclusion_reason",
+   "label": "Exclusion Reason",
+   "fieldtype": "Small Text",
+   "depends_on": "eval:!doc.allow_allocation",
+   "in_list_view": 0
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "module": "QOrg",
+ "name": "Shared Cost Allocation Target",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1,
+ "istable": 1,
+ "editable_grid": 1
+}

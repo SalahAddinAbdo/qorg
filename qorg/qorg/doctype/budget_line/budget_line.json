@@ -699,6 +699,52 @@
    "doctype": "DocField"
   },
   {
+   "fieldname": "donor_currency",
+   "label": "Donor Currency",
+   "fieldtype": "Link",
+   "options": "Currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "donor_amount",
+   "label": "Donor Amount",
+   "fieldtype": "Currency",
+   "options": "donor_currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "base_currency",
+   "label": "Base Currency",
+   "fieldtype": "Link",
+   "options": "Currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "base_amount",
+   "label": "Base Amount",
+   "fieldtype": "Currency",
+   "options": "base_currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "exchange_rate",
+   "label": "Exchange Rate",
+   "fieldtype": "Float",
+   "read_only": 1
+  },
+  {
+   "fieldname": "exchange_rate_date",
+   "label": "Exchange Rate Date",
+   "fieldtype": "Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "exchange_rate_source",
+   "label": "Exchange Rate Source",
+   "fieldtype": "Data",
+   "read_only": 1
+  },
+  {
    "label": "",
    "fieldtype": "Column Break",
    "fieldname": "column_break_amount",
@@ -1416,6 +1462,13 @@
   "section_break_amount",
   "currency",
   "line_cost",
+  "donor_currency",
+  "donor_amount",
+  "base_currency",
+  "base_amount",
+  "exchange_rate",
+  "exchange_rate_date",
+  "exchange_rate_source",
   "column_break_amount",
   "original_approved_amount",
   "section_break_control",

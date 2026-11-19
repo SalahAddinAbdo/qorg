@@ -1,0 +1,25 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "disable_prepared_report": 0,
+ "doctype": "Report",
+ "filters": [],
+ "is_standard": "Yes",
+ "module": "QOrg",
+ "name": "Allocation by Project and Donor",
+ "prepared_report": 0,
+ "ref_doctype": "Shared Cost Allocation Run",
+ "report_name": "Allocation by Project and Donor",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "Accounts User"
+  },
+  {
+   "role": "Projects Manager"
+  }
+ ]
+}

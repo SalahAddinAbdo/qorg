@@ -51,6 +51,7 @@ override_doctype_dashboards = {'Material Request': 'qorg.qorg.dashboards.materia
 # ==============================================================================
 
 app_include_js = ['/assets/qorg/js/finance_budget_grants.js',
+ '/assets/qorg/js/shared_cost_reports.js',
  '/assets/qorg/js/document_workflow.js',
  '/assets/qorg/js/qorg_form_bootstrap.js',
  '/assets/qorg/js/model_policy.js',
@@ -452,3 +453,34 @@ fixtures = [{'dt': 'Custom Field',
                 'Company-custom_print_light_color',
                 'Company-custom_column_break_twxkf',
                 'Company-custom_print_border_color']]]}]
+
+# ==============================================================================
+# SHARED COST ALLOCATION
+# ==============================================================================
+_shared_cost_provisioner = "qorg.qorg.shared_cost_allocation.provisioning.provision_shared_cost_allocation"
+if _shared_cost_provisioner not in after_install:
+    after_install.append(_shared_cost_provisioner)
+if _shared_cost_provisioner not in after_migrate:
+    after_migrate.append(_shared_cost_provisioner)
+permission_query_conditions["Shared Cost Allocation Run"] = "qorg.qorg.shared_cost_allocation.permissions.allocation_query"
+
+permission_query_conditions["Shared Cost Allocation Rule"] = "qorg.qorg.shared_cost_allocation.permissions.rule_query"
+
+def _qorg_shared_cost_add_event(doctype, event, handler):
+    current = doc_events.setdefault(doctype, {}).get(event)
+    if not current: doc_events[doctype][event] = handler
+    elif isinstance(current, list):
+        if handler not in current: current.append(handler)
+    elif current != handler: doc_events[doctype][event] = [current, handler]
+
+_qorg_shared_cost_add_event("Project Closure", "before_validate", "qorg.qorg.shared_cost_allocation.closeout.refresh_allocation_closeout")
+_qorg_shared_cost_add_event("Project Closure", "validate", "qorg.qorg.shared_cost_allocation.closeout.validate_allocation_closeout")
+_qorg_shared_cost_add_event("Project Closure", "on_update", "qorg.qorg.shared_cost_allocation.closeout.lock_rules_after_closure")
+permission_query_conditions["Budget Line"] = "qorg.qorg.finance_budget_grants.permissions.budget_line_query"
+permission_query_conditions["Commitment Ledger"] = "qorg.qorg.finance_budget_grants.permissions.commitment_ledger_query"
+permission_query_conditions["Commitment Entry"] = "qorg.qorg.finance_budget_grants.permissions.commitment_entry_query"
+permission_query_conditions["Project Closure"] = "qorg.qorg.finance_budget_grants.permissions.project_closure_query"
+has_permission["Budget Line"] = "qorg.qorg.finance_budget_grants.permissions.finance_document_permission"
+has_permission["Commitment Ledger"] = "qorg.qorg.finance_budget_grants.permissions.finance_document_permission"
+has_permission["Commitment Entry"] = "qorg.qorg.finance_budget_grants.permissions.finance_document_permission"
+

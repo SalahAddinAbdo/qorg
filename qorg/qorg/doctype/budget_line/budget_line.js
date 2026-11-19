@@ -178,3 +178,10 @@ function validate_budget_line(frm) {
     }
 }
 
+
+
+frappe.ui.form.on("Budget Line",{
+ project(frm){if(!frm.doc.project){["funding_agreement","donor_currency","donor_amount","base_currency","base_amount","exchange_rate","exchange_rate_date","exchange_rate_source"].forEach(f=>frm.set_value(f,null));}},
+ funding_agreement(frm){if(!frm.doc.funding_agreement){["donor_currency","donor_amount","exchange_rate","exchange_rate_date","exchange_rate_source"].forEach(f=>frm.set_value(f,null));}else{frappe.db.get_value("Funding Agreement",frm.doc.funding_agreement,["project","agreement_currency","exchange_rate","exchange_rate_date","exchange_rate_source"]).then(r=>{if(r.message.project!==frm.doc.project){frm.set_value("funding_agreement",null);frappe.throw(__("Funding Agreement must belong to the selected Project."));}frm.set_value("donor_currency",r.message.agreement_currency);frm.set_value("exchange_rate",r.message.exchange_rate);frm.set_value("exchange_rate_date",r.message.exchange_rate_date);frm.set_value("exchange_rate_source",r.message.exchange_rate_source);});}},
+ line_cost(frm){if(frm.doc.currency===frm.doc.donor_currency)frm.set_value("donor_amount",frm.doc.line_cost);}
+});

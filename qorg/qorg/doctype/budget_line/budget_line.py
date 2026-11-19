@@ -7,6 +7,31 @@ from frappe.utils.nestedset import NestedSet
 
 
 from qorg.qorg.project_management.services.project_reconciliation import reconcile_document_projects, reconcile_deleted_document, reconcile_project
+from qorg.qorg.finance_budget_grants.currency import company_currency, convert_between, currency_precision, quantize
+
+def sync_budget_line_currency(doc):
+    if not doc.project:
+        doc.donor_currency=None;doc.donor_amount=0;doc.base_currency=None;doc.base_amount=0;doc.exchange_rate=0;doc.exchange_rate_date=None;doc.exchange_rate_source=None
+        return
+    company=frappe.db.get_value("Project",doc.project,"company")
+    doc.base_currency=company_currency(company)
+    source_currency=doc.currency or doc.base_currency
+    doc.base_amount,result=convert_between(doc.line_cost,source_currency,doc.base_currency,frappe.utils.nowdate())
+    doc.exchange_rate=result.rate;doc.exchange_rate_date=result.rate_date;doc.exchange_rate_source=result.source
+    if getattr(doc,"funding_agreement",None):
+        ag=frappe.db.get_value("Funding Agreement",doc.funding_agreement,["agreement_currency","exchange_rate_type","exchange_rate","manual_rate_approval_reference","exchange_rate_source","exchange_rate_date"],as_dict=True)
+        if ag:
+            doc.donor_currency=ag.agreement_currency
+            if doc.donor_currency==source_currency: doc.donor_amount=doc.line_cost
+            else:
+                # Agreement exchange rate is stored donor-to-base. Convert the
+                # approved base amount back to donor currency without changing line_cost.
+                _,donor_to_base=convert_between(1,doc.donor_currency,doc.base_currency,ag.exchange_rate_date,ag.exchange_rate_type,ag.exchange_rate,ag.manual_rate_approval_reference,ag.exchange_rate_source)
+                doc.donor_amount=quantize(doc.base_amount/(donor_to_base.rate or 1),currency_precision(doc.donor_currency,company))
+        else: doc.donor_currency=None;doc.donor_amount=0
+    else:
+        doc.donor_currency=source_currency;doc.donor_amount=doc.line_cost
+
 class BudgetLine(NestedSet):
     nsm_parent_field = "parent_budget_line"
 
@@ -30,6 +55,7 @@ class BudgetLine(NestedSet):
         self._validate_project()
 
     def validate(self):
+        sync_budget_line_currency(self)
         self._validate_project()
         self._validate_parent()
         self._validate_single_root()
