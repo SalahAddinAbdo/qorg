@@ -553,3 +553,8 @@ _profile_permission_hook = (
 
 if _profile_permission_hook not in after_migrate:
     after_migrate.append(_profile_permission_hook)
+
+_material_issue_field_hook = "qorg.qorg.inventory_asset_custody.material_request_field_repair.repair_material_request_issue_fields"
+if _material_issue_field_hook not in after_migrate:
+    after_migrate.append(_material_issue_field_hook)
+
