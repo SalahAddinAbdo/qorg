@@ -1,0 +1,1 @@
+frappe.query_reports["Cost Distribution Exceptions"]={filters:[{fieldname:"company",label:__("Company"),fieldtype:"Link",options:"Company",reqd:1,default:frappe.defaults.get_user_default("Company")},{'fieldname': 'source_doctype', 'label': 'Source Type', 'fieldtype': 'Link', 'options': 'DocType'}]};
