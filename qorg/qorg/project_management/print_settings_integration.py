@@ -132,7 +132,7 @@ def _force_owned_field_definitions():
             "hidden": int(definition.get("hidden") or 0),
             "default": definition.get("default") or "",
             "is_system_generated": 1,
-            "module": "Q Org",
+            "module": "QOrg",
         }
         frappe.db.set_value(
             "Custom Field", name, values, update_modified=False

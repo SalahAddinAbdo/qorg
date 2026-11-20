@@ -16,7 +16,9 @@ RENAMES = {
 
 
 def prepare_short_project_doctype_names():
-    """Rename app-owned DocTypes safely before schema synchronization.
+    """NOT REGISTERED IN hooks.py OR patches.txt - do not wire without a staging upgrade test.
+
+    Rename app-owned DocTypes safely before schema synchronization.
 
     Production sites normally run with developer mode disabled. Frappe blocks
     renaming standard DocTypes in that mode. These DocTypes originated as UI
@@ -60,7 +62,7 @@ def prepare_short_project_doctype_names():
                     old_name,
                     {
                         "custom": int(original.custom or 0),
-                        "module": original.module or "Q Org",
+                        "module": original.module or "QOrg",
                     },
                     update_modified=False,
                 )
@@ -69,7 +71,7 @@ def prepare_short_project_doctype_names():
         frappe.db.set_value(
             "DocType",
             new_name,
-            {"custom": 0, "module": "Q Org"},
+            {"custom": 0, "module": "QOrg"},
             update_modified=False,
         )
         frappe.clear_cache(doctype=new_name)

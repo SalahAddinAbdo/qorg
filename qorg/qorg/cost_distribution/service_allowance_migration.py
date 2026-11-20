@@ -22,7 +22,7 @@ def _copy_table(old_dt,new_dt,parenttype=None):
  for col in cols:
   if col=="parenttype" and parenttype:select.append(f"{frappe.db.escape(parenttype)} as `parenttype`")
   else:select.append(f"`{col}`")
- frappe.db.sql(f"INSERT IGNORE INTO `tab{new_dt}` ({','.join('`'+x+'`' for x in cols)}) SELECT {','.join(select)} FROM `tab{old_dt}`")
+ frappe.db.sql(f"INSERT INTO `tab{new_dt}` ({','.join('`'+x+'`' for x in cols)}) SELECT {','.join(select)} FROM `tab{old_dt}` WHERE `name` NOT IN (SELECT `name` FROM `tab{new_dt}`)")
  return len(set(frappe.get_all(new_dt,pluck="name",limit_page_length=0))-before)
 def _copy_distribution_rows():
  if not frappe.db.exists("DocType","Cost Distribution Row"):return 0
