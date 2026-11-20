@@ -1,7 +1,7 @@
 import json
 import frappe
 from frappe import _
-from frappe.utils import flt, getdate, now_datetime, add_days, add_months, date_diff
+from frappe.utils import flt, getdate, now_datetime, add_days, add_months, date_diff, nowdate
 from qorg.qorg.shared_cost_allocation.validation import validate_rule
 
 PAYROLL_VOUCHERS={"Payroll Entry","Salary Slip"}
@@ -165,7 +165,7 @@ def _source_rows(doc,rule):
             selected_filters["voucher_type"]=voucher_type
             selected_filters["voucher_no"]=voucher_no
             rows.extend(frappe.get_all("GL Entry",filters=selected_filters,fields=source_fields,order_by="posting_date,name"))
-    submitted=frappe.get_all("Shared Cost Allocation Run",filters={"docstatus":1,"name":["!=",doc.name or ""]},pluck="name");payroll_group=frappe.get_cached_value("Company",rule.company,"custom_payroll_account_group") if rule.exclude_payroll_accounts else None;payroll_accounts=set()
+    submitted=frappe.get_all("Shared Cost Allocation Run",filters={"docstatus":1,"run_status":["not in",["Reversed","Failed"]],"name":["!=",doc.name or ""]},pluck="name");payroll_group=frappe.get_cached_value("Company",rule.company,"custom_payroll_account_group") if rule.exclude_payroll_accounts else None;payroll_accounts=set()
     if payroll_group:
         b=frappe.db.get_value("Account",payroll_group,["lft","rgt"],as_dict=True);payroll_accounts=set(frappe.get_all("Account",filters={"lft":[">=",b.lft],"rgt":["<=",b.rgt],"company":rule.company},pluck="name"))
     unique={}
@@ -250,14 +250,55 @@ def post_run(doc):
     for row in doc.entries:row.db_set("journal_entry",je.name,update_modified=False)
 
 def reverse_run(doc):
-    if not doc.journal_entry:
-        doc.db_set("run_status","Reversed",update_modified=False)
-        return
-    je=frappe.get_doc("Journal Entry",doc.journal_entry)
-    if je.docstatus==1:
-        frappe.throw(_("The linked Journal Entry is submitted. Create and approve a draft reversal entry before cancelling this run."))
+    if doc.journal_entry and frappe.db.get_value("Journal Entry",doc.journal_entry,"docstatus") == 1:
+        frappe.throw(_("A posted allocation run is reversed through a separate draft reversal Journal Entry. Use Create Draft Reversal Entry, review and submit the reversal, then the run will be marked Reversed automatically."))
     doc.db_set("run_status","Reversed",update_modified=False)
     doc.db_set("reconciliation_status","Reversed",update_modified=False)
+
+@frappe.whitelist()
+def create_draft_reversal_entry(run_name, posting_date=None, reason=None):
+    run=frappe.get_doc("Shared Cost Allocation Run",run_name);run.check_permission("read")
+    if run.docstatus != 1 or run.run_status != "Posted":frappe.throw(_("Only a posted allocation run can create a reversal entry."))
+    if not run.journal_entry:frappe.throw(_("No posted Journal Entry is linked to this run."))
+    original=frappe.get_doc("Journal Entry",run.journal_entry)
+    if original.docstatus != 1:frappe.throw(_("The linked Journal Entry must be submitted before reversal."))
+    if run.reversal_journal_entry:
+        existing_status=frappe.db.get_value("Journal Entry",run.reversal_journal_entry,"docstatus")
+        if existing_status in (0,1):return run.reversal_journal_entry
+    if not frappe.has_permission("Journal Entry","create"):frappe.throw(_("Not permitted to create Journal Entry."),frappe.PermissionError)
+    reversal=frappe.new_doc("Journal Entry")
+    reversal.company=original.company
+    reversal.posting_date=posting_date or nowdate()
+    reversal.voucher_type=original.voucher_type or "Journal Entry"
+    reversal.finance_book=original.finance_book
+    reversal.multi_currency=original.multi_currency
+    reversal.cheque_no=original.cheque_no
+    reversal.cheque_date=original.cheque_date
+    reversal.user_remark=_("Draft reversal of allocation Journal Entry {0} for run {1}. Reason: {2}").format(original.name,run.name,reason or _("Reversal requested"))
+    account_meta=frappe.get_meta("Journal Entry Account")
+    system_fields={"name","owner","creation","modified","modified_by","docstatus","idx","parent","parentfield","parenttype","doctype"}
+    money_fields={"debit","credit","debit_in_account_currency","credit_in_account_currency"}
+    for source in original.accounts:
+        values={}
+        for df in account_meta.fields:
+            if df.fieldname in system_fields or df.fieldname in money_fields or df.fieldtype in ("Section Break","Column Break","Tab Break","HTML","Button","Table"):continue
+            values[df.fieldname]=source.get(df.fieldname)
+        values.update({
+            "debit_in_account_currency":flt(source.credit_in_account_currency),
+            "credit_in_account_currency":flt(source.debit_in_account_currency),
+            "debit":flt(source.credit),
+            "credit":flt(source.debit),
+        })
+        reversal.append("accounts",values)
+    meta=frappe.get_meta("Journal Entry")
+    if meta.has_field("custom_qorg_source_doctype"):reversal.custom_qorg_source_doctype="Shared Cost Allocation Run"
+    if meta.has_field("custom_qorg_source_name"):reversal.custom_qorg_source_name=run.name
+    if meta.has_field("custom_qorg_source_hash"):reversal.custom_qorg_source_hash="REVERSAL:"+run.name+":"+original.name
+    reversal.insert()
+    run.db_set("reversal_journal_entry",reversal.name,update_modified=False)
+    run.db_set("run_status","Reversal Draft Created",update_modified=False)
+    run.db_set("reconciliation_status","Pending Reversal",update_modified=False)
+    return reversal.name
 
 
 @frappe.whitelist()
@@ -270,7 +311,7 @@ def get_allocation_run_defaults(source_rule):
 
     latest = frappe.get_all(
         "Shared Cost Allocation Run",
-        filters={"allocation_rule": source.name, "run_type": "Regular", "docstatus": ["<", 2]},
+        filters={"allocation_rule": source.name, "run_type": "Regular", "docstatus": ["<", 2], "run_status": ["not in", ["Reversed", "Failed"]]},
         fields=["name", "period_end", "docstatus", "run_status"],
         order_by="period_end desc, creation desc",
         limit=1,
@@ -314,6 +355,7 @@ def create_allocation_run(source_rule, period_start, period_end, posting_date):
         select name, docstatus, run_status, period_start, period_end
         from `tabShared Cost Allocation Run`
         where allocation_rule=%s and run_type='Regular' and docstatus < 2
+          and run_status not in ('Reversed','Failed')
           and period_start <= %s and period_end >= %s
         order by docstatus desc, creation desc
         limit 1

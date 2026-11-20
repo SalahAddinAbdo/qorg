@@ -28,7 +28,11 @@ def provision_cost_workflows():
       {"state":"Rejected","action":"Reopen","next_state":"Draft","allowed":"Accounts User","allow_self_approval":1},
       {"state":"Approved","action":"Cancel","next_state":"Cancelled","allowed":"Accounts Manager","allow_self_approval":0},
     ]
-    for doctype,title in (("Shared Cost Allocation Run","Shared Cost Allocation Run Approval"),("Service and Allowance Accrual","Service and Allowance Accrual Approval")):
+    workflow_specs=(
+      ("Shared Cost Allocation Run","Shared Cost Allocation Run Approval",[row for row in transitions if not (row["state"]=="Approved" and row["action"]=="Cancel")]),
+      ("Service and Allowance Accrual","Service and Allowance Accrual Approval",transitions),
+    )
+    for doctype,title,doctype_transitions in workflow_specs:
         for old in frappe.get_all("Workflow",filters={"document_type":doctype,"is_active":1,"workflow_name":["!=",title]},pluck="name"):
             frappe.db.set_value("Workflow",old,"is_active",0,update_modified=False)
-        ensure_managed_workflow({"workflow_name":title,"document_type":doctype,"is_active":1,"workflow_state_field":"workflow_state","send_email_alert":0,"states":common_states,"transitions":transitions},version="1.0.0")
+        ensure_managed_workflow({"workflow_name":title,"document_type":doctype,"is_active":1,"workflow_state_field":"workflow_state","send_email_alert":0,"states":common_states,"transitions":doctype_transitions},version="1.1.0")

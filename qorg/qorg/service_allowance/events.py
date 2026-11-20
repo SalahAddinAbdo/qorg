@@ -16,9 +16,13 @@ def on_submit_generated_journal(doc, method=None):
         frappe.db.set_value("Service and Allowance Accrual",doc.custom_qorg_source_name,{"operational_status":"Posted"},update_modified=False)
     run=frappe.db.get_value("Shared Cost Allocation Run",{"journal_entry":doc.name},"name")
     if run: frappe.db.set_value("Shared Cost Allocation Run",run,{"run_status":"Posted","reconciliation_status":"Matched"},update_modified=False)
+    reversal_run=frappe.db.get_value("Shared Cost Allocation Run",{"reversal_journal_entry":doc.name},"name")
+    if reversal_run: frappe.db.set_value("Shared Cost Allocation Run",reversal_run,{"run_status":"Reversed","reconciliation_status":"Reversed"},update_modified=False)
 
 def on_cancel_generated_journal(doc, method=None):
     if doc.get("custom_qorg_source_doctype") == "Service and Allowance Accrual" and doc.get("custom_qorg_source_name"):
         frappe.db.set_value("Service and Allowance Accrual",doc.custom_qorg_source_name,{"operational_status":"Approved"},update_modified=False)
     run=frappe.db.get_value("Shared Cost Allocation Run",{"journal_entry":doc.name},"name")
     if run: frappe.db.set_value("Shared Cost Allocation Run",run,{"run_status":"Approved","reconciliation_status":"Pending"},update_modified=False)
+    reversal_run=frappe.db.get_value("Shared Cost Allocation Run",{"reversal_journal_entry":doc.name},"name")
+    if reversal_run: frappe.db.set_value("Shared Cost Allocation Run",reversal_run,{"run_status":"Posted","reconciliation_status":"Matched"},update_modified=False)

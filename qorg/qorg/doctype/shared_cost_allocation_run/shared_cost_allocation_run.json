@@ -105,7 +105,7 @@
    "fieldname": "run_status",
    "label": "Run Status",
    "fieldtype": "Select",
-   "options": "Draft\nPreviewed\nJournal Draft Created\nPosted\nReversed\nFailed",
+   "options": "Draft\nPreviewed\nJournal Draft Created\nPosted\nReversal Draft Created\nReversed\nFailed",
    "default": "Draft",
    "read_only": 1,
    "in_list_view": 1
@@ -323,7 +323,7 @@
    "fieldname": "reconciliation_status",
    "label": "Reconciliation Status",
    "fieldtype": "Select",
-   "options": "Not Started\nMatched\nDifference\nReversed",
+   "options": "Not Started\nPending\nMatched\nDifference\nPending Reversal\nReversed",
    "default": "Not Started",
    "read_only": 1,
    "allow_on_submit": 1

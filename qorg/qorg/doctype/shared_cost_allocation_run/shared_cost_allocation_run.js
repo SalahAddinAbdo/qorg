@@ -1,5 +1,7 @@
 frappe.ui.form.on("Shared Cost Allocation Run",{
- setup(frm){set_run_queries(frm);},refresh(frm){set_run_queries(frm);if(frm.doc.docstatus===0)frm.add_custom_button(__("Refresh Preview"),()=>frm.save());if(frm.doc.journal_entry)frm.add_custom_button(__("Open Draft Journal Entry"),()=>frappe.set_route("Form","Journal Entry",frm.doc.journal_entry));},
+ setup(frm){set_run_queries(frm);},refresh(frm){set_run_queries(frm);if(frm.doc.docstatus===0)frm.add_custom_button(__("Refresh Preview"),()=>frm.save());  if(frm.doc.journal_entry)frm.add_custom_button(__("Open Journal Entry"),()=>frappe.set_route("Form","Journal Entry",frm.doc.journal_entry),__("Accounting"));
+  if(frm.doc.reversal_journal_entry)frm.add_custom_button(__("Open Reversal Journal Entry"),()=>frappe.set_route("Form","Journal Entry",frm.doc.reversal_journal_entry),__("Accounting"));
+  if(frm.doc.docstatus===1&&frm.doc.run_status==="Posted")frm.add_custom_button(__("Create Draft Reversal Entry"),()=>open_reversal_dialog(frm),__("Accounting"));},
  allocation_rule(frm){clear_run_rule_dependents(frm);if(frm.doc.allocation_rule)load_rule_defaults(frm);set_run_queries(frm);},
  run_type(frm){if(frm.doc.run_type!=="Adjustment"){frm.set_value("adjustment_of",null);frm.set_value("adjustment_reason",null);frm.set_value("donor_approval_reference",null);}set_run_queries(frm);},
  period_start(frm){if(frm.doc.period_end&&frm.doc.period_start>frm.doc.period_end)frm.set_value("period_end",null);},
@@ -9,3 +11,10 @@ frappe.ui.form.on("Shared Cost Allocation Run",{
 function set_run_queries(frm){frm.set_query("allocation_rule",()=>({filters:{docstatus:1,status:"Active"}}));frm.set_query("adjustment_of",()=>({filters:{docstatus:1,allocation_rule:frm.doc.allocation_rule||"",run_status:"Posted"}}));}
 function clear_run_rule_dependents(frm){["company","allocation_category","allocation_method","source_cost_center","company_currency","period_start","period_end","posting_date","adjustment_of","journal_entry","reversal_journal_entry"].forEach(f=>frm.set_value(f,null));frm.clear_table("entries");frm.refresh_field("entries");}
 function load_rule_defaults(frm){return frappe.call({method:"qorg.qorg.shared_cost_allocation.api.get_rule_defaults",args:{rule:frm.doc.allocation_rule}}).then(r=>{const d=r.message||{};frm.set_value("company",d.company);frm.set_value("allocation_category",d.allocation_category);frm.set_value("allocation_method",d.allocation_method);frm.set_value("source_cost_center",d.source_cost_center);frm.set_value("company_currency",d.currency);if(!frm.doc.period_start)frm.set_value("period_start",d.period_start);if(!frm.doc.period_end&&d.period_end)frm.set_value("period_end",d.period_end);if(!frm.doc.posting_date)frm.set_value("posting_date",d.posting_date);});}
+
+function open_reversal_dialog(frm){
+ frappe.prompt([
+  {fieldname:"posting_date",label:__("Reversal Posting Date"),fieldtype:"Date",default:frappe.datetime.get_today(),reqd:1},
+  {fieldname:"reason",label:__("Reversal Reason"),fieldtype:"Small Text",reqd:1}
+ ],values=>frappe.call({method:"qorg.qorg.shared_cost_allocation.engine.create_draft_reversal_entry",args:{run_name:frm.doc.name,posting_date:values.posting_date,reason:values.reason},freeze:true,callback:r=>{frm.reload_doc();frappe.set_route("Form","Journal Entry",r.message);}}),__("Create Draft Reversal Entry"),__("Create Draft"));
+}
