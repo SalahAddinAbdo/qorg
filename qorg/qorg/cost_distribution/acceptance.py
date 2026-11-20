@@ -1,6 +1,7 @@
 from __future__ import annotations
 import inspect
 import frappe
+from frappe.model.document import get_controller
 from frappe import _
 
 REQUIRED_DOCTYPES=(
@@ -46,7 +47,7 @@ def audit_runtime_configuration():
         for event in ("before_validate","before_submit","on_submit","on_cancel"):
             add(f"Hook {dt}.{event}",_event_hook_contains(dt,event,"qorg.qorg.cost_distribution.adapters.common"))
     try:
-        purchase_invoice_controller=frappe.get_controller("Purchase Invoice")
+        purchase_invoice_controller=get_controller("Purchase Invoice")
         purchase_signature=inspect.signature(purchase_invoice_controller.get_gl_entries)
         purchase_params=list(purchase_signature.parameters)
         add(
@@ -57,7 +58,7 @@ def audit_runtime_configuration():
     except Exception as exc:
         add("Purchase Invoice controller compatibility",False,repr(exc))
     try:
-        expense_claim_controller=frappe.get_controller("Expense Claim")
+        expense_claim_controller=get_controller("Expense Claim")
         expense_signature=inspect.signature(expense_claim_controller.get_gl_entries)
         add(
             "Expense Claim get_gl_entries compatibility",
