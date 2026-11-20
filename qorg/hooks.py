@@ -517,7 +517,7 @@ for _event, _handler in {
 extend_doctype_class = globals().get("extend_doctype_class", {})
 extend_doctype_class.setdefault("Purchase Invoice", []).append("qorg.qorg.cost_distribution.adapters.purchase_invoice.PurchaseInvoiceCostDistributionMixin")
 extend_doctype_class.setdefault("Expense Claim", []).append("qorg.qorg.cost_distribution.adapters.expense_claim.ExpenseClaimCostDistributionMixin")
-for _dt in ("Material Request","Supplier Quotation","Purchase Order","Purchase Invoice","Expense Claim","Stock Entry","Service and Allowance Accrual"):
+for _dt in ("Material Request","Supplier Quotation","Purchase Order","Purchase Invoice","Expense Claim","Stock Entry","Service Allowance Accrual"):
     _events=doc_events.setdefault(_dt,{})
     for _event,_handler in {"before_validate":"qorg.qorg.cost_distribution.adapters.common.before_validate","before_submit":"qorg.qorg.cost_distribution.adapters.common.before_submit","on_submit":"qorg.qorg.cost_distribution.adapters.common.on_submit","on_cancel":"qorg.qorg.cost_distribution.adapters.common.on_cancel"}.items():
         _current=_events.get(_event)
@@ -539,3 +539,9 @@ for _dt,_asset in _cost_distribution_js.items():
 
 for _hook in ("qorg.qorg.cost_distribution.migration.migrate_nested_accrual_distributions",):
     if _hook not in after_migrate:after_migrate.append(_hook)
+
+# Short-path compatibility migration
+before_migrate = globals().get("before_migrate", [])
+_naming_hook = "qorg.qorg.cost_distribution.naming_migration.rename_legacy_records"
+if _naming_hook not in before_migrate:
+    before_migrate.append(_naming_hook)

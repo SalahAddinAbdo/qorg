@@ -1,0 +1,207 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "hash",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "source_section",
+  "company",
+  "source_doctype",
+  "source_document",
+  "source_child_doctype",
+  "source_row",
+  "source_gl_entry",
+  "source_hash",
+  "amount_section",
+  "original_amount",
+  "distributed_amount",
+  "remaining_amount",
+  "status",
+  "amount_col",
+  "allocation_mode",
+  "allocation_profile",
+  "profile_version",
+  "distribution_document_type",
+  "distribution_document",
+  "journal_entry",
+  "reversal_reference",
+  "details_section",
+  "target_snapshot",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "source_section",
+   "label": "Source",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "company",
+   "label": "Company",
+   "fieldtype": "Link",
+   "options": "Company",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "source_doctype",
+   "label": "Source Document Type",
+   "fieldtype": "Link",
+   "options": "DocType",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "source_document",
+   "label": "Source Document",
+   "fieldtype": "Dynamic Link",
+   "options": "source_doctype",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "source_child_doctype",
+   "label": "Source Row Type",
+   "fieldtype": "Link",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "source_row",
+   "label": "Source Row",
+   "fieldtype": "Data",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "source_gl_entry",
+   "label": "Source GL Entry",
+   "fieldtype": "Link",
+   "options": "GL Entry"
+  },
+  {
+   "fieldname": "source_hash",
+   "label": "Source Hash",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "amount_section",
+   "label": "Amounts",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "original_amount",
+   "label": "Original Amount",
+   "fieldtype": "Currency",
+   "reqd": 1
+  },
+  {
+   "fieldname": "distributed_amount",
+   "label": "Distributed Amount",
+   "fieldtype": "Currency",
+   "reqd": 1
+  },
+  {
+   "fieldname": "remaining_amount",
+   "label": "Remaining Amount",
+   "fieldtype": "Currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Draft\nActive\nCancelled\nReversed",
+   "default": "Draft",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "amount_col",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "allocation_mode",
+   "label": "Allocation Mode",
+   "fieldtype": "Select",
+   "options": "Direct\nPeriodic\nCorrection",
+   "reqd": 1
+  },
+  {
+   "fieldname": "allocation_profile",
+   "label": "Allocation Profile",
+   "fieldtype": "Link",
+   "options": "Cost Distribution Profile"
+  },
+  {
+   "fieldname": "profile_version",
+   "label": "Profile Version",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "distribution_document_type",
+   "label": "Distribution Document Type",
+   "fieldtype": "Link",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "distribution_document",
+   "label": "Distribution Document",
+   "fieldtype": "Dynamic Link",
+   "options": "distribution_document_type"
+  },
+  {
+   "fieldname": "journal_entry",
+   "label": "Journal Entry",
+   "fieldtype": "Link",
+   "options": "Journal Entry"
+  },
+  {
+   "fieldname": "reversal_reference",
+   "label": "Reversal Reference",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "details_section",
+   "label": "Target Snapshot",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "target_snapshot",
+   "label": "Target Snapshot",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remarks",
+   "label": "Remarks",
+   "fieldtype": "Small Text"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "module": "QOrg",
+ "name": "Cost Distribution Ledger",
+ "permissions": [
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager"
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "System Manager"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "is_submittable": 0,
+ "read_only": 1
+}

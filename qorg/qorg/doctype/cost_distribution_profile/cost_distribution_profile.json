@@ -1,0 +1,455 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "naming_series:",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "identity_tab",
+  "identity_section",
+  "naming_series",
+  "profile_name",
+  "company",
+  "id_col_1",
+  "status",
+  "priority",
+  "version",
+  "effective_section",
+  "effective_from",
+  "effective_to",
+  "effective_col",
+  "supersedes_profile",
+  "change_type",
+  "change_effective_date",
+  "scope_tab",
+  "scope_section",
+  "match_basis",
+  "item",
+  "item_group",
+  "scope_col_1",
+  "expense_type",
+  "expense_account",
+  "procurement_category",
+  "scope_col_2",
+  "department",
+  "source_cost_center",
+  "transaction_types_section",
+  "transaction_types",
+  "method_tab",
+  "method_section",
+  "distribution_method",
+  "require_full_distribution",
+  "auto_apply",
+  "method_col_1",
+  "allow_manual_override",
+  "override_approval_required",
+  "recalculate_on_amount_change",
+  "method_col_2",
+  "prevent_periodic_reallocation",
+  "default_print_visibility",
+  "targets_section",
+  "targets",
+  "accounting_tab",
+  "accounting_section",
+  "apply_to_net_amount",
+  "tax_allocation_basis",
+  "discount_allocation_basis",
+  "acct_col_1",
+  "currency_basis",
+  "rounding_method",
+  "difference_handling",
+  "description_section",
+  "description",
+  "workflow_state"
+ ],
+ "fields": [
+  {
+   "fieldname": "identity_tab",
+   "label": "Identity",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "identity_section",
+   "label": "Profile Identity",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "label": "Series",
+   "fieldtype": "Select",
+   "options": "CDP-.YYYY.-.#####",
+   "default": "CDP-.YYYY.-.#####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "profile_name",
+   "label": "Profile Name",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "company",
+   "label": "Company",
+   "fieldtype": "Link",
+   "options": "Company",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "id_col_1",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Draft\nActive\nInactive\nSuperseded\nCancelled",
+   "default": "Draft",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "priority",
+   "label": "Priority",
+   "fieldtype": "Int",
+   "default": "100",
+   "reqd": 1
+  },
+  {
+   "fieldname": "version",
+   "label": "Version",
+   "fieldtype": "Data",
+   "default": "1.0",
+   "read_only": 1
+  },
+  {
+   "fieldname": "effective_section",
+   "label": "Effective Period",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "effective_from",
+   "label": "Effective From",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "effective_to",
+   "label": "Effective To",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "effective_col",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "supersedes_profile",
+   "label": "Supersedes Profile",
+   "fieldtype": "Link",
+   "options": "Cost Distribution Profile",
+   "read_only": 1
+  },
+  {
+   "fieldname": "change_type",
+   "label": "Change Type",
+   "fieldtype": "Select",
+   "options": "Initial Profile\nProspective Change\nCorrection\nPolicy Change",
+   "default": "Initial Profile"
+  },
+  {
+   "fieldname": "change_effective_date",
+   "label": "Change Effective Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "scope_tab",
+   "label": "Scope and Applicability",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "scope_section",
+   "label": "Source Matching",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "match_basis",
+   "label": "Match Basis",
+   "fieldtype": "Select",
+   "options": "Item\nItem Group\nExpense Type\nExpense Account\nProcurement Category\nDepartment\nCost Center\nTransaction Type\nCompany Default",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "item",
+   "label": "Item",
+   "fieldtype": "Link",
+   "options": "Item",
+   "depends_on": "eval:doc.match_basis==\"Item\""
+  },
+  {
+   "fieldname": "item_group",
+   "label": "Item Group",
+   "fieldtype": "Link",
+   "options": "Item Group",
+   "depends_on": "eval:doc.match_basis==\"Item Group\""
+  },
+  {
+   "fieldname": "scope_col_1",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "expense_type",
+   "label": "Expense Type",
+   "fieldtype": "Link",
+   "options": "Expense Claim Type",
+   "depends_on": "eval:doc.match_basis==\"Expense Type\""
+  },
+  {
+   "fieldname": "expense_account",
+   "label": "Expense Account",
+   "fieldtype": "Link",
+   "options": "Account",
+   "depends_on": "eval:doc.match_basis==\"Expense Account\""
+  },
+  {
+   "fieldname": "procurement_category",
+   "label": "Procurement Category",
+   "fieldtype": "Data",
+   "depends_on": "eval:doc.match_basis==\"Procurement Category\""
+  },
+  {
+   "fieldname": "scope_col_2",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "department",
+   "label": "Department",
+   "fieldtype": "Link",
+   "options": "Department",
+   "depends_on": "eval:doc.match_basis==\"Department\""
+  },
+  {
+   "fieldname": "source_cost_center",
+   "label": "Source Cost Center",
+   "fieldtype": "Link",
+   "options": "Cost Center",
+   "depends_on": "eval:doc.match_basis==\"Cost Center\""
+  },
+  {
+   "fieldname": "transaction_types_section",
+   "label": "Applicable Transactions",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "transaction_types",
+   "label": "Transaction Types",
+   "fieldtype": "Table",
+   "options": "Cost Distribution Scope",
+   "reqd": 1
+  },
+  {
+   "fieldname": "method_tab",
+   "label": "Distribution",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "method_section",
+   "label": "Distribution Method",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "distribution_method",
+   "label": "Distribution Method",
+   "fieldtype": "Select",
+   "options": "Fixed Percentage\nFixed Amount\nEqual Distribution",
+   "default": "Fixed Percentage",
+   "reqd": 1
+  },
+  {
+   "fieldname": "require_full_distribution",
+   "label": "Require Full Distribution",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "auto_apply",
+   "label": "Auto Apply",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "method_col_1",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "allow_manual_override",
+   "label": "Allow Manual Override",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "override_approval_required",
+   "label": "Override Approval Required",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "recalculate_on_amount_change",
+   "label": "Recalculate on Amount Change",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "method_col_2",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "prevent_periodic_reallocation",
+   "label": "Prevent Periodic Reallocation",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "default_print_visibility",
+   "label": "Default Print Visibility",
+   "fieldtype": "Select",
+   "options": "Internal Only\nAlways Visible\nHidden",
+   "default": "Internal Only"
+  },
+  {
+   "fieldname": "targets_section",
+   "label": "Distribution Targets",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "targets",
+   "label": "Targets",
+   "fieldtype": "Table",
+   "options": "Cost Distribution Target",
+   "reqd": 1
+  },
+  {
+   "fieldname": "accounting_tab",
+   "label": "Accounting and Currency",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "accounting_section",
+   "label": "Amount and Currency Rules",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "apply_to_net_amount",
+   "label": "Apply to Net Amount",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "tax_allocation_basis",
+   "label": "Tax Allocation Basis",
+   "fieldtype": "Select",
+   "options": "Same as Source Item\nProportionally to Net Amount\nExclude Recoverable Tax\nExclude All Tax",
+   "default": "Exclude Recoverable Tax"
+  },
+  {
+   "fieldname": "discount_allocation_basis",
+   "label": "Discount Allocation Basis",
+   "fieldtype": "Select",
+   "options": "After Item Discount\nAfter Additional Discount\nGross Amount",
+   "default": "After Additional Discount"
+  },
+  {
+   "fieldname": "acct_col_1",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "currency_basis",
+   "label": "Currency Basis",
+   "fieldtype": "Select",
+   "options": "Transaction Currency\nCompany Currency\nBoth",
+   "default": "Both"
+  },
+  {
+   "fieldname": "rounding_method",
+   "label": "Rounding Method",
+   "fieldtype": "Select",
+   "options": "Largest Share\nLast Row\nProportional",
+   "default": "Largest Share"
+  },
+  {
+   "fieldname": "difference_handling",
+   "label": "Difference Handling",
+   "fieldtype": "Select",
+   "options": "Allocate Rounding Difference\nLeave Unallocated\nReject Difference",
+   "default": "Allocate Rounding Difference"
+  },
+  {
+   "fieldname": "description_section",
+   "label": "Description and Audit",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "description",
+   "label": "Description",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "workflow_state",
+   "label": "Workflow State",
+   "fieldtype": "Link",
+   "options": "Workflow State",
+   "allow_on_submit": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "module": "QOrg",
+ "name": "Cost Distribution Profile",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Projects Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "is_submittable": 1,
+ "title_field": "profile_name",
+ "search_fields": "profile_name,company,status,match_basis"
+}

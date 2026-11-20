@@ -5,9 +5,9 @@ from qorg.qorg.cost_distribution.calculations import calculate_targets
 from qorg.qorg.cost_distribution.validation import validate_distribution_rows
 from qorg.qorg.cost_distribution.lifecycle import write_ledger,cancel_ledger,source_hash
 from qorg.qorg.cost_distribution.inheritance import ensure_source_key,inherited_rows
-SOURCE_TABLES={"Material Request":"items","Supplier Quotation":"items","Purchase Order":"items","Purchase Invoice":"items","Expense Claim":"expenses","Stock Entry":"items","Service and Allowance Accrual":"lines"}
+SOURCE_TABLES={"Material Request":"items","Supplier Quotation":"items","Purchase Order":"items","Purchase Invoice":"items","Expense Claim":"expenses","Stock Entry":"items","Service Allowance Accrual":"lines"}
 def before_validate(doc,method=None):
- table=SOURCE_TABLES.get(doc.doctype);field="cost_distributions" if doc.doctype=="Service and Allowance Accrual" else "custom_cost_distributions"
+ table=SOURCE_TABLES.get(doc.doctype);field="cost_distributions" if doc.doctype=="Service Allowance Accrual" else "custom_cost_distributions"
  if not table or not doc.meta.has_field(field):return
  source_rows=doc.get(table) or []
  for row in source_rows:ensure_source_key(row)
@@ -42,9 +42,9 @@ def _append_from_existing(doc,field,row,key,inherited,source):
   allocated=round(amount*ratio,2) if idx<len(inherited)-1 else round(amount-used,2);base_allocated=round(base*ratio,2) if idx<len(inherited)-1 else round(base-base_used,2);used+=allocated;base_used+=base_allocated
   values=_base(doc,row,key,source);values.update({"upstream_source_doctype":old.parenttype,"upstream_source_document":old.parent,"upstream_source_row":old.source_row,"allocation_profile":old.allocation_profile,"profile_version":old.profile_version,"project":old.project,"cost_center":old.cost_center,"department":old.department,"budget_line":old.budget_line,"funding_agreement":old.funding_agreement,"donor":old.donor,"allocation_percentage":round(ratio*100,6),"allocated_amount":allocated,"base_amount":base_allocated,"eligibility_status":"Eligible"});doc.append(field,values)
 def before_submit(doc,method=None):
- table=SOURCE_TABLES.get(doc.doctype);field="cost_distributions" if doc.doctype=="Service and Allowance Accrual" else "custom_cost_distributions"
+ table=SOURCE_TABLES.get(doc.doctype);field="cost_distributions" if doc.doctype=="Service Allowance Accrual" else "custom_cost_distributions"
  if table and doc.meta.has_field(field):validate_distribution_rows(doc,field,{r.custom_distribution_source_key:r for r in doc.get(table) or []},require_all=False)
 def on_submit(doc,method=None):
- field="cost_distributions" if doc.doctype=="Service and Allowance Accrual" else "custom_cost_distributions"
+ field="cost_distributions" if doc.doctype=="Service Allowance Accrual" else "custom_cost_distributions"
  if doc.meta.has_field(field) and doc.get(field):write_ledger(doc,field)
 def on_cancel(doc,method=None):cancel_ledger(doc)

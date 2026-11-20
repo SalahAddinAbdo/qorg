@@ -2,73 +2,230 @@
  "actions": [],
  "allow_rename": 0,
  "autoname": "",
- "creation": "2026-11-19 00:00:00.000000",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "source_row_reference",
+  "source_section",
+  "source_doctype",
+  "source_child_doctype",
+  "source_row",
+  "source_key",
+  "upstream_source_doctype",
+  "upstream_source_document",
+  "upstream_source_row",
+  "source_row_idx",
+  "source_col_1",
   "source_item",
   "source_account",
+  "source_description",
+  "source_col_2",
+  "source_quantity",
   "source_amount",
-  "allocation_rule",
-  "rule_version",
+  "source_base_amount",
+  "source_snapshot_section",
+  "source_snapshot",
+  "profile_section",
+  "allocation_profile",
+  "profile_version",
+  "distribution_source",
+  "target_section",
   "project",
   "cost_center",
+  "department",
+  "target_col_1",
   "budget_line",
   "funding_agreement",
   "donor",
-  "department",
+  "amount_section",
   "allocation_percentage",
+  "allocated_quantity",
   "allocated_amount",
   "base_amount",
+  "amount_col_1",
   "currency",
   "exchange_rate",
   "effective_date",
+  "control_section",
   "eligibility_status",
-  "validation_message",
   "manual_override",
+  "override_approved",
+  "control_col_1",
+  "validation_message",
   "override_reason",
   "supporting_document",
   "page_break"
  ],
  "fields": [
   {
-   "fieldname": "source_row_reference",
-   "label": "Source Row Reference",
+   "fieldname": "source_section",
+   "label": "Source",
+   "fieldtype": "Section Break",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "source_doctype",
+   "label": "Source Document Type",
+   "fieldtype": "Link",
+   "options": "DocType",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "source_child_doctype",
+   "label": "Source Row Type",
+   "fieldtype": "Link",
+   "options": "DocType",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "source_row",
+   "label": "Source Row",
    "fieldtype": "Data",
-   "read_only": 1
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "source_key",
+   "label": "Source Key",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "upstream_source_doctype",
+   "label": "Upstream Source Type",
+   "fieldtype": "Link",
+   "options": "DocType",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "upstream_source_document",
+   "label": "Upstream Source Document",
+   "fieldtype": "Dynamic Link",
+   "options": "upstream_source_doctype",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "upstream_source_row",
+   "label": "Upstream Source Row",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "source_row_idx",
+   "label": "Source Row #",
+   "fieldtype": "Int",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "source_col_1",
+   "label": "",
+   "fieldtype": "Column Break",
+   "in_list_view": 0
   },
   {
    "fieldname": "source_item",
    "label": "Source Item",
    "fieldtype": "Link",
    "options": "Item",
-   "read_only": 1
+   "read_only": 1,
+   "in_list_view": 1
   },
   {
    "fieldname": "source_account",
    "label": "Source Account",
    "fieldtype": "Link",
    "options": "Account",
-   "read_only": 1
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "source_description",
+   "label": "Source Description",
+   "fieldtype": "Small Text",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "source_col_2",
+   "label": "",
+   "fieldtype": "Column Break",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "source_quantity",
+   "label": "Source Quantity",
+   "fieldtype": "Float",
+   "read_only": 1,
+   "in_list_view": 0
   },
   {
    "fieldname": "source_amount",
    "label": "Source Amount",
    "fieldtype": "Currency",
-   "read_only": 1
+   "read_only": 1,
+   "in_list_view": 0
   },
   {
-   "fieldname": "allocation_rule",
-   "label": "Allocation Rule",
+   "fieldname": "source_base_amount",
+   "label": "Source Base Amount",
+   "fieldtype": "Currency",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "source_snapshot_section",
+   "label": "Source Snapshot",
+   "fieldtype": "Section Break",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "source_snapshot",
+   "label": "Source Snapshot",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "profile_section",
+   "label": "Profile",
+   "fieldtype": "Section Break",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "allocation_profile",
+   "label": "Allocation Profile",
    "fieldtype": "Link",
-   "options": "Shared Cost Allocation Rule"
+   "options": "Cost Distribution Profile",
+   "read_only": 1,
+   "in_list_view": 0
   },
   {
-   "fieldname": "rule_version",
-   "label": "Rule Version",
+   "fieldname": "profile_version",
+   "label": "Profile Version",
    "fieldtype": "Data",
-   "read_only": 1
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "distribution_source",
+   "label": "Distribution Source",
+   "fieldtype": "Select",
+   "options": "Auto Applied\nTransferred\nManually Selected\nManually Adjusted",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "target_section",
+   "label": "Target Dimensions",
+   "fieldtype": "Section Break",
+   "in_list_view": 0
   },
   {
    "fieldname": "project",
@@ -87,6 +244,19 @@
    "in_list_view": 1
   },
   {
+   "fieldname": "department",
+   "label": "Department",
+   "fieldtype": "Link",
+   "options": "Department",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "target_col_1",
+   "label": "",
+   "fieldtype": "Column Break",
+   "in_list_view": 0
+  },
+  {
    "fieldname": "budget_line",
    "label": "Budget Line",
    "fieldtype": "Link",
@@ -97,24 +267,32 @@
    "fieldname": "funding_agreement",
    "label": "Funding Agreement",
    "fieldtype": "Link",
-   "options": "Funding Agreement"
+   "options": "Funding Agreement",
+   "in_list_view": 0
   },
   {
    "fieldname": "donor",
    "label": "Donor",
    "fieldtype": "Link",
-   "options": "Donor"
+   "options": "Donor",
+   "in_list_view": 0
   },
   {
-   "fieldname": "department",
-   "label": "Department",
-   "fieldtype": "Link",
-   "options": "Department"
+   "fieldname": "amount_section",
+   "label": "Distribution Amount",
+   "fieldtype": "Section Break",
+   "in_list_view": 0
   },
   {
    "fieldname": "allocation_percentage",
    "label": "Allocation %",
    "fieldtype": "Percent",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "allocated_quantity",
+   "label": "Allocated Quantity",
+   "fieldtype": "Float",
    "in_list_view": 1
   },
   {
@@ -128,24 +306,40 @@
    "fieldname": "base_amount",
    "label": "Base Amount",
    "fieldtype": "Currency",
-   "read_only": 1
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "amount_col_1",
+   "label": "",
+   "fieldtype": "Column Break",
+   "in_list_view": 0
   },
   {
    "fieldname": "currency",
    "label": "Currency",
    "fieldtype": "Link",
-   "options": "Currency"
+   "options": "Currency",
+   "in_list_view": 0
   },
   {
    "fieldname": "exchange_rate",
    "label": "Exchange Rate",
    "fieldtype": "Float",
-   "precision": "9"
+   "precision": "9",
+   "in_list_view": 0
   },
   {
    "fieldname": "effective_date",
    "label": "Effective Date",
-   "fieldtype": "Date"
+   "fieldtype": "Date",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "control_section",
+   "label": "Controls and Validation",
+   "fieldtype": "Section Break",
+   "in_list_view": 0
   },
   {
    "fieldname": "eligibility_status",
@@ -154,30 +348,48 @@
    "options": "Pending\nEligible\nIneligible\nOverride Approved",
    "default": "Pending",
    "read_only": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "validation_message",
-   "label": "Validation Message",
-   "fieldtype": "Small Text",
-   "read_only": 1
+   "in_list_view": 0
   },
   {
    "fieldname": "manual_override",
    "label": "Manual Override",
    "fieldtype": "Check",
-   "default": "0"
+   "default": "0",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "override_approved",
+   "label": "Override Approved",
+   "fieldtype": "Check",
+   "default": "0",
+   "allow_on_submit": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "control_col_1",
+   "label": "",
+   "fieldtype": "Column Break",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "validation_message",
+   "label": "Validation Message",
+   "fieldtype": "Small Text",
+   "read_only": 1,
+   "in_list_view": 0
   },
   {
    "fieldname": "override_reason",
    "label": "Override Reason",
    "fieldtype": "Small Text",
-   "depends_on": "eval:doc.manual_override"
+   "depends_on": "eval:doc.manual_override",
+   "in_list_view": 0
   },
   {
    "fieldname": "supporting_document",
    "label": "Supporting Document",
-   "fieldtype": "Attach"
+   "fieldtype": "Attach",
+   "in_list_view": 0
   },
   {
    "fieldname": "page_break",
@@ -185,16 +397,14 @@
    "fieldtype": "Check",
    "default": "0",
    "allow_on_submit": 1,
-   "print_hide": 1
+   "print_hide": 1,
+   "in_list_view": 0
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-11-19 00:00:00.000000",
- "modified_by": "Administrator",
  "module": "QOrg",
  "name": "Cost Distribution Row",
- "owner": "Administrator",
  "permissions": [
   {
    "create": 1,
@@ -204,7 +414,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "System Manager",
+   "role": "Accounts Manager",
    "share": 1,
    "write": 1
   },
@@ -215,9 +425,14 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "Accounts Manager",
+   "role": "Projects Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User"
   }
  ],
  "row_format": "Dynamic",

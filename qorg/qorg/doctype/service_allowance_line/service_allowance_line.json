@@ -1,0 +1,421 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "",
+ "creation": "2026-11-19 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "external_person",
+  "beneficiary_type",
+  "volunteer_profile",
+  "site_code",
+  "identity_number",
+  "mobile_number",
+  "daily_rate",
+  "period_rate",
+  "currency",
+  "base_amount",
+  "donor",
+  "department",
+  "supervisor",
+  "reference_number",
+  "eligibility_status",
+  "exception_reason",
+  "supplier",
+  "employee",
+  "beneficiary_name",
+  "site",
+  "service_item",
+  "service_description",
+  "quantity",
+  "uom",
+  "number_of_days",
+  "rate",
+  "gross_amount",
+  "deduction",
+  "tax_withheld",
+  "net_payable",
+  "expense_account",
+  "payable_account",
+  "allocation_treatment",
+  "project",
+  "cost_center",
+  "budget_line",
+  "funding_agreement",
+  "contract_or_agreement",
+  "procurement_process",
+  "service_acceptance",
+  "attendance_reference",
+  "supporting_document_type",
+  "supporting_document",
+  "verification_status",
+  "verification_notes",
+  "include",
+  "page_break"
+ ],
+ "fields": [
+  {
+   "fieldname": "external_person",
+   "label": "Payee / Beneficiary",
+   "fieldtype": "Link",
+   "options": "External Person",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "beneficiary_type",
+   "label": "Beneficiary Type",
+   "fieldtype": "Select",
+   "options": "External Person\nSupplier\nEmployee\nVolunteer",
+   "default": "External Person",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "volunteer_profile",
+   "label": "Volunteer Profile",
+   "fieldtype": "Link",
+   "options": "Volunteer Profile",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "site_code",
+   "label": "Site Code",
+   "fieldtype": "Data",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "identity_number",
+   "label": "Identity Number",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "mobile_number",
+   "label": "Mobile Number",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "daily_rate",
+   "label": "Daily Rate",
+   "fieldtype": "Currency",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "period_rate",
+   "label": "Period Rate",
+   "fieldtype": "Currency",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "currency",
+   "label": "Currency",
+   "fieldtype": "Link",
+   "options": "Currency",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "base_amount",
+   "label": "Base Amount",
+   "fieldtype": "Currency",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "donor",
+   "label": "Donor",
+   "fieldtype": "Link",
+   "options": "Donor",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "department",
+   "label": "Department",
+   "fieldtype": "Link",
+   "options": "Department",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "supervisor",
+   "label": "Supervisor",
+   "fieldtype": "Link",
+   "options": "Employee",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "reference_number",
+   "label": "Reference Number",
+   "fieldtype": "Data",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "eligibility_status",
+   "label": "Eligibility Status",
+   "fieldtype": "Select",
+   "options": "Pending\nEligible\nIneligible\nOverride Approved",
+   "default": "Pending",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "exception_reason",
+   "label": "Exception Reason",
+   "fieldtype": "Small Text",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "supplier",
+   "label": "Supplier",
+   "fieldtype": "Link",
+   "options": "Supplier",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "employee",
+   "label": "Employee",
+   "fieldtype": "Link",
+   "options": "Employee",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "beneficiary_name",
+   "label": "Payee Name",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "site",
+   "label": "Site / Location",
+   "fieldtype": "Data",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "service_item",
+   "label": "Service Item",
+   "fieldtype": "Link",
+   "options": "Item",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "service_description",
+   "label": "Service Description",
+   "fieldtype": "Small Text",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "quantity",
+   "label": "Quantity",
+   "fieldtype": "Float",
+   "default": "1",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "uom",
+   "label": "UOM",
+   "fieldtype": "Link",
+   "options": "UOM",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "number_of_days",
+   "label": "Number of Days",
+   "fieldtype": "Float",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "rate",
+   "label": "Rate",
+   "fieldtype": "Currency",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "gross_amount",
+   "label": "Gross Amount",
+   "fieldtype": "Currency",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "deduction",
+   "label": "Other Deduction",
+   "fieldtype": "Currency",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "tax_withheld",
+   "label": "Tax Withheld",
+   "fieldtype": "Currency",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "net_payable",
+   "label": "Net Payable",
+   "fieldtype": "Currency",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "expense_account",
+   "label": "Expense Account",
+   "fieldtype": "Link",
+   "options": "Account",
+   "reqd": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "payable_account",
+   "label": "Payable Account",
+   "fieldtype": "Link",
+   "options": "Account",
+   "reqd": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "allocation_treatment",
+   "label": "Allocation Treatment",
+   "fieldtype": "Select",
+   "options": "Direct\nSplit Distribution\nShared Pool\nExcluded",
+   "default": "Direct",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "project",
+   "label": "Project",
+   "fieldtype": "Link",
+   "options": "Project",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "cost_center",
+   "label": "Cost Center",
+   "fieldtype": "Link",
+   "options": "Cost Center",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "budget_line",
+   "label": "Budget Line",
+   "fieldtype": "Link",
+   "options": "Budget Line",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "funding_agreement",
+   "label": "Funding Agreement",
+   "fieldtype": "Link",
+   "options": "Funding Agreement",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "contract_or_agreement",
+   "label": "Contract / Agreement",
+   "fieldtype": "Data",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "procurement_process",
+   "label": "Procurement Process",
+   "fieldtype": "Link",
+   "options": "Procurement Process",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "service_acceptance",
+   "label": "Procurement Acceptance",
+   "fieldtype": "Link",
+   "options": "Procure Acceptance",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "attendance_reference",
+   "label": "Attendance Reference",
+   "fieldtype": "Data",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "supporting_document_type",
+   "label": "Supporting Document Type",
+   "fieldtype": "Data",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "supporting_document",
+   "label": "Supporting Document",
+   "fieldtype": "Attach",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "verification_status",
+   "label": "Verification Status",
+   "fieldtype": "Select",
+   "options": "Pending\nVerified\nRejected",
+   "default": "Pending",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "verification_notes",
+   "label": "Verification Notes",
+   "fieldtype": "Small Text",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "include",
+   "label": "Include",
+   "fieldtype": "Check",
+   "default": "1",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "page_break",
+   "label": "Page Break After",
+   "fieldtype": "Check",
+   "default": "0",
+   "allow_on_submit": 1,
+   "print_hide": 1,
+   "in_list_view": 0
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-11-19 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "QOrg",
+ "name": "Service Allowance Line",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "istable": 1
+}

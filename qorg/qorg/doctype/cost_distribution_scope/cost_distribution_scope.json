@@ -1,0 +1,112 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "document_type",
+  "transaction_subtype",
+  "stock_entry_purpose",
+  "auto_apply",
+  "transfer_to_next_document",
+  "allow_manual_override",
+  "require_override_approval",
+  "active"
+ ],
+ "fields": [
+  {
+   "fieldname": "document_type",
+   "label": "Document Type",
+   "fieldtype": "Link",
+   "options": "DocType",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "transaction_subtype",
+   "label": "Transaction Subtype",
+   "fieldtype": "Data",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "stock_entry_purpose",
+   "label": "Stock Entry Purpose",
+   "fieldtype": "Select",
+   "options": "\nMaterial Issue\nMaterial Transfer\nMaterial Receipt\nMaterial Transfer for Manufacture\nMaterial Consumption for Manufacture\nManufacture\nRepack\nSend to Subcontractor"
+  },
+  {
+   "fieldname": "auto_apply",
+   "label": "Auto Apply",
+   "fieldtype": "Check",
+   "default": "1",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "transfer_to_next_document",
+   "label": "Transfer to Next Document",
+   "fieldtype": "Check",
+   "default": "1",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "allow_manual_override",
+   "label": "Allow Manual Override",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "require_override_approval",
+   "label": "Require Override Approval",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "active",
+   "label": "Active",
+   "fieldtype": "Check",
+   "default": "1",
+   "in_list_view": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "module": "QOrg",
+ "name": "Cost Distribution Scope",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Projects Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "istable": 1
+}

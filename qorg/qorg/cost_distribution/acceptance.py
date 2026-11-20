@@ -4,10 +4,10 @@ import frappe
 from frappe import _
 
 REQUIRED_DOCTYPES=(
- "Cost Distribution Profile","Cost Distribution Profile Target","Cost Distribution Transaction Type",
- "Cost Distribution Row","Cost Distribution Ledger","Service and Allowance Accrual",
+ "Cost Distribution Profile","Cost Distribution Target","Cost Distribution Scope",
+ "Cost Distribution Row","Cost Distribution Ledger","Service Allowance Accrual",
 )
-SOURCE_CHILDREN=("Material Request Item","Supplier Quotation Item","Purchase Order Item","Purchase Invoice Item","Expense Claim Detail","Stock Entry Detail","Service and Allowance Accrual Line")
+SOURCE_CHILDREN=("Material Request Item","Supplier Quotation Item","Purchase Order Item","Purchase Invoice Item","Expense Claim Detail","Stock Entry Detail","Service Allowance Line")
 TRANSACTION_FIELDS=(
  "custom_cost_distribution_section","custom_cost_distributions","custom_distribution_status","custom_distribution_hash",
 )
@@ -31,8 +31,8 @@ def audit_runtime_configuration():
     for dt in frappe.get_all("DocType",filters={"istable":1,"module":"QOrg"},pluck="name"):
         nested=[df.fieldname for df in frappe.get_meta(dt,cached=False).fields if df.fieldtype=="Table"]
         add(f"No nested table: {dt}",not nested,nested)
-    accrual_line=frappe.get_meta("Service and Allowance Accrual Line",cached=False)
-    accrual=frappe.get_meta("Service and Allowance Accrual",cached=False)
+    accrual_line=frappe.get_meta("Service Allowance Line",cached=False)
+    accrual=frappe.get_meta("Service Allowance Accrual",cached=False)
     add("Nested accrual field removed",accrual_line.get_field("cost_distribution") is None)
     add("Accrual head distribution table",bool(accrual.get_field("cost_distributions")),getattr(accrual.get_field("cost_distributions"),"options",None))
     row_meta=frappe.get_meta("Cost Distribution Row",cached=False)
@@ -42,7 +42,7 @@ def audit_runtime_configuration():
     add("Only implemented methods exposed",set((method_field.options or "").split("\n")) <= {"Fixed Percentage","Fixed Amount","Equal Distribution"},method_field.options)
     add("Purchase Invoice class extension",_hook_contains("extend_doctype_class","Purchase Invoice","PurchaseInvoiceCostDistributionMixin"))
     add("Expense Claim class extension",_hook_contains("extend_doctype_class","Expense Claim","ExpenseClaimCostDistributionMixin"))
-    for dt in TRANSACTIONS+("Service and Allowance Accrual",):
+    for dt in TRANSACTIONS+("Service Allowance Accrual",):
         for event in ("before_validate","before_submit","on_submit","on_cancel"):
             add(f"Hook {dt}.{event}",_event_hook_contains(dt,event,"qorg.qorg.cost_distribution.adapters.common"))
     try:

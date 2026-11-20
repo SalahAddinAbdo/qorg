@@ -2,14 +2,15 @@ from __future__ import annotations
 import frappe
 from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 TRANSACTIONS={"Material Request":("items","Planned Cost Distribution"),"Supplier Quotation":("items","Planned Cost Distribution"),"Purchase Order":("items","Committed Cost Distribution"),"Purchase Invoice":("items","Final Cost Distribution"),"Expense Claim":("expenses","Cost Distribution"),"Stock Entry":("items","Quantity Distribution")}
-SOURCE_CHILDREN=("Material Request Item","Supplier Quotation Item","Purchase Order Item","Purchase Invoice Item","Expense Claim Detail","Stock Entry Detail","Service and Allowance Accrual Line")
+SOURCE_CHILDREN=("Material Request Item","Supplier Quotation Item","Purchase Order Item","Purchase Invoice Item","Expense Claim Detail","Stock Entry Detail","Service Allowance Line")
 def provision_cost_distribution():
  custom={}
  for dt,(after,label) in TRANSACTIONS.items():
   custom[dt]=[
    {"fieldname":"custom_cost_distribution_section","label":label,"fieldtype":"Section Break","insert_after":after,"collapsible":1,"depends_on":"eval:(doc.custom_cost_distributions||[]).length>0","is_system_generated":1,"module":"QOrg"},
    {"fieldname":"custom_cost_distributions","label":"Cost Distributions","fieldtype":"Table","options":"Cost Distribution Row","insert_after":"custom_cost_distribution_section","is_system_generated":1,"module":"QOrg"},
-   {"fieldname":"custom_distribution_status","label":"Distribution Status","fieldtype":"Select","options":"Not Required\\nPending\\nAuto Applied\\nTransferred\\nManually Adjusted\\nValidated\\nPosted\\nException\\nReversed","default":"Not Required","insert_after":"custom_cost_distributions","read_only":1,"is_system_generated":1,"module":"QOrg"},
+   {"fieldname":"custom_distribution_control_section","label":"Distribution Control","fieldtype":"Section Break","insert_after":"custom_cost_distributions","collapsible":1,"depends_on":"eval:(doc.custom_cost_distributions||[]).length>0","is_system_generated":1,"module":"QOrg"},
+   {"fieldname":"custom_distribution_status","label":"Distribution Status","fieldtype":"Select","options":"Not Required\\nPending\\nAuto Applied\\nTransferred\\nManually Adjusted\\nValidated\\nPosted\\nException\\nReversed","default":"Not Required","insert_after":"custom_distribution_control_section","read_only":1,"is_system_generated":1,"module":"QOrg"},
    {"fieldname":"custom_distribution_hash","label":"Distribution Hash","fieldtype":"Data","insert_after":"custom_distribution_status","hidden":1,"read_only":1,"is_system_generated":1,"module":"QOrg"}]
  for dt in SOURCE_CHILDREN:
   if frappe.db.exists("DocType",dt):custom.setdefault(dt,[]).append({"fieldname":"custom_distribution_source_key","label":"Distribution Source Key","fieldtype":"Data","read_only":1,"hidden":1,"unique":0,"is_system_generated":1,"module":"QOrg"})
