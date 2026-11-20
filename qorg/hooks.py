@@ -484,3 +484,29 @@ has_permission["Budget Line"] = "qorg.qorg.finance_budget_grants.permissions.fin
 has_permission["Commitment Ledger"] = "qorg.qorg.finance_budget_grants.permissions.finance_document_permission"
 has_permission["Commitment Entry"] = "qorg.qorg.finance_budget_grants.permissions.finance_document_permission"
 
+
+# Service and allowance accrual foundation
+_service_allowance_provisioner = "qorg.qorg.service_allowance.provisioning.provision_service_allowance"
+_service_allowance_workflows = "qorg.qorg.service_allowance.workflows.provision_cost_workflows"
+if _service_allowance_provisioner not in after_install:
+    after_install.append(_service_allowance_provisioner)
+if _service_allowance_workflows not in after_install:
+    after_install.append(_service_allowance_workflows)
+if _service_allowance_provisioner not in after_migrate:
+    after_migrate.append(_service_allowance_provisioner)
+if _service_allowance_workflows not in after_migrate:
+    after_migrate.append(_service_allowance_workflows)
+
+# Generated accounting document integrity
+for _event, _handler in {
+    "validate": "qorg.qorg.service_allowance.events.validate_generated_journal",
+    "on_submit": "qorg.qorg.service_allowance.events.on_submit_generated_journal",
+    "on_cancel": "qorg.qorg.service_allowance.events.on_cancel_generated_journal",
+}.items():
+    _existing = doc_events.setdefault("Journal Entry", {}).get(_event)
+    if not _existing:
+        doc_events["Journal Entry"][_event] = _handler
+    elif isinstance(_existing, list):
+        if _handler not in _existing: _existing.append(_handler)
+    elif _existing != _handler:
+        doc_events["Journal Entry"][_event] = [_existing, _handler]

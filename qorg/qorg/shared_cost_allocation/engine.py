@@ -246,14 +246,18 @@ def post_run(doc):
             if meta.has_field("funding_agreement"):account["funding_agreement"]=row.funding_agreement
             je.append("accounts",account)
         for (account,cost_center,source_project),amount in grouped.items():je.append("accounts",{"account":account,"credit_in_account_currency":amount,"cost_center":cost_center,"project":source_project})
-    je.insert();je.submit();doc.db_set("journal_entry",je.name,update_modified=False);doc.db_set("run_status","Posted",update_modified=False);doc.db_set("processed_on",now_datetime(),update_modified=False);doc.db_set("processed_by",frappe.session.user,update_modified=False);doc.db_set("reconciliation_status","Matched",update_modified=False)
+    je.insert();doc.db_set("journal_entry",je.name,update_modified=False);doc.db_set("run_status","Journal Draft Created",update_modified=False);doc.db_set("processed_on",now_datetime(),update_modified=False);doc.db_set("processed_by",frappe.session.user,update_modified=False);doc.db_set("reconciliation_status","Pending",update_modified=False)
     for row in doc.entries:row.db_set("journal_entry",je.name,update_modified=False)
 
 def reverse_run(doc):
-    if not doc.journal_entry:return
+    if not doc.journal_entry:
+        doc.db_set("run_status","Reversed",update_modified=False)
+        return
     je=frappe.get_doc("Journal Entry",doc.journal_entry)
-    if je.docstatus==1:je.cancel()
-    doc.db_set("run_status","Reversed",update_modified=False);doc.db_set("reconciliation_status","Reversed",update_modified=False)
+    if je.docstatus==1:
+        frappe.throw(_("The linked Journal Entry is submitted. Create and approve a draft reversal entry before cancelling this run."))
+    doc.db_set("run_status","Reversed",update_modified=False)
+    doc.db_set("reconciliation_status","Reversed",update_modified=False)
 
 
 @frappe.whitelist()
@@ -325,6 +329,9 @@ def create_allocation_run(source_rule, period_start, period_end, posting_date):
         ))
 
     doc = frappe.new_doc("Shared Cost Allocation Run")
+    if frappe.get_meta("Shared Cost Allocation Run").has_field("workflow_state"):
+        doc.workflow_state = "Draft"
+    doc.flags.ignore_workflow = True
     doc.update({
         "allocation_rule": source.name,
         "company": source.company,

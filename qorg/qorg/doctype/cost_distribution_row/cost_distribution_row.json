@@ -1,0 +1,229 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "",
+ "creation": "2026-11-19 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "source_row_reference",
+  "source_item",
+  "source_account",
+  "source_amount",
+  "allocation_rule",
+  "rule_version",
+  "project",
+  "cost_center",
+  "budget_line",
+  "funding_agreement",
+  "donor",
+  "department",
+  "allocation_percentage",
+  "allocated_amount",
+  "base_amount",
+  "currency",
+  "exchange_rate",
+  "effective_date",
+  "eligibility_status",
+  "validation_message",
+  "manual_override",
+  "override_reason",
+  "supporting_document",
+  "page_break"
+ ],
+ "fields": [
+  {
+   "fieldname": "source_row_reference",
+   "label": "Source Row Reference",
+   "fieldtype": "Data",
+   "read_only": 1
+  },
+  {
+   "fieldname": "source_item",
+   "label": "Source Item",
+   "fieldtype": "Link",
+   "options": "Item",
+   "read_only": 1
+  },
+  {
+   "fieldname": "source_account",
+   "label": "Source Account",
+   "fieldtype": "Link",
+   "options": "Account",
+   "read_only": 1
+  },
+  {
+   "fieldname": "source_amount",
+   "label": "Source Amount",
+   "fieldtype": "Currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "allocation_rule",
+   "label": "Allocation Rule",
+   "fieldtype": "Link",
+   "options": "Shared Cost Allocation Rule"
+  },
+  {
+   "fieldname": "rule_version",
+   "label": "Rule Version",
+   "fieldtype": "Data",
+   "read_only": 1
+  },
+  {
+   "fieldname": "project",
+   "label": "Project",
+   "fieldtype": "Link",
+   "options": "Project",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cost_center",
+   "label": "Cost Center",
+   "fieldtype": "Link",
+   "options": "Cost Center",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "budget_line",
+   "label": "Budget Line",
+   "fieldtype": "Link",
+   "options": "Budget Line",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "funding_agreement",
+   "label": "Funding Agreement",
+   "fieldtype": "Link",
+   "options": "Funding Agreement"
+  },
+  {
+   "fieldname": "donor",
+   "label": "Donor",
+   "fieldtype": "Link",
+   "options": "Donor"
+  },
+  {
+   "fieldname": "department",
+   "label": "Department",
+   "fieldtype": "Link",
+   "options": "Department"
+  },
+  {
+   "fieldname": "allocation_percentage",
+   "label": "Allocation %",
+   "fieldtype": "Percent",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "allocated_amount",
+   "label": "Allocated Amount",
+   "fieldtype": "Currency",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "base_amount",
+   "label": "Base Amount",
+   "fieldtype": "Currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "currency",
+   "label": "Currency",
+   "fieldtype": "Link",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "exchange_rate",
+   "label": "Exchange Rate",
+   "fieldtype": "Float",
+   "precision": "9"
+  },
+  {
+   "fieldname": "effective_date",
+   "label": "Effective Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "eligibility_status",
+   "label": "Eligibility Status",
+   "fieldtype": "Select",
+   "options": "Pending\nEligible\nIneligible\nOverride Approved",
+   "default": "Pending",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "validation_message",
+   "label": "Validation Message",
+   "fieldtype": "Small Text",
+   "read_only": 1
+  },
+  {
+   "fieldname": "manual_override",
+   "label": "Manual Override",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "override_reason",
+   "label": "Override Reason",
+   "fieldtype": "Small Text",
+   "depends_on": "eval:doc.manual_override"
+  },
+  {
+   "fieldname": "supporting_document",
+   "label": "Supporting Document",
+   "fieldtype": "Attach"
+  },
+  {
+   "fieldname": "page_break",
+   "label": "Page Break After",
+   "fieldtype": "Check",
+   "default": "0",
+   "allow_on_submit": 1,
+   "print_hide": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-11-19 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "QOrg",
+ "name": "Cost Distribution Row",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "istable": 1
+}

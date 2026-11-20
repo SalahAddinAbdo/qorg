@@ -1,5 +1,5 @@
 frappe.ui.form.on("Shared Cost Allocation Run",{
- setup(frm){set_run_queries(frm);},refresh(frm){set_run_queries(frm);if(frm.doc.docstatus===0)frm.add_custom_button(__("Refresh Preview"),()=>frm.save());if(frm.doc.journal_entry)frm.add_custom_button(__("Open Journal Entry"),()=>frappe.set_route("Form","Journal Entry",frm.doc.journal_entry));},
+ setup(frm){set_run_queries(frm);},refresh(frm){set_run_queries(frm);if(frm.doc.docstatus===0)frm.add_custom_button(__("Refresh Preview"),()=>frm.save());if(frm.doc.journal_entry)frm.add_custom_button(__("Open Draft Journal Entry"),()=>frappe.set_route("Form","Journal Entry",frm.doc.journal_entry));},
  allocation_rule(frm){clear_run_rule_dependents(frm);if(frm.doc.allocation_rule)load_rule_defaults(frm);set_run_queries(frm);},
  run_type(frm){if(frm.doc.run_type!=="Adjustment"){frm.set_value("adjustment_of",null);frm.set_value("adjustment_reason",null);frm.set_value("donor_approval_reference",null);}set_run_queries(frm);},
  period_start(frm){if(frm.doc.period_end&&frm.doc.period_start>frm.doc.period_end)frm.set_value("period_end",null);},

@@ -1,0 +1,256 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "field:type_name",
+ "creation": "2026-11-19 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "type_name",
+  "active",
+  "default_service_item",
+  "default_expense_account",
+  "default_payable_account",
+  "default_uom",
+  "calculation_method",
+  "item_requirement",
+  "procurement_treatment",
+  "default_payment_method",
+  "require_external_person",
+  "require_site",
+  "require_agreement",
+  "require_attendance",
+  "require_service_acceptance",
+  "require_identity_verification",
+  "require_supporting_document",
+  "require_project",
+  "require_budget_line",
+  "allow_shared_pool",
+  "allow_split_distribution",
+  "withholding_rule",
+  "required_document_types",
+  "allow_manual_override",
+  "require_payment_verification",
+  "maximum_rate",
+  "maximum_days",
+  "workflow_profile",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "type_name",
+   "label": "Type Name",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "active",
+   "label": "Active",
+   "fieldtype": "Check",
+   "default": "1",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "default_service_item",
+   "label": "Default Service Item",
+   "fieldtype": "Link",
+   "options": "Item"
+  },
+  {
+   "fieldname": "default_expense_account",
+   "label": "Default Expense Account",
+   "fieldtype": "Link",
+   "options": "Account"
+  },
+  {
+   "fieldname": "default_payable_account",
+   "label": "Default Payable Account",
+   "fieldtype": "Link",
+   "options": "Account"
+  },
+  {
+   "fieldname": "default_uom",
+   "label": "Default UOM",
+   "fieldtype": "Link",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "calculation_method",
+   "label": "Calculation Method",
+   "fieldtype": "Select",
+   "options": "Quantity x Rate\nDays x Daily Rate\nFixed Amount",
+   "default": "Quantity x Rate",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_requirement",
+   "label": "Item Requirement",
+   "fieldtype": "Select",
+   "options": "Required\nOptional\nNot Applicable",
+   "default": "Optional"
+  },
+  {
+   "fieldname": "procurement_treatment",
+   "label": "Procurement Treatment",
+   "fieldtype": "Select",
+   "options": "Procurement Required\nFramework Agreement Required\nSimplified Procurement\nExempt by Policy\nNot Applicable",
+   "default": "Not Applicable"
+  },
+  {
+   "fieldname": "default_payment_method",
+   "label": "Default Payment Method",
+   "fieldtype": "Link",
+   "options": "Mode of Payment"
+  },
+  {
+   "fieldname": "require_external_person",
+   "label": "Require External Person",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "require_site",
+   "label": "Require Site",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "require_agreement",
+   "label": "Require Agreement",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "require_attendance",
+   "label": "Require Attendance",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "require_service_acceptance",
+   "label": "Require Service Acceptance",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "require_identity_verification",
+   "label": "Require Identity Verification",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "require_supporting_document",
+   "label": "Require Supporting Document",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "require_project",
+   "label": "Require Project",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "require_budget_line",
+   "label": "Require Budget Line",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "allow_shared_pool",
+   "label": "Allow Shared Pool",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "allow_split_distribution",
+   "label": "Allow Split Distribution",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "withholding_rule",
+   "label": "Withholding Rule",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "required_document_types",
+   "label": "Required Document Types",
+   "fieldtype": "Small Text",
+   "description": "One document type per line."
+  },
+  {
+   "fieldname": "allow_manual_override",
+   "label": "Allow Manual Override",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "require_payment_verification",
+   "label": "Require Payment Verification",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "maximum_rate",
+   "label": "Maximum Rate",
+   "fieldtype": "Currency"
+  },
+  {
+   "fieldname": "maximum_days",
+   "label": "Maximum Days",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "workflow_profile",
+   "label": "Workflow Profile",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "description",
+   "label": "Description",
+   "fieldtype": "Small Text"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-11-19 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "QOrg",
+ "name": "Service and Allowance Type",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "title_field": "type_name",
+ "search_fields": "type_name"
+}
