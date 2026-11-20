@@ -5,7 +5,7 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import flt, getdate, now
 
-class ServiceAndAllowanceAccrual(Document):
+class ServiceandAllowanceAccrual(Document):
     def validate(self):
         if getdate(self.period_end) < getdate(self.period_start):
             frappe.throw(_("Period End cannot be before Period Start."))

@@ -1,4 +1,5 @@
 from frappe.model.document import Document
 
-class ServiceAndAllowanceType(Document):
+
+class ServiceandAllowanceType(Document):
     pass
