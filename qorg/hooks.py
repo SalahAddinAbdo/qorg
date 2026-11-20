@@ -545,3 +545,11 @@ for _hook in ("qorg.qorg.cost_distribution.migration.migrate_nested_accrual_dist
 _service_allowance_copy_hook = "qorg.qorg.cost_distribution.service_allowance_migration.migrate_service_allowance_names"
 if _service_allowance_copy_hook not in after_migrate:
     after_migrate.append(_service_allowance_copy_hook)
+
+_profile_permission_hook = (
+    "qorg.qorg.cost_distribution.profile_permissions."
+    "repair_profile_submit_permissions"
+)
+
+if _profile_permission_hook not in after_migrate:
+    after_migrate.append(_profile_permission_hook)
