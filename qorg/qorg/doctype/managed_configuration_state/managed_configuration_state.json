@@ -77,13 +77,15 @@
       "fieldname": "applied_fingerprint",
       "fieldtype": "Data",
       "label": "Applied Fingerprint",
-      "read_only": 1
+      "read_only": 1,
+      "print_hide": 1
     },
     {
       "fieldname": "last_seen_fingerprint",
       "fieldtype": "Data",
       "label": "Last Seen Fingerprint",
-      "read_only": 1
+      "read_only": 1,
+      "print_hide": 1
     },
     {
       "fieldname": "column_break_state",

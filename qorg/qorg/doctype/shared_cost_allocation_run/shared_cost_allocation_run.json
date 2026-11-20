@@ -1,433 +1,434 @@
 {
- "actions": [],
- "allow_import": 1,
- "autoname": "naming_series:",
- "doctype": "DocType",
- "engine": "InnoDB",
- "field_order": [
-  "identity_section",
-  "naming_series",
-  "allocation_rule",
-  "company",
-  "column_1",
-  "allocation_category",
-  "allocation_method",
-  "run_status",
-  "run_type",
-  "adjustment_of",
-  "adjustment_reason",
-  "donor_approval_reference",
-  "period_section",
-  "period_start",
-  "period_end",
-  "posting_date",
-  "column_2",
-  "source_cost_center",
-  "company_currency",
-  "summary_section",
-  "source_amount",
-  "eligible_amount",
-  "allocated_amount",
-  "column_3",
-  "excluded_amount",
-  "unallocated_amount",
-  "rounding_difference",
-  "eligible_base_amount",
-  "indirect_rate_applied",
-  "recovery_cap_applied",
-  "prior_recovery_amount",
-  "adjustment_amount",
-  "rule_snapshot",
-  "donor_currency_total",
-  "over_budget_entries",
-  "source_entry_count",
-  "entries_section",
-  "entries",
-  "accounting_section",
-  "journal_entry",
-  "reversal_journal_entry",
-  "column_4",
-  "reconciliation_status",
-  "processed_on",
-  "processed_by",
-  "notes",
-  "amended_from"
- ],
- "fields": [
-  {
-   "fieldname": "identity_section",
-   "label": "Run Identity",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "naming_series",
-   "label": "Series",
-   "fieldtype": "Select",
-   "options": "SCARUN-.YYYY.-.#####",
-   "default": "SCARUN-.YYYY.-.#####",
-   "reqd": 1
-  },
-  {
-   "fieldname": "allocation_rule",
-   "label": "Allocation Rule",
-   "fieldtype": "Link",
-   "options": "Shared Cost Allocation Rule",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "company",
-   "label": "Company",
-   "fieldtype": "Link",
-   "options": "Company",
-   "reqd": 1,
-   "read_only": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "column_1",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "allocation_category",
-   "label": "Allocation Category",
-   "fieldtype": "Data",
-   "read_only": 1
-  },
-  {
-   "fieldname": "allocation_method",
-   "label": "Allocation Method",
-   "fieldtype": "Data",
-   "read_only": 1
-  },
-  {
-   "fieldname": "run_status",
-   "label": "Run Status",
-   "fieldtype": "Select",
-   "options": "Draft\nPreviewed\nApproved\nJournal Draft Created\nPosted\nReversal Draft Created\nReversed\nFailed\nCancelled",
-   "default": "Draft",
-   "read_only": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "run_type",
-   "label": "Run Type",
-   "fieldtype": "Select",
-   "options": "Regular\nAdjustment\nFinal Closeout",
-   "default": "Regular",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "adjustment_of",
-   "label": "Adjustment Of",
-   "fieldtype": "Link",
-   "options": "Shared Cost Allocation Run",
-   "depends_on": "eval:doc.run_type==\"Adjustment\""
-  },
-  {
-   "fieldname": "adjustment_reason",
-   "label": "Adjustment Reason",
-   "fieldtype": "Small Text",
-   "depends_on": "eval:doc.run_type==\"Adjustment\""
-  },
-  {
-   "fieldname": "donor_approval_reference",
-   "label": "Donor Approval Reference",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "period_section",
-   "label": "Allocation Period",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "period_start",
-   "label": "Period Start",
-   "fieldtype": "Date",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "period_end",
-   "label": "Period End",
-   "fieldtype": "Date",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "posting_date",
-   "label": "Posting Date",
-   "fieldtype": "Date",
-   "reqd": 1
-  },
-  {
-   "fieldname": "column_2",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "source_cost_center",
-   "label": "Source Cost Center",
-   "fieldtype": "Link",
-   "options": "Cost Center",
-   "read_only": 1
-  },
-  {
-   "fieldname": "company_currency",
-   "label": "Company Currency",
-   "fieldtype": "Link",
-   "options": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "summary_section",
-   "label": "Summary",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "source_amount",
-   "label": "Source Amount",
-   "fieldtype": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "eligible_amount",
-   "label": "Eligible Amount",
-   "fieldtype": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "allocated_amount",
-   "label": "Allocated Amount",
-   "fieldtype": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "column_3",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "excluded_amount",
-   "label": "Excluded Amount",
-   "fieldtype": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "unallocated_amount",
-   "label": "Unallocated Amount",
-   "fieldtype": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "rounding_difference",
-   "label": "Rounding Difference",
-   "fieldtype": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "eligible_base_amount",
-   "label": "Eligible Base Amount",
-   "fieldtype": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "indirect_rate_applied",
-   "label": "Indirect Rate Applied",
-   "fieldtype": "Percent",
-   "read_only": 1
-  },
-  {
-   "fieldname": "recovery_cap_applied",
-   "label": "Recovery Cap Applied",
-   "fieldtype": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "prior_recovery_amount",
-   "label": "Prior Recovery Amount",
-   "fieldtype": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "adjustment_amount",
-   "label": "Adjustment Amount",
-   "fieldtype": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "rule_snapshot",
-   "label": "Rule Snapshot",
-   "fieldtype": "Long Text",
-   "read_only": 1
-  },
-  {
-   "fieldname": "donor_currency_total",
-   "label": "Donor Currency Total",
-   "fieldtype": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "over_budget_entries",
-   "label": "Over Budget Entries",
-   "fieldtype": "Int",
-   "read_only": 1
-  },
-  {
-   "fieldname": "source_entry_count",
-   "label": "Source Entry Count",
-   "fieldtype": "Int",
-   "read_only": 1
-  },
-  {
-   "fieldname": "entries_section",
-   "label": "Allocation Details",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "entries",
-   "label": "Entries",
-   "fieldtype": "Table",
-   "options": "Shared Cost Allocation Entry",
-   "read_only": 1
-  },
-  {
-   "fieldname": "accounting_section",
-   "label": "Accounting and Reconciliation",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "journal_entry",
-   "label": "Journal Entry",
-   "fieldtype": "Link",
-   "options": "Journal Entry",
-   "read_only": 1,
-   "allow_on_submit": 1
-  },
-  {
-   "fieldname": "reversal_journal_entry",
-   "label": "Reversal Journal Entry",
-   "fieldtype": "Link",
-   "options": "Journal Entry",
-   "read_only": 1,
-   "allow_on_submit": 1
-  },
-  {
-   "fieldname": "column_4",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "reconciliation_status",
-   "label": "Reconciliation Status",
-   "fieldtype": "Select",
-   "options": "Not Started\nPending\nMatched\nDifference\nPending Reversal\nReversed",
-   "default": "Not Started",
-   "read_only": 1,
-   "allow_on_submit": 1
-  },
-  {
-   "fieldname": "processed_on",
-   "label": "Processed On",
-   "fieldtype": "Datetime",
-   "read_only": 1,
-   "allow_on_submit": 1
-  },
-  {
-   "fieldname": "processed_by",
-   "label": "Processed By",
-   "fieldtype": "Link",
-   "options": "User",
-   "read_only": 1,
-   "allow_on_submit": 1
-  },
-  {
-   "fieldname": "notes",
-   "label": "Notes",
-   "fieldtype": "Small Text"
-  },
-  {
-   "fieldname": "amended_from",
-   "label": "Amended From",
-   "fieldtype": "Link",
-   "options": "Shared Cost Allocation Run",
-   "read_only": 1,
-   "no_copy": 1
-  }
- ],
- "index_web_pages_for_search": 1,
- "links": [],
- "module": "QOrg",
- "name": "Shared Cost Allocation Run",
- "permissions": [
-  {
-   "role": "Accounts Manager",
-   "read": 1,
-   "write": 1,
-   "create": 1,
-   "delete": 1,
-   "submit": 1,
-   "cancel": 1,
-   "amend": 1,
-   "report": 1,
-   "export": 1,
-   "print": 1,
-   "email": 1,
-   "share": 1
-  },
-  {
-   "role": "Accounts User",
-   "read": 1,
-   "write": 1,
-   "create": 1,
-   "submit": 0,
-   "cancel": 0,
-   "report": 1,
-   "export": 1,
-   "print": 1,
-   "email": 1,
-   "share": 1
-  },
-  {
-   "role": "Projects Manager",
-   "read": 1,
-   "report": 1,
-   "export": 1,
-   "print": 1
-  },
-  {
-   "role": "Shared Cost Allocation Manager",
-   "read": 1,
-   "write": 1,
-   "create": 1,
-   "delete": 1,
-   "submit": 1,
-   "cancel": 1,
-   "amend": 1,
-   "report": 1,
-   "export": 1,
-   "print": 1,
-   "email": 1,
-   "share": 1
-  },
-  {
-   "role": "Shared Cost Allocation User",
-   "read": 1,
-   "write": 1,
-   "create": 1,
-   "report": 1,
-   "export": 1,
-   "print": 1,
-   "email": 1,
-   "share": 1
-  }
- ],
- "sort_field": "modified",
- "sort_order": "DESC",
- "track_changes": 1,
- "is_submittable": 1,
- "title_field": "allocation_rule",
- "search_fields": "allocation_rule,company,run_status,journal_entry"
+  "actions": [],
+  "allow_import": 1,
+  "autoname": "naming_series:",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "identity_section",
+    "naming_series",
+    "allocation_rule",
+    "company",
+    "column_1",
+    "allocation_category",
+    "allocation_method",
+    "run_status",
+    "run_type",
+    "adjustment_of",
+    "adjustment_reason",
+    "donor_approval_reference",
+    "period_section",
+    "period_start",
+    "period_end",
+    "posting_date",
+    "column_2",
+    "source_cost_center",
+    "company_currency",
+    "summary_section",
+    "source_amount",
+    "eligible_amount",
+    "allocated_amount",
+    "column_3",
+    "excluded_amount",
+    "unallocated_amount",
+    "rounding_difference",
+    "eligible_base_amount",
+    "indirect_rate_applied",
+    "recovery_cap_applied",
+    "prior_recovery_amount",
+    "adjustment_amount",
+    "rule_snapshot",
+    "donor_currency_total",
+    "over_budget_entries",
+    "source_entry_count",
+    "entries_section",
+    "entries",
+    "accounting_section",
+    "journal_entry",
+    "reversal_journal_entry",
+    "column_4",
+    "reconciliation_status",
+    "processed_on",
+    "processed_by",
+    "notes",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "identity_section",
+      "label": "Run Identity",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Series",
+      "fieldtype": "Select",
+      "options": "SCARUN-.YYYY.-.#####",
+      "default": "SCARUN-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "allocation_rule",
+      "label": "Allocation Rule",
+      "fieldtype": "Link",
+      "options": "Shared Cost Allocation Rule",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_1",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "allocation_category",
+      "label": "Allocation Category",
+      "fieldtype": "Data",
+      "read_only": 1
+    },
+    {
+      "fieldname": "allocation_method",
+      "label": "Allocation Method",
+      "fieldtype": "Data",
+      "read_only": 1
+    },
+    {
+      "fieldname": "run_status",
+      "label": "Run Status",
+      "fieldtype": "Select",
+      "options": "Draft\nPreviewed\nApproved\nJournal Draft Created\nPosted\nReversal Draft Created\nReversed\nFailed\nCancelled",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "run_type",
+      "label": "Run Type",
+      "fieldtype": "Select",
+      "options": "Regular\nAdjustment\nFinal Closeout",
+      "default": "Regular",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "adjustment_of",
+      "label": "Adjustment Of",
+      "fieldtype": "Link",
+      "options": "Shared Cost Allocation Run",
+      "depends_on": "eval:doc.run_type==\"Adjustment\""
+    },
+    {
+      "fieldname": "adjustment_reason",
+      "label": "Adjustment Reason",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:doc.run_type==\"Adjustment\""
+    },
+    {
+      "fieldname": "donor_approval_reference",
+      "label": "Donor Approval Reference",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "period_section",
+      "label": "Allocation Period",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "period_start",
+      "label": "Period Start",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "period_end",
+      "label": "Period End",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "posting_date",
+      "label": "Posting Date",
+      "fieldtype": "Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "source_cost_center",
+      "label": "Source Cost Center",
+      "fieldtype": "Link",
+      "options": "Cost Center",
+      "read_only": 1
+    },
+    {
+      "fieldname": "company_currency",
+      "label": "Company Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "summary_section",
+      "label": "Summary",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "source_amount",
+      "label": "Source Amount",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "eligible_amount",
+      "label": "Eligible Amount",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "allocated_amount",
+      "label": "Allocated Amount",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "excluded_amount",
+      "label": "Excluded Amount",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "unallocated_amount",
+      "label": "Unallocated Amount",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "rounding_difference",
+      "label": "Rounding Difference",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "eligible_base_amount",
+      "label": "Eligible Base Amount",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "indirect_rate_applied",
+      "label": "Indirect Rate Applied",
+      "fieldtype": "Percent",
+      "read_only": 1
+    },
+    {
+      "fieldname": "recovery_cap_applied",
+      "label": "Recovery Cap Applied",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "prior_recovery_amount",
+      "label": "Prior Recovery Amount",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "adjustment_amount",
+      "label": "Adjustment Amount",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "rule_snapshot",
+      "label": "Rule Snapshot",
+      "fieldtype": "Long Text",
+      "read_only": 1,
+      "print_hide": 1
+    },
+    {
+      "fieldname": "donor_currency_total",
+      "label": "Donor Currency Total",
+      "fieldtype": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "over_budget_entries",
+      "label": "Over Budget Entries",
+      "fieldtype": "Int",
+      "read_only": 1
+    },
+    {
+      "fieldname": "source_entry_count",
+      "label": "Source Entry Count",
+      "fieldtype": "Int",
+      "read_only": 1
+    },
+    {
+      "fieldname": "entries_section",
+      "label": "Allocation Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "entries",
+      "label": "Entries",
+      "fieldtype": "Table",
+      "options": "Shared Cost Allocation Entry",
+      "read_only": 1
+    },
+    {
+      "fieldname": "accounting_section",
+      "label": "Accounting and Reconciliation",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "journal_entry",
+      "label": "Journal Entry",
+      "fieldtype": "Link",
+      "options": "Journal Entry",
+      "read_only": 1,
+      "allow_on_submit": 1
+    },
+    {
+      "fieldname": "reversal_journal_entry",
+      "label": "Reversal Journal Entry",
+      "fieldtype": "Link",
+      "options": "Journal Entry",
+      "read_only": 1,
+      "allow_on_submit": 1
+    },
+    {
+      "fieldname": "column_4",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "reconciliation_status",
+      "label": "Reconciliation Status",
+      "fieldtype": "Select",
+      "options": "Not Started\nPending\nMatched\nDifference\nPending Reversal\nReversed",
+      "default": "Not Started",
+      "read_only": 1,
+      "allow_on_submit": 1
+    },
+    {
+      "fieldname": "processed_on",
+      "label": "Processed On",
+      "fieldtype": "Datetime",
+      "read_only": 1,
+      "allow_on_submit": 1
+    },
+    {
+      "fieldname": "processed_by",
+      "label": "Processed By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1,
+      "allow_on_submit": 1
+    },
+    {
+      "fieldname": "notes",
+      "label": "Notes",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "amended_from",
+      "label": "Amended From",
+      "fieldtype": "Link",
+      "options": "Shared Cost Allocation Run",
+      "read_only": 1,
+      "no_copy": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "module": "QOrg",
+  "name": "Shared Cost Allocation Run",
+  "permissions": [
+    {
+      "role": "Accounts Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Accounts User",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 0,
+      "cancel": 0,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Projects Manager",
+      "read": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "role": "Shared Cost Allocation Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Shared Cost Allocation User",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1,
+  "is_submittable": 1,
+  "title_field": "allocation_rule",
+  "search_fields": "allocation_rule,company,run_status,journal_entry"
 }

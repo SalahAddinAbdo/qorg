@@ -1,550 +1,564 @@
 {
- "actions": [],
- "allow_import": 1,
- "autoname": "naming_series:",
- "doctype": "DocType",
- "engine": "InnoDB",
- "field_order": [
-  "identity_section",
-  "naming_series",
-  "rule_name",
-  "company",
-  "column_1",
-  "allocation_category",
-  "allocation_method",
-  "frequency",
-  "status",
-  "version_section",
-  "rule_version",
-  "supersedes_rule",
-  "change_effective_date",
-  "column_5",
-  "change_type",
-  "donor_approval_reference",
-  "change_reason",
-  "source_section",
-  "source_cost_center",
-  "source_project",
-  "finance_book",
-  "column_2",
-  "voucher_types",
-  "require_unassigned_project",
-  "source_filters",
-  "selected_vouchers",
-  "source_selection_mode",
-  "selection_notes",
-  "period_section",
-  "effective_from",
-  "effective_to",
-  "column_3",
-  "currency_basis",
-  "rounding_method",
-  "difference_handling",
-  "indirect_section",
-  "indirect_base_method",
-  "rate_periods",
-  "column_6",
-  "indirect_cost_expense_account",
-  "indirect_cost_recovery_account",
-  "total_recovery_cap",
-  "exclude_shared_cost_allocations_from_base",
-  "driver_section",
-  "manual_driver_label",
-  "direct_expenditure_weight",
-  "budget_weight",
-  "column_driver",
-  "headcount_weight",
-  "beneficiary_weight",
-  "manual_weight",
-  "targets_section",
-  "targets",
-  "control_section",
-  "exclude_payroll_accounts",
-  "allow_partial_allocation",
-  "allow_budget_override",
-  "column_4",
-  "minimum_source_amount",
-  "maximum_run_amount",
-  "justification",
-  "amended_from"
- ],
- "fields": [
-  {
-   "fieldname": "identity_section",
-   "label": "Rule Identity",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "naming_series",
-   "label": "Series",
-   "fieldtype": "Select",
-   "options": "SCAR-.YYYY.-.#####",
-   "default": "SCAR-.YYYY.-.#####",
-   "reqd": 1
-  },
-  {
-   "fieldname": "rule_name",
-   "label": "Rule Name",
-   "fieldtype": "Data",
-   "reqd": 1,
-   "in_list_view": 1,
-   "in_global_search": 1
-  },
-  {
-   "fieldname": "company",
-   "label": "Company",
-   "fieldtype": "Link",
-   "options": "Company",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "column_1",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "allocation_category",
-   "label": "Allocation Category",
-   "fieldtype": "Select",
-   "options": "Shared Operating Cost\nIndirect Cost Recovery",
-   "default": "Shared Operating Cost",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "allocation_method",
-   "label": "Allocation Method",
-   "fieldtype": "Select",
-   "options": "Fixed Percentage\nFixed Amount\nEqual Distribution\nDirect Expenditure Ratio\nFunding or Budget Ratio\nHeadcount\nBeneficiary Count\nManual Driver\nComposite Driver",
-   "default": "Fixed Percentage",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "frequency",
-   "label": "Frequency",
-   "fieldtype": "Select",
-   "options": "On Demand\nMonthly\nQuarterly\nAnnual",
-   "default": "Monthly"
-  },
-  {
-   "fieldname": "status",
-   "label": "Status",
-   "fieldtype": "Select",
-   "options": "Draft\nActive\nInactive\nSuperseded\nCancelled",
-   "default": "Draft",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "version_section",
-   "label": "Version and Change Control",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "rule_version",
-   "label": "Rule Version",
-   "fieldtype": "Data",
-   "default": "1.0",
-   "reqd": 1
-  },
-  {
-   "fieldname": "supersedes_rule",
-   "label": "Supersedes Rule",
-   "fieldtype": "Link",
-   "options": "Shared Cost Allocation Rule",
-   "read_only": 1
-  },
-  {
-   "fieldname": "change_effective_date",
-   "label": "Change Effective Date",
-   "fieldtype": "Date"
-  },
-  {
-   "fieldname": "column_5",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "change_type",
-   "label": "Change Type",
-   "fieldtype": "Select",
-   "options": "Initial Rule\nProspective Change\nDonor Approved Increase\nDonor Approved Reduction\nCorrection",
-   "default": "Initial Rule",
-   "reqd": 1
-  },
-  {
-   "fieldname": "donor_approval_reference",
-   "label": "Donor Approval Reference",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "change_reason",
-   "label": "Change Reason",
-   "fieldtype": "Small Text"
-  },
-  {
-   "fieldname": "source_section",
-   "label": "Source Selection",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "source_cost_center",
-   "label": "Source Cost Center",
-   "fieldtype": "Link",
-   "options": "Cost Center",
-   "reqd": 0,
-   "in_list_view": 1,
-   "description": "Optional. If blank, the Company Default Shared Cost Center is used."
-  },
-  {
-   "fieldname": "source_project",
-   "label": "Source Project",
-   "fieldtype": "Link",
-   "options": "Project"
-  },
-  {
-   "fieldname": "finance_book",
-   "label": "Finance Book",
-   "fieldtype": "Link",
-   "options": "Finance Book"
-  },
-  {
-   "fieldname": "column_2",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "voucher_types",
-   "label": "Voucher Types",
-   "fieldtype": "Small Text",
-   "description": "Optional comma-separated voucher types. Leave empty to include all supported expense vouchers.",
-   "depends_on": "eval:doc.source_selection_mode!=\"Selected Vouchers Only\""
-  },
-  {
-   "fieldname": "require_unassigned_project",
-   "label": "Require Unassigned Project",
-   "fieldtype": "Check",
-   "default": "1"
-  },
-  {
-   "fieldname": "source_filters",
-   "label": "Account Filters",
-   "fieldtype": "Table",
-   "options": "Shared Cost Source Filter",
-   "depends_on": "eval:doc.source_selection_mode!=\"Selected Vouchers Only\""
-  },
-  {
-   "fieldname": "selected_vouchers",
-   "label": "Selected Vouchers",
-   "fieldtype": "Table",
-   "options": "Shared Cost Source Voucher",
-   "depends_on": "eval:doc.source_selection_mode!=\"Filtered GL Entries\""
-  },
-  {
-   "fieldname": "source_selection_mode",
-   "label": "Source Selection Mode",
-   "fieldtype": "Select",
-   "options": "Filtered GL Entries\nSelected Vouchers Only\nFiltered GL Entries plus Selected Vouchers",
-   "default": "Filtered GL Entries",
-   "reqd": 1
-  },
-  {
-   "fieldname": "selection_notes",
-   "label": "Selection Notes",
-   "fieldtype": "Small Text"
-  },
-  {
-   "fieldname": "period_section",
-   "label": "Validity and Currency",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "effective_from",
-   "label": "Effective From",
-   "fieldtype": "Date",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "effective_to",
-   "label": "Effective To",
-   "fieldtype": "Date"
-  },
-  {
-   "fieldname": "column_3",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "currency_basis",
-   "label": "Currency Basis",
-   "fieldtype": "Select",
-   "options": "Company Currency",
-   "default": "Company Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "rounding_method",
-   "label": "Rounding Method",
-   "fieldtype": "Select",
-   "options": "Largest Share\nLast Eligible Target",
-   "default": "Largest Share"
-  },
-  {
-   "fieldname": "difference_handling",
-   "label": "Difference Handling",
-   "fieldtype": "Select",
-   "options": "Allocate Rounding Difference\nLeave Unallocated",
-   "default": "Allocate Rounding Difference"
-  },
-  {
-   "fieldname": "indirect_section",
-   "label": "Indirect Cost Recovery Policy",
-   "fieldtype": "Section Break",
-   "depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\""
-  },
-  {
-   "fieldname": "indirect_base_method",
-   "label": "Eligible Base Method",
-   "fieldtype": "Select",
-   "options": "Eligible Direct Expense\nModified Total Direct Cost\nSelected Accounts and Budget Lines",
-   "default": "Eligible Direct Expense",
-   "depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\""
-  },
-  {
-   "fieldname": "rate_periods",
-   "label": "Effective-Dated Rates",
-   "fieldtype": "Table",
-   "options": "Indirect Cost Rate Period",
-   "depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\"",
-   "mandatory_depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\""
-  },
-  {
-   "fieldname": "column_6",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "indirect_cost_expense_account",
-   "label": "Indirect Cost Expense Account",
-   "fieldtype": "Link",
-   "options": "Account",
-   "depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\"",
-   "mandatory_depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\""
-  },
-  {
-   "fieldname": "indirect_cost_recovery_account",
-   "label": "Indirect Cost Recovery Account",
-   "fieldtype": "Link",
-   "options": "Account",
-   "depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\"",
-   "mandatory_depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\""
-  },
-  {
-   "fieldname": "total_recovery_cap",
-   "label": "Total Recovery Cap",
-   "fieldtype": "Currency",
-   "depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\"",
-   "mandatory_depends_on": null
-  },
-  {
-   "fieldname": "exclude_shared_cost_allocations_from_base",
-   "label": "Exclude Shared Cost Allocations from Base",
-   "fieldtype": "Check",
-   "default": "0",
-   "depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\"",
-   "mandatory_depends_on": null
-  },
-  {
-   "fieldname": "driver_section",
-   "label": "Driver Configuration",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "manual_driver_label",
-   "label": "Manual Driver Label",
-   "fieldtype": "Data",
-   "depends_on": "eval:[\"Manual Driver\",\"Composite Driver\"].includes(doc.allocation_method)",
-   "mandatory_depends_on": "eval:[\"Manual Driver\",\"Composite Driver\"].includes(doc.allocation_method)"
-  },
-  {
-   "fieldname": "direct_expenditure_weight",
-   "label": "Direct Expenditure Weight",
-   "fieldtype": "Percent",
-   "depends_on": "eval:doc.allocation_method==\"Composite Driver\"",
-   "mandatory_depends_on": "eval:doc.allocation_method==\"Composite Driver\""
-  },
-  {
-   "fieldname": "budget_weight",
-   "label": "Budget Weight",
-   "fieldtype": "Percent",
-   "depends_on": "eval:doc.allocation_method==\"Composite Driver\"",
-   "mandatory_depends_on": "eval:doc.allocation_method==\"Composite Driver\""
-  },
-  {
-   "fieldname": "column_driver",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "headcount_weight",
-   "label": "Headcount Weight",
-   "fieldtype": "Percent",
-   "depends_on": "eval:doc.allocation_method==\"Composite Driver\"",
-   "mandatory_depends_on": "eval:doc.allocation_method==\"Composite Driver\""
-  },
-  {
-   "fieldname": "beneficiary_weight",
-   "label": "Beneficiary Weight",
-   "fieldtype": "Percent",
-   "depends_on": "eval:doc.allocation_method==\"Composite Driver\"",
-   "mandatory_depends_on": "eval:doc.allocation_method==\"Composite Driver\""
-  },
-  {
-   "fieldname": "manual_weight",
-   "label": "Manual Driver Weight",
-   "fieldtype": "Percent",
-   "depends_on": "eval:doc.allocation_method==\"Composite Driver\"",
-   "mandatory_depends_on": "eval:doc.allocation_method==\"Composite Driver\""
-  },
-  {
-   "fieldname": "targets_section",
-   "label": "Allocation Targets",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "targets",
-   "label": "Targets",
-   "fieldtype": "Table",
-   "options": "Shared Cost Allocation Target",
-   "reqd": 1
-  },
-  {
-   "fieldname": "control_section",
-   "label": "Controls",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "exclude_payroll_accounts",
-   "label": "Exclude Payroll Accounts",
-   "fieldtype": "Check",
-   "default": "1"
-  },
-  {
-   "fieldname": "allow_partial_allocation",
-   "label": "Allow Partial Allocation",
-   "fieldtype": "Check",
-   "default": "0"
-  },
-  {
-   "fieldname": "allow_budget_override",
-   "label": "Allow Budget Override",
-   "fieldtype": "Check",
-   "default": "0"
-  },
-  {
-   "fieldname": "column_4",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "minimum_source_amount",
-   "label": "Minimum Source Amount",
-   "fieldtype": "Currency"
-  },
-  {
-   "fieldname": "maximum_run_amount",
-   "label": "Maximum Run Amount",
-   "fieldtype": "Currency"
-  },
-  {
-   "fieldname": "justification",
-   "label": "Business Justification",
-   "fieldtype": "Small Text",
-   "reqd": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "label": "Amended From",
-   "fieldtype": "Link",
-   "options": "Shared Cost Allocation Rule",
-   "read_only": 1,
-   "no_copy": 1
-  }
- ],
- "index_web_pages_for_search": 1,
- "links": [],
- "module": "QOrg",
- "name": "Shared Cost Allocation Rule",
- "permissions": [
-  {
-   "role": "Accounts Manager",
-   "read": 1,
-   "write": 1,
-   "create": 1,
-   "delete": 1,
-   "submit": 1,
-   "cancel": 1,
-   "amend": 1,
-   "report": 1,
-   "export": 1,
-   "print": 1,
-   "email": 1,
-   "share": 1
-  },
-  {
-   "role": "Accounts User",
-   "read": 1,
-   "write": 1,
-   "create": 1,
-   "submit": 0,
-   "cancel": 0,
-   "report": 1,
-   "export": 1,
-   "print": 1,
-   "email": 1,
-   "share": 1
-  },
-  {
-   "role": "Projects Manager",
-   "read": 1,
-   "report": 1,
-   "export": 1,
-   "print": 1
-  },
-  {
-   "role": "Shared Cost Allocation Manager",
-   "read": 1,
-   "write": 1,
-   "create": 1,
-   "delete": 1,
-   "submit": 1,
-   "cancel": 1,
-   "amend": 1,
-   "report": 1,
-   "export": 1,
-   "print": 1,
-   "email": 1,
-   "share": 1
-  },
-  {
-   "role": "Shared Cost Allocation User",
-   "read": 1,
-   "write": 1,
-   "create": 1,
-   "report": 1,
-   "export": 1,
-   "print": 1,
-   "email": 1,
-   "share": 1
-  }
- ],
- "sort_field": "modified",
- "sort_order": "DESC",
- "track_changes": 1,
- "is_submittable": 1,
- "title_field": "rule_name",
- "search_fields": "rule_name,company,allocation_category,status"
+  "actions": [],
+  "allow_import": 1,
+  "autoname": "naming_series:",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "identity_section",
+    "naming_series",
+    "rule_name",
+    "company",
+    "column_1",
+    "allocation_category",
+    "allocation_method",
+    "frequency",
+    "status",
+    "version_section",
+    "rule_version",
+    "supersedes_rule",
+    "change_effective_date",
+    "column_5",
+    "change_type",
+    "donor_approval_reference",
+    "change_reason",
+    "source_section",
+    "source_cost_center",
+    "source_project",
+    "finance_book",
+    "column_2",
+    "voucher_types",
+    "require_unassigned_project",
+    "source_filters_section",
+    "source_filters",
+    "selected_vouchers_section",
+    "selected_vouchers",
+    "source_selection_mode",
+    "selection_notes",
+    "period_section",
+    "effective_from",
+    "effective_to",
+    "column_3",
+    "currency_basis",
+    "rounding_method",
+    "difference_handling",
+    "indirect_section",
+    "indirect_base_method",
+    "rate_periods",
+    "column_6",
+    "indirect_cost_expense_account",
+    "indirect_cost_recovery_account",
+    "total_recovery_cap",
+    "exclude_shared_cost_allocations_from_base",
+    "driver_section",
+    "manual_driver_label",
+    "direct_expenditure_weight",
+    "budget_weight",
+    "column_driver",
+    "headcount_weight",
+    "beneficiary_weight",
+    "manual_weight",
+    "targets_section",
+    "targets",
+    "control_section",
+    "exclude_payroll_accounts",
+    "allow_partial_allocation",
+    "allow_budget_override",
+    "column_4",
+    "minimum_source_amount",
+    "maximum_run_amount",
+    "justification",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "identity_section",
+      "label": "Rule Identity",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Series",
+      "fieldtype": "Select",
+      "options": "SCAR-.YYYY.-.#####",
+      "default": "SCAR-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "rule_name",
+      "label": "Rule Name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_global_search": 1
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_1",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "allocation_category",
+      "label": "Allocation Category",
+      "fieldtype": "Select",
+      "options": "Shared Operating Cost\nIndirect Cost Recovery",
+      "default": "Shared Operating Cost",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "allocation_method",
+      "label": "Allocation Method",
+      "fieldtype": "Select",
+      "options": "Fixed Percentage\nFixed Amount\nEqual Distribution\nDirect Expenditure Ratio\nFunding or Budget Ratio\nHeadcount\nBeneficiary Count\nManual Driver\nComposite Driver",
+      "default": "Fixed Percentage",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "frequency",
+      "label": "Frequency",
+      "fieldtype": "Select",
+      "options": "On Demand\nMonthly\nQuarterly\nAnnual",
+      "default": "Monthly"
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nActive\nInactive\nSuperseded\nCancelled",
+      "default": "Draft",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "version_section",
+      "label": "Version and Change Control",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "rule_version",
+      "label": "Rule Version",
+      "fieldtype": "Data",
+      "default": "1.0",
+      "reqd": 1
+    },
+    {
+      "fieldname": "supersedes_rule",
+      "label": "Supersedes Rule",
+      "fieldtype": "Link",
+      "options": "Shared Cost Allocation Rule",
+      "read_only": 1
+    },
+    {
+      "fieldname": "change_effective_date",
+      "label": "Change Effective Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "column_5",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "change_type",
+      "label": "Change Type",
+      "fieldtype": "Select",
+      "options": "Initial Rule\nProspective Change\nDonor Approved Increase\nDonor Approved Reduction\nCorrection",
+      "default": "Initial Rule",
+      "reqd": 1
+    },
+    {
+      "fieldname": "donor_approval_reference",
+      "label": "Donor Approval Reference",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "change_reason",
+      "label": "Change Reason",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "source_section",
+      "label": "Source Selection",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "source_cost_center",
+      "label": "Source Cost Center",
+      "fieldtype": "Link",
+      "options": "Cost Center",
+      "reqd": 0,
+      "in_list_view": 1,
+      "description": "Optional. If blank, the Company Default Shared Cost Center is used."
+    },
+    {
+      "fieldname": "source_project",
+      "label": "Source Project",
+      "fieldtype": "Link",
+      "options": "Project"
+    },
+    {
+      "fieldname": "finance_book",
+      "label": "Finance Book",
+      "fieldtype": "Link",
+      "options": "Finance Book"
+    },
+    {
+      "fieldname": "column_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "voucher_types",
+      "label": "Voucher Types",
+      "fieldtype": "Small Text",
+      "description": "Optional comma-separated voucher types. Leave empty to include all supported expense vouchers.",
+      "depends_on": "eval:doc.source_selection_mode!=\"Selected Vouchers Only\""
+    },
+    {
+      "fieldname": "require_unassigned_project",
+      "label": "Require Unassigned Project",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "source_filters_section",
+      "fieldtype": "Section Break",
+      "label": "Source Filters",
+      "depends_on": "eval:doc.source_selection_mode!=\"Selected Vouchers Only\""
+    },
+    {
+      "fieldname": "source_filters",
+      "label": "Account Filters",
+      "fieldtype": "Table",
+      "options": "Shared Cost Source Filter",
+      "depends_on": "eval:doc.source_selection_mode!=\"Selected Vouchers Only\""
+    },
+    {
+      "fieldname": "selected_vouchers_section",
+      "fieldtype": "Section Break",
+      "label": "Selected Vouchers",
+      "depends_on": "eval:doc.source_selection_mode!=\"Filtered GL Entries\""
+    },
+    {
+      "fieldname": "selected_vouchers",
+      "label": "Selected Vouchers",
+      "fieldtype": "Table",
+      "options": "Shared Cost Source Voucher",
+      "depends_on": "eval:doc.source_selection_mode!=\"Filtered GL Entries\""
+    },
+    {
+      "fieldname": "source_selection_mode",
+      "label": "Source Selection Mode",
+      "fieldtype": "Select",
+      "options": "Filtered GL Entries\nSelected Vouchers Only\nFiltered GL Entries plus Selected Vouchers",
+      "default": "Filtered GL Entries",
+      "reqd": 1
+    },
+    {
+      "fieldname": "selection_notes",
+      "label": "Selection Notes",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "period_section",
+      "label": "Validity and Currency",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "effective_from",
+      "label": "Effective From",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "effective_to",
+      "label": "Effective To",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "column_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "currency_basis",
+      "label": "Currency Basis",
+      "fieldtype": "Select",
+      "options": "Company Currency",
+      "default": "Company Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "rounding_method",
+      "label": "Rounding Method",
+      "fieldtype": "Select",
+      "options": "Largest Share\nLast Eligible Target",
+      "default": "Largest Share"
+    },
+    {
+      "fieldname": "difference_handling",
+      "label": "Difference Handling",
+      "fieldtype": "Select",
+      "options": "Allocate Rounding Difference\nLeave Unallocated",
+      "default": "Allocate Rounding Difference"
+    },
+    {
+      "fieldname": "indirect_section",
+      "label": "Indirect Cost Recovery Policy",
+      "fieldtype": "Section Break",
+      "depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\""
+    },
+    {
+      "fieldname": "indirect_base_method",
+      "label": "Eligible Base Method",
+      "fieldtype": "Select",
+      "options": "Eligible Direct Expense\nModified Total Direct Cost\nSelected Accounts and Budget Lines",
+      "default": "Eligible Direct Expense",
+      "depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\""
+    },
+    {
+      "fieldname": "rate_periods",
+      "label": "Effective-Dated Rates",
+      "fieldtype": "Table",
+      "options": "Indirect Cost Rate Period",
+      "depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\"",
+      "mandatory_depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\""
+    },
+    {
+      "fieldname": "column_6",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "indirect_cost_expense_account",
+      "label": "Indirect Cost Expense Account",
+      "fieldtype": "Link",
+      "options": "Account",
+      "depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\"",
+      "mandatory_depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\""
+    },
+    {
+      "fieldname": "indirect_cost_recovery_account",
+      "label": "Indirect Cost Recovery Account",
+      "fieldtype": "Link",
+      "options": "Account",
+      "depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\"",
+      "mandatory_depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\""
+    },
+    {
+      "fieldname": "total_recovery_cap",
+      "label": "Total Recovery Cap",
+      "fieldtype": "Currency",
+      "depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\"",
+      "mandatory_depends_on": null
+    },
+    {
+      "fieldname": "exclude_shared_cost_allocations_from_base",
+      "label": "Exclude Shared Cost Allocations from Base",
+      "fieldtype": "Check",
+      "default": "0",
+      "depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\"",
+      "mandatory_depends_on": null
+    },
+    {
+      "fieldname": "driver_section",
+      "label": "Driver Configuration",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "manual_driver_label",
+      "label": "Manual Driver Label",
+      "fieldtype": "Data",
+      "depends_on": "eval:[\"Manual Driver\",\"Composite Driver\"].includes(doc.allocation_method)",
+      "mandatory_depends_on": "eval:[\"Manual Driver\",\"Composite Driver\"].includes(doc.allocation_method)"
+    },
+    {
+      "fieldname": "direct_expenditure_weight",
+      "label": "Direct Expenditure Weight",
+      "fieldtype": "Percent",
+      "depends_on": "eval:doc.allocation_method==\"Composite Driver\"",
+      "mandatory_depends_on": "eval:doc.allocation_method==\"Composite Driver\""
+    },
+    {
+      "fieldname": "budget_weight",
+      "label": "Budget Weight",
+      "fieldtype": "Percent",
+      "depends_on": "eval:doc.allocation_method==\"Composite Driver\"",
+      "mandatory_depends_on": "eval:doc.allocation_method==\"Composite Driver\""
+    },
+    {
+      "fieldname": "column_driver",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "headcount_weight",
+      "label": "Headcount Weight",
+      "fieldtype": "Percent",
+      "depends_on": "eval:doc.allocation_method==\"Composite Driver\"",
+      "mandatory_depends_on": "eval:doc.allocation_method==\"Composite Driver\""
+    },
+    {
+      "fieldname": "beneficiary_weight",
+      "label": "Beneficiary Weight",
+      "fieldtype": "Percent",
+      "depends_on": "eval:doc.allocation_method==\"Composite Driver\"",
+      "mandatory_depends_on": "eval:doc.allocation_method==\"Composite Driver\""
+    },
+    {
+      "fieldname": "manual_weight",
+      "label": "Manual Driver Weight",
+      "fieldtype": "Percent",
+      "depends_on": "eval:doc.allocation_method==\"Composite Driver\"",
+      "mandatory_depends_on": "eval:doc.allocation_method==\"Composite Driver\""
+    },
+    {
+      "fieldname": "targets_section",
+      "label": "Allocation Targets",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "targets",
+      "label": "Targets",
+      "fieldtype": "Table",
+      "options": "Shared Cost Allocation Target",
+      "reqd": 1
+    },
+    {
+      "fieldname": "control_section",
+      "label": "Controls",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "exclude_payroll_accounts",
+      "label": "Exclude Payroll Accounts",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "allow_partial_allocation",
+      "label": "Allow Partial Allocation",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "allow_budget_override",
+      "label": "Allow Budget Override",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "column_4",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "minimum_source_amount",
+      "label": "Minimum Source Amount",
+      "fieldtype": "Currency"
+    },
+    {
+      "fieldname": "maximum_run_amount",
+      "label": "Maximum Run Amount",
+      "fieldtype": "Currency"
+    },
+    {
+      "fieldname": "justification",
+      "label": "Business Justification",
+      "fieldtype": "Small Text",
+      "reqd": 1
+    },
+    {
+      "fieldname": "amended_from",
+      "label": "Amended From",
+      "fieldtype": "Link",
+      "options": "Shared Cost Allocation Rule",
+      "read_only": 1,
+      "no_copy": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "module": "QOrg",
+  "name": "Shared Cost Allocation Rule",
+  "permissions": [
+    {
+      "role": "Accounts Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Accounts User",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 0,
+      "cancel": 0,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Projects Manager",
+      "read": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "role": "Shared Cost Allocation Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Shared Cost Allocation User",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1,
+  "is_submittable": 1,
+  "title_field": "rule_name",
+  "search_fields": "rule_name,company,allocation_category,status"
 }
