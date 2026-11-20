@@ -23,10 +23,12 @@
   "operational_status",
   "workflow_state",
   "description",
+  "legacy_lines_section",
   "lines",
   "total_gross_amount",
   "total_deductions",
   "total_net_payable",
+  "legacy_supporting_section",
   "supporting_documents",
   "journal_entry",
   "source_hash",
@@ -151,6 +153,12 @@
    "fieldtype": "Small Text"
   },
   {
+   "fieldname": "legacy_lines_section",
+   "label": "Accrual Lines",
+   "fieldtype": "Section Break",
+   "collapsible": 0
+  },
+  {
    "fieldname": "lines",
    "label": "Accrual Lines",
    "fieldtype": "Table",
@@ -174,6 +182,12 @@
    "label": "Total Net Payable",
    "fieldtype": "Currency",
    "read_only": 1
+  },
+  {
+   "fieldname": "legacy_supporting_section",
+   "label": "Supporting Documents",
+   "fieldtype": "Section Break",
+   "collapsible": 1
   },
   {
    "fieldname": "supporting_documents",

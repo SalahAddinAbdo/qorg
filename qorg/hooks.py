@@ -540,8 +540,8 @@ for _dt,_asset in _cost_distribution_js.items():
 for _hook in ("qorg.qorg.cost_distribution.migration.migrate_nested_accrual_distributions",):
     if _hook not in after_migrate:after_migrate.append(_hook)
 
-# Short-path compatibility migration
-before_migrate = globals().get("before_migrate", [])
-_naming_hook = "qorg.qorg.cost_distribution.naming_migration.rename_legacy_records"
-if _naming_hook not in before_migrate:
-    before_migrate.append(_naming_hook)
+
+# Safe post-schema copy migration for shortened Service Allowance names.
+_service_allowance_copy_hook = "qorg.qorg.cost_distribution.service_allowance_migration.migrate_service_allowance_names"
+if _service_allowance_copy_hook not in after_migrate:
+    after_migrate.append(_service_allowance_copy_hook)
