@@ -1,0 +1,1 @@
+frappe.ui.form.on("Purchase Order",{setup(frm){qorg.cost_distribution.setup(frm,"items","custom_cost_distributions");},refresh(frm){qorg.cost_distribution.setup(frm,"items","custom_cost_distributions");}});

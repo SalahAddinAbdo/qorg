@@ -50,7 +50,8 @@ override_doctype_dashboards = {'Material Request': 'qorg.qorg.dashboards.materia
 # DESK ASSETS
 # ==============================================================================
 
-app_include_js = ['/assets/qorg/js/finance_budget_grants.js',
+app_include_js = [
+    '/assets/qorg/js/cost_distribution.js','/assets/qorg/js/finance_budget_grants.js',
  '/assets/qorg/js/shared_cost_reports.js',
  '/assets/qorg/js/document_workflow.js',
  '/assets/qorg/js/qorg_form_bootstrap.js',
@@ -510,3 +511,31 @@ for _event, _handler in {
         if _handler not in _existing: _existing.append(_handler)
     elif _existing != _handler:
         doc_events["Journal Entry"][_event] = [_existing, _handler]
+
+
+# Cost Distribution Integration
+extend_doctype_class = globals().get("extend_doctype_class", {})
+extend_doctype_class.setdefault("Purchase Invoice", []).append("qorg.qorg.cost_distribution.adapters.purchase_invoice.PurchaseInvoiceCostDistributionMixin")
+extend_doctype_class.setdefault("Expense Claim", []).append("qorg.qorg.cost_distribution.adapters.expense_claim.ExpenseClaimCostDistributionMixin")
+for _dt in ("Material Request","Supplier Quotation","Purchase Order","Purchase Invoice","Expense Claim","Stock Entry","Service and Allowance Accrual"):
+    _events=doc_events.setdefault(_dt,{})
+    for _event,_handler in {"before_validate":"qorg.qorg.cost_distribution.adapters.common.before_validate","before_submit":"qorg.qorg.cost_distribution.adapters.common.before_submit","on_submit":"qorg.qorg.cost_distribution.adapters.common.on_submit","on_cancel":"qorg.qorg.cost_distribution.adapters.common.on_cancel"}.items():
+        _current=_events.get(_event)
+        if not _current:_events[_event]=_handler
+        elif isinstance(_current,list):
+            if _handler not in _current:_current.append(_handler)
+        elif _current!=_handler:_events[_event]=[_current,_handler]
+_hook="qorg.qorg.cost_distribution.provisioning.provision_cost_distribution"
+if _hook not in after_install:after_install.append(_hook)
+if _hook not in after_migrate:after_migrate.append(_hook)
+
+_cost_distribution_js={"Material Request":"public/js/material_request_cost_distribution.js","Supplier Quotation":"public/js/supplier_quotation_cost_distribution.js","Purchase Order":"public/js/purchase_order_cost_distribution.js","Purchase Invoice":"public/js/purchase_invoice_cost_distribution.js","Expense Claim":"public/js/expense_claim_cost_distribution.js","Stock Entry":"public/js/stock_entry_cost_distribution.js"}
+for _dt,_asset in _cost_distribution_js.items():
+    _current=doctype_js.get(_dt)
+    if not _current:doctype_js[_dt]=_asset
+    elif isinstance(_current,list):
+        if _asset not in _current:_current.append(_asset)
+    elif _current!=_asset:doctype_js[_dt]=[_current,_asset]
+
+for _hook in ("qorg.qorg.cost_distribution.migration.migrate_nested_accrual_distributions",):
+    if _hook not in after_migrate:after_migrate.append(_hook)

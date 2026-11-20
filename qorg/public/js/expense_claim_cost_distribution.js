@@ -1,0 +1,1 @@
+frappe.ui.form.on("Expense Claim",{setup(frm){qorg.cost_distribution.setup(frm,"expenses","custom_cost_distributions");},refresh(frm){qorg.cost_distribution.setup(frm,"expenses","custom_cost_distributions");}});
