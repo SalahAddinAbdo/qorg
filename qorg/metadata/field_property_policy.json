@@ -1,0 +1,117 @@
+{
+  "policy_version": 1,
+  "currency_fields_without_options": [
+    {
+      "doctype": "Award Decision",
+      "fieldname": "awarded_amount",
+      "resolution": "framework_default_no_company_context",
+      "reason": "This DocType has no direct Company field. Per the QOrg field policy, no Currency option is added solely for display; Frappe uses its normal default."
+    },
+    {
+      "doctype": "Award Recommendation",
+      "fieldname": "recommended_amount",
+      "resolution": "framework_default_no_company_context",
+      "reason": "This DocType has no direct Company field. Per the QOrg field policy, no Currency option is added solely for display; Frappe uses its normal default."
+    },
+    {
+      "doctype": "Bid Summary Row",
+      "fieldname": "evaluated_price",
+      "resolution": "framework_default_no_company_context",
+      "reason": "This DocType has no direct Company field. Per the QOrg field policy, no Currency option is added solely for display; Frappe uses its normal default."
+    },
+    {
+      "doctype": "Cost Distribution Target",
+      "fieldname": "fixed_amount",
+      "resolution": "framework_default_no_company_context",
+      "reason": "This DocType has no direct Company field. Per the QOrg field policy, no Currency option is added solely for display; Frappe uses its normal default."
+    },
+    {
+      "doctype": "Cost Distribution Target",
+      "fieldname": "maximum_amount",
+      "resolution": "framework_default_no_company_context",
+      "reason": "This DocType has no direct Company field. Per the QOrg field policy, no Currency option is added solely for display; Frappe uses its normal default."
+    },
+    {
+      "doctype": "Indirect Cost Rate Period",
+      "fieldname": "period_cap",
+      "resolution": "framework_default_no_company_context",
+      "reason": "This DocType has no direct Company field. Per the QOrg field policy, no Currency option is added solely for display; Frappe uses its normal default."
+    },
+    {
+      "doctype": "Procure Acceptance",
+      "fieldname": "accepted_amount",
+      "resolution": "framework_default_no_company_context",
+      "reason": "This DocType has no direct Company field. Per the QOrg field policy, no Currency option is added solely for display; Frappe uses its normal default."
+    },
+    {
+      "doctype": "Procure Acceptance",
+      "fieldname": "advance_recovery_amount",
+      "resolution": "framework_default_no_company_context",
+      "reason": "This DocType has no direct Company field. Per the QOrg field policy, no Currency option is added solely for display; Frappe uses its normal default."
+    },
+    {
+      "doctype": "Procure Acceptance",
+      "fieldname": "eligible_invoice_amount",
+      "resolution": "framework_default_no_company_context",
+      "reason": "This DocType has no direct Company field. Per the QOrg field policy, no Currency option is added solely for display; Frappe uses its normal default."
+    },
+    {
+      "doctype": "Procure Acceptance",
+      "fieldname": "net_payable_amount",
+      "resolution": "framework_default_no_company_context",
+      "reason": "This DocType has no direct Company field. Per the QOrg field policy, no Currency option is added solely for display; Frappe uses its normal default."
+    },
+    {
+      "doctype": "Procure Acceptance",
+      "fieldname": "retention_amount",
+      "resolution": "framework_default_no_company_context",
+      "reason": "This DocType has no direct Company field. Per the QOrg field policy, no Currency option is added solely for display; Frappe uses its normal default."
+    },
+    {
+      "doctype": "Service and Allowance Type",
+      "fieldname": "maximum_rate",
+      "resolution": "framework_default_no_company_context",
+      "reason": "This DocType has no direct Company field. Per the QOrg field policy, no Currency option is added solely for display; Frappe uses its normal default."
+    },
+    {
+      "doctype": "Shared Cost Allocation Run",
+      "fieldname": "donor_currency_total",
+      "resolution": "hidden_mixed_currency_diagnostic",
+      "reason": "The aggregate can contain multiple donor currencies; it remains hidden, read-only, and excluded from print instead of displaying one currency symbol."
+    },
+    {
+      "doctype": "Shared Cost Allocation Target",
+      "fieldname": "fixed_amount",
+      "resolution": "framework_default_no_company_context",
+      "reason": "This DocType has no direct Company field. Per the QOrg field policy, no Currency option is added solely for display; Frappe uses its normal default."
+    },
+    {
+      "doctype": "Shared Cost Allocation Target",
+      "fieldname": "maximum_amount",
+      "resolution": "framework_default_no_company_context",
+      "reason": "This DocType has no direct Company field. Per the QOrg field policy, no Currency option is added solely for display; Frappe uses its normal default."
+    },
+    {
+      "doctype": "Shared Cost Allocation Target",
+      "fieldname": "target_cap",
+      "resolution": "framework_default_no_company_context",
+      "reason": "This DocType has no direct Company field. Per the QOrg field policy, no Currency option is added solely for display; Frappe uses its normal default."
+    },
+    {
+      "doctype": "Verification Item",
+      "fieldname": "valuation_rate",
+      "resolution": "framework_default_no_company_context",
+      "reason": "This DocType has no direct Company field. Per the QOrg field policy, no Currency option is added solely for display; Frappe uses its normal default."
+    },
+    {
+      "doctype": "Verification Item",
+      "fieldname": "variance_value",
+      "resolution": "framework_default_no_company_context",
+      "reason": "This DocType has no direct Company field. Per the QOrg field policy, no Currency option is added solely for display; Frappe uses its normal default."
+    }
+  ],
+  "link_filter_default": "Standard Frappe Link search plus DocType permissions and User Permissions unless a form script overrides with frm.set_query.",
+  "print_default": "Business fields remain printable unless print_hide is set; hashes, fingerprints, source keys, payloads, and snapshots are protected separately.",
+  "mandatory_default": "reqd means required at save; mandatory_depends_on is used only for conditional requirements; server lifecycle validation remains authoritative for submit/workflow-only requirements.",
+  "currency_policy": "Use Company:company:default_currency only when the same DocType has a Company field. Otherwise do not add a Currency option merely to force a symbol."
+}

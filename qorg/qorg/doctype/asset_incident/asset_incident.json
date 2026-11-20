@@ -207,12 +207,14 @@
     {
       "fieldname": "estimated_loss",
       "label": "Estimated Loss",
-      "fieldtype": "Currency"
+      "fieldtype": "Currency",
+      "options": "Company:company:default_currency"
     },
     {
       "fieldname": "repair_estimate",
       "label": "Repair Estimate",
-      "fieldtype": "Currency"
+      "fieldtype": "Currency",
+      "options": "Company:company:default_currency"
     },
     {
       "fieldname": "insurance_claim",
@@ -222,7 +224,8 @@
     {
       "fieldname": "recovery_amount",
       "label": "Recovery Amount",
-      "fieldtype": "Currency"
+      "fieldtype": "Currency",
+      "options": "Company:company:default_currency"
     },
     {
       "fieldname": "decision_section",

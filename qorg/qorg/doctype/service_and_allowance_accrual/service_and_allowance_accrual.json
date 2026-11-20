@@ -1,271 +1,274 @@
 {
- "actions": [],
- "allow_rename": 0,
- "autoname": "naming_series:",
- "creation": "2026-11-19 00:00:00.000000",
- "doctype": "DocType",
- "engine": "InnoDB",
- "field_order": [
-  "naming_series",
-  "company",
-  "accrual_type",
-  "posting_date",
-  "period_start",
-  "period_end",
-  "currency",
-  "exchange_rate",
-  "operating_unit",
-  "programme",
-  "source_request_doctype",
-  "source_request",
-  "procurement_treatment",
-  "payment_status",
-  "operational_status",
-  "workflow_state",
-  "description",
-  "legacy_lines_section",
-  "lines",
-  "total_gross_amount",
-  "total_deductions",
-  "total_net_payable",
-  "legacy_supporting_section",
-  "supporting_documents",
-  "journal_entry",
-  "source_hash",
-  "journal_created_on",
-  "journal_created_by",
-  "remarks"
- ],
- "fields": [
-  {
-   "fieldname": "naming_series",
-   "label": "Series",
-   "fieldtype": "Select",
-   "options": "SAA-.YYYY.-.#####",
-   "default": "SAA-.YYYY.-.#####",
-   "reqd": 1
-  },
-  {
-   "fieldname": "company",
-   "label": "Company",
-   "fieldtype": "Link",
-   "options": "Company",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "accrual_type",
-   "label": "Accrual Type",
-   "fieldtype": "Link",
-   "options": "Service and Allowance Type",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "posting_date",
-   "label": "Posting Date",
-   "fieldtype": "Date",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "period_start",
-   "label": "Period Start",
-   "fieldtype": "Date",
-   "reqd": 1
-  },
-  {
-   "fieldname": "period_end",
-   "label": "Period End",
-   "fieldtype": "Date",
-   "reqd": 1
-  },
-  {
-   "fieldname": "currency",
-   "label": "Currency",
-   "fieldtype": "Link",
-   "options": "Currency",
-   "reqd": 1
-  },
-  {
-   "fieldname": "exchange_rate",
-   "label": "Exchange Rate",
-   "fieldtype": "Float",
-   "default": "1",
-   "precision": "9"
-  },
-  {
-   "fieldname": "operating_unit",
-   "label": "Operating Unit",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "programme",
-   "label": "Programme",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "source_request_doctype",
-   "label": "Source Request Type",
-   "fieldtype": "Link",
-   "options": "DocType"
-  },
-  {
-   "fieldname": "source_request",
-   "label": "Source Request",
-   "fieldtype": "Dynamic Link",
-   "options": "source_request_doctype"
-  },
-  {
-   "fieldname": "procurement_treatment",
-   "label": "Procurement Treatment",
-   "fieldtype": "Select",
-   "options": "Procurement Required\nFramework Agreement Required\nSimplified Procurement\nExempt by Policy\nNot Applicable",
-   "read_only": 1
-  },
-  {
-   "fieldname": "payment_status",
-   "label": "Payment Status",
-   "fieldtype": "Select",
-   "options": "Not Started\nPartially Paid\nPaid\nReversed",
-   "default": "Not Started",
-   "read_only": 1
-  },
-  {
-   "fieldname": "operational_status",
-   "label": "Operational Status",
-   "fieldtype": "Select",
-   "options": "Draft\nUnder Review\nApproved\nJournal Draft Created\nPosted\nPartially Paid\nPaid\nReversed",
-   "default": "Draft",
-   "read_only": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "workflow_state",
-   "label": "Workflow State",
-   "fieldtype": "Link",
-   "options": "Workflow State",
-   "allow_on_submit": 1
-  },
-  {
-   "fieldname": "description",
-   "label": "Description",
-   "fieldtype": "Small Text"
-  },
-  {
-   "fieldname": "legacy_lines_section",
-   "label": "Accrual Lines",
-   "fieldtype": "Section Break",
-   "collapsible": 0
-  },
-  {
-   "fieldname": "lines",
-   "label": "Accrual Lines",
-   "fieldtype": "Table",
-   "options": "Service and Allowance Accrual Line",
-   "reqd": 1
-  },
-  {
-   "fieldname": "total_gross_amount",
-   "label": "Total Gross Amount",
-   "fieldtype": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "total_deductions",
-   "label": "Total Deductions",
-   "fieldtype": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "total_net_payable",
-   "label": "Total Net Payable",
-   "fieldtype": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "legacy_supporting_section",
-   "label": "Supporting Documents",
-   "fieldtype": "Section Break",
-   "collapsible": 1
-  },
-  {
-   "fieldname": "supporting_documents",
-   "label": "Supporting Documents",
-   "fieldtype": "Table",
-   "options": "Supporting Document Row"
-  },
-  {
-   "fieldname": "journal_entry",
-   "label": "Journal Entry",
-   "fieldtype": "Link",
-   "options": "Journal Entry",
-   "read_only": 1
-  },
-  {
-   "fieldname": "source_hash",
-   "label": "Source Hash",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "hidden": 1
-  },
-  {
-   "fieldname": "journal_created_on",
-   "label": "Journal Created On",
-   "fieldtype": "Datetime",
-   "read_only": 1
-  },
-  {
-   "fieldname": "journal_created_by",
-   "label": "Journal Created By",
-   "fieldtype": "Link",
-   "options": "User",
-   "read_only": 1
-  },
-  {
-   "fieldname": "remarks",
-   "label": "Remarks",
-   "fieldtype": "Small Text"
-  }
- ],
- "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2026-11-19 00:00:00.000000",
- "modified_by": "Administrator",
- "module": "QOrg",
- "name": "Service and Allowance Accrual",
- "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Accounts Manager",
-   "share": 1,
-   "write": 1
-  }
- ],
- "row_format": "Dynamic",
- "sort_field": "modified",
- "sort_order": "DESC",
- "states": [],
- "track_changes": 1,
- "is_submittable": 1,
- "title_field": "accrual_type",
- "search_fields": "company,accrual_type,operational_status"
+  "actions": [],
+  "allow_rename": 0,
+  "autoname": "naming_series:",
+  "creation": "2026-11-19 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "company",
+    "accrual_type",
+    "posting_date",
+    "period_start",
+    "period_end",
+    "currency",
+    "exchange_rate",
+    "operating_unit",
+    "programme",
+    "source_request_doctype",
+    "source_request",
+    "procurement_treatment",
+    "payment_status",
+    "operational_status",
+    "workflow_state",
+    "description",
+    "legacy_lines_section",
+    "lines",
+    "total_gross_amount",
+    "total_deductions",
+    "total_net_payable",
+    "legacy_supporting_section",
+    "supporting_documents",
+    "journal_entry",
+    "source_hash",
+    "journal_created_on",
+    "journal_created_by",
+    "remarks"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Series",
+      "fieldtype": "Select",
+      "options": "SAA-.YYYY.-.#####",
+      "default": "SAA-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "accrual_type",
+      "label": "Accrual Type",
+      "fieldtype": "Link",
+      "options": "Service and Allowance Type",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "posting_date",
+      "label": "Posting Date",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "period_start",
+      "label": "Period Start",
+      "fieldtype": "Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "period_end",
+      "label": "Period End",
+      "fieldtype": "Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "currency",
+      "label": "Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "reqd": 1
+    },
+    {
+      "fieldname": "exchange_rate",
+      "label": "Exchange Rate",
+      "fieldtype": "Float",
+      "default": "1",
+      "precision": "9"
+    },
+    {
+      "fieldname": "operating_unit",
+      "label": "Operating Unit",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "programme",
+      "label": "Programme",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "source_request_doctype",
+      "label": "Source Request Type",
+      "fieldtype": "Link",
+      "options": "DocType"
+    },
+    {
+      "fieldname": "source_request",
+      "label": "Source Request",
+      "fieldtype": "Dynamic Link",
+      "options": "source_request_doctype"
+    },
+    {
+      "fieldname": "procurement_treatment",
+      "label": "Procurement Treatment",
+      "fieldtype": "Select",
+      "options": "Procurement Required\nFramework Agreement Required\nSimplified Procurement\nExempt by Policy\nNot Applicable",
+      "read_only": 1
+    },
+    {
+      "fieldname": "payment_status",
+      "label": "Payment Status",
+      "fieldtype": "Select",
+      "options": "Not Started\nPartially Paid\nPaid\nReversed",
+      "default": "Not Started",
+      "read_only": 1
+    },
+    {
+      "fieldname": "operational_status",
+      "label": "Operational Status",
+      "fieldtype": "Select",
+      "options": "Draft\nUnder Review\nApproved\nJournal Draft Created\nPosted\nPartially Paid\nPaid\nReversed",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "workflow_state",
+      "label": "Workflow State",
+      "fieldtype": "Link",
+      "options": "Workflow State",
+      "allow_on_submit": 1
+    },
+    {
+      "fieldname": "description",
+      "label": "Description",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "legacy_lines_section",
+      "label": "Accrual Lines",
+      "fieldtype": "Section Break",
+      "collapsible": 0
+    },
+    {
+      "fieldname": "lines",
+      "label": "Accrual Lines",
+      "fieldtype": "Table",
+      "options": "Service and Allowance Accrual Line",
+      "reqd": 1
+    },
+    {
+      "fieldname": "total_gross_amount",
+      "label": "Total Gross Amount",
+      "fieldtype": "Currency",
+      "read_only": 1,
+      "options": "currency"
+    },
+    {
+      "fieldname": "total_deductions",
+      "label": "Total Deductions",
+      "fieldtype": "Currency",
+      "read_only": 1,
+      "options": "currency"
+    },
+    {
+      "fieldname": "total_net_payable",
+      "label": "Total Net Payable",
+      "fieldtype": "Currency",
+      "read_only": 1,
+      "options": "currency"
+    },
+    {
+      "fieldname": "legacy_supporting_section",
+      "label": "Supporting Documents",
+      "fieldtype": "Section Break",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "supporting_documents",
+      "label": "Supporting Documents",
+      "fieldtype": "Table",
+      "options": "Supporting Document Row"
+    },
+    {
+      "fieldname": "journal_entry",
+      "label": "Journal Entry",
+      "fieldtype": "Link",
+      "options": "Journal Entry",
+      "read_only": 1
+    },
+    {
+      "fieldname": "source_hash",
+      "label": "Source Hash",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "journal_created_on",
+      "label": "Journal Created On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "journal_created_by",
+      "label": "Journal Created By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "remarks",
+      "label": "Remarks",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-11-19 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "Service and Allowance Accrual",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Accounts Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "row_format": "Dynamic",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "is_submittable": 1,
+  "title_field": "accrual_type",
+  "search_fields": "company,accrual_type,operational_status"
 }

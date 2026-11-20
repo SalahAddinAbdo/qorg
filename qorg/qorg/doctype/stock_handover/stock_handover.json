@@ -450,7 +450,8 @@
       "fieldname": "transport_cost",
       "label": "Transport Cost",
       "fieldtype": "Currency",
-      "depends_on": "eval:doc.has_transporter == 1"
+      "depends_on": "eval:doc.has_transporter == 1",
+      "options": "currency"
     },
     {
       "fieldname": "transport_cost_reference",

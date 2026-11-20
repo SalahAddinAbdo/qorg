@@ -156,12 +156,14 @@
       "label": "Contract Value",
       "fieldtype": "Currency",
       "reqd": 1,
-      "in_list_view": 1
+      "in_list_view": 1,
+      "options": "currency"
     },
     {
       "fieldname": "ceiling_amount",
       "label": "Ceiling Amount",
-      "fieldtype": "Currency"
+      "fieldtype": "Currency",
+      "options": "currency"
     },
     {
       "fieldname": "effective_date",
@@ -318,25 +320,29 @@
       "fieldname": "advance_payment_amount",
       "fieldtype": "Currency",
       "label": "Advance Payment Amount",
-      "read_only": 1
+      "read_only": 1,
+      "options": "currency"
     },
     {
       "fieldname": "advance_recovered_amount",
       "fieldtype": "Currency",
       "label": "Advance Recovered Amount",
-      "read_only": 1
+      "read_only": 1,
+      "options": "currency"
     },
     {
       "fieldname": "retention_amount",
       "fieldtype": "Currency",
       "label": "Retention Amount",
-      "read_only": 1
+      "read_only": 1,
+      "options": "currency"
     },
     {
       "fieldname": "retention_released_amount",
       "fieldtype": "Currency",
       "label": "Retention Released Amount",
-      "read_only": 1
+      "read_only": 1,
+      "options": "currency"
     },
     {
       "fieldname": "qorg_layout_column",
@@ -346,19 +352,22 @@
       "fieldname": "invoiced_amount",
       "fieldtype": "Currency",
       "label": "Invoiced Amount",
-      "read_only": 1
+      "read_only": 1,
+      "options": "currency"
     },
     {
       "fieldname": "paid_amount",
       "fieldtype": "Currency",
       "label": "Paid Amount",
-      "read_only": 1
+      "read_only": 1,
+      "options": "currency"
     },
     {
       "fieldname": "remaining_contract_value",
       "fieldtype": "Currency",
       "label": "Remaining Contract Value",
-      "read_only": 1
+      "read_only": 1,
+      "options": "currency"
     }
   ],
   "permissions": [

@@ -102,25 +102,29 @@
       "fieldname": "requested",
       "label": "Requested",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "currency"
     },
     {
       "fieldname": "reserved",
       "label": "Reserved",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "currency"
     },
     {
       "fieldname": "ordered",
       "label": "Ordered",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "currency"
     },
     {
       "fieldname": "contracted",
       "label": "Contracted",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "currency"
     },
     {
       "fieldname": "column_2_4",
@@ -131,25 +135,29 @@
       "fieldname": "accepted",
       "label": "Accepted",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "currency"
     },
     {
       "fieldname": "invoiced",
       "label": "Invoiced",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "currency"
     },
     {
       "fieldname": "paid",
       "label": "Paid",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "currency"
     },
     {
       "fieldname": "available_balance",
       "label": "Available Balance",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "currency"
     },
     {
       "fieldname": "section_3",

@@ -190,19 +190,22 @@
       "fieldname": "source_amount",
       "label": "Source Amount",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "company_currency"
     },
     {
       "fieldname": "eligible_amount",
       "label": "Eligible Amount",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "company_currency"
     },
     {
       "fieldname": "allocated_amount",
       "label": "Allocated Amount",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "company_currency"
     },
     {
       "fieldname": "column_3",
@@ -213,25 +216,29 @@
       "fieldname": "excluded_amount",
       "label": "Excluded Amount",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "company_currency"
     },
     {
       "fieldname": "unallocated_amount",
       "label": "Unallocated Amount",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "company_currency"
     },
     {
       "fieldname": "rounding_difference",
       "label": "Rounding Difference",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "company_currency"
     },
     {
       "fieldname": "eligible_base_amount",
       "label": "Eligible Base Amount",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "company_currency"
     },
     {
       "fieldname": "indirect_rate_applied",
@@ -243,19 +250,22 @@
       "fieldname": "recovery_cap_applied",
       "label": "Recovery Cap Applied",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "company_currency"
     },
     {
       "fieldname": "prior_recovery_amount",
       "label": "Prior Recovery Amount",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "company_currency"
     },
     {
       "fieldname": "adjustment_amount",
       "label": "Adjustment Amount",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "company_currency"
     },
     {
       "fieldname": "rule_snapshot",
@@ -268,7 +278,9 @@
       "fieldname": "donor_currency_total",
       "label": "Donor Currency Total",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "hidden": 1,
+      "print_hide": 1
     },
     {
       "fieldname": "over_budget_entries",

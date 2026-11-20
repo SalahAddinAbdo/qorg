@@ -127,7 +127,8 @@
       "reqd": 1,
       "in_list_view": 1,
       "in_standard_filter": 0,
-      "in_preview": 1
+      "in_preview": 1,
+      "options": "currency"
     },
     {
       "fieldname": "procurement_type",

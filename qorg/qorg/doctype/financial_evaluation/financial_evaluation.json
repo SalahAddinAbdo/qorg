@@ -122,7 +122,8 @@
       "reqd": 1,
       "in_list_view": 0,
       "in_standard_filter": 0,
-      "in_preview": 0
+      "in_preview": 0,
+      "options": "currency"
     },
     {
       "fieldname": "arithmetic_corrections",
@@ -130,7 +131,8 @@
       "fieldtype": "Currency",
       "in_list_view": 0,
       "in_standard_filter": 0,
-      "in_preview": 0
+      "in_preview": 0,
+      "options": "currency"
     },
     {
       "fieldname": "discounts",
@@ -138,7 +140,8 @@
       "fieldtype": "Currency",
       "in_list_view": 0,
       "in_standard_filter": 0,
-      "in_preview": 0
+      "in_preview": 0,
+      "options": "currency"
     },
     {
       "fieldname": "taxes",
@@ -146,7 +149,8 @@
       "fieldtype": "Currency",
       "in_list_view": 0,
       "in_standard_filter": 0,
-      "in_preview": 0
+      "in_preview": 0,
+      "options": "currency"
     },
     {
       "fieldname": "other_evaluated_costs",
@@ -154,7 +158,8 @@
       "fieldtype": "Currency",
       "in_list_view": 0,
       "in_standard_filter": 0,
-      "in_preview": 0
+      "in_preview": 0,
+      "options": "currency"
     },
     {
       "fieldname": "price_column",
@@ -167,7 +172,8 @@
       "reqd": 1,
       "in_list_view": 0,
       "in_standard_filter": 0,
-      "in_preview": 0
+      "in_preview": 0,
+      "options": "currency"
     },
     {
       "fieldname": "lowest_evaluated_price",
@@ -175,7 +181,8 @@
       "fieldtype": "Currency",
       "in_list_view": 0,
       "in_standard_filter": 0,
-      "in_preview": 0
+      "in_preview": 0,
+      "options": "currency"
     },
     {
       "fieldname": "financial_score",

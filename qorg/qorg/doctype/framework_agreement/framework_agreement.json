@@ -107,13 +107,15 @@
       "fieldname": "total_ceiling",
       "label": "Total Ceiling",
       "fieldtype": "Currency",
-      "reqd": 1
+      "reqd": 1,
+      "options": "currency"
     },
     {
       "fieldname": "consumed_amount",
       "label": "Consumed Amount",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "currency"
     },
     {
       "fieldname": "status",

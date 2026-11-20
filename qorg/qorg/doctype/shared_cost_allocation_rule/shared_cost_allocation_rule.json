@@ -361,7 +361,8 @@
       "label": "Total Recovery Cap",
       "fieldtype": "Currency",
       "depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\"",
-      "mandatory_depends_on": null
+      "mandatory_depends_on": null,
+      "options": "Company:company:default_currency"
     },
     {
       "fieldname": "exclude_shared_cost_allocations_from_base",
@@ -466,12 +467,14 @@
     {
       "fieldname": "minimum_source_amount",
       "label": "Minimum Source Amount",
-      "fieldtype": "Currency"
+      "fieldtype": "Currency",
+      "options": "Company:company:default_currency"
     },
     {
       "fieldname": "maximum_run_amount",
       "label": "Maximum Run Amount",
-      "fieldtype": "Currency"
+      "fieldtype": "Currency",
+      "options": "Company:company:default_currency"
     },
     {
       "fieldname": "justification",

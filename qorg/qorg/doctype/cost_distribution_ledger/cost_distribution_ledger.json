@@ -134,19 +134,22 @@
       "fieldname": "original_amount",
       "label": "Original Amount",
       "fieldtype": "Currency",
-      "reqd": 1
+      "reqd": 1,
+      "options": "Company:company:default_currency"
     },
     {
       "fieldname": "distributed_amount",
       "label": "Distributed Amount",
       "fieldtype": "Currency",
-      "reqd": 1
+      "reqd": 1,
+      "options": "Company:company:default_currency"
     },
     {
       "fieldname": "remaining_amount",
       "label": "Remaining Amount",
       "fieldtype": "Currency",
-      "read_only": 1
+      "read_only": 1,
+      "options": "Company:company:default_currency"
     },
     {
       "fieldname": "amount_col",

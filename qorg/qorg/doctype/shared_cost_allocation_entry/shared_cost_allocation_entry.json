@@ -1,250 +1,254 @@
 {
- "actions": [],
- "allow_import": 1,
- "autoname": "hash",
- "doctype": "DocType",
- "engine": "InnoDB",
- "field_order": [
-  "source_reference",
-  "entry_type",
-  "source_gl_entry",
-  "source_voucher_type",
-  "source_voucher",
-  "source_account",
-  "source_cost_center",
-  "source_project",
-  "source_amount",
-  "project",
-  "cost_center",
-  "budget_line",
-  "funding_agreement",
-  "donor",
-  "allocation_percentage",
-  "allocated_amount",
-  "driver_basis",
-  "driver_value",
-  "company_currency",
-  "allocated_company_amount",
-  "donor_currency",
-  "donor_exchange_rate",
-  "allocated_donor_amount",
-  "budget_available_before",
-  "budget_available_after",
-  "budget_status",
-  "eligibility_status",
-  "exception_message",
-  "journal_entry"
- ],
- "fields": [
-  {
-   "fieldname": "source_reference",
-   "label": "Source Reference",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "entry_type",
-   "label": "Entry Type",
-   "fieldtype": "Select",
-   "options": "Source Allocation\nIndirect Recovery\nAdjustment",
-   "default": "Source Allocation",
-   "read_only": 1
-  },
-  {
-   "fieldname": "source_gl_entry",
-   "label": "Source GL Entry",
-   "fieldtype": "Link",
-   "options": "GL Entry",
-   "reqd": 0,
-   "in_list_view": 1,
-   "read_only": 1
-  },
-  {
-   "fieldname": "source_voucher_type",
-   "label": "Source Voucher Type",
-   "fieldtype": "Data",
-   "read_only": 1
-  },
-  {
-   "fieldname": "source_voucher",
-   "label": "Source Voucher",
-   "fieldtype": "Dynamic Link",
-   "options": "source_voucher_type",
-   "read_only": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "source_account",
-   "label": "Source Account",
-   "fieldtype": "Link",
-   "options": "Account",
-   "read_only": 1
-  },
-  {
-   "fieldname": "source_cost_center",
-   "label": "Source Cost Center",
-   "fieldtype": "Link",
-   "options": "Cost Center",
-   "read_only": 1
-  },
-  {
-   "fieldname": "source_project",
-   "label": "Source Project",
-   "fieldtype": "Link",
-   "options": "Project",
-   "read_only": 1
-  },
-  {
-   "fieldname": "source_amount",
-   "label": "Source Amount",
-   "fieldtype": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "project",
-   "label": "Project",
-   "fieldtype": "Link",
-   "options": "Project",
-   "read_only": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "cost_center",
-   "label": "Cost Center",
-   "fieldtype": "Link",
-   "options": "Cost Center",
-   "read_only": 1
-  },
-  {
-   "fieldname": "budget_line",
-   "label": "Budget Line",
-   "fieldtype": "Link",
-   "options": "Budget Line",
-   "read_only": 1
-  },
-  {
-   "fieldname": "funding_agreement",
-   "label": "Funding Agreement",
-   "fieldtype": "Link",
-   "options": "Funding Agreement",
-   "read_only": 1
-  },
-  {
-   "fieldname": "donor",
-   "label": "Donor",
-   "fieldtype": "Link",
-   "options": "Donor",
-   "read_only": 1
-  },
-  {
-   "fieldname": "allocation_percentage",
-   "label": "Allocation Percentage",
-   "fieldtype": "Percent",
-   "read_only": 1
-  },
-  {
-   "fieldname": "allocated_amount",
-   "label": "Allocated Amount",
-   "fieldtype": "Currency",
-   "read_only": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "driver_basis",
-   "label": "Driver Basis",
-   "fieldtype": "Data",
-   "read_only": 1
-  },
-  {
-   "fieldname": "driver_value",
-   "label": "Driver Value",
-   "fieldtype": "Float",
-   "read_only": 1
-  },
-  {
-   "fieldname": "company_currency",
-   "label": "Company Currency",
-   "fieldtype": "Link",
-   "options": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "allocated_company_amount",
-   "label": "Allocated Company Amount",
-   "fieldtype": "Currency",
-   "options": "company_currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "donor_currency",
-   "label": "Donor Currency",
-   "fieldtype": "Link",
-   "options": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "donor_exchange_rate",
-   "label": "Donor Exchange Rate",
-   "fieldtype": "Float",
-   "read_only": 1
-  },
-  {
-   "fieldname": "allocated_donor_amount",
-   "label": "Allocated Donor Amount",
-   "fieldtype": "Currency",
-   "options": "donor_currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "budget_available_before",
-   "label": "Budget Available Before",
-   "fieldtype": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "budget_available_after",
-   "label": "Budget Available After",
-   "fieldtype": "Currency",
-   "read_only": 1
-  },
-  {
-   "fieldname": "budget_status",
-   "label": "Budget Status",
-   "fieldtype": "Select",
-   "options": "Within Budget\nOver Budget\nNot Checked",
-   "read_only": 1
-  },
-  {
-   "fieldname": "eligibility_status",
-   "label": "Eligibility Status",
-   "fieldtype": "Select",
-   "options": "Eligible\nIneligible\nException",
-   "read_only": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "exception_message",
-   "label": "Exception Message",
-   "fieldtype": "Small Text",
-   "read_only": 1
-  },
-  {
-   "fieldname": "journal_entry",
-   "label": "Journal Entry",
-   "fieldtype": "Link",
-   "options": "Journal Entry",
-   "read_only": 1
-  }
- ],
- "index_web_pages_for_search": 1,
- "links": [],
- "module": "QOrg",
- "name": "Shared Cost Allocation Entry",
- "permissions": [],
- "sort_field": "modified",
- "sort_order": "DESC",
- "track_changes": 1,
- "istable": 1,
- "editable_grid": 1
+  "actions": [],
+  "allow_import": 1,
+  "autoname": "hash",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "source_reference",
+    "entry_type",
+    "source_gl_entry",
+    "source_voucher_type",
+    "source_voucher",
+    "source_account",
+    "source_cost_center",
+    "source_project",
+    "source_amount",
+    "project",
+    "cost_center",
+    "budget_line",
+    "funding_agreement",
+    "donor",
+    "allocation_percentage",
+    "allocated_amount",
+    "driver_basis",
+    "driver_value",
+    "company_currency",
+    "allocated_company_amount",
+    "donor_currency",
+    "donor_exchange_rate",
+    "allocated_donor_amount",
+    "budget_available_before",
+    "budget_available_after",
+    "budget_status",
+    "eligibility_status",
+    "exception_message",
+    "journal_entry"
+  ],
+  "fields": [
+    {
+      "fieldname": "source_reference",
+      "label": "Source Reference",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "entry_type",
+      "label": "Entry Type",
+      "fieldtype": "Select",
+      "options": "Source Allocation\nIndirect Recovery\nAdjustment",
+      "default": "Source Allocation",
+      "read_only": 1
+    },
+    {
+      "fieldname": "source_gl_entry",
+      "label": "Source GL Entry",
+      "fieldtype": "Link",
+      "options": "GL Entry",
+      "reqd": 0,
+      "in_list_view": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "source_voucher_type",
+      "label": "Source Voucher Type",
+      "fieldtype": "Data",
+      "read_only": 1
+    },
+    {
+      "fieldname": "source_voucher",
+      "label": "Source Voucher",
+      "fieldtype": "Dynamic Link",
+      "options": "source_voucher_type",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "source_account",
+      "label": "Source Account",
+      "fieldtype": "Link",
+      "options": "Account",
+      "read_only": 1
+    },
+    {
+      "fieldname": "source_cost_center",
+      "label": "Source Cost Center",
+      "fieldtype": "Link",
+      "options": "Cost Center",
+      "read_only": 1
+    },
+    {
+      "fieldname": "source_project",
+      "label": "Source Project",
+      "fieldtype": "Link",
+      "options": "Project",
+      "read_only": 1
+    },
+    {
+      "fieldname": "source_amount",
+      "label": "Source Amount",
+      "fieldtype": "Currency",
+      "read_only": 1,
+      "options": "company_currency"
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "cost_center",
+      "label": "Cost Center",
+      "fieldtype": "Link",
+      "options": "Cost Center",
+      "read_only": 1
+    },
+    {
+      "fieldname": "budget_line",
+      "label": "Budget Line",
+      "fieldtype": "Link",
+      "options": "Budget Line",
+      "read_only": 1
+    },
+    {
+      "fieldname": "funding_agreement",
+      "label": "Funding Agreement",
+      "fieldtype": "Link",
+      "options": "Funding Agreement",
+      "read_only": 1
+    },
+    {
+      "fieldname": "donor",
+      "label": "Donor",
+      "fieldtype": "Link",
+      "options": "Donor",
+      "read_only": 1
+    },
+    {
+      "fieldname": "allocation_percentage",
+      "label": "Allocation Percentage",
+      "fieldtype": "Percent",
+      "read_only": 1
+    },
+    {
+      "fieldname": "allocated_amount",
+      "label": "Allocated Amount",
+      "fieldtype": "Currency",
+      "read_only": 1,
+      "in_list_view": 1,
+      "options": "company_currency"
+    },
+    {
+      "fieldname": "driver_basis",
+      "label": "Driver Basis",
+      "fieldtype": "Data",
+      "read_only": 1
+    },
+    {
+      "fieldname": "driver_value",
+      "label": "Driver Value",
+      "fieldtype": "Float",
+      "read_only": 1
+    },
+    {
+      "fieldname": "company_currency",
+      "label": "Company Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "allocated_company_amount",
+      "label": "Allocated Company Amount",
+      "fieldtype": "Currency",
+      "options": "company_currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "donor_currency",
+      "label": "Donor Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "donor_exchange_rate",
+      "label": "Donor Exchange Rate",
+      "fieldtype": "Float",
+      "read_only": 1
+    },
+    {
+      "fieldname": "allocated_donor_amount",
+      "label": "Allocated Donor Amount",
+      "fieldtype": "Currency",
+      "options": "donor_currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "budget_available_before",
+      "label": "Budget Available Before",
+      "fieldtype": "Currency",
+      "read_only": 1,
+      "options": "company_currency"
+    },
+    {
+      "fieldname": "budget_available_after",
+      "label": "Budget Available After",
+      "fieldtype": "Currency",
+      "read_only": 1,
+      "options": "company_currency"
+    },
+    {
+      "fieldname": "budget_status",
+      "label": "Budget Status",
+      "fieldtype": "Select",
+      "options": "Within Budget\nOver Budget\nNot Checked",
+      "read_only": 1
+    },
+    {
+      "fieldname": "eligibility_status",
+      "label": "Eligibility Status",
+      "fieldtype": "Select",
+      "options": "Eligible\nIneligible\nException",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "exception_message",
+      "label": "Exception Message",
+      "fieldtype": "Small Text",
+      "read_only": 1
+    },
+    {
+      "fieldname": "journal_entry",
+      "label": "Journal Entry",
+      "fieldtype": "Link",
+      "options": "Journal Entry",
+      "read_only": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "module": "QOrg",
+  "name": "Shared Cost Allocation Entry",
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1,
+  "istable": 1,
+  "editable_grid": 1
 }

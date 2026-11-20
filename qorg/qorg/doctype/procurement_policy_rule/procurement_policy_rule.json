@@ -138,7 +138,8 @@
       "reqd": 1,
       "in_list_view": 0,
       "in_standard_filter": 0,
-      "in_preview": 0
+      "in_preview": 0,
+      "options": "currency"
     },
     {
       "fieldname": "maximum_amount",
@@ -146,7 +147,8 @@
       "fieldtype": "Currency",
       "in_list_view": 0,
       "in_standard_filter": 0,
-      "in_preview": 0
+      "in_preview": 0,
+      "options": "currency"
     },
     {
       "fieldname": "procurement_method",
