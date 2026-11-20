@@ -479,3 +479,39 @@ def controlled_cancel_allocation_run(run_name,reason):
     for entry_name in entry_names:
         frappe.db.set_value("Shared Cost Allocation Entry",entry_name,"journal_entry",original_journal,update_modified=False)
     return {"run":run.name,"journal_entry":original_journal,"method":"Controlled Cancellation"}
+
+
+@frappe.whitelist()
+def delete_draft_allocation_journal(run_name, journal_kind="Original"):
+    run=frappe.get_doc("Shared Cost Allocation Run",run_name)
+    run.check_permission("write")
+    if run.docstatus != 1:
+        frappe.throw(_("The allocation run must be submitted before managing its generated draft Journal Entry."))
+    is_reversal = journal_kind == "Reversal"
+    fieldname = "reversal_journal_entry" if is_reversal else "journal_entry"
+    journal_name = run.get(fieldname)
+    if not journal_name:
+        frappe.throw(_("No draft Journal Entry is linked in {0}.").format(fieldname))
+    journal = frappe.get_doc("Journal Entry",journal_name)
+    journal.check_permission("delete")
+    if journal.docstatus != 0:
+        frappe.throw(_("Only a draft Journal Entry can be deleted. Submitted entries must be cancelled or reversed according to Company policy."))
+
+    entry_names = frappe.get_all(
+        "Shared Cost Allocation Entry",
+        filters={"parent": run.name, "parenttype": "Shared Cost Allocation Run"},
+        pluck="name",
+    )
+    frappe.db.set_value("Shared Cost Allocation Run",run.name,fieldname,None,update_modified=False)
+    if not is_reversal:
+        for entry_name in entry_names:
+            frappe.db.set_value("Shared Cost Allocation Entry",entry_name,"journal_entry",None,update_modified=False)
+    journal.flags.ignore_links=True
+    frappe.delete_doc("Journal Entry",journal.name,ignore_permissions=False,force=True)
+
+    if is_reversal:
+        values={"run_status":"Posted","reconciliation_status":"Matched"}
+    else:
+        values={"run_status":"Approved","reconciliation_status":"Pending"}
+    frappe.db.set_value("Shared Cost Allocation Run",run.name,values,update_modified=False)
+    return {"run":run.name,"deleted_journal_entry":journal_name,"journal_kind":journal_kind}

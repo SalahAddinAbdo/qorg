@@ -1,6 +1,8 @@
 frappe.ui.form.on("Shared Cost Allocation Run",{
  setup(frm){set_run_queries(frm);},refresh(frm){set_run_queries(frm);if(frm.doc.docstatus===0)frm.add_custom_button(__("Refresh Preview"),()=>frm.save());  if(frm.doc.journal_entry)frm.add_custom_button(__("Open Journal Entry"),()=>frappe.set_route("Form","Journal Entry",frm.doc.journal_entry),__("Accounting"));
   if(frm.doc.reversal_journal_entry)frm.add_custom_button(__("Open Reversal Journal Entry"),()=>frappe.set_route("Form","Journal Entry",frm.doc.reversal_journal_entry),__("Accounting"));
+  if(frm.doc.journal_entry&&frm.doc.run_status==="Journal Draft Created")frm.add_custom_button(__("Delete Draft Journal Entry"),()=>delete_draft_journal(frm,"Original"),__("Accounting"));
+  if(frm.doc.reversal_journal_entry&&frm.doc.run_status==="Reversal Draft Created")frm.add_custom_button(__("Delete Draft Reversal Entry"),()=>delete_draft_journal(frm,"Reversal"),__("Accounting"));
   if(frm.doc.docstatus===1&&frm.doc.run_status==="Posted")frm.add_custom_button(__("Rollback Allocation"),()=>open_rollback_dialog(frm),__("Accounting"));},
  allocation_rule(frm){clear_run_rule_dependents(frm);if(frm.doc.allocation_rule)load_rule_defaults(frm);set_run_queries(frm);},
  run_type(frm){if(frm.doc.run_type!=="Adjustment"){frm.set_value("adjustment_of",null);frm.set_value("adjustment_reason",null);frm.set_value("donor_approval_reference",null);}set_run_queries(frm);},
@@ -37,4 +39,14 @@ function open_rollback_dialog(frm){
    frappe.call({method,args,freeze:true,callback:res=>{d.hide();if(v.method==="Reversal Entry")frappe.set_route("Form","Journal Entry",res.message);else frappe.set_route("Form","Shared Cost Allocation Run",frm.doc.name);}});
   }});d.show();
  }});
+}
+
+function delete_draft_journal(frm,journal_kind){
+ const label=journal_kind==="Reversal"?__("draft reversal Journal Entry"):__("draft Journal Entry");
+ frappe.confirm(__("Delete the linked {0}? This is allowed only while the Journal Entry is still Draft.",[label]),()=>frappe.prompt([
+  {fieldname:"confirmation",label:__("Type DELETE to confirm"),fieldtype:"Data",reqd:1}
+ ],v=>{
+  if((v.confirmation||"").trim().toUpperCase()!=="DELETE"){frappe.msgprint(__("Confirmation text must be DELETE."));return;}
+  frappe.call({method:"qorg.qorg.shared_cost_allocation.engine.delete_draft_allocation_journal",args:{run_name:frm.doc.name,journal_kind},freeze:true,callback:r=>{frappe.show_alert({message:__("Draft Journal Entry deleted."),indicator:"green"});frm.reload_doc();}});
+ },__("Delete Draft Journal Entry"),__("Delete")));
 }
