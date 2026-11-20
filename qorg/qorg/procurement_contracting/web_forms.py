@@ -2,6 +2,12 @@ from __future__ import annotations
 
 import frappe
 
+from qorg.qorg.enterprise_foundation.web_form_preservation import preserve_existing_web_form
+from qorg.qorg.enterprise_foundation.web_form_field_sync import (
+    set_if_supported,
+    synchronize_web_form_field,
+)
+
 from qorg.qorg.people_and_opportunities.web_form_policy import apply_managed_web_form_settings
 from qorg.qorg.enterprise_foundation.idempotent_provisioning import (
     normalized_document_state,
@@ -94,8 +100,7 @@ WEB_FORMS = [
 
 
 def _set(row, meta, fieldname, value):
-    if meta.has_field(fieldname):
-        row.set(fieldname, value)
+    set_if_supported(row, meta, fieldname, value)
 
 
 def _apply_settings(doc, definition):
@@ -155,18 +160,7 @@ def _rebuild_fields(doc, definition):
         target = target_meta.get_field(item["fieldname"])
         if not target:
             frappe.throw(f"Missing field {definition['doc_type']}.{item['fieldname']}")
-        _set(row, child_meta, "fieldname", target.fieldname)
-        _set(row, child_meta, "fieldtype", target.fieldtype)
-        _set(row, child_meta, "label", item.get("label") or target.label)
-        _set(row, child_meta, "options", target.options)
-        _set(row, child_meta, "description", target.description)
-        # Frappe Web Form Field uses reqd. Keep req compatibility only when present.
-        required = int(bool(item.get("required") or target.reqd))
-        _set(row, child_meta, "reqd", required)
-        _set(row, child_meta, "req", required)
-        _set(row, child_meta, "read_only", int(bool(item.get("read_only") or target.read_only)))
-        if target.fieldtype == "Link":
-            _set(row, child_meta, "allow_read_on_all_link_options", 1)
+        synchronize_web_form_field(row, child_meta, target, item)
 
 
 def provision_procurement_web_forms():
@@ -175,11 +169,13 @@ def provision_procurement_web_forms():
     for definition in WEB_FORMS:
         name = frappe.db.get_value("Web Form", {"route": definition["route"]}, "name")
         doc = frappe.get_doc("Web Form", name) if name else frappe.new_doc("Web Form")
-        before_state = normalized_document_state(doc) if name else None
+        if name:
+            before_state = normalized_document_state(doc)
+            preserve_existing_web_form(doc, definition.get("managed_version"))
+            save_document_if_changed(doc, before_state)
+            continue
+
         _apply_settings(doc, definition)
         _rebuild_fields(doc, definition)
-        if name:
-            save_document_if_changed(doc, before_state)
-        else:
-            doc.insert(ignore_permissions=True)
+        doc.insert(ignore_permissions=True)
     frappe.clear_cache(doctype="Web Form")

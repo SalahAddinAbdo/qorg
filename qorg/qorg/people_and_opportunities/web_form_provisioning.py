@@ -11,6 +11,11 @@ from qorg.qorg.enterprise_foundation.idempotent_provisioning import (
 )
 
 from qorg.qorg.people_and_opportunities.web_form_definitions import WEB_FORMS
+from qorg.qorg.enterprise_foundation.web_form_preservation import preserve_existing_web_form
+from qorg.qorg.enterprise_foundation.web_form_field_sync import (
+    set_if_supported,
+    synchronize_web_form_field,
+)
 from qorg.qorg.people_and_opportunities.web_form_grid_policies import (
     provision_external_profile_grid_policies,
 )
@@ -21,7 +26,7 @@ LAYOUT_TYPES = {"Page Break", "Section Break", "Column Break"}
 def provision_standard_opportunity_web_forms():
     _create_custom_fields_if_changed()
     provision_external_profile_grid_policies()
-    result = {"created": [], "updated": []}
+    result = {"created": [], "updated": [], "preserved": []}
     for definition in WEB_FORMS:
         if frappe.db.exists("DocType", definition["doc_type"]):
             _provision_one(definition, result)
@@ -40,17 +45,19 @@ def _create_custom_fields_if_changed():
 def _provision_one(definition, result):
     name = frappe.db.get_value("Web Form", {"route": definition["route"]}, "name")
     doc = frappe.get_doc("Web Form", name) if name else frappe.new_doc("Web Form")
-    before_state = normalized_document_state(doc) if name else None
+    if name:
+        before_state = normalized_document_state(doc)
+        preserve_existing_web_form(doc, definition.get("managed_version"))
+        if save_document_if_changed(doc, before_state):
+            result["preserved"].append(definition["route"])
+        return
+
     _apply_settings(doc, definition)
     _rebuild_fields(doc, definition)
     if doc.meta.has_field("client_script"):
         doc.client_script = ""
-    if name:
-        if save_document_if_changed(doc, before_state):
-            result["updated"].append(definition["route"])
-    else:
-        doc.insert(ignore_permissions=True)
-        result["created"].append(definition["route"])
+    doc.insert(ignore_permissions=True)
+    result["created"].append(definition["route"])
 
 
 def _apply_settings(doc, definition):
@@ -108,17 +115,7 @@ def _rebuild_fields(doc, definition):
             frappe.throw(
                 f"{definition['doc_type']} is missing managed field {item['fieldname']}"
             )
-        _set(row, child_meta, "fieldname", target.fieldname)
-        _set(row, child_meta, "fieldtype", target.fieldtype)
-        _set(row, child_meta, "label", item.get("label") or target.label or target.fieldname)
-        _set(row, child_meta, "options", target.options)
-        _set(row, child_meta, "description", target.description)
-        _set(row, child_meta, "reqd", int(item.get("required", False)))
-        _set(row, child_meta, "read_only", int(item.get("read_only", False)))
-        if target.fieldtype == "Link":
-            _set(row, child_meta, "allow_read_on_all_link_options", 1)
-
+        synchronize_web_form_field(row, child_meta, target, item)
 
 def _set(row, meta, fieldname, value):
-    if meta.has_field(fieldname):
-        row.set(fieldname, value)
+    set_if_supported(row, meta, fieldname, value)
