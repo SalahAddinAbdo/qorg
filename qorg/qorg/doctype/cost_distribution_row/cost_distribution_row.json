@@ -58,7 +58,7 @@
  "fields": [
   {
    "fieldname": "source_section",
-   "label": "Source",
+   "label": "Source Summary",
    "fieldtype": "Section Break",
    "in_list_view": 0
   },
@@ -68,7 +68,8 @@
    "fieldtype": "Link",
    "options": "DocType",
    "read_only": 1,
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "source_child_doctype",
@@ -76,21 +77,24 @@
    "fieldtype": "Link",
    "options": "DocType",
    "read_only": 1,
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "source_row",
    "label": "Source Row",
    "fieldtype": "Data",
    "read_only": 1,
-   "in_list_view": 1
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "source_key",
    "label": "Source Key",
    "fieldtype": "Data",
    "read_only": 1,
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "upstream_source_doctype",
@@ -98,7 +102,8 @@
    "fieldtype": "Link",
    "options": "DocType",
    "read_only": 1,
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "upstream_source_document",
@@ -106,21 +111,24 @@
    "fieldtype": "Dynamic Link",
    "options": "upstream_source_doctype",
    "read_only": 1,
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "upstream_source_row",
    "label": "Upstream Source Row",
    "fieldtype": "Data",
    "read_only": 1,
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "source_row_idx",
    "label": "Source Row #",
    "fieldtype": "Int",
    "read_only": 1,
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "source_col_1",
@@ -142,7 +150,8 @@
    "fieldtype": "Link",
    "options": "Account",
    "read_only": 1,
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "source_description",
@@ -162,27 +171,30 @@
    "label": "Source Quantity",
    "fieldtype": "Float",
    "read_only": 1,
-   "in_list_view": 0
+   "in_list_view": 1
   },
   {
    "fieldname": "source_amount",
    "label": "Source Amount",
    "fieldtype": "Currency",
    "read_only": 1,
-   "in_list_view": 0
+   "in_list_view": 1
   },
   {
    "fieldname": "source_base_amount",
    "label": "Source Base Amount",
    "fieldtype": "Currency",
    "read_only": 1,
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "source_snapshot_section",
    "label": "Source Snapshot",
    "fieldtype": "Section Break",
-   "collapsible": 1
+   "collapsible": 1,
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "source_snapshot",
@@ -190,13 +202,15 @@
    "fieldtype": "Code",
    "options": "JSON",
    "read_only": 1,
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "profile_section",
    "label": "Profile",
    "fieldtype": "Section Break",
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "allocation_profile",
@@ -204,14 +218,16 @@
    "fieldtype": "Link",
    "options": "Cost Distribution Profile",
    "read_only": 1,
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "profile_version",
    "label": "Profile Version",
    "fieldtype": "Data",
    "read_only": 1,
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "distribution_source",
@@ -219,11 +235,12 @@
    "fieldtype": "Select",
    "options": "Auto Applied\nTransferred\nManually Selected\nManually Adjusted",
    "read_only": 1,
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "target_section",
-   "label": "Target Dimensions",
+   "label": "Distribution Destination",
    "fieldtype": "Section Break",
    "in_list_view": 0
   },
@@ -279,7 +296,7 @@
   },
   {
    "fieldname": "amount_section",
-   "label": "Distribution Amount",
+   "label": "Distribution Value",
    "fieldtype": "Section Break",
    "in_list_view": 0
   },
@@ -293,7 +310,7 @@
    "fieldname": "allocated_quantity",
    "label": "Allocated Quantity",
    "fieldtype": "Float",
-   "in_list_view": 1
+   "in_list_view": 0
   },
   {
    "fieldname": "allocated_amount",
@@ -307,7 +324,8 @@
    "label": "Base Amount",
    "fieldtype": "Currency",
    "read_only": 1,
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "amount_col_1",
@@ -320,26 +338,30 @@
    "label": "Currency",
    "fieldtype": "Link",
    "options": "Currency",
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "exchange_rate",
    "label": "Exchange Rate",
    "fieldtype": "Float",
    "precision": "9",
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "effective_date",
    "label": "Effective Date",
    "fieldtype": "Date",
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "control_section",
-   "label": "Controls and Validation",
+   "label": "Adjustment and Evidence",
    "fieldtype": "Section Break",
-   "in_list_view": 0
+   "in_list_view": 0,
+   "collapsible": 1
   },
   {
    "fieldname": "eligibility_status",
@@ -348,7 +370,8 @@
    "options": "Pending\nEligible\nIneligible\nOverride Approved",
    "default": "Pending",
    "read_only": 1,
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "manual_override",
@@ -363,7 +386,8 @@
    "fieldtype": "Check",
    "default": "0",
    "allow_on_submit": 1,
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "control_col_1",
@@ -376,7 +400,8 @@
    "label": "Validation Message",
    "fieldtype": "Small Text",
    "read_only": 1,
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "override_reason",
@@ -398,7 +423,8 @@
    "default": "0",
    "allow_on_submit": 1,
    "print_hide": 1,
-   "in_list_view": 0
+   "in_list_view": 0,
+   "hidden": 1
   }
  ],
  "index_web_pages_for_search": 1,

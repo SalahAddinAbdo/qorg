@@ -81,8 +81,8 @@ def definitions():
   elif row.get('fieldname') == 'custom_recipient_type':
    row['mandatory_depends_on'] = 'eval:doc.material_request_type == "Material Issue"'
   elif row.get('fieldname') == 'custom_recipient_employee':
-   row['depends_on'] = 'eval:doc.custom_recipient_type == "Employee"'
-   row['mandatory_depends_on'] = 'eval:doc.custom_recipient_type == "Employee"'
+   row['depends_on'] = 'eval:doc.material_request_type == "Material Issue" && doc.custom_recipient_type == "Employee"'
+   row['mandatory_depends_on'] = 'eval:doc.material_request_type == "Material Issue" && doc.custom_recipient_type == "Employee"' 
   elif row.get('fieldname') == 'custom_required_delivery_date':
    row['depends_on'] = 'eval:["Project Activity","Beneficiary Distribution","Field Location","Partner Handover","Transfer","External Delivery"].includes(doc.custom_issue_usage_type)'
   elif row.get('fieldname') == 'custom_return_expected':
@@ -90,6 +90,20 @@ def definitions():
   elif row.get('fieldname') == 'custom_expected_return_date':
    row['depends_on'] = 'eval:doc.custom_return_expected == 1'
    row['mandatory_depends_on'] = 'eval:doc.custom_return_expected == 1'
+
+
+ # Material Request issue fields must never leak into Purchase or other request types.
+ for row in out.get('Material Request', []):
+  if row.get('fieldname') in ('custom_issue_usage_type', 'custom_issue_purpose', 'custom_workplan_activity', 'custom_delivery_location', 'custom_recipient_type', 'custom_recipient_employee', 'custom_required_delivery_date', 'custom_return_expected', 'custom_expected_return_date', 'custom_issue_status'):
+   existing = row.get('depends_on')
+   issue_gate = 'doc.material_request_type == "Material Issue"'
+   if existing and existing.startswith('eval:') and issue_gate not in existing:
+    row['depends_on'] = 'eval:' + issue_gate + ' && (' + existing[5:] + ')'
+   elif not existing:
+    row['depends_on'] = 'eval:' + issue_gate
+   mandatory = row.get('mandatory_depends_on')
+   if mandatory and mandatory.startswith('eval:') and issue_gate not in mandatory:
+    row['mandatory_depends_on'] = 'eval:' + issue_gate + ' && (' + mandatory[5:] + ')'
 
  # Transport and arrival data on the standard Purchase Receipt.
  add(out,'Purchase Receipt',[
