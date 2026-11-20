@@ -5,16 +5,25 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "transaction_section",
   "document_type",
   "transaction_subtype",
   "stock_entry_purpose",
+  "transaction_col_2",
+  "active",
   "auto_apply",
   "transfer_to_next_document",
+  "override_section",
   "allow_manual_override",
-  "require_override_approval",
-  "active"
+  "override_col_2",
+  "require_override_approval"
  ],
  "fields": [
+  {
+   "fieldname": "transaction_section",
+   "label": "Transaction Scope",
+   "fieldtype": "Section Break"
+  },
   {
    "fieldname": "document_type",
    "label": "Document Type",
@@ -36,6 +45,18 @@
    "options": "\nMaterial Issue\nMaterial Transfer\nMaterial Receipt\nMaterial Transfer for Manufacture\nMaterial Consumption for Manufacture\nManufacture\nRepack\nSend to Subcontractor"
   },
   {
+   "fieldname": "transaction_col_2",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "active",
+   "label": "Active",
+   "fieldtype": "Check",
+   "default": "1",
+   "in_list_view": 1
+  },
+  {
    "fieldname": "auto_apply",
    "label": "Auto Apply",
    "fieldtype": "Check",
@@ -50,23 +71,26 @@
    "in_list_view": 1
   },
   {
+   "fieldname": "override_section",
+   "label": "Override Policy",
+   "fieldtype": "Section Break"
+  },
+  {
    "fieldname": "allow_manual_override",
    "label": "Allow Manual Override",
    "fieldtype": "Check",
    "default": "1"
   },
   {
+   "fieldname": "override_col_2",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "require_override_approval",
    "label": "Require Override Approval",
    "fieldtype": "Check",
    "default": "0"
-  },
-  {
-   "fieldname": "active",
-   "label": "Active",
-   "fieldtype": "Check",
-   "default": "1",
-   "in_list_view": 1
   }
  ],
  "index_web_pages_for_search": 1,

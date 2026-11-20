@@ -6,8 +6,6 @@ from frappe.utils import flt, getdate
 
 class CostDistributionProfile(Document):
     def validate(self):
-        if self.docstatus == 0:
-            self.status = "Draft"
         if self.effective_to and getdate(self.effective_to) < getdate(self.effective_from):
             frappe.throw(_("Effective To cannot be before Effective From."))
         if not any(row.active for row in self.transaction_types):

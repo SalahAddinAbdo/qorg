@@ -5,35 +5,48 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "source_tab",
   "source_section",
   "company",
   "source_doctype",
   "source_document",
+  "source_col_2",
   "source_child_doctype",
   "source_row",
   "source_gl_entry",
+  "source_col_3",
   "source_hash",
+  "status",
+  "allocation_tab",
   "amount_section",
   "original_amount",
   "distributed_amount",
   "remaining_amount",
-  "status",
   "amount_col",
   "allocation_mode",
   "allocation_profile",
   "profile_version",
+  "amount_col_3",
   "distribution_document_type",
   "distribution_document",
+  "accounting_section",
   "journal_entry",
   "reversal_reference",
+  "audit_tab",
   "details_section",
   "target_snapshot",
+  "remarks_section",
   "remarks"
  ],
  "fields": [
   {
-   "fieldname": "source_section",
+   "fieldname": "source_tab",
    "label": "Source",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "source_section",
+   "label": "Source Document",
    "fieldtype": "Section Break"
   },
   {
@@ -61,6 +74,11 @@
    "in_list_view": 1
   },
   {
+   "fieldname": "source_col_2",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "source_child_doctype",
    "label": "Source Row Type",
    "fieldtype": "Link",
@@ -79,6 +97,11 @@
    "options": "GL Entry"
   },
   {
+   "fieldname": "source_col_3",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "source_hash",
    "label": "Source Hash",
    "fieldtype": "Data",
@@ -86,8 +109,22 @@
    "unique": 1
   },
   {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Draft\nActive\nCancelled\nReversed",
+   "default": "Draft",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "allocation_tab",
+   "label": "Allocation",
+   "fieldtype": "Tab Break"
+  },
+  {
    "fieldname": "amount_section",
-   "label": "Amounts",
+   "label": "Amounts and Allocation",
    "fieldtype": "Section Break"
   },
   {
@@ -107,15 +144,6 @@
    "label": "Remaining Amount",
    "fieldtype": "Currency",
    "read_only": 1
-  },
-  {
-   "fieldname": "status",
-   "label": "Status",
-   "fieldtype": "Select",
-   "options": "Draft\nActive\nCancelled\nReversed",
-   "default": "Draft",
-   "reqd": 1,
-   "in_list_view": 1
   },
   {
    "fieldname": "amount_col",
@@ -141,6 +169,11 @@
    "fieldtype": "Data"
   },
   {
+   "fieldname": "amount_col_3",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "distribution_document_type",
    "label": "Distribution Document Type",
    "fieldtype": "Link",
@@ -151,6 +184,11 @@
    "label": "Distribution Document",
    "fieldtype": "Dynamic Link",
    "options": "distribution_document_type"
+  },
+  {
+   "fieldname": "accounting_section",
+   "label": "Accounting and Reversal",
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "journal_entry",
@@ -164,6 +202,11 @@
    "fieldtype": "Data"
   },
   {
+   "fieldname": "audit_tab",
+   "label": "Audit Snapshot",
+   "fieldtype": "Tab Break"
+  },
+  {
    "fieldname": "details_section",
    "label": "Target Snapshot",
    "fieldtype": "Section Break"
@@ -174,6 +217,11 @@
    "fieldtype": "Code",
    "options": "JSON",
    "read_only": 1
+  },
+  {
+   "fieldname": "remarks_section",
+   "label": "Remarks",
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "remarks",

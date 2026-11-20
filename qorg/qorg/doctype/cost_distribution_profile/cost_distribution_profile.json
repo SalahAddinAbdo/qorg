@@ -17,10 +17,10 @@
   "effective_section",
   "effective_from",
   "effective_to",
-  "effective_col",
-  "supersedes_profile",
-  "change_type",
   "change_effective_date",
+  "effective_col",
+  "change_type",
+  "supersedes_profile",
   "scope_tab",
   "scope_section",
   "match_basis",
@@ -60,6 +60,7 @@
   "difference_handling",
   "description_section",
   "description",
+  "workflow_section",
   "workflow_state"
  ],
  "fields": [
@@ -108,9 +109,7 @@
    "options": "Draft\nActive\nInactive\nSuperseded\nCancelled",
    "default": "Draft",
    "reqd": 1,
-   "in_list_view": 1,
-   "read_only": 1,
-   "allow_on_submit": 1
+   "in_list_view": 1
   },
   {
    "fieldname": "priority",
@@ -128,7 +127,7 @@
   },
   {
    "fieldname": "effective_section",
-   "label": "Effective Period",
+   "label": "Effective Period and Change",
    "fieldtype": "Section Break"
   },
   {
@@ -144,16 +143,14 @@
    "fieldtype": "Date"
   },
   {
+   "fieldname": "change_effective_date",
+   "label": "Change Effective Date",
+   "fieldtype": "Date"
+  },
+  {
    "fieldname": "effective_col",
    "label": "",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "supersedes_profile",
-   "label": "Supersedes Profile",
-   "fieldtype": "Link",
-   "options": "Cost Distribution Profile",
-   "read_only": 1
   },
   {
    "fieldname": "change_type",
@@ -163,9 +160,11 @@
    "default": "Initial Profile"
   },
   {
-   "fieldname": "change_effective_date",
-   "label": "Change Effective Date",
-   "fieldtype": "Date"
+   "fieldname": "supersedes_profile",
+   "label": "Supersedes Profile",
+   "fieldtype": "Link",
+   "options": "Cost Distribution Profile",
+   "read_only": 1
   },
   {
    "fieldname": "scope_tab",
@@ -262,7 +261,7 @@
   },
   {
    "fieldname": "method_section",
-   "label": "Distribution Method",
+   "label": "Distribution Method and Controls",
    "fieldtype": "Section Break"
   },
   {
@@ -345,7 +344,7 @@
   },
   {
    "fieldname": "accounting_section",
-   "label": "Amount and Currency Rules",
+   "label": "Amount, Tax and Currency Rules",
    "fieldtype": "Section Break"
   },
   {
@@ -396,13 +395,18 @@
   },
   {
    "fieldname": "description_section",
-   "label": "Description and Audit",
+   "label": "Description and Workflow",
    "fieldtype": "Section Break"
   },
   {
    "fieldname": "description",
    "label": "Description",
    "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "workflow_section",
+   "label": "Workflow",
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "workflow_state",
@@ -427,10 +431,7 @@
    "report": 1,
    "role": "Accounts Manager",
    "share": 1,
-   "write": 1,
-   "submit": 1,
-   "cancel": 1,
-   "amend": 1
+   "write": 1
   },
   {
    "create": 1,
@@ -441,18 +442,12 @@
    "report": 1,
    "role": "Projects Manager",
    "share": 1,
-   "write": 1,
-   "submit": 1,
-   "cancel": 1,
-   "amend": 1
+   "write": 1
   },
   {
    "read": 1,
    "report": 1,
-   "role": "Accounts User",
-   "submit": 0,
-   "cancel": 0,
-   "amend": 0
+   "role": "Accounts User"
   }
  ],
  "row_format": "Dynamic",

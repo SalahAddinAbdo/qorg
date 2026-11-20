@@ -6,39 +6,66 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "details_tab",
+  "identity_section",
   "naming_series",
   "company",
   "accrual_type",
+  "identity_col_2",
   "posting_date",
   "period_start",
   "period_end",
+  "identity_col_3",
   "currency",
   "exchange_rate",
   "operating_unit",
+  "classification_section",
   "programme",
   "source_request_doctype",
   "source_request",
+  "classification_col_2",
   "procurement_treatment",
   "payment_status",
   "operational_status",
+  "classification_col_3",
   "workflow_state",
+  "source_hash",
+  "description_section",
   "description",
+  "lines_tab",
   "lines_section",
   "lines",
+  "distribution_tab",
   "distribution_section",
   "cost_distributions",
+  "accounting_tab",
+  "totals_section",
   "total_gross_amount",
+  "totals_col_2",
   "total_deductions",
+  "totals_col_3",
   "total_net_payable",
   "supporting_documents_section",
   "supporting_documents",
+  "journal_section",
   "journal_entry",
-  "source_hash",
   "journal_created_on",
+  "journal_col_2",
   "journal_created_by",
+  "remarks_section",
   "remarks"
  ],
  "fields": [
+  {
+   "fieldname": "details_tab",
+   "label": "Details",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "identity_section",
+   "label": "Accrual Identity",
+   "fieldtype": "Section Break"
+  },
   {
    "fieldname": "naming_series",
    "label": "Series",
@@ -64,6 +91,11 @@
    "in_list_view": 1
   },
   {
+   "fieldname": "identity_col_2",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "posting_date",
    "label": "Posting Date",
    "fieldtype": "Date",
@@ -81,6 +113,11 @@
    "label": "Period End",
    "fieldtype": "Date",
    "reqd": 1
+  },
+  {
+   "fieldname": "identity_col_3",
+   "label": "",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "currency",
@@ -102,6 +139,11 @@
    "fieldtype": "Data"
   },
   {
+   "fieldname": "classification_section",
+   "label": "Classification and Source",
+   "fieldtype": "Section Break"
+  },
+  {
    "fieldname": "programme",
    "label": "Programme",
    "fieldtype": "Data"
@@ -117,6 +159,11 @@
    "label": "Source Request",
    "fieldtype": "Dynamic Link",
    "options": "source_request_doctype"
+  },
+  {
+   "fieldname": "classification_col_2",
+   "label": "",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "procurement_treatment",
@@ -143,6 +190,11 @@
    "in_list_view": 1
   },
   {
+   "fieldname": "classification_col_3",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "workflow_state",
    "label": "Workflow State",
    "fieldtype": "Link",
@@ -150,9 +202,26 @@
    "allow_on_submit": 1
   },
   {
+   "fieldname": "source_hash",
+   "label": "Source Hash",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "description_section",
+   "label": "Description",
+   "fieldtype": "Section Break"
+  },
+  {
    "fieldname": "description",
    "label": "Description",
    "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "lines_tab",
+   "label": "Accrual Lines",
+   "fieldtype": "Tab Break"
   },
   {
    "fieldname": "lines_section",
@@ -168,6 +237,11 @@
    "reqd": 1
   },
   {
+   "fieldname": "distribution_tab",
+   "label": "Cost Distribution",
+   "fieldtype": "Tab Break"
+  },
+  {
    "fieldname": "distribution_section",
    "label": "Cost Distribution",
    "fieldtype": "Section Break",
@@ -181,16 +255,36 @@
    "options": "Cost Distribution Row"
   },
   {
+   "fieldname": "accounting_tab",
+   "label": "Accounting and Evidence",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "totals_section",
+   "label": "Totals",
+   "fieldtype": "Section Break"
+  },
+  {
    "fieldname": "total_gross_amount",
    "label": "Total Gross Amount",
    "fieldtype": "Currency",
    "read_only": 1
   },
   {
+   "fieldname": "totals_col_2",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "total_deductions",
    "label": "Total Deductions",
    "fieldtype": "Currency",
    "read_only": 1
+  },
+  {
+   "fieldname": "totals_col_3",
+   "label": "",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "total_net_payable",
@@ -211,18 +305,16 @@
    "options": "Supporting Document Row"
   },
   {
+   "fieldname": "journal_section",
+   "label": "Journal Entry and Audit",
+   "fieldtype": "Section Break"
+  },
+  {
    "fieldname": "journal_entry",
    "label": "Journal Entry",
    "fieldtype": "Link",
    "options": "Journal Entry",
    "read_only": 1
-  },
-  {
-   "fieldname": "source_hash",
-   "label": "Source Hash",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "hidden": 1
   },
   {
    "fieldname": "journal_created_on",
@@ -231,11 +323,21 @@
    "read_only": 1
   },
   {
+   "fieldname": "journal_col_2",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "journal_created_by",
    "label": "Journal Created By",
    "fieldtype": "Link",
    "options": "User",
    "read_only": 1
+  },
+  {
+   "fieldname": "remarks_section",
+   "label": "Remarks",
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "remarks",

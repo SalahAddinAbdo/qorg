@@ -6,55 +6,75 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "beneficiary_section",
   "external_person",
   "beneficiary_type",
+  "beneficiary_name",
+  "beneficiary_col_2",
   "volunteer_profile",
+  "employee",
+  "supplier",
+  "beneficiary_col_3",
+  "site",
   "site_code",
   "identity_number",
   "mobile_number",
-  "daily_rate",
-  "period_rate",
-  "currency",
-  "base_amount",
-  "donor",
-  "department",
-  "supervisor",
-  "reference_number",
-  "eligibility_status",
-  "exception_reason",
-  "supplier",
-  "employee",
-  "beneficiary_name",
-  "site",
+  "service_section",
   "service_item",
   "service_description",
   "quantity",
   "uom",
+  "service_col_2",
   "number_of_days",
+  "daily_rate",
+  "period_rate",
   "rate",
+  "service_col_3",
+  "currency",
+  "base_amount",
+  "reference_number",
+  "amounts_section",
   "gross_amount",
   "deduction",
   "tax_withheld",
   "net_payable",
+  "amounts_col_2",
   "expense_account",
   "payable_account",
   "allocation_treatment",
+  "amounts_col_3",
+  "donor",
+  "department",
+  "supervisor",
+  "allocation_section",
   "project",
   "cost_center",
   "budget_line",
+  "allocation_col_2",
   "funding_agreement",
   "contract_or_agreement",
   "procurement_process",
+  "allocation_col_3",
   "service_acceptance",
   "attendance_reference",
+  "eligibility_status",
+  "exception_reason",
+  "evidence_section",
   "supporting_document_type",
   "supporting_document",
   "verification_status",
-  "verification_notes",
+  "evidence_col_2",
   "include",
-  "page_break"
+  "page_break",
+  "verification_notes_section",
+  "verification_notes"
  ],
  "fields": [
+  {
+   "fieldname": "beneficiary_section",
+   "label": "Payee and Beneficiary",
+   "fieldtype": "Section Break"
+  },
   {
    "fieldname": "external_person",
    "label": "Payee / Beneficiary",
@@ -71,11 +91,48 @@
    "in_list_view": 1
   },
   {
+   "fieldname": "beneficiary_name",
+   "label": "Payee Name",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "beneficiary_col_2",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "volunteer_profile",
    "label": "Volunteer Profile",
    "fieldtype": "Link",
    "options": "Volunteer Profile",
    "in_list_view": 0
+  },
+  {
+   "fieldname": "employee",
+   "label": "Employee",
+   "fieldtype": "Link",
+   "options": "Employee",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "supplier",
+   "label": "Supplier",
+   "fieldtype": "Link",
+   "options": "Supplier",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "beneficiary_col_3",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "site",
+   "label": "Site / Location",
+   "fieldtype": "Data",
+   "in_list_view": 1
   },
   {
    "fieldname": "site_code",
@@ -98,100 +155,9 @@
    "in_list_view": 0
   },
   {
-   "fieldname": "daily_rate",
-   "label": "Daily Rate",
-   "fieldtype": "Currency",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "period_rate",
-   "label": "Period Rate",
-   "fieldtype": "Currency",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "currency",
-   "label": "Currency",
-   "fieldtype": "Link",
-   "options": "Currency",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "base_amount",
-   "label": "Base Amount",
-   "fieldtype": "Currency",
-   "read_only": 1,
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "donor",
-   "label": "Donor",
-   "fieldtype": "Link",
-   "options": "Donor",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "department",
-   "label": "Department",
-   "fieldtype": "Link",
-   "options": "Department",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "supervisor",
-   "label": "Supervisor",
-   "fieldtype": "Link",
-   "options": "Employee",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "reference_number",
-   "label": "Reference Number",
-   "fieldtype": "Data",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "eligibility_status",
-   "label": "Eligibility Status",
-   "fieldtype": "Select",
-   "options": "Pending\nEligible\nIneligible\nOverride Approved",
-   "default": "Pending",
-   "read_only": 1,
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "exception_reason",
-   "label": "Exception Reason",
-   "fieldtype": "Small Text",
-   "read_only": 1,
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "supplier",
-   "label": "Supplier",
-   "fieldtype": "Link",
-   "options": "Supplier",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "employee",
-   "label": "Employee",
-   "fieldtype": "Link",
-   "options": "Employee",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "beneficiary_name",
-   "label": "Payee Name",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "site",
-   "label": "Site / Location",
-   "fieldtype": "Data",
-   "in_list_view": 1
+   "fieldname": "service_section",
+   "label": "Service and Rate",
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "service_item",
@@ -221,9 +187,26 @@
    "in_list_view": 0
   },
   {
+   "fieldname": "service_col_2",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "number_of_days",
    "label": "Number of Days",
    "fieldtype": "Float",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "daily_rate",
+   "label": "Daily Rate",
+   "fieldtype": "Currency",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "period_rate",
+   "label": "Period Rate",
+   "fieldtype": "Currency",
    "in_list_view": 0
   },
   {
@@ -231,6 +214,36 @@
    "label": "Rate",
    "fieldtype": "Currency",
    "in_list_view": 0
+  },
+  {
+   "fieldname": "service_col_3",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "currency",
+   "label": "Currency",
+   "fieldtype": "Link",
+   "options": "Currency",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "base_amount",
+   "label": "Base Amount",
+   "fieldtype": "Currency",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "reference_number",
+   "label": "Reference Number",
+   "fieldtype": "Data",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "amounts_section",
+   "label": "Amounts and Accounts",
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "gross_amount",
@@ -259,6 +272,11 @@
    "in_list_view": 1
   },
   {
+   "fieldname": "amounts_col_2",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "expense_account",
    "label": "Expense Account",
    "fieldtype": "Link",
@@ -284,6 +302,37 @@
    "in_list_view": 1
   },
   {
+   "fieldname": "amounts_col_3",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "donor",
+   "label": "Donor",
+   "fieldtype": "Link",
+   "options": "Donor",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "department",
+   "label": "Department",
+   "fieldtype": "Link",
+   "options": "Department",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "supervisor",
+   "label": "Supervisor",
+   "fieldtype": "Link",
+   "options": "Employee",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "allocation_section",
+   "label": "Project and Funding",
+   "fieldtype": "Section Break"
+  },
+  {
    "fieldname": "project",
    "label": "Project",
    "fieldtype": "Link",
@@ -303,6 +352,11 @@
    "fieldtype": "Link",
    "options": "Budget Line",
    "in_list_view": 0
+  },
+  {
+   "fieldname": "allocation_col_2",
+   "label": "",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "funding_agreement",
@@ -325,6 +379,11 @@
    "in_list_view": 0
   },
   {
+   "fieldname": "allocation_col_3",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "service_acceptance",
    "label": "Procurement Acceptance",
    "fieldtype": "Link",
@@ -336,6 +395,27 @@
    "label": "Attendance Reference",
    "fieldtype": "Data",
    "in_list_view": 0
+  },
+  {
+   "fieldname": "eligibility_status",
+   "label": "Eligibility Status",
+   "fieldtype": "Select",
+   "options": "Pending\nEligible\nIneligible\nOverride Approved",
+   "default": "Pending",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "exception_reason",
+   "label": "Exception Reason",
+   "fieldtype": "Small Text",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "evidence_section",
+   "label": "Evidence and Verification",
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "supporting_document_type",
@@ -358,10 +438,9 @@
    "in_list_view": 0
   },
   {
-   "fieldname": "verification_notes",
-   "label": "Verification Notes",
-   "fieldtype": "Small Text",
-   "in_list_view": 0
+   "fieldname": "evidence_col_2",
+   "label": "",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "include",
@@ -377,6 +456,17 @@
    "default": "0",
    "allow_on_submit": 1,
    "print_hide": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "verification_notes_section",
+   "label": "Verification Notes",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "verification_notes",
+   "label": "Verification Notes",
+   "fieldtype": "Small Text",
    "in_list_view": 0
   }
  ],

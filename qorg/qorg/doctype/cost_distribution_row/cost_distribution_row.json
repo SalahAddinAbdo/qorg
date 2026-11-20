@@ -6,6 +6,10 @@
  "engine": "InnoDB",
  "field_order": [
   "source_section",
+  "source_item",
+  "source_description",
+  "source_quantity",
+  "source_amount",
   "source_doctype",
   "source_child_doctype",
   "source_row",
@@ -14,13 +18,7 @@
   "upstream_source_document",
   "upstream_source_row",
   "source_row_idx",
-  "source_col_1",
-  "source_item",
   "source_account",
-  "source_description",
-  "source_col_2",
-  "source_quantity",
-  "source_amount",
   "source_base_amount",
   "source_snapshot_section",
   "source_snapshot",
@@ -40,19 +38,19 @@
   "allocation_percentage",
   "allocated_quantity",
   "allocated_amount",
-  "base_amount",
   "amount_col_1",
+  "base_amount",
   "currency",
   "exchange_rate",
   "effective_date",
   "control_section",
-  "eligibility_status",
   "manual_override",
-  "override_approved",
-  "control_col_1",
-  "validation_message",
   "override_reason",
   "supporting_document",
+  "control_col_1",
+  "eligibility_status",
+  "override_approved",
+  "validation_message",
   "page_break"
  ],
  "fields": [
@@ -61,6 +59,35 @@
    "label": "Source Summary",
    "fieldtype": "Section Break",
    "in_list_view": 0
+  },
+  {
+   "fieldname": "source_item",
+   "label": "Source Item",
+   "fieldtype": "Link",
+   "options": "Item",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "source_description",
+   "label": "Source Description",
+   "fieldtype": "Small Text",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "source_quantity",
+   "label": "Source Quantity",
+   "fieldtype": "Float",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "source_amount",
+   "label": "Source Amount",
+   "fieldtype": "Currency",
+   "read_only": 1,
+   "in_list_view": 1
   },
   {
    "fieldname": "source_doctype",
@@ -131,20 +158,6 @@
    "hidden": 1
   },
   {
-   "fieldname": "source_col_1",
-   "label": "",
-   "fieldtype": "Column Break",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "source_item",
-   "label": "Source Item",
-   "fieldtype": "Link",
-   "options": "Item",
-   "read_only": 1,
-   "in_list_view": 1
-  },
-  {
    "fieldname": "source_account",
    "label": "Source Account",
    "fieldtype": "Link",
@@ -152,33 +165,6 @@
    "read_only": 1,
    "in_list_view": 0,
    "hidden": 1
-  },
-  {
-   "fieldname": "source_description",
-   "label": "Source Description",
-   "fieldtype": "Small Text",
-   "read_only": 1,
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "source_col_2",
-   "label": "",
-   "fieldtype": "Column Break",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "source_quantity",
-   "label": "Source Quantity",
-   "fieldtype": "Float",
-   "read_only": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "source_amount",
-   "label": "Source Amount",
-   "fieldtype": "Currency",
-   "read_only": 1,
-   "in_list_view": 1
   },
   {
    "fieldname": "source_base_amount",
@@ -320,18 +306,18 @@
    "in_list_view": 1
   },
   {
+   "fieldname": "amount_col_1",
+   "label": "",
+   "fieldtype": "Column Break",
+   "in_list_view": 0
+  },
+  {
    "fieldname": "base_amount",
    "label": "Base Amount",
    "fieldtype": "Currency",
    "read_only": 1,
    "in_list_view": 0,
    "hidden": 1
-  },
-  {
-   "fieldname": "amount_col_1",
-   "label": "",
-   "fieldtype": "Column Break",
-   "in_list_view": 0
   },
   {
    "fieldname": "currency",
@@ -364,44 +350,11 @@
    "collapsible": 1
   },
   {
-   "fieldname": "eligibility_status",
-   "label": "Eligibility Status",
-   "fieldtype": "Select",
-   "options": "Pending\nEligible\nIneligible\nOverride Approved",
-   "default": "Pending",
-   "read_only": 1,
-   "in_list_view": 0,
-   "hidden": 1
-  },
-  {
    "fieldname": "manual_override",
    "label": "Manual Override",
    "fieldtype": "Check",
    "default": "0",
    "in_list_view": 0
-  },
-  {
-   "fieldname": "override_approved",
-   "label": "Override Approved",
-   "fieldtype": "Check",
-   "default": "0",
-   "allow_on_submit": 1,
-   "in_list_view": 0,
-   "hidden": 1
-  },
-  {
-   "fieldname": "control_col_1",
-   "label": "",
-   "fieldtype": "Column Break",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "validation_message",
-   "label": "Validation Message",
-   "fieldtype": "Small Text",
-   "read_only": 1,
-   "in_list_view": 0,
-   "hidden": 1
   },
   {
    "fieldname": "override_reason",
@@ -415,6 +368,39 @@
    "label": "Supporting Document",
    "fieldtype": "Attach",
    "in_list_view": 0
+  },
+  {
+   "fieldname": "control_col_1",
+   "label": "",
+   "fieldtype": "Column Break",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "eligibility_status",
+   "label": "Eligibility Status",
+   "fieldtype": "Select",
+   "options": "Pending\nEligible\nIneligible\nOverride Approved",
+   "default": "Pending",
+   "read_only": 1,
+   "in_list_view": 0,
+   "hidden": 1
+  },
+  {
+   "fieldname": "override_approved",
+   "label": "Override Approved",
+   "fieldtype": "Check",
+   "default": "0",
+   "allow_on_submit": 1,
+   "in_list_view": 0,
+   "hidden": 1
+  },
+  {
+   "fieldname": "validation_message",
+   "label": "Validation Message",
+   "fieldtype": "Small Text",
+   "read_only": 1,
+   "in_list_view": 0,
+   "hidden": 1
   },
   {
    "fieldname": "page_break",
