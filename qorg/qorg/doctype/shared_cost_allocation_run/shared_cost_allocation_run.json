@@ -105,7 +105,7 @@
    "fieldname": "run_status",
    "label": "Run Status",
    "fieldtype": "Select",
-   "options": "Draft\nPreviewed\nJournal Draft Created\nPosted\nReversal Draft Created\nReversed\nFailed",
+   "options": "Draft\nPreviewed\nJournal Draft Created\nPosted\nReversal Draft Created\nReversed\nFailed\nCancelled",
    "default": "Draft",
    "read_only": 1,
    "in_list_view": 1

@@ -1,7 +1,7 @@
 import json
 import frappe
 from frappe import _
-from frappe.utils import flt, getdate, now_datetime, add_days, add_months, date_diff, nowdate
+from frappe.utils import flt, getdate, now_datetime, add_days, add_months, date_diff, nowdate, cint
 from qorg.qorg.shared_cost_allocation.validation import validate_rule
 
 PAYROLL_VOUCHERS={"Payroll Entry","Salary Slip"}
@@ -426,3 +426,56 @@ def create_changed_rule(source_rule,change_type="Prospective Change",change_effe
 def _next_version(value):
     try:major,minor=(str(value or "1.0").split(".")+["0"])[:2];return f"{int(major)}.{int(minor)+1}"
     except Exception:return "2.0"
+
+
+@frappe.whitelist()
+def get_allocation_rollback_options(run_name):
+    run=frappe.get_doc("Shared Cost Allocation Run",run_name);run.check_permission("read")
+    policy=frappe.get_cached_value("Company",run.company,"custom_posted_allocation_rollback_policy") or "Reversal Entry Only"
+    allowed,reason=_controlled_cancellation_eligibility(run,policy,throw=False)
+    return {"policy":policy,"controlled_cancellation_allowed":1 if allowed else 0,"controlled_cancellation_reason":reason,"reversal_allowed":1 if run.docstatus==1 and run.run_status=="Posted" else 0}
+
+
+def _controlled_cancellation_eligibility(run,policy=None,throw=True):
+    policy=policy or frappe.get_cached_value("Company",run.company,"custom_posted_allocation_rollback_policy") or "Reversal Entry Only"
+    reason=None
+    if policy=="Reversal Entry Only":reason=_("Company policy requires a reversal entry.")
+    elif policy=="Administrator Controlled" and "System Manager" not in frappe.get_roles():reason=_("Only a System Manager may use controlled cancellation under the company policy.")
+    elif run.docstatus!=1 or run.run_status!="Posted":reason=_("Only a posted allocation run can be cancelled with its original Journal Entry.")
+    elif run.run_type=="Final Closeout":reason=_("Final Closeout runs must be reversed, not cancelled.")
+    elif not run.journal_entry or frappe.db.get_value("Journal Entry",run.journal_entry,"docstatus")!=1:reason=_("The original Journal Entry is not submitted.")
+    elif run.reversal_journal_entry and frappe.db.get_value("Journal Entry",run.reversal_journal_entry,"docstatus") in (0,1):reason=_("A reversal Journal Entry already exists. Complete or cancel it first.")
+    else:
+        days=cint(frappe.get_cached_value("Company",run.company,"custom_original_cancellation_within_days") or 0)
+        if days and date_diff(nowdate(),run.posting_date)>days:reason=_("The original cancellation window of {0} days has expired.").format(days)
+        frozen=frappe.get_cached_value("Company",run.company,"accounts_frozen_till")
+        if not reason and frozen and getdate(run.posting_date)<=getdate(frozen):reason=_("Accounts are frozen through {0}.").format(frozen)
+        later=frappe.db.exists("Shared Cost Allocation Run",{"allocation_rule":run.allocation_rule,"docstatus":1,"run_status":["not in",["Reversed","Failed"]],"period_start":[">",run.period_end]})
+        if not reason and later:reason=_("A later submitted allocation run depends on this rule sequence.")
+    if reason and throw:frappe.throw(reason)
+    return (not reason),reason
+
+
+@frappe.whitelist()
+def controlled_cancel_allocation_run(run_name,reason):
+    run=frappe.get_doc("Shared Cost Allocation Run",run_name);run.check_permission("cancel")
+    journal=frappe.get_doc("Journal Entry",run.journal_entry) if run.journal_entry else None
+    if not journal or not journal.has_permission("cancel"):frappe.throw(_("Not permitted to cancel the linked Journal Entry."),frappe.PermissionError)
+    policy=frappe.get_cached_value("Company",run.company,"custom_posted_allocation_rollback_policy") or "Reversal Entry Only"
+    _controlled_cancellation_eligibility(run,policy,throw=True)
+    require_reason=cint(frappe.get_cached_value("Company",run.company,"custom_require_allocation_cancellation_reason"))
+    if require_reason and not (reason or "").strip():frappe.throw(_("Rollback Reason is required."))
+    original_journal=run.journal_entry
+    entry_names=frappe.get_all("Shared Cost Allocation Entry",filters={"parent":run.name,"parenttype":"Shared Cost Allocation Run"},pluck="name")
+    # Break only the circular links inside the current database transaction.
+    frappe.db.set_value("Shared Cost Allocation Run",run.name,"journal_entry",None,update_modified=False)
+    for entry_name in entry_names:
+        frappe.db.set_value("Shared Cost Allocation Entry",entry_name,"journal_entry",None,update_modified=False)
+    journal.flags.ignore_links=True
+    journal.cancel()
+    run.reload();run.flags.ignore_workflow=True;run.flags.ignore_links=True;run.cancel()
+    audit={"journal_entry":original_journal,"run_status":"Cancelled","reconciliation_status":"Reversed","custom_rollback_method":"Controlled Cancellation","custom_rollback_reason":reason,"custom_rollback_by":frappe.session.user,"custom_rollback_on":now_datetime()}
+    frappe.db.set_value("Shared Cost Allocation Run",run.name,audit,update_modified=False)
+    for entry_name in entry_names:
+        frappe.db.set_value("Shared Cost Allocation Entry",entry_name,"journal_entry",original_journal,update_modified=False)
+    return {"run":run.name,"journal_entry":original_journal,"method":"Controlled Cancellation"}
