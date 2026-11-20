@@ -46,13 +46,26 @@ def audit_runtime_configuration():
         for event in ("before_validate","before_submit","on_submit","on_cancel"):
             add(f"Hook {dt}.{event}",_event_hook_contains(dt,event,"qorg.qorg.cost_distribution.adapters.common"))
     try:
-        from erpnext.accounts.doctype.purchase_invoice.purchase_invoice import PurchaseInvoice
-        add("Purchase Invoice get_gl_entries signature","warehouse_account" in inspect.signature(PurchaseInvoice.get_gl_entries).parameters,str(inspect.signature(PurchaseInvoice.get_gl_entries)))
-    except Exception as exc:add("Purchase Invoice controller import",False,repr(exc))
+        purchase_invoice_controller=frappe.get_controller("Purchase Invoice")
+        purchase_signature=inspect.signature(purchase_invoice_controller.get_gl_entries)
+        purchase_params=list(purchase_signature.parameters)
+        add(
+            "Purchase Invoice get_gl_entries signature",
+            "inventory_account_map" in purchase_signature.parameters,
+            {"controller": f"{purchase_invoice_controller.__module__}.{purchase_invoice_controller.__name__}", "signature": str(purchase_signature), "parameters": purchase_params},
+        )
+    except Exception as exc:
+        add("Purchase Invoice controller compatibility",False,repr(exc))
     try:
-        from erpnext.accounts.doctype.expense_claim.expense_claim import ExpenseClaim
-        add("Expense Claim get_gl_entries exists",hasattr(ExpenseClaim,"get_gl_entries"),str(inspect.signature(ExpenseClaim.get_gl_entries)) if hasattr(ExpenseClaim,"get_gl_entries") else "")
-    except Exception as exc:add("Expense Claim controller import",False,repr(exc))
+        expense_claim_controller=frappe.get_controller("Expense Claim")
+        expense_signature=inspect.signature(expense_claim_controller.get_gl_entries)
+        add(
+            "Expense Claim get_gl_entries compatibility",
+            hasattr(expense_claim_controller,"get_gl_entries"),
+            {"controller": f"{expense_claim_controller.__module__}.{expense_claim_controller.__name__}", "signature": str(expense_signature)},
+        )
+    except Exception as exc:
+        add("Expense Claim controller compatibility",False,repr(exc))
     dimension_fields=[]
     if frappe.db.exists("DocType","Accounting Dimension"):
         dimension_fields=frappe.get_all("Accounting Dimension",filters={"disabled":0},pluck="fieldname")
