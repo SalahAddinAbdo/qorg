@@ -153,7 +153,7 @@ def _source_rows(doc,rule):
         include=frappe.get_all("Account",filters={"company":rule.company,"root_type":"Expense","is_group":0},pluck="name")
     if include:filters["account"]=["in",include]
     if rule.voucher_types:filters["voucher_type"]=["in",[x.strip() for x in rule.voucher_types.split(",") if x.strip()]]
-    source_fields=["name","account","cost_center","project","finance_book","voucher_type","voucher_no","posting_date","debit","credit"]
+    source_fields=["name","account","cost_center","project","finance_book","voucher_type","voucher_no","voucher_detail_no","posting_date","debit","credit"]
     rows=[] if rule.source_selection_mode=="Selected Vouchers Only" else frappe.get_all("GL Entry",filters=filters,fields=source_fields,order_by="posting_date,name")
     selected={(r.voucher_type,r.voucher_no) for r in rule.selected_vouchers if r.include}
     excluded_selected={(r.voucher_type,r.voucher_no) for r in rule.selected_vouchers if not r.include}
@@ -168,8 +168,14 @@ def _source_rows(doc,rule):
     submitted=frappe.get_all("Shared Cost Allocation Run",filters={"docstatus":1,"run_status":["not in",["Reversed","Failed"]],"name":["!=",doc.name or ""]},pluck="name");payroll_group=frappe.get_cached_value("Company",rule.company,"custom_payroll_account_group") if rule.exclude_payroll_accounts else None;payroll_accounts=set()
     if payroll_group:
         b=frappe.db.get_value("Account",payroll_group,["lft","rgt"],as_dict=True);payroll_accounts=set(frappe.get_all("Account",filters={"lft":[">=",b.lft],"rgt":["<=",b.rgt],"company":rule.company},pluck="name"))
+    direct_gl=set();direct_sources=set()
+    if frappe.db.exists("DocType","Cost Distribution Ledger"):
+        for distributed in frappe.get_all("Cost Distribution Ledger",filters={"status":"Active","allocation_mode":"Direct"},fields=["source_gl_entry","source_doctype","source_document","source_row"],limit_page_length=0):
+            if distributed.source_gl_entry:direct_gl.add(distributed.source_gl_entry)
+            direct_sources.add((distributed.source_doctype,distributed.source_document,distributed.source_row))
     unique={}
     for row in rows:
+        if row.name in direct_gl or (row.voucher_type,row.voucher_no,row.get("voucher_detail_no")) in direct_sources:continue
         if rule.source_selection_mode=="Selected Vouchers Only" and (row.voucher_type,row.voucher_no) not in selected:continue
         if (row.voucher_type,row.voucher_no) in excluded_selected or row.account in exclude or row.account in payroll_accounts or row.voucher_type in PAYROLL_VOUCHERS:continue
         original=flt(row.debit)-flt(row.credit)
