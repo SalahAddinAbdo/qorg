@@ -10,11 +10,11 @@ def provision_cost_distribution():
    {"fieldname":"custom_cost_distribution_section","label":label,"fieldtype":"Section Break","insert_after":after,"collapsible":1,"depends_on":"eval:(doc.custom_cost_distributions||[]).length>0","is_system_generated":1,"module":"QOrg"},
    {"fieldname":"custom_cost_distributions","label":"Cost Distributions","fieldtype":"Table","options":"Cost Distribution Row","insert_after":"custom_cost_distribution_section","is_system_generated":1,"module":"QOrg"},
    {"fieldname":"custom_distribution_control_section","label":"Distribution Control","fieldtype":"Section Break","insert_after":"custom_cost_distributions","collapsible":1,"depends_on":"eval:(doc.custom_cost_distributions||[]).length>0","is_system_generated":1,"module":"QOrg"},
-   {"fieldname":"custom_distribution_status","label":"Distribution Status","fieldtype":"Select","options":"Not Required\\nPending\\nAuto Applied\\nTransferred\\nManually Adjusted\\nValidated\\nPosted\\nException\\nReversed","default":"Not Required","insert_after":"custom_distribution_control_section","read_only":1,"is_system_generated":1,"module":"QOrg"},
+   {"fieldname":"custom_distribution_status","label":"Distribution Status","fieldtype":"Select","options":"Not Required\nPending\nAuto Applied\nTransferred\nManually Adjusted\nValidated\nPosted\nException\nReversed","default":"Not Required","insert_after":"custom_distribution_control_section","read_only":1,"is_system_generated":1,"module":"QOrg"},
    {"fieldname":"custom_distribution_hash","label":"Distribution Hash","fieldtype":"Data","insert_after":"custom_distribution_status","hidden":1,"read_only":1,"is_system_generated":1,"module":"QOrg"}]
  for dt in SOURCE_CHILDREN:
   if frappe.db.exists("DocType",dt):custom.setdefault(dt,[]).append({"fieldname":"custom_distribution_source_key","label":"Distribution Source Key","fieldtype":"Data","read_only":1,"hidden":1,"unique":0,"is_system_generated":1,"module":"QOrg"})
- create_custom_fields(custom,update=True);provision_dynamic_dimensions();provision_internal_print_formats()
+ create_custom_fields(custom,update=True);repair_distribution_status_options();provision_dynamic_dimensions();provision_internal_print_formats()
 def provision_dynamic_dimensions():
  if not frappe.db.exists("DocType","Accounting Dimension"):return
  fields=[];meta=frappe.get_meta("Cost Distribution Row",cached=False);insert_after="department"
@@ -29,3 +29,12 @@ def provision_internal_print_formats():
   values={"doc_type":dt,"module":"QOrg","standard":"Yes","custom_format":1,"print_format_type":"Jinja","html":html}
   if frappe.db.exists("Print Format",name):frappe.db.set_value("Print Format",name,values,update_modified=False)
   else:frappe.get_doc({"doctype":"Print Format","name":name,**values}).insert(ignore_permissions=True)
+
+
+def repair_distribution_status_options():
+    options = "Not Required\nPending\nAuto Applied\nTransferred\nManually Adjusted\nValidated\nPosted\nException\nReversed"
+    for dt in TRANSACTIONS:
+        name = frappe.db.get_value("Custom Field", {"dt": dt, "fieldname": "custom_distribution_status"}, "name")
+        if name:
+            frappe.db.set_value("Custom Field", name, {"options": options, "default": "Not Required"}, update_modified=False)
+    frappe.clear_cache()
