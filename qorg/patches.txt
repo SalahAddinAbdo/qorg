@@ -24,3 +24,7 @@ qorg.qorg.shared_cost_allocation.patches.v2_0_0
 qorg.qorg.shared_cost_allocation.patches.v3_0_0
 qorg.qorg.finance_budget_grants.patches.v4_0_0_finance_core_hardening
 qorg.qorg.shared_cost_allocation.patches.v4_1_0
+qorg.qorg.patches.v4_0.provision_payroll_workforce_allocation
+qorg.qorg.patches.v5_0.complete_payroll_workforce_allocation
+qorg.qorg.patches.v5_1.harden_payroll_workforce_allocation
+qorg.qorg.patches.v5_2.refine_payroll_fields_and_reports

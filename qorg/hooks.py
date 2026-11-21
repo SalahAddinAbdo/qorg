@@ -557,4 +557,97 @@ if _profile_permission_hook not in after_migrate:
 _material_issue_field_hook = "qorg.qorg.inventory_asset_custody.material_request_field_repair.repair_material_request_issue_fields"
 if _material_issue_field_hook not in after_migrate:
     after_migrate.append(_material_issue_field_hook)
+# Payroll and workforce allocation integration
+_payroll_allocation_migrate = "qorg.qorg.payroll_workforce_allocation.migration.migrate"
+if _payroll_allocation_migrate not in after_install:
+    after_install.append(_payroll_allocation_migrate)
+if _payroll_allocation_migrate not in after_migrate:
+    after_migrate.append(_payroll_allocation_migrate)
 
+for _doctype, _events in {
+    "Payroll Entry": {"validate": "qorg.qorg.payroll_workforce_allocation.events.validate_payroll_entry"},
+    "Salary Slip": {
+        "on_submit": "qorg.qorg.payroll_workforce_allocation.events.salary_slip_on_submit",
+        "on_cancel": "qorg.qorg.payroll_workforce_allocation.events.salary_slip_on_cancel",
+    },
+}.items():
+    doc_events.setdefault(_doctype, {})
+    for _event, _handler in _events.items():
+        _current = doc_events[_doctype].get(_event)
+        if not _current:
+            doc_events[_doctype][_event] = _handler
+        elif isinstance(_current, list):
+            if _handler not in _current: _current.append(_handler)
+        elif _current != _handler:
+            doc_events[_doctype][_event] = [_current, _handler]
+
+_payroll_salary_slip_js = "public/js/payroll_allocation_salary_slip.js"
+_existing_salary_js = doctype_js.get("Salary Slip")
+if not _existing_salary_js:
+    doctype_js["Salary Slip"] = _payroll_salary_slip_js
+elif isinstance(_existing_salary_js, list):
+    if _payroll_salary_slip_js not in _existing_salary_js:
+        _existing_salary_js.append(_payroll_salary_slip_js)
+elif _existing_salary_js != _payroll_salary_slip_js:
+    doctype_js["Salary Slip"] = [_existing_salary_js, _payroll_salary_slip_js]
+
+_payroll_daily_job = "qorg.qorg.payroll_workforce_allocation.scheduled_tasks.daily"
+scheduler_events.setdefault("daily", [])
+if _payroll_daily_job not in scheduler_events["daily"]:
+    scheduler_events["daily"].append(_payroll_daily_job)
+
+permission_query_conditions = globals().get("permission_query_conditions", {})
+permission_query_conditions.update({
+    "Payroll Allocation Run": "qorg.qorg.payroll_workforce_allocation.permissions.payroll_run_query",
+    "Workforce Funding Plan": "qorg.qorg.payroll_workforce_allocation.permissions.plan_query",
+})
+has_permission = globals().get("has_permission", {})
+has_permission.update({
+    "Payroll Allocation Run": "qorg.qorg.payroll_workforce_allocation.permissions.has_payroll_run_permission",
+    "Workforce Funding Plan": "qorg.qorg.payroll_workforce_allocation.permissions.has_plan_permission",
+})
+for _allocation_doctype in ("Shared Cost Allocation", "Shared Cost Allocation Run", "Cost Distribution", "Cost Distribution Run"):
+    doc_events.setdefault(_allocation_doctype, {})
+    _guard = "qorg.qorg.payroll_workforce_allocation.guards.validate_other_allocation_document"
+    _existing = doc_events[_allocation_doctype].get("validate")
+    if not _existing:
+        doc_events[_allocation_doctype]["validate"] = _guard
+    elif isinstance(_existing, list):
+        if _guard not in _existing:
+            _existing.append(_guard)
+    elif _existing != _guard:
+        doc_events[_allocation_doctype]["validate"] = [_existing, _guard]
+
+# Payroll liability payment integration (additive)
+for _event,_handler in {
+    "validate":"qorg.qorg.payroll_workforce_allocation.payment.validate_payment_entry",
+    "on_submit":"qorg.qorg.payroll_workforce_allocation.payment.payment_entry_on_submit",
+    "on_cancel":"qorg.qorg.payroll_workforce_allocation.payment.payment_entry_on_cancel",
+}.items():
+    doc_events.setdefault("Payment Entry",{})
+    _current=doc_events["Payment Entry"].get(_event)
+    if not _current:doc_events["Payment Entry"][_event]=_handler
+    elif isinstance(_current,list):
+        if _handler not in _current:_current.append(_handler)
+    elif _current!=_handler:doc_events["Payment Entry"][_event]=[_current,_handler]
+
+permission_query_conditions.update({
+ "Payroll Cost Policy":"qorg.qorg.payroll_workforce_allocation.permissions.policy_query",
+ "Monthly Effort Certification":"qorg.qorg.payroll_workforce_allocation.permissions.effort_query",
+})
+has_permission.update({
+ "Payroll Cost Policy":"qorg.qorg.payroll_workforce_allocation.permissions.has_policy_permission",
+ "Monthly Effort Certification":"qorg.qorg.payroll_workforce_allocation.permissions.has_effort_permission",
+})
+
+# Payroll allocation standard-form scripts
+for _dt,_asset in {
+ "Company":"public/js/payroll_company.js",
+ "Payroll Entry":"public/js/payroll_entry_allocation.js",
+ "Salary Slip":"public/js/payroll_allocation_salary_slip.js",
+}.items():
+    _current=doctype_js.get(_dt)
+    if not _current:doctype_js[_dt]=_asset
+    elif isinstance(_current,list):
+        if _asset not in _current:_current.append(_asset)
+    elif _current!=_asset:doctype_js[_dt]=[_current,_asset]

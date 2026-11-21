@@ -1,0 +1,1 @@
+frappe.ui.form.on("Payroll Entry",{refresh(frm){if(!frm.doc.company)return;frappe.db.get_value("Company",frm.doc.company,"custom_enable_payroll_allocation").then(r=>{frm.toggle_display("custom_payroll_control_section",Boolean(r.message.custom_enable_payroll_allocation));});}});
