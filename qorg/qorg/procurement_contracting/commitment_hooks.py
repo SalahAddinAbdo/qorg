@@ -27,8 +27,8 @@ def purchase_order_submit(doc, method=None):
 
 
 def contract_submit(doc, method=None):
-    if doc.procurement_process:
-        record(doc.procurement_process, "Contracted", doc.doctype, doc.name, doc.contract_value)
+    if doc.get("qorg_procurement_process"):
+        record(doc.qorg_procurement_process, "Contracted", doc.doctype, doc.name, doc.qorg_contract_value)
 
 
 def acceptance_submit(doc, method=None):
@@ -82,7 +82,7 @@ def purchase_order_cancel(doc, method=None):
 
 
 def contract_cancel(doc, method=None):
-    _reverse(doc.doctype, doc.name, "Contracted", doc.procurement_process, doc.contract_value)
+    _reverse(doc.doctype, doc.name, "Contracted", doc.qorg_procurement_process, doc.qorg_contract_value)
 
 
 def acceptance_cancel(doc, method=None):

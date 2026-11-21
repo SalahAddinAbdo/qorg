@@ -20,10 +20,10 @@ def validate_purchase_order(doc,method=None):
 def validate_contract_links(doc,method=None):
  contract=getattr(doc,"custom_procurement_contract",None)
  if not contract:return
- c=frappe.get_doc("Procurement Contract",contract)
- if c.status not in ("Active","Completed"):frappe.throw(_("The linked Procurement Contract must be active."))
- if getattr(doc,"company",None)!=c.company:frappe.throw(_("Company must match the Procurement Contract."))
- if getattr(doc,"currency",None) and doc.currency!=c.currency:frappe.throw(_("Currency must match the Procurement Contract."))
+ c=frappe.get_doc("Contract",contract)
+ if c.qorg_lifecycle_status not in ("Active","Completed"):frappe.throw(_("The linked Contract must be active."))
+ if getattr(doc,"company",None)!=c.qorg_company:frappe.throw(_("Company must match the Contract."))
+ if getattr(doc,"currency",None) and doc.qorg_currency!=c.qorg_currency:frappe.throw(_("Currency must match the Contract."))
 
 
 def validate_rfq_extensions(doc):

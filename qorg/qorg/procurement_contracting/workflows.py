@@ -47,7 +47,7 @@ WORKFLOWS = {
             ("Under Due Diligence", "Rejected", "Reject Supplier", "Procurement Manager"),
         ],
     },
-    "Procurement Contract": {
+    "Contract": {
         "state_field": "status",
         "states": {
             "Draft": 0,

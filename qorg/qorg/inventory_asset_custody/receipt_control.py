@@ -47,13 +47,13 @@ def reconcile_receipt(doc, method=None):
     tolerance = flt(settings.custom_over_receipt_tolerance) if getattr(settings, "custom_allow_over_receipt", 0) else 0
     contract = getattr(doc, "custom_procurement_contract", None)
     if contract:
-        fields = [x for x in ("company", "status", "end_date", "extended_end_date") if frappe.get_meta("Procurement Contract").has_field(x)]
-        contract_doc = frappe.db.get_value("Procurement Contract", contract, fields, as_dict=True) or {}
-        if contract_doc.get("company") and contract_doc.company != doc.company:
+        fields = [x for x in ("qorg_company", "qorg_lifecycle_status", "end_date") if frappe.get_meta("Contract").has_field(x)]
+        contract_doc = frappe.db.get_value("Contract", contract, fields, as_dict=True) or {}
+        if contract_doc.get("qorg_company") and contract_doc.qorg_company != doc.company:
             frappe.throw(_("Contract company must match receipt company."))
-        if contract_doc.get("status") in CLOSED:
+        if contract_doc.get("qorg_lifecycle_status") in CLOSED:
             frappe.throw(_("Receipt is not allowed against contract {0} with status {1}.").format(contract, contract_doc.status))
-        expiry = contract_doc.get("extended_end_date") or contract_doc.get("end_date")
+        expiry = contract_doc.get("end_date")
         if expiry and getdate(doc.posting_date) > getdate(expiry):
             frappe.throw(_("Contract {0} expired on {1}.").format(contract, expiry))
 

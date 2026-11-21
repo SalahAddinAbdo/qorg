@@ -44,7 +44,8 @@ override_whitelisted_methods = {'frappe.model.rename_doc.update_document_title':
 extend_doctype_class = {'Task': ['qorg.qorg.task_management.task_controller.TaskProjectPeriodPolicyMixin'],
  'Material Request': ['qorg.qorg.procurement_contracting.material_request.MaterialRequestProcurementMixin']}
 
-override_doctype_dashboards = {'Material Request': 'qorg.qorg.dashboards.material_request.get_data'}
+override_doctype_dashboards = {'Material Request': 'qorg.qorg.dashboards.material_request.get_data',
+ 'Contract': 'qorg.qorg.dashboards.contract.get_data'}
 
 # ==============================================================================
 # DESK ASSETS
@@ -124,6 +125,8 @@ doctype_js = {'Website Settings': 'public/js/website_settings_opportunity_portal
  'Task Assignment Request': 'public/js/task_assignment_request.js',
  'Task': 'public/js/task.js',
  'Employee': 'public/js/employee_announcement.js',
+ 'Contract': ['public/js/unified_contract.js'],
+ 'Contract Template': ['public/js/contract_template_qorg.js'],
  'Notification': 'public/js/notification_configuration.js',
  'Workflow': 'public/js/workflow_engine.js',
  'Projects Settings': 'public/js/projects_settings.js',
@@ -234,9 +237,6 @@ doc_events = {'Web Form': {'before_validate': 'qorg.qorg.people_and_opportunitie
                       'on_cancel': ['qorg.qorg.procurement_contracting.commitment_hooks.material_request_cancel'],
                       'validate': ['qorg.qorg.inventory_asset_custody.issue_control.validate_material_request_activity',
                                    'qorg.qorg.finance_budget_grants.services.validate_accounting_document']},
- 'Procurement Contract': {'validate': ['qorg.qorg.procurement_contracting.contract_engine.validate_contract'],
-                          'on_submit': ['qorg.qorg.procurement_contracting.commitment_hooks.contract_submit'],
-                          'on_cancel': ['qorg.qorg.procurement_contracting.commitment_hooks.contract_cancel']},
  'Framework Call Off': {'validate': ['qorg.qorg.procurement_contracting.contract_engine.validate_framework_call_off']},
  'Procurement Submission': {'validate': ['qorg.qorg.procurement_contracting.submission_service.validate_submission']},
  'Purchase Order': {'on_submit': ['qorg.qorg.procurement_contracting.commitment_hooks.purchase_order_submit'],
@@ -299,13 +299,19 @@ doc_events = {'Web Form': {'before_validate': 'qorg.qorg.people_and_opportunitie
  'Budget Line': {'before_validate': 'qorg.qorg.finance_budget_grants.services.apply_budget_line_defaults',
                  'validate': 'qorg.qorg.finance_budget_grants.services.validate_budget_line'},
  'Project': {'validate': 'qorg.qorg.finance_budget_grants.services.validate_project_funding_source'},
- 'Funding Agreement': {'on_update': 'qorg.qorg.finance_budget_grants.budget_transfers.sync_funding_agreement_to_project'}}
+ 'Funding Agreement': {'on_update': 'qorg.qorg.finance_budget_grants.budget_transfers.sync_funding_agreement_to_project'},
+ 'Contract': {'validate': ['qorg.qorg.unified_contracts.services.validate_contract',
+                            'qorg.qorg.procurement_contracting.contract_engine.validate_contract'],
+              'on_submit': 'qorg.qorg.procurement_contracting.commitment_hooks.contract_submit',
+              'on_cancel': 'qorg.qorg.procurement_contracting.commitment_hooks.contract_cancel'},
+ 'Contract Template': {'validate': 'qorg.qorg.unified_contracts.services.validate_template'}}
 
 # ==============================================================================
 # PERMISSIONS
 # ==============================================================================
 
-permission_query_conditions = {'Task': 'qorg.qorg.task_management.permissions.task_query_condition',
+permission_query_conditions = {'Contract': 'qorg.qorg.unified_contracts.permissions.contract_query_condition',
+ 'Task': 'qorg.qorg.task_management.permissions.task_query_condition',
  'Task Assignment Request': 'qorg.qorg.task_management.permissions.request_query_condition',
  'Technical Evaluation': 'qorg.qorg.procurement_contracting.permissions.technical_query',
  'Financial Evaluation': 'qorg.qorg.procurement_contracting.permissions.financial_query',
@@ -323,7 +329,8 @@ permission_query_conditions = {'Task': 'qorg.qorg.task_management.permissions.ta
  'Funding Agreement': 'qorg.qorg.finance_budget_grants.permissions.funding_agreement_query',
  'Budget Transfer Audit': 'qorg.qorg.finance_budget_grants.permissions.budget_transfer_audit_query'}
 
-has_permission = {'Feature Control Center': 'qorg.qorg.enterprise_foundation.permissions.feature_control_center_has_permission',
+has_permission = {'Contract': 'qorg.qorg.unified_contracts.permissions.contract_has_permission',
+ 'Feature Control Center': 'qorg.qorg.enterprise_foundation.permissions.feature_control_center_has_permission',
  'Managed Configuration State': 'qorg.qorg.enterprise_foundation.permissions.managed_state_has_permission',
  'Task': 'qorg.qorg.task_management.permissions.has_task_permission',
  'Task Assignment Request': 'qorg.qorg.task_management.permissions.has_request_permission',
@@ -350,7 +357,8 @@ file_permission = ['qorg.qorg.procurement_contracting.private_files.has_file_per
 # SCHEDULER
 # ==============================================================================
 
-scheduler_events = {'daily': ['qorg.qorg.recruitment_extensions.settings_jobs.run_daily_recruitment_settings_jobs',
+scheduler_events = {'daily': ['qorg.qorg.unified_contracts.services.update_expiring_contracts',
+'qorg.qorg.recruitment_extensions.settings_jobs.run_daily_recruitment_settings_jobs',
            'qorg.qorg.people_and_opportunities.portal_scheduler.close_expired_public_opportunities',
            'qorg.qorg.project_management.notification_engine.run_daily_project_notifications',
            'qorg.qorg.project_management.integrity_jobs.run_daily_project_reconciliation',
@@ -391,7 +399,8 @@ after_install = ['qorg.qorg.finance_budget_grants.provisioning.provision_finance
  'qorg.qorg.inventory_asset_custody.workflows.provision_workflows',
  'qorg.qorg.inventory_asset_custody.print_formats.provision_print_formats']
 
-after_migrate = ['qorg.qorg.finance_budget_grants.provisioning.provision_finance_budget_grants',
+after_migrate = ['qorg.qorg.unified_contracts.provisioning.provision_unified_contracts',
+ 'qorg.qorg.finance_budget_grants.provisioning.provision_finance_budget_grants',
  'qorg.qorg.workflow.provisioning.provision_workflow_responsibility_routing',
  'qorg.qorg.recruitment_extensions.settings_provisioning.provision_recruitment_settings',
  'qorg.qorg.recruitment_extensions.provisioning.provision_recruitment_extensions',

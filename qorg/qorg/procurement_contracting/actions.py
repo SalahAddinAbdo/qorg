@@ -35,7 +35,7 @@ PROCESS_STAGES = {
         "field": "procurement_process",
         "states": ["Combined Evaluation Completed", "Award Approved"],
     },
-    "Procurement Contract": {
+    "Contract": {
         "field": "procurement_process",
         "states": ["Award Approved", "Closed"],
     },
@@ -223,41 +223,37 @@ def create_or_open_process_stage(process_name, target_doctype, defaults=None):
     return doc.name
 
 
+def _unified_contract_type(process):
+    method = (process.get("procurement_method") or "").lower()
+    if "works" in method:
+        return "Works Contract"
+    if "consult" in method:
+        return "Consultancy Contract"
+    if "service" in method:
+        return "Service Contract"
+    return "Goods Supply Contract"
+
+
 @frappe.whitelist()
 def create_or_open_contract(award_decision):
     award = frappe.get_doc("Award Decision", award_decision)
     award.check_permission("read")
-
     if award.decision != "Approved":
         frappe.throw(_("The award decision must be Approved before contract creation."))
-
-    existing = frappe.db.get_value(
-        "Procurement Contract",
-        {"award_decision": award.name, "docstatus": ["<", 2]},
-        "name",
-    )
+    existing = frappe.db.get_value("Contract", {"qorg_award_decision": award.name, "docstatus": ["<", 2]}, "name")
     if existing:
-        return existing
-
+        return {"existing": existing}
     process = frappe.get_doc("Procurement Process", award.procurement_process)
     if process.status not in ("Award Approved", "Closed"):
         frappe.throw(_("The procurement award must be approved."))
-
-    doc = frappe.get_doc(
-        {
-            "doctype": "Procurement Contract",
-            "award_decision": award.name,
-            "procurement_process": process.name,
-            "supplier": award.awarded_supplier,
-            "contract_value": award.awarded_amount,
-            "company": process.company,
-            "project": process.project,
-            "currency": process.currency,
-            "contract_title": process.title,
-        }
-    )
-    doc.insert()
-    return doc.name
+    return {"defaults": {
+        "party_type": "Supplier", "party_name": award.awarded_supplier,
+        "qorg_award_decision": award.name, "qorg_procurement_process": process.name,
+        "qorg_contract_type": _unified_contract_type(process),
+        "qorg_contract_value": award.awarded_amount, "qorg_company": process.company,
+        "qorg_project": process.project, "qorg_currency": process.currency,
+        "qorg_contract_title": process.title, "qorg_lifecycle_status": "Under Review"
+    }}
 
 
 @frappe.whitelist()
@@ -265,12 +261,12 @@ def create_or_open_contract_record(contract_name, target_doctype):
     allowed = {
         "Commitment Ledger": "procurement_process",
         "Procure Acceptance": "procurement_process",
-        "Procurement Amendment": "procurement_process",
+        "Contract Amendment": "contract",
     }
     if target_doctype not in allowed:
         frappe.throw(_("Unsupported contract action."))
 
-    contract = frappe.get_doc("Procurement Contract", contract_name)
+    contract = frappe.get_doc("Contract", contract_name)
     contract.check_permission("read")
 
     if not frappe.has_permission(target_doctype, "create"):
@@ -279,28 +275,26 @@ def create_or_open_contract_record(contract_name, target_doctype):
             frappe.PermissionError,
         )
 
-    if contract.status not in ("Active", "Under Approval"):
+    if contract.qorg_lifecycle_status not in ("Active", "Under Review", "Pending Approval"):
         frappe.throw(_("The contract must be active or under approval."))
 
-    filters = {
-        allowed[target_doctype]: contract.procurement_process,
-        "docstatus": ["<", 2],
-    }
+    filters = {allowed[target_doctype]: contract.name if target_doctype == "Contract Amendment" else contract.qorg_procurement_process, "docstatus": ["<", 2]}
     if target_doctype == "Commitment Ledger":
         existing = frappe.db.get_value(target_doctype, filters, "name")
         if existing:
             return existing
 
-    values = {
-        "doctype": target_doctype,
-        "procurement_process": contract.procurement_process,
-    }
     meta = frappe.get_meta(target_doctype)
+    values = {"doctype": target_doctype}
+    if meta.has_field("procurement_process"):
+        values["procurement_process"] = contract.qorg_procurement_process
+    if meta.has_field("contract"):
+        values["contract"] = contract.name
     for field, value in (
-        ("company", contract.company),
-        ("project", contract.project),
-        ("budget_line", contract.budget_line),
-        ("currency", contract.currency),
+        ("company", contract.qorg_company),
+        ("project", contract.qorg_project),
+        ("budget_line", contract.qorg_budget_line),
+        ("currency", contract.qorg_currency),
     ):
         if meta.has_field(field):
             values[field] = value

@@ -1,0 +1,231 @@
+{
+  "doctype": "DocType",
+  "name": "QOrg Contract Type",
+  "module": "QOrg",
+  "custom": 0,
+  "track_changes": 1,
+  "autoname": "field:type_name",
+  "title_field": "type_name",
+  "search_fields": "type_name,category",
+  "sort_field": "type_name",
+  "sort_order": "ASC",
+  "field_order": [
+    "type_name",
+    "category",
+    "is_active",
+    "party_section",
+    "allowed_party_types",
+    "default_party_type",
+    "configuration_section",
+    "default_contract_template",
+    "numbering_series",
+    "default_duration_months",
+    "renewal_notice_days",
+    "termination_notice_days",
+    "features_section",
+    "requires_value",
+    "requires_funding_context",
+    "requires_milestones",
+    "requires_deliverables",
+    "requires_guarantee",
+    "requires_probation",
+    "requires_payroll_activation",
+    "requires_procurement_source",
+    "allows_renewal",
+    "allows_amendment",
+    "allows_open_ended_period",
+    "confidential_by_default",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "type_name",
+      "label": "Contract Type",
+      "fieldtype": "Data",
+      "unique": 1,
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "category",
+      "label": "Category",
+      "fieldtype": "Select",
+      "options": "Employment\nProcurement\nSupply\nService\nWorks\nConsultancy\nVolunteer\nInternship\nPartnership\nCustomer\nFramework Agreement\nFunding / Grant\nLease\nMemorandum of Understanding\nOther",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "is_active",
+      "label": "Active",
+      "fieldtype": "Check",
+      "default": "1",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "party_section",
+      "label": "Party Rules",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "allowed_party_types",
+      "label": "Allowed Standard Party Types",
+      "fieldtype": "Small Text",
+      "description": "One standard party DocType per line, for example Customer, Supplier, or Employee."
+    },
+    {
+      "fieldname": "default_party_type",
+      "label": "Default Standard Party Type",
+      "fieldtype": "Select",
+      "options": "\nCustomer\nSupplier\nEmployee"
+    },
+    {
+      "fieldname": "configuration_section",
+      "label": "Defaults and Lifecycle",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "default_contract_template",
+      "label": "Default Contract Template",
+      "fieldtype": "Link",
+      "options": "Contract Template"
+    },
+    {
+      "fieldname": "numbering_series",
+      "label": "Preferred Numbering Series",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "default_duration_months",
+      "label": "Default Duration (Months)",
+      "fieldtype": "Int",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "renewal_notice_days",
+      "label": "Renewal Notice (Days)",
+      "fieldtype": "Int",
+      "default": "30",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "termination_notice_days",
+      "label": "Termination Notice (Days)",
+      "fieldtype": "Int",
+      "default": "30",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "features_section",
+      "label": "Required Features",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "requires_value",
+      "label": "Requires Contract Value",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "requires_funding_context",
+      "label": "Requires Funding Context",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "requires_milestones",
+      "label": "Requires Milestones",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "requires_deliverables",
+      "label": "Requires Deliverables",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "requires_guarantee",
+      "label": "Requires Guarantee",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "requires_probation",
+      "label": "Requires Probation",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "requires_payroll_activation",
+      "label": "Requires Payroll Activation",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "requires_procurement_source",
+      "label": "Requires Procurement Source",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "allows_renewal",
+      "label": "Allows Renewal",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "allows_amendment",
+      "label": "Allows Amendment",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "allows_open_ended_period",
+      "label": "Allows Open-ended Period",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "confidential_by_default",
+      "label": "Confidential by Default",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "notes",
+      "label": "Notes",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    },
+    {
+      "role": "HR Manager",
+      "read": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1
+    },
+    {
+      "role": "Projects Manager",
+      "read": 1
+    },
+    {
+      "role": "Accounts Manager",
+      "read": 1
+    },
+    {
+      "role": "Volunteer Manager",
+      "read": 1
+    }
+  ]
+}

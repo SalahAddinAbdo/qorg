@@ -2,7 +2,7 @@
   "doctype": "Report",
   "name": "Contract Commitments",
   "report_name": "Contract Commitments",
-  "ref_doctype": "Procurement Contract",
+  "ref_doctype": "Contract",
   "report_type": "Script Report",
   "is_standard": "Yes",
   "module": "QOrg",

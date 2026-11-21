@@ -9,8 +9,8 @@ SPECS = (
     ("Procurement - Approved Purchase Request", "Material Request", "docstatus", 1, "Approved Purchase Request", "Procurement Officer"),
     ("Procurement - Process Assignment", "Procurement Process", "status", "Draft", "Procurement Process Assignment", "Procurement Officer"),
     ("Procurement - Bid Submission Receipt", "Procurement Submission", "submission_status", "Submitted", "Bid Submission Receipt", "owner"),
-    ("Procurement - Contract Approval", "Procurement Contract", "status", "Under Approval", "Contract Approval Required", "Procurement Manager"),
-    ("Procurement - Contract Activated", "Procurement Contract", "status", "Active", "Contract Activated", "contract_manager"),
+    ("Procurement - Contract Approval", "Contract", "status", "Under Approval", "Contract Approval Required", "Procurement Manager"),
+    ("Procurement - Contract Activated", "Contract", "status", "Active", "Contract Activated", "contract_manager"),
 )
 
 # Exact application-owned predecessors and duplicates found in the exported Notification records.

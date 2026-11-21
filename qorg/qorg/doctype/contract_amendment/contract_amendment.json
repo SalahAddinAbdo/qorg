@@ -1,0 +1,224 @@
+{
+  "doctype": "DocType",
+  "name": "Contract Amendment",
+  "module": "QOrg",
+  "custom": 0,
+  "is_submittable": 1,
+  "track_changes": 1,
+  "autoname": "naming_series:",
+  "title_field": "contract",
+  "field_order": [
+    "naming_series",
+    "contract",
+    "amendment_type",
+    "effective_date",
+    "status",
+    "details_section",
+    "reason",
+    "change_summary",
+    "values_section",
+    "old_start_date",
+    "new_start_date",
+    "old_end_date",
+    "new_end_date",
+    "value_column",
+    "currency",
+    "old_contract_value",
+    "new_contract_value",
+    "approval_section",
+    "approved_by",
+    "approved_on",
+    "signed_amendment",
+    "supersedes_amendment",
+    "applied_on"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "CAM-.YYYY.-.#####",
+      "default": "CAM-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "contract",
+      "label": "Contract",
+      "fieldtype": "Link",
+      "options": "Contract",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "amendment_type",
+      "label": "Amendment Type",
+      "fieldtype": "Select",
+      "options": "Administrative\nScope\nValue\nDuration\nParty\nTerms\nRenewal\nSuspension\nTermination\nOther",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "effective_date",
+      "label": "Effective Date",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nUnder Review\nApproved\nApplied\nRejected\nCancelled",
+      "default": "Draft",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "details_section",
+      "label": "Change Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "reason",
+      "label": "Reason",
+      "fieldtype": "Small Text",
+      "reqd": 1
+    },
+    {
+      "fieldname": "change_summary",
+      "label": "Change Summary",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "values_section",
+      "label": "Structured Changes",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "old_start_date",
+      "label": "Previous Start Date",
+      "fieldtype": "Date",
+      "read_only": 1
+    },
+    {
+      "fieldname": "new_start_date",
+      "label": "New Start Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "old_end_date",
+      "label": "Previous End Date",
+      "fieldtype": "Date",
+      "read_only": 1
+    },
+    {
+      "fieldname": "new_end_date",
+      "label": "New End Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "value_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "currency",
+      "label": "Currency",
+      "fieldtype": "Link",
+      "options": "Currency"
+    },
+    {
+      "fieldname": "old_contract_value",
+      "label": "Previous Contract Value",
+      "fieldtype": "Currency",
+      "options": "currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "new_contract_value",
+      "label": "New Contract Value",
+      "fieldtype": "Currency",
+      "options": "currency"
+    },
+    {
+      "fieldname": "approval_section",
+      "label": "Approval and Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "approved_by",
+      "label": "Approved By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "approved_on",
+      "label": "Approved On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "signed_amendment",
+      "label": "Signed Amendment",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "supersedes_amendment",
+      "label": "Supersedes Amendment",
+      "fieldtype": "Link",
+      "options": "Contract Amendment"
+    },
+    {
+      "fieldname": "applied_on",
+      "label": "Applied On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "HR Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Projects Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    },
+    {
+      "role": "Accounts Manager",
+      "read": 1
+    },
+    {
+      "role": "Auditor",
+      "read": 1
+    }
+  ]
+}
