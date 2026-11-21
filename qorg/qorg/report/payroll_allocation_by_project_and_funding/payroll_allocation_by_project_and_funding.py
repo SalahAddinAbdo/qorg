@@ -1,0 +1,6 @@
+from frappe.utils import flt
+from qorg.qorg.payroll_workforce_allocation.reporting import allocation_rows,summary,col
+def execute(filters=None):
+ rows=allocation_rows(filters);cols=[col("allocation_run","Allocation Run","Link","Payroll Allocation Run",170,True),col("employee","Employee","Link","Employee",160,True),col("project","Project","Link","Project",170),col("funding_agreement","Funding Agreement","Link","Funding Agreement",180),col("budget_line","Budget Line","Link","Budget Line",170),col("work_share","Work Share","Percent",width=110),col("currency","Currency","Link","Currency",90),col("allocated_amount","Allocated Amount","Currency","currency",140),col("company_currency_amount","Company Currency Amount","Currency",width=170)];total=sum(flt(x.get("company_currency_amount")) for x in rows);cards=[summary(total,"Allocated Cost"),summary(len({x.get("project") for x in rows if x.get("project")}),"Projects","Int"),summary(len({x.get("funding_agreement") for x in rows if x.get("funding_agreement")}),"Funding Agreements","Int")];by={}
+ for x in rows:by[x.get("project") or "Unspecified"]=by.get(x.get("project") or "Unspecified",0)+flt(x.get("company_currency_amount"))
+ chart={"data":{"labels":list(by)[:20],"datasets":[{"name":"Allocated Cost","values":list(by.values())[:20]}]},"type":"bar"};return cols,rows,None,chart,cards

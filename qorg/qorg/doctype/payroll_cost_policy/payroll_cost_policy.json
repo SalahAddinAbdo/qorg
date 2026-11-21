@@ -1,0 +1,249 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "creation": "2026-11-21 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "policy_tab",
+    "naming_series",
+    "scope_section",
+    "policy_name",
+    "company",
+    "donor",
+    "funding_agreement",
+    "scope_column",
+    "effective_from",
+    "effective_to",
+    "priority",
+    "status",
+    "supersedes_policy",
+    "fingerprint",
+    "rules_tab",
+    "rules_section",
+    "component_rules",
+    "liabilities_tab",
+    "liabilities_section",
+    "liability_rules",
+    "history_tab",
+    "history_section",
+    "notes_section",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "policy_tab",
+      "fieldtype": "Tab Break",
+      "label": "Policy"
+    },
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Naming Series",
+      "options": "PCP-.YYYY.-.#####",
+      "default": "PCP-.YYYY.-.#####",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "scope_section",
+      "fieldtype": "Section Break",
+      "label": "Scope and Validity"
+    },
+    {
+      "fieldname": "policy_name",
+      "fieldtype": "Data",
+      "label": "Policy Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "donor",
+      "fieldtype": "Link",
+      "label": "Donor",
+      "options": "Donor"
+    },
+    {
+      "fieldname": "funding_agreement",
+      "fieldtype": "Link",
+      "label": "Funding Agreement",
+      "options": "Funding Agreement"
+    },
+    {
+      "fieldname": "scope_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "effective_from",
+      "fieldtype": "Date",
+      "label": "Effective From",
+      "reqd": 1
+    },
+    {
+      "fieldname": "effective_to",
+      "fieldtype": "Date",
+      "label": "Effective To"
+    },
+    {
+      "fieldname": "priority",
+      "fieldtype": "Int",
+      "label": "Priority",
+      "default": "10"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nActive\nSuperseded\nExpired",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "supersedes_policy",
+      "fieldtype": "Link",
+      "label": "Supersedes Policy",
+      "options": "Payroll Cost Policy"
+    },
+    {
+      "fieldname": "fingerprint",
+      "fieldtype": "Data",
+      "label": "Fingerprint",
+      "read_only": 1,
+      "hidden": 1,
+      "print_hide": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "rules_tab",
+      "fieldtype": "Tab Break",
+      "label": "Component Rules"
+    },
+    {
+      "fieldname": "rules_section",
+      "fieldtype": "Section Break",
+      "label": "Component Rules"
+    },
+    {
+      "fieldname": "component_rules",
+      "fieldtype": "Table",
+      "label": "Component Rules",
+      "options": "Payroll Component Rule",
+      "reqd": 1
+    },
+    {
+      "fieldname": "liabilities_tab",
+      "fieldtype": "Tab Break",
+      "label": "Liability Rules"
+    },
+    {
+      "fieldname": "liabilities_section",
+      "fieldtype": "Section Break",
+      "label": "Liability Rules"
+    },
+    {
+      "fieldname": "liability_rules",
+      "fieldtype": "Table",
+      "label": "Liability Rules",
+      "options": "Payroll Liability Rule"
+    },
+    {
+      "fieldname": "history_tab",
+      "fieldtype": "Tab Break",
+      "label": "History and Notes"
+    },
+    {
+      "fieldname": "history_section",
+      "fieldtype": "Section Break",
+      "label": "History"
+    },
+    {
+      "fieldname": "notes_section",
+      "fieldtype": "Section Break",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes",
+      "columns": 0
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-11-21 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "Payroll Cost Policy",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "read": 1,
+      "write": 1,
+      "delete": 1,
+      "role": "System Manager",
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "create": 1,
+      "read": 1,
+      "write": 1,
+      "role": "Payroll Manager",
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "read": 1,
+      "role": "Accounts Manager",
+      "submit": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "read": 1,
+      "role": "HR Manager"
+    },
+    {
+      "read": 1,
+      "role": "Grant Manager",
+      "submit": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "read": 1,
+      "role": "Auditor"
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "is_submittable": 1,
+  "autoname": "naming_series:",
+  "title_field": "policy_name",
+  "search_fields": "company,status,funding_agreement,donor",
+  "show_name_in_global_search": 1
+}

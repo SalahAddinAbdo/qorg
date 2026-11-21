@@ -1,0 +1,4 @@
+from frappe.utils import flt
+from qorg.qorg.payroll_workforce_allocation.reporting import liability_rows,summary,col
+def execute(filters=None):
+ rows=liability_rows(filters);cols=[col("allocation_run","Allocation Run","Link","Payroll Allocation Run",170,True),col("account","Liability Account","Link","Account",190,True),col("company","Company","Link","Company",150),col("payroll_entry","Payroll Entry","Link","Payroll Entry",160),col("accrued","Accrued","Currency",width=130),col("paid","Paid","Currency",width=130),col("outstanding","Outstanding","Currency",width=130),col("liability_reconciliation_status","Liability Status","Data",width=130),col("payment_reconciliation_status","Payment Status","Data",width=130)];cards=[summary(sum(flt(x.accrued) for x in rows),"Accrued"),summary(sum(flt(x.paid) for x in rows),"Paid"),summary(sum(flt(x.outstanding) for x in rows),"Outstanding","Currency","Orange")];return cols,rows,None,None,cards

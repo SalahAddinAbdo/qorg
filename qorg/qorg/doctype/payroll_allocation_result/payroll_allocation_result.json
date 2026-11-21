@@ -1,0 +1,321 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "creation": "2026-11-21 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "employee",
+    "allocation_source_section",
+    "salary_slip",
+    "salary_component",
+    "allocation_source_column",
+    "component_category",
+    "component_amount",
+    "amounts_section",
+    "allocation_basis",
+    "work_share",
+    "eligible_percentage",
+    "allocated_amount",
+    "amounts_column",
+    "currency",
+    "exchange_rate",
+    "company_currency_amount",
+    "ineligible_amount",
+    "project",
+    "destination_dimensions_section",
+    "cost_center",
+    "destination_dimensions_column",
+    "funding_agreement",
+    "budget_line",
+    "funding_type",
+    "evidence_type",
+    "audit_evidence_section",
+    "evidence_reference",
+    "evidence_payload",
+    "policy_reference",
+    "audit_evidence_column",
+    "approval_reference_type",
+    "approval_reference",
+    "dimension_snapshot",
+    "source_fingerprint"
+  ],
+  "fields": [
+    {
+      "fieldname": "employee",
+      "fieldtype": "Link",
+      "label": "Employee",
+      "options": "Employee",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "allocation_source_section",
+      "fieldtype": "Section Break",
+      "label": "Allocation Source"
+    },
+    {
+      "fieldname": "salary_slip",
+      "fieldtype": "Link",
+      "label": "Salary Slip",
+      "options": "Salary Slip",
+      "reqd": 1
+    },
+    {
+      "fieldname": "salary_component",
+      "fieldtype": "Link",
+      "label": "Salary Component",
+      "options": "Salary Component",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "allocation_source_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "component_category",
+      "fieldtype": "Data",
+      "label": "Component Category",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "component_amount",
+      "fieldtype": "Currency",
+      "label": "Component Amount",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "amounts_section",
+      "fieldtype": "Section Break",
+      "label": "Amounts"
+    },
+    {
+      "fieldname": "allocation_basis",
+      "fieldtype": "Data",
+      "label": "Allocation Basis",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "work_share",
+      "fieldtype": "Percent",
+      "label": "Work Share",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "eligible_percentage",
+      "fieldtype": "Percent",
+      "label": "Eligible Percentage",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "allocated_amount",
+      "fieldtype": "Currency",
+      "label": "Allocated Amount",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 2,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "amounts_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "currency",
+      "fieldtype": "Link",
+      "label": "Currency",
+      "options": "Currency",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "exchange_rate",
+      "fieldtype": "Float",
+      "label": "Exchange Rate",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "company_currency_amount",
+      "fieldtype": "Currency",
+      "label": "Company Currency Amount",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "ineligible_amount",
+      "fieldtype": "Currency",
+      "label": "Ineligible Amount",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "project",
+      "fieldtype": "Link",
+      "label": "Project",
+      "options": "Project",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 2,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "destination_dimensions_section",
+      "fieldtype": "Section Break",
+      "label": "Destination and Dimensions"
+    },
+    {
+      "fieldname": "cost_center",
+      "fieldtype": "Link",
+      "label": "Cost Center",
+      "options": "Cost Center",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "destination_dimensions_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "funding_agreement",
+      "fieldtype": "Link",
+      "label": "Funding Agreement",
+      "options": "Funding Agreement",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 2,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "budget_line",
+      "fieldtype": "Link",
+      "label": "Budget Line",
+      "options": "Budget Line",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "funding_type",
+      "fieldtype": "Data",
+      "label": "Funding Type",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "evidence_type",
+      "fieldtype": "Data",
+      "label": "Evidence Type",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "audit_evidence_section",
+      "fieldtype": "Section Break",
+      "label": "Evidence and Audit"
+    },
+    {
+      "fieldname": "evidence_reference",
+      "fieldtype": "Dynamic Link",
+      "label": "Evidence Reference",
+      "options": "evidence_type",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "evidence_payload",
+      "fieldtype": "JSON",
+      "label": "Evidence Payload",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "policy_reference",
+      "fieldtype": "Link",
+      "label": "Policy Reference",
+      "options": "Payroll Cost Policy",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "audit_evidence_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "approval_reference_type",
+      "fieldtype": "Link",
+      "label": "Approval Reference Type",
+      "options": "DocType",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "approval_reference",
+      "fieldtype": "Dynamic Link",
+      "label": "Approval Reference",
+      "options": "approval_reference_type",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "dimension_snapshot",
+      "fieldtype": "Long Text",
+      "label": "Dimension Snapshot",
+      "read_only": 1,
+      "hidden": 1,
+      "print_hide": 1,
+      "no_copy": 1,
+      "columns": 0
+    },
+    {
+      "fieldname": "source_fingerprint",
+      "fieldtype": "Data",
+      "label": "Source Fingerprint",
+      "read_only": 1,
+      "hidden": 1,
+      "print_hide": 1,
+      "no_copy": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-11-21 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "Payroll Allocation Result",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "read": 1,
+      "write": 1,
+      "delete": 1,
+      "role": "System Manager"
+    },
+    {
+      "create": 1,
+      "read": 1,
+      "write": 1,
+      "role": "Payroll Manager"
+    },
+    {
+      "read": 1,
+      "role": "Accounts Manager"
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "istable": 1,
+  "editable_grid": 0
+}

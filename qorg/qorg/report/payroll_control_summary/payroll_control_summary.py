@@ -1,0 +1,7 @@
+import frappe
+from frappe.utils import flt
+from qorg.qorg.payroll_workforce_allocation.reporting import run_names,summary,col
+def execute(filters=None):
+ names=run_names(filters);rows=frappe.get_all("Payroll Allocation Run",filters={"name":["in",names]},fields=["name","company","payroll_entry","posting_date","status","total_employment_cost","total_allocated_cost","allocation_difference","commitment_status","reconciliation_status"],order_by="posting_date desc,name desc",limit_page_length=0);cols=[col("name","Allocation Run","Link","Payroll Allocation Run",170,True),col("payroll_entry","Payroll Entry","Link","Payroll Entry",170,True),col("company","Company","Link","Company",150),col("posting_date","Posting Date","Date",width=110),col("status","Status","Data",width=120),col("total_employment_cost","Employment Cost","Currency",width=140),col("total_allocated_cost","Allocated Cost","Currency",width=140),col("allocation_difference","Difference","Currency",width=120),col("commitment_status","Commitment","Data",width=120),col("reconciliation_status","Reconciliation","Data",width=120)];cards=[summary(len(rows),"Runs","Int"),summary(sum(flt(x.total_allocated_cost) for x in rows),"Allocated Cost"),summary(sum(abs(flt(x.allocation_difference)) for x in rows),"Open Difference","Currency","Red")];by={}
+ for x in rows:by[x.status]=by.get(x.status,0)+1
+ chart={"data":{"labels":list(by),"datasets":[{"values":list(by.values())}]},"type":"donut"};return cols,rows,None,chart,cards

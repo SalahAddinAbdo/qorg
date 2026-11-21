@@ -1,0 +1,191 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "creation": "2026-11-21 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "salary_component",
+    "component_section",
+    "cost_treatment",
+    "component_column",
+    "allocation_basis",
+    "source_salary_component",
+    "funding_treatment",
+    "eligibility_section",
+    "eligible_percentage",
+    "eligibility_column",
+    "maximum_eligible_amount",
+    "requires_prior_approval",
+    "fallback_section",
+    "fallback_project",
+    "fallback_column",
+    "fallback_funding_agreement",
+    "fallback_budget_line",
+    "component_fingerprint",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "salary_component",
+      "fieldtype": "Link",
+      "label": "Salary Component",
+      "options": "Salary Component",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "component_section",
+      "fieldtype": "Section Break",
+      "label": "Component"
+    },
+    {
+      "fieldname": "cost_treatment",
+      "fieldtype": "Select",
+      "label": "Cost Treatment",
+      "options": "Allocable Earning\nEmployer Contribution\nEmployee Deduction\nInformational\nExcluded",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "component_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "allocation_basis",
+      "fieldtype": "Select",
+      "label": "Allocation Basis",
+      "options": "Work Allocation\nBasic Salary Allocation\nTaxable Earnings Allocation\nNet Pay Allocation\nSource Component Allocation\nExplicit Origin\nDo Not Allocate",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "source_salary_component",
+      "fieldtype": "Link",
+      "label": "Source Salary Component",
+      "options": "Salary Component",
+      "depends_on": "eval:[\"Basic Salary Allocation\",\"Source Component Allocation\"].includes(doc.allocation_basis)"
+    },
+    {
+      "fieldname": "funding_treatment",
+      "fieldtype": "Select",
+      "label": "Funding Treatment",
+      "options": "Eligible\nPartially Eligible\nIneligible\nRequires Approval",
+      "reqd": 1,
+      "default": "Eligible",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "eligibility_section",
+      "fieldtype": "Section Break",
+      "label": "Funding Eligibility"
+    },
+    {
+      "fieldname": "eligible_percentage",
+      "fieldtype": "Percent",
+      "label": "Eligible Percentage",
+      "default": "100",
+      "in_list_view": 1,
+      "columns": 1,
+      "depends_on": "eval:doc.funding_treatment==\"Partially Eligible\"",
+      "mandatory_depends_on": "eval:doc.funding_treatment==\"Partially Eligible\""
+    },
+    {
+      "fieldname": "eligibility_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "maximum_eligible_amount",
+      "fieldtype": "Currency",
+      "label": "Maximum Eligible Amount"
+    },
+    {
+      "fieldname": "requires_prior_approval",
+      "fieldtype": "Check",
+      "label": "Requires Prior Approval"
+    },
+    {
+      "fieldname": "fallback_section",
+      "fieldtype": "Section Break",
+      "label": "Fallback and Approval"
+    },
+    {
+      "fieldname": "fallback_project",
+      "fieldtype": "Link",
+      "label": "Fallback Project",
+      "options": "Project",
+      "in_list_view": 1,
+      "columns": 2,
+      "depends_on": "eval:[\"Partially Eligible\",\"Ineligible\"].includes(doc.funding_treatment)"
+    },
+    {
+      "fieldname": "fallback_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "fallback_funding_agreement",
+      "fieldtype": "Link",
+      "label": "Fallback Funding Agreement",
+      "options": "Funding Agreement",
+      "depends_on": "eval:[\"Partially Eligible\",\"Ineligible\"].includes(doc.funding_treatment)"
+    },
+    {
+      "fieldname": "fallback_budget_line",
+      "fieldtype": "Link",
+      "label": "Fallback Budget Line",
+      "options": "Budget Line",
+      "depends_on": "eval:[\"Partially Eligible\",\"Ineligible\"].includes(doc.funding_treatment)"
+    },
+    {
+      "fieldname": "component_fingerprint",
+      "fieldtype": "Data",
+      "label": "Component Fingerprint",
+      "read_only": 1,
+      "hidden": 1,
+      "print_hide": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes",
+      "columns": 0
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-11-21 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "Payroll Component Rule",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "read": 1,
+      "write": 1,
+      "delete": 1,
+      "role": "System Manager"
+    },
+    {
+      "create": 1,
+      "read": 1,
+      "write": 1,
+      "role": "Payroll Manager"
+    },
+    {
+      "read": 1,
+      "role": "Accounts Manager"
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "istable": 1,
+  "editable_grid": 1
+}

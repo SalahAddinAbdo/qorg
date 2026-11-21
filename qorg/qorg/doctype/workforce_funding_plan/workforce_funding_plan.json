@@ -1,0 +1,251 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "creation": "2026-11-21 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "plan_tab",
+    "naming_series",
+    "identity_section",
+    "employee",
+    "employee_name",
+    "company",
+    "identity_column",
+    "effective_from",
+    "effective_to",
+    "status",
+    "method_section",
+    "allocation_method",
+    "require_actual_effort_reconciliation",
+    "method_column",
+    "supersedes_plan",
+    "fingerprint",
+    "destinations_tab",
+    "destinations_section",
+    "destinations",
+    "history_tab",
+    "history_section",
+    "history_column",
+    "notes_section",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "plan_tab",
+      "fieldtype": "Tab Break",
+      "label": "Plan"
+    },
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Naming Series",
+      "options": "WFP-.YYYY.-.#####",
+      "default": "WFP-.YYYY.-.#####",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "identity_section",
+      "fieldtype": "Section Break",
+      "label": "Employee and Period"
+    },
+    {
+      "fieldname": "employee",
+      "fieldtype": "Link",
+      "label": "Employee",
+      "options": "Employee",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "employee_name",
+      "fieldtype": "Data",
+      "label": "Employee Name",
+      "fetch_from": "employee.employee_name",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company",
+      "fetch_from": "employee.company",
+      "read_only": 1,
+      "reqd": 1,
+      "in_standard_filter": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "identity_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "effective_from",
+      "fieldtype": "Date",
+      "label": "Effective From",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "effective_to",
+      "fieldtype": "Date",
+      "label": "Effective To",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nActive\nSuspended\nExpired\nSuperseded",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "method_section",
+      "fieldtype": "Section Break",
+      "label": "Allocation Method"
+    },
+    {
+      "fieldname": "allocation_method",
+      "fieldtype": "Select",
+      "label": "Allocation Method",
+      "options": "Single Destination\nFixed Percentage\nApproved Timesheet\nMonthly Certified Effort\nHybrid",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "require_actual_effort_reconciliation",
+      "fieldtype": "Check",
+      "label": "Require Actual Effort Reconciliation"
+    },
+    {
+      "fieldname": "method_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "supersedes_plan",
+      "fieldtype": "Link",
+      "label": "Supersedes Plan",
+      "options": "Workforce Funding Plan"
+    },
+    {
+      "fieldname": "fingerprint",
+      "fieldtype": "Data",
+      "label": "Fingerprint",
+      "read_only": 1,
+      "hidden": 1,
+      "print_hide": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "destinations_tab",
+      "fieldtype": "Tab Break",
+      "label": "Funding Destinations"
+    },
+    {
+      "fieldname": "destinations_section",
+      "fieldtype": "Section Break",
+      "label": "Funding Destinations"
+    },
+    {
+      "fieldname": "destinations",
+      "fieldtype": "Table",
+      "label": "Funding Destinations",
+      "options": "Workforce Funding Destination",
+      "reqd": 1
+    },
+    {
+      "fieldname": "history_tab",
+      "fieldtype": "Tab Break",
+      "label": "History and Notes"
+    },
+    {
+      "fieldname": "history_section",
+      "fieldtype": "Section Break",
+      "label": "History"
+    },
+    {
+      "fieldname": "history_column",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "notes_section",
+      "fieldtype": "Section Break",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes",
+      "columns": 0
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-11-21 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "Workforce Funding Plan",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "read": 1,
+      "write": 1,
+      "delete": 1,
+      "role": "System Manager",
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "create": 1,
+      "read": 1,
+      "write": 1,
+      "role": "Payroll Manager",
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "read": 1,
+      "role": "Accounts Manager"
+    },
+    {
+      "read": 1,
+      "role": "HR Manager"
+    },
+    {
+      "read": 1,
+      "role": "Grant Manager"
+    },
+    {
+      "read": 1,
+      "role": "Auditor"
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "is_submittable": 1,
+  "autoname": "naming_series:",
+  "title_field": "employee",
+  "search_fields": "employee,company,status,allocation_method",
+  "show_name_in_global_search": 1
+}

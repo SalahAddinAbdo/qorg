@@ -1,0 +1,159 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "creation": "2026-11-21 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "project",
+    "destination_section",
+    "allocation_percentage",
+    "allocation_section",
+    "cost_center",
+    "destination_column",
+    "funding_agreement",
+    "budget_line",
+    "funding_type",
+    "allocation_column",
+    "effective_from",
+    "effective_to",
+    "priority",
+    "is_default",
+    "notes",
+    "destination_notes_section"
+  ],
+  "fields": [
+    {
+      "fieldname": "project",
+      "fieldtype": "Link",
+      "label": "Project",
+      "options": "Project",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "destination_section",
+      "fieldtype": "Section Break",
+      "label": "Destination"
+    },
+    {
+      "fieldname": "allocation_percentage",
+      "fieldtype": "Percent",
+      "label": "Allocation Percentage",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "allocation_section",
+      "fieldtype": "Section Break",
+      "label": "Allocation and Validity"
+    },
+    {
+      "fieldname": "cost_center",
+      "fieldtype": "Link",
+      "label": "Cost Center",
+      "options": "Cost Center",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "destination_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "funding_agreement",
+      "fieldtype": "Link",
+      "label": "Funding Agreement",
+      "options": "Funding Agreement",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "budget_line",
+      "fieldtype": "Link",
+      "label": "Budget Line",
+      "options": "Budget Line",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "funding_type",
+      "fieldtype": "Select",
+      "label": "Funding Type",
+      "options": "Donor Funded\nOrganization Funded\nCost Share\nMatching Contribution\nOther Internal Funding",
+      "reqd": 1,
+      "default": "Donor Funded",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "allocation_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "effective_from",
+      "fieldtype": "Date",
+      "label": "Effective From"
+    },
+    {
+      "fieldname": "effective_to",
+      "fieldtype": "Date",
+      "label": "Effective To"
+    },
+    {
+      "fieldname": "priority",
+      "fieldtype": "Int",
+      "label": "Priority",
+      "default": "10"
+    },
+    {
+      "fieldname": "is_default",
+      "fieldtype": "Check",
+      "label": "Is Default",
+      "default": "0"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "destination_notes_section",
+      "fieldtype": "Section Break",
+      "label": "Notes"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-11-21 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "Workforce Funding Destination",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "read": 1,
+      "write": 1,
+      "delete": 1,
+      "role": "System Manager"
+    },
+    {
+      "create": 1,
+      "read": 1,
+      "write": 1,
+      "role": "Payroll Manager"
+    },
+    {
+      "read": 1,
+      "role": "Accounts Manager"
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "istable": 1,
+  "editable_grid": 1
+}

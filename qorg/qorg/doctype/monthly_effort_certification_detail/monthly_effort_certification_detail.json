@@ -1,0 +1,109 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "project",
+    "effort_destination_section",
+    "cost_center",
+    "effort_destination_column",
+    "funding_agreement",
+    "budget_line",
+    "hours",
+    "effort_values_section",
+    "percentage",
+    "effort_values_column",
+    "task",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "project",
+      "fieldtype": "Link",
+      "label": "Project",
+      "options": "Project",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 3
+    },
+    {
+      "fieldname": "effort_destination_section",
+      "fieldtype": "Section Break",
+      "label": "Destination"
+    },
+    {
+      "fieldname": "cost_center",
+      "fieldtype": "Link",
+      "label": "Cost Center",
+      "options": "Cost Center",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "effort_destination_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "funding_agreement",
+      "fieldtype": "Link",
+      "label": "Funding Agreement",
+      "options": "Funding Agreement",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "budget_line",
+      "fieldtype": "Link",
+      "label": "Budget Line",
+      "options": "Budget Line"
+    },
+    {
+      "fieldname": "hours",
+      "fieldtype": "Float",
+      "label": "Hours",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "effort_values_section",
+      "fieldtype": "Section Break",
+      "label": "Effort"
+    },
+    {
+      "fieldname": "percentage",
+      "fieldtype": "Percent",
+      "label": "Percentage",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "effort_values_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "task",
+      "fieldtype": "Link",
+      "label": "Task",
+      "options": "Task"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes",
+      "columns": 0
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "istable": 1,
+  "editable_grid": 1,
+  "module": "QOrg",
+  "name": "Monthly Effort Certification Detail",
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}
