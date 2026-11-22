@@ -1,0 +1,285 @@
+{
+  "doctype": "DocType",
+  "name": "Employee Document Requirement",
+  "module": "QOrg",
+  "custom": 0,
+  "track_changes": 1,
+  "field_order": [
+    "scope_section",
+    "naming_series",
+    "document_type",
+    "company",
+    "branch",
+    "department",
+    "designation",
+    "scope_column",
+    "employee_grade",
+    "employment_type",
+    "contract_type",
+    "participation_type",
+    "project",
+    "effective_from",
+    "effective_to",
+    "is_active",
+    "rules_section",
+    "requirement_level",
+    "renewal_required",
+    "verification_required",
+    "valid_access_reference_required",
+    "rules_column",
+    "blocks_employment",
+    "blocks_payroll",
+    "blocks_attendance",
+    "blocks_leave",
+    "blocks_onboarding",
+    "blocks_contract",
+    "warning_only",
+    "timing_section",
+    "required_before_joining",
+    "required_within_days",
+    "required_before_contract_signature",
+    "required_before_payroll",
+    "required_before_site_access",
+    "condition_notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "scope_section",
+      "label": "Requirement Scope",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "EDR-.YYYY.-.#####",
+      "default": "EDR-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "document_type",
+      "label": "Document Type",
+      "fieldtype": "Link",
+      "options": "Employee Document Type",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "branch",
+      "label": "Branch",
+      "fieldtype": "Link",
+      "options": "Branch"
+    },
+    {
+      "fieldname": "department",
+      "label": "Department",
+      "fieldtype": "Link",
+      "options": "Department"
+    },
+    {
+      "fieldname": "designation",
+      "label": "Designation",
+      "fieldtype": "Link",
+      "options": "Designation"
+    },
+    {
+      "fieldname": "scope_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "employee_grade",
+      "label": "Employee Grade",
+      "fieldtype": "Link",
+      "options": "Employee Grade"
+    },
+    {
+      "fieldname": "employment_type",
+      "label": "Employment Type",
+      "fieldtype": "Link",
+      "options": "Employment Type"
+    },
+    {
+      "fieldname": "contract_type",
+      "label": "Contract Type",
+      "fieldtype": "Link",
+      "options": "QOrg Contract Type"
+    },
+    {
+      "fieldname": "participation_type",
+      "label": "Participation Type",
+      "fieldtype": "Link",
+      "options": "Participation Type"
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project"
+    },
+    {
+      "fieldname": "effective_from",
+      "label": "Effective From",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "effective_to",
+      "label": "Effective To",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "is_active",
+      "label": "Active",
+      "fieldtype": "Check",
+      "default": "1",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "rules_section",
+      "label": "Requirement Rules",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "requirement_level",
+      "label": "Requirement Level",
+      "fieldtype": "Select",
+      "options": "Mandatory\nRecommended\nConditional",
+      "default": "Mandatory",
+      "reqd": 1
+    },
+    {
+      "fieldname": "renewal_required",
+      "label": "Renewal Required",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "verification_required",
+      "label": "Verification Required",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "valid_access_reference_required",
+      "label": "Valid Access Reference Required",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "rules_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "blocks_employment",
+      "label": "Blocks Employment Activation",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "blocks_payroll",
+      "label": "Blocks Payroll Activation",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "blocks_attendance",
+      "label": "Blocks Attendance Activation",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "blocks_leave",
+      "label": "Blocks Leave Activation",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "blocks_onboarding",
+      "label": "Blocks Onboarding Completion",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "blocks_contract",
+      "label": "Blocks Contract Activation",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "warning_only",
+      "label": "Warning Only",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "timing_section",
+      "label": "Timing and Conditions",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "required_before_joining",
+      "label": "Required Before Joining",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "required_within_days",
+      "label": "Required Within Days After Joining",
+      "fieldtype": "Int",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "required_before_contract_signature",
+      "label": "Required Before Contract Signature",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "required_before_payroll",
+      "label": "Required Before Payroll Date",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "required_before_site_access",
+      "label": "Required Before Site Access",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "condition_notes",
+      "label": "Condition Notes",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    },
+    {
+      "role": "HR Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    },
+    {
+      "role": "HR User",
+      "read": 1
+    }
+  ],
+  "title_field": "document_type",
+  "autoname": "naming_series:"
+}

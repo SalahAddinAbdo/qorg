@@ -124,7 +124,7 @@ doctype_js = {'Website Settings': 'public/js/website_settings_opportunity_portal
                    'public/js/recruitment_communications.js'],
  'Task Assignment Request': 'public/js/task_assignment_request.js',
  'Task': 'public/js/task.js',
- 'Employee': ['public/js/employee_announcement.js', 'public/js/employee_lifecycle.js', 'public/js/employee_movements.js'],
+ 'Employee': 'public/js/employee_announcement.js',
  'Contract': ['public/js/unified_contract.js'],
  'Contract Template': ['public/js/contract_template_qorg.js'],
  'QOrg Contract Type': ['public/js/qorg_contract_type.js'],
@@ -139,7 +139,7 @@ doctype_js = {'Website Settings': 'public/js/website_settings_opportunity_portal
  'Appointment Letter': ['public/js/recruitment_communications.js'],
  'Employee Onboarding': ['public/js/recruitment_communications.js'],
  'Employee Boarding Activity': ['public/js/recruitment_communications.js'],
- 'Work Commencement Notice': ['public/js/recruitment_communications.js', 'public/js/work_commencement_lifecycle.js'],
+ 'Work Commencement Notice': ['public/js/recruitment_communications.js'],
  'Participation Application': ['public/js/participation_communications.js'],
  'Participation Engagement': ['public/js/participation_communications.js'],
  'Participation Service Log': ['public/js/participation_communications.js'],
@@ -400,9 +400,7 @@ after_install = ['qorg.qorg.finance_budget_grants.provisioning.provision_finance
  'qorg.qorg.inventory_asset_custody.workflows.provision_workflows',
  'qorg.qorg.inventory_asset_custody.print_formats.provision_print_formats']
 
-after_migrate = ['qorg.qorg.employee_lifecycle.movement_provisioning.provision_employee_movements',
- 'qorg.qorg.employee_lifecycle.provisioning.provision_employee_lifecycle',
- 'qorg.qorg.unified_contracts.provisioning.provision_unified_contracts',
+after_migrate = ['qorg.qorg.unified_contracts.provisioning.provision_unified_contracts',
  'qorg.qorg.finance_budget_grants.provisioning.provision_finance_budget_grants',
  'qorg.qorg.workflow.provisioning.provision_workflow_responsibility_routing',
  'qorg.qorg.recruitment_extensions.settings_provisioning.provision_recruitment_settings',
@@ -664,8 +662,7 @@ for _dt,_asset in {
         if _asset not in _current:_current.append(_asset)
     elif _current!=_asset:doctype_js[_dt]=[_current,_asset]
 
-# QORG EMPLOYEE MOVEMENT HOOKS
-
+# QORG EMPLOYEE LIFECYCLE PHASES 7.0-7.5 (additive, idempotent hook registration)
 def _qorg_add_doc_event(doctype, event, method):
     current = doc_events.setdefault(doctype, {}).get(event)
     if not current:
@@ -675,6 +672,50 @@ def _qorg_add_doc_event(doctype, event, method):
             current.append(method)
     elif current != method:
         doc_events[doctype][event] = [current, method]
+
+for _dt, _asset in (
+    ("Employee", "public/js/employee_lifecycle.js"),
+    ("Employee", "public/js/employee_documents.js"),
+    ("Work Commencement Notice", "public/js/work_commencement_lifecycle.js"),
+    ("Employee Document Record", "public/js/employee_document_record.js"),
+):
+    _current = doctype_js.get(_dt)
+    if not _current:
+        doctype_js[_dt] = _asset
+    elif isinstance(_current, list):
+        if _asset not in _current:
+            _current.append(_asset)
+    elif _current != _asset:
+        doctype_js[_dt] = [_current, _asset]
+
+# Employee movement script must be added separately because Python dictionaries cannot repeat Employee.
+for _asset in ("public/js/employee_movements.js",):
+    _current = doctype_js.get("Employee")
+    if isinstance(_current, list):
+        if _asset not in _current:
+            _current.append(_asset)
+    elif _current != _asset:
+        doctype_js["Employee"] = [_current, _asset] if _current else _asset
+
+for _method in (
+    "qorg.qorg.employee_lifecycle.provisioning.provision_employee_lifecycle",
+    "qorg.qorg.employee_lifecycle.movement_provisioning.provision_employee_movements",
+    "qorg.qorg.employee_lifecycle.document_provisioning.provision_employee_documents",
+):
+    if _method not in after_migrate:
+        after_migrate.append(_method)
+
+_document_daily_job = "qorg.qorg.employee_lifecycle.documents.update_document_statuses"
+scheduler_events.setdefault("daily", [])
+if _document_daily_job not in scheduler_events["daily"]:
+    scheduler_events["daily"].append(_document_daily_job)
+
+permission_query_conditions.update({
+    "Employee Document Record": "qorg.qorg.employee_lifecycle.document_permissions.query_condition",
+})
+has_permission.update({
+    "Employee Document Record": "qorg.qorg.employee_lifecycle.document_permissions.has_permission",
+})
 
 for _doctype in ("Employee Promotion", "Employee Transfer"):
     _qorg_add_doc_event(_doctype, "validate", "qorg.qorg.employee_lifecycle.movements.validate_employee_movement")

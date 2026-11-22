@@ -1,0 +1,278 @@
+{
+  "doctype": "DocType",
+  "name": "Employee Document Type",
+  "module": "QOrg",
+  "custom": 0,
+  "track_changes": 1,
+  "field_order": [
+    "identity_section",
+    "document_type_name",
+    "document_code",
+    "document_category",
+    "is_active",
+    "identity_column",
+    "applicable_subject_type",
+    "confidentiality_level",
+    "properties_section",
+    "has_issue_date",
+    "has_expiry_date",
+    "default_validity_months",
+    "renewal_required",
+    "verification_required",
+    "properties_column",
+    "storage_reference_required",
+    "signed_copy_required",
+    "multiple_active_records_allowed",
+    "issuing_authority_required",
+    "reference_number_required",
+    "security_section",
+    "allowed_viewer_roles",
+    "allowed_verifier_roles",
+    "mask_reference_number",
+    "hide_external_url",
+    "exclude_from_general_attachments",
+    "audit_access",
+    "security_column",
+    "expiry_warning_days",
+    "escalation_role",
+    "notify_employee",
+    "notify_hr",
+    "notify_supervisor",
+    "notify_compliance"
+  ],
+  "fields": [
+    {
+      "fieldname": "identity_section",
+      "label": "Identity",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "document_type_name",
+      "label": "Document Type",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "unique": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "document_code",
+      "label": "Document Code",
+      "fieldtype": "Data",
+      "unique": 1
+    },
+    {
+      "fieldname": "document_category",
+      "label": "Category",
+      "fieldtype": "Select",
+      "options": "Identity\nEmployment\nContract\nEducation\nProfessional\nFinancial\nMedical\nTax\nInsurance\nSafeguarding\nConduct\nConfidentiality\nSafety\nAccess\nOther",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "is_active",
+      "label": "Active",
+      "fieldtype": "Check",
+      "default": "1",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "identity_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "applicable_subject_type",
+      "label": "Applicable Subject Type",
+      "fieldtype": "Select",
+      "options": "Employee\nExternal Person\nParticipation Engagement\nAny Person",
+      "default": "Employee",
+      "reqd": 1
+    },
+    {
+      "fieldname": "confidentiality_level",
+      "label": "Confidentiality Level",
+      "fieldtype": "Select",
+      "options": "Normal\nInternal\nConfidential\nHighly Confidential\nRestricted HR\nRestricted Medical\nRestricted Financial\nSafeguarding Restricted",
+      "default": "Confidential",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "properties_section",
+      "label": "Document Properties",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "has_issue_date",
+      "label": "Has Issue Date",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "has_expiry_date",
+      "label": "Has Expiry Date",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "default_validity_months",
+      "label": "Default Validity (Months)",
+      "fieldtype": "Int",
+      "non_negative": 1,
+      "depends_on": "eval:doc.has_expiry_date"
+    },
+    {
+      "fieldname": "renewal_required",
+      "label": "Renewal Required",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "verification_required",
+      "label": "Verification Required",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "properties_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "storage_reference_required",
+      "label": "Storage Reference Required",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "signed_copy_required",
+      "label": "Signed Copy Required",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "multiple_active_records_allowed",
+      "label": "Multiple Active Records Allowed",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "issuing_authority_required",
+      "label": "Issuing Authority Required",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "reference_number_required",
+      "label": "Reference Number Required",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "security_section",
+      "label": "Security and Notifications",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "allowed_viewer_roles",
+      "label": "Allowed Viewer Roles",
+      "fieldtype": "Table MultiSelect",
+      "options": "Has Role"
+    },
+    {
+      "fieldname": "allowed_verifier_roles",
+      "label": "Allowed Verifier Roles",
+      "fieldtype": "Table MultiSelect",
+      "options": "Has Role"
+    },
+    {
+      "fieldname": "mask_reference_number",
+      "label": "Mask Reference Number",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "hide_external_url",
+      "label": "Hide External URL from Standard Views",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "exclude_from_general_attachments",
+      "label": "Exclude from General Employee Attachments",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "audit_access",
+      "label": "Audit Access",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "security_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "expiry_warning_days",
+      "label": "Expiry Warning Days",
+      "fieldtype": "Data",
+      "default": "90,60,30,7",
+      "description": "Comma-separated days before expiry."
+    },
+    {
+      "fieldname": "escalation_role",
+      "label": "Escalation Role",
+      "fieldtype": "Link",
+      "options": "Role"
+    },
+    {
+      "fieldname": "notify_employee",
+      "label": "Notify Employee",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "notify_hr",
+      "label": "Notify HR",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "notify_supervisor",
+      "label": "Notify Supervisor",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "notify_compliance",
+      "label": "Notify Compliance",
+      "fieldtype": "Check",
+      "default": "0"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    },
+    {
+      "role": "HR Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    },
+    {
+      "role": "HR User",
+      "read": 1
+    }
+  ],
+  "title_field": "document_type_name",
+  "autoname": "field:document_type_name"
+}
