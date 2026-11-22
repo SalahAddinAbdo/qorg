@@ -50,7 +50,27 @@ def reconcile_employee_contract_type():
 
 
 def provision_employee_lifecycle():
-    definitions = {dt: rows for dt, rows in FIELDS.items() if frappe.db.exists("DocType", dt)}
+    definitions = {dt: list(rows) for dt, rows in FIELDS.items() if frappe.db.exists("DocType", dt)}
+    if frappe.db.exists("DocType", "Employee"):
+        definitions.setdefault("Employee", []).extend(ACTIVATION_FIELDS)
+    if frappe.db.exists("DocType", "Contract Template"):
+        definitions["Contract Template"] = TEMPLATE_ACTIVATION_FIELDS
     result = create_custom_fields_if_changed(definitions, update=True) if definitions else {"changed": [], "unchanged": []}
     reconcile_employee_contract_type()
     return result
+
+ACTIVATION_FIELDS = [
+    {"fieldname":"qorg_readiness_section","label":"Service Readiness","fieldtype":"Section Break","insert_after":"qorg_leave_effective_date","collapsible":1},
+    {"fieldname":"qorg_service_last_evaluated_on","label":"Last Evaluated On","fieldtype":"Datetime","insert_after":"qorg_readiness_section","read_only":1},
+    {"fieldname":"qorg_service_activated_by","label":"Activated By","fieldtype":"Link","options":"User","insert_after":"qorg_service_last_evaluated_on","read_only":1},
+    {"fieldname":"qorg_service_activated_on","label":"Activated On","fieldtype":"Datetime","insert_after":"qorg_service_activated_by","read_only":1},
+    {"fieldname":"qorg_readiness_column","fieldtype":"Column Break","insert_after":"qorg_service_activated_on"},
+    {"fieldname":"qorg_service_blockers","label":"Activation Blockers","fieldtype":"Small Text","insert_after":"qorg_readiness_column","read_only":1},
+    {"fieldname":"qorg_service_readiness_json","label":"Readiness Snapshot","fieldtype":"Long Text","insert_after":"qorg_service_blockers","read_only":1,"hidden":1},
+]
+
+TEMPLATE_ACTIVATION_FIELDS = [
+    {"fieldname":"qorg_holiday_list_required","label":"Holiday List Required","fieldtype":"Check","default":"1","insert_after":"qorg_attendance_activation_required"},
+    {"fieldname":"qorg_shift_assignment_required","label":"Shift Assignment Required","fieldtype":"Check","default":"0","insert_after":"qorg_holiday_list_required"},
+    {"fieldname":"qorg_leave_policy_required","label":"Leave Policy Assignment Required","fieldtype":"Check","default":"1","insert_after":"qorg_leave_activation_required"},
+]

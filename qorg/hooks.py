@@ -124,7 +124,7 @@ doctype_js = {'Website Settings': 'public/js/website_settings_opportunity_portal
                    'public/js/recruitment_communications.js'],
  'Task Assignment Request': 'public/js/task_assignment_request.js',
  'Task': 'public/js/task.js',
- 'Employee': 'public/js/employee_announcement.js',
+ 'Employee': ['public/js/employee_announcement.js', 'public/js/employee_lifecycle.js'],
  'Contract': ['public/js/unified_contract.js'],
  'Contract Template': ['public/js/contract_template_qorg.js'],
  'QOrg Contract Type': ['public/js/qorg_contract_type.js'],
