@@ -6,44 +6,99 @@
   "track_changes": 1,
   "autoname": "field:type_name",
   "title_field": "type_name",
-  "search_fields": "type_name,category",
+  "search_fields": "type_name,type_code,category",
   "sort_field": "type_name",
   "sort_order": "ASC",
   "field_order": [
+    "identity_section",
     "type_name",
     "category",
     "is_active",
+    "identity_column",
+    "contract_nature",
+    "type_code",
+    "confidential_by_default",
     "party_section",
-    "allowed_party_types",
+    "party_model",
+    "allowed_parties",
+    "require_primary_party",
+    "party_column",
     "default_party_type",
-    "configuration_section",
+    "default_extended_party_doctype",
+    "allow_multiple_parties",
+    "allowed_party_types",
+    "template_section",
     "default_contract_template",
+    "default_language",
+    "default_print_format",
     "numbering_series",
+    "template_column",
     "default_duration_months",
+    "allows_open_ended_period",
+    "auto_renewal_default",
     "renewal_notice_days",
     "termination_notice_days",
-    "features_section",
+    "financial_section",
     "requires_value",
+    "allows_zero_value",
+    "requires_currency",
+    "requires_payment_basis",
+    "requires_ceiling_amount",
+    "financial_column",
     "requires_funding_context",
+    "requires_project",
+    "requires_cost_center",
+    "requires_funding_agreement",
+    "requires_budget_line",
+    "operations_section",
     "requires_milestones",
     "requires_deliverables",
     "requires_guarantee",
+    "requires_signed_document",
+    "operations_column",
+    "requires_procurement_source",
+    "requires_award_decision",
+    "requires_technical_manager",
+    "requires_acceptance",
+    "requires_closure",
+    "hr_section",
+    "requires_employee",
+    "requires_appointment_letter",
+    "requires_work_commencement",
     "requires_probation",
     "requires_payroll_activation",
-    "requires_procurement_source",
-    "allows_renewal",
+    "hr_column",
+    "requires_external_person",
+    "requires_participation_engagement",
+    "requires_supervisor",
+    "requires_expected_hours",
+    "requires_safeguarding_documents",
+    "lifecycle_section",
+    "initial_lifecycle_status",
+    "requires_legal_review",
+    "requires_financial_review",
+    "requires_management_approval",
+    "lifecycle_column",
     "allows_amendment",
-    "allows_open_ended_period",
-    "confidential_by_default",
+    "allows_renewal",
+    "allows_suspension",
+    "allows_termination",
+    "allows_supersession",
+    "notes_section",
     "notes"
   ],
   "fields": [
     {
+      "fieldname": "identity_section",
+      "label": "Identity and Classification",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "type_name",
       "label": "Contract Type",
       "fieldtype": "Data",
-      "unique": 1,
       "reqd": 1,
+      "unique": 1,
       "in_list_view": 1,
       "in_standard_filter": 1
     },
@@ -64,25 +119,96 @@
       "in_list_view": 1
     },
     {
+      "fieldname": "identity_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "contract_nature",
+      "label": "Contract Nature",
+      "fieldtype": "Select",
+      "options": "Legal Contract\nAgreement\nMemorandum\nEngagement\nFramework",
+      "default": "Legal Contract",
+      "reqd": 1
+    },
+    {
+      "fieldname": "type_code",
+      "label": "Internal Contract Type Code",
+      "fieldtype": "Data",
+      "unique": 1
+    },
+    {
+      "fieldname": "confidential_by_default",
+      "label": "Confidential by Default",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
       "fieldname": "party_section",
-      "label": "Party Rules",
+      "label": "Party Policy",
       "fieldtype": "Section Break"
     },
     {
-      "fieldname": "allowed_party_types",
-      "label": "Allowed Standard Party Types",
-      "fieldtype": "Small Text",
-      "description": "One standard party DocType per line, for example Customer, Supplier, or Employee."
+      "fieldname": "party_model",
+      "label": "Party Model",
+      "fieldtype": "Select",
+      "options": "Standard Party\nExtended Party\nEither Standard or Extended\nMultiple Parties\nNo Counterparty",
+      "default": "Standard Party",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "allowed_parties",
+      "label": "Allowed Parties",
+      "fieldtype": "Table",
+      "options": "QOrg Contract Allowed Party",
+      "depends_on": "eval:doc.party_model!='No Counterparty'",
+      "mandatory_depends_on": "eval:doc.party_model!='No Counterparty'"
+    },
+    {
+      "fieldname": "require_primary_party",
+      "label": "Require Primary Party",
+      "fieldtype": "Check",
+      "default": "1",
+      "depends_on": "eval:doc.party_model!='No Counterparty'"
+    },
+    {
+      "fieldname": "party_column",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "default_party_type",
       "label": "Default Standard Party Type",
-      "fieldtype": "Select",
-      "options": "\nCustomer\nSupplier\nEmployee"
+      "fieldtype": "Link",
+      "options": "DocType",
+      "depends_on": "eval:['Standard Party','Either Standard or Extended'].includes(doc.party_model)"
     },
     {
-      "fieldname": "configuration_section",
-      "label": "Defaults and Lifecycle",
+      "fieldname": "default_extended_party_doctype",
+      "label": "Default Extended Party DocType",
+      "fieldtype": "Link",
+      "options": "DocType",
+      "depends_on": "eval:['Extended Party','Either Standard or Extended','Multiple Parties'].includes(doc.party_model)"
+    },
+    {
+      "fieldname": "allow_multiple_parties",
+      "label": "Allow Multiple Parties",
+      "fieldtype": "Check",
+      "default": "0",
+      "depends_on": "eval:doc.party_model=='Multiple Parties'",
+      "read_only_depends_on": "eval:doc.party_model=='Multiple Parties'"
+    },
+    {
+      "fieldname": "allowed_party_types",
+      "label": "Legacy Allowed Party Types",
+      "fieldtype": "Small Text",
+      "hidden": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "template_section",
+      "label": "Template, Numbering and Duration",
       "fieldtype": "Section Break"
     },
     {
@@ -92,15 +218,45 @@
       "options": "Contract Template"
     },
     {
+      "fieldname": "default_language",
+      "label": "Default Language",
+      "fieldtype": "Select",
+      "options": "English\nArabic\nBilingual",
+      "default": "Bilingual"
+    },
+    {
+      "fieldname": "default_print_format",
+      "label": "Default Print Format",
+      "fieldtype": "Link",
+      "options": "Print Format"
+    },
+    {
       "fieldname": "numbering_series",
       "label": "Preferred Numbering Series",
       "fieldtype": "Data"
+    },
+    {
+      "fieldname": "template_column",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "default_duration_months",
       "label": "Default Duration (Months)",
       "fieldtype": "Int",
       "non_negative": 1
+    },
+    {
+      "fieldname": "allows_open_ended_period",
+      "label": "Allows Open-ended Period",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "auto_renewal_default",
+      "label": "Auto Renewal by Default",
+      "fieldtype": "Check",
+      "default": "0"
     },
     {
       "fieldname": "renewal_notice_days",
@@ -117,8 +273,8 @@
       "non_negative": 1
     },
     {
-      "fieldname": "features_section",
-      "label": "Required Features",
+      "fieldname": "financial_section",
+      "label": "Financial and Funding Requirements",
       "fieldtype": "Section Break"
     },
     {
@@ -128,10 +284,68 @@
       "default": "0"
     },
     {
+      "fieldname": "allows_zero_value",
+      "label": "Allows Zero-value Contract",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "requires_currency",
+      "label": "Requires Currency",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "requires_payment_basis",
+      "label": "Requires Payment Basis",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "requires_ceiling_amount",
+      "label": "Requires Ceiling Amount",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "financial_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "requires_funding_context",
       "label": "Requires Funding Context",
       "fieldtype": "Check",
       "default": "0"
+    },
+    {
+      "fieldname": "requires_project",
+      "label": "Requires Project",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "requires_cost_center",
+      "label": "Requires Cost Center",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "requires_funding_agreement",
+      "label": "Requires Funding Agreement",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "requires_budget_line",
+      "label": "Requires Budget Line",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "operations_section",
+      "label": "Operational Requirements",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "requires_milestones",
@@ -147,21 +361,20 @@
     },
     {
       "fieldname": "requires_guarantee",
-      "label": "Requires Guarantee",
+      "label": "Requires Guarantees",
       "fieldtype": "Check",
       "default": "0"
     },
     {
-      "fieldname": "requires_probation",
-      "label": "Requires Probation",
+      "fieldname": "requires_signed_document",
+      "label": "Requires Signed Document",
       "fieldtype": "Check",
-      "default": "0"
+      "default": "1"
     },
     {
-      "fieldname": "requires_payroll_activation",
-      "label": "Requires Payroll Activation",
-      "fieldtype": "Check",
-      "default": "0"
+      "fieldname": "operations_column",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "requires_procurement_source",
@@ -170,10 +383,146 @@
       "default": "0"
     },
     {
-      "fieldname": "allows_renewal",
-      "label": "Allows Renewal",
+      "fieldname": "requires_award_decision",
+      "label": "Requires Award Decision",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "requires_technical_manager",
+      "label": "Requires Technical Manager",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "requires_acceptance",
+      "label": "Requires Acceptance",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "requires_closure",
+      "label": "Requires Closure",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "hr_section",
+      "label": "HR and Participation Requirements",
+      "fieldtype": "Section Break",
+      "depends_on": "eval:['Employment','Volunteer','Internship','Consultancy'].includes(doc.category)",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "requires_employee",
+      "label": "Requires Employee",
+      "fieldtype": "Check",
+      "default": "0",
+      "depends_on": "eval:['Employment','Volunteer','Internship','Consultancy'].includes(doc.category)"
+    },
+    {
+      "fieldname": "requires_appointment_letter",
+      "label": "Requires Appointment Letter",
+      "fieldtype": "Check",
+      "default": "0",
+      "depends_on": "eval:['Employment','Volunteer','Internship','Consultancy'].includes(doc.category)"
+    },
+    {
+      "fieldname": "requires_work_commencement",
+      "label": "Requires Work Commencement Notice",
+      "fieldtype": "Check",
+      "default": "0",
+      "depends_on": "eval:['Employment','Volunteer','Internship','Consultancy'].includes(doc.category)"
+    },
+    {
+      "fieldname": "requires_probation",
+      "label": "Requires Probation",
+      "fieldtype": "Check",
+      "default": "0",
+      "depends_on": "eval:['Employment','Volunteer','Internship','Consultancy'].includes(doc.category)"
+    },
+    {
+      "fieldname": "requires_payroll_activation",
+      "label": "Requires Payroll Activation",
+      "fieldtype": "Check",
+      "default": "0",
+      "depends_on": "eval:['Employment','Volunteer','Internship','Consultancy'].includes(doc.category)"
+    },
+    {
+      "fieldname": "hr_column",
+      "label": "",
+      "fieldtype": "Column Break",
+      "depends_on": "eval:['Employment','Volunteer','Internship','Consultancy'].includes(doc.category)"
+    },
+    {
+      "fieldname": "requires_external_person",
+      "label": "Requires External Person",
+      "fieldtype": "Check",
+      "default": "0",
+      "depends_on": "eval:['Employment','Volunteer','Internship','Consultancy'].includes(doc.category)"
+    },
+    {
+      "fieldname": "requires_participation_engagement",
+      "label": "Requires Participation Engagement",
+      "fieldtype": "Check",
+      "default": "0",
+      "depends_on": "eval:['Employment','Volunteer','Internship','Consultancy'].includes(doc.category)"
+    },
+    {
+      "fieldname": "requires_supervisor",
+      "label": "Requires Supervisor",
+      "fieldtype": "Check",
+      "default": "0",
+      "depends_on": "eval:['Employment','Volunteer','Internship','Consultancy'].includes(doc.category)"
+    },
+    {
+      "fieldname": "requires_expected_hours",
+      "label": "Requires Expected Hours",
+      "fieldtype": "Check",
+      "default": "0",
+      "depends_on": "eval:['Employment','Volunteer','Internship','Consultancy'].includes(doc.category)"
+    },
+    {
+      "fieldname": "requires_safeguarding_documents",
+      "label": "Requires Safeguarding Documents",
+      "fieldtype": "Check",
+      "default": "0",
+      "depends_on": "eval:['Employment','Volunteer','Internship','Consultancy'].includes(doc.category)"
+    },
+    {
+      "fieldname": "lifecycle_section",
+      "label": "Lifecycle and Approvals",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "initial_lifecycle_status",
+      "label": "Initial Lifecycle Status",
+      "fieldtype": "Select",
+      "options": "Draft\nUnder Review\nPending Approval\nApproved\nPending Signature",
+      "default": "Draft"
+    },
+    {
+      "fieldname": "requires_legal_review",
+      "label": "Requires Legal Review",
       "fieldtype": "Check",
       "default": "1"
+    },
+    {
+      "fieldname": "requires_financial_review",
+      "label": "Requires Financial Review",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "requires_management_approval",
+      "label": "Requires Management Approval",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "lifecycle_column",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "allows_amendment",
@@ -182,16 +531,33 @@
       "default": "1"
     },
     {
-      "fieldname": "allows_open_ended_period",
-      "label": "Allows Open-ended Period",
+      "fieldname": "allows_renewal",
+      "label": "Allows Renewal",
       "fieldtype": "Check",
-      "default": "0"
+      "default": "1"
     },
     {
-      "fieldname": "confidential_by_default",
-      "label": "Confidential by Default",
+      "fieldname": "allows_suspension",
+      "label": "Allows Suspension",
       "fieldtype": "Check",
-      "default": "0"
+      "default": "1"
+    },
+    {
+      "fieldname": "allows_termination",
+      "label": "Allows Termination",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "allows_supersession",
+      "label": "Allows Supersession",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "notes_section",
+      "label": "Notes",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "notes",

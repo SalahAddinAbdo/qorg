@@ -1,0 +1,67 @@
+{
+  "doctype": "DocType",
+  "name": "QOrg Contract Party",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "editable_grid": 1,
+  "field_order": [
+    "party_mode",
+    "party_doctype",
+    "party",
+    "party_role",
+    "is_primary",
+    "signatory_name",
+    "signatory_designation"
+  ],
+  "fields": [
+    {
+      "fieldname": "party_mode",
+      "label": "Party Mode",
+      "fieldtype": "Select",
+      "options": "Standard\nExtended",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "party_doctype",
+      "label": "Party DocType",
+      "fieldtype": "Link",
+      "options": "DocType",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "party",
+      "label": "Party",
+      "fieldtype": "Dynamic Link",
+      "options": "party_doctype",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "party_role",
+      "label": "Party Role",
+      "fieldtype": "Data",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "is_primary",
+      "label": "Primary Party",
+      "fieldtype": "Check",
+      "default": "0",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "signatory_name",
+      "label": "Signatory Name",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "signatory_designation",
+      "label": "Signatory Designation",
+      "fieldtype": "Data"
+    }
+  ],
+  "permissions": []
+}

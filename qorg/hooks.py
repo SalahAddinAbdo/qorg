@@ -127,6 +127,7 @@ doctype_js = {'Website Settings': 'public/js/website_settings_opportunity_portal
  'Employee': 'public/js/employee_announcement.js',
  'Contract': ['public/js/unified_contract.js'],
  'Contract Template': ['public/js/contract_template_qorg.js'],
+ 'QOrg Contract Type': ['public/js/qorg_contract_type.js'],
  'Notification': 'public/js/notification_configuration.js',
  'Workflow': 'public/js/workflow_engine.js',
  'Projects Settings': 'public/js/projects_settings.js',

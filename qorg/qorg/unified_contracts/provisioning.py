@@ -127,7 +127,10 @@ def provision_unified_contracts():
         create_custom_fields_if_changed(definitions, update=True)
     configure_standard_contract_meta()
     provision_contract_permissions()
+    from qorg.qorg.unified_contracts.refinement import provision_refinement_fields
+    provision_refinement_fields()
     provision_contract_types()
+    reconcile_contract_type_policies()
 
 
 
@@ -183,4 +186,46 @@ def provision_contract_types():
     for name, category, party_types, value, funding, milestones, payroll, procurement in rows:
         if frappe.db.exists("QOrg Contract Type", name):
             continue
-        frappe.get_doc({"doctype":"QOrg Contract Type","type_name":name,"category":category,"allowed_party_types":party_types,"default_party_type":party_types.split("\n")[0] if party_types in {"Customer","Supplier","Employee"} else "","requires_value":value,"requires_funding_context":funding,"requires_milestones":milestones,"requires_payroll_activation":payroll,"requires_procurement_source":procurement,"is_active":1}).insert(ignore_permissions=True)
+        doc = frappe.get_doc({"doctype":"QOrg Contract Type","type_name":name,"category":category,"allowed_party_types":party_types,"default_party_type":party_types.split("\n")[0] if party_types in {"Customer","Supplier","Employee"} else "","requires_value":value,"requires_funding_context":funding,"requires_milestones":milestones,"requires_payroll_activation":payroll,"requires_procurement_source":procurement,"is_active":1})
+        doc.flags.ignore_validate = True
+        doc.insert(ignore_permissions=True)
+
+
+
+def reconcile_contract_type_policies():
+    """Backfill the structured party policy without overwriting configured rows."""
+    if not frappe.db.exists("DocType", "QOrg Contract Allowed Party"):
+        return
+    defaults = {
+        "Employment Contract": ("Standard Party", [("Standard","Employee")]),
+        "Goods Supply Contract": ("Standard Party", [("Standard","Supplier")]),
+        "Service Contract": ("Standard Party", [("Standard","Supplier")]),
+        "Works Contract": ("Standard Party", [("Standard","Supplier")]),
+        "Consultancy Contract": ("Either Standard or Extended", [("Standard","Supplier"),("Standard","Employee"),("Extended","External Person")]),
+        "Volunteer Agreement": ("Extended Party", [("Extended","External Person")]),
+        "Internship Agreement": ("Extended Party", [("Extended","External Person")]),
+        "Customer Contract": ("Standard Party", [("Standard","Customer")]),
+        "Framework Agreement": ("Standard Party", [("Standard","Supplier")]),
+        "Funding Agreement": ("Either Standard or Extended", [("Standard","Customer")]),
+        "Partnership Agreement": ("Multiple Parties", [("Extended","Project Partner")]),
+        "Memorandum of Understanding": ("Either Standard or Extended", [("Extended","Partner")]),
+    }
+    for name, (model, rows) in defaults.items():
+        if not frappe.db.exists("QOrg Contract Type", name):
+            continue
+        doc = frappe.get_doc("QOrg Contract Type", name)
+        changed = False
+        if not doc.allowed_parties and doc.party_model != model:
+            doc.party_model = model; changed = True
+        if doc.requires_value and doc.allows_zero_value:
+            doc.allows_zero_value = 0; changed = True
+        if model == "Multiple Parties" and not doc.allow_multiple_parties:
+            doc.allow_multiple_parties = 1; changed = True
+        if not doc.allowed_parties:
+            for idx, (mode, doctype) in enumerate(rows):
+                if frappe.db.exists("DocType", doctype):
+                    doc.append("allowed_parties", {"party_mode":mode,"party_doctype":doctype,"is_default":1 if idx == 0 else 0,"is_active":1})
+                    changed = True
+        if changed:
+            doc.flags.ignore_validate = True
+            doc.save(ignore_permissions=True)
