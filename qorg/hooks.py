@@ -124,7 +124,7 @@ doctype_js = {'Website Settings': 'public/js/website_settings_opportunity_portal
                    'public/js/recruitment_communications.js'],
  'Task Assignment Request': 'public/js/task_assignment_request.js',
  'Task': 'public/js/task.js',
- 'Employee': ['public/js/employee_announcement.js', 'public/js/employee_lifecycle.js'],
+ 'Employee': ['public/js/employee_announcement.js', 'public/js/employee_lifecycle.js', 'public/js/employee_movements.js'],
  'Contract': ['public/js/unified_contract.js'],
  'Contract Template': ['public/js/contract_template_qorg.js'],
  'QOrg Contract Type': ['public/js/qorg_contract_type.js'],
@@ -400,7 +400,8 @@ after_install = ['qorg.qorg.finance_budget_grants.provisioning.provision_finance
  'qorg.qorg.inventory_asset_custody.workflows.provision_workflows',
  'qorg.qorg.inventory_asset_custody.print_formats.provision_print_formats']
 
-after_migrate = ['qorg.qorg.employee_lifecycle.provisioning.provision_employee_lifecycle',
+after_migrate = ['qorg.qorg.employee_lifecycle.movement_provisioning.provision_employee_movements',
+ 'qorg.qorg.employee_lifecycle.provisioning.provision_employee_lifecycle',
  'qorg.qorg.unified_contracts.provisioning.provision_unified_contracts',
  'qorg.qorg.finance_budget_grants.provisioning.provision_finance_budget_grants',
  'qorg.qorg.workflow.provisioning.provision_workflow_responsibility_routing',
@@ -662,3 +663,24 @@ for _dt,_asset in {
     elif isinstance(_current,list):
         if _asset not in _current:_current.append(_asset)
     elif _current!=_asset:doctype_js[_dt]=[_current,_asset]
+
+# QORG EMPLOYEE MOVEMENT HOOKS
+
+def _qorg_add_doc_event(doctype, event, method):
+    current = doc_events.setdefault(doctype, {}).get(event)
+    if not current:
+        doc_events[doctype][event] = method
+    elif isinstance(current, list):
+        if method not in current:
+            current.append(method)
+    elif current != method:
+        doc_events[doctype][event] = [current, method]
+
+for _doctype in ("Employee Promotion", "Employee Transfer"):
+    _qorg_add_doc_event(_doctype, "validate", "qorg.qorg.employee_lifecycle.movements.validate_employee_movement")
+    _qorg_add_doc_event(_doctype, "on_submit", "qorg.qorg.employee_lifecycle.movements.movement_submitted")
+    _qorg_add_doc_event(_doctype, "before_cancel", "qorg.qorg.employee_lifecycle.movements.before_cancel_employee_movement")
+    _qorg_add_doc_event(_doctype, "on_cancel", "qorg.qorg.employee_lifecycle.movements.movement_cancelled")
+_qorg_add_doc_event("Salary Structure Assignment", "validate", "qorg.qorg.employee_lifecycle.movements.validate_salary_assignment")
+_qorg_add_doc_event("Workforce Funding Plan", "validate", "qorg.qorg.employee_lifecycle.movements.validate_funding_plan_movement")
+_qorg_add_doc_event("Contract Amendment", "validate", "qorg.qorg.employee_lifecycle.movements.validate_contract_amendment_movement")
