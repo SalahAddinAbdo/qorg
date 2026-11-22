@@ -36,6 +36,8 @@
     "payroll_effective_date",
     "attendance_effective_date",
     "onboarding",
+    "lifecycle_warnings",
+    "employment_contract",
     "confirmation_section",
     "supervisor_confirmed_by",
     "supervisor_confirmation_date",
@@ -96,9 +98,10 @@
       "label": "Employee",
       "fieldtype": "Link",
       "options": "Employee",
-      "reqd": 1,
+      "reqd": 0,
       "in_list_view": 1,
-      "in_standard_filter": 1
+      "in_standard_filter": 1,
+      "description": "Created or linked automatically before submission. It may be selected manually only when an existing Employee is confirmed."
     },
     {
       "fieldname": "company",
@@ -205,6 +208,19 @@
       "label": "Employee Onboarding",
       "fieldtype": "Link",
       "options": "Employee Onboarding",
+      "read_only": 1
+    },
+    {
+      "fieldname": "employment_contract",
+      "label": "Employment Contract",
+      "fieldtype": "Link",
+      "options": "Contract",
+      "read_only": 1
+    },
+    {
+      "fieldname": "lifecycle_warnings",
+      "label": "Lifecycle Preparation Warnings",
+      "fieldtype": "Small Text",
       "read_only": 1
     },
     {

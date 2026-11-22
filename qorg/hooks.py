@@ -139,7 +139,7 @@ doctype_js = {'Website Settings': 'public/js/website_settings_opportunity_portal
  'Appointment Letter': ['public/js/recruitment_communications.js'],
  'Employee Onboarding': ['public/js/recruitment_communications.js'],
  'Employee Boarding Activity': ['public/js/recruitment_communications.js'],
- 'Work Commencement Notice': ['public/js/recruitment_communications.js'],
+ 'Work Commencement Notice': ['public/js/recruitment_communications.js', 'public/js/work_commencement_lifecycle.js'],
  'Participation Application': ['public/js/participation_communications.js'],
  'Participation Engagement': ['public/js/participation_communications.js'],
  'Participation Service Log': ['public/js/participation_communications.js'],
@@ -400,7 +400,8 @@ after_install = ['qorg.qorg.finance_budget_grants.provisioning.provision_finance
  'qorg.qorg.inventory_asset_custody.workflows.provision_workflows',
  'qorg.qorg.inventory_asset_custody.print_formats.provision_print_formats']
 
-after_migrate = ['qorg.qorg.unified_contracts.provisioning.provision_unified_contracts',
+after_migrate = ['qorg.qorg.employee_lifecycle.provisioning.provision_employee_lifecycle',
+ 'qorg.qorg.unified_contracts.provisioning.provision_unified_contracts',
  'qorg.qorg.finance_budget_grants.provisioning.provision_finance_budget_grants',
  'qorg.qorg.workflow.provisioning.provision_workflow_responsibility_routing',
  'qorg.qorg.recruitment_extensions.settings_provisioning.provision_recruitment_settings',
