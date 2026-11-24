@@ -739,6 +739,12 @@
    "read_only": 1
   },
   {
+   "fieldname": "layout_more_1",
+   "label": "Additional Details",
+   "fieldtype": "Section Break",
+   "collapsible": 1
+  },
+  {
    "fieldname": "exchange_rate_source",
    "label": "Exchange Rate Source",
    "fieldtype": "Data",
@@ -1468,6 +1474,7 @@
   "base_amount",
   "exchange_rate",
   "exchange_rate_date",
+  "layout_more_1",
   "exchange_rate_source",
   "column_break_amount",
   "original_approved_amount",

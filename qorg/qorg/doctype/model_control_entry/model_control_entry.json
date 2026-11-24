@@ -1,215 +1,286 @@
 {
-  "actions": [],
-  "allow_import": 0,
-  "allow_rename": 0,
-  "autoname": "",
-  "creation": "2026-10-23 11:25:00.000000",
-  "custom": 0,
-  "doctype": "DocType",
-  "engine": "InnoDB",
-  "field_order": [
-    "document_type",
-    "document_label",
-    "app_name",
-    "module_name",
-    "model_kind",
-    "ownership_type",
-    "current_policy",
-    "requested_policy",
-    "current_action_policy",
-    "requested_action_policy",
-    "risk_level",
-    "record_count",
-    "qorg_layout_column",
-    "incoming_links",
-    "has_workflow",
-    "has_reports",
-    "has_workspace_links",
-    "allow_print",
-    "allow_email",
-    "allow_comments",
-    "allow_attachments",
-    "change_reason",
-    "last_synchronized_on",
-    "scan_fingerprint"
-  ],
-  "fields": [
-    {
-      "fieldname": "document_type",
-      "label": "Document Type",
-      "fieldtype": "Link",
-      "options": "DocType",
-      "reqd": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "document_label",
-      "label": "Label",
-      "fieldtype": "Data",
-      "read_only": 1
-    },
-    {
-      "fieldname": "app_name",
-      "label": "App",
-      "fieldtype": "Data",
-      "read_only": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "module_name",
-      "label": "Module",
-      "fieldtype": "Data",
-      "read_only": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "model_kind",
-      "label": "Kind",
-      "fieldtype": "Select",
-      "options": "Main\nChild Table\nSingle\nVirtual",
-      "read_only": 1
-    },
-    {
-      "fieldname": "ownership_type",
-      "label": "Ownership",
-      "fieldtype": "Select",
-      "options": "Framework Standard\nERPNext Standard\nHRMS Standard\nQOrg Standard\nOther App Standard\nCustom from UI",
-      "read_only": 1
-    },
-    {
-      "fieldname": "current_policy",
-      "label": "Current Access Policy",
-      "fieldtype": "Select",
-      "options": "Enabled\nHidden from Navigation\nRestricted\nRead Only\nFeature Disabled\nDeprecated",
-      "read_only": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "requested_policy",
-      "label": "Requested Access Policy",
-      "fieldtype": "Select",
-      "options": "Enabled\nHidden from Navigation\nRestricted\nRead Only\nFeature Disabled\nDeprecated",
-      "default": "Enabled",
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "current_action_policy",
-      "label": "Current Action Policy",
-      "fieldtype": "Select",
-      "options": "Standard\nView Only",
-      "default": "Standard",
-      "read_only": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "requested_action_policy",
-      "label": "Requested Action Policy",
-      "fieldtype": "Select",
-      "options": "Standard\nView Only",
-      "default": "Standard",
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "risk_level",
-      "label": "Risk",
-      "fieldtype": "Select",
-      "options": "Low\nMedium\nHigh\nBlocked",
-      "read_only": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "record_count",
-      "label": "Records",
-      "fieldtype": "Int",
-      "read_only": 1,
-      "non_negative": 1
-    },
-    {
-      "fieldname": "qorg_layout_column",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "incoming_links",
-      "label": "Incoming Links",
-      "fieldtype": "Int",
-      "read_only": 1,
-      "non_negative": 1
-    },
-    {
-      "fieldname": "has_workflow",
-      "label": "Workflow",
-      "fieldtype": "Check",
-      "read_only": 1
-    },
-    {
-      "fieldname": "has_reports",
-      "label": "Reports",
-      "fieldtype": "Check",
-      "read_only": 1
-    },
-    {
-      "fieldname": "has_workspace_links",
-      "label": "Workspace Links",
-      "fieldtype": "Check",
-      "read_only": 1
-    },
-    {
-      "fieldname": "allow_print",
-      "label": "Allow Print",
-      "fieldtype": "Check",
-      "default": "1"
-    },
-    {
-      "fieldname": "allow_email",
-      "label": "Allow Email",
-      "fieldtype": "Check",
-      "default": "1"
-    },
-    {
-      "fieldname": "allow_comments",
-      "label": "Allow Add Comment",
-      "fieldtype": "Check",
-      "default": "1"
-    },
-    {
-      "fieldname": "allow_attachments",
-      "label": "Allow Add Attachment",
-      "fieldtype": "Check",
-      "default": "1"
-    },
-    {
-      "fieldname": "change_reason",
-      "label": "Change Reason",
-      "fieldtype": "Small Text"
-    },
-    {
-      "fieldname": "last_synchronized_on",
-      "label": "Last Synchronized On",
-      "fieldtype": "Datetime",
-      "read_only": 1
-    },
-    {
-      "fieldname": "scan_fingerprint",
-      "label": "Scan Fingerprint",
-      "fieldtype": "Data",
-      "hidden": 1,
-      "read_only": 1
-    }
-  ],
-  "grid_page_length": 50,
-  "index_web_pages_for_search": 0,
-  "istable": 1,
-  "editable_grid": 1,
-  "links": [],
-  "modified": "2026-10-23 12:00:00.000000",
-  "modified_by": "Administrator",
-  "module": "QOrg",
-  "name": "Model Control Entry",
-  "owner": "Administrator",
-  "permissions": [],
-  "row_format": "Dynamic",
-  "sort_field": "modified",
-  "sort_order": "DESC",
-  "states": [],
-  "track_changes": 0
+ "actions": [],
+ "allow_import": 0,
+ "allow_rename": 0,
+ "autoname": "",
+ "creation": "2026-10-23 11:25:00.000000",
+ "custom": 0,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "qorg_layout_section_1",
+  "document_type",
+  "document_label",
+  "model_kind",
+  "ownership_type",
+  "qorg_layout_column_1_2",
+  "app_name",
+  "module_name",
+  "risk_level",
+  "qorg_layout_section_2",
+  "current_policy",
+  "requested_policy",
+  "qorg_layout_column_2_2",
+  "current_action_policy",
+  "requested_action_policy",
+  "qorg_layout_section_3",
+  "record_count",
+  "incoming_links",
+  "has_workflow",
+  "qorg_layout_column_3_2",
+  "has_reports",
+  "has_workspace_links",
+  "qorg_layout_section_4",
+  "allow_print",
+  "allow_email",
+  "qorg_layout_column_4_2",
+  "allow_comments",
+  "allow_attachments",
+  "qorg_layout_section_5",
+  "change_reason",
+  "qorg_layout_column_5_2",
+  "last_synchronized_on",
+  "scan_fingerprint"
+ ],
+ "fields": [
+  {
+   "fieldname": "qorg_layout_section_1",
+   "fieldtype": "Section Break",
+   "label": "Model Identity"
+  },
+  {
+   "fieldname": "document_type",
+   "label": "Document Type",
+   "fieldtype": "Link",
+   "options": "DocType",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "document_label",
+   "label": "Label",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "model_kind",
+   "label": "Kind",
+   "fieldtype": "Select",
+   "options": "Main\nChild Table\nSingle\nVirtual",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "ownership_type",
+   "label": "Ownership",
+   "fieldtype": "Select",
+   "options": "Framework Standard\nERPNext Standard\nHRMS Standard\nQOrg Standard\nOther App Standard\nCustom from UI",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "qorg_layout_column_1_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "app_name",
+   "label": "App",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "module_name",
+   "label": "Module",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "risk_level",
+   "label": "Risk",
+   "fieldtype": "Select",
+   "options": "Low\nMedium\nHigh\nBlocked",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "qorg_layout_section_2",
+   "fieldtype": "Section Break",
+   "label": "Policy Control"
+  },
+  {
+   "fieldname": "current_policy",
+   "label": "Current Access Policy",
+   "fieldtype": "Select",
+   "options": "Enabled\nHidden from Navigation\nRestricted\nRead Only\nFeature Disabled\nDeprecated",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "requested_policy",
+   "label": "Requested Access Policy",
+   "fieldtype": "Select",
+   "options": "Enabled\nHidden from Navigation\nRestricted\nRead Only\nFeature Disabled\nDeprecated",
+   "default": "Enabled",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "qorg_layout_column_2_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "current_action_policy",
+   "label": "Current Action Policy",
+   "fieldtype": "Select",
+   "options": "Standard\nView Only",
+   "default": "Standard",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "requested_action_policy",
+   "label": "Requested Action Policy",
+   "fieldtype": "Select",
+   "options": "Standard\nView Only",
+   "default": "Standard",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "qorg_layout_section_3",
+   "fieldtype": "Section Break",
+   "label": "Usage and Dependencies"
+  },
+  {
+   "fieldname": "record_count",
+   "label": "Records",
+   "fieldtype": "Int",
+   "read_only": 1,
+   "non_negative": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "incoming_links",
+   "label": "Incoming Links",
+   "fieldtype": "Int",
+   "read_only": 1,
+   "non_negative": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "has_workflow",
+   "label": "Workflow",
+   "fieldtype": "Check",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "qorg_layout_column_3_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "has_reports",
+   "label": "Reports",
+   "fieldtype": "Check",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "has_workspace_links",
+   "label": "Workspace Links",
+   "fieldtype": "Check",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "qorg_layout_section_4",
+   "fieldtype": "Section Break",
+   "label": "Allowed Capabilities"
+  },
+  {
+   "fieldname": "allow_print",
+   "label": "Allow Print",
+   "fieldtype": "Check",
+   "default": "1",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "allow_email",
+   "label": "Allow Email",
+   "fieldtype": "Check",
+   "default": "1",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "qorg_layout_column_4_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "allow_comments",
+   "label": "Allow Add Comment",
+   "fieldtype": "Check",
+   "default": "1",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "allow_attachments",
+   "label": "Allow Add Attachment",
+   "fieldtype": "Check",
+   "default": "1",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "qorg_layout_section_5",
+   "fieldtype": "Section Break",
+   "label": "Change and Audit",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "change_reason",
+   "label": "Change Reason",
+   "fieldtype": "Small Text",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "qorg_layout_column_5_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "last_synchronized_on",
+   "label": "Last Synchronized On",
+   "fieldtype": "Datetime",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "scan_fingerprint",
+   "label": "Scan Fingerprint",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "read_only": 1,
+   "in_list_view": 0
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "editable_grid": 1,
+ "links": [],
+ "modified": "2026-10-23 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "QOrg",
+ "name": "Model Control Entry",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 0
 }

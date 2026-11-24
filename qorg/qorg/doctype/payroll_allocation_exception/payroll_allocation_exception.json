@@ -1,246 +1,284 @@
 {
-  "actions": [],
-  "allow_rename": 0,
-  "creation": "2026-11-21 00:00:00.000000",
-  "doctype": "DocType",
-  "engine": "InnoDB",
-  "field_order": [
-    "employee",
-    "salary_slip",
-    "salary_component",
-    "exception_type",
-    "severity",
-    "description",
-    "amount",
-    "required_action",
-    "resolution",
-    "approval_reference_type",
-    "approval_reference",
-    "approval_evidence_column",
-    "approval_evidence_section",
-    "approval_attachment",
-    "approved_percentage",
-    "approved_amount",
-    "approval_currency",
-    "approved_by",
-    "approved_on",
-    "resolved",
-    "resolution_audit_column",
-    "resolution_audit_section",
-    "resolved_by",
-    "resolved_on",
-    "exception_key",
-    "source_fingerprint"
-  ],
-  "fields": [
-    {
-      "fieldname": "employee",
-      "fieldtype": "Link",
-      "label": "Employee",
-      "options": "Employee",
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "salary_slip",
-      "fieldtype": "Link",
-      "label": "Salary Slip",
-      "options": "Salary Slip"
-    },
-    {
-      "fieldname": "salary_component",
-      "fieldtype": "Link",
-      "label": "Salary Component",
-      "options": "Salary Component"
-    },
-    {
-      "fieldname": "exception_type",
-      "fieldtype": "Select",
-      "label": "Exception Type",
-      "options": "Missing Plan\nAllocation Gap\nIneligible Cost\nExpired Funding\nBudget Unavailable\nComponent Changed\nMissing Dimension\nDuplicate Allocation\nMissing Approval\nOther",
-      "reqd": 1,
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "severity",
-      "fieldtype": "Select",
-      "label": "Severity",
-      "options": "Blocker\nWarning\nInfo",
-      "reqd": 1,
-      "in_list_view": 1,
-      "columns": 1
-    },
-    {
-      "fieldname": "description",
-      "fieldtype": "Small Text",
-      "label": "Description",
-      "reqd": 1,
-      "in_list_view": 1,
-      "columns": 4
-    },
-    {
-      "fieldname": "amount",
-      "fieldtype": "Currency",
-      "label": "Amount",
-      "in_list_view": 1,
-      "columns": 1
-    },
-    {
-      "fieldname": "required_action",
-      "fieldtype": "Small Text",
-      "label": "Required Action",
-      "columns": 0
-    },
-    {
-      "fieldname": "resolution",
-      "fieldtype": "Small Text",
-      "label": "Resolution",
-      "columns": 0
-    },
-    {
-      "fieldname": "approval_reference_type",
-      "fieldtype": "Link",
-      "label": "Approval Reference Type",
-      "options": "DocType",
-      "depends_on": "eval:doc.exception_type==\"Missing Approval\""
-    },
-    {
-      "fieldname": "approval_reference",
-      "fieldtype": "Dynamic Link",
-      "label": "Approval Reference",
-      "options": "approval_reference_type",
-      "depends_on": "eval:doc.exception_type==\"Missing Approval\""
-    },
-    {
-      "fieldname": "approval_evidence_column",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "approval_evidence_section",
-      "fieldtype": "Section Break",
-      "label": "Approval Evidence"
-    },
-    {
-      "fieldname": "approval_attachment",
-      "fieldtype": "Attach",
-      "label": "Approval Attachment",
-      "depends_on": "eval:doc.exception_type==\"Missing Approval\""
-    },
-    {
-      "fieldname": "approved_percentage",
-      "fieldtype": "Percent",
-      "label": "Approved Percentage",
-      "depends_on": "eval:doc.exception_type==\"Missing Approval\""
-    },
-    {
-      "fieldname": "approved_amount",
-      "fieldtype": "Currency",
-      "label": "Approved Amount",
-      "depends_on": "eval:doc.exception_type==\"Missing Approval\""
-    },
-    {
-      "fieldname": "approval_currency",
-      "fieldtype": "Link",
-      "label": "Approval Currency",
-      "options": "Currency",
-      "depends_on": "eval:doc.exception_type==\"Missing Approval\""
-    },
-    {
-      "fieldname": "approved_by",
-      "fieldtype": "Link",
-      "label": "Approved By",
-      "options": "User",
-      "read_only": 1,
-      "no_copy": 1
-    },
-    {
-      "fieldname": "approved_on",
-      "fieldtype": "Datetime",
-      "label": "Approved On",
-      "read_only": 1,
-      "no_copy": 1
-    },
-    {
-      "fieldname": "resolved",
-      "fieldtype": "Check",
-      "label": "Resolved",
-      "in_list_view": 1,
-      "columns": 1
-    },
-    {
-      "fieldname": "resolution_audit_column",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "resolution_audit_section",
-      "fieldtype": "Section Break",
-      "label": "Resolution Audit"
-    },
-    {
-      "fieldname": "resolved_by",
-      "fieldtype": "Link",
-      "label": "Resolved By",
-      "options": "User",
-      "read_only": 1,
-      "no_copy": 1
-    },
-    {
-      "fieldname": "resolved_on",
-      "fieldtype": "Datetime",
-      "label": "Resolved On",
-      "read_only": 1,
-      "no_copy": 1
-    },
-    {
-      "fieldname": "exception_key",
-      "fieldtype": "Data",
-      "label": "Exception Key",
-      "read_only": 1,
-      "hidden": 1,
-      "print_hide": 1,
-      "no_copy": 1
-    },
-    {
-      "fieldname": "source_fingerprint",
-      "fieldtype": "Data",
-      "label": "Source Fingerprint",
-      "read_only": 1,
-      "hidden": 1,
-      "print_hide": 1,
-      "no_copy": 1
-    }
-  ],
-  "index_web_pages_for_search": 1,
-  "links": [],
-  "modified": "2026-11-21 00:00:00.000000",
-  "modified_by": "Administrator",
-  "module": "QOrg",
-  "name": "Payroll Allocation Exception",
-  "owner": "Administrator",
-  "permissions": [
-    {
-      "create": 1,
-      "read": 1,
-      "write": 1,
-      "delete": 1,
-      "role": "System Manager"
-    },
-    {
-      "create": 1,
-      "read": 1,
-      "write": 1,
-      "role": "Payroll Manager"
-    },
-    {
-      "read": 1,
-      "role": "Accounts Manager"
-    }
-  ],
-  "sort_field": "modified",
-  "sort_order": "DESC",
-  "states": [],
-  "track_changes": 1,
-  "istable": 1,
-  "editable_grid": 1
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-11-21 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "qorg_layout_section_1",
+  "employee",
+  "salary_slip",
+  "salary_component",
+  "exception_type",
+  "qorg_layout_column_1_2",
+  "severity",
+  "amount",
+  "resolved",
+  "qorg_layout_section_2",
+  "description",
+  "required_action",
+  "qorg_layout_section_3",
+  "resolution",
+  "qorg_layout_column_3_2",
+  "resolved_by",
+  "resolved_on",
+  "qorg_layout_section_4",
+  "approval_reference_type",
+  "approval_reference",
+  "approval_attachment",
+  "qorg_layout_column_4_2",
+  "approved_percentage",
+  "approved_amount",
+  "approval_currency",
+  "approved_by",
+  "approved_on",
+  "qorg_layout_section_5",
+  "exception_key",
+  "source_fingerprint"
+ ],
+ "fields": [
+  {
+   "fieldname": "qorg_layout_section_1",
+   "fieldtype": "Section Break",
+   "label": "Exception Summary"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "salary_slip",
+   "fieldtype": "Link",
+   "label": "Salary Slip",
+   "options": "Salary Slip",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "salary_component",
+   "fieldtype": "Link",
+   "label": "Salary Component",
+   "options": "Salary Component",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "exception_type",
+   "fieldtype": "Select",
+   "label": "Exception Type",
+   "options": "Missing Plan\nAllocation Gap\nIneligible Cost\nExpired Funding\nBudget Unavailable\nComponent Changed\nMissing Dimension\nDuplicate Allocation\nMissing Approval\nOther",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "qorg_layout_column_1_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "severity",
+   "fieldtype": "Select",
+   "label": "Severity",
+   "options": "Blocker\nWarning\nInfo",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "resolved",
+   "fieldtype": "Check",
+   "label": "Resolved",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "qorg_layout_section_2",
+   "fieldtype": "Section Break",
+   "label": "Description and Required Action"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "required_action",
+   "fieldtype": "Small Text",
+   "label": "Required Action",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "qorg_layout_section_3",
+   "fieldtype": "Section Break",
+   "label": "Resolution"
+  },
+  {
+   "fieldname": "resolution",
+   "fieldtype": "Small Text",
+   "label": "Resolution",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "qorg_layout_column_3_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "resolved_by",
+   "fieldtype": "Link",
+   "label": "Resolved By",
+   "options": "User",
+   "read_only": 1,
+   "no_copy": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "resolved_on",
+   "fieldtype": "Datetime",
+   "label": "Resolved On",
+   "read_only": 1,
+   "no_copy": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "qorg_layout_section_4",
+   "fieldtype": "Section Break",
+   "label": "Approval Evidence"
+  },
+  {
+   "fieldname": "approval_reference_type",
+   "fieldtype": "Link",
+   "label": "Approval Reference Type",
+   "options": "DocType",
+   "depends_on": "eval:doc.exception_type==\"Missing Approval\"",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "approval_reference",
+   "fieldtype": "Dynamic Link",
+   "label": "Approval Reference",
+   "options": "approval_reference_type",
+   "depends_on": "eval:doc.exception_type==\"Missing Approval\"",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "approval_attachment",
+   "fieldtype": "Attach",
+   "label": "Approval Attachment",
+   "depends_on": "eval:doc.exception_type==\"Missing Approval\"",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "qorg_layout_column_4_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "approved_percentage",
+   "fieldtype": "Percent",
+   "label": "Approved Percentage",
+   "depends_on": "eval:doc.exception_type==\"Missing Approval\"",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "approved_amount",
+   "fieldtype": "Currency",
+   "label": "Approved Amount",
+   "depends_on": "eval:doc.exception_type==\"Missing Approval\"",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "approval_currency",
+   "fieldtype": "Link",
+   "label": "Approval Currency",
+   "options": "Currency",
+   "depends_on": "eval:doc.exception_type==\"Missing Approval\"",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "Approved By",
+   "options": "User",
+   "read_only": 1,
+   "no_copy": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "approved_on",
+   "fieldtype": "Datetime",
+   "label": "Approved On",
+   "read_only": 1,
+   "no_copy": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "qorg_layout_section_5",
+   "fieldtype": "Section Break",
+   "label": "Technical Audit",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "exception_key",
+   "fieldtype": "Data",
+   "label": "Exception Key",
+   "read_only": 1,
+   "hidden": 1,
+   "print_hide": 1,
+   "no_copy": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "source_fingerprint",
+   "fieldtype": "Data",
+   "label": "Source Fingerprint",
+   "read_only": 1,
+   "hidden": 1,
+   "print_hide": 1,
+   "no_copy": 1,
+   "in_list_view": 0
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-11-21 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "QOrg",
+ "name": "Payroll Allocation Exception",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "read": 1,
+   "write": 1,
+   "delete": 1,
+   "role": "System Manager"
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "write": 1,
+   "role": "Payroll Manager"
+  },
+  {
+   "read": 1,
+   "role": "Accounts Manager"
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "istable": 1,
+ "editable_grid": 1
 }

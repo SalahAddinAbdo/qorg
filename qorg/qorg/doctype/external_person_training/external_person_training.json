@@ -1,125 +1,144 @@
 {
-  "actions": [],
-  "allow_import": 0,
-  "allow_rename": 0,
-  "autoname": "hash",
-  "creation": "2026-10-23 22:45:00.000000",
-  "custom": 0,
-  "doctype": "DocType",
-  "engine": "InnoDB",
-  "field_order": [
-    "course_title",
-    "provider",
-    "country",
-    "start_date",
-    "end_date",
-    "qorg_layout_column",
-    "certificate_number",
-    "certificate",
-    "details",
-    "page_break"
-  ],
-  "fields": [
-    {
-      "fieldname": "course_title",
-      "label": "Course / Certification",
-      "fieldtype": "Data",
-      "reqd": 1,
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "provider",
-      "label": "Provider",
-      "fieldtype": "Data",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "country",
-      "label": "Country",
-      "fieldtype": "Link",
-      "options": "Country",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "start_date",
-      "label": "Start Date",
-      "fieldtype": "Date",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "end_date",
-      "label": "End Date",
-      "fieldtype": "Date",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "qorg_layout_column",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "certificate_number",
-      "label": "Certificate Number",
-      "fieldtype": "Data",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 0,
-      "columns": 2
-    },
-    {
-      "fieldname": "certificate",
-      "label": "Certificate",
-      "fieldtype": "Attach",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "details",
-      "label": "Details",
-      "fieldtype": "Small Text",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 0
-    },
-    {
-      "fieldname": "page_break",
-      "label": "Page Break",
-      "fieldtype": "Check",
-      "default": "0",
-      "in_list_view": 1,
-      "allow_on_submit": 1,
-      "print_hide": 1,
-      "columns": 1
-    }
-  ],
-  "grid_page_length": 50,
-  "index_web_pages_for_search": 0,
-  "istable": 1,
-  "links": [],
-  "modified": "2026-10-23 23:30:00.000000",
-  "modified_by": "Administrator",
-  "module": "QOrg",
-  "name": "External Person Training",
-  "owner": "Administrator",
-  "permissions": [],
-  "row_format": "Dynamic",
-  "sort_field": "modified",
-  "sort_order": "DESC",
-  "states": [],
-  "track_changes": 0,
-  "editable_grid": 1
+ "actions": [],
+ "allow_import": 0,
+ "allow_rename": 0,
+ "autoname": "hash",
+ "creation": "2026-10-23 22:45:00.000000",
+ "custom": 0,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "qorg_layout_section_1",
+  "course_title",
+  "provider",
+  "country",
+  "qorg_layout_column_1_2",
+  "start_date",
+  "end_date",
+  "page_break",
+  "qorg_layout_section_2",
+  "certificate_number",
+  "certificate",
+  "qorg_layout_section_3",
+  "details"
+ ],
+ "fields": [
+  {
+   "fieldname": "qorg_layout_section_1",
+   "fieldtype": "Section Break",
+   "label": "Course and Provider"
+  },
+  {
+   "fieldname": "course_title",
+   "label": "Course / Certification",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "provider",
+   "label": "Provider",
+   "fieldtype": "Data",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "country",
+   "label": "Country",
+   "fieldtype": "Link",
+   "options": "Country",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "qorg_layout_column_1_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "start_date",
+   "label": "Start Date",
+   "fieldtype": "Date",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "end_date",
+   "label": "End Date",
+   "fieldtype": "Date",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "page_break",
+   "label": "Page Break",
+   "fieldtype": "Check",
+   "default": "0",
+   "in_list_view": 1,
+   "allow_on_submit": 1,
+   "print_hide": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "qorg_layout_section_2",
+   "fieldtype": "Section Break",
+   "label": "Certification"
+  },
+  {
+   "fieldname": "certificate_number",
+   "label": "Certificate Number",
+   "fieldtype": "Data",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "certificate",
+   "label": "Certificate",
+   "fieldtype": "Attach",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "qorg_layout_section_3",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "details",
+   "label": "Details",
+   "fieldtype": "Small Text",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 0
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-10-23 23:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "QOrg",
+ "name": "External Person Training",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 0,
+ "editable_grid": 1
 }

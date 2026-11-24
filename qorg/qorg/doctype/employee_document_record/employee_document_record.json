@@ -1,452 +1,466 @@
 {
-  "doctype": "DocType",
-  "name": "Employee Document Record",
-  "module": "QOrg",
-  "custom": 0,
-  "track_changes": 1,
-  "field_order": [
-    "identity_section",
-    "naming_series",
-    "subject_doctype",
-    "subject_name",
-    "document_type",
-    "requirement",
-    "document_title",
-    "status",
-    "identity_column",
-    "reference_number",
-    "issuing_authority",
-    "country_of_issue",
-    "issue_date",
-    "expiry_date",
-    "version",
-    "supersedes_document",
-    "superseded_by",
-    "storage_section",
-    "storage_type",
-    "attachment",
-    "file_reference",
-    "external_url",
-    "storage_provider",
-    "repository_name",
-    "external_document_id",
-    "external_version_id",
-    "requires_authentication",
-    "storage_column",
-    "microsoft_site_url",
-    "microsoft_drive_id",
-    "microsoft_item_id",
-    "microsoft_tenant",
-    "google_file_id",
-    "google_shared_drive_id",
-    "holding_organization",
-    "physical_location",
-    "archive_reference",
-    "archive_details",
-    "verification_section",
-    "verification_status",
-    "verification_method",
-    "verified_by",
-    "verified_on",
-    "verification_notes",
-    "rejection_reason",
-    "verification_column",
-    "access_verification_status",
-    "last_access_verified_on",
-    "last_access_verified_by",
-    "access_verification_notes",
-    "confidentiality_level",
-    "notes"
-  ],
-  "fields": [
-    {
-      "fieldname": "identity_section",
-      "label": "Document Identity",
-      "fieldtype": "Section Break"
-    },
-    {
-      "fieldname": "naming_series",
-      "label": "Naming Series",
-      "fieldtype": "Select",
-      "options": "EDOC-.YYYY.-.#####",
-      "default": "EDOC-.YYYY.-.#####",
-      "reqd": 1
-    },
-    {
-      "fieldname": "subject_doctype",
-      "label": "Subject Type",
-      "fieldtype": "Select",
-      "options": "Employee\nExternal Person\nParticipation Engagement",
-      "default": "Employee",
-      "reqd": 1,
-      "in_standard_filter": 1
-    },
-    {
-      "fieldname": "subject_name",
-      "label": "Subject",
-      "fieldtype": "Dynamic Link",
-      "options": "subject_doctype",
-      "reqd": 1,
-      "in_list_view": 1,
-      "in_standard_filter": 1,
-      "description": "Select the subject; related document context is populated automatically."
-    },
-    {
-      "fieldname": "document_type",
-      "label": "Document Type",
-      "fieldtype": "Link",
-      "options": "Employee Document Type",
-      "reqd": 1,
-      "in_list_view": 1,
-      "in_standard_filter": 1
-    },
-    {
-      "fieldname": "requirement",
-      "label": "Requirement",
-      "fieldtype": "Link",
-      "options": "Employee Document Requirement"
-    },
-    {
-      "fieldname": "document_title",
-      "label": "Document Title",
-      "fieldtype": "Data",
-      "reqd": 1
-    },
-    {
-      "fieldname": "status",
-      "label": "Status",
-      "fieldtype": "Select",
-      "options": "Draft\nSubmitted\nPending Verification\nVerified\nRejected\nExpired\nSuperseded\nRevoked\nMissing\nAccess Failed",
-      "default": "Draft",
-      "reqd": 1,
-      "in_list_view": 1,
-      "in_standard_filter": 1
-    },
-    {
-      "fieldname": "identity_column",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "reference_number",
-      "label": "Reference Number",
-      "fieldtype": "Data"
-    },
-    {
-      "fieldname": "issuing_authority",
-      "label": "Issuing Authority",
-      "fieldtype": "Data"
-    },
-    {
-      "fieldname": "country_of_issue",
-      "label": "Country of Issue",
-      "fieldtype": "Link",
-      "options": "Country"
-    },
-    {
-      "fieldname": "issue_date",
-      "label": "Issue Date",
-      "fieldtype": "Date"
-    },
-    {
-      "fieldname": "expiry_date",
-      "label": "Expiry Date",
-      "fieldtype": "Date",
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "version",
-      "label": "Version",
-      "fieldtype": "Data",
-      "default": "1"
-    },
-    {
-      "fieldname": "supersedes_document",
-      "label": "Supersedes Document",
-      "fieldtype": "Link",
-      "options": "Employee Document Record"
-    },
-    {
-      "fieldname": "superseded_by",
-      "label": "Superseded By",
-      "fieldtype": "Link",
-      "options": "Employee Document Record",
-      "read_only": 1
-    },
-    {
-      "fieldname": "storage_section",
-      "label": "Storage Reference",
-      "fieldtype": "Section Break"
-    },
-    {
-      "fieldname": "storage_type",
-      "label": "Storage Type",
-      "fieldtype": "Select",
-      "options": "Frappe Attachment\nExternal URL\nMicrosoft SharePoint / OneDrive\nGoogle Drive\nExternal Document Management System\nPhysical Document\nReference Only",
-      "reqd": 1,
-      "in_list_view": 1,
-      "in_standard_filter": 1
-    },
-    {
-      "fieldname": "attachment",
-      "label": "Attachment",
-      "fieldtype": "Attach",
-      "depends_on": "eval:doc.storage_type=='Frappe Attachment'"
-    },
-    {
-      "fieldname": "file_reference",
-      "label": "File Reference",
-      "fieldtype": "Link",
-      "options": "File",
-      "read_only": 1,
-      "depends_on": "eval:doc.storage_type=='Frappe Attachment'"
-    },
-    {
-      "fieldname": "external_url",
-      "label": "External URL",
-      "fieldtype": "Data",
-      "options": "URL",
-      "depends_on": "eval:['External URL','Microsoft SharePoint / OneDrive','Google Drive','External Document Management System','Reference Only'].includes(doc.storage_type)",
-      "description": "Paste the Google Drive, SharePoint, OneDrive, external DMS, or reference link. Technical identifiers are extracted automatically when possible.",
-      "mandatory_depends_on": "eval:['External URL','Microsoft SharePoint / OneDrive','Google Drive','External Document Management System','Reference Only'].includes(doc.storage_type)"
-    },
-    {
-      "fieldname": "storage_provider",
-      "label": "Storage Provider",
-      "fieldtype": "Data",
-      "read_only": 1,
-      "hidden": 1
-    },
-    {
-      "fieldname": "repository_name",
-      "label": "Repository / Library",
-      "fieldtype": "Data",
-      "depends_on": "eval:doc.storage_type=='External Document Management System'",
-      "description": "Optional repository or library name for an external DMS."
-    },
-    {
-      "fieldname": "external_document_id",
-      "label": "External Document ID",
-      "fieldtype": "Data",
-      "read_only": 1,
-      "hidden": 1
-    },
-    {
-      "fieldname": "external_version_id",
-      "label": "External Version ID",
-      "fieldtype": "Data",
-      "read_only": 1,
-      "hidden": 1
-    },
-    {
-      "fieldname": "requires_authentication",
-      "label": "Requires Authentication",
-      "fieldtype": "Check",
-      "default": "1",
-      "read_only": 1,
-      "hidden": 1
-    },
-    {
-      "fieldname": "storage_column",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "microsoft_site_url",
-      "label": "Microsoft Site URL",
-      "fieldtype": "Data",
-      "read_only": 1,
-      "hidden": 1
-    },
-    {
-      "fieldname": "microsoft_drive_id",
-      "label": "Microsoft Drive ID",
-      "fieldtype": "Data",
-      "read_only": 1,
-      "hidden": 1
-    },
-    {
-      "fieldname": "microsoft_item_id",
-      "label": "Microsoft Item ID",
-      "fieldtype": "Data",
-      "read_only": 1,
-      "hidden": 1
-    },
-    {
-      "fieldname": "microsoft_tenant",
-      "label": "Microsoft Tenant / Organization",
-      "fieldtype": "Data",
-      "read_only": 1,
-      "hidden": 1
-    },
-    {
-      "fieldname": "google_file_id",
-      "label": "Google Drive File ID",
-      "fieldtype": "Data",
-      "read_only": 1,
-      "hidden": 1
-    },
-    {
-      "fieldname": "google_shared_drive_id",
-      "label": "Google Shared Drive ID",
-      "fieldtype": "Data",
-      "read_only": 1,
-      "hidden": 1
-    },
-    {
-      "fieldname": "holding_organization",
-      "label": "Holding Organization",
-      "fieldtype": "Data",
-      "depends_on": "eval:['Physical Document','Reference Only','External Document Management System'].includes(doc.storage_type)"
-    },
-    {
-      "fieldname": "physical_location",
-      "label": "Physical Location",
-      "fieldtype": "Data",
-      "depends_on": "eval:doc.storage_type=='Physical Document'"
-    },
-    {
-      "fieldname": "archive_reference",
-      "label": "Archive Reference",
-      "fieldtype": "Data",
-      "depends_on": "eval:doc.storage_type=='Physical Document'"
-    },
-    {
-      "fieldname": "archive_details",
-      "label": "Archive Details",
-      "fieldtype": "Small Text",
-      "depends_on": "eval:doc.storage_type=='Physical Document'"
-    },
-    {
-      "fieldname": "verification_section",
-      "label": "Verification and Access",
-      "fieldtype": "Section Break"
-    },
-    {
-      "fieldname": "verification_status",
-      "label": "Verification Status",
-      "fieldtype": "Select",
-      "options": "Not Verified\nPending\nVerified\nRejected",
-      "default": "Not Verified",
-      "reqd": 1,
-      "in_standard_filter": 1,
-      "read_only": 1
-    },
-    {
-      "fieldname": "verification_method",
-      "label": "Verification Method",
-      "fieldtype": "Select",
-      "options": "\nOriginal Seen\nCertified Copy\nIssuer Portal\nDigital Signature\nExternal Repository\nManual Confirmation",
-      "read_only": 1
-    },
-    {
-      "fieldname": "verified_by",
-      "label": "Verified By",
-      "fieldtype": "Link",
-      "options": "User",
-      "read_only": 1
-    },
-    {
-      "fieldname": "verified_on",
-      "label": "Verified On",
-      "fieldtype": "Datetime",
-      "read_only": 1
-    },
-    {
-      "fieldname": "verification_notes",
-      "label": "Verification Notes",
-      "fieldtype": "Small Text",
-      "read_only": 1
-    },
-    {
-      "fieldname": "rejection_reason",
-      "label": "Rejection Reason",
-      "fieldtype": "Small Text",
-      "depends_on": "eval:doc.verification_status=='Rejected'",
-      "read_only": 1
-    },
-    {
-      "fieldname": "verification_column",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "access_verification_status",
-      "label": "Access Verification Status",
-      "fieldtype": "Select",
-      "options": "Not Verified\nAccessible\nAccess Denied\nLink Expired\nDocument Missing\nAuthentication Required\nVerification Failed\nNot Applicable",
-      "default": "Not Verified",
-      "reqd": 1,
-      "in_standard_filter": 1,
-      "read_only": 1
-    },
-    {
-      "fieldname": "last_access_verified_on",
-      "label": "Last Access Verified On",
-      "fieldtype": "Datetime",
-      "read_only": 1
-    },
-    {
-      "fieldname": "last_access_verified_by",
-      "label": "Last Access Verified By",
-      "fieldtype": "Link",
-      "options": "User",
-      "read_only": 1
-    },
-    {
-      "fieldname": "access_verification_notes",
-      "label": "Access Verification Notes",
-      "fieldtype": "Small Text",
-      "read_only": 1
-    },
-    {
-      "fieldname": "confidentiality_level",
-      "label": "Confidentiality Level",
-      "fieldtype": "Select",
-      "options": "Normal\nInternal\nConfidential\nHighly Confidential\nRestricted HR\nRestricted Medical\nRestricted Financial\nSafeguarding Restricted",
-      "default": "Confidential",
-      "reqd": 1,
-      "in_standard_filter": 1
-    },
-    {
-      "fieldname": "notes",
-      "label": "Notes",
-      "fieldtype": "Small Text"
-    }
-  ],
-  "permissions": [
-    {
-      "role": "System Manager",
-      "read": 1,
-      "write": 1,
-      "create": 1,
-      "delete": 1,
-      "submit": 1,
-      "cancel": 1,
-      "amend": 1
-    },
-    {
-      "role": "HR Manager",
-      "read": 1,
-      "write": 1,
-      "create": 1,
-      "delete": 1,
-      "submit": 1,
-      "cancel": 1,
-      "amend": 1
-    },
-    {
-      "role": "HR User",
-      "read": 1,
-      "write": 1,
-      "create": 1
-    },
-    {
-      "role": "Employee",
-      "read": 1
-    }
-  ],
-  "title_field": "document_title",
-  "autoname": "naming_series:",
-  "is_submittable": 1
+ "doctype": "DocType",
+ "name": "Employee Document Record",
+ "module": "QOrg",
+ "custom": 0,
+ "track_changes": 1,
+ "field_order": [
+  "identity_section",
+  "naming_series",
+  "subject_doctype",
+  "subject_name",
+  "document_type",
+  "requirement",
+  "document_title",
+  "status",
+  "identity_column",
+  "reference_number",
+  "issuing_authority",
+  "country_of_issue",
+  "issue_date",
+  "expiry_date",
+  "version",
+  "supersedes_document",
+  "superseded_by",
+  "storage_section",
+  "storage_type",
+  "attachment",
+  "file_reference",
+  "external_url",
+  "storage_provider",
+  "repository_name",
+  "external_document_id",
+  "external_version_id",
+  "layout_more_1",
+  "requires_authentication",
+  "storage_column",
+  "microsoft_site_url",
+  "microsoft_drive_id",
+  "microsoft_item_id",
+  "microsoft_tenant",
+  "google_file_id",
+  "google_shared_drive_id",
+  "holding_organization",
+  "physical_location",
+  "layout_more_2",
+  "archive_reference",
+  "archive_details",
+  "verification_section",
+  "verification_status",
+  "verification_method",
+  "verified_by",
+  "verified_on",
+  "verification_notes",
+  "rejection_reason",
+  "verification_column",
+  "access_verification_status",
+  "last_access_verified_on",
+  "last_access_verified_by",
+  "access_verification_notes",
+  "confidentiality_level",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "identity_section",
+   "label": "Document Identity",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "label": "Naming Series",
+   "fieldtype": "Select",
+   "options": "EDOC-.YYYY.-.#####",
+   "default": "EDOC-.YYYY.-.#####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "subject_doctype",
+   "label": "Subject Type",
+   "fieldtype": "Select",
+   "options": "Employee\nExternal Person\nParticipation Engagement",
+   "default": "Employee",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "subject_name",
+   "label": "Subject",
+   "fieldtype": "Dynamic Link",
+   "options": "subject_doctype",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "description": "Select the subject; related document context is populated automatically."
+  },
+  {
+   "fieldname": "document_type",
+   "label": "Document Type",
+   "fieldtype": "Link",
+   "options": "Employee Document Type",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "requirement",
+   "label": "Requirement",
+   "fieldtype": "Link",
+   "options": "Employee Document Requirement"
+  },
+  {
+   "fieldname": "document_title",
+   "label": "Document Title",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Draft\nSubmitted\nPending Verification\nVerified\nRejected\nExpired\nSuperseded\nRevoked\nMissing\nAccess Failed",
+   "default": "Draft",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "identity_column",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reference_number",
+   "label": "Reference Number",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "issuing_authority",
+   "label": "Issuing Authority",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "country_of_issue",
+   "label": "Country of Issue",
+   "fieldtype": "Link",
+   "options": "Country"
+  },
+  {
+   "fieldname": "issue_date",
+   "label": "Issue Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "expiry_date",
+   "label": "Expiry Date",
+   "fieldtype": "Date",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "version",
+   "label": "Version",
+   "fieldtype": "Data",
+   "default": "1"
+  },
+  {
+   "fieldname": "supersedes_document",
+   "label": "Supersedes Document",
+   "fieldtype": "Link",
+   "options": "Employee Document Record"
+  },
+  {
+   "fieldname": "superseded_by",
+   "label": "Superseded By",
+   "fieldtype": "Link",
+   "options": "Employee Document Record",
+   "read_only": 1
+  },
+  {
+   "fieldname": "storage_section",
+   "label": "Storage Reference",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "storage_type",
+   "label": "Storage Type",
+   "fieldtype": "Select",
+   "options": "Frappe Attachment\nExternal URL\nMicrosoft SharePoint / OneDrive\nGoogle Drive\nExternal Document Management System\nPhysical Document\nReference Only",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "attachment",
+   "label": "Attachment",
+   "fieldtype": "Attach",
+   "depends_on": "eval:doc.storage_type=='Frappe Attachment'"
+  },
+  {
+   "fieldname": "file_reference",
+   "label": "File Reference",
+   "fieldtype": "Link",
+   "options": "File",
+   "read_only": 1,
+   "depends_on": "eval:doc.storage_type=='Frappe Attachment'"
+  },
+  {
+   "fieldname": "external_url",
+   "label": "External URL",
+   "fieldtype": "Data",
+   "options": "URL",
+   "depends_on": "eval:['External URL','Microsoft SharePoint / OneDrive','Google Drive','External Document Management System','Reference Only'].includes(doc.storage_type)",
+   "description": "Paste the Google Drive, SharePoint, OneDrive, external DMS, or reference link. Technical identifiers are extracted automatically when possible.",
+   "mandatory_depends_on": "eval:['External URL','Microsoft SharePoint / OneDrive','Google Drive','External Document Management System','Reference Only'].includes(doc.storage_type)"
+  },
+  {
+   "fieldname": "storage_provider",
+   "label": "Storage Provider",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "repository_name",
+   "label": "Repository / Library",
+   "fieldtype": "Data",
+   "depends_on": "eval:doc.storage_type=='External Document Management System'",
+   "description": "Optional repository or library name for an external DMS."
+  },
+  {
+   "fieldname": "external_document_id",
+   "label": "External Document ID",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "external_version_id",
+   "label": "External Version ID",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "layout_more_1",
+   "label": "Additional Details",
+   "fieldtype": "Section Break",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "requires_authentication",
+   "label": "Requires Authentication",
+   "fieldtype": "Check",
+   "default": "1",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "storage_column",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "microsoft_site_url",
+   "label": "Microsoft Site URL",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "microsoft_drive_id",
+   "label": "Microsoft Drive ID",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "microsoft_item_id",
+   "label": "Microsoft Item ID",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "microsoft_tenant",
+   "label": "Microsoft Tenant / Organization",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "google_file_id",
+   "label": "Google Drive File ID",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "google_shared_drive_id",
+   "label": "Google Shared Drive ID",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "holding_organization",
+   "label": "Holding Organization",
+   "fieldtype": "Data",
+   "depends_on": "eval:['Physical Document','Reference Only','External Document Management System'].includes(doc.storage_type)"
+  },
+  {
+   "fieldname": "physical_location",
+   "label": "Physical Location",
+   "fieldtype": "Data",
+   "depends_on": "eval:doc.storage_type=='Physical Document'"
+  },
+  {
+   "fieldname": "layout_more_2",
+   "label": "Additional Details",
+   "fieldtype": "Section Break",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "archive_reference",
+   "label": "Archive Reference",
+   "fieldtype": "Data",
+   "depends_on": "eval:doc.storage_type=='Physical Document'"
+  },
+  {
+   "fieldname": "archive_details",
+   "label": "Archive Details",
+   "fieldtype": "Small Text",
+   "depends_on": "eval:doc.storage_type=='Physical Document'"
+  },
+  {
+   "fieldname": "verification_section",
+   "label": "Verification and Access",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "verification_status",
+   "label": "Verification Status",
+   "fieldtype": "Select",
+   "options": "Not Verified\nPending\nVerified\nRejected",
+   "default": "Not Verified",
+   "reqd": 1,
+   "in_standard_filter": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "verification_method",
+   "label": "Verification Method",
+   "fieldtype": "Select",
+   "options": "\nOriginal Seen\nCertified Copy\nIssuer Portal\nDigital Signature\nExternal Repository\nManual Confirmation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "verified_by",
+   "label": "Verified By",
+   "fieldtype": "Link",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "verified_on",
+   "label": "Verified On",
+   "fieldtype": "Datetime",
+   "read_only": 1
+  },
+  {
+   "fieldname": "verification_notes",
+   "label": "Verification Notes",
+   "fieldtype": "Small Text",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rejection_reason",
+   "label": "Rejection Reason",
+   "fieldtype": "Small Text",
+   "depends_on": "eval:doc.verification_status=='Rejected'",
+   "read_only": 1
+  },
+  {
+   "fieldname": "verification_column",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "access_verification_status",
+   "label": "Access Verification Status",
+   "fieldtype": "Select",
+   "options": "Not Verified\nAccessible\nAccess Denied\nLink Expired\nDocument Missing\nAuthentication Required\nVerification Failed\nNot Applicable",
+   "default": "Not Verified",
+   "reqd": 1,
+   "in_standard_filter": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_access_verified_on",
+   "label": "Last Access Verified On",
+   "fieldtype": "Datetime",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_access_verified_by",
+   "label": "Last Access Verified By",
+   "fieldtype": "Link",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "access_verification_notes",
+   "label": "Access Verification Notes",
+   "fieldtype": "Small Text",
+   "read_only": 1
+  },
+  {
+   "fieldname": "confidentiality_level",
+   "label": "Confidentiality Level",
+   "fieldtype": "Select",
+   "options": "Normal\nInternal\nConfidential\nHighly Confidential\nRestricted HR\nRestricted Medical\nRestricted Financial\nSafeguarding Restricted",
+   "default": "Confidential",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "notes",
+   "label": "Notes",
+   "fieldtype": "Small Text"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "HR Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "HR User",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Employee",
+   "read": 1
+  }
+ ],
+ "title_field": "document_title",
+ "autoname": "naming_series:",
+ "is_submittable": 1
 }

@@ -1,185 +1,220 @@
 {
-  "actions": [],
-  "allow_import": 0,
-  "allow_rename": 0,
-  "autoname": "hash",
-  "creation": "2026-10-23 23:30:00.000000",
-  "custom": 0,
-  "doctype": "DocType",
-  "engine": "InnoDB",
-  "field_order": [
-    "sequence",
-    "stage_name",
-    "assessment_type",
-    "interview_type",
-    "weight",
-    "passing_score",
-    "is_mandatory",
-    "default_mode",
-    "qorg_layout_column",
-    "duration_minutes",
-    "maximum_attempts",
-    "instructions",
-    "page_break",
-    "allow_retry",
-    "retry_requires_approval",
-    "retry_approval_role",
-    "retry_instructions"
-  ],
-  "fields": [
-    {
-      "fieldname": "sequence",
-      "label": "Sequence",
-      "fieldtype": "Int",
-      "reqd": 1,
-      "in_list_view": 1,
-      "columns": 1,
-      "allow_on_submit": 1
-    },
-    {
-      "fieldname": "stage_name",
-      "label": "Stage Name",
-      "fieldtype": "Data",
-      "reqd": 1,
-      "in_list_view": 1,
-      "columns": 2,
-      "allow_on_submit": 1
-    },
-    {
-      "fieldname": "assessment_type",
-      "label": "Assessment Type",
-      "fieldtype": "Select",
-      "options": "Structured Interview\nTechnical Interview\nWritten Test\nPractical Test\nCase Study\nPresentation\nReference Check\nOther",
-      "reqd": 1,
-      "in_list_view": 1,
-      "columns": 2,
-      "allow_on_submit": 1
-    },
-    {
-      "fieldname": "interview_type",
-      "label": "Interview Type",
-      "fieldtype": "Link",
-      "options": "Interview Type",
-      "in_list_view": 1,
-      "columns": 2,
-      "allow_on_submit": 1
-    },
-    {
-      "fieldname": "weight",
-      "label": "Weight %",
-      "fieldtype": "Percent",
-      "reqd": 1,
-      "in_list_view": 1,
-      "columns": 1,
-      "allow_on_submit": 1
-    },
-    {
-      "fieldname": "passing_score",
-      "label": "Passing Score %",
-      "fieldtype": "Percent",
-      "reqd": 1,
-      "in_list_view": 1,
-      "columns": 1,
-      "allow_on_submit": 1
-    },
-    {
-      "fieldname": "is_mandatory",
-      "label": "Mandatory",
-      "fieldtype": "Check",
-      "default": "1",
-      "in_list_view": 1,
-      "columns": 1,
-      "allow_on_submit": 1
-    },
-    {
-      "fieldname": "default_mode",
-      "label": "Default Mode",
-      "fieldtype": "Select",
-      "options": "In Person\nOnline\nHybrid",
-      "default": "In Person",
-      "in_list_view": 1,
-      "columns": 1,
-      "allow_on_submit": 1
-    },
-    {
-      "fieldname": "qorg_layout_column",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "duration_minutes",
-      "label": "Duration (Minutes)",
-      "fieldtype": "Int",
-      "allow_on_submit": 1
-    },
-    {
-      "fieldname": "maximum_attempts",
-      "label": "Maximum Attempts",
-      "fieldtype": "Int",
-      "default": "1",
-      "allow_on_submit": 1,
-      "depends_on": "eval:doc.allow_retry",
-      "description": "Total allowed attempts including the first attempt."
-    },
-    {
-      "fieldname": "instructions",
-      "label": "Instructions",
-      "fieldtype": "Small Text",
-      "allow_on_submit": 1
-    },
-    {
-      "fieldname": "page_break",
-      "label": "Page Break",
-      "fieldtype": "Check",
-      "default": "0",
-      "allow_on_submit": 1,
-      "print_hide": 1
-    },
-    {
-      "fieldname": "allow_retry",
-      "label": "Allow Retry",
-      "fieldtype": "Check",
-      "allow_on_submit": 1,
-      "default": "0",
-      "in_list_view": 1,
-      "columns": 1
-    },
-    {
-      "fieldname": "retry_requires_approval",
-      "label": "Retry Requires Approval",
-      "fieldtype": "Check",
-      "allow_on_submit": 1,
-      "default": "0",
-      "depends_on": "eval:doc.allow_retry"
-    },
-    {
-      "fieldname": "retry_approval_role",
-      "label": "Retry Approval Role",
-      "fieldtype": "Link",
-      "allow_on_submit": 1,
-      "options": "Role",
-      "depends_on": "eval:doc.allow_retry && doc.retry_requires_approval"
-    },
-    {
-      "fieldname": "retry_instructions",
-      "label": "Retry Instructions",
-      "fieldtype": "Small Text",
-      "allow_on_submit": 1,
-      "depends_on": "eval:doc.allow_retry"
-    }
-  ],
-  "grid_page_length": 50,
-  "index_web_pages_for_search": 0,
-  "istable": 1,
-  "links": [],
-  "modified": "2026-10-23 23:30:00.000000",
-  "modified_by": "Administrator",
-  "module": "QOrg",
-  "name": "Recruitment Assessment Stage",
-  "owner": "Administrator",
-  "permissions": [],
-  "row_format": "Dynamic",
-  "sort_field": "modified",
-  "sort_order": "DESC",
-  "states": [],
-  "track_changes": 0
+ "actions": [],
+ "allow_import": 0,
+ "allow_rename": 0,
+ "autoname": "hash",
+ "creation": "2026-10-23 23:30:00.000000",
+ "custom": 0,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "qorg_layout_section_1",
+  "sequence",
+  "stage_name",
+  "assessment_type",
+  "interview_type",
+  "qorg_layout_column_1_2",
+  "is_mandatory",
+  "default_mode",
+  "duration_minutes",
+  "page_break",
+  "qorg_layout_section_2",
+  "weight",
+  "passing_score",
+  "maximum_attempts",
+  "qorg_layout_column_2_2",
+  "allow_retry",
+  "retry_requires_approval",
+  "retry_approval_role",
+  "qorg_layout_section_3",
+  "instructions",
+  "qorg_layout_section_4",
+  "retry_instructions"
+ ],
+ "fields": [
+  {
+   "fieldname": "qorg_layout_section_1",
+   "fieldtype": "Section Break",
+   "label": "Stage Definition"
+  },
+  {
+   "fieldname": "sequence",
+   "label": "Sequence",
+   "fieldtype": "Int",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "stage_name",
+   "label": "Stage Name",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 2,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "assessment_type",
+   "label": "Assessment Type",
+   "fieldtype": "Select",
+   "options": "Structured Interview\nTechnical Interview\nWritten Test\nPractical Test\nCase Study\nPresentation\nReference Check\nOther",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 2,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "interview_type",
+   "label": "Interview Type",
+   "fieldtype": "Link",
+   "options": "Interview Type",
+   "in_list_view": 1,
+   "columns": 2,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "qorg_layout_column_1_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "is_mandatory",
+   "label": "Mandatory",
+   "fieldtype": "Check",
+   "default": "1",
+   "in_list_view": 1,
+   "columns": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "default_mode",
+   "label": "Default Mode",
+   "fieldtype": "Select",
+   "options": "In Person\nOnline\nHybrid",
+   "default": "In Person",
+   "in_list_view": 0,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "duration_minutes",
+   "label": "Duration (Minutes)",
+   "fieldtype": "Int",
+   "allow_on_submit": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "page_break",
+   "label": "Page Break",
+   "fieldtype": "Check",
+   "default": "0",
+   "allow_on_submit": 1,
+   "print_hide": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "qorg_layout_section_2",
+   "fieldtype": "Section Break",
+   "label": "Scoring and Attempts"
+  },
+  {
+   "fieldname": "weight",
+   "label": "Weight %",
+   "fieldtype": "Percent",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "passing_score",
+   "label": "Passing Score %",
+   "fieldtype": "Percent",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "maximum_attempts",
+   "label": "Maximum Attempts",
+   "fieldtype": "Int",
+   "default": "1",
+   "allow_on_submit": 1,
+   "depends_on": "eval:doc.allow_retry",
+   "description": "Total allowed attempts including the first attempt.",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "qorg_layout_column_2_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "allow_retry",
+   "label": "Allow Retry",
+   "fieldtype": "Check",
+   "allow_on_submit": 1,
+   "default": "0",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "retry_requires_approval",
+   "label": "Retry Requires Approval",
+   "fieldtype": "Check",
+   "allow_on_submit": 1,
+   "default": "0",
+   "depends_on": "eval:doc.allow_retry",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "retry_approval_role",
+   "label": "Retry Approval Role",
+   "fieldtype": "Link",
+   "allow_on_submit": 1,
+   "options": "Role",
+   "depends_on": "eval:doc.allow_retry && doc.retry_requires_approval",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "qorg_layout_section_3",
+   "fieldtype": "Section Break",
+   "label": "Instructions"
+  },
+  {
+   "fieldname": "instructions",
+   "label": "Instructions",
+   "fieldtype": "Small Text",
+   "allow_on_submit": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "qorg_layout_section_4",
+   "fieldtype": "Section Break",
+   "label": "Retry Instructions",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "retry_instructions",
+   "label": "Retry Instructions",
+   "fieldtype": "Small Text",
+   "allow_on_submit": 1,
+   "depends_on": "eval:doc.allow_retry",
+   "in_list_view": 0
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-10-23 23:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "QOrg",
+ "name": "Recruitment Assessment Stage",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 0
 }

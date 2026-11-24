@@ -6,37 +6,51 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "layout_section_1",
   "type_name",
   "active",
   "default_service_item",
   "default_expense_account",
+  "layout_column_1",
   "default_payable_account",
   "default_uom",
   "calculation_method",
   "item_requirement",
+  "layout_section_2",
   "procurement_treatment",
   "default_payment_method",
   "require_external_person",
   "require_site",
+  "layout_column_2",
   "require_agreement",
   "require_attendance",
   "require_service_acceptance",
   "require_identity_verification",
+  "layout_section_3",
   "require_supporting_document",
   "require_project",
   "require_budget_line",
   "allow_shared_pool",
+  "layout_column_3",
   "allow_split_distribution",
   "withholding_rule",
   "required_document_types",
   "allow_manual_override",
+  "layout_section_4",
   "require_payment_verification",
   "maximum_rate",
   "maximum_days",
   "workflow_profile",
+  "layout_column_4",
   "description"
  ],
  "fields": [
+  {
+   "fieldname": "layout_section_1",
+   "label": "Basic Information",
+   "fieldtype": "Section Break",
+   "collapsible": 0
+  },
   {
    "fieldname": "type_name",
    "label": "Type Name",
@@ -63,6 +77,10 @@
    "label": "Default Expense Account",
    "fieldtype": "Link",
    "options": "Account"
+  },
+  {
+   "fieldname": "layout_column_1",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "default_payable_account",
@@ -92,6 +110,12 @@
    "default": "Optional"
   },
   {
+   "fieldname": "layout_section_2",
+   "label": "Configuration and Rules",
+   "fieldtype": "Section Break",
+   "collapsible": 1
+  },
+  {
    "fieldname": "procurement_treatment",
    "label": "Procurement Treatment",
    "fieldtype": "Select",
@@ -115,6 +139,10 @@
    "label": "Require Site",
    "fieldtype": "Check",
    "default": "0"
+  },
+  {
+   "fieldname": "layout_column_2",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "require_agreement",
@@ -141,6 +169,12 @@
    "default": "0"
   },
   {
+   "fieldname": "layout_section_3",
+   "label": "Additional Details 2",
+   "fieldtype": "Section Break",
+   "collapsible": 1
+  },
+  {
    "fieldname": "require_supporting_document",
    "label": "Require Supporting Document",
    "fieldtype": "Check",
@@ -163,6 +197,10 @@
    "label": "Allow Shared Pool",
    "fieldtype": "Check",
    "default": "1"
+  },
+  {
+   "fieldname": "layout_column_3",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "allow_split_distribution",
@@ -188,6 +226,12 @@
    "default": "0"
   },
   {
+   "fieldname": "layout_section_4",
+   "label": "Additional Details 3",
+   "fieldtype": "Section Break",
+   "collapsible": 1
+  },
+  {
    "fieldname": "require_payment_verification",
    "label": "Require Payment Verification",
    "fieldtype": "Check",
@@ -207,6 +251,10 @@
    "fieldname": "workflow_profile",
    "label": "Workflow Profile",
    "fieldtype": "Data"
+  },
+  {
+   "fieldname": "layout_column_4",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "description",

@@ -1,116 +1,129 @@
 {
-  "actions": [],
-  "allow_import": 0,
-  "allow_rename": 0,
-  "autoname": "hash",
-  "creation": "2026-10-23 22:45:00.000000",
-  "custom": 0,
-  "doctype": "DocType",
-  "engine": "InnoDB",
-  "field_order": [
-    "country",
-    "governorate",
-    "district",
-    "location",
-    "qorg_layout_column",
-    "location_details",
-    "is_primary",
-    "vacancy_count",
-    "page_break"
-  ],
-  "fields": [
-    {
-      "fieldname": "country",
-      "label": "Country",
-      "fieldtype": "Link",
-      "options": "Country",
-      "reqd": 1,
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "governorate",
-      "label": "Governorate",
-      "fieldtype": "Data",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "district",
-      "label": "District",
-      "fieldtype": "Data",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "location",
-      "label": "Location",
-      "fieldtype": "Data",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "qorg_layout_column",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "location_details",
-      "label": "Details",
-      "fieldtype": "Small Text",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 0
-    },
-    {
-      "fieldname": "is_primary",
-      "label": "Primary",
-      "fieldtype": "Check",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "vacancy_count",
-      "label": "Positions",
-      "fieldtype": "Int",
-      "non_negative": 1,
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "page_break",
-      "label": "Page Break",
-      "fieldtype": "Check",
-      "default": "0",
-      "in_list_view": 1,
-      "allow_on_submit": 1,
-      "print_hide": 1,
-      "columns": 1
-    }
-  ],
-  "grid_page_length": 50,
-  "index_web_pages_for_search": 0,
-  "istable": 1,
-  "links": [],
-  "modified": "2026-10-23 23:30:00.000000",
-  "modified_by": "Administrator",
-  "module": "QOrg",
-  "name": "Opportunity Location",
-  "owner": "Administrator",
-  "permissions": [],
-  "row_format": "Dynamic",
-  "sort_field": "modified",
-  "sort_order": "DESC",
-  "states": [],
-  "track_changes": 0,
-  "editable_grid": 1
+ "actions": [],
+ "allow_import": 0,
+ "allow_rename": 0,
+ "autoname": "hash",
+ "creation": "2026-10-23 22:45:00.000000",
+ "custom": 0,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "qorg_layout_section_1",
+  "country",
+  "governorate",
+  "district",
+  "location",
+  "qorg_layout_column_1_2",
+  "is_primary",
+  "vacancy_count",
+  "page_break",
+  "qorg_layout_section_2",
+  "location_details"
+ ],
+ "fields": [
+  {
+   "fieldname": "qorg_layout_section_1",
+   "fieldtype": "Section Break",
+   "label": "Location"
+  },
+  {
+   "fieldname": "country",
+   "label": "Country",
+   "fieldtype": "Link",
+   "options": "Country",
+   "reqd": 1,
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "governorate",
+   "label": "Governorate",
+   "fieldtype": "Data",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "district",
+   "label": "District",
+   "fieldtype": "Data",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "location",
+   "label": "Location",
+   "fieldtype": "Data",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "qorg_layout_column_1_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "is_primary",
+   "label": "Primary",
+   "fieldtype": "Check",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "vacancy_count",
+   "label": "Positions",
+   "fieldtype": "Int",
+   "non_negative": 1,
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "page_break",
+   "label": "Page Break",
+   "fieldtype": "Check",
+   "default": "0",
+   "in_list_view": 0,
+   "allow_on_submit": 1,
+   "print_hide": 1
+  },
+  {
+   "fieldname": "qorg_layout_section_2",
+   "fieldtype": "Section Break",
+   "label": "Location Details"
+  },
+  {
+   "fieldname": "location_details",
+   "label": "Details",
+   "fieldtype": "Small Text",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 0
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-10-23 23:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "QOrg",
+ "name": "Opportunity Location",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 0,
+ "editable_grid": 1
 }

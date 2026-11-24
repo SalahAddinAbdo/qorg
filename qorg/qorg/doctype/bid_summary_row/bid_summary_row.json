@@ -1,127 +1,150 @@
 {
-  "doctype": "DocType",
-  "name": "Bid Summary Row",
-  "module": "QOrg",
-  "custom": 0,
-  "istable": 1,
-  "issingle": 0,
-  "editable_grid": 1,
-  "track_changes": 1,
-  "field_order": [
-    "supplier",
-    "submission",
-    "preliminary_result",
-    "technical_score",
-    "technical_weighted",
-    "evaluated_price",
-    "financial_score",
-    "qorg_layout_column",
-    "financial_weighted",
-    "total_score",
-    "rank",
-    "recommendation",
-    "rationale",
-    "page_break"
-  ],
-  "fields": [
-    {
-      "fieldname": "supplier",
-      "label": "Supplier",
-      "fieldtype": "Link",
-      "options": "Supplier",
-      "reqd": 1,
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "submission",
-      "label": "Submission",
-      "fieldtype": "Link",
-      "options": "Procurement Submission",
-      "in_list_view": 0
-    },
-    {
-      "fieldname": "preliminary_result",
-      "label": "Preliminary Result",
-      "fieldtype": "Select",
-      "options": "Pending\nResponsive\nConditionally Responsive\nNon-Responsive\nDisqualified",
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "technical_score",
-      "label": "Technical Score",
-      "fieldtype": "Float",
-      "in_list_view": 1,
-      "columns": 1
-    },
-    {
-      "fieldname": "technical_weighted",
-      "label": "Weighted Technical Score",
-      "fieldtype": "Float",
-      "in_list_view": 0
-    },
-    {
-      "fieldname": "evaluated_price",
-      "label": "Evaluated Price",
-      "fieldtype": "Currency",
-      "in_list_view": 0
-    },
-    {
-      "fieldname": "financial_score",
-      "label": "Financial Score",
-      "fieldtype": "Float",
-      "in_list_view": 1,
-      "columns": 1
-    },
-    {
-      "fieldname": "qorg_layout_column",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "financial_weighted",
-      "label": "Weighted Financial Score",
-      "fieldtype": "Float",
-      "in_list_view": 0
-    },
-    {
-      "fieldname": "total_score",
-      "label": "Combined Score",
-      "fieldtype": "Float",
-      "in_list_view": 1,
-      "columns": 1
-    },
-    {
-      "fieldname": "rank",
-      "label": "Rank",
-      "fieldtype": "Int",
-      "in_list_view": 1,
-      "columns": 1
-    },
-    {
-      "fieldname": "recommendation",
-      "label": "Recommendation",
-      "fieldtype": "Select",
-      "options": "Pending\nRecommended\nReserve\nNot Recommended\nDisqualified",
-      "in_list_view": 1,
-      "columns": 1
-    },
-    {
-      "fieldname": "rationale",
-      "label": "Rationale",
-      "fieldtype": "Small Text",
-      "in_list_view": 0
-    },
-    {
-      "fieldname": "page_break",
-      "label": "Page Break After This Row",
-      "fieldtype": "Check",
-      "default": "0",
-      "allow_on_submit": 1,
-      "print_hide": 1,
-      "in_list_view": 0,
-      "description": "Starts a new printed page after this row in managed print formats."
-    }
-  ],
-  "permissions": []
+ "doctype": "DocType",
+ "name": "Bid Summary Row",
+ "module": "QOrg",
+ "custom": 0,
+ "istable": 1,
+ "issingle": 0,
+ "editable_grid": 1,
+ "track_changes": 1,
+ "field_order": [
+  "qorg_layout_section_1",
+  "supplier",
+  "submission",
+  "preliminary_result",
+  "qorg_layout_column_1_2",
+  "recommendation",
+  "rank",
+  "qorg_layout_section_2",
+  "technical_score",
+  "technical_weighted",
+  "evaluated_price",
+  "qorg_layout_column_2_2",
+  "financial_score",
+  "financial_weighted",
+  "total_score",
+  "qorg_layout_section_3",
+  "rationale",
+  "page_break"
+ ],
+ "fields": [
+  {
+   "fieldname": "qorg_layout_section_1",
+   "fieldtype": "Section Break",
+   "label": "Bidder and Preliminary Review"
+  },
+  {
+   "fieldname": "supplier",
+   "label": "Supplier",
+   "fieldtype": "Link",
+   "options": "Supplier",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "submission",
+   "label": "Submission",
+   "fieldtype": "Link",
+   "options": "Procurement Submission",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "preliminary_result",
+   "label": "Preliminary Result",
+   "fieldtype": "Select",
+   "options": "Pending\nResponsive\nConditionally Responsive\nNon-Responsive\nDisqualified",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "qorg_layout_column_1_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "recommendation",
+   "label": "Recommendation",
+   "fieldtype": "Select",
+   "options": "Pending\nRecommended\nReserve\nNot Recommended\nDisqualified",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "rank",
+   "label": "Rank",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "qorg_layout_section_2",
+   "fieldtype": "Section Break",
+   "label": "Technical and Financial Evaluation"
+  },
+  {
+   "fieldname": "technical_score",
+   "label": "Technical Score",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "technical_weighted",
+   "label": "Weighted Technical Score",
+   "fieldtype": "Float",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "evaluated_price",
+   "label": "Evaluated Price",
+   "fieldtype": "Currency",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "qorg_layout_column_2_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "financial_score",
+   "label": "Financial Score",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "financial_weighted",
+   "label": "Weighted Financial Score",
+   "fieldtype": "Float",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "total_score",
+   "label": "Combined Score",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "qorg_layout_section_3",
+   "fieldtype": "Section Break",
+   "label": "Recommendation Rationale"
+  },
+  {
+   "fieldname": "rationale",
+   "label": "Rationale",
+   "fieldtype": "Small Text",
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "page_break",
+   "label": "Page Break After This Row",
+   "fieldtype": "Check",
+   "default": "0",
+   "allow_on_submit": 1,
+   "print_hide": 1,
+   "in_list_view": 0,
+   "description": "Starts a new printed page after this row in managed print formats."
+  }
+ ],
+ "permissions": []
 }

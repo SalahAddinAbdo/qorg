@@ -6,26 +6,35 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "qorg_layout_section_1",
   "conversion_context",
   "from_currency",
   "to_currency",
   "rate",
+  "qorg_layout_column_1_2",
   "rate_type",
   "rate_date",
   "rate_source",
-  "manual_approval_reference",
+  "qorg_layout_section_2",
   "reference_doctype",
   "reference_name",
+  "manual_approval_reference",
+  "qorg_layout_column_2_2",
   "locked_on",
   "locked_by"
  ],
  "fields": [
   {
+   "fieldname": "qorg_layout_section_1",
+   "fieldtype": "Section Break",
+   "label": "Exchange Rate"
+  },
+  {
    "fieldname": "conversion_context",
    "label": "Context",
    "fieldtype": "Data",
    "read_only": 1,
-   "in_list_view": 1
+   "in_list_view": 0
   },
   {
    "fieldname": "from_currency",
@@ -33,7 +42,8 @@
    "fieldtype": "Link",
    "options": "Currency",
    "read_only": 1,
-   "in_list_view": 1
+   "in_list_view": 1,
+   "columns": 2
   },
   {
    "fieldname": "to_currency",
@@ -41,65 +51,90 @@
    "fieldtype": "Link",
    "options": "Currency",
    "read_only": 1,
-   "in_list_view": 1
+   "in_list_view": 1,
+   "columns": 2
   },
   {
    "fieldname": "rate",
    "label": "Rate",
    "fieldtype": "Float",
    "read_only": 1,
-   "in_list_view": 1
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "qorg_layout_column_1_2",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "rate_type",
    "label": "Rate Type",
    "fieldtype": "Data",
-   "read_only": 1
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 2
   },
   {
    "fieldname": "rate_date",
    "label": "Rate Date",
    "fieldtype": "Date",
-   "read_only": 1
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 2
   },
   {
    "fieldname": "rate_source",
    "label": "Rate Source",
    "fieldtype": "Data",
-   "read_only": 1
+   "read_only": 1,
+   "in_list_view": 0
   },
   {
-   "fieldname": "manual_approval_reference",
-   "label": "Manual Approval Reference",
-   "fieldtype": "Data",
-   "read_only": 1
+   "fieldname": "qorg_layout_section_2",
+   "fieldtype": "Section Break",
+   "label": "Reference and Approval"
   },
   {
    "fieldname": "reference_doctype",
    "label": "Reference DocType",
    "fieldtype": "Link",
    "options": "DocType",
-   "read_only": 1
+   "read_only": 1,
+   "in_list_view": 0
   },
   {
    "fieldname": "reference_name",
    "label": "Reference Name",
    "fieldtype": "Dynamic Link",
    "options": "reference_doctype",
-   "read_only": 1
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "manual_approval_reference",
+   "label": "Manual Approval Reference",
+   "fieldtype": "Data",
+   "read_only": 1,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "qorg_layout_column_2_2",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "locked_on",
    "label": "Locked On",
    "fieldtype": "Datetime",
-   "read_only": 1
+   "read_only": 1,
+   "in_list_view": 0
   },
   {
    "fieldname": "locked_by",
    "label": "Locked By",
    "fieldtype": "Link",
    "options": "User",
-   "read_only": 1
+   "read_only": 1,
+   "in_list_view": 0
   }
  ],
  "index_web_pages_for_search": 0,

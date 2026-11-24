@@ -1,136 +1,149 @@
 {
-  "actions": [],
-  "allow_import": 0,
-  "allow_rename": 0,
-  "autoname": "hash",
-  "creation": "2026-10-23 22:45:00.000000",
-  "custom": 0,
-  "doctype": "DocType",
-  "engine": "InnoDB",
-  "field_order": [
-    "qualification",
-    "field_of_study",
-    "institution",
-    "country",
-    "start_year",
-    "qorg_layout_column",
-    "graduation_year",
-    "grade",
-    "is_highest",
-    "description",
-    "page_break"
-  ],
-  "fields": [
-    {
-      "fieldname": "qualification",
-      "label": "Qualification",
-      "fieldtype": "Link",
-      "options": "Person Qualification",
-      "reqd": 1,
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "field_of_study",
-      "label": "Field of Study",
-      "fieldtype": "Data",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "institution",
-      "label": "Institution",
-      "fieldtype": "Data",
-      "reqd": 1,
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "country",
-      "label": "Country",
-      "fieldtype": "Link",
-      "options": "Country",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "start_year",
-      "label": "Start Year",
-      "fieldtype": "Int",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 0
-    },
-    {
-      "fieldname": "qorg_layout_column",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "graduation_year",
-      "label": "Graduation Year",
-      "fieldtype": "Int",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "grade",
-      "label": "Grade / GPA",
-      "fieldtype": "Data",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "is_highest",
-      "label": "Highest Qualification",
-      "fieldtype": "Check",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "description",
-      "label": "Details",
-      "fieldtype": "Small Text",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 0
-    },
-    {
-      "fieldname": "page_break",
-      "label": "Page Break",
-      "fieldtype": "Check",
-      "default": "0",
-      "in_list_view": 1,
-      "allow_on_submit": 1,
-      "print_hide": 1,
-      "columns": 1
-    }
-  ],
-  "grid_page_length": 50,
-  "index_web_pages_for_search": 0,
-  "istable": 1,
-  "links": [],
-  "modified": "2026-10-23 23:30:00.000000",
-  "modified_by": "Administrator",
-  "module": "QOrg",
-  "name": "External Person Education",
-  "owner": "Administrator",
-  "permissions": [],
-  "row_format": "Dynamic",
-  "sort_field": "modified",
-  "sort_order": "DESC",
-  "states": [],
-  "track_changes": 0,
-  "editable_grid": 1
+ "actions": [],
+ "allow_import": 0,
+ "allow_rename": 0,
+ "autoname": "hash",
+ "creation": "2026-10-23 22:45:00.000000",
+ "custom": 0,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "qorg_layout_section_1",
+  "qualification",
+  "field_of_study",
+  "institution",
+  "qorg_layout_column_1_2",
+  "country",
+  "start_year",
+  "graduation_year",
+  "grade",
+  "is_highest",
+  "page_break",
+  "qorg_layout_section_2",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "qorg_layout_section_1",
+   "fieldtype": "Section Break",
+   "label": "Qualification"
+  },
+  {
+   "fieldname": "qualification",
+   "label": "Qualification",
+   "fieldtype": "Link",
+   "options": "Person Qualification",
+   "reqd": 1,
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "field_of_study",
+   "label": "Field of Study",
+   "fieldtype": "Data",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "institution",
+   "label": "Institution",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "qorg_layout_column_1_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "country",
+   "label": "Country",
+   "fieldtype": "Link",
+   "options": "Country",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "start_year",
+   "label": "Start Year",
+   "fieldtype": "Int",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 0
+  },
+  {
+   "fieldname": "graduation_year",
+   "label": "Graduation Year",
+   "fieldtype": "Int",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "grade",
+   "label": "Grade / GPA",
+   "fieldtype": "Data",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "is_highest",
+   "label": "Highest Qualification",
+   "fieldtype": "Check",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "page_break",
+   "label": "Page Break",
+   "fieldtype": "Check",
+   "default": "0",
+   "in_list_view": 0,
+   "allow_on_submit": 1,
+   "print_hide": 1
+  },
+  {
+   "fieldname": "qorg_layout_section_2",
+   "fieldtype": "Section Break",
+   "label": "Description"
+  },
+  {
+   "fieldname": "description",
+   "label": "Details",
+   "fieldtype": "Small Text",
+   "allow_on_submit": 1,
+   "print_hide": 0,
+   "in_list_view": 0
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-10-23 23:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "QOrg",
+ "name": "External Person Education",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 0,
+ "editable_grid": 1
 }

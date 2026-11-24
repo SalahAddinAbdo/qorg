@@ -1,99 +1,111 @@
 {
-  "doctype": "DocType",
-  "name": "Eval Criterion",
-  "module": "QOrg",
-  "custom": 0,
-  "istable": 1,
-  "issingle": 0,
-  "editable_grid": 1,
-  "track_changes": 1,
-  "field_order": [
-    "component",
-    "criterion",
-    "scoring_method",
-    "maximum_score",
-    "weight",
-    "qorg_layout_column",
-    "mandatory",
-    "minimum_passing_score",
-    "description",
-    "page_break"
-  ],
-  "fields": [
-    {
-      "fieldname": "component",
-      "label": "Component",
-      "fieldtype": "Select",
-      "options": "Preliminary\nTechnical\nFinancial\nOther",
-      "reqd": 1,
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "criterion",
-      "label": "Criterion",
-      "fieldtype": "Data",
-      "reqd": 1,
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "scoring_method",
-      "label": "Scoring Method",
-      "fieldtype": "Select",
-      "options": "Individual Average\nWeighted Member Average\nConsensus Score\nIndividual then Consensus\nIndividual Pass Fail\nConsensus Pass Fail\nSystem Calculated\nSingle Authorized Assessor\nMeasured Value to Score",
-      "reqd": 1,
-      "in_list_view": 1,
-      "columns": 1
-    },
-    {
-      "fieldname": "maximum_score",
-      "label": "Maximum Score",
-      "fieldtype": "Float",
-      "in_list_view": 1,
-      "columns": 1
-    },
-    {
-      "fieldname": "weight",
-      "label": "Weight",
-      "fieldtype": "Percent",
-      "in_list_view": 1,
-      "columns": 1
-    },
-    {
-      "fieldname": "qorg_layout_column",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "mandatory",
-      "label": "Mandatory",
-      "fieldtype": "Check",
-      "in_list_view": 1,
-      "columns": 1
-    },
-    {
-      "fieldname": "minimum_passing_score",
-      "label": "Minimum Passing Score",
-      "fieldtype": "Float",
-      "in_list_view": 1,
-      "columns": 1
-    },
-    {
-      "fieldname": "description",
-      "label": "Description",
-      "fieldtype": "Small Text",
-      "in_list_view": 0
-    },
-    {
-      "fieldname": "page_break",
-      "label": "Page Break After This Row",
-      "fieldtype": "Check",
-      "default": "0",
-      "allow_on_submit": 1,
-      "print_hide": 1,
-      "in_list_view": 0,
-      "description": "Starts a new printed page after this row in managed print formats."
-    }
-  ],
-  "permissions": []
+ "doctype": "DocType",
+ "name": "Eval Criterion",
+ "module": "QOrg",
+ "custom": 0,
+ "istable": 1,
+ "issingle": 0,
+ "editable_grid": 1,
+ "track_changes": 1,
+ "field_order": [
+  "qorg_layout_section_1",
+  "component",
+  "criterion",
+  "scoring_method",
+  "qorg_layout_column_1_2",
+  "maximum_score",
+  "weight",
+  "mandatory",
+  "minimum_passing_score",
+  "page_break",
+  "qorg_layout_section_2",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "qorg_layout_section_1",
+   "fieldtype": "Section Break",
+   "label": "Criterion Definition"
+  },
+  {
+   "fieldname": "component",
+   "label": "Component",
+   "fieldtype": "Select",
+   "options": "Preliminary\nTechnical\nFinancial\nOther",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "criterion",
+   "label": "Criterion",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "scoring_method",
+   "label": "Scoring Method",
+   "fieldtype": "Select",
+   "options": "Individual Average\nWeighted Member Average\nConsensus Score\nIndividual then Consensus\nIndividual Pass Fail\nConsensus Pass Fail\nSystem Calculated\nSingle Authorized Assessor\nMeasured Value to Score",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "qorg_layout_column_1_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "maximum_score",
+   "label": "Maximum Score",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "weight",
+   "label": "Weight",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "mandatory",
+   "label": "Mandatory",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "minimum_passing_score",
+   "label": "Minimum Passing Score",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "page_break",
+   "label": "Page Break After This Row",
+   "fieldtype": "Check",
+   "default": "0",
+   "allow_on_submit": 1,
+   "print_hide": 1,
+   "in_list_view": 0,
+   "description": "Starts a new printed page after this row in managed print formats."
+  },
+  {
+   "fieldname": "qorg_layout_section_2",
+   "fieldtype": "Section Break",
+   "label": "Description"
+  },
+  {
+   "fieldname": "description",
+   "label": "Description",
+   "fieldtype": "Small Text",
+   "in_list_view": 0
+  }
+ ],
+ "permissions": []
 }
