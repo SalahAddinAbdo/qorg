@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import re
+from urllib.parse import parse_qs, unquote, urlparse
+
 import json
 from collections import defaultdict
 
@@ -49,6 +52,7 @@ def validate_document_requirement(doc):
 
 
 def validate_document_record(doc):
+    _hydrate_document_record(doc)
     if not frappe.db.exists(doc.subject_doctype, doc.subject_name):
         frappe.throw(_("Subject {0} {1} does not exist.").format(doc.subject_doctype, doc.subject_name))
     dtype = frappe.get_cached_doc(DOC_TYPE, doc.document_type)
@@ -303,3 +307,70 @@ def evaluate_readiness_with_documents(employee_name, persist=True):
     if persist:
         _persist_readiness(employee, result)
     return result
+
+
+TECHNICAL_STORAGE_FIELDS = (
+    "storage_provider", "external_document_id", "external_version_id",
+    "microsoft_site_url", "microsoft_drive_id", "microsoft_item_id", "microsoft_tenant", "google_file_id",
+    "google_shared_drive_id", "requires_authentication",
+)
+
+
+def _hydrate_document_record(doc):
+    """Synchronize derived document values on every write, including API/Data Import."""
+    if doc.subject_doctype and doc.subject_name and frappe.db.exists(doc.subject_doctype, doc.subject_name):
+        context = _subject_context(doc.subject_doctype, frappe.get_doc(doc.subject_doctype, doc.subject_name))
+        if not doc.document_title and context.get("title"):
+            doc.document_title = context["title"]
+    if doc.requirement:
+        req = frappe.get_doc("Employee Document Requirement", doc.requirement)
+        if req.document_type and req.document_type != doc.document_type:
+            doc.document_type = req.document_type
+    if doc.storage_type in EXTERNAL_TYPES or doc.storage_type == "Reference Only":
+        values = parse_external_document_url(doc.storage_type, doc.external_url, validate_only=False)
+        for fieldname in TECHNICAL_STORAGE_FIELDS:
+            doc.set(fieldname, values.get(fieldname))
+    else:
+        for fieldname in TECHNICAL_STORAGE_FIELDS:
+            doc.set(fieldname, None)
+
+
+@frappe.whitelist()
+def document_subject_context(subject_doctype, subject_name):
+    frappe.has_permission(subject_doctype, "read", subject_name, throw=True)
+    subject = frappe.get_doc(subject_doctype, subject_name)
+    context = _subject_context(subject_doctype, subject)
+    context["title"] = getattr(subject, "employee_name", None) or getattr(subject, "title", None) or subject.name
+    return context
+
+
+@frappe.whitelist()
+def parse_external_document_url(storage_type, url, validate_only=True):
+    """Parse provider metadata locally. External APIs are intentionally not called during validation."""
+    url = (url or "").strip()
+    if not url:
+        return {}
+    parsed = urlparse(url)
+    if parsed.scheme.lower() != "https" or not parsed.netloc:
+        frappe.throw(_("External document URL must be a valid HTTPS link."))
+    host = parsed.netloc.lower().split(":")[0]
+    path = unquote(parsed.path or "")
+    query = parse_qs(parsed.query or "")
+    values = {"requires_authentication": 1}
+    if storage_type == "Google Drive":
+        if host not in {"drive.google.com", "docs.google.com"}:
+            frappe.throw(_("Google Drive storage requires a drive.google.com or docs.google.com link."))
+        match = re.search(r"/(?:file/d|document/d|spreadsheets/d|presentation/d|forms/d|folders)/([^/?#]+)", path)
+        file_id = (match.group(1) if match else (query.get("id") or [None])[0])
+        values.update({"storage_provider": "Google Drive", "google_file_id": file_id, "external_document_id": file_id})
+    elif storage_type == "Microsoft SharePoint / OneDrive":
+        allowed = host.endswith(".sharepoint.com") or host in {"1drv.ms", "onedrive.live.com"}
+        if not allowed:
+            frappe.throw(_("Microsoft storage requires a SharePoint or OneDrive link."))
+        item_hint = (query.get("id") or query.get("resid") or [None])[0]
+        values.update({"storage_provider": "Microsoft 365", "microsoft_item_id": item_hint, "external_document_id": item_hint})
+    elif storage_type == "External Document Management System":
+        values.update({"storage_provider": host, "external_document_id": (query.get("id") or [None])[0]})
+    else:
+        values.update({"storage_provider": host, "requires_authentication": 0})
+    return values

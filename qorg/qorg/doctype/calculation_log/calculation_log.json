@@ -4,39 +4,56 @@
   "module": "QOrg",
   "custom": 0,
   "track_changes": 1,
+  "istable": 1,
+  "editable_grid": 0,
   "field_order": [
+    "revision_section",
     "revision",
     "calculated_on",
     "calculated_by",
+    "result_column",
     "completion",
     "final_score",
+    "provisional",
+    "outcome_section",
     "rating",
     "outcome",
-    "provisional",
+    "snapshot_section",
     "snapshot"
   ],
   "fields": [
+    {
+      "fieldname": "revision_section",
+      "label": "Calculation Revision",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "revision",
       "label": "Revision",
       "fieldtype": "Int",
       "read_only": 1,
-      "in_list_view": 1
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "calculated_on",
       "label": "Calculated On",
       "fieldtype": "Datetime",
       "read_only": 1,
-      "in_list_view": 1
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "calculated_by",
       "label": "Calculated By",
       "fieldtype": "Link",
       "options": "User",
-      "read_only": 1,
-      "in_list_view": 1
+      "read_only": 1
+    },
+    {
+      "fieldname": "result_column",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "completion",
@@ -49,28 +66,42 @@
       "label": "Final Score",
       "fieldtype": "Percent",
       "read_only": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "rating",
-      "label": "Rating",
-      "fieldtype": "Data",
-      "read_only": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "outcome",
-      "label": "Outcome",
-      "fieldtype": "Data",
-      "read_only": 1,
-      "in_list_view": 1
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "provisional",
       "label": "Provisional",
       "fieldtype": "Check",
       "read_only": 1,
-      "in_list_view": 1
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "outcome_section",
+      "label": "Outcome",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "rating",
+      "label": "Rating",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "outcome",
+      "label": "Outcome",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "snapshot_section",
+      "label": "Calculation Snapshot",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "snapshot",
@@ -79,7 +110,5 @@
       "read_only": 1
     }
   ],
-  "permissions": [],
-  "istable": 1,
-  "editable_grid": 0
+  "permissions": []
 }

@@ -4,23 +4,33 @@
   "module": "QOrg",
   "custom": 0,
   "track_changes": 1,
+  "istable": 1,
+  "editable_grid": 1,
   "field_order": [
+    "employee_section",
     "employee",
     "employee_name",
     "department",
     "designation",
-    "participation_reason",
+    "selection_column",
     "mandatory",
-    "include"
+    "include",
+    "participation_reason"
   ],
   "fields": [
+    {
+      "fieldname": "employee_section",
+      "label": "Participant",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "employee",
       "label": "Employee",
       "fieldtype": "Link",
       "options": "Employee",
       "reqd": 1,
-      "in_list_view": 1
+      "in_list_view": 1,
+      "columns": 3
     },
     {
       "fieldname": "employee_name",
@@ -28,7 +38,8 @@
       "fieldtype": "Data",
       "fetch_from": "employee.employee_name",
       "read_only": 1,
-      "in_list_view": 1
+      "in_list_view": 1,
+      "columns": 3
     },
     {
       "fieldname": "department",
@@ -36,8 +47,7 @@
       "fieldtype": "Link",
       "options": "Department",
       "fetch_from": "employee.department",
-      "read_only": 1,
-      "in_list_view": 1
+      "read_only": 1
     },
     {
       "fieldname": "designation",
@@ -45,30 +55,34 @@
       "fieldtype": "Link",
       "options": "Designation",
       "fetch_from": "employee.designation",
-      "read_only": 1,
-      "in_list_view": 1
+      "read_only": 1
     },
     {
-      "fieldname": "participation_reason",
-      "label": "Participation Reason",
-      "fieldtype": "Small Text"
+      "fieldname": "selection_column",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "mandatory",
       "label": "Mandatory",
       "fieldtype": "Check",
       "default": "0",
-      "in_list_view": 1
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "include",
       "label": "Include",
       "fieldtype": "Check",
       "default": "1",
-      "in_list_view": 1
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "participation_reason",
+      "label": "Participation Reason",
+      "fieldtype": "Small Text"
     }
   ],
-  "permissions": [],
-  "istable": 1,
-  "editable_grid": 1
+  "permissions": []
 }

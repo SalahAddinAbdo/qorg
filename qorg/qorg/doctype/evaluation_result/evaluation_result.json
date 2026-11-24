@@ -4,73 +4,64 @@
   "module": "QOrg",
   "custom": 0,
   "track_changes": 1,
+  "istable": 1,
+  "editable_grid": 0,
   "field_order": [
+    "result_section",
     "source",
+    "status",
     "weight",
+    "score_column",
+    "raw_score",
+    "source_score",
+    "weighted_score",
+    "review_section",
     "expected_reviews",
     "minimum_reviews",
     "completed_reviews",
+    "review_column",
     "meets_minimum",
     "completion",
-    "raw_score",
-    "source_score",
     "effective_weight",
-    "weighted_score",
-    "status",
+    "policy_section",
     "policy_applied",
     "score_type",
     "notes"
   ],
   "fields": [
     {
+      "fieldname": "result_section",
+      "label": "Source Result",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "source",
       "label": "Source",
       "fieldtype": "Data",
       "reqd": 1,
+      "read_only": 1,
       "in_list_view": 1,
-      "read_only": 1
+      "columns": 2
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Complete\nPartial\nMissing\nExcluded",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "weight",
       "label": "Weight (%)",
       "fieldtype": "Percent",
-      "read_only": 1,
-      "in_list_view": 1
+      "read_only": 1
     },
     {
-      "fieldname": "expected_reviews",
-      "label": "Expected",
-      "fieldtype": "Int",
-      "read_only": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "minimum_reviews",
-      "label": "Minimum Required",
-      "fieldtype": "Int",
-      "read_only": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "completed_reviews",
-      "label": "Completed",
-      "fieldtype": "Int",
-      "read_only": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "meets_minimum",
-      "label": "Meets Minimum",
-      "fieldtype": "Check",
-      "read_only": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "completion",
-      "label": "Completion (%)",
-      "fieldtype": "Percent",
-      "read_only": 1,
-      "in_list_view": 1
+      "fieldname": "score_column",
+      "label": "",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "raw_score",
@@ -83,7 +74,58 @@
       "label": "Source Score",
       "fieldtype": "Percent",
       "read_only": 1,
-      "in_list_view": 1
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "weighted_score",
+      "label": "Weighted Score",
+      "fieldtype": "Float",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "review_section",
+      "label": "Review Completion",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "expected_reviews",
+      "label": "Expected",
+      "fieldtype": "Int",
+      "read_only": 1
+    },
+    {
+      "fieldname": "minimum_reviews",
+      "label": "Minimum Required",
+      "fieldtype": "Int",
+      "read_only": 1
+    },
+    {
+      "fieldname": "completed_reviews",
+      "label": "Completed",
+      "fieldtype": "Int",
+      "read_only": 1
+    },
+    {
+      "fieldname": "review_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "meets_minimum",
+      "label": "Meets Minimum",
+      "fieldtype": "Check",
+      "read_only": 1
+    },
+    {
+      "fieldname": "completion",
+      "label": "Completion (%)",
+      "fieldtype": "Percent",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "effective_weight",
@@ -92,19 +134,9 @@
       "read_only": 1
     },
     {
-      "fieldname": "weighted_score",
-      "label": "Weighted Score",
-      "fieldtype": "Float",
-      "read_only": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "status",
-      "label": "Status",
-      "fieldtype": "Select",
-      "options": "Complete\nPartial\nMissing\nExcluded",
-      "read_only": 1,
-      "in_list_view": 1
+      "fieldname": "policy_section",
+      "label": "Policy and Notes",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "policy_applied",
@@ -125,7 +157,5 @@
       "read_only": 1
     }
   ],
-  "permissions": [],
-  "istable": 1,
-  "editable_grid": 0
+  "permissions": []
 }
