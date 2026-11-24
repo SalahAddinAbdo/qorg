@@ -1,0 +1,304 @@
+{
+  "doctype": "DocType",
+  "name": "Development Action",
+  "module": "QOrg",
+  "custom": 0,
+  "track_changes": 1,
+  "field_order": [
+    "overview_section",
+    "naming_series",
+    "employee",
+    "employee_name",
+    "company",
+    "status",
+    "overview_column",
+    "source_type",
+    "source_doctype",
+    "source_document",
+    "skill",
+    "development_need",
+    "action_section",
+    "action_type",
+    "responsible_person",
+    "target_date",
+    "success_measure",
+    "action_column",
+    "training_need_request",
+    "completion_date",
+    "completion_evidence_type",
+    "completion_document",
+    "completion_url",
+    "completion_notes",
+    "audit_section",
+    "planned_by",
+    "planned_on",
+    "completed_by",
+    "completed_on"
+  ],
+  "fields": [
+    {
+      "fieldname": "overview_section",
+      "label": "Development Action",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "EDA-.YYYY.-.#####",
+      "default": "EDA-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "employee",
+      "label": "Employee",
+      "fieldtype": "Link",
+      "options": "Employee",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "employee_name",
+      "label": "Employee Name",
+      "fieldtype": "Data",
+      "fetch_from": "employee.employee_name",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "fetch_from": "employee.company",
+      "read_only": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nPlanned\nIn Progress\nCompleted\nDeferred\nCancelled",
+      "default": "Draft",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "overview_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "source_type",
+      "label": "Source Type",
+      "fieldtype": "Select",
+      "options": "Appraisal\nSkill Assessment\nPerformance Feedback\nTraining Follow-up\nManager Decision\nCompliance Requirement\nOther",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "source_doctype",
+      "label": "Source Document Type",
+      "fieldtype": "Link",
+      "options": "DocType",
+      "reqd": 1
+    },
+    {
+      "fieldname": "source_document",
+      "label": "Source Document",
+      "fieldtype": "Dynamic Link",
+      "options": "source_doctype",
+      "reqd": 1
+    },
+    {
+      "fieldname": "skill",
+      "label": "Skill",
+      "fieldtype": "Link",
+      "options": "Skill"
+    },
+    {
+      "fieldname": "development_need",
+      "label": "Development Need",
+      "fieldtype": "Small Text",
+      "reqd": 1
+    },
+    {
+      "fieldname": "action_section",
+      "label": "Action Plan",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "action_type",
+      "label": "Action Type",
+      "fieldtype": "Select",
+      "options": "Training\nCoaching\nMentoring\nJob Shadowing\nStretch Assignment\nSelf-Learning\nCertification",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "responsible_person",
+      "label": "Responsible Person",
+      "fieldtype": "Link",
+      "options": "User",
+      "reqd": 1
+    },
+    {
+      "fieldname": "target_date",
+      "label": "Target Date",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "success_measure",
+      "label": "Success Measure",
+      "fieldtype": "Small Text",
+      "reqd": 1
+    },
+    {
+      "fieldname": "action_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "training_need_request",
+      "label": "Training Need Request",
+      "fieldtype": "Link",
+      "options": "Training Need Request",
+      "depends_on": "eval:doc.action_type=='Training'",
+      "mandatory_depends_on": "eval:doc.action_type=='Training'"
+    },
+    {
+      "fieldname": "completion_date",
+      "label": "Completion Date",
+      "fieldtype": "Date",
+      "depends_on": "eval:doc.status=='Completed'",
+      "mandatory_depends_on": "eval:doc.status=='Completed'"
+    },
+    {
+      "fieldname": "completion_evidence_type",
+      "label": "Completion Evidence Type",
+      "fieldtype": "Select",
+      "options": "\nEmployee Document Record\nExternal URL\nReference Only",
+      "depends_on": "eval:doc.status=='Completed'",
+      "mandatory_depends_on": "eval:doc.status=='Completed'"
+    },
+    {
+      "fieldname": "completion_document",
+      "label": "Completion Document",
+      "fieldtype": "Link",
+      "options": "Employee Document Record",
+      "depends_on": "eval:doc.completion_evidence_type=='Employee Document Record'"
+    },
+    {
+      "fieldname": "completion_url",
+      "label": "Completion URL",
+      "fieldtype": "Data",
+      "options": "URL",
+      "depends_on": "eval:doc.completion_evidence_type=='External URL'"
+    },
+    {
+      "fieldname": "completion_notes",
+      "label": "Completion Notes",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:doc.status=='Completed'",
+      "mandatory_depends_on": "eval:doc.status=='Completed' && doc.completion_evidence_type=='Reference Only'"
+    },
+    {
+      "fieldname": "audit_section",
+      "label": "Audit",
+      "fieldtype": "Section Break",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "planned_by",
+      "label": "Planned By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "planned_on",
+      "label": "Planned On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "completed_by",
+      "label": "Completed By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "completed_on",
+      "label": "Completed On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "HR Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "HR User",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Employee",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "print": 1,
+      "email": 1
+    },
+    {
+      "role": "Employee Self Service",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "print": 1,
+      "email": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "title_field": "development_need",
+  "search_fields": "employee,employee_name,development_need,status"
+}

@@ -1,0 +1,297 @@
+{
+  "doctype": "DocType",
+  "name": "Training Follow-up",
+  "module": "QOrg",
+  "custom": 0,
+  "track_changes": 1,
+  "field_order": [
+    "overview_section",
+    "naming_series",
+    "training_event",
+    "training_result",
+    "employee",
+    "employee_name",
+    "overview_column",
+    "due_date",
+    "responsible_user",
+    "status",
+    "completed_on",
+    "outcome_section",
+    "application_level",
+    "performance_improvement",
+    "manager_confirmed",
+    "outcome_column",
+    "evidence_type",
+    "evidence_document",
+    "evidence_url",
+    "evidence_notes",
+    "development_section",
+    "additional_training_required",
+    "recommended_action",
+    "follow_up_comments",
+    "audit_section",
+    "created_from_event",
+    "completed_by",
+    "cancelled_by",
+    "cancelled_on",
+    "cancel_reason"
+  ],
+  "fields": [
+    {
+      "fieldname": "overview_section",
+      "label": "Training Follow-up",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "TFU-.YYYY.-.#####",
+      "default": "TFU-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "training_event",
+      "label": "Training Event",
+      "fieldtype": "Link",
+      "options": "Training Event",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "training_result",
+      "label": "Training Result",
+      "fieldtype": "Link",
+      "options": "Training Result"
+    },
+    {
+      "fieldname": "employee",
+      "label": "Employee",
+      "fieldtype": "Link",
+      "options": "Employee",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "employee_name",
+      "label": "Employee Name",
+      "fieldtype": "Data",
+      "fetch_from": "employee.employee_name",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "overview_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "due_date",
+      "label": "Due Date",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "responsible_user",
+      "label": "Responsible Person",
+      "fieldtype": "Link",
+      "options": "User",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Open\nIn Progress\nCompleted\nOverdue\nCancelled",
+      "default": "Open",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "completed_on",
+      "label": "Completed On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "outcome_section",
+      "label": "Effectiveness",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "application_level",
+      "label": "Application Level",
+      "fieldtype": "Select",
+      "options": "\nNot Applied\nLimited\nPartially Applied\nApplied\nFully Embedded",
+      "mandatory_depends_on": "eval:doc.status=='Completed'",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "performance_improvement",
+      "label": "Performance Improvement Observed",
+      "fieldtype": "Select",
+      "options": "\nNo\nLimited\nModerate\nSignificant",
+      "mandatory_depends_on": "eval:doc.status=='Completed'"
+    },
+    {
+      "fieldname": "manager_confirmed",
+      "label": "Manager Confirmed",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "outcome_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "evidence_type",
+      "label": "Evidence Type",
+      "fieldtype": "Select",
+      "options": "\nEmployee Document Record\nExternal URL\nReference Only"
+    },
+    {
+      "fieldname": "evidence_document",
+      "label": "Evidence Document",
+      "fieldtype": "Link",
+      "options": "Employee Document Record",
+      "depends_on": "eval:doc.evidence_type=='Employee Document Record'"
+    },
+    {
+      "fieldname": "evidence_url",
+      "label": "Evidence URL",
+      "fieldtype": "Data",
+      "options": "URL",
+      "depends_on": "eval:doc.evidence_type=='External URL'"
+    },
+    {
+      "fieldname": "evidence_notes",
+      "label": "Evidence Notes",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:doc.evidence_type"
+    },
+    {
+      "fieldname": "development_section",
+      "label": "Further Development",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "additional_training_required",
+      "label": "Additional Training Required",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "recommended_action",
+      "label": "Recommended Development Action",
+      "fieldtype": "Link",
+      "options": "Development Action",
+      "depends_on": "eval:doc.additional_training_required",
+      "mandatory_depends_on": "eval:doc.additional_training_required"
+    },
+    {
+      "fieldname": "follow_up_comments",
+      "label": "Follow-up Comments",
+      "fieldtype": "Text Editor",
+      "mandatory_depends_on": "eval:doc.status=='Completed'"
+    },
+    {
+      "fieldname": "audit_section",
+      "label": "Audit",
+      "fieldtype": "Section Break",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "created_from_event",
+      "label": "Created from Event",
+      "fieldtype": "Check",
+      "default": "0",
+      "read_only": 1
+    },
+    {
+      "fieldname": "completed_by",
+      "label": "Completed By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cancelled_by",
+      "label": "Cancelled By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cancelled_on",
+      "label": "Cancelled On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cancel_reason",
+      "label": "Cancel Reason",
+      "fieldtype": "Small Text",
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "HR Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "HR User",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Employee Self Service",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "print": 1,
+      "email": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "title_field": "employee_name",
+  "search_fields": "employee,employee_name,training_event,status"
+}

@@ -1,0 +1,537 @@
+{
+  "doctype": "DocType",
+  "name": "Training Need Request",
+  "module": "QOrg",
+  "custom": 0,
+  "track_changes": 1,
+  "field_order": [
+    "overview_section",
+    "naming_series",
+    "training_need_title",
+    "request_date",
+    "requested_by",
+    "requested_for_employee",
+    "overview_column",
+    "status",
+    "priority",
+    "mandatory_training",
+    "need_source",
+    "source_doctype",
+    "source_document",
+    "organization_section",
+    "company",
+    "branch",
+    "department",
+    "request_scope",
+    "organization_column",
+    "designation",
+    "employment_type",
+    "employee_grade",
+    "work_location",
+    "justification_section",
+    "justification",
+    "competency_section",
+    "target_competencies",
+    "objectives_section",
+    "training_objectives",
+    "outcomes_section",
+    "expected_outcomes",
+    "delivery_column",
+    "preferred_delivery_method",
+    "preferred_start_date",
+    "preferred_end_date",
+    "expected_participants",
+    "participants_section",
+    "participants",
+    "funding_section",
+    "funding_required",
+    "estimated_cost",
+    "currency",
+    "project",
+    "funding_column",
+    "cost_center",
+    "funding_agreement",
+    "budget_line",
+    "funding_notes",
+    "review_section",
+    "hr_reviewed_by",
+    "hr_reviewed_on",
+    "approved_by",
+    "approved_on",
+    "return_or_rejection_reason",
+    "review_column",
+    "conversion_mode",
+    "training_program",
+    "training_event",
+    "converted_by",
+    "converted_on",
+    "conversion_snapshot"
+  ],
+  "fields": [
+    {
+      "fieldname": "overview_section",
+      "label": "Training Need",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "TNR-.YYYY.-.#####",
+      "default": "TNR-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "training_need_title",
+      "label": "Training Need Title",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "request_date",
+      "label": "Request Date",
+      "fieldtype": "Date",
+      "default": "Today",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "requested_by",
+      "label": "Requested By",
+      "fieldtype": "Link",
+      "options": "User",
+      "default": "__user",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "requested_for_employee",
+      "label": "Requested for Employee",
+      "fieldtype": "Link",
+      "options": "Employee",
+      "depends_on": "eval:doc.request_scope=='Individual Employee'",
+      "mandatory_depends_on": "eval:doc.request_scope=='Individual Employee'"
+    },
+    {
+      "fieldname": "overview_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nPending HR Review\nPending Approval\nApproved\nReturned\nRejected\nConverted\nCancelled",
+      "default": "Draft",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "priority",
+      "label": "Priority",
+      "fieldtype": "Select",
+      "options": "Low\nMedium\nHigh\nCritical",
+      "default": "Medium",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "mandatory_training",
+      "label": "Mandatory Training",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "need_source",
+      "label": "Need Source",
+      "fieldtype": "Select",
+      "options": "Appraisal Recommendation\nCompetency Gap\nEmployee Request\nManager Request\nHR Requirement\nPolicy or Compliance Requirement\nProject Requirement\nAnnual Training Plan\nContract Requirement\nOther",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "source_doctype",
+      "label": "Source Document Type",
+      "fieldtype": "Link",
+      "options": "DocType",
+      "depends_on": "eval:['Appraisal Recommendation','Competency Gap','Policy or Compliance Requirement','Contract Requirement'].includes(doc.need_source)"
+    },
+    {
+      "fieldname": "source_document",
+      "label": "Source Document",
+      "fieldtype": "Dynamic Link",
+      "options": "source_doctype",
+      "depends_on": "eval:doc.source_doctype",
+      "mandatory_depends_on": "eval:doc.source_doctype"
+    },
+    {
+      "fieldname": "organization_section",
+      "label": "Organization Context",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "branch",
+      "label": "Branch",
+      "fieldtype": "Link",
+      "options": "Branch"
+    },
+    {
+      "fieldname": "department",
+      "label": "Department",
+      "fieldtype": "Link",
+      "options": "Department"
+    },
+    {
+      "fieldname": "request_scope",
+      "label": "Request Scope",
+      "fieldtype": "Select",
+      "options": "Individual Employee\nNamed Group\nCriteria-based Group\nDesignation\nDepartment\nProject Team\nOrganization-wide\nExternal Participant Group",
+      "default": "Individual Employee",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "organization_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "designation",
+      "label": "Designation",
+      "fieldtype": "Link",
+      "options": "Designation",
+      "depends_on": "eval:doc.request_scope=='Designation'",
+      "mandatory_depends_on": "eval:doc.request_scope=='Designation'"
+    },
+    {
+      "fieldname": "employment_type",
+      "label": "Employment Type",
+      "fieldtype": "Link",
+      "options": "Employment Type",
+      "depends_on": "eval:doc.request_scope=='Criteria-based Group'"
+    },
+    {
+      "fieldname": "employee_grade",
+      "label": "Employee Grade",
+      "fieldtype": "Link",
+      "options": "Employee Grade",
+      "depends_on": "eval:doc.request_scope=='Criteria-based Group'"
+    },
+    {
+      "fieldname": "work_location",
+      "label": "Work Location",
+      "fieldtype": "Data",
+      "depends_on": "eval:doc.request_scope=='Criteria-based Group'"
+    },
+    {
+      "fieldname": "justification_section",
+      "label": "Business Need",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "justification",
+      "label": "Justification",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "competency_section",
+      "label": "Competencies and Delivery",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "target_competencies",
+      "label": "Target Competencies / Skills",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "objectives_section",
+      "label": "Training Objectives",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "training_objectives",
+      "label": "Training Objectives",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "outcomes_section",
+      "label": "Expected Outcomes",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "expected_outcomes",
+      "label": "Expected Outcomes",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "delivery_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "preferred_delivery_method",
+      "label": "Preferred Delivery Method",
+      "fieldtype": "Select",
+      "options": "\nIn Person\nVirtual\nHybrid\nSelf-paced\nCoaching\nMentoring\nJob Shadowing\nOther"
+    },
+    {
+      "fieldname": "preferred_start_date",
+      "label": "Preferred Start Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "preferred_end_date",
+      "label": "Preferred End Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "expected_participants",
+      "label": "Expected Participants",
+      "fieldtype": "Int",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "participants_section",
+      "label": "Named Participants",
+      "fieldtype": "Section Break",
+      "depends_on": "eval:['Named Group','Individual Employee'].includes(doc.request_scope)",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "participants",
+      "label": "Participants",
+      "fieldtype": "Table",
+      "options": "Training Need Participant",
+      "depends_on": "eval:doc.request_scope=='Named Group'",
+      "mandatory_depends_on": "eval:doc.request_scope=='Named Group'"
+    },
+    {
+      "fieldname": "funding_section",
+      "label": "Funding Context",
+      "fieldtype": "Section Break",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "funding_required",
+      "label": "Funding Required",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "estimated_cost",
+      "label": "Estimated Cost",
+      "fieldtype": "Currency",
+      "options": "currency",
+      "depends_on": "eval:doc.funding_required",
+      "mandatory_depends_on": "eval:doc.funding_required"
+    },
+    {
+      "fieldname": "currency",
+      "label": "Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "depends_on": "eval:doc.funding_required",
+      "mandatory_depends_on": "eval:doc.funding_required"
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project",
+      "depends_on": "eval:doc.funding_required || doc.need_source=='Project Requirement' || doc.request_scope=='Project Team'",
+      "mandatory_depends_on": "eval:doc.request_scope=='Project Team' || doc.need_source=='Project Requirement'"
+    },
+    {
+      "fieldname": "funding_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "cost_center",
+      "label": "Cost Center",
+      "fieldtype": "Link",
+      "options": "Cost Center",
+      "depends_on": "eval:doc.funding_required"
+    },
+    {
+      "fieldname": "funding_agreement",
+      "label": "Funding Agreement",
+      "fieldtype": "Link",
+      "options": "Funding Agreement",
+      "depends_on": "eval:doc.funding_required"
+    },
+    {
+      "fieldname": "budget_line",
+      "label": "Budget Line",
+      "fieldtype": "Link",
+      "options": "Budget Line",
+      "depends_on": "eval:doc.funding_required"
+    },
+    {
+      "fieldname": "funding_notes",
+      "label": "Funding Notes",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:doc.funding_required"
+    },
+    {
+      "fieldname": "review_section",
+      "label": "Review and Conversion",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "hr_reviewed_by",
+      "label": "HR Reviewed By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "hr_reviewed_on",
+      "label": "HR Reviewed On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "approved_by",
+      "label": "Approved By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "approved_on",
+      "label": "Approved On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "return_or_rejection_reason",
+      "label": "Return / Rejection Reason",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:['Returned','Rejected'].includes(doc.status)"
+    },
+    {
+      "fieldname": "review_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "conversion_mode",
+      "label": "Conversion Mode",
+      "fieldtype": "Select",
+      "options": "\nLink Existing Program\nCreate Training Program\nCreate Training Event",
+      "read_only": 1
+    },
+    {
+      "fieldname": "training_program",
+      "label": "Training Program",
+      "fieldtype": "Link",
+      "options": "Training Program",
+      "read_only": 1
+    },
+    {
+      "fieldname": "training_event",
+      "label": "Training Event",
+      "fieldtype": "Link",
+      "options": "Training Event",
+      "read_only": 1
+    },
+    {
+      "fieldname": "converted_by",
+      "label": "Converted By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "converted_on",
+      "label": "Converted On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "conversion_snapshot",
+      "label": "Conversion Snapshot",
+      "fieldtype": "Long Text",
+      "hidden": 1,
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "HR Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "HR User",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Employee",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "print": 1,
+      "email": 1
+    },
+    {
+      "role": "Employee Self Service",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "print": 1,
+      "email": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "title_field": "training_need_title",
+  "search_fields": "training_need_title,company,department,status",
+  "is_submittable": 0
+}

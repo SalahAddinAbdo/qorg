@@ -1,0 +1,124 @@
+{
+  "doctype": "DocType",
+  "name": "Rating Scale",
+  "module": "QOrg",
+  "custom": 0,
+  "track_changes": 1,
+  "field_order": [
+    "overview_section",
+    "scale_name",
+    "scale_code",
+    "active",
+    "overview_column",
+    "minimum_score",
+    "maximum_score",
+    "description",
+    "bands_section",
+    "bands"
+  ],
+  "fields": [
+    {
+      "fieldname": "overview_section",
+      "label": "Rating Scale",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "scale_name",
+      "label": "Scale Name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "unique": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "scale_code",
+      "label": "Code",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "unique": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "active",
+      "label": "Active",
+      "fieldtype": "Check",
+      "default": "1",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "overview_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "minimum_score",
+      "label": "Minimum Score",
+      "fieldtype": "Percent",
+      "default": "0",
+      "read_only": 1
+    },
+    {
+      "fieldname": "maximum_score",
+      "label": "Maximum Score",
+      "fieldtype": "Percent",
+      "default": "100",
+      "read_only": 1
+    },
+    {
+      "fieldname": "description",
+      "label": "Description",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "bands_section",
+      "label": "Rating Bands",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "bands",
+      "label": "Bands",
+      "fieldtype": "Table",
+      "options": "Rating Band",
+      "reqd": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "HR Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "HR User",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    }
+  ],
+  "autoname": "field:scale_name",
+  "title_field": "scale_name"
+}

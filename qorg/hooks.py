@@ -725,3 +725,91 @@ for _doctype in ("Employee Promotion", "Employee Transfer"):
 _qorg_add_doc_event("Salary Structure Assignment", "validate", "qorg.qorg.employee_lifecycle.movements.validate_salary_assignment")
 _qorg_add_doc_event("Workforce Funding Plan", "validate", "qorg.qorg.employee_lifecycle.movements.validate_funding_plan_movement")
 _qorg_add_doc_event("Contract Amendment", "validate", "qorg.qorg.employee_lifecycle.movements.validate_contract_amendment_movement")
+
+# EMPLOYEE LIFECYCLE PHASE 7.6B - LEARNING NEEDS AND DEVELOPMENT PLANNING
+def _learning_add_js(doctype, asset):
+    current = doctype_js.get(doctype)
+    if not current:
+        doctype_js[doctype] = asset
+    elif isinstance(current, list):
+        if asset not in current:
+            current.append(asset)
+    elif current != asset:
+        doctype_js[doctype] = [current, asset]
+
+_learning_add_js("Training Need Request", "public/js/training_need_request.js")
+_learning_add_js("Development Action", "public/js/development_action.js")
+
+_learning_provisioner = "qorg.qorg.employee_lifecycle.learning_provisioning.provision_learning_planning"
+if _learning_provisioner not in after_migrate:
+    after_migrate.append(_learning_provisioner)
+
+permission_query_conditions.update({
+    "Training Need Request": "qorg.qorg.employee_lifecycle.learning_permissions.training_need_query",
+    "Development Action": "qorg.qorg.employee_lifecycle.learning_permissions.development_action_query",
+})
+has_permission.update({
+    "Training Need Request": "qorg.qorg.employee_lifecycle.learning_permissions.training_need_has_permission",
+    "Development Action": "qorg.qorg.employee_lifecycle.learning_permissions.development_action_has_permission",
+})
+
+# EMPLOYEE LIFECYCLE PHASE 7.6C - TRAINING EXECUTION AND EFFECTIVENESS
+_learning_add_js("Training Assessment", "public/js/training_assessment.js")
+_learning_add_js("Training Follow-up", "public/js/training_follow_up.js")
+_learning_add_js("Training Event", "public/js/training_event_ext.js")
+_training_setup = "qorg.qorg.employee_lifecycle.training_setup.setup_training_execution"
+if _training_setup not in after_migrate:
+    after_migrate.append(_training_setup)
+_training_daily = "qorg.qorg.employee_lifecycle.training.update_overdue_follow_ups"
+scheduler_events.setdefault("daily", [])
+if _training_daily not in scheduler_events["daily"]:
+    scheduler_events["daily"].append(_training_daily)
+permission_query_conditions.update({
+    "Training Assessment": "qorg.qorg.employee_lifecycle.training_perm.assessment_query",
+    "Training Follow-up": "qorg.qorg.employee_lifecycle.training_perm.follow_up_query",
+})
+has_permission.update({
+    "Training Assessment": "qorg.qorg.employee_lifecycle.training_perm.assessment_has_permission",
+    "Training Follow-up": "qorg.qorg.employee_lifecycle.training_perm.follow_up_has_permission",
+})
+
+# EMPLOYEE LIFECYCLE PHASE 7.6D - EVALUATION POLICY AND ASSIGNMENTS
+_learning_add_js("Evaluation Type", "public/js/evaluation_type.js")
+_learning_add_js("Evaluation Assignment", "public/js/evaluation_assignment.js")
+_learning_add_js("Appraisal", "public/js/appraisal_ext.js")
+_learning_add_js("Appraisal Cycle", "public/js/appraisal_cycle_ext.js")
+_performance_setup = "qorg.qorg.employee_lifecycle.perf_setup.setup_performance_policy"
+if _performance_setup not in after_migrate:
+    after_migrate.append(_performance_setup)
+permission_query_conditions.update({
+    "Evaluation Assignment": "qorg.qorg.employee_lifecycle.perf_perm.assignment_query",
+})
+has_permission.update({
+    "Evaluation Assignment": "qorg.qorg.employee_lifecycle.perf_perm.assignment_has_permission",
+})
+_qorg_add_doc_event("Appraisal Cycle", "validate", "qorg.qorg.employee_lifecycle.performance.validate_appraisal_cycle")
+_qorg_add_doc_event("Employee Performance Feedback", "validate", "qorg.qorg.employee_lifecycle.performance.validate_feedback")
+_qorg_add_doc_event("Employee Performance Feedback", "on_submit", "qorg.qorg.employee_lifecycle.performance.feedback_submitted")
+_qorg_add_doc_event("Employee Performance Feedback", "on_cancel", "qorg.qorg.employee_lifecycle.performance.feedback_cancelled")
+
+# EMPLOYEE LIFECYCLE PHASE 7.6E - APPRAISAL LIFECYCLE AND CALCULATION
+_qorg_add_doc_event("Appraisal", "before_submit", "qorg.qorg.employee_lifecycle.performance.before_submit_appraisal")
+_qorg_add_doc_event("Appraisal", "on_submit", "qorg.qorg.employee_lifecycle.performance.appraisal_submitted")
+_qorg_add_doc_event("Appraisal", "on_cancel", "qorg.qorg.employee_lifecycle.performance.appraisal_cancelled")
+_qorg_add_doc_event("Appraisal", "validate", "qorg.qorg.employee_lifecycle.performance.protect_appraisal")
+
+# EMPLOYEE LIFECYCLE PHASE 7.6F - SKILLS, RECOMMENDATIONS AND HISTORY
+_learning_add_js("Employee", "public/js/employee_dev.js")
+_development_setup = "qorg.qorg.employee_lifecycle.dev_setup.setup_development"
+if _development_setup not in after_migrate:
+    after_migrate.append(_development_setup)
+_qorg_add_doc_event("Training Program", "validate", "qorg.qorg.employee_lifecycle.training.validate_training_policy")
+_qorg_add_doc_event("Training Event", "validate", "qorg.qorg.employee_lifecycle.training.validate_training_policy")
+_learning_add_js("Employee Performance Feedback", "public/js/performance_feedback_ext.js")
+_learning_add_js("Training Follow-up", "public/js/learning_comms.js")
+_learning_add_js("Training Result", "public/js/learning_comms.js")
+_learning_add_js("Evaluation Assignment", "public/js/learning_comms.js")
+_learning_add_js("Appraisal", "public/js/learning_comms.js")
+_learning_comms_setup = "qorg.qorg.employee_lifecycle.comms.provision_communications"
+if _learning_comms_setup not in after_migrate:
+    after_migrate.append(_learning_comms_setup)

@@ -1,0 +1,334 @@
+{
+  "doctype": "DocType",
+  "name": "Evaluation Assignment",
+  "module": "QOrg",
+  "custom": 0,
+  "track_changes": 1,
+  "field_order": [
+    "overview_section",
+    "naming_series",
+    "appraisal_cycle",
+    "appraisal",
+    "evaluation_type",
+    "status",
+    "overview_column",
+    "assigned_on",
+    "due_date",
+    "submitted_on",
+    "locked",
+    "people_section",
+    "employee",
+    "employee_name",
+    "evaluation_source",
+    "weight",
+    "anonymous",
+    "people_column",
+    "reviewer",
+    "reviewer_name",
+    "reviewer_user",
+    "reviewer_category",
+    "related_department",
+    "tracking_section",
+    "feedback",
+    "conflict_declared",
+    "conflict_notes",
+    "decline_reason",
+    "tracking_column",
+    "reminder_count",
+    "last_reminder_on",
+    "escalated_on",
+    "replaces_assignment",
+    "replaced_by",
+    "replacement_reason"
+  ],
+  "fields": [
+    {
+      "fieldname": "overview_section",
+      "label": "Evaluation Assignment",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "EVA-.YYYY.-.#####",
+      "default": "EVA-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "appraisal_cycle",
+      "label": "Appraisal Cycle",
+      "fieldtype": "Link",
+      "options": "Appraisal Cycle",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "appraisal",
+      "label": "Appraisal",
+      "fieldtype": "Link",
+      "options": "Appraisal",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "evaluation_type",
+      "label": "Evaluation Type",
+      "fieldtype": "Link",
+      "options": "Evaluation Type",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Assigned\nIn Progress\nSubmitted\nDeclined\nReplaced\nCancelled",
+      "default": "Assigned",
+      "read_only": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "overview_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "assigned_on",
+      "label": "Assigned On",
+      "fieldtype": "Date",
+      "default": "Today",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "due_date",
+      "label": "Due Date",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "submitted_on",
+      "label": "Submitted On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "locked",
+      "label": "Locked",
+      "fieldtype": "Check",
+      "default": "0",
+      "read_only": 1
+    },
+    {
+      "fieldname": "people_section",
+      "label": "Employee and Reviewer",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "employee",
+      "label": "Employee",
+      "fieldtype": "Link",
+      "options": "Employee",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "employee_name",
+      "label": "Employee Name",
+      "fieldtype": "Data",
+      "fetch_from": "employee.employee_name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "evaluation_source",
+      "label": "Evaluation Source",
+      "fieldtype": "Select",
+      "options": "Goals\nSelf\nDirect Manager\nPeers\nHuman Resources\nSenior Management\nRelated Department\nDirect Reports\nTechnical Assessor\nOther",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "weight",
+      "label": "Weight (%)",
+      "fieldtype": "Percent",
+      "reqd": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "anonymous",
+      "label": "Anonymous",
+      "fieldtype": "Check",
+      "default": "0",
+      "read_only": 1
+    },
+    {
+      "fieldname": "people_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "reviewer",
+      "label": "Reviewer",
+      "fieldtype": "Link",
+      "options": "Employee",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "reviewer_name",
+      "label": "Reviewer Name",
+      "fieldtype": "Data",
+      "fetch_from": "reviewer.employee_name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "reviewer_user",
+      "label": "Reviewer User",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "reviewer_category",
+      "label": "Reviewer Category",
+      "fieldtype": "Data",
+      "read_only": 1
+    },
+    {
+      "fieldname": "related_department",
+      "label": "Related Department",
+      "fieldtype": "Link",
+      "options": "Department",
+      "depends_on": "eval:doc.evaluation_source=='Related Department'"
+    },
+    {
+      "fieldname": "tracking_section",
+      "label": "Tracking",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "feedback",
+      "label": "Feedback",
+      "fieldtype": "Link",
+      "options": "Employee Performance Feedback",
+      "read_only": 1
+    },
+    {
+      "fieldname": "conflict_declared",
+      "label": "Conflict of Interest Declared",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "conflict_notes",
+      "label": "Conflict Notes",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:doc.conflict_declared",
+      "mandatory_depends_on": "eval:doc.conflict_declared"
+    },
+    {
+      "fieldname": "decline_reason",
+      "label": "Decline Reason",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:doc.status=='Declined'"
+    },
+    {
+      "fieldname": "tracking_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "reminder_count",
+      "label": "Reminder Count",
+      "fieldtype": "Int",
+      "default": "0",
+      "read_only": 1
+    },
+    {
+      "fieldname": "last_reminder_on",
+      "label": "Last Reminder On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "escalated_on",
+      "label": "Escalated On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "replaces_assignment",
+      "label": "Replaces Assignment",
+      "fieldtype": "Link",
+      "options": "Evaluation Assignment",
+      "read_only": 1
+    },
+    {
+      "fieldname": "replaced_by",
+      "label": "Replaced By",
+      "fieldtype": "Link",
+      "options": "Evaluation Assignment",
+      "read_only": 1
+    },
+    {
+      "fieldname": "replacement_reason",
+      "label": "Replacement Reason",
+      "fieldtype": "Small Text",
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "HR Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "HR User",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Employee Self Service",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "print": 1,
+      "email": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "title_field": "employee_name",
+  "search_fields": "employee,employee_name,reviewer,reviewer_name,appraisal,status"
+}

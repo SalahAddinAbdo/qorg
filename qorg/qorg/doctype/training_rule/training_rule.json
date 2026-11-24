@@ -1,0 +1,19 @@
+{
+  "doctype": "DocType",
+  "name": "Training Rule",
+  "module": "QOrg",
+  "custom": 0,
+  "track_changes": 1,
+  "istable": 1,
+  "editable_grid": 1,
+  "field_order": ["component", "weight", "required", "must_pass", "attempt_policy", "pass_score"],
+  "fields": [
+    {"fieldname":"component","label":"Component","fieldtype":"Select","options":"Attendance\nPost-Assessment\nPractical\nTrainer Evaluation\nCertification Exam","reqd":1,"in_list_view":1},
+    {"fieldname":"weight","label":"Weight (%)","fieldtype":"Percent","default":"0","reqd":1,"in_list_view":1},
+    {"fieldname":"required","label":"Required","fieldtype":"Check","default":"0","in_list_view":1},
+    {"fieldname":"must_pass","label":"Must Pass","fieldtype":"Check","default":"0","in_list_view":1,"depends_on":"eval:doc.component!='Attendance'"},
+    {"fieldname":"attempt_policy","label":"Attempt Policy","fieldtype":"Select","options":"Latest Attempt\nBest Attempt\nFirst Passing Attempt\nAverage of Attempts","default":"Latest Attempt","depends_on":"eval:doc.component!='Attendance'"},
+    {"fieldname":"pass_score","label":"Pass Score (%)","fieldtype":"Percent","default":"60","depends_on":"eval:doc.component!='Attendance'"}
+  ],
+  "permissions": []
+}

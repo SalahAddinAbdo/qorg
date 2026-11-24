@@ -1,0 +1,271 @@
+{
+  "doctype": "DocType",
+  "name": "Training Assessment",
+  "module": "QOrg",
+  "custom": 0,
+  "track_changes": 1,
+  "field_order": [
+    "overview_section",
+    "naming_series",
+    "training_event",
+    "employee",
+    "employee_name",
+    "assessment_type",
+    "overview_column",
+    "attempt_no",
+    "assessment_date",
+    "assessor",
+    "status",
+    "score_section",
+    "maximum_score",
+    "score",
+    "percentage",
+    "score_column",
+    "passing_percentage",
+    "passed",
+    "evidence",
+    "remarks",
+    "audit_section",
+    "submitted_by",
+    "submitted_on",
+    "cancelled_by",
+    "cancelled_on",
+    "cancel_reason"
+  ],
+  "fields": [
+    {
+      "fieldname": "overview_section",
+      "label": "Assessment",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "TAS-.YYYY.-.#####",
+      "default": "TAS-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "training_event",
+      "label": "Training Event",
+      "fieldtype": "Link",
+      "options": "Training Event",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "employee",
+      "label": "Employee",
+      "fieldtype": "Link",
+      "options": "Employee",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "employee_name",
+      "label": "Employee Name",
+      "fieldtype": "Data",
+      "fetch_from": "employee.employee_name",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "assessment_type",
+      "label": "Assessment Type",
+      "fieldtype": "Select",
+      "options": "Pre-Assessment\nPost-Assessment\nPractical\nTrainer Evaluation\nCertification Exam",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "overview_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "attempt_no",
+      "label": "Attempt Number",
+      "fieldtype": "Int",
+      "default": "1",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "assessment_date",
+      "label": "Assessment Date",
+      "fieldtype": "Date",
+      "default": "Today",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "assessor",
+      "label": "Assessor",
+      "fieldtype": "Link",
+      "options": "User",
+      "default": "__user",
+      "reqd": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nSubmitted\nCancelled",
+      "default": "Draft",
+      "read_only": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "score_section",
+      "label": "Score",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "maximum_score",
+      "label": "Maximum Score",
+      "fieldtype": "Float",
+      "default": "100",
+      "reqd": 1
+    },
+    {
+      "fieldname": "score",
+      "label": "Score",
+      "fieldtype": "Float",
+      "reqd": 1
+    },
+    {
+      "fieldname": "percentage",
+      "label": "Percentage",
+      "fieldtype": "Percent",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "score_column",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "passing_percentage",
+      "label": "Passing Percentage",
+      "fieldtype": "Percent",
+      "default": "60",
+      "reqd": 1
+    },
+    {
+      "fieldname": "passed",
+      "label": "Passed",
+      "fieldtype": "Check",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "evidence",
+      "label": "Evidence",
+      "fieldtype": "Link",
+      "options": "Employee Document Record",
+      "depends_on": "eval:doc.status!=\"Cancelled\""
+    },
+    {
+      "fieldname": "remarks",
+      "label": "Remarks",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "audit_section",
+      "label": "Audit",
+      "fieldtype": "Section Break",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "submitted_by",
+      "label": "Submitted By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "submitted_on",
+      "label": "Submitted On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cancelled_by",
+      "label": "Cancelled By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cancelled_on",
+      "label": "Cancelled On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cancel_reason",
+      "label": "Cancel Reason",
+      "fieldtype": "Small Text",
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "HR Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "HR User",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Employee Self Service",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "print": 1,
+      "email": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "title_field": "employee_name",
+  "search_fields": "employee,employee_name,training_event,assessment_type,status"
+}

@@ -1,0 +1,131 @@
+{
+  "doctype": "DocType",
+  "name": "Evaluation Result",
+  "module": "QOrg",
+  "custom": 0,
+  "track_changes": 1,
+  "field_order": [
+    "source",
+    "weight",
+    "expected_reviews",
+    "minimum_reviews",
+    "completed_reviews",
+    "meets_minimum",
+    "completion",
+    "raw_score",
+    "source_score",
+    "effective_weight",
+    "weighted_score",
+    "status",
+    "policy_applied",
+    "score_type",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "source",
+      "label": "Source",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "weight",
+      "label": "Weight (%)",
+      "fieldtype": "Percent",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "expected_reviews",
+      "label": "Expected",
+      "fieldtype": "Int",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "minimum_reviews",
+      "label": "Minimum Required",
+      "fieldtype": "Int",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "completed_reviews",
+      "label": "Completed",
+      "fieldtype": "Int",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "meets_minimum",
+      "label": "Meets Minimum",
+      "fieldtype": "Check",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "completion",
+      "label": "Completion (%)",
+      "fieldtype": "Percent",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "raw_score",
+      "label": "Raw Score",
+      "fieldtype": "Float",
+      "read_only": 1
+    },
+    {
+      "fieldname": "source_score",
+      "label": "Source Score",
+      "fieldtype": "Percent",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "effective_weight",
+      "label": "Effective Weight",
+      "fieldtype": "Percent",
+      "read_only": 1
+    },
+    {
+      "fieldname": "weighted_score",
+      "label": "Weighted Score",
+      "fieldtype": "Float",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Complete\nPartial\nMissing\nExcluded",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "policy_applied",
+      "label": "Policy Applied",
+      "fieldtype": "Data",
+      "read_only": 1
+    },
+    {
+      "fieldname": "score_type",
+      "label": "Score Type",
+      "fieldtype": "Data",
+      "read_only": 1
+    },
+    {
+      "fieldname": "notes",
+      "label": "Notes",
+      "fieldtype": "Small Text",
+      "read_only": 1
+    }
+  ],
+  "permissions": [],
+  "istable": 1,
+  "editable_grid": 0
+}
