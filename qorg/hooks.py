@@ -45,7 +45,8 @@ extend_doctype_class = {'Task': ['qorg.qorg.task_management.task_controller.Task
  'Material Request': ['qorg.qorg.procurement_contracting.material_request.MaterialRequestProcurementMixin']}
 
 override_doctype_dashboards = {'Material Request': 'qorg.qorg.dashboards.material_request.get_data',
- 'Contract': 'qorg.qorg.dashboards.contract.get_data'}
+ 'Contract': 'qorg.qorg.dashboards.contract.get_data',
+ 'Employee Separation': 'qorg.qorg.employee_lifecycle.separation_clearance.dashboard.get_data'}
 
 # ==============================================================================
 # DESK ASSETS
@@ -144,7 +145,9 @@ doctype_js = {'Website Settings': 'public/js/website_settings_opportunity_portal
  'Participation Engagement': ['public/js/participation_communications.js'],
  'Participation Service Log': ['public/js/participation_communications.js'],
  'Participation Certificate': ['public/js/participation_communications.js'],
- 'Procurement Complaint': ['public/js/procurement_complaint.js']}
+ 'Procurement Complaint': ['public/js/procurement_complaint.js'],
+ 'Employee Separation': ['public/js/employee_separation_clearance.js'],
+ 'Employee Offboarding': ['public/js/employee_separation_clearance.js']}
 
 # ==============================================================================
 # DOCUMENT EVENTS
@@ -273,9 +276,11 @@ doc_events = {'Web Form': {'before_validate': 'qorg.qorg.people_and_opportunitie
                         'qorg.qorg.finance_budget_grants.services.validate_accounting_document']},
  'Asset Movement': {'validate': ['qorg.qorg.inventory_asset_custody.asset_control.validate_movement']},
  'Employee Separation': {'validate': ['qorg.qorg.inventory_asset_custody.asset_control.prevent_separation',
-                                      'qorg.qorg.recruitment_extensions.employee_cycle_integrity.prevent_incomplete_employee_exit']},
+                                      'qorg.qorg.recruitment_extensions.employee_cycle_integrity.prevent_incomplete_employee_exit',
+                                      'qorg.qorg.employee_lifecycle.separation_clearance.services.validate_employee_clearance']},
  'Employee Offboarding': {'validate': ['qorg.qorg.inventory_asset_custody.asset_control.prevent_separation',
-                                       'qorg.qorg.recruitment_extensions.employee_cycle_integrity.prevent_incomplete_employee_exit']},
+                                       'qorg.qorg.recruitment_extensions.employee_cycle_integrity.prevent_incomplete_employee_exit',
+                                       'qorg.qorg.employee_lifecycle.separation_clearance.services.validate_employee_clearance']},
  'Project Result': {'validate': 'qorg.qorg.project_management.cycle_integrity.validate_project_cycle_links'},
  'Project Indicator': {'validate': 'qorg.qorg.project_management.cycle_integrity.validate_project_cycle_links'},
  'Indicator Target Plan': {'validate': 'qorg.qorg.project_management.cycle_integrity.validate_project_cycle_links'},
@@ -701,6 +706,7 @@ for _method in (
     "qorg.qorg.employee_lifecycle.provisioning.provision_employee_lifecycle",
     "qorg.qorg.employee_lifecycle.movement_provisioning.provision_employee_movements",
     "qorg.qorg.employee_lifecycle.document_provisioning.provision_employee_documents",
+    "qorg.qorg.employee_lifecycle.separation_clearance.provisioning.provision_employee_separation_clearance",
 ):
     if _method not in after_migrate:
         after_migrate.append(_method)
