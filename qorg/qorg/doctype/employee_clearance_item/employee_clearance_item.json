@@ -1,0 +1,219 @@
+{
+ "doctype": "DocType",
+ "name": "Employee Clearance Item",
+ "module": "QOrg",
+ "custom": 0,
+ "istable": 1,
+ "editable_grid": 1,
+ "track_changes": 1,
+ "field_order": [
+  "requirement_section",
+  "clearance_area",
+  "required",
+  "status",
+  "requirement_col_2",
+  "responsible_role",
+  "responsible_user",
+  "reference_section",
+  "reference_doctype",
+  "reference_document",
+  "reference_col_2",
+  "outstanding_amount",
+  "currency",
+  "evidence_section",
+  "evidence",
+  "completed_by",
+  "completed_on",
+  "remarks_section",
+  "remarks",
+  "exception_section",
+  "exception_approved",
+  "exception_approval_doctype",
+  "exception_approval",
+  "exception_reason_section",
+  "exception_reason",
+  "print_section",
+  "page_break"
+ ],
+ "fields": [
+  {
+   "fieldname": "requirement_section",
+   "fieldtype": "Section Break",
+   "label": "Clearance Requirement"
+  },
+  {
+   "fieldname": "clearance_area",
+   "fieldtype": "Select",
+   "label": "Clearance Area",
+   "options": "HR and Documents\nSupervisor Handover\nFinance and Advances\nPayroll and Final Settlement\nAssets and Custody\nStock and Materials\nSystem Access\nContract Closeout\nOther",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "required",
+   "fieldtype": "Check",
+   "label": "Required",
+   "default": "1",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nIn Progress\nCompleted\nBlocked\nException Approved",
+   "default": "Pending",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "requirement_col_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "responsible_role",
+   "fieldtype": "Link",
+   "label": "Responsible Role",
+   "options": "Role",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "responsible_user",
+   "fieldtype": "Link",
+   "label": "Responsible User",
+   "options": "User",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "reference_section",
+   "fieldtype": "Section Break",
+   "label": "Reference and Financial Position"
+  },
+  {
+   "fieldname": "reference_doctype",
+   "fieldtype": "Link",
+   "label": "Reference DocType",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "reference_document",
+   "fieldtype": "Dynamic Link",
+   "label": "Reference Document",
+   "options": "reference_doctype",
+   "depends_on": "reference_doctype",
+   "mandatory_depends_on": "reference_doctype"
+  },
+  {
+   "fieldname": "reference_col_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "outstanding_amount",
+   "fieldtype": "Currency",
+   "label": "Outstanding Amount"
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency",
+   "depends_on": "eval:doc.outstanding_amount!=0",
+   "mandatory_depends_on": "eval:doc.outstanding_amount!=0"
+  },
+  {
+   "fieldname": "evidence_section",
+   "fieldtype": "Section Break",
+   "label": "Evidence and Completion"
+  },
+  {
+   "fieldname": "evidence",
+   "fieldtype": "Attach",
+   "label": "Evidence"
+  },
+  {
+   "fieldname": "completed_by",
+   "fieldtype": "Link",
+   "label": "Completed By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "completed_on",
+   "fieldtype": "Datetime",
+   "label": "Completed On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remarks_section",
+   "fieldtype": "Section Break",
+   "label": "Remarks",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "exception_section",
+   "fieldtype": "Section Break",
+   "label": "Exception Approval",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "exception_approved",
+   "fieldtype": "Check",
+   "label": "Exception Approved"
+  },
+  {
+   "fieldname": "exception_approval_doctype",
+   "fieldtype": "Link",
+   "label": "Exception Approval DocType",
+   "options": "DocType",
+   "depends_on": "eval:doc.exception_approved",
+   "mandatory_depends_on": "eval:doc.exception_approved"
+  },
+  {
+   "fieldname": "exception_approval",
+   "fieldtype": "Dynamic Link",
+   "label": "Exception Approval",
+   "options": "exception_approval_doctype",
+   "depends_on": "eval:doc.exception_approved && doc.exception_approval_doctype",
+   "mandatory_depends_on": "eval:doc.exception_approved"
+  },
+  {
+   "fieldname": "exception_reason_section",
+   "fieldtype": "Section Break",
+   "label": "Exception Reason",
+   "depends_on": "eval:doc.exception_approved"
+  },
+  {
+   "fieldname": "exception_reason",
+   "fieldtype": "Small Text",
+   "label": "Exception Reason",
+   "mandatory_depends_on": "eval:doc.exception_approved"
+  },
+  {
+   "fieldname": "print_section",
+   "fieldtype": "Section Break",
+   "label": "Print Control",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "page_break",
+   "fieldtype": "Check",
+   "label": "Page Break",
+   "allow_on_submit": 1,
+   "print_hide": 1
+  }
+ ],
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}
