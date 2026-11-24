@@ -34,7 +34,7 @@ def _provision_notifications():
  for name,dt,condition,value_field,template,recipient_field in specs:
   subject=TEMPLATES[template][1]
   message=_html(TEMPLATES[template][2],TEMPLATES[template][3],TEMPLATES[template][4]).replace('{{ record_url }}','{{ frappe.utils.get_url_to_form(doc.doctype, doc.name) }}').replace('{{ title }}',TEMPLATES[template][2])
-  values={'subject':subject,'document_type':dt,'event':'Value Change','value_changed':value_field,'condition':condition,'channel':'Email','enabled':1,'message_type':'Jinja','message':message,'set_property_after_alert':0}
+  values={'subject':subject,'document_type':dt,'event':'Value Change','value_changed':value_field,'condition':condition,'channel':'Email','enabled':1,'message_type':'HTML','message':message,'set_property_after_alert':0}
   if frappe.db.exists('Notification',name):
    doc=frappe.get_doc('Notification',name);doc.update(values);doc.set('recipients',[])
   else:
