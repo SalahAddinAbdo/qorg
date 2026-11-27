@@ -51,7 +51,12 @@ def _email_templates():
     result={"created":[],"upgraded":[],"preserved_manual":[],"unchanged":[]}
     for filename in sorted(os.listdir(folder)):
         if not filename.endswith(".json"):continue
-        data=json.load(open(os.path.join(folder,filename),encoding="utf-8"));name=data["name"]
+        data=json.load(open(os.path.join(folder,filename),encoding="utf-8"))
+        data.setdefault("doctype", "Email Template")
+        name=(data.get("name") or "").strip()
+        if not name:
+            frappe.throw(f"Email Template name is missing in {filename}")
+        data["name"]=name
         new_hash=_template_hash(data.get("subject"),data.get("response_html") or data.get("response"),data.get("use_html"))
         if not frappe.db.exists("Email Template",name):
             frappe.get_doc(data).insert(ignore_permissions=True);result["created"].append(name);continue
