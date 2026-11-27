@@ -109,3 +109,24 @@ def test_opportunity_portal_settings_are_isolated_in_one_tab():
  for fieldname in ('qorg_opportunity_portal_general_cb','qorg_opportunity_portal_display_cb'):
   assert by_name[fieldname]['fieldtype']=='Column Break'
  assert len(by_name)==len(fields)
+
+
+def test_portal_provisioning_loads_all_non_overlapping_field_sources():
+ source=(ROOT/'qorg/qorg/people_and_opportunities/portal_provisioning.py').read_text()
+ data_folder=ROOT/'qorg/qorg/people_and_opportunities/data'
+ filenames=('portal_custom_fields.json','website_settings_custom_fields.json')
+ assert 'PORTAL_CUSTOM_FIELD_FILES' in source
+ for filename in filenames:
+  assert filename in source
+ definitions=[]
+ for filename in filenames:
+  payload=json.loads((data_folder/filename).read_text())
+  definitions.extend(
+   (doctype,row.get('fieldname'))
+   for doctype,rows in payload.items()
+   for row in rows
+  )
+ assert all(fieldname for _,fieldname in definitions)
+ assert len(definitions)==len(set(definitions))
+ assert 'create_custom_fields_if_changed(definitions, update=True)' in source
+ assert 'frappe.clear_cache(doctype="Website Settings")' in source
