@@ -1,4 +1,5 @@
 {
+  "doctype": "Email Template",
   "name": "Recruitment - Candidate Reference Check Request - Bilingual",
   "subject": "Reference Check Request / طلب للتحقق من مرجع مهني - {{ doc.reference_name }}",
   "use_html": 1,
