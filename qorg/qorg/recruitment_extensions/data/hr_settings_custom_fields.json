@@ -324,5 +324,77 @@
     "module": "QOrg",
     "is_system_generated": 1,
     "default": "0"
+  },
+  {
+    "fieldname": "qorg_reference_check_section",
+    "label": "Reference Checks",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_allow_assigned_user_reopen"
+  },
+  {
+    "fieldname": "qorg_require_reference_checks",
+    "label": "Require Reference Checks",
+    "fieldtype": "Check",
+    "default": "1",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_reference_check_section"
+  },
+  {
+    "fieldname": "qorg_reference_check_trigger",
+    "label": "Reference Check Trigger",
+    "fieldtype": "Select",
+    "options": "After Offer Acceptance\nBefore Final Decision",
+    "default": "After Offer Acceptance",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_require_reference_checks"
+  },
+  {
+    "fieldname": "qorg_minimum_required_reference_checks",
+    "label": "Minimum Required Reference Checks",
+    "fieldtype": "Int",
+    "default": "2",
+    "non_negative": 1,
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_reference_check_trigger"
+  },
+  {
+    "fieldname": "qorg_reference_check_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_minimum_required_reference_checks"
+  },
+  {
+    "fieldname": "qorg_require_signed_reference_response",
+    "label": "Require Signed Reference Response",
+    "fieldtype": "Check",
+    "default": "1",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_reference_check_cb"
+  },
+  {
+    "fieldname": "qorg_block_commencement_until_reference_checks",
+    "label": "Block Commencement Until Reference Checks Complete",
+    "fieldtype": "Check",
+    "default": "1",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_require_signed_reference_response"
+  },
+  {
+    "fieldname": "qorg_allow_qualified_reference_result",
+    "label": "Allow Satisfactory with Reservations",
+    "fieldtype": "Check",
+    "default": "0",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_block_commencement_until_reference_checks"
   }
 ]

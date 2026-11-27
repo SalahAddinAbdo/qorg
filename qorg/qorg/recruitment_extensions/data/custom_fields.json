@@ -2244,5 +2244,55 @@
     "fieldtype": "Column Break",
     "module": "QOrg",
     "is_system_generated": 1
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_reference_check_section",
+    "label": "Reference Checks",
+    "fieldtype": "Section Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_decision_log"
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_reference_checks_required",
+    "label": "Reference Checks Required",
+    "fieldtype": "Int",
+    "read_only": 1,
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_reference_check_section"
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_reference_checks_completed",
+    "label": "Reference Checks Completed",
+    "fieldtype": "Int",
+    "read_only": 1,
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_reference_checks_required"
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_reference_check_status",
+    "label": "Reference Check Status",
+    "fieldtype": "Select",
+    "options": "Not Required\nNot Started\nIn Progress\nCompleted",
+    "read_only": 1,
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_reference_checks_completed"
+  },
+  {
+    "dt": "Job Applicant",
+    "fieldname": "qorg_latest_reference_check_on",
+    "label": "Latest Reference Check On",
+    "fieldtype": "Datetime",
+    "read_only": 1,
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_reference_check_status"
   }
 ]
