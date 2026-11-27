@@ -9,6 +9,8 @@ from frappe import _
 from frappe.website.utils import clear_cache as clear_website_cache
 from frappe.utils import cint, getdate, now_datetime, today
 
+from qorg.qorg.people_and_opportunities.profile_completeness import validate_profile_for_opportunity
+from qorg.qorg.people_and_opportunities.portal_ownership import get_external_person_for_user
 from qorg.qorg.people_and_opportunities.portal_settings import (
     get_opportunity_portal_settings,
 )
@@ -265,7 +267,7 @@ def get_public_opportunity(route):
     if behavior == "Employment":
         result["application_doctype"] = "Job Applicant"
         result["apply_url"] = f"/employment-application/new?qorg_external_opportunity={quote(doc.name)}"
-    else:
+    elif behavior in ("Volunteering", "Internship"):
         result["application_doctype"] = "Participation Application"
         result["apply_url"] = (
             "/api/method/"
@@ -273,6 +275,10 @@ def get_public_opportunity(route):
             "start_participation_application"
             f"?opportunity={quote(doc.name)}"
         )
+    else:
+        result["application_doctype"] = None
+        result["apply_url"] = None
+    result["application_route_available"] = bool(result.get("apply_url"))
     return result
 
 
@@ -320,17 +326,13 @@ def submit_opportunity_application(
     if not is_opportunity_open(doc):
         frappe.throw(_("Applications are closed for this opportunity."))
 
-    person = _get_external_person_for_user(frappe.session.user)
-    if not person:
-        frappe.throw(
-            _("Complete your external profile before applying. Open /external-profile."),
-            frappe.ValidationError,
-        )
+    person = get_external_person_for_user(required=True, active_only=True)
+    validate_profile_for_opportunity(person, doc)
 
     behavior = _opportunity_behavior(doc)
     if behavior == "Employment":
         application = _create_job_applicant(doc, person, motivation)
-    else:
+    elif behavior in ("Volunteering", "Internship"):
         application = _create_participation_application(
             doc,
             person,
@@ -338,6 +340,8 @@ def submit_opportunity_application(
             availability_start_date,
             hours_per_week,
         )
+    else:
+        frappe.throw(_("This opportunity type does not have an external application route."))
 
     return {
         "ok": True,

@@ -881,3 +881,40 @@ elif not _current_period_js: doctype_js["Budget Period"] = _period_close_js
 for _dt in ("Material Request", "Purchase Order", "Purchase Invoice"):
     _qorg_add_doc_event(_dt, "validate", "qorg.qorg.finance_period_control.policy_v2.validate_document")
 _qorg_add_doc_event("Material Request", "validate", "qorg.qorg.finance_period_control.procurement_route.validate")
+
+
+# People and opportunity portal ownership and privacy.
+permission_query_conditions = globals().get("permission_query_conditions", {})
+permission_query_conditions.update({
+    "External Person": "qorg.qorg.people_and_opportunities.portal_permissions.external_person_query",
+    "Participation Application": "qorg.qorg.people_and_opportunities.portal_permissions.participation_application_query",
+    "Job Applicant": "qorg.qorg.people_and_opportunities.portal_permissions.job_applicant_query",
+})
+has_permission = globals().get("has_permission", {})
+has_permission.update({
+    "External Person": "qorg.qorg.people_and_opportunities.portal_permissions.external_person_permission",
+    "Participation Application": "qorg.qorg.people_and_opportunities.portal_permissions.participation_application_permission",
+    "Job Applicant": "qorg.qorg.people_and_opportunities.portal_permissions.job_applicant_permission",
+})
+_portal_file_permission = "qorg.qorg.people_and_opportunities.private_files.has_file_permission"
+if _portal_file_permission not in file_permission:
+    file_permission.append(_portal_file_permission)
+
+
+# External portal file privacy and Web Form Request integrity.
+_file_events = doc_events.setdefault("File", {})
+_file_validate = _file_events.setdefault("validate", [])
+if isinstance(_file_validate, str):
+    _file_validate = [_file_validate]
+    _file_events["validate"] = _file_validate
+_sensitive_file_validator = "qorg.qorg.people_and_opportunities.private_files.validate_sensitive_file"
+if _sensitive_file_validator not in _file_validate:
+    _file_validate.append(_sensitive_file_validator)
+_request_events = doc_events.setdefault("Web Form Request", {})
+_request_validate = _request_events.setdefault("validate", [])
+if isinstance(_request_validate, str):
+    _request_validate = [_request_validate]
+    _request_events["validate"] = _request_validate
+_request_validator = "qorg.qorg.people_and_opportunities.web_form_request_security.validate_web_form_request"
+if _request_validator not in _request_validate:
+    _request_validate.append(_request_validator)

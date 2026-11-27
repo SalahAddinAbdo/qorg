@@ -1,24 +1,18 @@
 from __future__ import annotations
-import re, frappe
+import frappe
 from frappe.utils import now
 from qorg.qorg.people_and_opportunities.settings import settings
-def normalize_email(value): return (value or "").strip().lower()
-def normalize_mobile(value): return re.sub(r"[^0-9+]", "", (value or "").strip())
+from qorg.qorg.people_and_opportunities.identity import (normalize_email, normalize_mobile, normalize_identity, validate_identity_uniqueness)
 def validate_external_person(doc):
-    doc.primary_email=normalize_email(doc.primary_email); doc.secondary_email=normalize_email(doc.secondary_email); doc.mobile_no=normalize_mobile(doc.mobile_no); doc.alternative_mobile_no=normalize_mobile(doc.alternative_mobile_no)
-    if not doc.full_name: frappe.throw("Full Name is required.")
-    config=settings()
-    if config.match_by_official_id and doc.identification_number and doc.identification_type:
-        duplicate=frappe.db.get_value("External Person",{"identification_type":doc.identification_type,"identification_number":doc.identification_number,"identification_country":doc.identification_country or "","name":("!=",doc.name or "")},"name")
-        if duplicate: frappe.throw(f"The same official identity is already linked to {duplicate}.")
-    matching=[]
-    if config.match_by_email: matching.append("primary_email")
-    if config.match_by_mobile: matching.append("mobile_no")
-    for field in matching:
-        value=doc.get(field)
-        if value:
-            duplicate=frappe.db.get_value("External Person",{field:value,"name":("!=",doc.name or ""),"person_status":("!=","Merged")},"name")
-            if duplicate: frappe.throw(f"{field.replace('_',' ').title()} is already linked to {duplicate}.")
+    doc.primary_email = normalize_email(doc.primary_email)
+    doc.secondary_email = normalize_email(doc.secondary_email)
+    doc.mobile_no = normalize_mobile(doc.mobile_no)
+    doc.alternative_mobile_no = normalize_mobile(doc.alternative_mobile_no)
+    doc.identification_number = normalize_identity(doc.identification_number)
+    if not doc.full_name:
+        frappe.throw("Full Name is required.")
+    validate_identity_uniqueness(doc, settings())
+
 def update_profile_metrics(doc):
     required=[doc.full_name,doc.primary_email or doc.mobile_no,doc.professional_title,doc.professional_summary,doc.education,doc.experience,doc.skills]
     doc.profile_completion=round(sum(bool(x) for x in required)*100/len(required),2)

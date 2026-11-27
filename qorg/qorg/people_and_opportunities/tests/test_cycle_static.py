@@ -130,3 +130,128 @@ def test_portal_provisioning_loads_all_non_overlapping_field_sources():
  assert len(definitions)==len(set(definitions))
  assert 'create_custom_fields_if_changed(definitions, update=True)' in source
  assert 'frappe.clear_cache(doctype="Website Settings")' in source
+
+
+def test_portal_ownership_permissions_and_private_files_are_centralized():
+ hooks=(ROOT/'qorg/hooks.py').read_text()
+ ownership=(ROOT/'qorg/qorg/people_and_opportunities/portal_ownership.py').read_text()
+ permissions=(ROOT/'qorg/qorg/people_and_opportunities/portal_permissions.py').read_text()
+ private_files=(ROOT/'qorg/qorg/people_and_opportunities/private_files.py').read_text()
+ for marker in (
+  'def get_external_person_for_user',
+  'def assert_owned_external_person',
+  'More than one External Person is linked to this user',
+  'active_only',
+ ):
+  assert marker in ownership
+ for doctype in ('External Person','Participation Application','Job Applicant'):
+  assert f'"{doctype}"' in hooks
+ assert 'portal_permissions.external_person_query' in hooks
+ assert 'portal_permissions.participation_application_query' in hooks
+ assert 'portal_permissions.job_applicant_query' in hooks
+ assert 'people_and_opportunities.private_files.has_file_permission' in hooks
+ assert 'PROTECTED_DOCTYPES' in private_files
+ assert 'return None' in permissions
+
+
+def test_portal_profile_and_application_services_use_central_ownership():
+ portal_api=(ROOT/'qorg/qorg/people_and_opportunities/portal_api.py').read_text()
+ services=(ROOT/'qorg/qorg/people_and_opportunities/web_form_services.py').read_text()
+ assert 'assert_owned_external_person(name)' in portal_api
+ assert 'get_external_person_for_user(required=True, active_only=True)' in services
+ assert 'frappe.db.get_value("External Person", {"user": user}' not in services
+
+
+def test_external_opportunity_delete_guard_uses_current_participation_fields():
+ source=(ROOT/'qorg/qorg/people_and_opportunities/integrity.py').read_text()
+ assert '("Participation Application","opportunity")' in source
+ assert '("Participation Engagement","opportunity")' in source
+ assert 'external_opportunity' not in source
+
+
+def test_identity_normalization_and_duplicate_control_are_centralized():
+ identity=(ROOT/'qorg/qorg/people_and_opportunities/identity.py').read_text()
+ people=(ROOT/'qorg/qorg/people_and_opportunities/services/people.py').read_text()
+ for marker in ('def normalize_email','def normalize_mobile','def normalize_identity','def validate_identity_uniqueness'):
+  assert marker in identity
+ assert 'validate_identity_uniqueness(doc, settings())' in people
+ assert 'doc.identification_number = normalize_identity' in people
+ assert 'def normalize_email' not in people
+
+
+def test_profile_completeness_is_opportunity_specific():
+ source=(ROOT/'qorg/qorg/people_and_opportunities/profile_completeness.py').read_text()
+ portal=(ROOT/'qorg/qorg/people_and_opportunities/portal.py').read_text()
+ for marker in ('require_resume','require_identification','minimum_age','requirements'):
+  assert marker in source
+ assert 'validate_profile_for_opportunity(person, doc)' in portal
+
+
+def test_application_routing_reuses_standard_and_participation_models():
+ portal=(ROOT/'qorg/qorg/people_and_opportunities/portal.py').read_text()
+ assert 'behavior == "Employment"' in portal
+ assert '"Job Applicant"' in portal
+ assert 'behavior in ("Volunteering", "Internship")' in portal
+ assert '"Participation Application"' in portal
+ assert 'result["application_doctype"] = None' in portal
+
+
+def test_deep_review_fixes_all_portal_entry_paths():
+ workflow=(ROOT/'qorg/qorg/people_and_opportunities/web_form_workflow.py').read_text()
+ services=(ROOT/'qorg/qorg/people_and_opportunities/web_form_services.py').read_text()
+ portal=(ROOT/'qorg/qorg/people_and_opportunities/portal.py').read_text()
+ assert '_get_external_person_for_user' not in workflow
+ assert '_get_external_person_names_for_user' not in workflow
+ assert 'get_external_person_for_user' in workflow
+ assert 'portal_owned_reference' in workflow
+ assert 'validate_profile_for_opportunity(person, opportunity_doc)' in workflow
+ assert 'validate_profile_for_opportunity(person, opportunity)' in services
+ assert 'behavior != "Employment"' in services
+ assert 'behavior not in ("Volunteering", "Internship")' in services
+ assert 'application_route_available' in portal
+ assert 'result["is_open"] = False' not in portal
+
+
+def test_deep_review_protects_admin_fields_files_and_requests():
+ services=(ROOT/'qorg/qorg/people_and_opportunities/web_form_services.py').read_text()
+ files=(ROOT/'qorg/qorg/people_and_opportunities/private_files.py').read_text()
+ requests=(ROOT/'qorg/qorg/people_and_opportunities/web_form_request_security.py').read_text()
+ hooks=(ROOT/'qorg/hooks.py').read_text()
+ for fieldname in (
+  'contact','address','employee','supplier','merged_into','person_status','source',
+  'source_reference_doctype','source_reference_name','identity_verified_by',
+  'identity_verified_on','payment_verified_by','payment_verified_on',
+ ):
+  assert f'"{fieldname}"' in services
+ assert 'doc.is_private = 1' in files
+ assert 'Portal users cannot move an attached file' in files
+ assert 'ALLOWED_REFERENCE_DOCTYPES' in requests
+ assert 'portal_owned_reference' in requests
+ assert 'expires_on' in requests
+ assert 'private_files.validate_sensitive_file' in hooks
+ assert 'web_form_request_security.validate_web_form_request' in hooks
+
+
+def test_deep_review_age_requirements_and_unicode_digits():
+ profile=(ROOT/'qorg/qorg/people_and_opportunities/profile_completeness.py').read_text()
+ identity=(ROOT/'qorg/qorg/people_and_opportunities/identity.py').read_text()
+ assert '((current.month, current.day) < (born.month, born.day))' in profile
+ assert 'minimum_age' in profile and 'maximum_age' in profile
+ assert 'Date of Birth' in profile
+ assert '_requirement_satisfied' in profile
+ assert '_experience_years' in profile
+ assert 'years_of_experience' in profile
+ assert '_DIGIT_TRANSLATION' in identity
+ assert '٠١٢٣٤٥٦٧٨٩' in identity
+ assert '۰۱۲۳۴۵۶۷۸۹' in identity
+
+
+def test_create_permissions_and_external_person_file_ownership_are_supported():
+ ownership=(ROOT/'qorg/qorg/people_and_opportunities/portal_ownership.py').read_text()
+ permissions=(ROOT/'qorg/qorg/people_and_opportunities/portal_permissions.py').read_text()
+ acceptance=(ROOT/'qorg/qorg/people_and_opportunities/portal_acceptance.py').read_text()
+ assert 'if doctype == "External Person"' in ownership
+ assert permissions.count('permission_type == "create"') >= 2
+ assert 'def audit_deep_runtime_configuration' in acceptance
+ assert 'Duplicate External Person Users' in acceptance
+ assert 'Public Protected Files' in acceptance

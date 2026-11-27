@@ -3,6 +3,8 @@ from __future__ import annotations
 import frappe
 from frappe import _
 from frappe.utils import cint, getdate, now_datetime, today
+from qorg.qorg.people_and_opportunities.portal_ownership import get_external_person_for_user
+from qorg.qorg.people_and_opportunities.profile_completeness import validate_profile_for_opportunity
 from frappe.website.utils import delete_page_cache
 
 LOCKED_APPLICATION_STATUSES = {
@@ -34,8 +36,11 @@ def validate_external_person_portal_access(doc, method=None):
         frappe.throw(old.get("portal_edit_lock_reason") or _("Profile editing is locked by the organization."))
 
     protected = (
-        "user", "allow_portal_editing", "portal_edit_lock_reason",
-        "portal_edit_locked_by", "portal_edit_locked_on",
+        "user", "contact", "address", "employee", "supplier", "merged_into",
+        "person_status", "source", "source_reference_doctype", "source_reference_name",
+        "allow_portal_editing", "portal_edit_lock_reason", "portal_edit_locked_by",
+        "portal_edit_locked_on", "identity_verified_by", "identity_verified_on",
+        "payment_verified_by", "payment_verified_on",
     )
     for fieldname in protected:
         if old and doc.get(fieldname) != old.get(fieldname):
@@ -100,14 +105,18 @@ def _validate_application(doc, opportunity_field, person_field):
         opportunity_name,
     )
     opportunity = frappe.get_doc("External Opportunity", opportunity_name)
-    from qorg.qorg.people_and_opportunities.portal import is_opportunity_open
+    from qorg.qorg.people_and_opportunities.portal import _opportunity_behavior, is_opportunity_open
 
+    behavior = _opportunity_behavior(opportunity)
+    if doc.doctype == "Job Applicant" and behavior != "Employment":
+        frappe.throw(_("This opportunity type cannot use the employment application route."))
+    if doc.doctype == "Participation Application" and behavior not in ("Volunteering", "Internship"):
+        frappe.throw(_("This opportunity type cannot use the participation application route."))
     if not is_opportunity_open(opportunity):
         frappe.throw(_("Applications are closed for this opportunity."))
 
-    person = _person_for_user(frappe.session.user)
-    if not person:
-        frappe.throw(_("Create your external profile before applying."))
+    person = get_external_person_for_user(required=True, active_only=True)
+    validate_profile_for_opportunity(person, opportunity)
 
     _set(doc, person_field, person.name)
     _set(doc, "applicant_name", person.get("full_name"))
@@ -176,8 +185,7 @@ def _reconcile(opportunity_name):
 
 
 def _person_for_user(user):
-    name = frappe.db.get_value("External Person", {"user": user}, "name")
-    return frappe.get_doc("External Person", name) if name else None
+    return get_external_person_for_user(user=user)
 
 
 def _maintain_lock_audit(doc):

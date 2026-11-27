@@ -6,11 +6,12 @@ import frappe
 from frappe import _
 from frappe.utils import add_to_date, now_datetime, today
 
-from qorg.qorg.people_and_opportunities.portal import (
-    _get_external_person_for_user,
-    _get_external_person_names_for_user,
-    is_opportunity_open,
+from qorg.qorg.people_and_opportunities.portal import is_opportunity_open
+from qorg.qorg.people_and_opportunities.portal_ownership import (
+    get_external_person_for_user,
+    portal_owned_reference,
 )
+from qorg.qorg.people_and_opportunities.profile_completeness import validate_profile_for_opportunity
 
 
 @frappe.whitelist()
@@ -40,12 +41,13 @@ def start_participation_application(
     opportunity_doc = frappe.get_doc("External Opportunity", opportunity_name)
     if not is_opportunity_open(opportunity_doc):
         frappe.throw(_("Applications are closed for this opportunity."))
-    person_names = _get_external_person_names_for_user(frappe.session.user)
-    person = _get_external_person_for_user(frappe.session.user)
-    if not person or not person_names:
+    person = get_external_person_for_user()
+    if not person:
         frappe.local.response["type"] = "redirect"
         frappe.local.response["location"] = "/external-profile-form"
         return
+    person = get_external_person_for_user(required=True, active_only=True)
+    validate_profile_for_opportunity(person, opportunity_doc)
     existing = frappe.db.get_value(
         "Participation Application",
         {
@@ -79,11 +81,11 @@ def redirect_to_my_participation_applications():
         frappe.local.flags.redirect_location = "/login?redirect-to=/my-applications"
         raise frappe.Redirect
 
-    person_names = _get_external_person_names_for_user(frappe.session.user)
+    person = get_external_person_for_user()
     filters = []
-    if person_names:
+    if person:
         filters.append(
-            ["Participation Application", "external_person", "in", person_names]
+            ["Participation Application", "external_person", "=", person.name]
         )
     filters.append(
         ["Participation Application", "owner", "=", frappe.session.user]
@@ -179,10 +181,7 @@ def open_participation_application(application: str | None = None):
         frappe.throw(_("The selected application does not exist."))
 
     application_doc = frappe.get_doc("Participation Application", application_name)
-    person_names = _get_external_person_names_for_user(frappe.session.user)
-    permitted = application_doc.owner == frappe.session.user or (
-        application_doc.external_person and application_doc.external_person in person_names
-    )
+    permitted = portal_owned_reference("Participation Application", application_doc.name)
     if not permitted:
         frappe.throw(_("You are not permitted to open this application."), frappe.PermissionError)
 

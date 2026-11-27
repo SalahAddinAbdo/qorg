@@ -2,16 +2,16 @@ from __future__ import annotations
 
 import frappe
 from qorg.qorg.people_and_opportunities.settings import settings
+from qorg.qorg.people_and_opportunities.portal_ownership import assert_owned_external_person
 from frappe.utils import cint
 
 
 def _owned_profile(name: str):
-    if frappe.session.user == "Guest":
-        frappe.throw("Login required", frappe.PermissionError)
-    doc = frappe.get_doc("External Person", name)
-    if doc.user != frappe.session.user and frappe.session.user != "Administrator":
-        frappe.throw("Not permitted", frappe.PermissionError)
+    doc = assert_owned_external_person(name)
+    if doc.person_status == "Merged":
+        frappe.throw("Merged profiles cannot be edited.", frappe.PermissionError)
     return doc
+
 
 
 @frappe.whitelist()

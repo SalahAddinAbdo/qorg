@@ -14,7 +14,7 @@ def prevent_master_delete(doc, method=None):
 def prevent_operational_delete(doc, method=None):
     links={
         "External Person":[("Job Applicant","qorg_external_person"),("Participation Application","external_person"),("Participation Engagement","external_person")],
-        "External Opportunity":[("Participation Application","external_opportunity"),("Participation Engagement","external_opportunity")],
+        "External Opportunity":[("Participation Application","opportunity"),("Participation Engagement","opportunity")],
     }
     for target,field in links.get(doc.doctype,[]):
         if frappe.db.exists("DocType",target) and frappe.db.exists(target,{field:doc.name}):
