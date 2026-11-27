@@ -139,10 +139,10 @@ def _validate_application(doc, opportunity_field, person_field):
 
 def _assert_application_editable(doc, opportunity):
     settings = frappe.get_single("HR Settings")
-    if cint(settings.get("qorg_allow_application_edit_until_closing") or 1):
+    if cint(settings.get("qorg_allow_application_edit_until_closing")):
         if opportunity.get("closing_date") and getdate(opportunity.closing_date) < getdate(today()):
             frappe.throw(_("This application cannot be edited because the opportunity is closed."))
-    if cint(settings.get("qorg_lock_application_when_screening_starts") or 1):
+    if cint(settings.get("qorg_lock_application_when_screening_starts")):
         if doc.get("status") in LOCKED_APPLICATION_STATUSES:
             frappe.throw(_("This application is locked because screening or assessment has started."))
 

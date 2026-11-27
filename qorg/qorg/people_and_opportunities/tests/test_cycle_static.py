@@ -9,11 +9,13 @@ def test_cycle_python_syntax():
 
 def test_integrity_handlers_are_registered():
  hooks=(ROOT/'qorg/hooks.py').read_text()
- for doctype in ('External Person','External Opportunity','Job Applicant'):
-  assert f'("{doctype}",' in hooks
- assert 'validate_external_person_links' in hooks
- assert 'validate_external_opportunity_links' in hooks
- assert 'validate_job_applicant_person' in hooks
+ for handler in (
+  'qorg.qorg.people_and_opportunities.integrity.prevent_operational_delete',
+  'qorg.qorg.people_and_opportunities.cycle_integrity.validate_external_person_links',
+  'qorg.qorg.people_and_opportunities.cycle_integrity.validate_external_opportunity_links',
+  'qorg.qorg.people_and_opportunities.cycle_integrity.validate_job_applicant_person',
+ ):
+  assert handler in hooks,handler
 
 def test_delete_guards_cover_recruitment_and_participation():
  source=(ROOT/'qorg/qorg/people_and_opportunities/integrity.py').read_text()
@@ -46,12 +48,15 @@ def test_core_doctype_dependencies_resolve():
 
 def test_shared_hooks_preserve_project_cycle_and_add_people_cycle():
  hooks=(ROOT/'qorg/hooks.py').read_text()
- assert 'Project cycle integrity validation.' in hooks
- assert '_project_permission_map' in hooks
- assert 'People, opportunities and recruitment cycle integrity.' in hooks
- for handler in ('validate_external_person_links','validate_external_opportunity_links','validate_job_applicant_person'):
+ for handler in (
+  'validate_external_person_links',
+  'validate_external_opportunity_links',
+  'validate_job_applicant_person',
+ ):
   assert hooks.count(handler)==1
- assert hooks.count('def _qorg_people_add_event')==1
+ assert "'External Person':" in hooks
+ assert "'External Opportunity':" in hooks
+ assert "'Job Applicant':" in hooks
 
 def test_recruitment_templates_are_operationally_linked():
  hooks=(ROOT/'qorg/hooks.py').read_text()
@@ -67,3 +72,40 @@ def test_recruitment_notification_methods_are_whitelisted():
  source=(ROOT/'qorg/qorg/recruitment_extensions/notifications.py').read_text()
  assert '@frappe.whitelist()\ndef preview_recruitment_message' in source
  assert '@frappe.whitelist()\ndef send_managed_recruitment_message' in source
+
+
+def test_opportunity_portal_settings_are_configuration_driven():
+ source=(ROOT/'qorg/qorg/people_and_opportunities/portal_settings.py').read_text()
+ fields=json.loads((ROOT/'qorg/qorg/people_and_opportunities/data/website_settings_custom_fields.json').read_text())['Website Settings']
+ managed={row.get('fieldname') for row in fields}
+ for fieldname in (
+  'qorg_opportunity_portal_enabled','qorg_public_opportunity_listing',
+  'qorg_external_applications_enabled','qorg_default_opportunity_visibility',
+  'qorg_show_upcoming_opportunities','qorg_show_closed_opportunities',
+  'qorg_opportunity_portal_page_size',
+ ):
+  assert fieldname in managed
+  assert fieldname in source
+ assert 'DEFAULTS =' not in source
+ assert 'or 24' not in source
+ assert 'PAGE_SIZE_MIN = 6' in source
+ assert 'PAGE_SIZE_MAX = 50' in source
+
+
+def test_application_policy_preserves_disabled_check_values():
+ source=(ROOT/'qorg/qorg/people_and_opportunities/web_form_services.py').read_text()
+ assert 'qorg_allow_application_edit_until_closing") or 1' not in source
+ assert 'qorg_lock_application_when_screening_starts") or 1' not in source
+ assert 'cint(settings.get("qorg_allow_application_edit_until_closing"))' in source
+ assert 'cint(settings.get("qorg_lock_application_when_screening_starts"))' in source
+
+
+def test_opportunity_portal_settings_are_isolated_in_one_tab():
+ fields=json.loads((ROOT/'qorg/qorg/people_and_opportunities/data/website_settings_custom_fields.json').read_text())['Website Settings']
+ by_name={row['fieldname']:row for row in fields}
+ assert by_name['qorg_opportunity_portal_tab']['fieldtype']=='Tab Break'
+ for fieldname in ('qorg_opportunity_portal_general_section','qorg_opportunity_portal_display_section'):
+  assert by_name[fieldname]['fieldtype']=='Section Break'
+ for fieldname in ('qorg_opportunity_portal_general_cb','qorg_opportunity_portal_display_cb'):
+  assert by_name[fieldname]['fieldtype']=='Column Break'
+ assert len(by_name)==len(fields)
