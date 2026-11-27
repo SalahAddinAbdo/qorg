@@ -4,6 +4,7 @@ import json
 import os
 
 import frappe
+from frappe.model.document import get_controller
 
 
 PROVISION = "qorg.qorg.volunteer_management.provisioning.provision_volunteer_management"
@@ -153,7 +154,7 @@ def _audit_hooks(missing):
 def _audit_controllers(missing):
     for doctype, methods in EXPECTED_CONTROLLER_METHODS.items():
         try:
-            controller = frappe.get_controller(doctype)
+            controller = get_controller(doctype)
         except Exception as exc:
             missing.append(f"Controller: {doctype} ({exc})")
             continue
