@@ -42,6 +42,14 @@ def audit_runtime_configuration():
     return {"ok": not missing, "missing": missing}
 
 
+def _flatten_hook_values(value):
+    if isinstance(value, str):
+        return [value]
+    if isinstance(value, (list, tuple, set)):
+        return [item for child in value for item in _flatten_hook_values(child)]
+    return []
+
+
 @frappe.whitelist()
 def audit_deep_runtime_configuration():
     base = audit_runtime_configuration()
@@ -54,9 +62,10 @@ def audit_deep_runtime_configuration():
     }
     configured_permissions = hooks.get("has_permission") or {}
     for doctype, path in expected_permissions.items():
-        if configured_permissions.get(doctype) != path:
+        actual = _flatten_hook_values(configured_permissions.get(doctype))
+        if path not in actual:
             missing.append(f"Hook:has_permission:{doctype}")
-    file_hooks = hooks.get("file_permission") or []
+    file_hooks = _flatten_hook_values(hooks.get("file_permission"))
     file_path = "qorg.qorg.people_and_opportunities.private_files.has_file_permission"
     if file_path not in file_hooks:
         missing.append("Hook:file_permission:people_and_opportunities")
