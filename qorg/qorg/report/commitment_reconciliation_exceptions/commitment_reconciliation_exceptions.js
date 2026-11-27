@@ -1,0 +1,1 @@
+frappe.query_reports["Commitment Reconciliation Exceptions"]={filters:[{fieldname:"company",label:__("Company"),fieldtype:"Link",options:"Company",reqd:1,default:frappe.defaults.get_user_default("Company")},{fieldname:"project",label:__("Project"),fieldtype:"Link",options:"Project",get_query:()=>({filters:{company:frappe.query_report.get_filter_value("company")}})}]};

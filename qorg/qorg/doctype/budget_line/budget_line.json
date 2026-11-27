@@ -1130,7 +1130,8 @@
   },
   {
    "fieldname": "qorg_layout_column",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "hidden": 1
   },
   {
    "label": "Left",
@@ -1293,6 +1294,199 @@
    "columns": 0,
    "show_description_on_click": 0,
    "doctype": "DocField"
+  },
+  {
+   "fieldname": "budget_period_section",
+   "label": "Period Allocations",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "period_allocations",
+   "label": "Period Allocations",
+   "fieldtype": "Table",
+   "options": "Budget Period Allocation",
+   "description": "Allocate this Budget Line across non-overlapping Budget Periods.",
+   "depends_on": "eval:!doc.is_group"
+  },
+  {
+   "fieldname": "allocation_total",
+   "label": "Allocation Total",
+   "fieldtype": "Currency",
+   "options": "currency",
+   "read_only": 1,
+   "depends_on": "eval:!doc.is_group"
+  },
+  {
+   "fieldname": "migration_status",
+   "label": "Migration Status",
+   "fieldtype": "Select",
+   "options": "Not Required\nPending\nMigrated\nReview Required",
+   "default": "Pending",
+   "read_only": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "projection_section",
+   "label": "Budget Projection",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "projected_budget_period",
+   "label": "Projected Budget Period",
+   "fieldtype": "Link",
+   "options": "Budget Period",
+   "read_only": 1,
+   "depends_on": "eval:!doc.is_group"
+  },
+  {
+   "fieldname": "projected_budget",
+   "label": "Period Budget",
+   "fieldtype": "Currency",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "projected_actual",
+   "label": "Posted Actual",
+   "fieldtype": "Currency",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "projected_commitment",
+   "label": "Open Commitment",
+   "fieldtype": "Currency",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "projection_column",
+   "label": "Projection Result",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "projected_available",
+   "label": "Projected Available",
+   "fieldtype": "Currency",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "projected_utilization",
+   "label": "Projected Utilization %",
+   "fieldtype": "Percent",
+   "read_only": 1
+  },
+  {
+   "fieldname": "projection_status",
+   "label": "Projection Status",
+   "fieldtype": "Select",
+   "options": "Not Calculated\nHealthy\nWarning\nOver Budget\nReview Required",
+   "default": "Not Calculated",
+   "read_only": 1,
+   "depends_on": "eval:!doc.is_group",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "projection_as_of",
+   "label": "Projection As Of",
+   "fieldtype": "Datetime",
+   "read_only": 1
+  },
+  {
+   "fieldname": "erpnext_sync_section",
+   "label": "ERPNext Budget Sync",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "erpnext_account",
+   "label": "ERPNext Account",
+   "fieldtype": "Link",
+   "options": "Account",
+   "depends_on": "eval:!doc.is_group",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "erpnext_budget",
+   "label": "ERPNext Budget",
+   "fieldtype": "Link",
+   "options": "Budget",
+   "read_only": 1,
+   "depends_on": "eval:!doc.is_group"
+  },
+  {
+   "fieldname": "erpnext_sync_status",
+   "label": "ERPNext Sync Status",
+   "fieldtype": "Select",
+   "options": "Not Synced\nSynced\nSkipped\nReview Required\nError",
+   "default": "Not Synced",
+   "read_only": 1,
+   "depends_on": "eval:!doc.is_group",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "sync_column_2",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "recognition_basis",
+   "label": "Actual Recognition Basis",
+   "fieldtype": "Select",
+   "options": "Expense Only\nAsset Acquisition\nExpense and Asset Acquisition",
+   "default": "Expense Only",
+   "reqd": 1,
+   "depends_on": "eval:!doc.is_group",
+   "description": "Controls which GL debit accounts count as budget actuals. Asset Acquisition excludes depreciation expense to avoid double counting acquisition and depreciation."
+  },
+  {
+   "fieldname": "commitment_amount_basis",
+   "label": "Commitment Amount Basis",
+   "fieldtype": "Select",
+   "options": "Net Amount\nNet + Non-recoverable Taxes\nGrand Total",
+   "default": "Net Amount",
+   "reqd": 1,
+   "depends_on": "eval:!doc.is_group"
+  },
+  {
+   "fieldname": "charge_allocation_basis",
+   "label": "Document Charges Allocation",
+   "fieldtype": "Select",
+   "options": "By Net Amount\nBy Quantity\nDo Not Allocate",
+   "default": "By Net Amount",
+   "reqd": 1,
+   "depends_on": "eval:!doc.is_group"
+  },
+  {
+   "fieldname": "allow_recoverable_tax",
+   "label": "Include Recoverable Tax",
+   "fieldtype": "Check",
+   "default": "0",
+   "depends_on": "eval:!doc.is_group",
+   "description": "Normally disabled because recoverable input taxes are not a budget cost."
+  },
+  {
+   "fieldname": "erpnext_sync_column",
+   "label": "Sync Details",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "erpnext_sync_hash",
+   "label": "Sync Hash",
+   "fieldtype": "Data",
+   "read_only": 1
+  },
+  {
+   "fieldname": "erpnext_synced_on",
+   "label": "Synced On",
+   "fieldtype": "Datetime",
+   "read_only": 1
+  },
+  {
+   "fieldname": "erpnext_sync_message",
+   "label": "Sync Message",
+   "fieldtype": "Small Text",
+   "read_only": 1
   }
  ],
  "permissions": [
@@ -1486,6 +1680,33 @@
   "qorg_layout_column",
   "lft",
   "rgt",
-  "amended_from"
+  "amended_from",
+  "budget_period_section",
+  "period_allocations",
+  "allocation_total",
+  "migration_status",
+  "projection_section",
+  "projected_budget_period",
+  "projected_budget",
+  "projected_actual",
+  "projected_commitment",
+  "projection_column",
+  "projected_available",
+  "projected_utilization",
+  "projection_status",
+  "projection_as_of",
+  "erpnext_sync_section",
+  "erpnext_account",
+  "erpnext_budget",
+  "erpnext_sync_status",
+  "sync_column_2",
+  "recognition_basis",
+  "commitment_amount_basis",
+  "charge_allocation_basis",
+  "allow_recoverable_tax",
+  "erpnext_sync_column",
+  "erpnext_sync_hash",
+  "erpnext_synced_on",
+  "erpnext_sync_message"
  ]
 }

@@ -29,3 +29,5 @@ qorg.qorg.patches.v4_0.provision_payroll_workforce_allocation
 qorg.qorg.patches.v5_0.complete_payroll_workforce_allocation
 qorg.qorg.patches.v5_1.harden_payroll_workforce_allocation
 qorg.qorg.patches.v5_2.refine_payroll_fields_and_reports
+qorg.qorg.finance_period_control.setup.execute
+qorg.qorg.finance_period_control.patch_1d.execute

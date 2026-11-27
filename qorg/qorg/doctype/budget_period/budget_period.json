@@ -1,0 +1,222 @@
+{
+ "module": "QOrg",
+ "custom": 0,
+ "engine": "InnoDB",
+ "doctype": "DocType",
+ "actions": [],
+ "links": [],
+ "states": [],
+ "permissions": [
+  {
+   "role": "Accounts Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1,
+   "share": 1
+  },
+  {
+   "role": "Accounts User",
+   "read": 1,
+   "report": 1,
+   "export": 1
+  }
+ ],
+ "name": "Budget Period",
+ "autoname": "field:period_code",
+ "title_field": "period_name",
+ "search_fields": "period_code,period_name,company",
+ "sort_field": "from_date",
+ "sort_order": "DESC",
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "period_code",
+   "label": "Period Code",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "period_name",
+   "label": "Period Name",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "company",
+   "label": "Company",
+   "fieldtype": "Link",
+   "options": "Company",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "flags_column",
+   "label": "Control",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Draft\nOpen\nClosed\nArchived",
+   "default": "Draft",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "fiscal_year",
+   "label": "Fiscal Year",
+   "fieldtype": "Link",
+   "options": "Fiscal Year",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "is_default",
+   "label": "Is Default",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "date_section",
+   "label": "Dates",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "from_date",
+   "label": "From Date",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 2,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "date_column",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "to_date",
+   "label": "To Date",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 2,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "allow_commitments",
+   "label": "Allow Commitments",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "allow_actuals",
+   "label": "Allow Actuals",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "closure_section",
+   "label": "Period Closure",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "carry_forward_to",
+   "label": "Carry Forward To",
+   "fieldtype": "Link",
+   "options": "Budget Period"
+  },
+  {
+   "fieldname": "allow_late_adjustments",
+   "label": "Allow Late Adjustments",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "closure_column",
+   "label": "",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "closed_on",
+   "label": "Closed On",
+   "fieldtype": "Datetime",
+   "read_only": 1
+  },
+  {
+   "fieldname": "closed_by",
+   "label": "Closed By",
+   "fieldtype": "Link",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reopened_on",
+   "label": "Reopened On",
+   "fieldtype": "Datetime",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reopened_by",
+   "label": "Reopened By",
+   "fieldtype": "Link",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_carry_forward_batch",
+   "label": "Last Carry Forward Batch",
+   "fieldtype": "Data",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_carry_forward_reversed",
+   "label": "Last Carry Forward Reversed",
+   "fieldtype": "Check",
+   "read_only": 1,
+   "default": "0"
+  },
+  {
+   "fieldname": "notes",
+   "label": "Notes",
+   "fieldtype": "Small Text"
+  }
+ ],
+ "field_order": [
+  "period_code",
+  "period_name",
+  "company",
+  "flags_column",
+  "status",
+  "fiscal_year",
+  "is_default",
+  "date_section",
+  "from_date",
+  "date_column",
+  "to_date",
+  "allow_commitments",
+  "allow_actuals",
+  "closure_section",
+  "carry_forward_to",
+  "allow_late_adjustments",
+  "closure_column",
+  "closed_on",
+  "closed_by",
+  "reopened_on",
+  "reopened_by",
+  "last_carry_forward_batch",
+  "last_carry_forward_reversed",
+  "notes"
+ ]
+}

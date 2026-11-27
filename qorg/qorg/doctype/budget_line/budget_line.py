@@ -319,3 +319,5 @@ def _qorg_wrapped_on_update_after_submit(self):
         _qorg_original_on_update_after_submit(self)
     reconcile_document_projects(self)
 BudgetLine.on_update_after_submit = _qorg_wrapped_on_update_after_submit
+
+# Period allocation validation is also registered in hooks; this import is intentionally avoided here to preserve the existing controller.

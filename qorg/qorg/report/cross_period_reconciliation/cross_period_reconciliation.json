@@ -1,0 +1,17 @@
+{
+ "doctype": "Report",
+ "name": "Cross Period Reconciliation",
+ "report_name": "Cross Period Reconciliation",
+ "ref_doctype": "Commitment Entry",
+ "report_type": "Script Report",
+ "is_standard": "Yes",
+ "module": "QOrg",
+ "roles": [
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "System Manager"
+  }
+ ]
+}

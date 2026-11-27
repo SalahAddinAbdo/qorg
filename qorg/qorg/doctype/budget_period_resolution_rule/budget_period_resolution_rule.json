@@ -1,0 +1,139 @@
+{
+ "module": "QOrg",
+ "custom": 0,
+ "engine": "InnoDB",
+ "doctype": "DocType",
+ "actions": [],
+ "links": [],
+ "states": [],
+ "permissions": [
+  {
+   "role": "Accounts Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1,
+   "share": 1
+  },
+  {
+   "role": "Accounts User",
+   "read": 1,
+   "report": 1,
+   "export": 1
+  }
+ ],
+ "name": "Budget Period Resolution Rule",
+ "autoname": "format:BPRR-{company}-{####}",
+ "title_field": "rule_name",
+ "search_fields": "rule_name,company,project",
+ "sort_field": "priority",
+ "sort_order": "ASC",
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "rule_name",
+   "label": "Rule Name",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "enabled",
+   "label": "Enabled",
+   "fieldtype": "Check",
+   "default": "1",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "priority",
+   "label": "Priority",
+   "fieldtype": "Int",
+   "default": "100",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "company",
+   "label": "Company",
+   "fieldtype": "Link",
+   "options": "Company",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "scope_section",
+   "label": "Safe Match Conditions",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "project",
+   "label": "Project",
+   "fieldtype": "Link",
+   "options": "Project",
+   "in_standard_filter": 1,
+   "get_query": ""
+  },
+  {
+   "fieldname": "reference_doctype",
+   "label": "Reference DocType",
+   "fieldtype": "Link",
+   "options": "DocType",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "transaction_type",
+   "label": "Transaction Type",
+   "fieldtype": "Select",
+   "options": "Commitment\nActual\nAllocation\nTransfer",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "result_column",
+   "label": "Resolved Period",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "budget_period",
+   "label": "Budget Period",
+   "fieldtype": "Link",
+   "options": "Budget Period",
+   "reqd": 1,
+   "in_standard_filter": 1,
+   "description": "Restricted to the selected Company by the form query."
+  },
+  {
+   "fieldname": "valid_from",
+   "label": "Valid From",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "valid_to",
+   "label": "Valid To",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "notes",
+   "label": "Notes",
+   "fieldtype": "Small Text"
+  }
+ ],
+ "field_order": [
+  "rule_name",
+  "enabled",
+  "priority",
+  "company",
+  "scope_section",
+  "project",
+  "reference_doctype",
+  "transaction_type",
+  "result_column",
+  "budget_period",
+  "valid_from",
+  "valid_to",
+  "notes"
+ ]
+}

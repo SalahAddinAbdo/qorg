@@ -1,0 +1,1 @@
+frappe.query_reports["Cross Period Reconciliation"]={filters:[{fieldname:"company",label:__("Company"),fieldtype:"Link",options:"Company",reqd:1,default:frappe.defaults.get_user_default("Company")},{fieldname:"budget_period",label:__("Period"),fieldtype:"Link",options:"Budget Period",get_query:()=>({filters:{company:frappe.query_report.get_filter_value("company")}})}]};

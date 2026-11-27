@@ -233,26 +233,26 @@ doc_events = {'Web Form': {'before_validate': 'qorg.qorg.people_and_opportunitie
  'Purchase Invoice': {'validate': ['qorg.qorg.procurement_contracting.acceptance.validate_purchase_invoice',
                                    'qorg.qorg.procurement_contracting.standard_guards.validate_contract_links',
                                    'qorg.qorg.finance_budget_grants.services.validate_accounting_document'],
-                      'on_submit': ['qorg.qorg.procurement_contracting.commitment_hooks.invoice_submit'],
-                      'on_cancel': ['qorg.qorg.procurement_contracting.commitment_hooks.invoice_cancel']},
+                      'on_submit': ['qorg.qorg.finance_period_control.routing_v2.purchase_invoice_submit'],
+                      'on_cancel': ['qorg.qorg.finance_period_control.settlement_v2.cancel_source']},
  'Supplier Registration': {'validate': ['qorg.qorg.procurement_contracting.supplier_profile.validate_supplier_registration']},
  'Material Request': {'on_submit': ['qorg.qorg.procurement_contracting.routing.route_material_request',
-                                    'qorg.qorg.procurement_contracting.commitment_hooks.material_request_submit'],
-                      'on_cancel': ['qorg.qorg.procurement_contracting.commitment_hooks.material_request_cancel'],
+                                    'qorg.qorg.finance_period_control.routing_v2.material_request_submit'],
+                      'on_cancel': ['qorg.qorg.finance_period_control.settlement_v2.cancel_source'],
                       'validate': ['qorg.qorg.inventory_asset_custody.issue_control.validate_material_request_activity',
                                    'qorg.qorg.finance_budget_grants.services.validate_accounting_document']},
  'Framework Call Off': {'validate': ['qorg.qorg.procurement_contracting.contract_engine.validate_framework_call_off']},
  'Procurement Submission': {'validate': ['qorg.qorg.procurement_contracting.submission_service.validate_submission']},
- 'Purchase Order': {'on_submit': ['qorg.qorg.procurement_contracting.commitment_hooks.purchase_order_submit'],
-                    'on_cancel': ['qorg.qorg.procurement_contracting.commitment_hooks.purchase_order_cancel'],
+ 'Purchase Order': {'on_submit': ['qorg.qorg.finance_period_control.routing_v2.purchase_order_submit'],
+                    'on_cancel': ['qorg.qorg.finance_period_control.settlement_v2.cancel_source'],
                     'validate': ['qorg.qorg.procurement_contracting.standard_guards.validate_purchase_order',
                                  'qorg.qorg.procurement_contracting.standard_guards.validate_contract_links',
                                  'qorg.qorg.finance_budget_grants.services.validate_accounting_document']},
  'Procure Acceptance': {'on_submit': ['qorg.qorg.procurement_contracting.commitment_hooks.acceptance_submit'],
                         'on_cancel': ['qorg.qorg.procurement_contracting.commitment_hooks.acceptance_cancel'],
                         'validate': ['qorg.qorg.procurement_contracting.contract_engine.validate_acceptance']},
- 'Payment Entry': {'on_submit': ['qorg.qorg.procurement_contracting.commitment_hooks.payment_submit'],
-                   'on_cancel': ['qorg.qorg.procurement_contracting.commitment_hooks.payment_cancel'],
+ 'Payment Entry': {'on_submit': ['qorg.qorg.finance_period_control.settlement_v2.payment_submit'],
+                   'on_cancel': ['qorg.qorg.finance_period_control.settlement_v2.cancel_source'],
                    'validate': 'qorg.qorg.finance_budget_grants.services.validate_accounting_document'},
  'Buying Settings': {'validate': ['qorg.qorg.procurement_contracting.settings.validate_buying_settings']},
  'Request for Quotation': {'validate': ['qorg.qorg.procurement_contracting.standard_guards.validate_rfq']},
@@ -819,3 +819,68 @@ _learning_add_js("Appraisal", "public/js/learning_comms.js")
 _learning_comms_setup = "qorg.qorg.employee_lifecycle.comms.provision_communications"
 if _learning_comms_setup not in after_migrate:
     after_migrate.append(_learning_comms_setup)
+# Multi-period budget control
+def _qorg_add_doc_event(doctype, event, method):
+    current = doc_events.setdefault(doctype, {}).get(event)
+    if not current: doc_events[doctype][event] = method
+    elif isinstance(current, list):
+        if method not in current: current.append(method)
+    elif current != method: doc_events[doctype][event] = [current, method]
+_qorg_add_doc_event("Budget Line", "validate", "qorg.qorg.finance_period_control.service.validate_budget_line")
+_qorg_add_doc_event("Commitment Ledger", "validate", "qorg.qorg.finance_period_control.service.validate_commitment_ledger")
+_qorg_add_doc_event("Commitment Ledger", "on_update", "qorg.qorg.finance_period_control.projection.refresh_for_ledger")
+_qorg_add_doc_event("Commitment Ledger", "on_cancel", "qorg.qorg.finance_period_control.projection.refresh_for_ledger")
+_projection_js = "public/js/budget_line_projection.js"
+_current_projection_js = doctype_js.get("Budget Line")
+if not _current_projection_js:
+    doctype_js["Budget Line"] = _projection_js
+elif isinstance(_current_projection_js, list):
+    if _projection_js not in _current_projection_js: _current_projection_js.append(_projection_js)
+elif _current_projection_js != _projection_js:
+    doctype_js["Budget Line"] = [_current_projection_js, _projection_js]
+_qorg_add_doc_event("Budget Line", "on_update", "qorg.qorg.finance_period_control.budget_sync.mark_unsynced")
+_sync_js = "public/js/budget_line_sync.js"
+_current_sync_js = doctype_js.get("Budget Line")
+if not _current_sync_js:
+    doctype_js["Budget Line"] = _sync_js
+elif isinstance(_current_sync_js, list):
+    if _sync_js not in _current_sync_js: _current_sync_js.append(_sync_js)
+elif _current_sync_js != _sync_js:
+    doctype_js["Budget Line"] = [_current_sync_js, _sync_js]
+for _dt in ("Budget Period", "Budget Period Resolution Rule", "Commitment Ledger"):
+    _asset = "public/js/finance_period_control.js"
+    _current = doctype_js.get(_dt)
+    if not _current: doctype_js[_dt] = _asset
+    elif isinstance(_current, list):
+        if _asset not in _current: _current.append(_asset)
+    elif _current != _asset: doctype_js[_dt] = [_current, _asset]
+_finance_control_asset = "public/js/finance_period_control.js"
+_current_bl_assets = doctype_js.get("Budget Line")
+if isinstance(_current_bl_assets, list):
+    if _finance_control_asset not in _current_bl_assets: _current_bl_assets.append(_finance_control_asset)
+elif _current_bl_assets and _current_bl_assets != _finance_control_asset:
+    doctype_js["Budget Line"] = [_current_bl_assets, _finance_control_asset]
+elif not _current_bl_assets: doctype_js["Budget Line"] = _finance_control_asset
+_qorg_add_doc_event("Purchase Receipt", "on_submit", "qorg.qorg.finance_period_control.routing_v2.purchase_receipt_submit")
+_qorg_add_doc_event("Purchase Receipt", "on_cancel", "qorg.qorg.finance_period_control.settlement_v2.cancel_source")
+_qorg_add_doc_event("Purchase Invoice", "on_update_after_submit", "qorg.qorg.finance_period_control.gl_matching_v2.reconcile_on_update_after_submit")
+_qorg_add_doc_event("Purchase Order", "on_update_after_submit", "qorg.qorg.finance_period_control.returns_v2.close_purchase_order")
+_qorg_add_doc_event("Purchase Order", "validate", "qorg.qorg.finance_period_control.routing_v2.validate")
+_qorg_add_doc_event("Purchase Invoice", "validate", "qorg.qorg.finance_period_control.routing_v2.validate")
+for _dt in ("Purchase Order", "Purchase Invoice"):
+    _asset = "public/js/direct_procurement.js"
+    _current = doctype_js.get(_dt)
+    if not _current: doctype_js[_dt] = _asset
+    elif isinstance(_current, list):
+        if _asset not in _current: _current.append(_asset)
+    elif _current != _asset: doctype_js[_dt] = [_current, _asset]
+for _dt in ("Purchase Order", "Purchase Invoice", "Purchase Receipt"):
+    _qorg_add_doc_event(_dt, "validate", "qorg.qorg.finance_period_control.distribution_bridge.validate_distribution")
+_period_close_js = "public/js/budget_period_closure.js"
+_current_period_js = doctype_js.get("Budget Period")
+if isinstance(_current_period_js, list):
+    if _period_close_js not in _current_period_js: _current_period_js.append(_period_close_js)
+elif _current_period_js and _current_period_js != _period_close_js: doctype_js["Budget Period"] = [_current_period_js, _period_close_js]
+elif not _current_period_js: doctype_js["Budget Period"] = _period_close_js
+for _dt in ("Material Request", "Purchase Order", "Purchase Invoice"):
+    _qorg_add_doc_event(_dt, "validate", "qorg.qorg.finance_period_control.policy_v2.validate_document")

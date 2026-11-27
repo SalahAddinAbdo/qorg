@@ -1,5 +1,8 @@
 function bva_toggle_asset_filter(report){const enabled=Number(report.get_filter_value("include_asset_expenses")||0)===1;const filter=report.get_filter("asset_accounts");if(filter&&filter.$wrapper)filter.$wrapper.toggle(enabled);}
 frappe.query_reports["Budget Versus Actual"]={tree:true,name_field:"budget_line",parent_field:"parent",initial_depth:2,filters:[
+{fieldname:"view_mode",label:__("View"),fieldtype:"Select",options:"Original Account Detail\nPeriod & Commitments",default:"Original Account Detail",reqd:1},
+{fieldname:"budget_period",label:__("Budget Period"),fieldtype:"Link",options:"Budget Period",depends_on:"eval:doc.view_mode==='Period & Commitments'",get_query(){const c=frappe.query_report.get_filter_value("company");return{filters:c?{company:c}:{}};}},
+{fieldname:"budget_line",label:__("Budget Line"),fieldtype:"Link",options:"Budget Line",depends_on:"eval:doc.view_mode==='Period & Commitments'",get_query(){const p=frappe.query_report.get_filter_value("project");return{filters:p?{project:p,is_group:0}:{is_group:0}};}},
 {fieldname:"company",label:__("Company"),fieldtype:"Link",options:"Company",default:frappe.defaults.get_default("company"),reqd:1},
 {fieldname:"from_date",label:__("From Date"),fieldtype:"Date"},{fieldname:"to_date",label:__("To Date"),fieldtype:"Date"},
 {fieldname:"project",label:__("Project"),fieldtype:"Link",options:"Project",get_query(){const c=frappe.query_report.get_filter_value("company");return{filters:c?{company:c}:{}};}},
@@ -47,4 +50,17 @@ onload(report){bva_toggle_asset_filter(report);report.page.add_inner_button(__("
 ;(function qorg_link_title_style(){
  const id="qfap-link-title-style-v284";if(document.getElementById(id))return;
  const s=document.createElement("style");s.id=id;s.textContent=`.query-report .qfap-link-title{display:inline;color:var(--text-muted,#6b7280);font-size:11px;line-height:1.25;white-space:normal}.query-report .qfap-link-title-separator{color:var(--text-muted,#6b7280)}`;document.head.appendChild(s);
+})();
+
+;(function qorg_bva_period_extension(){
+ const config=frappe.query_reports["Budget Versus Actual"];
+ const base=config.formatter;
+ config.formatter=function(value,row,column,data,df){
+  const rendered=base?base.call(this,value,row,column,data,df):df(value,row,column,data);
+  if(data&&column&&column.fieldname==="performance_status"&&frappe.query_report.get_filter_value("view_mode")==="Period & Commitments"){
+   const color=data.performance_status==="Over Budget"?"red":data.performance_status==="Warning"?"orange":data.performance_status==="Healthy"?"green":"gray";
+   return `<span class="indicator-pill ${color}">${frappe.utils.escape_html(String(value||""))}</span>`;
+  }
+  return rendered;
+ };
 })();

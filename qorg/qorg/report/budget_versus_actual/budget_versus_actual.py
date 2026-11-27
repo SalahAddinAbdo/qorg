@@ -10,7 +10,7 @@ def _sort_key(name):
     if not match:return (0,(),str(name or ""))
     return (1,tuple(int(x) for x in match.group(1).split(".") if x.isdigit()),str(name or ""))
 
-def execute(filters=None):
+def execute_legacy(filters=None):
     filters=frappe._dict(filters or {})
     company=filters.get("company"); project=filters.get("project")
     from_date=filters.get("from_date") or "1900-01-01"; to_date=filters.get("to_date") or nowdate()
@@ -77,3 +77,46 @@ def execute(filters=None):
       if not x.get("is_account_row"):counts[x.get("performance_status")]=counts.get(x.get("performance_status"),0)+1
     chart={"data":{"labels":list(counts),"datasets":[{"name":_("Budget Lines"),"values":list(counts.values())}]},"type":"donut","height":300}
     return finalize_report_result((columns, rows, "", chart, summary, 1))
+
+
+def execute_period_commitment(filters=None):
+    filters=frappe._dict(filters or {})
+    company=filters.get("company")
+    if not company:return [],[],_("Select a Company."),None,[]
+    period_name=filters.get("budget_period")
+    if not period_name: return [],[],_("Select a Budget Period for Period & Commitments view."),None,[]
+    period=frappe.get_doc("Budget Period",period_name)
+    if period.company!=company: frappe.throw(_("Budget Period does not belong to Company."))
+    currency=frappe.db.get_value("Company",company,"default_currency")
+    conditions=["p.company=%s"];values=[company]
+    if filters.get("project"):conditions.append("bl.project=%s");values.append(filters.project)
+    if filters.get("budget_line"):conditions.append("bl.name=%s");values.append(filters.budget_line)
+    lines=frappe.db.sql("select bl.name,bl.name1,bl.parent_budget_line,bl.is_group,bl.project,bl.lft from `tabBudget Line` bl inner join `tabProject` p on p.name=bl.project where "+" and ".join(conditions)+" order by bl.lft",values,as_dict=True)
+    names=[x.name for x in lines]
+    if not names:return [],[],_("No Budget Lines match the selected filters."),None,[]
+    allocations={x.parent:flt(x.amount) for x in frappe.db.sql("select parent,sum(allocated_amount) amount from `tabBudget Period Allocation` where budget_period=%s and parent in %s group by parent",(period.name,tuple(names)),as_dict=True)}
+    from qorg.qorg.finance_period_control.actuals import actual_for_line
+    actuals={x.name:actual_for_line(company,x.name,period.from_date,period.to_date) for x in lines if not x.is_group}
+    from qorg.qorg.finance_period_control.period_balances import period_balances
+    commitments={x.budget_line:flt(x.amount) for x in period_balances(company,period.name,names,filters.get("project"))}
+    by={x.name:x for x in lines};children={}
+    for x in lines:children.setdefault(x.parent_budget_line,[]).append(x.name)
+    budget={n:allocations.get(n,0) for n in names};actual={n:actuals.get(n,0) for n in names};commit={n:commitments.get(n,0) for n in names}
+    for n in reversed(names):
+        if by[n].is_group:
+            cs=children.get(n,[]);budget[n]=sum(budget.get(c,0) for c in cs);actual[n]=sum(actual.get(c,0) for c in cs);commit[n]=sum(commit.get(c,0) for c in cs)
+    rows=[]
+    for n in names:
+        b,a,c=budget[n],actual[n],commit[n];used=a+c;available=b-used;util=(used/b*100) if b else 0
+        status="Over Budget" if available<0 else "Warning" if util>=90 else "Healthy" if b else "Review Required"
+        rows.append({"budget_line":n,"budget_line__title":by[n].name1,"parent":by[n].parent_budget_line,"project":by[n].project,"is_group":by[n].is_group,"budget_period":period.name,"budget_amount":b,"actual_amount":a,"commitment_amount":c,"obligated_amount":used,"available_amount":available,"utilization_percentage":util,"performance_status":status,"currency":currency})
+    columns=[{"label":_("Budget Line"),"fieldname":"budget_line","fieldtype":"Link","options":"Budget Line","width":300,"sticky":True},{"label":_("Project"),"fieldname":"project","fieldtype":"Link","options":"Project","width":180,"sticky":True},{"label":_("Period Budget"),"fieldname":"budget_amount","fieldtype":"Currency","options":"currency","width":125},{"label":_("Actual Expense"),"fieldname":"actual_amount","fieldtype":"Currency","options":"currency","width":125},{"label":_("Open Commitment"),"fieldname":"commitment_amount","fieldtype":"Currency","options":"currency","width":135},{"label":_("Actual + Commitment"),"fieldname":"obligated_amount","fieldtype":"Currency","options":"currency","width":150},{"label":_("Available"),"fieldname":"available_amount","fieldtype":"Currency","options":"currency","width":125},{"label":_("Utilization %"),"fieldname":"utilization_percentage","fieldtype":"Percent","width":110},{"label":_("Status"),"fieldname":"performance_status","width":130}]
+    leaves=[x for x in rows if not x["is_group"]]
+    summary=[{"value":sum(x["budget_amount"] for x in leaves),"label":_("Period Budget"),"datatype":"Currency","currency":currency},{"value":sum(x["actual_amount"] for x in leaves),"label":_("Actual"),"datatype":"Currency","currency":currency},{"value":sum(x["commitment_amount"] for x in leaves),"label":_("Commitments"),"datatype":"Currency","currency":currency},{"value":sum(x["available_amount"] for x in leaves),"label":_("Available"),"datatype":"Currency","currency":currency}]
+    chart={"data":{"labels":[x["budget_line__title"] or x["budget_line"] for x in leaves[:25]],"datasets":[{"name":_("Budget"),"values":[x["budget_amount"] for x in leaves[:25]]},{"name":_("Actual"),"values":[x["actual_amount"] for x in leaves[:25]]},{"name":_("Commitment"),"values":[x["commitment_amount"] for x in leaves[:25]]}]},"type":"bar"}
+    return finalize_report_result(columns,rows,None,chart,summary)
+
+def execute(filters=None):
+    filters=frappe._dict(filters or {})
+    if filters.get("view_mode")=="Period & Commitments": return execute_period_commitment(filters)
+    return execute_legacy(filters)

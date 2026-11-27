@@ -1,0 +1,17 @@
+{
+ "doctype": "Report",
+ "name": "Commitment Reconciliation Exceptions",
+ "report_name": "Commitment Reconciliation Exceptions",
+ "ref_doctype": "Commitment Ledger",
+ "report_type": "Script Report",
+ "is_standard": "Yes",
+ "module": "QOrg",
+ "roles": [
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "System Manager"
+  }
+ ]
+}
