@@ -25,17 +25,21 @@
     "qorg_participation_general_cb",
     "qorg_participation_require_code",
     "qorg_participation_require_safeguarding",
+    "qorg_participation_general_cb_2",
     "qorg_participation_block_pending_clearance",
+    "qorg_participation_require_decision_rationale",
     "qorg_participation_hours_section",
     "qorg_participation_max_daily_hours",
     "qorg_participation_max_weekly_hours",
-    "qorg_participation_require_evidence",
     "qorg_participation_hours_cb",
+    "qorg_participation_require_evidence",
     "qorg_participation_require_supervisor_verification",
+    "qorg_participation_hours_cb_2",
     "qorg_participation_allow_overachievement",
     "qorg_participation_intern_section",
     "qorg_participation_require_learning_objectives",
     "qorg_participation_require_midterm",
+    "qorg_participation_intern_cb",
     "qorg_participation_require_final"
   ]
 }

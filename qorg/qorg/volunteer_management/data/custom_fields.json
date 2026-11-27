@@ -207,12 +207,31 @@
   },
   {
     "dt": "HR Settings",
+    "fieldname": "qorg_participation_general_cb_2",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_participation_require_safeguarding"
+  },
+  {
+    "dt": "HR Settings",
     "fieldname": "qorg_participation_block_pending_clearance",
     "label": "Prevent Activation with Pending Clearance",
     "fieldtype": "Check",
     "default": "1",
     "module": "QOrg",
     "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_require_decision_rationale",
+    "label": "Require Decision Rationale",
+    "fieldtype": "Check",
+    "default": "1",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_participation_block_pending_clearance"
   },
   {
     "dt": "HR Settings",
@@ -229,7 +248,10 @@
     "fieldtype": "Float",
     "default": "8",
     "module": "QOrg",
-    "is_system_generated": 1
+    "is_system_generated": 1,
+    "description": "Maximum service hours permitted for one participant on one calendar day. Must be greater than zero.",
+    "non_negative": 1,
+    "precision": "2"
   },
   {
     "dt": "HR Settings",
@@ -238,7 +260,10 @@
     "fieldtype": "Float",
     "default": "40",
     "module": "QOrg",
-    "is_system_generated": 1
+    "is_system_generated": 1,
+    "description": "Maximum service hours permitted for one engagement from Monday through Sunday. Must be greater than or equal to the daily limit.",
+    "non_negative": 1,
+    "precision": "2"
   },
   {
     "dt": "HR Settings",
@@ -265,6 +290,15 @@
     "default": "1",
     "module": "QOrg",
     "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_hours_cb_2",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_participation_require_supervisor_verification"
   },
   {
     "dt": "HR Settings",
@@ -300,6 +334,15 @@
     "default": "1",
     "module": "QOrg",
     "is_system_generated": 1
+  },
+  {
+    "dt": "HR Settings",
+    "fieldname": "qorg_participation_intern_cb",
+    "label": "",
+    "fieldtype": "Column Break",
+    "module": "QOrg",
+    "is_system_generated": 1,
+    "insert_after": "qorg_participation_require_midterm"
   },
   {
     "dt": "HR Settings",
