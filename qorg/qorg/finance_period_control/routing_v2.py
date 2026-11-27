@@ -7,17 +7,6 @@ from qorg.qorg.finance_period_control.returns_amendments import amendment_submit
 
 def _po_linked(row): return bool(row.get("material_request") or row.get("material_request_item"))
 def _pi_linked(row): return bool(row.get("purchase_order") or row.get("po_detail"))
-def _require_direct(doc, rows):
-    if not rows:return
-    if not doc.get("qorg_direct_procurement"):frappe.throw("Unlinked rows require Direct Procurement: "+", ".join(str(r.idx) for r in rows))
-    if not doc.get("qorg_direct_procurement_reason") or not doc.get("qorg_direct_approval_reference"):frappe.throw("Direct Procurement Reason and Approval Reference are required")
-    missing=[str(r.idx) for r in rows if not sr.row_budget_line(r) or not (r.get("project") or doc.get("project"))]
-    if missing:frappe.throw("Budget Line and Project are required for direct rows: "+", ".join(missing))
-
-def validate(doc,method=None):
-    if doc.get("is_return"):return
-    direct=[r for r in doc.items if not (_po_linked(r) if doc.doctype=="Purchase Order" else _pi_linked(r))]
-    _require_direct(doc,direct)
 
 def material_request_submit(doc,method=None):
     if doc.material_request_type!="Purchase":return

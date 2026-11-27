@@ -865,9 +865,9 @@ _qorg_add_doc_event("Purchase Receipt", "on_submit", "qorg.qorg.finance_period_c
 _qorg_add_doc_event("Purchase Receipt", "on_cancel", "qorg.qorg.finance_period_control.settlement_v2.cancel_source")
 _qorg_add_doc_event("Purchase Invoice", "on_update_after_submit", "qorg.qorg.finance_period_control.gl_matching_v2.reconcile_on_update_after_submit")
 _qorg_add_doc_event("Purchase Order", "on_update_after_submit", "qorg.qorg.finance_period_control.returns_v2.close_purchase_order")
-_qorg_add_doc_event("Purchase Order", "validate", "qorg.qorg.finance_period_control.routing_v2.validate")
-_qorg_add_doc_event("Purchase Invoice", "validate", "qorg.qorg.finance_period_control.routing_v2.validate")
-for _dt in ("Purchase Order", "Purchase Invoice"):
+_qorg_add_doc_event("Purchase Order", "validate", "qorg.qorg.finance_period_control.procurement_route.validate")
+_qorg_add_doc_event("Purchase Invoice", "validate", "qorg.qorg.finance_period_control.procurement_route.validate")
+for _dt in ("Material Request", "Purchase Order", "Purchase Invoice"):
     _asset = "public/js/direct_procurement.js"
     _current = doctype_js.get(_dt)
     if not _current: doctype_js[_dt] = _asset
@@ -884,3 +884,4 @@ elif _current_period_js and _current_period_js != _period_close_js: doctype_js["
 elif not _current_period_js: doctype_js["Budget Period"] = _period_close_js
 for _dt in ("Material Request", "Purchase Order", "Purchase Invoice"):
     _qorg_add_doc_event(_dt, "validate", "qorg.qorg.finance_period_control.policy_v2.validate_document")
+_qorg_add_doc_event("Material Request", "validate", "qorg.qorg.finance_period_control.procurement_route.validate")

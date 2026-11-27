@@ -537,6 +537,36 @@
    "doctype": "DocField"
   },
   {
+   "fieldname": "budget_period_section",
+   "label": "Period Allocations",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "period_allocations",
+   "label": "Period Allocations",
+   "fieldtype": "Table",
+   "options": "Budget Period Allocation",
+   "description": "Allocate this Budget Line across non-overlapping Budget Periods.",
+   "depends_on": "eval:!doc.is_group"
+  },
+  {
+   "fieldname": "allocation_total",
+   "label": "Allocation Total",
+   "fieldtype": "Currency",
+   "options": "currency",
+   "read_only": 1,
+   "depends_on": "eval:!doc.is_group"
+  },
+  {
+   "fieldname": "migration_status",
+   "label": "Migration Status",
+   "fieldtype": "Select",
+   "options": "Not Required\nPending\nMigrated\nReview Required",
+   "default": "Pending",
+   "read_only": 1,
+   "in_standard_filter": 1
+  },
+  {
    "label": "Budget Amount",
    "fieldtype": "Section Break",
    "fieldname": "section_break_amount",
@@ -645,7 +675,7 @@
    "doctype": "DocField"
   },
   {
-   "label": "Approved Budget Amount",
+   "label": "Total Approved Budget",
    "fieldtype": "Currency",
    "fieldname": "line_cost",
    "length": 0,
@@ -681,7 +711,7 @@
    "sticky": 0,
    "in_filter": 0,
    "in_global_search": 0,
-   "read_only": 0,
+   "read_only": 1,
    "allow_on_submit": 0,
    "ignore_user_permissions": 0,
    "allow_bulk_edit": 0,
@@ -696,7 +726,8 @@
    "alignment": "",
    "columns": 3,
    "show_description_on_click": 0,
-   "doctype": "DocField"
+   "doctype": "DocField",
+   "description": "Calculated from Period Allocations."
   },
   {
    "fieldname": "donor_currency",
@@ -1296,36 +1327,6 @@
    "doctype": "DocField"
   },
   {
-   "fieldname": "budget_period_section",
-   "label": "Period Allocations",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "period_allocations",
-   "label": "Period Allocations",
-   "fieldtype": "Table",
-   "options": "Budget Period Allocation",
-   "description": "Allocate this Budget Line across non-overlapping Budget Periods.",
-   "depends_on": "eval:!doc.is_group"
-  },
-  {
-   "fieldname": "allocation_total",
-   "label": "Allocation Total",
-   "fieldtype": "Currency",
-   "options": "currency",
-   "read_only": 1,
-   "depends_on": "eval:!doc.is_group"
-  },
-  {
-   "fieldname": "migration_status",
-   "label": "Migration Status",
-   "fieldtype": "Select",
-   "options": "Not Required\nPending\nMigrated\nReview Required",
-   "default": "Pending",
-   "read_only": 1,
-   "in_standard_filter": 1
-  },
-  {
    "fieldname": "projection_section",
    "label": "Budget Projection",
    "fieldtype": "Section Break"
@@ -1659,6 +1660,10 @@
   "budget_line",
   "name1",
   "more_details",
+  "budget_period_section",
+  "period_allocations",
+  "allocation_total",
+  "migration_status",
   "section_break_amount",
   "currency",
   "line_cost",
@@ -1681,10 +1686,6 @@
   "lft",
   "rgt",
   "amended_from",
-  "budget_period_section",
-  "period_allocations",
-  "allocation_total",
-  "migration_status",
   "projection_section",
   "projected_budget_period",
   "projected_budget",

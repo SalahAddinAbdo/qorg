@@ -35,7 +35,8 @@
    "options": "Budget Period",
    "reqd": 1,
    "in_list_view": 1,
-   "columns": 3
+   "columns": 3,
+   "in_standard_filter": 1
   },
   {
    "fieldname": "allocated_amount",
@@ -54,21 +55,24 @@
    "options": "Currency",
    "reqd": 1,
    "columns": 2,
-   "in_list_view": 1
+   "in_list_view": 1,
+   "read_only": 1
   },
   {
    "fieldname": "effective_from",
    "label": "Effective From",
    "fieldtype": "Date",
    "columns": 1,
-   "in_list_view": 1
+   "in_list_view": 1,
+   "read_only": 1
   },
   {
    "fieldname": "effective_to",
    "label": "Effective To",
    "fieldtype": "Date",
    "columns": 1,
-   "in_list_view": 1
+   "in_list_view": 1,
+   "read_only": 1
   },
   {
    "fieldname": "legacy_source",

@@ -32,3 +32,4 @@ qorg.qorg.patches.v5_2.refine_payroll_fields_and_reports
 qorg.qorg.finance_period_control.setup
 qorg.qorg.finance_period_control.patch_1d
 qorg.qorg.finance_period_control.patches.v1_2_2_refine_finance_layout
+qorg.qorg.finance_period_control.patches.v1_3_1_procurement_route_final_cleanup

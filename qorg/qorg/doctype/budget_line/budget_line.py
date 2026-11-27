@@ -55,6 +55,7 @@ class BudgetLine(NestedSet):
         self._validate_project()
 
     def validate(self):
+        self._sync_period_allocations()
         sync_budget_line_currency(self)
         self._validate_project()
         self._validate_parent()
@@ -63,6 +64,31 @@ class BudgetLine(NestedSet):
         self._validate_status_and_amount()
         self._protect_locked_values()
         self._set_lock_state()
+
+    def _sync_period_allocations(self):
+        if self.is_group:
+            self.allocation_total = 0
+            return
+        total = 0
+        seen = set()
+        for row in self.get("period_allocations") or []:
+            if not row.budget_period:
+                frappe.throw(_("Budget Period is required on every allocation row."))
+            if row.budget_period in seen:
+                frappe.throw(_("Budget Period {0} is duplicated.").format(row.budget_period))
+            seen.add(row.budget_period)
+            if flt(row.allocated_amount) < 0:
+                frappe.throw(_("Period allocation cannot be negative."))
+            period = frappe.db.get_value("Budget Period", row.budget_period, ["company","from_date","to_date"], as_dict=True)
+            company = frappe.db.get_value("Project", self.project, "company")
+            if not period or period.company != company:
+                frappe.throw(_("Budget Period {0} does not belong to the Project company.").format(row.budget_period))
+            row.currency = self.currency
+            row.effective_from = period.from_date
+            row.effective_to = period.to_date
+            total += flt(row.allocated_amount)
+        self.allocation_total = total
+        self.line_cost = total
 
     def on_update(self):
         self._rollup_project_groups()
