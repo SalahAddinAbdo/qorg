@@ -112,8 +112,9 @@ function apply_budget_line_controls(frm) {
         frm.set_df_property(fieldname, "read_only", protectedRecord ? 1 : 0);
     });
 
-    frm.set_df_property("line_cost", "read_only", (protectedRecord || isGroup) ? 1 : 0);
-    frm.set_df_property("line_cost", "reqd", isGroup ? 0 : 1);
+    // Total Approved Budget is derived exclusively from Period Allocations.
+    frm.set_df_property("line_cost", "read_only", 1);
+    frm.set_df_property("line_cost", "reqd", 0);
 
     if (frm.doc.status === "Approved" && !locked) {
         frm.dashboard.set_headline_alert(

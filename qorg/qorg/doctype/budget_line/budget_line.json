@@ -727,7 +727,7 @@
    "columns": 3,
    "show_description_on_click": 0,
    "doctype": "DocField",
-   "description": "Calculated from Period Allocations."
+   "description": "Calculated automatically as the sum of Period Allocations."
   },
   {
    "fieldname": "donor_currency",
