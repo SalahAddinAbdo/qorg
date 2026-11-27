@@ -5,7 +5,7 @@ from frappe import _
 
 from qorg.qorg.people_and_opportunities.portal_ownership import is_website_user, portal_owned_reference
 
-PROTECTED_DOCTYPES = {"External Person", "Participation Application", "Job Applicant"}
+PROTECTED_DOCTYPES = {"External Person", "Participation Application", "Job Applicant", "Candidate Reference Check"}
 
 
 def has_file_permission(file_doc, user=None):

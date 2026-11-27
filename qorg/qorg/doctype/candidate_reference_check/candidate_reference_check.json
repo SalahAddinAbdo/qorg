@@ -1,0 +1,510 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "autoname": "naming_series:",
+  "creation": "2026-11-27 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "reference_tab",
+    "naming_series",
+    "overview_section",
+    "job_applicant",
+    "job_opening",
+    "external_person",
+    "overview_column_2",
+    "job_offer",
+    "company",
+    "project",
+    "reference_source_row",
+    "reference_section",
+    "reference_name",
+    "organization",
+    "reference_column_2",
+    "designation",
+    "relationship",
+    "reference_column_3",
+    "email",
+    "mobile_no",
+    "status_section",
+    "status",
+    "response_method",
+    "status_column_2",
+    "result",
+    "follow_up_on",
+    "status_column_3",
+    "reminder_count",
+    "last_reminder_on",
+    "tracking_section",
+    "requested_on",
+    "requested_by",
+    "tracking_column_2",
+    "sent_on",
+    "received_on",
+    "tracking_column_3",
+    "verified_on",
+    "verified_by",
+    "response_section",
+    "employment_confirmed",
+    "position_confirmed",
+    "response_column_2",
+    "employment_period_confirmed",
+    "performance_assessment",
+    "response_column_3",
+    "eligible_for_rehire",
+    "conduct_or_safeguarding_concerns",
+    "response_details_section",
+    "response_summary",
+    "additional_remarks",
+    "result_rationale",
+    "signature_section",
+    "signed_by",
+    "signed_on",
+    "signature_column_2",
+    "signed_response",
+    "supporting_attachment",
+    "communication_section",
+    "communication_reference"
+  ],
+  "fields": [
+    {
+      "fieldname": "reference_tab",
+      "fieldtype": "Tab Break",
+      "label": "Reference Check"
+    },
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "CRC-.YYYY.-.#####",
+      "default": "CRC-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "overview_section",
+      "fieldtype": "Section Break",
+      "label": "Application and Offer"
+    },
+    {
+      "fieldname": "job_applicant",
+      "fieldtype": "Link",
+      "label": "Job Applicant",
+      "options": "Job Applicant",
+      "reqd": 1,
+      "in_list_view": 1,
+      "search_index": 1
+    },
+    {
+      "fieldname": "job_opening",
+      "fieldtype": "Link",
+      "label": "Job Opening",
+      "options": "Job Opening",
+      "read_only": 1,
+      "in_standard_filter": 1,
+      "fetch_from": "job_applicant.qorg_job_opening"
+    },
+    {
+      "fieldname": "external_person",
+      "fieldtype": "Link",
+      "label": "External Person",
+      "options": "External Person",
+      "read_only": 1,
+      "fetch_from": "job_applicant.qorg_external_person"
+    },
+    {
+      "fieldname": "overview_column_2",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "job_offer",
+      "fieldtype": "Link",
+      "label": "Job Offer",
+      "options": "Job Offer",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "search_index": 1
+    },
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1,
+      "in_standard_filter": 1,
+      "search_index": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "project",
+      "fieldtype": "Link",
+      "label": "Project",
+      "options": "Project"
+    },
+    {
+      "fieldname": "reference_source_row",
+      "fieldtype": "Data",
+      "label": "Reference Source Row",
+      "hidden": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "reference_section",
+      "fieldtype": "Section Break",
+      "label": "Reference Details"
+    },
+    {
+      "fieldname": "reference_name",
+      "fieldtype": "Data",
+      "label": "Reference Name",
+      "reqd": 1,
+      "in_list_view": 1,
+      "search_index": 1
+    },
+    {
+      "fieldname": "organization",
+      "fieldtype": "Data",
+      "label": "Organization"
+    },
+    {
+      "fieldname": "reference_column_2",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "designation",
+      "fieldtype": "Data",
+      "label": "Designation"
+    },
+    {
+      "fieldname": "relationship",
+      "fieldtype": "Data",
+      "label": "Professional Relationship"
+    },
+    {
+      "fieldname": "reference_column_3",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "email",
+      "fieldtype": "Data",
+      "label": "Email",
+      "options": "Email",
+      "search_index": 1
+    },
+    {
+      "fieldname": "mobile_no",
+      "fieldtype": "Data",
+      "label": "Mobile Number",
+      "options": "Phone"
+    },
+    {
+      "fieldname": "status_section",
+      "fieldtype": "Section Break",
+      "label": "Status and Result"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nReady to Send\nSent\nFollow-up Required\nReceived\nVerified\nUnable to Reach\nDeclined\nCancelled",
+      "default": "Draft",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "search_index": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "response_method",
+      "fieldtype": "Select",
+      "label": "Response Method",
+      "options": "\nEmail\nSigned Form\nPhone\nVideo Call\nOther",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\"",
+      "mandatory_depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\""
+    },
+    {
+      "fieldname": "status_column_2",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "result",
+      "fieldtype": "Select",
+      "label": "Result",
+      "options": "\nSatisfactory\nSatisfactory with Reservations\nUnsatisfactory\nInconclusive",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "search_index": 1,
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\"",
+      "mandatory_depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\""
+    },
+    {
+      "fieldname": "follow_up_on",
+      "fieldtype": "Date",
+      "label": "Follow-up On"
+    },
+    {
+      "fieldname": "status_column_3",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "reminder_count",
+      "fieldtype": "Int",
+      "label": "Reminder Count",
+      "read_only": 1,
+      "default": "0"
+    },
+    {
+      "fieldname": "last_reminder_on",
+      "fieldtype": "Datetime",
+      "label": "Last Reminder On",
+      "read_only": 1
+    },
+    {
+      "fieldname": "tracking_section",
+      "fieldtype": "Section Break",
+      "label": "Request Tracking"
+    },
+    {
+      "fieldname": "requested_on",
+      "fieldtype": "Datetime",
+      "label": "Requested On",
+      "read_only": 1
+    },
+    {
+      "fieldname": "requested_by",
+      "fieldtype": "Link",
+      "label": "Requested By",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "tracking_column_2",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "sent_on",
+      "fieldtype": "Datetime",
+      "label": "Sent On",
+      "read_only": 1
+    },
+    {
+      "fieldname": "received_on",
+      "fieldtype": "Datetime",
+      "label": "Received On",
+      "read_only": 1
+    },
+    {
+      "fieldname": "tracking_column_3",
+      "fieldtype": "Column Break",
+      "label": ""
+    },
+    {
+      "fieldname": "verified_on",
+      "fieldtype": "Datetime",
+      "label": "Verified On",
+      "read_only": 1
+    },
+    {
+      "fieldname": "verified_by",
+      "fieldtype": "Link",
+      "label": "Verified By",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "response_section",
+      "fieldtype": "Section Break",
+      "label": "Reference Response",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\""
+    },
+    {
+      "fieldname": "employment_confirmed",
+      "fieldtype": "Select",
+      "label": "Employment Confirmed",
+      "options": "\nYes\nNo\nUnable to Confirm",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\""
+    },
+    {
+      "fieldname": "position_confirmed",
+      "fieldtype": "Select",
+      "label": "Position Confirmed",
+      "options": "\nYes\nNo\nUnable to Confirm",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\""
+    },
+    {
+      "fieldname": "response_column_2",
+      "fieldtype": "Column Break",
+      "label": "",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\""
+    },
+    {
+      "fieldname": "employment_period_confirmed",
+      "fieldtype": "Select",
+      "label": "Employment Period Confirmed",
+      "options": "\nYes\nNo\nUnable to Confirm",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\""
+    },
+    {
+      "fieldname": "performance_assessment",
+      "fieldtype": "Select",
+      "label": "Performance Assessment",
+      "options": "\nExcellent\nVery Good\nGood\nSatisfactory\nBelow Expectations\nUnable to Assess",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\""
+    },
+    {
+      "fieldname": "response_column_3",
+      "fieldtype": "Column Break",
+      "label": "",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\""
+    },
+    {
+      "fieldname": "eligible_for_rehire",
+      "fieldtype": "Select",
+      "label": "Eligible for Rehire",
+      "options": "\nYes\nNo\nUnable to Confirm",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\""
+    },
+    {
+      "fieldname": "conduct_or_safeguarding_concerns",
+      "fieldtype": "Check",
+      "label": "Conduct or Safeguarding Concerns",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\""
+    },
+    {
+      "fieldname": "response_details_section",
+      "fieldtype": "Section Break",
+      "label": "Response Details",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\""
+    },
+    {
+      "fieldname": "response_summary",
+      "fieldtype": "Text Editor",
+      "label": "Response Summary",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\"",
+      "columns": 0
+    },
+    {
+      "fieldname": "additional_remarks",
+      "fieldtype": "Text Editor",
+      "label": "Additional Remarks",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\"",
+      "columns": 0
+    },
+    {
+      "fieldname": "result_rationale",
+      "fieldtype": "Small Text",
+      "label": "Result Rationale",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\"",
+      "columns": 0
+    },
+    {
+      "fieldname": "signature_section",
+      "fieldtype": "Section Break",
+      "label": "Signature and Evidence",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\""
+    },
+    {
+      "fieldname": "signed_by",
+      "fieldtype": "Data",
+      "label": "Signed By",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\"",
+      "mandatory_depends_on": "eval:doc.status==\"Verified\" && doc.signed_response"
+    },
+    {
+      "fieldname": "signed_on",
+      "fieldtype": "Date",
+      "label": "Signed On",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\"",
+      "mandatory_depends_on": "eval:doc.status==\"Verified\" && doc.signed_response"
+    },
+    {
+      "fieldname": "signature_column_2",
+      "fieldtype": "Column Break",
+      "label": "",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\""
+    },
+    {
+      "fieldname": "signed_response",
+      "fieldtype": "Attach",
+      "label": "Signed Response",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\""
+    },
+    {
+      "fieldname": "supporting_attachment",
+      "fieldtype": "Attach",
+      "label": "Supporting Attachment",
+      "depends_on": "eval:doc.status==\"Received\" || doc.status==\"Verified\""
+    },
+    {
+      "fieldname": "communication_section",
+      "fieldtype": "Section Break",
+      "label": "Communication Record"
+    },
+    {
+      "fieldname": "communication_reference",
+      "fieldtype": "Data",
+      "label": "Communication Reference",
+      "columns": 0
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "is_submittable": 0,
+  "links": [],
+  "modified": "2026-11-27 20:45:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "Candidate Reference Check",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "Recruitment Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "HR Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "title_field": "reference_name",
+  "search_fields": "reference_name,email,job_applicant,job_offer,organization",
+  "show_title_field_in_link": 1
+}
