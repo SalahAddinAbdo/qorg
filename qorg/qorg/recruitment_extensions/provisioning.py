@@ -69,7 +69,7 @@ def _email_templates():
     return result
 
 def reconcile_standard_reports():
-    names=("Applicant Screening and Aging","Candidate Selection Queue","External Opportunity Overview","Interview Progress","Offer and Appointment Tracking","Recruitment Cycle Performance","Recruitment Pipeline","Volunteer Application Pipeline")
+    names=("Applicant Screening and Aging","Candidate Selection Queue","External Opportunity Overview","Interview Progress","Offer and Appointment Tracking","Recruitment Cycle Performance","Recruitment Pipeline")
     for name in names:
         if frappe.db.exists("Report",name):
             frappe.db.set_value("Report",name,{"disabled":0,"is_standard":"Yes"},update_modified=False)
@@ -88,6 +88,6 @@ def audit_reports_and_templates():
         expected=_template_hash(data.get("subject"),data.get("response_html") or data.get("response"),data.get("use_html"))
         actual=_template_hash(template.subject,template.response_html or template.response,template.use_html)
         result["templates"][name]="Current" if actual==expected else "Customized or Old"
-    for name in ("Applicant Screening and Aging","Candidate Selection Queue","External Opportunity Overview","Interview Progress","Offer and Appointment Tracking","Recruitment Cycle Performance","Recruitment Pipeline","Volunteer Application Pipeline"):
+    for name in ("Applicant Screening and Aging","Candidate Selection Queue","External Opportunity Overview","Interview Progress","Offer and Appointment Tracking","Recruitment Cycle Performance","Recruitment Pipeline"):
         result["reports"][name]="Current record" if frappe.db.exists("Report",name) else "Missing"
     return result

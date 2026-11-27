@@ -5,7 +5,7 @@ def prevent_master_delete(doc, method=None):
     checks={
         "External Opportunity Type":[("External Opportunity","opportunity_type"),],
         "Person Qualification":[("External Person Education","qualification"),],
-        "Volunteer Category":[("Volunteer Profile","volunteer_category"),("Volunteer Engagement","volunteer_category")],
+        "Volunteer Category":[],
     }
     for target,field in checks.get(doc.doctype,[]):
         if frappe.db.exists(target,{field:doc.name}):
@@ -13,9 +13,8 @@ def prevent_master_delete(doc, method=None):
 
 def prevent_operational_delete(doc, method=None):
     links={
-        "External Person":[("Job Applicant","qorg_external_person"),("Volunteer Application","external_person"),("Volunteer Profile","external_person"),("Participation Application","external_person"),("Participation Engagement","external_person")],
-        "External Opportunity":[("Volunteer Application","external_opportunity"),("Volunteer Engagement","external_opportunity"),("Participation Application","external_opportunity"),("Participation Engagement","external_opportunity")],
-        "Volunteer Profile":[("Volunteer Engagement","volunteer_profile")],
+        "External Person":[("Job Applicant","qorg_external_person"),("Participation Application","external_person"),("Participation Engagement","external_person")],
+        "External Opportunity":[("Participation Application","external_opportunity"),("Participation Engagement","external_opportunity")],
     }
     for target,field in links.get(doc.doctype,[]):
         if frappe.db.exists("DocType",target) and frappe.db.exists(target,{field:doc.name}):

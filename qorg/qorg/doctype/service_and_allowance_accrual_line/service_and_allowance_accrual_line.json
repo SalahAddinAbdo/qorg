@@ -11,7 +11,6 @@
   "external_person",
   "employee",
   "supplier",
-  "volunteer_profile",
   "beneficiary_name",
   "qorg_layout_column_1_2",
   "identity_number",
@@ -98,13 +97,6 @@
    "label": "Supplier",
    "fieldtype": "Link",
    "options": "Supplier",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "volunteer_profile",
-   "label": "Volunteer Profile",
-   "fieldtype": "Link",
-   "options": "Volunteer Profile",
    "in_list_view": 0
   },
   {

@@ -92,7 +92,6 @@
   "portal_edit_locked_on",
   "employee",
   "links_section",
-  "volunteer",
   "merged_into",
   "source_reference_doctype",
   "links_col_2",
@@ -536,7 +535,7 @@
    "fieldname": "source",
    "label": "Source",
    "fieldtype": "Select",
-   "options": "Job Application\nVolunteer Application\nPortal Registration\nManual Entry\nEmployee Referral\nImport\nMigration\nOther",
+   "options": "Job Application\nPortal Registration\nManual Entry\nEmployee Referral\nImport\nMigration\nOther",
    "default": "Manual Entry",
    "reqd": 1,
    "in_standard_filter": 1
@@ -607,13 +606,6 @@
    "fieldname": "links_section",
    "label": "System Links",
    "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "volunteer",
-   "label": "Volunteer Profile",
-   "fieldtype": "Link",
-   "options": "Volunteer Profile",
-   "read_only": 1
   },
   {
    "fieldname": "merged_into",

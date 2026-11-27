@@ -17,7 +17,7 @@ def test_integrity_handlers_are_registered():
 
 def test_delete_guards_cover_recruitment_and_participation():
  source=(ROOT/'qorg/qorg/people_and_opportunities/integrity.py').read_text()
- for marker in ('Job Applicant','Volunteer Application','Participation Application','Participation Engagement'):
+ for marker in ('Job Applicant','Participation Application','Participation Engagement'):
   assert marker in source
 
 def test_recruitment_template_field_is_meta_aware():
