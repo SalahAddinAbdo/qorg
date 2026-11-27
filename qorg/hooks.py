@@ -918,3 +918,17 @@ if isinstance(_request_validate, str):
 _request_validator = "qorg.qorg.people_and_opportunities.web_form_request_security.validate_web_form_request"
 if _request_validator not in _request_validate:
     _request_validate.append(_request_validator)
+
+
+# Recruitment reference check lifecycle.
+_reference_events = doc_events.setdefault("Candidate Reference Check", {})
+_reference_events.setdefault("on_update", "qorg.qorg.recruitment_extensions.reference_checks.on_reference_check_update")
+_reference_events.setdefault("on_trash", "qorg.qorg.recruitment_extensions.reference_checks.on_reference_check_delete")
+_commencement_events = doc_events.setdefault("Work Commencement Notice", {})
+_commencement_validate = _commencement_events.setdefault("validate", [])
+if isinstance(_commencement_validate, str):
+    _commencement_validate = [_commencement_validate]
+    _commencement_events["validate"] = _commencement_validate
+_reference_gate = "qorg.qorg.recruitment_extensions.reference_checks.validate_commencement_reference_checks"
+if _reference_gate not in _commencement_validate:
+    _commencement_validate.append(_reference_gate)
