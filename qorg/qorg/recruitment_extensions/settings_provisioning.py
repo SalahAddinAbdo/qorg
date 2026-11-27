@@ -30,6 +30,12 @@ INITIAL_DEFAULTS = {
     "qorg_require_mandatory_activity_evidence": 0,
     "qorg_require_activity_verification": 1,
     "qorg_allow_assigned_user_reopen": 0,
+    "qorg_require_reference_checks": 1,
+    "qorg_reference_check_trigger": "After Offer Acceptance",
+    "qorg_minimum_required_reference_checks": 2,
+    "qorg_require_signed_reference_response": 1,
+    "qorg_block_commencement_until_reference_checks": 1,
+    "qorg_allow_qualified_reference_result": 0,
 }
 
 

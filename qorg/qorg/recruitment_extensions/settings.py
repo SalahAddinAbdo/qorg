@@ -43,6 +43,12 @@ DEFAULTS = {
     "require_mandatory_activity_evidence": 0,
     "require_activity_verification": 1,
     "allow_assigned_user_reopen": 0,
+    "require_reference_checks": 1,
+    "reference_check_trigger": "After Offer Acceptance",
+    "minimum_required_reference_checks": 2,
+    "require_signed_reference_response": 1,
+    "block_commencement_until_reference_checks": 1,
+    "allow_qualified_reference_result": 0,
 }
 
 def _field(key): return f"qorg_{key}"
@@ -66,6 +72,6 @@ def validate_hr_settings(doc, method=None):
     for field in percent_fields:
         value=flt(doc.get(field))
         if value<0 or value>100: frappe.throw(_("{0} must be between 0 and 100%.").format(doc.meta.get_label(field)))
-    positive=("qorg_default_interview_duration","qorg_default_required_feedback_count","qorg_default_offer_validity_days","qorg_candidate_priority_limit","qorg_default_onboarding_duration_days")
+    positive=("qorg_default_interview_duration","qorg_default_required_feedback_count","qorg_default_offer_validity_days","qorg_candidate_priority_limit","qorg_default_onboarding_duration_days","qorg_minimum_required_reference_checks")
     for field in positive:
         if cint(doc.get(field))<1: frappe.throw(_("{0} must be at least 1.").format(doc.meta.get_label(field)))

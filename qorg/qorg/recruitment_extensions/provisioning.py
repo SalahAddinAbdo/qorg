@@ -1,3 +1,4 @@
+from pathlib import Path
 import hashlib
 import json
 import os
@@ -19,6 +20,7 @@ def _template_hash(subject,response_html,use_html):
 def provision_recruitment_extensions():
     _custom_fields()
     result=_email_templates()
+    _reference_check_print_format()
     result["deleted_legacy"]=_delete_legacy_templates()
     from .layout_provisioning import reconcile_recruitment_form_layouts
     reconcile_recruitment_form_layouts()
@@ -91,3 +93,32 @@ def audit_reports_and_templates():
     for name in ("Applicant Screening and Aging","Candidate Selection Queue","External Opportunity Overview","Interview Progress","Offer and Appointment Tracking","Recruitment Cycle Performance","Recruitment Pipeline"):
         result["reports"][name]="Current record" if frappe.db.exists("Report",name) else "Missing"
     return result
+
+
+
+def _reference_check_print_format():
+    questionnaire_name = "Candidate Reference Check Questionnaire - Bilingual"
+    template_path = frappe.get_app_path("qorg", "qorg", "recruitment_extensions", "templates", "candidate_reference_check_questionnaire.html")
+    html = Path(template_path).read_text(encoding="utf-8")
+    values = {
+        "doc_type": "Candidate Reference Check", "print_format_type": "Jinja",
+        "html": html, "standard": "No", "disabled": 0,
+    }
+    if frappe.db.exists("Print Format", questionnaire_name):
+        frappe.db.set_value("Print Format", questionnaire_name, values, update_modified=False)
+    else:
+        frappe.get_doc({"doctype": "Print Format", "name": questionnaire_name, **values}).insert(ignore_permissions=True)
+
+    if frappe.get_meta("Print Settings").has_field("qorg_rules"):
+        settings = frappe.get_single("Print Settings")
+        if not any(row.document_type == "Candidate Reference Check" for row in settings.get("qorg_rules") or []):
+            settings.append("qorg_rules", {
+                "document_type": "Candidate Reference Check", "enabled": 1,
+                "print_profile": "Q Universal", "set_as_default": 1,
+                "include_letter_head": 1, "include_workflow_status": 1,
+                "include_signatures": 1, "include_audit_information": 1,
+                "include_attachments": 1,
+            })
+            settings.save(ignore_permissions=True)
+        from qorg.printing.provisioning import provision_universal_print_formats
+        provision_universal_print_formats(force=True)
