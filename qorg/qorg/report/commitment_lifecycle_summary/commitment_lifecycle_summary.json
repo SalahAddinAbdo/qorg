@@ -1,17 +1,17 @@
 {
  "doctype": "Report",
- "name": "Commitment Lifecycle Summary",
- "report_name": "Commitment Lifecycle Summary",
- "ref_doctype": "Commitment Ledger",
- "report_type": "Script Report",
  "is_standard": "Yes",
  "module": "QOrg",
+ "name": "Commitment Lifecycle Summary",
+ "ref_doctype": "Commitment Ledger",
+ "report_name": "Commitment Lifecycle Summary",
+ "report_type": "Script Report",
  "roles": [
   {
-   "role": "Accounts Manager"
+   "role": "Accounts User"
   },
   {
-   "role": "Accounts User"
+   "role": "Accounts Manager"
   },
   {
    "role": "System Manager"

@@ -14,8 +14,11 @@ qorg.qorg.patches.v1_0.upgrade_managed_web_form_design_v2_1
 qorg.qorg.patches.v1_0.provision_web_form_ux_system_v3
 qorg.qorg.patches.v1_0.fix_web_form_first_page_and_header_v3_0_2
 qorg.qorg.patches.v2_2.migrate_design_system_and_web_forms
+
 qorg.qorg.patches.v2_3.align_qorg_visible_branding
+
 qorg.qorg.patches.v2_5.provision_workflow_responsibility_routing
+
 qorg.qorg.patches.v2_6.migrate_procure_settings_to_buying_settings
 qorg.qorg.shared_cost_allocation.patches.v1_0_0
 qorg.qorg.shared_cost_allocation.patches.v2_0_0
@@ -26,5 +29,6 @@ qorg.qorg.patches.v4_0.provision_payroll_workforce_allocation
 qorg.qorg.patches.v5_0.complete_payroll_workforce_allocation
 qorg.qorg.patches.v5_1.harden_payroll_workforce_allocation
 qorg.qorg.patches.v5_2.refine_payroll_fields_and_reports
-qorg.qorg.finance_period_control.setup
-qorg.qorg.finance_period_control.patch_1d
+qorg.qorg.finance_period_control.setup.execute
+qorg.qorg.finance_period_control.patch_1d.execute
+qorg.qorg.finance_period_control.patches.v1_2_2_refine_finance_layout
