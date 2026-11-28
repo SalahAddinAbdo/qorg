@@ -1,0 +1,303 @@
+{
+  "doctype": "DocType",
+  "name": "Assurance Finding",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "engine": "InnoDB",
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Series",
+      "fieldtype": "Select",
+      "options": "FIND-.YYYY.-.#####",
+      "default": "FIND-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "overview_tab",
+      "label": "Finding",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "identity_section",
+      "label": "Finding Identity",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "finding_title",
+      "label": "Finding Title",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "source_type",
+      "label": "Source Type",
+      "fieldtype": "Select",
+      "options": "Internal Audit\nExternal Audit\nDonor Review\nCompliance Review\nQuality Assurance\nMonitoring Visit\nInvestigation\nManagement Review\nOther",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "source_doctype",
+      "label": "Source Document Type",
+      "fieldtype": "Link",
+      "options": "DocType"
+    },
+    {
+      "fieldname": "source_name",
+      "label": "Source Document",
+      "fieldtype": "Dynamic Link",
+      "options": "source_doctype"
+    },
+    {
+      "fieldname": "identity_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project"
+    },
+    {
+      "fieldname": "classification",
+      "label": "Classification",
+      "fieldtype": "Select",
+      "options": "Observation\nOpportunity for Improvement\nMinor Nonconformity\nMajor Nonconformity\nCritical Finding",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nOpen\nAction Agreed\nIn Progress\nPending Verification\nClosed\nRisk Accepted",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "criteria_section",
+      "label": "Criteria",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "criteria",
+      "label": "Criteria",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "condition_section",
+      "label": "Condition",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "condition",
+      "label": "Condition",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "cause_section",
+      "label": "Cause and Effect",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "cause",
+      "label": "Cause",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "effect",
+      "label": "Effect or Risk",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "recommendation_section",
+      "label": "Recommendation and Management Response",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "recommendation",
+      "label": "Recommendation",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "management_response",
+      "label": "Management Response",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "action_section",
+      "label": "Ownership and Linked Actions",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "responsible_user",
+      "label": "Responsible User",
+      "fieldtype": "Link",
+      "options": "User"
+    },
+    {
+      "fieldname": "due_date",
+      "label": "Due Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "corrective_action",
+      "label": "Corrective Action",
+      "fieldtype": "Link",
+      "options": "Corrective Action"
+    },
+    {
+      "fieldname": "action_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "enterprise_risk",
+      "label": "Enterprise Risk",
+      "fieldtype": "Link",
+      "options": "Enterprise Risk"
+    },
+    {
+      "fieldname": "compliance_obligation",
+      "label": "Compliance Obligation",
+      "fieldtype": "Link",
+      "options": "Compliance Obligation"
+    },
+    {
+      "fieldname": "verification_text_section",
+      "label": "Verification",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "verification_method",
+      "label": "Verification Method",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "verification_evidence",
+      "label": "Verification Evidence",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "verification_notes",
+      "label": "Verification Notes",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "verification_meta_section",
+      "label": "Verification Metadata",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "verified_by",
+      "label": "Verified By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "verified_on",
+      "label": "Verified On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "effectiveness",
+      "label": "Effectiveness",
+      "fieldtype": "Select",
+      "options": "\nEffective\nPartially Effective\nIneffective"
+    }
+  ],
+  "field_order": [
+    "naming_series",
+    "overview_tab",
+    "identity_section",
+    "finding_title",
+    "source_type",
+    "source_doctype",
+    "source_name",
+    "identity_cb",
+    "company",
+    "project",
+    "classification",
+    "status",
+    "criteria_section",
+    "criteria",
+    "condition_section",
+    "condition",
+    "cause_section",
+    "cause",
+    "effect",
+    "recommendation_section",
+    "recommendation",
+    "management_response",
+    "action_section",
+    "responsible_user",
+    "due_date",
+    "corrective_action",
+    "action_cb",
+    "enterprise_risk",
+    "compliance_obligation",
+    "verification_text_section",
+    "verification_method",
+    "verification_evidence",
+    "verification_notes",
+    "verification_meta_section",
+    "verified_by",
+    "verified_on",
+    "effectiveness"
+  ],
+  "actions": [],
+  "links": [],
+  "states": [],
+  "track_changes": 1,
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Compliance Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Accountability Manager",
+      "read": 1,
+      "report": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "naming_rule": "By fieldname",
+  "title_field": "finding_title",
+  "show_title_field_in_link": 1
+}

@@ -1,0 +1,93 @@
+{
+  "doctype": "DocType",
+  "name": "Corrective Action Update",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "engine": "InnoDB",
+  "fields": [
+    {
+      "fieldname": "meta_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "update_on",
+      "label": "Update On",
+      "fieldtype": "Datetime",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "updated_by",
+      "label": "Updated By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "progress_percent",
+      "label": "Progress Percent",
+      "fieldtype": "Percent",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Not Started\nIn Progress\nBlocked\nCompleted\nVerified\nIneffective",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "meta_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "evidence",
+      "label": "Evidence",
+      "fieldtype": "Attach",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "details_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "update_summary",
+      "label": "Update Summary",
+      "fieldtype": "Small Text",
+      "reqd": 1
+    },
+    {
+      "fieldname": "next_step",
+      "label": "Next Step",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "field_order": [
+    "meta_section",
+    "update_on",
+    "updated_by",
+    "progress_percent",
+    "status",
+    "meta_cb",
+    "evidence",
+    "details_section",
+    "update_summary",
+    "next_step"
+  ],
+  "actions": [],
+  "links": [],
+  "states": [],
+  "track_changes": 0,
+  "permissions": []
+}

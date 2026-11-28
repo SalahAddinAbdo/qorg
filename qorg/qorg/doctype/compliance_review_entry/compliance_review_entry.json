@@ -1,0 +1,97 @@
+{
+  "doctype": "DocType",
+  "name": "Compliance Review Entry",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "engine": "InnoDB",
+  "fields": [
+    {
+      "fieldname": "review_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "reviewed_on",
+      "label": "Reviewed On",
+      "fieldtype": "Datetime",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "reviewed_by",
+      "label": "Reviewed By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "review_type",
+      "label": "Review Type",
+      "fieldtype": "Select",
+      "options": "Periodic\nEvent Driven\nRegulatory Change\nDonor Review\nContract Review",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Compliance Status",
+      "fieldtype": "Select",
+      "options": "Compliant\nPartially Compliant\nNoncompliant\nNot Applicable",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "review_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "next_review_date",
+      "label": "Next Review Date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "evidence",
+      "label": "Evidence",
+      "fieldtype": "Attach",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "details_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "review_notes",
+      "label": "Review Notes",
+      "fieldtype": "Small Text",
+      "reqd": 1
+    }
+  ],
+  "field_order": [
+    "review_section",
+    "reviewed_on",
+    "reviewed_by",
+    "review_type",
+    "status",
+    "review_cb",
+    "next_review_date",
+    "evidence",
+    "details_section",
+    "review_notes"
+  ],
+  "actions": [],
+  "links": [],
+  "states": [],
+  "track_changes": 0,
+  "permissions": []
+}

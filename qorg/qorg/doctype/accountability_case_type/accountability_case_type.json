@@ -1,0 +1,177 @@
+{
+  "doctype": "DocType",
+  "name": "Accountability Case Type",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "engine": "InnoDB",
+  "fields": [
+    {
+      "fieldname": "type_name",
+      "label": "Type Name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "enabled",
+      "label": "Enabled",
+      "fieldtype": "Check",
+      "default": "1",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "defaults_section",
+      "label": "Defaults",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "case_nature",
+      "label": "Case Nature",
+      "fieldtype": "Select",
+      "options": "Complaint\nFeedback\nSuggestion\nInformation Request\nAssistance Request\nGrievance\nAppeal\nWhistleblowing Report\nPositive Feedback\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "allow_anonymous",
+      "label": "Allow Anonymous",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "requires_response",
+      "label": "Requires Response",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "allow_appeal",
+      "label": "Allow Appeal",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "defaults_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "default_confidentiality",
+      "label": "Default Confidentiality",
+      "fieldtype": "Select",
+      "options": "Standard\nRestricted\nConfidential\nHighly Confidential",
+      "default": "Standard",
+      "reqd": 1
+    },
+    {
+      "fieldname": "investigation_default",
+      "label": "Investigation Required by Default",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "closure_approval_required",
+      "label": "Closure Approval Required",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "sla_section",
+      "label": "Service Levels",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "acknowledgement_days",
+      "label": "Acknowledgement Days",
+      "fieldtype": "Int",
+      "default": "2",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "triage_days",
+      "label": "Triage Days",
+      "fieldtype": "Int",
+      "default": "2",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "sla_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "response_days",
+      "label": "Response Days",
+      "fieldtype": "Int",
+      "default": "15",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "update_frequency_days",
+      "label": "Update Frequency Days",
+      "fieldtype": "Int",
+      "default": "7",
+      "non_negative": 1
+    }
+  ],
+  "field_order": [
+    "type_name",
+    "enabled",
+    "defaults_section",
+    "case_nature",
+    "allow_anonymous",
+    "requires_response",
+    "allow_appeal",
+    "defaults_cb",
+    "default_confidentiality",
+    "investigation_default",
+    "closure_approval_required",
+    "sla_section",
+    "acknowledgement_days",
+    "triage_days",
+    "sla_cb",
+    "response_days",
+    "update_frequency_days"
+  ],
+  "track_changes": 1,
+  "actions": [],
+  "links": [],
+  "states": [],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Accountability Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Accountability Officer",
+      "read": 1,
+      "report": 1,
+      "select": 1
+    }
+  ],
+  "autoname": "field:type_name",
+  "naming_rule": "Expression",
+  "title_field": "type_name",
+  "show_title_field_in_link": 1
+}

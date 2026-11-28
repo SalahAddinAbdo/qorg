@@ -1,0 +1,369 @@
+{
+  "doctype": "DocType",
+  "name": "Corrective Action",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "engine": "InnoDB",
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Series",
+      "fieldtype": "Select",
+      "options": "CAPA-.YYYY.-.#####",
+      "default": "CAPA-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "overview_tab",
+      "label": "Corrective Action",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "identity_section",
+      "label": "Identity and Source",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "subject",
+      "label": "Subject",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "source_doctype",
+      "label": "Source Document Type",
+      "fieldtype": "Link",
+      "options": "DocType",
+      "reqd": 1
+    },
+    {
+      "fieldname": "source_name",
+      "label": "Source Document",
+      "fieldtype": "Dynamic Link",
+      "options": "source_doctype",
+      "reqd": 1
+    },
+    {
+      "fieldname": "accountability_case",
+      "label": "Accountability Case",
+      "fieldtype": "Link",
+      "options": "Accountability Case"
+    },
+    {
+      "fieldname": "investigation_case",
+      "label": "Investigation Case",
+      "fieldtype": "Link",
+      "options": "Investigation Case"
+    },
+    {
+      "fieldname": "identity_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project"
+    },
+    {
+      "fieldname": "department",
+      "label": "Department",
+      "fieldtype": "Link",
+      "options": "Department"
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nApproved\nIn Progress\nPending Verification\nVerified Effective\nVerified Ineffective\nClosed\nCancelled",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "priority",
+      "label": "Priority",
+      "fieldtype": "Select",
+      "options": "Low\nMedium\nHigh\nCritical",
+      "default": "Medium",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "problem_section",
+      "label": "Problem Statement",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "problem_statement",
+      "label": "Problem Statement",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "root_cause_section",
+      "label": "Root Cause Analysis",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "root_cause_method",
+      "label": "Root Cause Method",
+      "fieldtype": "Select",
+      "options": "5 Whys\nFishbone Diagram\nFault Tree Analysis\nProcess Review\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "root_cause",
+      "label": "Root Cause",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "immediate_correction",
+      "label": "Immediate Correction",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "action_plan_section",
+      "label": "Action Ownership and Plan",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "action_type",
+      "label": "Action Type",
+      "fieldtype": "Select",
+      "options": "Correction\nCorrective Action\nPreventive Action\nCombined",
+      "reqd": 1
+    },
+    {
+      "fieldname": "responsible_user",
+      "label": "Responsible User",
+      "fieldtype": "Link",
+      "options": "User",
+      "reqd": 1
+    },
+    {
+      "fieldname": "responsible_department",
+      "label": "Responsible Department",
+      "fieldtype": "Link",
+      "options": "Department"
+    },
+    {
+      "fieldname": "due_date",
+      "label": "Due Date",
+      "fieldtype": "Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "approved_by",
+      "label": "Approved By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "approved_on",
+      "label": "Approved On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "action_plan",
+      "label": "Action Plan",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "monitoring_tab",
+      "label": "Monitoring and Verification",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "monitoring_section",
+      "label": "Progress Updates",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "updates",
+      "label": "Updates",
+      "fieldtype": "Table",
+      "options": "Corrective Action Update"
+    },
+    {
+      "fieldname": "verification_text_section",
+      "label": "Effectiveness Verification",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "verification_method",
+      "label": "Verification Method",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "verification_notes",
+      "label": "Verification Notes",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "verification_evidence",
+      "label": "Verification Evidence",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "verification_meta_section",
+      "label": "Verification and Closure Metadata",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "verified_by",
+      "label": "Verified By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "verified_on",
+      "label": "Verified On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "effectiveness_result",
+      "label": "Effectiveness Result",
+      "fieldtype": "Select",
+      "options": "\nEffective\nPartially Effective\nIneffective"
+    },
+    {
+      "fieldname": "verification_meta_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "closed_on",
+      "label": "Closed On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "closed_by",
+      "label": "Closed By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "reopened_from",
+      "label": "Reopened From",
+      "fieldtype": "Link",
+      "options": "Corrective Action",
+      "read_only": 1
+    },
+    {
+      "fieldname": "closure_notes",
+      "label": "Closure Notes",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "field_order": [
+    "naming_series",
+    "overview_tab",
+    "identity_section",
+    "subject",
+    "source_doctype",
+    "source_name",
+    "accountability_case",
+    "investigation_case",
+    "identity_cb",
+    "company",
+    "project",
+    "department",
+    "status",
+    "priority",
+    "problem_section",
+    "problem_statement",
+    "root_cause_section",
+    "root_cause_method",
+    "root_cause",
+    "immediate_correction",
+    "action_plan_section",
+    "action_type",
+    "responsible_user",
+    "responsible_department",
+    "due_date",
+    "approved_by",
+    "approved_on",
+    "action_plan",
+    "monitoring_tab",
+    "monitoring_section",
+    "updates",
+    "verification_text_section",
+    "verification_method",
+    "verification_notes",
+    "verification_evidence",
+    "verification_meta_section",
+    "verified_by",
+    "verified_on",
+    "effectiveness_result",
+    "verification_meta_cb",
+    "closed_on",
+    "closed_by",
+    "reopened_from",
+    "closure_notes"
+  ],
+  "actions": [],
+  "links": [],
+  "states": [],
+  "track_changes": 1,
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Accountability Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Compliance Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1
+    },
+    {
+      "role": "Accountability Officer",
+      "read": 1,
+      "report": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "naming_rule": "By fieldname",
+  "title_field": "subject",
+  "show_title_field_in_link": 1
+}

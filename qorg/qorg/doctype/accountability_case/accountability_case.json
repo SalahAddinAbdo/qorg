@@ -1,0 +1,719 @@
+{
+  "doctype": "DocType",
+  "name": "Accountability Case",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "engine": "InnoDB",
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Series",
+      "fieldtype": "Select",
+      "options": "ACC-.YYYY.-.#####",
+      "default": "ACC-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "case_tab",
+      "label": "Case",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "registration_section",
+      "label": "Registration",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "case_type",
+      "label": "Case Type",
+      "fieldtype": "Link",
+      "options": "Accountability Case Type",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "search_index": 1
+    },
+    {
+      "fieldname": "category",
+      "label": "Category",
+      "fieldtype": "Link",
+      "options": "Accountability Category",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "search_index": 1
+    },
+    {
+      "fieldname": "channel",
+      "label": "Channel",
+      "fieldtype": "Link",
+      "options": "Accountability Channel",
+      "reqd": 1
+    },
+    {
+      "fieldname": "registration_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "received_on",
+      "label": "Received On",
+      "fieldtype": "Datetime",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Received\nAcknowledged\nTriaged\nAssigned\nUnder Review\nReferred\nUnder Investigation\nAction in Progress\nResponse Prepared\nResponse Delivered\nPending Confirmation\nClosed\nEscalated\nAppealed\nReopened\nWithdrawn\nDuplicate\nOut of Scope\nReferred Externally\nUnable to Contact",
+      "default": "Received",
+      "read_only": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "search_index": 1
+    },
+    {
+      "fieldname": "priority",
+      "label": "Priority",
+      "fieldtype": "Select",
+      "options": "Low\nMedium\nHigh\nCritical",
+      "default": "Medium",
+      "in_list_view": 1,
+      "search_index": 1
+    },
+    {
+      "fieldname": "severity",
+      "label": "Severity",
+      "fieldtype": "Select",
+      "options": "Low\nMedium\nHigh\nCritical",
+      "default": "Medium",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "confidentiality",
+      "label": "Confidentiality",
+      "fieldtype": "Select",
+      "options": "Standard\nRestricted\nConfidential\nHighly Confidential",
+      "default": "Standard",
+      "reqd": 1,
+      "in_standard_filter": 1,
+      "search_index": 1
+    },
+    {
+      "fieldname": "stakeholder_section",
+      "label": "Reporter and Stakeholder",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "anonymous",
+      "label": "Anonymous",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "stakeholder_type",
+      "label": "Stakeholder Type",
+      "fieldtype": "Select",
+      "options": "Beneficiary\nCommunity Member\nEmployee\nVolunteer\nJob Applicant\nSupplier\nService Provider\nPartner\nGovernment Representative\nVisitor\nOther\nAnonymous",
+      "reqd": 1
+    },
+    {
+      "fieldname": "reporter_name",
+      "label": "Reporter Name",
+      "fieldtype": "Data",
+      "depends_on": "eval:!doc.anonymous"
+    },
+    {
+      "fieldname": "preferred_language",
+      "label": "Preferred Language",
+      "fieldtype": "Select",
+      "options": "\nArabic\nEnglish\nOther"
+    },
+    {
+      "fieldname": "stakeholder_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "employee",
+      "label": "Employee",
+      "fieldtype": "Link",
+      "options": "Employee",
+      "depends_on": "eval:doc.stakeholder_type==\"Employee\"",
+      "mandatory_depends_on": "eval:!doc.anonymous && doc.stakeholder_type==\"Employee\""
+    },
+    {
+      "fieldname": "external_person",
+      "label": "External Person",
+      "fieldtype": "Link",
+      "options": "External Person"
+    },
+    {
+      "fieldname": "supplier",
+      "label": "Supplier",
+      "fieldtype": "Link",
+      "options": "Supplier",
+      "depends_on": "eval:doc.stakeholder_type==\"Supplier\" || doc.stakeholder_type==\"Service Provider\""
+    },
+    {
+      "fieldname": "contact",
+      "label": "Contact",
+      "fieldtype": "Link",
+      "options": "Contact"
+    },
+    {
+      "fieldname": "email",
+      "label": "Email",
+      "fieldtype": "Data",
+      "options": "Email",
+      "depends_on": "eval:!doc.anonymous"
+    },
+    {
+      "fieldname": "mobile_no",
+      "label": "Mobile Number",
+      "fieldtype": "Data",
+      "options": "Phone",
+      "depends_on": "eval:!doc.anonymous"
+    },
+    {
+      "fieldname": "consent_to_contact",
+      "label": "Consent to Contact",
+      "fieldtype": "Check",
+      "depends_on": "eval:!doc.anonymous"
+    },
+    {
+      "fieldname": "context_section",
+      "label": "Organizational Context",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "department",
+      "label": "Department",
+      "fieldtype": "Link",
+      "options": "Department"
+    },
+    {
+      "fieldname": "branch",
+      "label": "Branch",
+      "fieldtype": "Link",
+      "options": "Branch"
+    },
+    {
+      "fieldname": "context_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "procurement_process",
+      "label": "Procurement Process",
+      "fieldtype": "Link",
+      "options": "Procurement Process",
+      "depends_on": "eval:doc.category"
+    },
+    {
+      "fieldname": "related_doctype",
+      "label": "Related Document Type",
+      "fieldtype": "Link",
+      "options": "DocType"
+    },
+    {
+      "fieldname": "related_name",
+      "label": "Related Document",
+      "fieldtype": "Dynamic Link",
+      "options": "related_doctype",
+      "depends_on": "eval:doc.related_doctype"
+    },
+    {
+      "fieldname": "location_details",
+      "label": "Location Details",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "case_details_text_section",
+      "label": "Case Narrative",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "subject",
+      "label": "Subject",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "case_details",
+      "label": "Case Details",
+      "fieldtype": "Text Editor",
+      "reqd": 1,
+      "columns": 0
+    },
+    {
+      "fieldname": "evidence",
+      "label": "Evidence",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "triage_section",
+      "label": "Triage and Protection",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "immediate_safety_risk",
+      "label": "Immediate Safety Risk",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "protection_or_safeguarding_risk",
+      "label": "Protection or Safeguarding Risk",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "triage_outcome",
+      "label": "Triage Outcome",
+      "fieldtype": "Select",
+      "options": "\nIn Scope\nOut of Scope\nExternal Referral\nDuplicate\nInsufficient Information"
+    },
+    {
+      "fieldname": "triage_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "investigation_required",
+      "label": "Investigation Required",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "conflict_of_interest",
+      "label": "Conflict of Interest Identified",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "conflict_notes",
+      "label": "Conflict Notes",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:doc.conflict_of_interest"
+    },
+    {
+      "fieldname": "routing_tab",
+      "label": "Routing and Follow-up",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "routing_section",
+      "label": "Routing",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "receiving_role",
+      "label": "Receiving Role",
+      "fieldtype": "Link",
+      "options": "Role"
+    },
+    {
+      "fieldname": "receiving_department",
+      "label": "Receiving Department",
+      "fieldtype": "Link",
+      "options": "Department"
+    },
+    {
+      "fieldname": "custom_current_responsible_user",
+      "label": "Current Responsible User",
+      "fieldtype": "Link",
+      "options": "User"
+    },
+    {
+      "fieldname": "custom_previous_responsible_user",
+      "label": "Previous Responsible User",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "routing_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "acknowledgement_due_on",
+      "label": "Acknowledgement Due On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "triage_due_on",
+      "label": "Triage Due On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "response_due_on",
+      "label": "Response Due On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "acknowledged_on",
+      "label": "Acknowledged On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "last_update_to_reporter_on",
+      "label": "Last Update to Reporter On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "next_reporter_update_due_on",
+      "label": "Next Reporter Update Due On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "reporter_update_overdue",
+      "label": "Reporter Update Overdue",
+      "fieldtype": "Check",
+      "read_only": 1
+    },
+    {
+      "fieldname": "overdue",
+      "label": "Overdue",
+      "fieldtype": "Check",
+      "read_only": 1
+    },
+    {
+      "fieldname": "referrals_section",
+      "label": "Referrals",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "referrals",
+      "label": "Referrals",
+      "fieldtype": "Table",
+      "options": "Accountability Referral",
+      "cannot_add_rows": 1,
+      "cannot_delete_rows": 1,
+      "columns": 0
+    },
+    {
+      "fieldname": "follow_ups_section",
+      "label": "Follow-ups",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "follow_ups",
+      "label": "Follow-ups",
+      "fieldtype": "Table",
+      "options": "Accountability Follow Up",
+      "cannot_add_rows": 1,
+      "cannot_delete_rows": 1,
+      "columns": 0
+    },
+    {
+      "fieldname": "resolution_tab",
+      "label": "Resolution",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "resolution_details_section",
+      "label": "Resolution Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "review_summary",
+      "label": "Review Summary",
+      "fieldtype": "Text Editor",
+      "columns": 0
+    },
+    {
+      "fieldname": "resolution_decision",
+      "label": "Resolution Decision",
+      "fieldtype": "Text Editor",
+      "columns": 0
+    },
+    {
+      "fieldname": "corrective_action_summary",
+      "label": "Corrective Action Summary",
+      "fieldtype": "Text Editor",
+      "columns": 0
+    },
+    {
+      "fieldname": "response_section",
+      "label": "Response History",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "response_logs",
+      "label": "Response Log",
+      "fieldtype": "Table",
+      "options": "Accountability Response Log",
+      "cannot_add_rows": 1,
+      "cannot_delete_rows": 1,
+      "columns": 0
+    },
+    {
+      "fieldname": "closure_section",
+      "label": "Closure and Appeal",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "closed_on",
+      "label": "Closed On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "closed_by",
+      "label": "Closed By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "closure_approved_by",
+      "label": "Closure Approved By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "closure_rationale",
+      "label": "Closure Rationale",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "appeal_due_on",
+      "label": "Appeal Due On",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "reopened_from",
+      "label": "Reopened From",
+      "fieldtype": "Link",
+      "options": "Accountability Case",
+      "read_only": 1
+    },
+    {
+      "fieldname": "external_tracking_section",
+      "label": "External Tracking",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "external_tracking_enabled",
+      "label": "External Tracking Enabled",
+      "fieldtype": "Check",
+      "default": "0",
+      "read_only": 1
+    },
+    {
+      "fieldname": "external_tracking_key_hash",
+      "label": "External Tracking Key Hash",
+      "fieldtype": "Data",
+      "hidden": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "external_tracking_created_on",
+      "label": "External Tracking Created On",
+      "fieldtype": "Datetime",
+      "hidden": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "external_tracking_last_accessed",
+      "label": "External Tracking Last Accessed",
+      "fieldtype": "Datetime",
+      "hidden": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "legacy_section",
+      "label": "Legacy and Migration",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "legacy_doctype",
+      "label": "Legacy DocType",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "legacy_name",
+      "label": "Legacy Name",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "migration_version",
+      "label": "Migration Version",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "migrated_on",
+      "label": "Migrated On",
+      "fieldtype": "Datetime",
+      "read_only": 1,
+      "hidden": 1
+    }
+  ],
+  "field_order": [
+    "naming_series",
+    "case_tab",
+    "registration_section",
+    "case_type",
+    "category",
+    "channel",
+    "registration_cb",
+    "received_on",
+    "status",
+    "priority",
+    "severity",
+    "confidentiality",
+    "stakeholder_section",
+    "anonymous",
+    "stakeholder_type",
+    "reporter_name",
+    "preferred_language",
+    "stakeholder_cb",
+    "employee",
+    "external_person",
+    "supplier",
+    "contact",
+    "email",
+    "mobile_no",
+    "consent_to_contact",
+    "context_section",
+    "company",
+    "project",
+    "department",
+    "branch",
+    "context_cb",
+    "procurement_process",
+    "related_doctype",
+    "related_name",
+    "location_details",
+    "case_details_text_section",
+    "subject",
+    "case_details",
+    "evidence",
+    "triage_section",
+    "immediate_safety_risk",
+    "protection_or_safeguarding_risk",
+    "triage_outcome",
+    "triage_cb",
+    "investigation_required",
+    "conflict_of_interest",
+    "conflict_notes",
+    "routing_tab",
+    "routing_section",
+    "receiving_role",
+    "receiving_department",
+    "custom_current_responsible_user",
+    "custom_previous_responsible_user",
+    "routing_cb",
+    "acknowledgement_due_on",
+    "triage_due_on",
+    "response_due_on",
+    "acknowledged_on",
+    "last_update_to_reporter_on",
+    "next_reporter_update_due_on",
+    "reporter_update_overdue",
+    "overdue",
+    "referrals_section",
+    "referrals",
+    "follow_ups_section",
+    "follow_ups",
+    "resolution_tab",
+    "resolution_details_section",
+    "review_summary",
+    "resolution_decision",
+    "corrective_action_summary",
+    "response_section",
+    "response_logs",
+    "closure_section",
+    "closed_on",
+    "closed_by",
+    "closure_approved_by",
+    "closure_rationale",
+    "appeal_due_on",
+    "reopened_from",
+    "external_tracking_section",
+    "external_tracking_enabled",
+    "external_tracking_key_hash",
+    "external_tracking_created_on",
+    "external_tracking_last_accessed",
+    "legacy_section",
+    "legacy_doctype",
+    "legacy_name",
+    "migration_version",
+    "migrated_on"
+  ],
+  "track_changes": 1,
+  "actions": [],
+  "links": [],
+  "states": [],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Accountability Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Accountability Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1,
+      "email": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "naming_rule": "By fieldname",
+  "title_field": "subject",
+  "show_title_field_in_link": 1,
+  "search_fields": "subject,reporter_name,case_type,category,project,procurement_process,legacy_name",
+  "modified": "2026-11-27 21:00:00.000000"
+}

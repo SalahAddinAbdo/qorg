@@ -1,0 +1,222 @@
+{
+  "doctype": "DocType",
+  "name": "Accountability Routing Rule",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "engine": "InnoDB",
+  "fields": [
+    {
+      "fieldname": "rule_name",
+      "label": "Rule Name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "unique": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "enabled",
+      "label": "Enabled",
+      "fieldtype": "Check",
+      "default": "1",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "priority",
+      "label": "Priority",
+      "fieldtype": "Int",
+      "default": "100",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "criteria_section",
+      "label": "Matching Criteria",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company"
+    },
+    {
+      "fieldname": "case_type",
+      "label": "Case Type",
+      "fieldtype": "Link",
+      "options": "Accountability Case Type"
+    },
+    {
+      "fieldname": "category",
+      "label": "Category",
+      "fieldtype": "Link",
+      "options": "Accountability Category"
+    },
+    {
+      "fieldname": "stakeholder_type",
+      "label": "Stakeholder Type",
+      "fieldtype": "Select",
+      "options": "\nBeneficiary\nCommunity Member\nEmployee\nVolunteer\nJob Applicant\nSupplier\nService Provider\nPartner\nGovernment Representative\nVisitor\nOther\nAnonymous"
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project"
+    },
+    {
+      "fieldname": "department",
+      "label": "Department",
+      "fieldtype": "Link",
+      "options": "Department"
+    },
+    {
+      "fieldname": "criteria_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "channel",
+      "label": "Channel",
+      "fieldtype": "Link",
+      "options": "Accountability Channel"
+    },
+    {
+      "fieldname": "severity",
+      "label": "Severity",
+      "fieldtype": "Select",
+      "options": "\nLow\nMedium\nHigh\nCritical"
+    },
+    {
+      "fieldname": "confidentiality",
+      "label": "Confidentiality",
+      "fieldtype": "Select",
+      "options": "\nStandard\nRestricted\nConfidential\nHighly Confidential"
+    },
+    {
+      "fieldname": "related_doctype",
+      "label": "Related Document Type",
+      "fieldtype": "Link",
+      "options": "DocType"
+    },
+    {
+      "fieldname": "outcome_section",
+      "label": "Routing Outcome",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "receiving_role",
+      "label": "Receiving Role",
+      "fieldtype": "Link",
+      "options": "Role",
+      "reqd": 1
+    },
+    {
+      "fieldname": "receiving_department",
+      "label": "Receiving Department",
+      "fieldtype": "Link",
+      "options": "Department"
+    },
+    {
+      "fieldname": "default_responsible_user",
+      "label": "Default Responsible User",
+      "fieldtype": "Link",
+      "options": "User"
+    },
+    {
+      "fieldname": "outcome_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "escalation_role",
+      "label": "Escalation Role",
+      "fieldtype": "Link",
+      "options": "Role"
+    },
+    {
+      "fieldname": "acknowledgement_days",
+      "label": "Acknowledgement Days",
+      "fieldtype": "Int",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "response_days",
+      "label": "Response Days",
+      "fieldtype": "Int",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "investigation_required",
+      "label": "Investigation Required",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "specialized_referral",
+      "label": "Specialized Referral",
+      "fieldtype": "Select",
+      "options": "\nProcurement Review\nHuman Resources\nSafeguarding\nPSEA\nCompliance\nInternal Audit\nData Protection\nProject Management\nMEAL / Accountability\nExternal Referral"
+    }
+  ],
+  "field_order": [
+    "rule_name",
+    "enabled",
+    "priority",
+    "criteria_section",
+    "company",
+    "case_type",
+    "category",
+    "stakeholder_type",
+    "project",
+    "department",
+    "criteria_cb",
+    "channel",
+    "severity",
+    "confidentiality",
+    "related_doctype",
+    "outcome_section",
+    "receiving_role",
+    "receiving_department",
+    "default_responsible_user",
+    "outcome_cb",
+    "escalation_role",
+    "acknowledgement_days",
+    "response_days",
+    "investigation_required",
+    "specialized_referral"
+  ],
+  "track_changes": 1,
+  "actions": [],
+  "links": [],
+  "states": [],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Accountability Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    }
+  ],
+  "autoname": "field:rule_name",
+  "naming_rule": "Expression",
+  "title_field": "rule_name",
+  "show_title_field_in_link": 1
+}

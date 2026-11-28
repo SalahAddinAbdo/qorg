@@ -1,0 +1,153 @@
+{
+  "doctype": "DocType",
+  "name": "Accountability Category",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "engine": "InnoDB",
+  "fields": [
+    {
+      "fieldname": "category_name",
+      "label": "Category Name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "unique": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "enabled",
+      "label": "Enabled",
+      "fieldtype": "Check",
+      "default": "1",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "classification_section",
+      "label": "Classification",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "domain",
+      "label": "Domain",
+      "fieldtype": "Select",
+      "options": "Human Resources\nAid Assistance\nBeneficiary Selection\nProject Delivery\nStaff Conduct\nProcurement\nSupplier Performance\nFinance\nFraud and Corruption\nSafeguarding\nPSEA\nData Protection\nConflict of Interest\nWorkplace Safety\nService Quality\nOther",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "sensitive_category",
+      "label": "Sensitive Category",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "default_priority",
+      "label": "Default Priority",
+      "fieldtype": "Select",
+      "options": "Low\nMedium\nHigh\nCritical",
+      "default": "Medium"
+    },
+    {
+      "fieldname": "routing_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "default_receiving_role",
+      "label": "Default Receiving Role",
+      "fieldtype": "Link",
+      "options": "Role"
+    },
+    {
+      "fieldname": "default_department",
+      "label": "Default Department",
+      "fieldtype": "Link",
+      "options": "Department"
+    },
+    {
+      "fieldname": "default_escalation_role",
+      "label": "Default Escalation Role",
+      "fieldtype": "Link",
+      "options": "Role"
+    },
+    {
+      "fieldname": "policy_section",
+      "label": "Policy",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "default_confidentiality",
+      "label": "Default Confidentiality",
+      "fieldtype": "Select",
+      "options": "Standard\nRestricted\nConfidential\nHighly Confidential",
+      "default": "Standard"
+    },
+    {
+      "fieldname": "requires_investigation",
+      "label": "Requires Investigation",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "specialized_referral",
+      "label": "Specialized Referral",
+      "fieldtype": "Select",
+      "options": "\nProcurement Review\nHuman Resources\nSafeguarding\nPSEA\nCompliance\nInternal Audit\nData Protection\nProject Management\nMEAL / Accountability\nExternal Referral"
+    }
+  ],
+  "field_order": [
+    "category_name",
+    "enabled",
+    "classification_section",
+    "domain",
+    "sensitive_category",
+    "default_priority",
+    "routing_cb",
+    "default_receiving_role",
+    "default_department",
+    "default_escalation_role",
+    "policy_section",
+    "default_confidentiality",
+    "requires_investigation",
+    "specialized_referral"
+  ],
+  "track_changes": 1,
+  "actions": [],
+  "links": [],
+  "states": [],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Accountability Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Accountability Officer",
+      "read": 1,
+      "report": 1,
+      "select": 1
+    }
+  ],
+  "autoname": "field:category_name",
+  "naming_rule": "Expression",
+  "title_field": "category_name",
+  "show_title_field_in_link": 1
+}

@@ -1,0 +1,265 @@
+{
+  "doctype": "DocType",
+  "name": "Compliance Obligation",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "engine": "InnoDB",
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Series",
+      "fieldtype": "Select",
+      "options": "COMP-.YYYY.-.#####",
+      "default": "COMP-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "overview_tab",
+      "label": "Obligation",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "identity_section",
+      "label": "Obligation Identity",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "obligation_title",
+      "label": "Obligation Title",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "source_type",
+      "label": "Source Type",
+      "fieldtype": "Select",
+      "options": "Law\nRegulation\nDonor Requirement\nContract\nPolicy\nStandard\nLicense\nPermit\nOther",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "source_reference",
+      "label": "Source Reference",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "jurisdiction",
+      "label": "Jurisdiction",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "identity_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project"
+    },
+    {
+      "fieldname": "responsible_role",
+      "label": "Responsible Role",
+      "fieldtype": "Link",
+      "options": "Role",
+      "reqd": 1
+    },
+    {
+      "fieldname": "responsible_user",
+      "label": "Responsible User",
+      "fieldtype": "Link",
+      "options": "User"
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nActive\nUnder Review\nNoncompliant\nSuspended\nExpired\nClosed",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "requirement_text_section",
+      "label": "Requirement Summary",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "requirement_summary",
+      "label": "Requirement Summary",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "requirements_meta_section",
+      "label": "Dates, Review and Risk",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "effective_date",
+      "label": "Effective Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "expiry_date",
+      "label": "Expiry Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "review_frequency_days",
+      "label": "Review Frequency Days",
+      "fieldtype": "Int",
+      "reqd": 1
+    },
+    {
+      "fieldname": "requirements_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "evidence_required",
+      "label": "Evidence Required",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "current_compliance_status",
+      "label": "Current Compliance Status",
+      "fieldtype": "Select",
+      "options": "Not Assessed\nCompliant\nPartially Compliant\nNoncompliant\nNot Applicable",
+      "default": "Not Assessed",
+      "read_only": 1
+    },
+    {
+      "fieldname": "next_review_date",
+      "label": "Next Review Date",
+      "fieldtype": "Date",
+      "read_only": 1
+    },
+    {
+      "fieldname": "linked_risk",
+      "label": "Enterprise Risk",
+      "fieldtype": "Link",
+      "options": "Enterprise Risk"
+    },
+    {
+      "fieldname": "reviews_tab",
+      "label": "Reviews and Actions",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "reviews_section",
+      "label": "Compliance Reviews",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "reviews",
+      "label": "Reviews",
+      "fieldtype": "Table",
+      "options": "Compliance Review Entry"
+    },
+    {
+      "fieldname": "action_section",
+      "label": "Corrective Action",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "corrective_action",
+      "label": "Corrective Action",
+      "fieldtype": "Link",
+      "options": "Corrective Action"
+    },
+    {
+      "fieldname": "closure_evidence",
+      "label": "Closure Evidence",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "closure_notes",
+      "label": "Closure Notes",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "field_order": [
+    "naming_series",
+    "overview_tab",
+    "identity_section",
+    "obligation_title",
+    "source_type",
+    "source_reference",
+    "jurisdiction",
+    "identity_cb",
+    "company",
+    "project",
+    "responsible_role",
+    "responsible_user",
+    "status",
+    "requirement_text_section",
+    "requirement_summary",
+    "requirements_meta_section",
+    "effective_date",
+    "expiry_date",
+    "review_frequency_days",
+    "requirements_cb",
+    "evidence_required",
+    "current_compliance_status",
+    "next_review_date",
+    "linked_risk",
+    "reviews_tab",
+    "reviews_section",
+    "reviews",
+    "action_section",
+    "corrective_action",
+    "closure_evidence",
+    "closure_notes"
+  ],
+  "actions": [],
+  "links": [],
+  "states": [],
+  "track_changes": 1,
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Compliance Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Accountability Manager",
+      "read": 1,
+      "report": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "naming_rule": "By fieldname",
+  "title_field": "obligation_title",
+  "show_title_field_in_link": 1
+}

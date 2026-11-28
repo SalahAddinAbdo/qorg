@@ -1,0 +1,286 @@
+{
+  "doctype": "DocType",
+  "name": "Enterprise Risk",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "engine": "InnoDB",
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Series",
+      "fieldtype": "Select",
+      "options": "ERISK-.YYYY.-.#####",
+      "default": "ERISK-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "overview_tab",
+      "label": "Risk",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "identity_section",
+      "label": "Risk Identity",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "risk_title",
+      "label": "Risk Title",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "risk_category",
+      "label": "Risk Category",
+      "fieldtype": "Select",
+      "options": "Strategic\nOperational\nFinancial\nCompliance\nFraud\nSafeguarding\nSecurity\nData Protection\nReputation\nProgrammatic\nOther",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "risk_owner",
+      "label": "Risk Owner",
+      "fieldtype": "Link",
+      "options": "User",
+      "reqd": 1
+    },
+    {
+      "fieldname": "identity_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nOpen\nTreatment In Progress\nMonitoring\nClosed\nAccepted\nEscalated",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "priority",
+      "label": "Priority",
+      "fieldtype": "Select",
+      "options": "Low\nMedium\nHigh\nCritical",
+      "default": "Medium"
+    },
+    {
+      "fieldname": "project_risk",
+      "label": "Project Risk",
+      "fieldtype": "Link",
+      "options": "Project Risk"
+    },
+    {
+      "fieldname": "accountability_case",
+      "label": "Accountability Case",
+      "fieldtype": "Link",
+      "options": "Accountability Case"
+    },
+    {
+      "fieldname": "assurance_finding",
+      "label": "Assurance Finding",
+      "fieldtype": "Link",
+      "options": "Assurance Finding"
+    },
+    {
+      "fieldname": "risk_narrative_section",
+      "label": "Risk Narrative",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "risk_event",
+      "label": "Risk Event",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "causes",
+      "label": "Causes",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "consequences",
+      "label": "Consequences",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "existing_controls",
+      "label": "Existing Controls",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "appetite_section",
+      "label": "Appetite and Escalation",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "risk_appetite",
+      "label": "Risk Appetite",
+      "fieldtype": "Select",
+      "options": "Averse\nMinimal\nCautious\nOpen\nSeeking",
+      "reqd": 1
+    },
+    {
+      "fieldname": "tolerance_threshold",
+      "label": "Tolerance Threshold",
+      "fieldtype": "Int"
+    },
+    {
+      "fieldname": "escalation_required",
+      "label": "Escalation Required",
+      "fieldtype": "Check",
+      "read_only": 1
+    },
+    {
+      "fieldname": "assessment_tab",
+      "label": "Assessment and Treatment",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "assessment_section",
+      "label": "Assessments",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "assessments",
+      "label": "Assessments",
+      "fieldtype": "Table",
+      "options": "Risk Assessment Entry"
+    },
+    {
+      "fieldname": "treatment_section",
+      "label": "Treatment Plan",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "treatment_actions",
+      "label": "Treatment Actions",
+      "fieldtype": "Table",
+      "options": "Risk Treatment Action"
+    },
+    {
+      "fieldname": "review_section",
+      "label": "Review and Closure",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "next_review_date",
+      "label": "Next Review Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "last_reviewed_on",
+      "label": "Last Reviewed On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "last_reviewed_by",
+      "label": "Last Reviewed By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "review_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "closure_evidence",
+      "label": "Closure Evidence",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "closure_notes",
+      "label": "Closure Notes",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "field_order": [
+    "naming_series",
+    "overview_tab",
+    "identity_section",
+    "risk_title",
+    "company",
+    "risk_category",
+    "risk_owner",
+    "identity_cb",
+    "status",
+    "priority",
+    "project_risk",
+    "accountability_case",
+    "assurance_finding",
+    "risk_narrative_section",
+    "risk_event",
+    "causes",
+    "consequences",
+    "existing_controls",
+    "appetite_section",
+    "risk_appetite",
+    "tolerance_threshold",
+    "escalation_required",
+    "assessment_tab",
+    "assessment_section",
+    "assessments",
+    "treatment_section",
+    "treatment_actions",
+    "review_section",
+    "next_review_date",
+    "last_reviewed_on",
+    "last_reviewed_by",
+    "review_cb",
+    "closure_evidence",
+    "closure_notes"
+  ],
+  "actions": [],
+  "links": [],
+  "states": [],
+  "track_changes": 1,
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Compliance Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Accountability Manager",
+      "read": 1,
+      "report": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "naming_rule": "By fieldname",
+  "title_field": "risk_title",
+  "show_title_field_in_link": 1
+}

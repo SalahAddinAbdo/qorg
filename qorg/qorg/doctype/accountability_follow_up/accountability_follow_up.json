@@ -1,0 +1,88 @@
+{
+  "doctype": "DocType",
+  "name": "Accountability Follow Up",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "issingle": 0,
+  "engine": "InnoDB",
+  "fields": [
+    {
+      "fieldname": "meta_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "follow_up_on",
+      "label": "Follow-up On",
+      "fieldtype": "Datetime",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "follow_up_by",
+      "label": "Follow-up By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "method",
+      "label": "Method",
+      "fieldtype": "Select",
+      "options": "Phone\nEmail\nSMS\nWhatsApp\nIn Person\nLetter\nInternal Review\nOther",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "contact_successful",
+      "label": "Contact Successful",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "meta_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "next_follow_up_on",
+      "label": "Next Follow-up On",
+      "fieldtype": "Datetime",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "details_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "summary",
+      "label": "Summary",
+      "fieldtype": "Small Text",
+      "reqd": 1
+    }
+  ],
+  "field_order": [
+    "meta_section",
+    "follow_up_on",
+    "follow_up_by",
+    "method",
+    "contact_successful",
+    "meta_cb",
+    "next_follow_up_on",
+    "details_section",
+    "summary"
+  ],
+  "track_changes": 1,
+  "actions": [],
+  "links": [],
+  "states": [],
+  "permissions": []
+}
