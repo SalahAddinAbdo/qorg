@@ -974,10 +974,3 @@ _accountability_private_file_validator = "qorg.qorg.governance_accountability.pr
 if _accountability_private_file_validator not in _accountability_file_validate:
     _accountability_file_validate.append(_accountability_private_file_validator)
 
-_procurement_legacy_validate = _procurement_legacy_events.setdefault("validate", [])
-if isinstance(_procurement_legacy_validate, str):
-    _procurement_legacy_validate = [_procurement_legacy_validate]
-    _procurement_legacy_events["validate"] = _procurement_legacy_validate
-_procurement_legacy_guard = "qorg.qorg.governance_accountability.legacy.protect_procurement_complaint"
-if _procurement_legacy_guard not in _procurement_legacy_validate:
-    _procurement_legacy_validate.append(_procurement_legacy_guard)

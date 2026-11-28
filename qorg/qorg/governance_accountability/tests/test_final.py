@@ -71,12 +71,13 @@ def test_package_has_no_duplicate_doctype_definitions_or_duplicate_fields():
         assert len(fields)==len(set(fields)), name
     assert all(len(paths)==1 for paths in definitions.values()), definitions
 
-def test_procurement_dashboard_patch_does_not_replace_procurement_model():
+def test_procurement_dashboard_uses_unified_accountability_source():
     folder=ROOT/'qorg/qorg/doctype/procurement_process'
-    assert (folder/'procurement_process_dashboard.py').exists()
-    assert not (folder/'procurement_process.json').exists()
-    assert not (folder/'procurement_process.py').exists()
-    assert not (folder/'procurement_process.js').exists()
+    dashboard=(folder/'procurement_process_dashboard.py').read_text()
+    assert (folder/'procurement_process.json').exists()
+    assert (folder/'procurement_process.py').exists()
+    assert 'Accountability Case' in dashboard
+    assert 'Procurement Complaint' not in dashboard
 def test_accountability_settings_has_canonical_name_path_and_controller():
     path=ROOT/'qorg/qorg/doctype/accountability_settings/accountability_settings.json'
     data=json.loads(path.read_text())
