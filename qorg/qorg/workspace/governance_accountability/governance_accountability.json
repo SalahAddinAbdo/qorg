@@ -92,10 +92,10 @@
       "type": "Card Break"
     },
     {
-      "label": "Governance and Accountability Settings",
+      "label": "Accountability Settings",
       "type": "Link",
       "link_type": "DocType",
-      "link_to": "Governance and Accountability Settings"
+      "link_to": "Accountability Settings"
     },
     {
       "label": "Accountability Routing Rule",
