@@ -1,0 +1,20 @@
+{
+  "doctype": "Report",
+  "name": "Compliance Status",
+  "report_name": "Compliance Status",
+  "ref_doctype": "Compliance Obligation",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "module": "QOrg",
+  "roles": [
+    {
+      "role": "Accountability Manager"
+    },
+    {
+      "role": "Compliance Manager"
+    },
+    {
+      "role": "System Manager"
+    }
+  ]
+}

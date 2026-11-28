@@ -1,0 +1,20 @@
+{
+  "doctype": "Report",
+  "name": "Corrective Action Tracking",
+  "report_name": "Corrective Action Tracking",
+  "ref_doctype": "Corrective Action",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "module": "QOrg",
+  "roles": [
+    {
+      "role": "Accountability Manager"
+    },
+    {
+      "role": "Compliance Manager"
+    },
+    {
+      "role": "System Manager"
+    }
+  ]
+}

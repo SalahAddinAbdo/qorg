@@ -1,0 +1,20 @@
+{
+  "doctype": "Report",
+  "name": "Accountability Case Resolution",
+  "report_name": "Accountability Case Resolution",
+  "ref_doctype": "Accountability Case",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "module": "QOrg",
+  "roles": [
+    {
+      "role": "Accountability Manager"
+    },
+    {
+      "role": "Compliance Manager"
+    },
+    {
+      "role": "System Manager"
+    }
+  ]
+}

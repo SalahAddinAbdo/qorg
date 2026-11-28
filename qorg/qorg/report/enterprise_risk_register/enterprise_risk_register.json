@@ -1,0 +1,20 @@
+{
+  "doctype": "Report",
+  "name": "Enterprise Risk Register",
+  "report_name": "Enterprise Risk Register",
+  "ref_doctype": "Enterprise Risk",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "module": "QOrg",
+  "roles": [
+    {
+      "role": "Accountability Manager"
+    },
+    {
+      "role": "Compliance Manager"
+    },
+    {
+      "role": "System Manager"
+    }
+  ]
+}
