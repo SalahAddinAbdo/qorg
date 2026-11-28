@@ -8,8 +8,22 @@ class TestV25(unittest.TestCase):
   s=(ROOT/"permissions.py").read_text()
   for x in ("Grant Manager","Projects Manager","Auditor","policy_query","effort_query","assert_report_access","aggregate_only"):self.assertIn(x,s)
  def test_reports(self):
-  for p in (ROOT.parent/"report").glob("payroll_*/*.py"):
-   s=p.read_text();self.assertIn("summary",s)
+  report_root = ROOT.parent / "report"
+  report_files = sorted(
+   p for p in report_root.glob("payroll_*/*.py")
+   if p.name != "__init__.py"
+  )
+  self.assertTrue(
+   report_files,
+   "No payroll report implementation files were found.",
+  )
+  for p in report_files:
+   s = p.read_text(encoding="utf-8")
+   self.assertIn(
+    "summary",
+    s,
+    f"Missing summary support in {p}",
+   )
  def test_print_disclosure(self):
   s=(ROOT/"printing.py").read_text()
   for x in ("None","Project and Percentage","Project, Funding and Percentage","Full Authorized Disclosure","can_view_funding_amounts"):self.assertIn(x,s)
