@@ -18,7 +18,7 @@ def _recipient(doc):
     return doc.email
 
 def _safe_context(doc):
-    settings=frappe.get_single("Governance and Accountability Settings")
+    settings=frappe.get_single("Accountability Settings")
     sensitive=bool(settings.hide_sensitive_details_in_notifications and doc.confidentiality in SENSITIVE)
     return {"doc":doc,"case_reference":doc.name,"case_status":doc.status,"subject":(_("Confidential case") if sensitive else doc.subject),"details_hidden":sensitive}
 

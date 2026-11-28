@@ -23,7 +23,7 @@ def enforce_rate_limit(scope,limit):
     return value
 
 def validate_captcha(token):
-    settings=frappe.get_single('Governance and Accountability Settings')
+    settings=frappe.get_single('Accountability Settings')
     if not settings.require_captcha:return
     if not token:frappe.throw(_("CAPTCHA verification is required."))
     if not settings.captcha_verifier_method:frappe.throw(_("CAPTCHA verifier is not configured."),frappe.PermissionError)

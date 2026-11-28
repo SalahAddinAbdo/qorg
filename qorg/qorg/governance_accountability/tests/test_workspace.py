@@ -7,7 +7,7 @@ def test_workspace_links_all_primary_records_reports_and_settings():
  d=load('qorg/qorg/workspace/governance_accountability/governance_accountability.json')
  assert d['module']=='QOrg' and d['public']==1
  text=json.dumps(d)
- for name in ('Accountability Case','Investigation Case','Corrective Action','Enterprise Risk','Compliance Obligation','Assurance Finding','Governance and Accountability Settings'):assert name in text
+ for name in ('Accountability Case','Investigation Case','Corrective Action','Enterprise Risk','Compliance Obligation','Assurance Finding','Accountability Settings'):assert name in text
 def test_retention_disables_tokens_and_minimizes_contact_without_deleting_cases():
  s=read('qorg/qorg/governance_accountability/retention.py')
  assert 'external_tracking_enabled": 0' in s and 'external_tracking_key_hash": None' in s

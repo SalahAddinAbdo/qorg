@@ -9,7 +9,7 @@ def has_file_permission(file_doc,user=None):
     return bool(frappe.has_permission(file_doc.attached_to_doctype,"read",file_doc.attached_to_name,user=user))
 def validate_private_file(doc,method=None):
     if doc.attached_to_doctype not in PROTECTED_DOCTYPES or not doc.attached_to_name:return
-    settings=frappe.get_single('Governance and Accountability Settings')
+    settings=frappe.get_single('Accountability Settings')
     if settings.force_private_attachments:doc.is_private=1
     old=doc.get_doc_before_save()
     if old and (old.attached_to_doctype,old.attached_to_name)!=(doc.attached_to_doctype,doc.attached_to_name):

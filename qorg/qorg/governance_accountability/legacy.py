@@ -5,9 +5,9 @@ from frappe import _
 
 
 def protect_procurement_complaint(doc, method=None):
-    if not frappe.db.exists("DocType", "Governance and Accountability Settings"):
+    if not frappe.db.exists("DocType", "Accountability Settings"):
         return
-    settings = frappe.get_single("Governance and Accountability Settings")
+    settings = frappe.get_single("Accountability Settings")
     if not settings.lock_legacy_procurement_complaints:
         return
     if doc.is_new():

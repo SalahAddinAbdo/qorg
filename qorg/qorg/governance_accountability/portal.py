@@ -18,7 +18,7 @@ def _enabled_value(doctype,name,field='enabled'):
 
 @frappe.whitelist(allow_guest=True,methods=["POST"])
 def submit_accountability_case(case_type,category,channel,subject,case_details,company,anonymous=0,stakeholder_type=None,reporter_name=None,email=None,mobile_no=None,project=None,location_details=None,consent_to_contact=0,captcha_token=None):
-    settings=frappe.get_single("Governance and Accountability Settings")
+    settings=frappe.get_single("Accountability Settings")
     if not settings.enable_public_intake: frappe.throw(_("Public accountability intake is not enabled."),frappe.PermissionError)
     enforce_rate_limit("intake",settings.intake_rate_limit_per_hour)
     validate_captcha(captcha_token)
@@ -46,7 +46,7 @@ def submit_accountability_case(case_type,category,channel,subject,case_details,c
 
 @frappe.whitelist(allow_guest=True,methods=["POST"])
 def track_accountability_case(case_reference,tracking_token,captcha_token=None):
-    settings=frappe.get_single("Governance and Accountability Settings")
+    settings=frappe.get_single("Accountability Settings")
     if not settings.enable_public_tracking: frappe.throw(_("Public accountability tracking is not enabled."),frappe.PermissionError)
     enforce_rate_limit("tracking",settings.tracking_rate_limit_per_hour)
     validate_captcha(captcha_token)

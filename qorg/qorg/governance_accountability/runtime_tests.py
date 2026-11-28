@@ -6,7 +6,7 @@ import frappe
 def run_runtime_smoke_tests():
     required_doctypes = (
         'Accountability Case','Investigation Case','Corrective Action','Enterprise Risk',
-        'Compliance Obligation','Assurance Finding','Governance and Accountability Settings',
+        'Compliance Obligation','Assurance Finding','Accountability Settings',
     )
     result={'ok':True,'checks':{},'errors':[]}
     for name in required_doctypes:

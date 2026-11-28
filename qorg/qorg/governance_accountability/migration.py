@@ -26,7 +26,7 @@ def _company_for_process(process):
 def migrate_procurement_complaints():
     if not frappe.db.exists("DocType", "Procurement Complaint") or not frappe.db.exists("DocType", "Accountability Case"):
         return {"ok": True, "skipped": True, "reason": "Required DocTypes are unavailable"}
-    settings = frappe.get_single("Governance and Accountability Settings")
+    settings = frappe.get_single("Accountability Settings")
     if not settings.enable_legacy_procurement_complaint_migration:
         return {"ok": True, "skipped": True, "reason": "Migration is disabled in settings"}
     names = frappe.get_all("Procurement Complaint", pluck="name", order_by="creation asc")

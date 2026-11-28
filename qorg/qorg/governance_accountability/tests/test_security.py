@@ -4,7 +4,7 @@ ROOT=Path(__file__).resolve().parents[4]
 def read(p):return (ROOT/p).read_text()
 def load(p):return json.loads(read(p))
 def test_public_features_are_disabled_by_default_and_captcha_required():
- d=load('qorg/qorg/doctype/governance_accountability_settings/governance_accountability_settings.json');f={x['fieldname']:x for x in d['fields']};assert f['enable_public_intake']['default']=='0';assert f['enable_public_tracking']['default']=='0';assert f['require_captcha']['default']=='1'
+ d=load('qorg/qorg/doctype/accountability_settings/accountability_settings.json');f={x['fieldname']:x for x in d['fields']};assert f['enable_public_intake']['default']=='0';assert f['enable_public_tracking']['default']=='0';assert f['require_captcha']['default']=='1'
 def test_rate_limit_hashes_ip_and_uses_hour_bucket():
  s=read('qorg/qorg/governance_accountability/security.py');assert 'hashlib.sha256(client_ip().encode())' in s;assert 'cache.incr(key)' in s;assert 'cache.expire(key,3700)' in s;assert 'RateLimitExceededError' in s
 def test_portal_enforces_feature_flags_rate_limits_captcha_and_expiry():

@@ -8,13 +8,13 @@ def test_provisioning_creates_roles_settings_types_categories_channels_and_rules
     source=read('qorg/qorg/governance_accountability/provisioning.py')
     for value in ('Accountability Manager','Accountability Officer','PSEA Focal Point','Whistleblowing Report','Aid Assistance','Procurement','WhatsApp','name = f"Default - {category}"'):
         assert value in source
-    assert 'frappe.get_single("Governance and Accountability Settings")' in source
+    assert 'frappe.get_single("Accountability Settings")' in source
     assert 'insert(ignore_permissions=True)' in source
     assert 'frappe.clear_cache()' in source
 
 def test_provisioning_does_not_insert_single_settings_document():
     source=read('qorg/qorg/governance_accountability/provisioning.py')
-    assert 'frappe.get_doc({"doctype": "Governance and Accountability Settings"}).insert' not in source
+    assert 'frappe.get_doc({"doctype": "Accountability Settings"}).insert' not in source
 
 def test_procurement_migration_maps_all_legacy_business_fields():
     source=read('qorg/qorg/governance_accountability/migration.py')

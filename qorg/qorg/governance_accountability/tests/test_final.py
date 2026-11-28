@@ -23,7 +23,7 @@ def test_text_editors_and_tables_are_not_in_split_column_sections():
    boundary=next((x for x in fs[i+1:] if x['fieldtype'] in ('Column Break','Section Break','Tab Break')),None)
    assert not boundary or boundary['fieldtype']!='Column Break',(slug,f['fieldname'])
 def test_settings_are_validated_and_consumed():
- settings=read('qorg/qorg/doctype/governance_accountability_settings/governance_accountability_settings.py');validation=read('qorg/qorg/governance_accountability/validations.py');scheduled=read('qorg/qorg/governance_accountability/scheduled_tasks.py')
+ settings=read('qorg/qorg/doctype/accountability_settings/accountability_settings.py');validation=read('qorg/qorg/governance_accountability/validations.py');scheduled=read('qorg/qorg/governance_accountability/scheduled_tasks.py')
  for name in ('complex_response_days','captcha_verifier_method','intake_rate_limit_per_hour'):assert name in settings
  for name in ('default_triage_days','complex_response_days','update_frequency_days'):assert name in validation
  assert 'critical_escalation_role' in scheduled
@@ -77,3 +77,18 @@ def test_procurement_dashboard_patch_does_not_replace_procurement_model():
     assert not (folder/'procurement_process.json').exists()
     assert not (folder/'procurement_process.py').exists()
     assert not (folder/'procurement_process.js').exists()
+def test_accountability_settings_has_canonical_name_path_and_controller():
+    path=ROOT/'qorg/qorg/doctype/accountability_settings/accountability_settings.json'
+    data=json.loads(path.read_text())
+    assert data['name']=='Accountability Settings'
+    assert data['module']=='QOrg' and data['issingle']==1
+    source=(path.parent/'accountability_settings.py').read_text()
+    assert 'class AccountabilitySettings(Document):' in source
+
+def test_old_accountability_settings_names_and_paths_are_absent():
+    old=('Governance'+' and Accountability Settings','Governance'+'AccountabilitySettings','governance'+'_accountability_settings')
+    for path in (ROOT/'qorg').rglob('*'):
+        if not path.is_file() or path.suffix not in {'.py','.json','.js','.md','.txt','.html','.css'}:
+            continue
+        text=path.read_text()
+        assert not any(value in text for value in old),path

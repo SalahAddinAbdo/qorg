@@ -9,7 +9,7 @@ CLOSED_STATUSES = ("Closed", "Withdrawn", "Duplicate", "Out of Scope", "Referred
 def run_daily_retention_jobs():
     if not frappe.db.exists("DocType", "Accountability Case"):
         return {"ok": True, "skipped": True}
-    settings = frappe.get_single("Governance and Accountability Settings")
+    settings = frappe.get_single("Accountability Settings")
     tracking_cutoff = add_days(nowdate(), -int(settings.disable_tracking_after_closure_days or 0))
     anonymize_cutoff = add_days(nowdate(), -int(settings.anonymize_contact_after_days or 0))
     tracking_disabled = 0

@@ -70,7 +70,7 @@ def provision_governance_accountability():
     for role in ROLES:
         _ensure_role(role)
     result = {"ok": True, "roles": len(ROLES), "created": [], "adopted": []}
-    settings = frappe.get_single("Governance and Accountability Settings")
+    settings = frappe.get_single("Accountability Settings")
     defaults = {
         "default_acknowledgement_days": 2, "default_triage_days": 2,
         "default_response_days": 15, "complex_response_days": 30,

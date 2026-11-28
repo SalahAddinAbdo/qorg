@@ -136,7 +136,7 @@ def add_response(name, response_method, response_summary, delivered=1, satisfact
     doc.status = "Response Delivered" if int(delivered or 0) else "Response Prepared"
     if int(delivered or 0):
         doc.last_update_to_reporter_on=now_datetime()
-        settings=frappe.get_single("Governance and Accountability Settings")
+        settings=frappe.get_single("Accountability Settings")
         days=frappe.db.get_value("Accountability Case Type",doc.case_type,"update_frequency_days") or settings.update_frequency_days
         doc.next_reporter_update_due_on=frappe.utils.add_days(doc.last_update_to_reporter_on,int(days))
     return _save_action(doc)
