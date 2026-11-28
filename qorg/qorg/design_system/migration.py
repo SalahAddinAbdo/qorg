@@ -36,3 +36,28 @@ def migrate_login_experience():
         doc.flags.ignore_permissions = True
         doc.save()
     frappe.clear_cache()
+
+
+def migrate_legacy_web_form_design():
+    """Bridge the historical v2.2 patch to the current managed Web Form services.
+
+    The legacy patch path is part of ``patches.txt`` and must remain importable for
+    clean installs and upgrades from databases where the patch has not run yet.
+    Current provisioning and reconciliation services are idempotent and preserve
+    user-managed Web Forms, so the bridge delegates to them instead of restoring
+    obsolete migration logic.
+    """
+    from qorg.qorg.people_and_opportunities.web_form_policy import (
+        reconcile_web_form_policy,
+    )
+    from qorg.qorg.people_and_opportunities.web_form_provisioning import (
+        provision_standard_opportunity_web_forms,
+    )
+
+    provision_result = provision_standard_opportunity_web_forms()
+    policy_result = reconcile_web_form_policy()
+    frappe.clear_cache()
+    return {
+        "provisioning": provision_result,
+        "policy": policy_result,
+    }
