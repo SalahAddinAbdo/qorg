@@ -10,5 +10,13 @@ class TestV30(unittest.TestCase):
   s=(ROOT/"acceptance.py").read_text()
   for x in ("accounting_passed","permissions_passed","idempotency_passed","ready_for_acceptance"):self.assertIn(x,s)
  def test_docs(self):
-  for x in ("PAYROLL_v3.0.2_DEPLOYMENT.md","PAYROLL_v3.0.2_ROLLBACK.md","PAYROLL_v3.0.2_TEST_MATRIX.md","PAYROLL_v3.0.2_RUNTIME_ACCEPTANCE_TEMPLATE.json"):self.assertTrue((BASE/x).exists())
+  docs_root = ROOT / "docs"
+  for name in (
+   "PAYROLL_v3.0.2_DEPLOYMENT.md",
+   "PAYROLL_v3.0.2_ROLLBACK.md",
+   "PAYROLL_v3.0.2_TEST_MATRIX.md",
+   "PAYROLL_v3.0.2_RUNTIME_ACCEPTANCE_TEMPLATE.json",
+  ):
+   path = docs_root / name
+   self.assertTrue(path.exists(), f"Missing payroll delivery document: {path}")
 if __name__=="__main__":unittest.main()
