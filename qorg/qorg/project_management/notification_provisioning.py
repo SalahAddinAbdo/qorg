@@ -46,7 +46,7 @@ CHILD_FIELDS = [
     {"fieldname":"description","label":"Description","fieldtype":"Small Text","read_only":1,"insert_after":"rule_label"},
     {"fieldname":"reference_doctype","label":"Reference DocType","fieldtype":"Link","options":"DocType","read_only":1,"in_list_view":1,"insert_after":"description"},
     {"fieldname":"trigger_type","label":"Trigger Type","fieldtype":"Select","options":"On Save\nDaily","read_only":1,"in_list_view":1,"insert_after":"reference_doctype"},
-    {"fieldname":"delivery_channel","label":"Delivery Channel","fieldtype":"Select","options":"System Notification\nEmail and System Notification","default":"System Notification","in_list_view":1,"insert_after":"trigger_type"},
+    {"fieldname":"delivery_channel","label":"Delivery Channel","fieldtype":"Select","options":"System Notification\nEmail and System Notification","default":"System Notification","in_list_view":0,"insert_after":"trigger_type"},
     {"fieldname":"recipient_users","label":"Recipient Users","fieldtype":"Small Text","insert_after":"recipient_role","description":"Enter active User IDs or email addresses, separated by commas or new lines."},
     {"fieldname":"recipient_employees","label":"Recipient Employees","fieldtype":"Small Text","insert_after":"recipient_users","description":"Enter Employee IDs, separated by commas or new lines. Each Employee must have Employee.user_id."},
     {"fieldname":"fallback_to_project_manager","label":"Fallback to Project Manager","fieldtype":"Check","default":"1","insert_after":"recipient_employees"},
@@ -127,6 +127,8 @@ def provision_project_notifications():
     settings.save(ignore_permissions=True)
     frappe.clear_cache(doctype="Projects Settings")
     audit_project_notification_configuration()
+    from qorg.qorg.layout_closure.runtime_reconciliation import reconcile_runtime_layouts
+    reconcile_runtime_layouts()
 
 
 def audit_project_notification_configuration():
