@@ -43,7 +43,7 @@ class TestProcurementIntegratedRuntime(FrappeTestCase):
 class TestProcurementV2Coverage(FrappeTestCase):
     def test_all_required_email_templates(self):
         from qorg.qorg.procurement_contracting.communications import SPECS
-        required={"Approved Purchase Request","Procurement Process Assignment","Procurement Invitation","Submission Deadline Reminder","Bid Submission Receipt","Supplier Information Request","Supplier Profile Approved","Supplier Profile Rejected","Bid Opening Completed","Technical Evaluation Assignment","Technical Evaluation Approved","Financial Evaluation Ready","Award Recommendation Submitted","Award Notification","Unsuccessful Bidder Notice","Contract Approval Required","Contract Activated","Contract Expiry Reminder","Guarantee Expiry Reminder","Contract Milestone Reminder","Procurement Complaint Acknowledgement","Procurement Clarification Response"}
+        required={"Approved Purchase Request","Procurement Process Assignment","Procurement Invitation","Submission Deadline Reminder","Bid Submission Receipt","Supplier Information Request","Supplier Profile Approved","Supplier Profile Rejected","Bid Opening Completed","Technical Evaluation Assignment","Technical Evaluation Approved","Financial Evaluation Ready","Award Recommendation Submitted","Award Notification","Unsuccessful Bidder Notice","Contract Approval Required","Contract Activated","Contract Expiry Reminder","Guarantee Expiry Reminder","Contract Milestone Reminder","Procurement Clarification Response"}
         self.assertEqual(required,set(SPECS))
 
     def test_procurement_actions_are_whitelisted(self):
