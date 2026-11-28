@@ -21,15 +21,7 @@ LAYOUT_FIELDS = {
         },
     ],
     "External Opportunity": [
-        {
-            "fieldname": "qorg_publication_section",
-            "label": "Website Publication",
-            "fieldtype": "Section Break",
-            "insert_after": "application_limit",
-            "module": "QOrg",
-            "is_system_generated": 1,
-        },
-        {"fieldname": "route", "insert_after": "qorg_publication_section"},
+        {"fieldname": "route", "insert_after": "publication_section"},
         {"fieldname": "published_by", "insert_after": "route"},
         {"fieldname": "portal_visibility", "insert_after": "published_by"},
         {"fieldname": "public_contact_email", "insert_after": "portal_visibility"},
@@ -97,8 +89,8 @@ LAYOUT_FIELDS = {
             "module": "QOrg",
             "is_system_generated": 1,
         },
-        {"fieldname": "reference_doctype", "insert_after": "qorg_rule_delivery_section", "columns": 2},
-        {"fieldname": "trigger_type", "insert_after": "reference_doctype", "columns": 1},
+        {"fieldname": "reference_doctype", "insert_after": "qorg_rule_delivery_section", "in_list_view": 0, "columns": 0},
+        {"fieldname": "trigger_type", "insert_after": "reference_doctype", "in_list_view": 0, "columns": 0},
         {"fieldname": "delivery_channel", "insert_after": "trigger_type", "in_list_view": 0},
         {
             "fieldname": "qorg_rule_recipients_section",
@@ -213,12 +205,23 @@ def reconcile_runtime_layouts():
     """
     created = create_custom_fields_if_changed(_new_layout_breaks(), update=True)
     updated, unchanged = _reconcile_existing_custom_fields()
+    obsolete_layout_field = "External Opportunity-qorg_publication_section"
+    removed = []
+    if frappe.db.exists("Custom Field", obsolete_layout_field):
+        frappe.delete_doc(
+            "Custom Field",
+            obsolete_layout_field,
+            ignore_permissions=True,
+            force=True,
+        )
+        removed.append(obsolete_layout_field)
     frappe.clear_cache()
     return {
         "ok": True,
         "created": created,
         "updated": updated,
         "unchanged": unchanged,
+        "removed_obsolete_layout_fields": removed,
     }
 
 

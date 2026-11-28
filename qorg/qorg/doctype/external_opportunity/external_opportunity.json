@@ -36,6 +36,7 @@
     "expected_end_date",
     "duration_text",
     "application_limit",
+    "publication_section",
     "dates_col_3",
     "publish_on_website",
     "published_on",
@@ -256,6 +257,11 @@
       "label": "Application Limit",
       "fieldtype": "Int",
       "non_negative": 1
+    },
+    {
+      "fieldname": "publication_section",
+      "label": "Website Publication",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "dates_col_3",

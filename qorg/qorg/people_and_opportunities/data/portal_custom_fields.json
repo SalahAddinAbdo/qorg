@@ -4,7 +4,7 @@
       "fieldname": "route",
       "label": "Public Route",
       "fieldtype": "Data",
-      "insert_after": "publish_on_website",
+      "insert_after": "publication_section",
       "read_only": 1,
       "unique": 1,
       "no_copy": 1,

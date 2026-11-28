@@ -44,8 +44,8 @@ def _notification_message(title, description):
 CHILD_FIELDS = [
     {"fieldname":"rule_label","label":"Rule Label","fieldtype":"Data","read_only":1,"in_list_view":1,"insert_after":"notification_key"},
     {"fieldname":"description","label":"Description","fieldtype":"Small Text","read_only":1,"insert_after":"rule_label"},
-    {"fieldname":"reference_doctype","label":"Reference DocType","fieldtype":"Link","options":"DocType","read_only":1,"in_list_view":1,"insert_after":"description"},
-    {"fieldname":"trigger_type","label":"Trigger Type","fieldtype":"Select","options":"On Save\nDaily","read_only":1,"in_list_view":1,"insert_after":"reference_doctype"},
+    {"fieldname":"reference_doctype","label":"Reference DocType","fieldtype":"Link","options":"DocType","read_only":1,"in_list_view":0,"insert_after":"description"},
+    {"fieldname":"trigger_type","label":"Trigger Type","fieldtype":"Select","options":"On Save\nDaily","read_only":1,"in_list_view":0,"insert_after":"reference_doctype"},
     {"fieldname":"delivery_channel","label":"Delivery Channel","fieldtype":"Select","options":"System Notification\nEmail and System Notification","default":"System Notification","in_list_view":0,"insert_after":"trigger_type"},
     {"fieldname":"recipient_users","label":"Recipient Users","fieldtype":"Small Text","insert_after":"recipient_role","description":"Enter active User IDs or email addresses, separated by commas or new lines."},
     {"fieldname":"recipient_employees","label":"Recipient Employees","fieldtype":"Small Text","insert_after":"recipient_users","description":"Enter Employee IDs, separated by commas or new lines. Each Employee must have Employee.user_id."},
