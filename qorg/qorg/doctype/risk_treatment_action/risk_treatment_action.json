@@ -1,0 +1,96 @@
+{
+  "doctype": "DocType",
+  "name": "Risk Treatment Action",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "engine": "InnoDB",
+  "fields": [
+    {
+      "fieldname": "ownership_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "treatment_type",
+      "label": "Treatment Type",
+      "fieldtype": "Select",
+      "options": "Avoid\nReduce\nTransfer\nAccept\nExploit",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "responsible_user",
+      "label": "Responsible User",
+      "fieldtype": "Link",
+      "options": "User",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "due_date",
+      "label": "Due Date",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Not Started\nIn Progress\nCompleted\nCancelled",
+      "default": "Not Started",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "ownership_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "corrective_action",
+      "label": "Corrective Action",
+      "fieldtype": "Link",
+      "options": "Corrective Action",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "evidence",
+      "label": "Evidence",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "details_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "action",
+      "label": "Treatment Action",
+      "fieldtype": "Small Text",
+      "reqd": 1
+    }
+  ],
+  "field_order": [
+    "ownership_section",
+    "treatment_type",
+    "responsible_user",
+    "due_date",
+    "status",
+    "ownership_cb",
+    "corrective_action",
+    "evidence",
+    "details_section",
+    "action"
+  ],
+  "actions": [],
+  "links": [],
+  "states": [],
+  "track_changes": 0,
+  "permissions": []
+}

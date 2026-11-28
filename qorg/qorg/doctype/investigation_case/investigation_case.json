@@ -1,0 +1,363 @@
+{
+  "doctype": "DocType",
+  "name": "Investigation Case",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "engine": "InnoDB",
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Series",
+      "fieldtype": "Select",
+      "options": "INV-.YYYY.-.#####",
+      "default": "INV-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "overview_tab",
+      "label": "Overview",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "identity_section",
+      "label": "Investigation Identity",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "subject",
+      "label": "Subject",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "accountability_case",
+      "label": "Accountability Case",
+      "fieldtype": "Link",
+      "options": "Accountability Case",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project"
+    },
+    {
+      "fieldname": "identity_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nAuthorized\nPlanning\nEvidence Collection\nInterviews\nAnalysis\nReport Review\nClosed\nSuspended\nCancelled",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "confidentiality",
+      "label": "Confidentiality",
+      "fieldtype": "Select",
+      "options": "Confidential\nHighly Confidential",
+      "default": "Confidential",
+      "reqd": 1
+    },
+    {
+      "fieldname": "authorized_on",
+      "label": "Authorized On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "authorized_by",
+      "label": "Authorized By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "target_completion_date",
+      "label": "Target Completion Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "scope_text_section",
+      "label": "Scope and Terms of Reference",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "allegation_summary",
+      "label": "Allegation Summary",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "scope",
+      "label": "Scope",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "objectives",
+      "label": "Objectives",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "limitations",
+      "label": "Limitations",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "independence_section",
+      "label": "Independence and Oversight",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "lead_investigator",
+      "label": "Lead Investigator",
+      "fieldtype": "Link",
+      "options": "User"
+    },
+    {
+      "fieldname": "independence_confirmed",
+      "label": "Independence Confirmed",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "independence_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "conflict_reviewed_by",
+      "label": "Conflict Reviewed By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "conflict_reviewed_on",
+      "label": "Conflict Reviewed On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "work_tab",
+      "label": "Investigation Work",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "team_section",
+      "label": "Investigation Team",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "team_members",
+      "label": "Team Members",
+      "fieldtype": "Table",
+      "options": "Investigation Team Member"
+    },
+    {
+      "fieldname": "interviews_section",
+      "label": "Interviews",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "interviews",
+      "label": "Interviews",
+      "fieldtype": "Table",
+      "options": "Investigation Interview"
+    },
+    {
+      "fieldname": "evidence_section",
+      "label": "Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "evidence_items",
+      "label": "Evidence Items",
+      "fieldtype": "Table",
+      "options": "Investigation Evidence"
+    },
+    {
+      "fieldname": "findings_tab",
+      "label": "Findings and Closure",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "findings_section",
+      "label": "Findings",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "findings",
+      "label": "Findings",
+      "fieldtype": "Table",
+      "options": "Investigation Finding"
+    },
+    {
+      "fieldname": "conclusion_section",
+      "label": "Conclusion and Recommendations",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "conclusion",
+      "label": "Conclusion",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "recommendations",
+      "label": "Recommendations",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "closure_section",
+      "label": "Closure",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "final_report",
+      "label": "Final Report",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "report_approved_by",
+      "label": "Report Approved By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "report_approved_on",
+      "label": "Report Approved On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "closure_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "closed_on",
+      "label": "Closed On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "closed_by",
+      "label": "Closed By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "closure_notes",
+      "label": "Closure Notes",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "field_order": [
+    "naming_series",
+    "overview_tab",
+    "identity_section",
+    "subject",
+    "accountability_case",
+    "company",
+    "project",
+    "identity_cb",
+    "status",
+    "confidentiality",
+    "authorized_on",
+    "authorized_by",
+    "target_completion_date",
+    "scope_text_section",
+    "allegation_summary",
+    "scope",
+    "objectives",
+    "limitations",
+    "independence_section",
+    "lead_investigator",
+    "independence_confirmed",
+    "independence_cb",
+    "conflict_reviewed_by",
+    "conflict_reviewed_on",
+    "work_tab",
+    "team_section",
+    "team_members",
+    "interviews_section",
+    "interviews",
+    "evidence_section",
+    "evidence_items",
+    "findings_tab",
+    "findings_section",
+    "findings",
+    "conclusion_section",
+    "conclusion",
+    "recommendations",
+    "closure_section",
+    "final_report",
+    "report_approved_by",
+    "report_approved_on",
+    "closure_cb",
+    "closed_on",
+    "closed_by",
+    "closure_notes"
+  ],
+  "actions": [],
+  "links": [],
+  "states": [],
+  "track_changes": 1,
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Accountability Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "Investigator",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "naming_rule": "By fieldname",
+  "title_field": "subject",
+  "show_title_field_in_link": 1
+}

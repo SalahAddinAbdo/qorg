@@ -1,0 +1,114 @@
+{
+  "doctype": "DocType",
+  "name": "Investigation Evidence",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "engine": "InnoDB",
+  "fields": [
+    {
+      "fieldname": "identity_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "evidence_reference",
+      "label": "Evidence Reference",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "evidence_type",
+      "label": "Evidence Type",
+      "fieldtype": "Select",
+      "options": "Document\nEmail\nPhoto\nVideo\nAudio\nSystem Record\nPhysical Item\nStatement\nOther",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "source",
+      "label": "Source",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "confidential",
+      "label": "Confidential",
+      "fieldtype": "Check",
+      "default": "1",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "identity_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "received_on",
+      "label": "Received On",
+      "fieldtype": "Datetime",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "received_by",
+      "label": "Received By",
+      "fieldtype": "Link",
+      "options": "User",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "file",
+      "label": "File",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "details_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "description",
+      "label": "Description",
+      "fieldtype": "Small Text",
+      "reqd": 1
+    },
+    {
+      "fieldname": "chain_of_custody_notes",
+      "label": "Chain of Custody Notes",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "integrity_hash",
+      "label": "Integrity Hash",
+      "fieldtype": "Data",
+      "read_only": 1
+    }
+  ],
+  "field_order": [
+    "identity_section",
+    "evidence_reference",
+    "evidence_type",
+    "source",
+    "confidential",
+    "identity_cb",
+    "received_on",
+    "received_by",
+    "file",
+    "details_section",
+    "description",
+    "chain_of_custody_notes",
+    "integrity_hash"
+  ],
+  "actions": [],
+  "links": [],
+  "states": [],
+  "track_changes": 0,
+  "permissions": []
+}

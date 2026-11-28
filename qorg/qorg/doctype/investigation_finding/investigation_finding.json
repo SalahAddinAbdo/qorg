@@ -1,0 +1,93 @@
+{
+  "doctype": "DocType",
+  "name": "Investigation Finding",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "engine": "InnoDB",
+  "fields": [
+    {
+      "fieldname": "identity_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "finding_reference",
+      "label": "Finding Reference",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "standard_of_proof",
+      "label": "Standard of Proof",
+      "fieldtype": "Select",
+      "options": "Balance of Probabilities\nClear and Convincing Evidence\nOther",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "outcome",
+      "label": "Outcome",
+      "fieldtype": "Select",
+      "options": "Substantiated\nPartially Substantiated\nUnsubstantiated\nInconclusive\nOutside Scope",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "sensitive",
+      "label": "Sensitive",
+      "fieldtype": "Check",
+      "default": "1",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "issue_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "allegation_or_issue",
+      "label": "Allegation or Issue",
+      "fieldtype": "Small Text",
+      "reqd": 1
+    },
+    {
+      "fieldname": "analysis_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "analysis",
+      "label": "Analysis",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "recommendation",
+      "label": "Recommendation",
+      "fieldtype": "Text Editor"
+    }
+  ],
+  "field_order": [
+    "identity_section",
+    "finding_reference",
+    "standard_of_proof",
+    "outcome",
+    "sensitive",
+    "issue_section",
+    "allegation_or_issue",
+    "analysis_section",
+    "analysis",
+    "recommendation"
+  ],
+  "actions": [],
+  "links": [],
+  "states": [],
+  "track_changes": 0,
+  "permissions": []
+}

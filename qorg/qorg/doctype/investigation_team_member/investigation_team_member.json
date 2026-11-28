@@ -1,0 +1,96 @@
+{
+  "doctype": "DocType",
+  "name": "Investigation Team Member",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "engine": "InnoDB",
+  "fields": [
+    {
+      "fieldname": "member_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "user",
+      "label": "User",
+      "fieldtype": "Link",
+      "options": "User",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "role_in_investigation",
+      "label": "Role in Investigation",
+      "fieldtype": "Select",
+      "options": "Lead Investigator\nInvestigator\nTechnical Adviser\nObserver",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "appointed_on",
+      "label": "Appointed On",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "member_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "conflict_declared",
+      "label": "Conflict Declared",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "conflict_cleared_by",
+      "label": "Conflict Cleared By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "access_revoked",
+      "label": "Access Revoked",
+      "fieldtype": "Check",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "conflict_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "conflict_details",
+      "label": "Conflict Details",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:doc.conflict_declared"
+    }
+  ],
+  "field_order": [
+    "member_section",
+    "user",
+    "role_in_investigation",
+    "appointed_on",
+    "member_cb",
+    "conflict_declared",
+    "conflict_cleared_by",
+    "access_revoked",
+    "conflict_section",
+    "conflict_details"
+  ],
+  "actions": [],
+  "links": [],
+  "states": [],
+  "track_changes": 0,
+  "permissions": []
+}

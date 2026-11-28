@@ -1,0 +1,124 @@
+{
+  "doctype": "DocType",
+  "name": "Risk Assessment Entry",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "engine": "InnoDB",
+  "fields": [
+    {
+      "fieldname": "assessment_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "assessment_on",
+      "label": "Assessment On",
+      "fieldtype": "Datetime",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "assessed_by",
+      "label": "Assessed By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "assessment_type",
+      "label": "Assessment Type",
+      "fieldtype": "Select",
+      "options": "Initial\nPeriodic Review\nEvent Driven\nPost Treatment",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "assessment_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "likelihood",
+      "label": "Likelihood",
+      "fieldtype": "Int",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "impact",
+      "label": "Impact",
+      "fieldtype": "Int",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "inherent_score",
+      "label": "Inherent Score",
+      "fieldtype": "Int",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "control_effectiveness",
+      "label": "Control Effectiveness",
+      "fieldtype": "Percent"
+    },
+    {
+      "fieldname": "residual_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "residual_likelihood",
+      "label": "Residual Likelihood",
+      "fieldtype": "Int",
+      "reqd": 1
+    },
+    {
+      "fieldname": "residual_impact",
+      "label": "Residual Impact",
+      "fieldtype": "Int",
+      "reqd": 1
+    },
+    {
+      "fieldname": "residual_score",
+      "label": "Residual Score",
+      "fieldtype": "Int",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "notes",
+      "label": "Assessment Notes",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "field_order": [
+    "assessment_section",
+    "assessment_on",
+    "assessed_by",
+    "assessment_type",
+    "assessment_cb",
+    "likelihood",
+    "impact",
+    "inherent_score",
+    "control_effectiveness",
+    "residual_section",
+    "residual_likelihood",
+    "residual_impact",
+    "residual_score",
+    "notes"
+  ],
+  "actions": [],
+  "links": [],
+  "states": [],
+  "track_changes": 0,
+  "permissions": []
+}

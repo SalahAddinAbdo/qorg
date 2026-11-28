@@ -1,0 +1,121 @@
+{
+  "doctype": "DocType",
+  "name": "Investigation Interview",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "engine": "InnoDB",
+  "fields": [
+    {
+      "fieldname": "identity_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "interviewee_type",
+      "label": "Interviewee Type",
+      "fieldtype": "Select",
+      "options": "Employee\nExternal Person\nSupplier\nOther",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "interviewee_reference_doctype",
+      "label": "Interviewee Reference Type",
+      "fieldtype": "Link",
+      "options": "DocType"
+    },
+    {
+      "fieldname": "interviewee_reference",
+      "label": "Interviewee Reference",
+      "fieldtype": "Dynamic Link",
+      "options": "interviewee_reference_doctype"
+    },
+    {
+      "fieldname": "interviewee_name",
+      "label": "Interviewee Name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "schedule_cb",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "scheduled_on",
+      "label": "Scheduled On",
+      "fieldtype": "Datetime",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "conducted_on",
+      "label": "Conducted On",
+      "fieldtype": "Datetime",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "conducted_by",
+      "label": "Conducted By",
+      "fieldtype": "Link",
+      "options": "User"
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Planned\nCompleted\nDeclined\nCancelled",
+      "default": "Planned",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "consent_recorded",
+      "label": "Consent Recorded",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "record_section",
+      "label": "",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "summary",
+      "label": "Interview Summary",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "signed_record",
+      "label": "Signed Interview Record",
+      "fieldtype": "Attach"
+    }
+  ],
+  "field_order": [
+    "identity_section",
+    "interviewee_type",
+    "interviewee_reference_doctype",
+    "interviewee_reference",
+    "interviewee_name",
+    "schedule_cb",
+    "scheduled_on",
+    "conducted_on",
+    "conducted_by",
+    "status",
+    "consent_recorded",
+    "record_section",
+    "summary",
+    "signed_record"
+  ],
+  "actions": [],
+  "links": [],
+  "states": [],
+  "track_changes": 0,
+  "permissions": []
+}
