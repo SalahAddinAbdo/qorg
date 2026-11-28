@@ -46,7 +46,13 @@ extend_doctype_class = {'Task': ['qorg.qorg.task_management.task_controller.Task
 
 override_doctype_dashboards = {'Material Request': 'qorg.qorg.dashboards.material_request.get_data',
  'Contract': 'qorg.qorg.dashboards.contract.get_data',
- 'Employee Separation': 'qorg.qorg.employee_lifecycle.separation_clearance.dashboard.get_data'}
+ 'Employee Separation': 'qorg.qorg.employee_lifecycle.separation_clearance.dashboard.get_data',
+ 'Procurement Process': 'qorg.qorg.doctype.procurement_process.procurement_process_dashboard.get_data',
+ 'Accountability Case': 'qorg.qorg.doctype.accountability_case.accountability_case_dashboard.get_data',
+ 'Investigation Case': 'qorg.qorg.doctype.investigation_case.investigation_case_dashboard.get_data',
+ 'Corrective Action': 'qorg.qorg.doctype.corrective_action.corrective_action_dashboard.get_data',
+ 'Enterprise Risk': 'qorg.qorg.doctype.enterprise_risk.enterprise_risk_dashboard.get_data',
+ 'Compliance Obligation': 'qorg.qorg.doctype.compliance_obligation.compliance_obligation_dashboard.get_data'}
 
 # ==============================================================================
 # DESK ASSETS
@@ -73,7 +79,8 @@ app_include_css = ['/assets/qorg/css/model_policy.css',
  '/assets/qorg/css/qorg_ui_tokens.css',
  '/assets/qorg/css/qorg_theme_runtime.css',
  '/assets/qorg/css/qorg_desk_controls.css',
- '/assets/qorg/css/procurement_reports.css']
+ '/assets/qorg/css/procurement_reports.css',
+ '/assets/qorg/css/governance_reports.css']
 
 # ==============================================================================
 # WEBSITE ASSETS AND ROUTING
@@ -367,7 +374,9 @@ scheduler_events = {'daily': ['qorg.qorg.unified_contracts.services.update_expir
            'qorg.qorg.procurement_contracting.scheduled_tasks.daily_procurement_alerts',
            'qorg.qorg.procurement_contracting.scheduled_tasks.send_procurement_reminders',
            'qorg.qorg.inventory_asset_custody.scheduled_tasks.send_inventory_reminders',
-           'qorg.qorg.finance_budget_grants.scheduled_tasks.send_funding_reminders'],
+           'qorg.qorg.finance_budget_grants.scheduled_tasks.send_funding_reminders',
+           'qorg.qorg.governance_accountability.retention.run_daily_retention_jobs',
+ 'qorg.qorg.governance_accountability.scheduled_tasks.daily_case_sla_and_updates'],
  'cron': {'*/15 * * * *': ['qorg.qorg.task_management.scheduler.run_scheduled_task_summary']}}
 
 # ==============================================================================
@@ -399,7 +408,8 @@ after_install = ['qorg.qorg.finance_budget_grants.provisioning.provision_finance
  'qorg.qorg.inventory_asset_custody.custom_fields.provision_custom_fields',
  'qorg.qorg.inventory_asset_custody.communications.provision_communications',
  'qorg.qorg.inventory_asset_custody.workflows.provision_workflows',
- 'qorg.qorg.inventory_asset_custody.print_formats.provision_print_formats']
+ 'qorg.qorg.inventory_asset_custody.print_formats.provision_print_formats',
+ 'qorg.qorg.governance_accountability.provisioning.provision_governance_accountability']
 
 after_migrate = ['qorg.qorg.unified_contracts.provisioning.provision_unified_contracts',
  'qorg.qorg.finance_budget_grants.provisioning.provision_finance_budget_grants',
@@ -434,7 +444,9 @@ after_migrate = ['qorg.qorg.unified_contracts.provisioning.provision_unified_con
  'qorg.qorg.finance_budget_grants.migration.migrate_finance_budget_grants_v155',
  'qorg.qorg.finance_budget_grants.migration.migrate_finance_budget_grants_v156',
  'qorg.qorg.printing.page_break_provisioning.provision_printable_child_row_page_breaks',
- 'qorg.qorg.printing.email_template_hardening.harden_email_template_previews']
+ 'qorg.qorg.printing.email_template_hardening.harden_email_template_previews',
+ 'qorg.qorg.governance_accountability.provisioning.provision_governance_accountability',
+ 'qorg.qorg.governance_accountability.migration.migrate_procurement_complaints']
 
 # ==============================================================================
 # FIXTURES
@@ -932,3 +944,43 @@ if isinstance(_commencement_validate, str):
 _reference_gate = "qorg.qorg.recruitment_extensions.reference_checks.validate_commencement_reference_checks"
 if _reference_gate not in _commencement_validate:
     _commencement_validate.append(_reference_gate)
+
+# Governance, accountability, grievance, and feedback case protection.
+permission_query_conditions = globals().get("permission_query_conditions", {})
+permission_query_conditions.update({
+    "Accountability Case": "qorg.qorg.governance_accountability.permissions.accountability_case_query",
+    "Investigation Case": "qorg.qorg.governance_accountability.investigation.investigation_query",
+    "Corrective Action": "qorg.qorg.governance_accountability.record_permissions.corrective_action_query",
+    "Assurance Finding": "qorg.qorg.governance_accountability.record_permissions.assurance_finding_query",
+    "Compliance Obligation": "qorg.qorg.governance_accountability.record_permissions.compliance_obligation_query",
+    "Enterprise Risk": "qorg.qorg.governance_accountability.record_permissions.enterprise_risk_query",
+})
+has_permission = globals().get("has_permission", {})
+has_permission.update({
+    "Accountability Case": "qorg.qorg.governance_accountability.permissions.accountability_case_permission",
+    "Investigation Case": "qorg.qorg.governance_accountability.investigation.investigation_permission",
+    "Enterprise Risk": "qorg.qorg.governance_accountability.record_permissions.has_permission",
+    "Compliance Obligation": "qorg.qorg.governance_accountability.record_permissions.has_permission",
+    "Assurance Finding": "qorg.qorg.governance_accountability.record_permissions.has_permission",
+    "Corrective Action": "qorg.qorg.governance_accountability.record_permissions.has_permission",
+})
+_accountability_file_permission = "qorg.qorg.governance_accountability.private_files.has_file_permission"
+if _accountability_file_permission not in file_permission:
+    file_permission.append(_accountability_file_permission)
+_accountability_file_events = doc_events.setdefault("File", {})
+_accountability_file_validate = _accountability_file_events.setdefault("validate", [])
+if isinstance(_accountability_file_validate, str):
+    _accountability_file_validate = [_accountability_file_validate]
+    _accountability_file_events["validate"] = _accountability_file_validate
+_accountability_private_file_validator = "qorg.qorg.governance_accountability.private_files.validate_private_file"
+if _accountability_private_file_validator not in _accountability_file_validate:
+    _accountability_file_validate.append(_accountability_private_file_validator)
+
+_procurement_legacy_events = doc_events.setdefault("Procurement Complaint", {})
+_procurement_legacy_validate = _procurement_legacy_events.setdefault("validate", [])
+if isinstance(_procurement_legacy_validate, str):
+    _procurement_legacy_validate = [_procurement_legacy_validate]
+    _procurement_legacy_events["validate"] = _procurement_legacy_validate
+_procurement_legacy_guard = "qorg.qorg.governance_accountability.legacy.protect_procurement_complaint"
+if _procurement_legacy_guard not in _procurement_legacy_validate:
+    _procurement_legacy_validate.append(_procurement_legacy_guard)

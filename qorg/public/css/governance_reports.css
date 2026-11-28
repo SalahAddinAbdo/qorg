@@ -1,0 +1,4 @@
+.qorg-sticky-report .dt-scrollable .dt-cell--col-0,.qorg-sticky-report .dt-header .dt-cell--col-0{position:sticky!important;left:0;z-index:4;background:var(--card-bg,#fff)}
+.qorg-sticky-report .dt-scrollable .dt-cell--col-1,.qorg-sticky-report .dt-header .dt-cell--col-1{position:sticky!important;left:150px;z-index:3;background:var(--card-bg,#fff);box-shadow:2px 0 4px rgba(0,0,0,.08)}
+[dir="rtl"] .qorg-sticky-report .dt-scrollable .dt-cell--col-0,[dir="rtl"] .qorg-sticky-report .dt-header .dt-cell--col-0{left:auto;right:0}
+[dir="rtl"] .qorg-sticky-report .dt-scrollable .dt-cell--col-1,[dir="rtl"] .qorg-sticky-report .dt-header .dt-cell--col-1{left:auto;right:150px}
