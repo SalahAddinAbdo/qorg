@@ -20,7 +20,7 @@ def test_public_pages_exist_and_reflect_disabled_state():
  for route in ('accountability','accountability-track'):
   assert (ROOT/f'qorg/www/{route}/index.py').exists();html=read(f'qorg/www/{route}/index.html');assert 'not currently enabled' in html
 def test_runtime_audit_covers_sources_reports_templates_and_migration():
- s=read('qorg/qorg/governance_accountability/acceptance.py');assert 'REQUIRED_DOCTYPES' in s and 'REQUIRED_REPORTS' in s and 'REQUIRED_TEMPLATES' in s;assert 'audit_procurement_migration' in s
+ s=read('qorg/qorg/governance_accountability/acceptance.py');assert 'REQUIRED_DOCTYPES' in s and 'REQUIRED_REPORTS' in s and 'REQUIRED_TEMPLATES' in s;assert 'legacy_procurement_complaint_removed' in s
 def test_new_python_sources_parse():
  for name in ('security.py','record_permissions.py','acceptance.py','portal.py'):
   ast.parse(read('qorg/qorg/governance_accountability/'+name))

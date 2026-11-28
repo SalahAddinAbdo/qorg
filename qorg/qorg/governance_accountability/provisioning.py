@@ -78,8 +78,6 @@ def provision_governance_accountability():
         "force_private_attachments": 1, "hide_sensitive_details_in_notifications": 1,
         "default_accountability_role": "Accountability Officer",
         "default_accountability_manager_role": "Accountability Manager",
-        "enable_legacy_procurement_complaint_migration": 1,
-        "lock_legacy_procurement_complaints": 1, "migration_version": "v1.0",
     }
     dirty = False
     for key, value in defaults.items():

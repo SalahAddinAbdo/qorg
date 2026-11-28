@@ -126,25 +126,6 @@
       "fieldtype": "Section Break"
     },
     {
-      "fieldname": "enable_legacy_procurement_complaint_migration",
-      "label": "Enable Legacy Procurement Complaint Migration",
-      "fieldtype": "Check",
-      "default": "1"
-    },
-    {
-      "fieldname": "lock_legacy_procurement_complaints",
-      "label": "Lock Legacy Procurement Complaints",
-      "fieldtype": "Check",
-      "default": "1"
-    },
-    {
-      "fieldname": "migration_version",
-      "label": "Migration Version",
-      "fieldtype": "Data",
-      "default": "v1.0",
-      "read_only": 1
-    },
-    {
       "fieldname": "portal_tab",
       "label": "Portal and Security",
       "fieldtype": "Tab Break"
@@ -256,9 +237,6 @@
     "default_accountability_manager_role",
     "critical_escalation_role",
     "migration_section",
-    "enable_legacy_procurement_complaint_migration",
-    "lock_legacy_procurement_complaints",
-    "migration_version",
     "portal_tab",
     "portal_security_section",
     "enable_public_intake",

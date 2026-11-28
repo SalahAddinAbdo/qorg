@@ -152,7 +152,6 @@ doctype_js = {'Website Settings': 'public/js/website_settings_opportunity_portal
  'Participation Engagement': ['public/js/participation_communications.js'],
  'Participation Service Log': ['public/js/participation_communications.js'],
  'Participation Certificate': ['public/js/participation_communications.js'],
- 'Procurement Complaint': ['public/js/procurement_complaint.js'],
  'Employee Separation': ['public/js/employee_separation_clearance.js'],
  'Employee Offboarding': ['public/js/employee_separation_clearance.js']}
 
@@ -334,7 +333,6 @@ permission_query_conditions = {'Contract': 'qorg.qorg.unified_contracts.permissi
  'Project Compliance Deliverable': 'qorg.qorg.project_management.permissions.project_compliance_deliverable_query',
  'Project Beneficiary Plan': 'qorg.qorg.project_management.permissions.project_beneficiary_plan_query',
  'Project Closure': 'qorg.qorg.project_management.permissions.project_closure_query',
- 'Procurement Complaint': 'qorg.qorg.procurement_contracting.complaint_permissions.query',
  'Funding Agreement': 'qorg.qorg.finance_budget_grants.permissions.funding_agreement_query',
  'Budget Transfer Audit': 'qorg.qorg.finance_budget_grants.permissions.budget_transfer_audit_query'}
 
@@ -356,7 +354,6 @@ has_permission = {'Contract': 'qorg.qorg.unified_contracts.permissions.contract_
  'Project Compliance Deliverable': 'qorg.qorg.project_management.permissions.project_compliance_deliverable_has',
  'Project Beneficiary Plan': 'qorg.qorg.project_management.permissions.project_beneficiary_plan_has',
  'Project Closure': 'qorg.qorg.project_management.permissions.project_closure_has',
- 'Procurement Complaint': 'qorg.qorg.procurement_contracting.complaint_permissions.has',
  'Funding Agreement': 'qorg.qorg.finance_budget_grants.permissions.funding_agreement_permission',
  'Budget Transfer Audit': 'qorg.qorg.finance_budget_grants.permissions.budget_transfer_audit_permission'}
 
@@ -446,7 +443,7 @@ after_migrate = ['qorg.qorg.unified_contracts.provisioning.provision_unified_con
  'qorg.qorg.printing.page_break_provisioning.provision_printable_child_row_page_breaks',
  'qorg.qorg.printing.email_template_hardening.harden_email_template_previews',
  'qorg.qorg.governance_accountability.provisioning.provision_governance_accountability',
- 'qorg.qorg.governance_accountability.migration.migrate_procurement_complaints']
+ 'qorg.qorg.governance_accountability.cleanup.remove_legacy_procurement_complaint_artifacts']
 
 # ==============================================================================
 # FIXTURES
@@ -476,7 +473,8 @@ fixtures = [{'dt': 'Custom Field',
                 'Company-custom_print_accent_color',
                 'Company-custom_print_light_color',
                 'Company-custom_column_break_twxkf',
-                'Company-custom_print_border_color']]]}]
+                'Company-custom_print_border_color']]]},
+ 'qorg.qorg.governance_accountability.cleanup.remove_legacy_procurement_complaint_artifacts']
 
 # ==============================================================================
 # SHARED COST ALLOCATION
@@ -976,7 +974,6 @@ _accountability_private_file_validator = "qorg.qorg.governance_accountability.pr
 if _accountability_private_file_validator not in _accountability_file_validate:
     _accountability_file_validate.append(_accountability_private_file_validator)
 
-_procurement_legacy_events = doc_events.setdefault("Procurement Complaint", {})
 _procurement_legacy_validate = _procurement_legacy_events.setdefault("validate", [])
 if isinstance(_procurement_legacy_validate, str):
     _procurement_legacy_validate = [_procurement_legacy_validate]

@@ -14,5 +14,9 @@ def audit_runtime_configuration():
  settings=frappe.get_single('Accountability Settings') if not missing else None
  return {'ok':not missing,'missing':missing,'public_intake_enabled':bool(settings and settings.enable_public_intake),'public_tracking_enabled':bool(settings and settings.enable_public_tracking)}
 def audit_deep_runtime_configuration():
- base=audit_runtime_configuration(); migration=frappe.get_attr('qorg.qorg.governance_accountability.migration.audit_procurement_migration')() if frappe.db.exists('DocType','Procurement Complaint') else {'ok':True,'skipped':True}
- base['procurement_migration']=migration;base['ok']=bool(base['ok'] and migration.get('ok'));return base
+ base=audit_runtime_configuration()
+ retired=not bool(frappe.db.exists('DocType','Procurement Complaint'))
+ base['legacy_procurement_complaint_removed']=retired
+ if not retired:base['missing'].append('Legacy DocType:Procurement Complaint')
+ base['ok']=bool(base['ok'] and retired)
+ return base

@@ -9,6 +9,6 @@ Concise pytest module names:
 - `test_security.py`: security, company scope, CAPTCHA, and tracking checks.
 - `test_reports.py`: reports, portal, templates, notifications, and dashboards.
 - `test_risk.py`: enterprise risk, compliance, and assurance.
-- `test_migration.py`: provisioning and Procurement Complaint migration.
+- `test_retirement.py`: safe retirement of the obsolete procurement complaint source.
 
 Pytest discovers all modules because every filename keeps the `test_*.py` pattern.
