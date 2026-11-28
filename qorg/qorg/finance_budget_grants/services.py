@@ -76,7 +76,7 @@ def apply_budget_line_defaults(doc,method=None):
  for field,value in values.items():
   if not doc.get(field): doc.set(field,value)
 
-def validate_project_funding_source(parent,method=None):
+def _legacy_validate_project_funding_source(parent,method=None):
  rows=parent.get("custom_funding_sources") or []
  primaries=[r for r in rows if r.is_primary_donor and r.funding_status in ("Approved","Partially Approved")]
  if len(primaries)>1: frappe.throw(_("Only one approved Project Funding Source can be marked as Primary Donor."))

@@ -34,7 +34,7 @@ def validate_rating_scale(doc):
         previous_high = high
 
 
-def validate_evaluation_type(doc):
+def _legacy_validate_evaluation_type(doc):
     if not doc.sources:
         frappe.throw(_("At least one Evaluation Source is required."))
     if flt(doc.source_score_max) <= 0:
@@ -222,7 +222,7 @@ def validate_appraisal(doc, method=None):
         doc.qorg_evaluation_type = evaluation_type
 
 
-def _policy_snapshot(policy):
+def _legacy__policy_snapshot(policy):
     return {
         "evaluation_type": policy.name,
         "rating_scale": policy.rating_scale,
@@ -238,7 +238,7 @@ def _policy_snapshot(policy):
     }
 
 
-def validate_feedback(doc, method=None):
+def _legacy_validate_feedback(doc, method=None):
     if not doc.get("qorg_assignment"):
         return
     assignment = frappe.get_doc("Evaluation Assignment", doc.qorg_assignment)
@@ -260,7 +260,7 @@ def feedback_submitted(doc, method=None):
     _update_assignment_summary(assignment.appraisal)
 
 
-def feedback_cancelled(doc, method=None):
+def _legacy_feedback_cancelled(doc, method=None):
     if not doc.get("qorg_assignment"):
         return
     assignment = frappe.get_doc("Evaluation Assignment", doc.qorg_assignment)
@@ -332,7 +332,7 @@ def recalculate_appraisal(appraisal_name, save=True):
     return result
 
 
-def transition_appraisal(name, target, reason=None):
+def _legacy_transition_appraisal(name, target, reason=None):
     doc = frappe.get_doc("Appraisal", name)
     doc.check_permission("write")
     current = doc.get("qorg_stage") or "Preparation"
@@ -383,7 +383,7 @@ def protect_appraisal(doc, method=None):
                 frappe.throw(_("Calculated appraisal fields are system controlled."))
 
 
-def _calculate(doc, policy):
+def _legacy__calculate(doc, policy):
     source_defs = {row.source: row for row in policy.sources if row.include_score}
     rows = []
     for source, definition in source_defs.items():
@@ -429,7 +429,7 @@ def _calculate(doc, policy):
     return {"appraisal": doc.name, "evaluation_type": policy.name, "policy": global_policy, "completion": completion, "final_score": final_score, "rating": rating, "outcome": outcome, "development_required": development, "provisional": provisional, "sources": rows, "calculated_on": now_datetime(), "calculated_by": frappe.session.user}
 
 
-def _source_result(doc, policy, definition):
+def _legacy__source_result(doc, policy, definition):
     source = definition.source
     expected = definition.min_reviews if definition.assignment_required else 1
     completed, scores = 0, []
@@ -502,7 +502,7 @@ def _normalized(value):
     return value
 
 
-def before_submit_appraisal(doc, method=None):
+def _legacy_before_submit_appraisal(doc, method=None):
     if doc.get("qorg_stage") != "Finalized":
         frappe.throw(_("Appraisal must be Finalized before submission."))
     result = recalculate_appraisal(doc.name, save=False)

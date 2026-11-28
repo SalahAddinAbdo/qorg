@@ -7,4 +7,4 @@ def test_audit_is_standard_first_and_read_only():
  for forbidden in ('.insert(','.save(','create_custom_fields','make_property_setter'):assert forbidden not in source
  assert {'run_audit','_inspect_doctype','_detect_conflicts','_recommendations'}<={n.name for n in tree.body if isinstance(n,ast.FunctionDef)}
 def test_architecture_rules_are_explicit():
- text=(ROOT/'LEARNING_PERFORMANCE_PHASE_7_6A.md').read_text();assert 'Never replace the complete field order' in text;assert 'Python domain services own validation' in text
+ text=(ROOT/'qorg/qorg/employee_lifecycle/docs/LEARNING_PERFORMANCE_PHASE_7_6A.md').read_text(encoding='utf-8');assert 'Never replace the complete field order' in text;assert 'Python domain services own validation' in text

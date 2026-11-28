@@ -98,7 +98,7 @@ def cancel_assessment(name, reason):
     return {"name": doc.name, "status": doc.status}
 
 
-def sync_training_result(training_event):
+def _legacy_sync_training_result(training_event):
     result_name = frappe.db.get_value("Training Result", {"training_event": training_event, "docstatus": ["<", 2]}, "name")
     if not result_name:
         return None
@@ -199,7 +199,7 @@ def _participant_completed(row):
     return bool(row and (_attendance_percentage(row) > 0 or row.status in {"Attended", "Completed"}))
 
 
-def _improvement_percentage(pre, post):
+def _legacy__improvement_percentage(pre, post):
     if not pre or not post:
         return None
     if pre.percentage >= 100:

@@ -826,12 +826,6 @@ _learning_comms_setup = "qorg.qorg.employee_lifecycle.comms.provision_communicat
 if _learning_comms_setup not in after_migrate:
     after_migrate.append(_learning_comms_setup)
 # Multi-period budget control
-def _qorg_add_doc_event(doctype, event, method):
-    current = doc_events.setdefault(doctype, {}).get(event)
-    if not current: doc_events[doctype][event] = method
-    elif isinstance(current, list):
-        if method not in current: current.append(method)
-    elif current != method: doc_events[doctype][event] = [current, method]
 _qorg_add_doc_event("Budget Line", "validate", "qorg.qorg.finance_period_control.service.validate_budget_line")
 _qorg_add_doc_event("Commitment Ledger", "validate", "qorg.qorg.finance_period_control.service.validate_commitment_ledger")
 _qorg_add_doc_event("Commitment Ledger", "on_update", "qorg.qorg.finance_period_control.projection.refresh_for_ledger")

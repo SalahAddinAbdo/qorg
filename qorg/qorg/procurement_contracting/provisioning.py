@@ -233,7 +233,7 @@ def _provision_workflow_states():
  for state in WORKFLOW_STATES:
   if not frappe.db.exists("Workflow State",state): frappe.get_doc({"doctype":"Workflow State","workflow_state_name":state,"style":"Primary"}).insert(ignore_permissions=True)
 
-def provision_procurement_contracting_full():
+def _provision_procurement_contracting_workflow_base():
  provision_procurement_contracting(); _provision_workflow_states()
 
 def _provision_budget_line_dimension():
@@ -254,7 +254,7 @@ def provision_procurement_contracting_v13():
     provision_procurement_contracting_full()
     from qorg.qorg.procurement_contracting.notifications import provision_email_templates
     provision_email_templates()
-def provision_procurement_contracting_v13_final():
+def _provision_procurement_contracting_v13_base():
     provision_procurement_contracting_v13()
     from qorg.qorg.procurement_contracting.settings import provision_buying_settings_extension
     from qorg.qorg.procurement_contracting.notifications import provision_notifications
@@ -314,9 +314,8 @@ def provision_request_for_quotation_extensions():
 
 
 # Wrap the existing final provisioner once so all procurement records converge together.
-_provision_procurement_contracting_v13_final = provision_procurement_contracting_v13_final
 def provision_procurement_contracting_v13_final():
-    _provision_procurement_contracting_v13_final()
+    _provision_procurement_contracting_v13_base()
     provision_request_for_quotation_extensions()
     from qorg.qorg.procurement_contracting.communications import provision_email_templates
     from qorg.qorg.procurement_contracting.notifications import provision as provision_managed_notifications

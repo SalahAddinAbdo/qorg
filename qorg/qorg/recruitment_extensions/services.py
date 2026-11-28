@@ -52,7 +52,7 @@ def sync_screening_criteria(applicant, force=False):
 def sync_context(doc, source=None):
     if source: copy_context(source, doc)
 
-def configure_interview(doc):
+def _legacy_configure_interview(doc):
     if not doc.get("job_applicant"): return
     applicant=frappe.get_doc("Job Applicant", doc.job_applicant)
     copy_context(applicant, doc)
@@ -115,7 +115,7 @@ def _latest_valid_interviews(applicant_name):
         if key: latest[key]=r
     return list(latest.values())
 
-def recalculate_applicant(applicant_name):
+def _legacy_recalculate_applicant(applicant_name):
     doc=frappe.get_doc("Job Applicant",applicant_name)
     screening=flt(doc.get("qorg_screening_score")); opening=linked_job_opening(doc)
     sw=flt(frappe.db.get_value("Job Opening",opening,"qorg_screening_weight") or 20) if opening else 20

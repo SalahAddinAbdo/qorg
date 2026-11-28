@@ -23,7 +23,7 @@ FIELDS={
   {"fieldname":"qorg_comments","label":"Evaluation Comments","fieldtype":"Text Editor","insert_after":"qorg_evidence"},
  ],
 }
-def setup_performance_policy():
+def _legacy_setup_performance_policy():
  definitions={dt:rows for dt,rows in FIELDS.items() if frappe.db.exists("DocType",dt)}
  return create_custom_fields_if_changed(definitions,update=True) if definitions else {"changed":[],"unchanged":[]}
 
@@ -56,7 +56,6 @@ APPRAISAL_LIFECYCLE_FIELDS = [
   {"fieldname":"qorg_calc_snapshot","label":"Latest Calculation Snapshot","fieldtype":"Long Text","read_only":1,"hidden":1,"insert_after":"qorg_calc_log"},
 ]
 
-_old_setup_performance_policy = setup_performance_policy
 def setup_performance_policy():
     definitions={dt:list(rows) for dt,rows in FIELDS.items() if frappe.db.exists("DocType",dt)}
     if frappe.db.exists("DocType","Appraisal"):
