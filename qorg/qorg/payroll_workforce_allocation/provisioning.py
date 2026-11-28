@@ -172,8 +172,7 @@ def _provision_print_format():
     frappe.get_doc({"doctype": "Print Format", "name": name, "doc_type": "Salary Slip", "module": "QOrg", "standard": "No", "print_format_type": "Jinja", "html": content, "custom_format": 1, "disabled": 0}).insert(ignore_permissions=True)
 
 
-def provision_payroll_workforce_allocation():
-    
+def _provision_managed_artifacts():
     for definitions in CUSTOM_FIELDS.values():
         for definition in definitions:
             definition.setdefault("module", "QOrg")
@@ -204,9 +203,9 @@ def _ensure_indexes():
     for doctype,fields in (("Payroll Allocation Run",["payroll_entry"]),("Workforce Funding Plan",["employee","effective_from","effective_to"]),("Payroll Cost Policy",["company","funding_agreement","effective_from","effective_to"]),("Payroll Allocation Result",["salary_slip","salary_component","project"]),("Monthly Effort Certification",["employee","start_date","end_date"])):
         if frappe.db.exists("DocType",doctype): frappe.db.add_index(doctype,fields,index_name=f"idx_{frappe.scrub(doctype)}_{'_'.join(fields)}"[:60])
 
-_original_provision = provision_payroll_workforce_allocation
 def provision_payroll_workforce_allocation():
-    _original_provision()
+    """Provision managed payroll artifacts idempotently."""
+    _provision_managed_artifacts()
     _ensure_roles()
     _ensure_workspace_links()
     _ensure_indexes()

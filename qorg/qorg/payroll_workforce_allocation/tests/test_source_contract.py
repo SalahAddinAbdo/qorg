@@ -11,6 +11,20 @@ class TestSourceContract(unittest.TestCase):
         for path in PACKAGE_ROOT.rglob("*.py"):
             ast.parse(path.read_text(), filename=str(path))
 
+    def test_no_duplicate_top_level_definitions(self):
+        for path in PACKAGE_ROOT.glob("*.py"):
+            tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+            definitions = [
+                node.name
+                for node in tree.body
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+            ]
+            self.assertEqual(
+                len(definitions),
+                len(set(definitions)),
+                f"Duplicate top-level definition in {path}",
+            )
+
     def test_six_reports_exist(self):
         reports = ["payroll_readiness", "payroll_control_summary", "payroll_reconciliation", "payroll_allocation_by_project_and_funding", "unallocated_and_ineligible_payroll_cost", "payroll_liability_reconciliation"]
         for report in reports:
