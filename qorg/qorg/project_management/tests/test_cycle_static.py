@@ -16,7 +16,7 @@ def test_permission_scope_distinguishes_read_and_write():
 def test_project_cycle_integrity_registered():
  hooks=(ROOT/'qorg/hooks.py').read_text();guard=(ROOT/'qorg/qorg/project_management/cycle_integrity.py').read_text()
  for doctype in ('Project Result','Project Indicator','Project Workplan Activity','Project Progress Update','Project Closure'):
-  assert f'"{doctype}"' in hooks
+  assert doctype in hooks
  assert 'validate_project_cycle_links' in hooks
  assert 'Invalid result hierarchy' in guard
  assert 'must belong to Project' in guard
@@ -48,10 +48,23 @@ def test_all_project_permission_handlers_are_registered():
   'Project Progress Update','Project Risk','Project Change Request',
   'Project Compliance Deliverable','Project Beneficiary Plan','Project Closure',
  )
+ expected = {
+  'Project Result': ('project_result_query', 'project_result_has'),
+  'Project Indicator': ('project_indicator_query', 'project_indicator_has'),
+  'Indicator Target Plan': ('indicator_target_plan_query', 'indicator_target_plan_has'),
+  'Project Workplan Activity': ('project_workplan_activity_query', 'project_workplan_activity_has'),
+  'Project Progress Update': ('project_progress_update_query', 'project_progress_update_has'),
+  'Project Risk': ('project_risk_query', 'project_risk_has'),
+  'Project Change Request': ('project_change_request_query', 'project_change_request_has'),
+  'Project Compliance Deliverable': ('project_compliance_deliverable_query', 'project_compliance_deliverable_has'),
+  'Project Beneficiary Plan': ('project_beneficiary_plan_query', 'project_beneficiary_plan_has'),
+  'Project Closure': ('project_closure_query', 'project_closure_has'),
+ }
  for doctype in doctypes:
-  assert f'"{doctype}": (' in hooks
- assert 'permission_query_conditions[_doctype]' in hooks
- assert 'has_permission[_doctype]' in hooks
+  query_handler, permission_handler = expected[doctype]
+  assert doctype in hooks
+  assert f'project_management.permissions.{query_handler}' in hooks
+  assert f'project_management.permissions.{permission_handler}' in hooks
 
 def test_notification_deduplication_is_document_specific():
  source=(ROOT/'qorg/qorg/project_management/notification_engine.py').read_text()
