@@ -86,7 +86,9 @@ def test_opportunity_portal_settings_are_configuration_driven():
  ):
   assert fieldname in managed
   assert fieldname in source
- assert 'DEFAULTS =' not in source
+ assert 'SAFE_DEFAULT_VISIBILITY = "Internal Only"' in source
+ assert 'SAFE_DEFAULT_PAGE_SIZE = 24' in source
+ assert 'Set Default Opportunity Visibility in Website Settings.' not in source
  assert 'or 24' not in source
  assert 'PAGE_SIZE_MIN = 6' in source
  assert 'PAGE_SIZE_MAX = 50' in source
@@ -255,3 +257,23 @@ def test_create_permissions_and_external_person_file_ownership_are_supported():
  assert 'def audit_deep_runtime_configuration' in acceptance
  assert 'Duplicate External Person Users' in acceptance
  assert 'Public Protected Files' in acceptance
+
+
+def test_desk_permissions_remain_configuration_driven_and_portal_only():
+ permissions=(ROOT/'qorg/qorg/people_and_opportunities/portal_permissions.py').read_text()
+ ownership=(ROOT/'qorg/qorg/people_and_opportunities/portal_ownership.py').read_text()
+ assert 'if not is_website_user(user):\n        return ""' in permissions
+ assert permissions.count('if not is_website_user(user):\n        # Continue with standard Role Permission Manager and User Permission checks.\n        return True') >= 2
+ assert 'if not is_website_user(user):\n        # Frappe v16 requires an explicit truthy result from has_permission hooks.' in ownership
+ assert '"System Manager" in frappe.get_roles' not in permissions
+ assert '"System Manager" in frappe.get_roles' not in ownership
+
+
+def test_portal_provisioning_backfills_only_required_blank_settings():
+ source=(ROOT/'qorg/qorg/people_and_opportunities/portal_provisioning.py').read_text()
+ assert 'def _reconcile_required_website_settings' in source
+ assert 'qorg_default_opportunity_visibility' in source
+ assert 'Internal Only' in source
+ assert 'qorg_opportunity_portal_page_size' in source
+ assert 'settings.get(fieldname) in (None, "", 0, "0")' in source
+ assert 'Check fields are not' in source

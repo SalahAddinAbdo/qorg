@@ -64,7 +64,9 @@ def can_access_external_person(doc, user: str | None = None, permission_type: st
     if user == "Administrator":
         return True
     if not is_website_user(user):
-        return None
+        # Frappe v16 requires an explicit truthy result from has_permission hooks.
+        # Role Permission Manager and User Permissions are evaluated afterwards.
+        return True
     if permission_type in {"create"}:
         return not external_person_names_for_user(user)
     return bool(doc and doc.get("user") == user)

@@ -23,6 +23,8 @@ SETTING_FIELD_MAP = {
 
 PAGE_SIZE_MIN = 6
 PAGE_SIZE_MAX = 50
+SAFE_DEFAULT_VISIBILITY = "Internal Only"
+SAFE_DEFAULT_PAGE_SIZE = 24
 
 
 def get_opportunity_portal_settings():
@@ -50,11 +52,11 @@ def get_opportunity_portal_settings():
     values.applications_enabled = cint(values.applications_enabled)
     values.show_upcoming = cint(values.show_upcoming)
     values.show_closed = cint(values.show_closed)
-    values.default_visibility = (values.default_visibility or "").strip()
-    values.page_size = cint(values.page_size)
+    values.default_visibility = (
+        values.default_visibility or SAFE_DEFAULT_VISIBILITY
+    ).strip()
+    values.page_size = cint(values.page_size or SAFE_DEFAULT_PAGE_SIZE)
 
-    if not values.default_visibility:
-        frappe.throw(_("Set Default Opportunity Visibility in Website Settings."))
     if not PAGE_SIZE_MIN <= values.page_size <= PAGE_SIZE_MAX:
         frappe.throw(
             _("Opportunities per Page must be between {0} and {1}.").format(

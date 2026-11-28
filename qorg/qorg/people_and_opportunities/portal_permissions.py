@@ -35,7 +35,8 @@ def participation_application_query(user=None):
 def participation_application_permission(doc, user=None, permission_type=None):
     user = user or frappe.session.user
     if not is_website_user(user):
-        return None
+        # Continue with standard Role Permission Manager and User Permission checks.
+        return True
     person = get_external_person_for_user(user=user)
     if permission_type == "create":
         return bool(person and person.person_status == "Active")
@@ -57,7 +58,8 @@ def job_applicant_query(user=None):
 def job_applicant_permission(doc, user=None, permission_type=None):
     user = user or frappe.session.user
     if not is_website_user(user):
-        return None
+        # Continue with standard Role Permission Manager and User Permission checks.
+        return True
     person = get_external_person_for_user(user=user)
     if permission_type == "create":
         return bool(person and person.person_status == "Active")
