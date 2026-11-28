@@ -1,0 +1,159 @@
+{
+  "doctype": "Workspace",
+  "name": "Governance Accountability",
+  "label": "Governance Accountability",
+  "title": "Governance, Risk, Compliance and Accountability",
+  "module": "QOrg",
+  "icon": "shield",
+  "public": 1,
+  "is_hidden": 0,
+  "content": "[{\"id\":\"header_cases\",\"type\":\"header\",\"data\":{\"text\":\"Accountability and Cases\",\"col\":12}},{\"id\":\"number_card_1\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Open Accountability Cases\",\"col\":4}},{\"id\":\"number_card_2\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Overdue Accountability Cases\",\"col\":4}},{\"id\":\"number_card_3\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Critical Enterprise Risks\",\"col\":4}},{\"id\":\"number_card_4\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Noncompliant Obligations\",\"col\":4}},{\"id\":\"number_card_5\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Overdue Corrective Actions\",\"col\":4}},{\"id\":\"shortcut_cases\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Accountability Cases\",\"col\":4}},{\"id\":\"shortcut_investigations\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Investigation Cases\",\"col\":4}},{\"id\":\"shortcut_actions\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Corrective Actions\",\"col\":4}},{\"id\":\"header_grc\",\"type\":\"header\",\"data\":{\"text\":\"Risk, Compliance and Assurance\",\"col\":12}},{\"id\":\"shortcut_risks\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Enterprise Risks\",\"col\":4}},{\"id\":\"shortcut_compliance\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Compliance Obligations\",\"col\":4}},{\"id\":\"shortcut_findings\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Assurance Findings\",\"col\":4}}]",
+  "shortcuts": [
+    {
+      "label": "Accountability Cases",
+      "type": "DocType",
+      "link_to": "Accountability Case",
+      "doc_view": "List",
+      "color": "Blue"
+    },
+    {
+      "label": "Investigation Cases",
+      "type": "DocType",
+      "link_to": "Investigation Case",
+      "doc_view": "List",
+      "color": "Orange"
+    },
+    {
+      "label": "Corrective Actions",
+      "type": "DocType",
+      "link_to": "Corrective Action",
+      "doc_view": "List",
+      "color": "Yellow"
+    },
+    {
+      "label": "Enterprise Risks",
+      "type": "DocType",
+      "link_to": "Enterprise Risk",
+      "doc_view": "List",
+      "color": "Red"
+    },
+    {
+      "label": "Compliance Obligations",
+      "type": "DocType",
+      "link_to": "Compliance Obligation",
+      "doc_view": "List",
+      "color": "Green"
+    },
+    {
+      "label": "Assurance Findings",
+      "type": "DocType",
+      "link_to": "Assurance Finding",
+      "doc_view": "List",
+      "color": "Purple"
+    }
+  ],
+  "links": [
+    {
+      "label": "Reports",
+      "type": "Card Break"
+    },
+    {
+      "label": "Accountability Case Resolution",
+      "type": "Link",
+      "link_type": "Report",
+      "link_to": "Accountability Case Resolution"
+    },
+    {
+      "label": "Enterprise Risk Register",
+      "type": "Link",
+      "link_type": "Report",
+      "link_to": "Enterprise Risk Register"
+    },
+    {
+      "label": "Compliance Status",
+      "type": "Link",
+      "link_type": "Report",
+      "link_to": "Compliance Status"
+    },
+    {
+      "label": "Assurance Findings",
+      "type": "Link",
+      "link_type": "Report",
+      "link_to": "Assurance Findings"
+    },
+    {
+      "label": "Corrective Action Tracking",
+      "type": "Link",
+      "link_type": "Report",
+      "link_to": "Corrective Action Tracking"
+    },
+    {
+      "label": "Configuration",
+      "type": "Card Break"
+    },
+    {
+      "label": "Governance and Accountability Settings",
+      "type": "Link",
+      "link_type": "DocType",
+      "link_to": "Governance and Accountability Settings"
+    },
+    {
+      "label": "Accountability Routing Rule",
+      "type": "Link",
+      "link_type": "DocType",
+      "link_to": "Accountability Routing Rule"
+    }
+  ],
+  "roles": [
+    {
+      "role": "Accountability Manager"
+    },
+    {
+      "role": "Accountability Officer"
+    },
+    {
+      "role": "Compliance Manager"
+    },
+    {
+      "role": "Internal Auditor"
+    },
+    {
+      "role": "Investigator"
+    },
+    {
+      "role": "System Manager"
+    }
+  ],
+  "charts": [],
+  "number_cards": [
+    {
+      "label": "Open Accountability Cases",
+      "number_card_name": "Open Accountability Cases"
+    },
+    {
+      "label": "Overdue Accountability Cases",
+      "number_card_name": "Overdue Accountability Cases"
+    },
+    {
+      "label": "Critical Enterprise Risks",
+      "number_card_name": "Critical Enterprise Risks"
+    },
+    {
+      "label": "Noncompliant Obligations",
+      "number_card_name": "Noncompliant Obligations"
+    },
+    {
+      "label": "Overdue Corrective Actions",
+      "number_card_name": "Overdue Corrective Actions"
+    }
+  ],
+  "quick_lists": [],
+  "custom_blocks": [],
+  "sequence_id": 90,
+  "docstatus": 0,
+  "idx": 0,
+  "for_user": "",
+  "hide_custom": 0,
+  "parent_page": "Q Management Hub",
+  "type": "Workspace"
+}
