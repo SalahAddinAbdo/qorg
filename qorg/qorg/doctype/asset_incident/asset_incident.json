@@ -28,9 +28,10 @@
     "physical_verification",
     "project",
     "funding_source",
+    "incident_description_section",
+    "incident_description",
     "assessment_section",
     "description_section",
-    "incident_description",
     "immediate_action",
     "assessment_column",
     "estimated_loss",
@@ -179,12 +180,7 @@
       "options": "Project Funding Source"
     },
     {
-      "fieldname": "assessment_section",
-      "label": "Assessment and Decision",
-      "fieldtype": "Section Break"
-    },
-    {
-      "fieldname": "description_section",
+      "fieldname": "incident_description_section",
       "label": "Incident Description",
       "fieldtype": "Section Break"
     },
@@ -193,6 +189,16 @@
       "label": "Incident Description",
       "fieldtype": "Text Editor",
       "reqd": 1
+    },
+    {
+      "fieldname": "assessment_section",
+      "label": "Assessment and Decision",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "description_section",
+      "label": "Incident Description",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "immediate_action",

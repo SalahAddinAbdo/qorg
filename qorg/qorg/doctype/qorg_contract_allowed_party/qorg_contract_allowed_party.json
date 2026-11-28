@@ -6,14 +6,21 @@
   "istable": 1,
   "editable_grid": 1,
   "field_order": [
+    "qorg_row_overview_section",
     "party_mode",
     "party_doctype",
     "party_role",
+    "qorg_row_overview_column",
     "is_default",
     "is_primary",
     "is_active"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "party_mode",
       "label": "Party Mode",
@@ -35,6 +42,10 @@
       "label": "Party Role",
       "fieldtype": "Data",
       "in_list_view": 1
+    },
+    {
+      "fieldname": "qorg_row_overview_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "is_default",

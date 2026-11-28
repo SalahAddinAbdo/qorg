@@ -3,13 +3,19 @@
   "doctype": "DocType",
   "engine": "InnoDB",
   "field_order": [
+    "qorg_row_overview_section",
     "target_doctype",
     "field_name",
-    "qorg_layout_column",
+    "qorg_row_overview_column",
     "enabled",
     "requires_donor_approval"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "target_doctype",
       "fieldtype": "Link",
@@ -28,7 +34,7 @@
       "columns": 2
     },
     {
-      "fieldname": "qorg_layout_column",
+      "fieldname": "qorg_row_overview_column",
       "fieldtype": "Column Break"
     },
     {

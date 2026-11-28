@@ -9,19 +9,26 @@
   "document_type": "",
   "engine": "InnoDB",
   "field_order": [
+    "qorg_row_overview_section",
     "feature_key",
     "feature_label",
     "feature_state",
     "enabled",
     "operating_mode",
-    "qorg_layout_column",
+    "qorg_row_overview_column",
     "effective_from",
     "effective_to",
     "configuration",
-    "notes",
-    "managed_version"
+    "managed_version",
+    "qorg_row_details_section",
+    "notes"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "feature_key",
       "label": "Feature Key",
@@ -63,7 +70,7 @@
       "in_list_view": 1
     },
     {
-      "fieldname": "qorg_layout_column",
+      "fieldname": "qorg_row_overview_column",
       "fieldtype": "Column Break"
     },
     {
@@ -82,16 +89,21 @@
       "fieldtype": "JSON"
     },
     {
-      "fieldname": "notes",
-      "label": "Notes",
-      "fieldtype": "Small Text"
-    },
-    {
       "fieldname": "managed_version",
       "label": "Managed Version",
       "fieldtype": "Data",
       "read_only": 1,
       "hidden": 1
+    },
+    {
+      "fieldname": "qorg_row_details_section",
+      "label": "Details and Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "notes",
+      "label": "Notes",
+      "fieldtype": "Small Text"
     }
   ],
   "grid_page_length": 50,

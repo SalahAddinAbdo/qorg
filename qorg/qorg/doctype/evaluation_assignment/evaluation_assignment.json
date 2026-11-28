@@ -20,25 +20,31 @@
     "employee",
     "employee_name",
     "evaluation_source",
+    "qorg_people_section_0_column",
     "weight",
     "anonymous",
-    "people_column",
     "reviewer",
+    "qorg_people_section_0_column_2",
     "reviewer_name",
     "reviewer_user",
     "reviewer_category",
+    "qorg_people_section_more_1",
     "related_department",
     "tracking_section",
     "feedback",
     "conflict_declared",
-    "conflict_notes",
-    "decline_reason",
-    "tracking_column",
     "reminder_count",
+    "qorg_tracking_section_0_column",
     "last_reminder_on",
     "escalated_on",
+    "qorg_tracking_section_0_column_2",
     "replaces_assignment",
     "replaced_by",
+    "qorg_conflict_notes_full_width_section",
+    "conflict_notes",
+    "qorg_decline_reason_full_width_section",
+    "decline_reason",
+    "qorg_replacement_reason_full_width_section",
     "replacement_reason"
   ],
   "fields": [
@@ -153,6 +159,10 @@
       "in_standard_filter": 1
     },
     {
+      "fieldname": "qorg_people_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "weight",
       "label": "Weight (%)",
       "fieldtype": "Percent",
@@ -167,11 +177,6 @@
       "read_only": 1
     },
     {
-      "fieldname": "people_column",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
       "fieldname": "reviewer",
       "label": "Reviewer",
       "fieldtype": "Link",
@@ -179,6 +184,10 @@
       "reqd": 1,
       "in_list_view": 1,
       "in_standard_filter": 1
+    },
+    {
+      "fieldname": "qorg_people_section_0_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "reviewer_name",
@@ -199,6 +208,11 @@
       "label": "Reviewer Category",
       "fieldtype": "Data",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_people_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "related_department",
@@ -226,29 +240,15 @@
       "default": "0"
     },
     {
-      "fieldname": "conflict_notes",
-      "label": "Conflict Notes",
-      "fieldtype": "Small Text",
-      "depends_on": "eval:doc.conflict_declared",
-      "mandatory_depends_on": "eval:doc.conflict_declared"
-    },
-    {
-      "fieldname": "decline_reason",
-      "label": "Decline Reason",
-      "fieldtype": "Small Text",
-      "depends_on": "eval:doc.status=='Declined'"
-    },
-    {
-      "fieldname": "tracking_column",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
       "fieldname": "reminder_count",
       "label": "Reminder Count",
       "fieldtype": "Int",
       "default": "0",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_tracking_section_0_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "last_reminder_on",
@@ -263,6 +263,10 @@
       "read_only": 1
     },
     {
+      "fieldname": "qorg_tracking_section_0_column_2",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "replaces_assignment",
       "label": "Replaces Assignment",
       "fieldtype": "Link",
@@ -275,6 +279,34 @@
       "fieldtype": "Link",
       "options": "Evaluation Assignment",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_conflict_notes_full_width_section",
+      "label": "Conflict Notes",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "conflict_notes",
+      "label": "Conflict Notes",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:doc.conflict_declared",
+      "mandatory_depends_on": "eval:doc.conflict_declared"
+    },
+    {
+      "fieldname": "qorg_decline_reason_full_width_section",
+      "label": "Decline Reason",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "decline_reason",
+      "label": "Decline Reason",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:doc.status=='Declined'"
+    },
+    {
+      "fieldname": "qorg_replacement_reason_full_width_section",
+      "label": "Replacement Reason",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "replacement_reason",

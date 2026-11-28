@@ -18,18 +18,25 @@
   "track_changes": 0,
   "name": "Applicant Screening Criterion",
   "field_order": [
+    "criterion_section",
     "sequence",
     "criterion",
     "criterion_type",
     "is_mandatory",
+    "criterion_col",
     "maximum_score",
-    "qorg_layout_column",
     "score",
     "result",
+    "evidence_section",
     "evidence_remarks",
     "page_break"
   ],
   "fields": [
+    {
+      "fieldname": "criterion_section",
+      "label": "Criterion and Result",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "sequence",
       "label": "Sequence",
@@ -63,14 +70,14 @@
       "columns": 1
     },
     {
+      "fieldname": "criterion_col",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "maximum_score",
       "label": "Maximum Score",
       "fieldtype": "Float",
       "read_only": 1
-    },
-    {
-      "fieldname": "qorg_layout_column",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "score",
@@ -85,7 +92,12 @@
       "fieldtype": "Select",
       "options": "Pending\nMet\nNot Met",
       "in_list_view": 1,
-      "columns": 1
+      "columns": 2
+    },
+    {
+      "fieldname": "evidence_section",
+      "label": "Evidence and Remarks",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "evidence_remarks",

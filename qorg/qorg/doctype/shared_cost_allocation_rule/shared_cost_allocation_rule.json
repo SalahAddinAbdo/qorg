@@ -44,8 +44,8 @@
     "difference_handling",
     "indirect_section",
     "indirect_base_method",
+    "qorg_rate_periods_full_width_section",
     "rate_periods",
-    "column_6",
     "indirect_cost_expense_account",
     "indirect_cost_recovery_account",
     "total_recovery_cap",
@@ -328,17 +328,17 @@
       "depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\""
     },
     {
+      "fieldname": "qorg_rate_periods_full_width_section",
+      "label": "Effective-Dated Rates",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "rate_periods",
       "label": "Effective-Dated Rates",
       "fieldtype": "Table",
       "options": "Indirect Cost Rate Period",
       "depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\"",
       "mandatory_depends_on": "eval:doc.allocation_category==\"Indirect Cost Recovery\""
-    },
-    {
-      "fieldname": "column_6",
-      "label": "",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "indirect_cost_expense_account",

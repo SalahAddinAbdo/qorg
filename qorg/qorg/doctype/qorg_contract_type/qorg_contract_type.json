@@ -20,7 +20,6 @@
     "confidential_by_default",
     "party_section",
     "party_model",
-    "allowed_parties",
     "require_primary_party",
     "party_column",
     "default_party_type",
@@ -42,13 +41,15 @@
     "requires_value",
     "allows_zero_value",
     "requires_currency",
+    "qorg_financial_section_0_column",
     "requires_payment_basis",
     "requires_ceiling_amount",
-    "financial_column",
     "requires_funding_context",
+    "qorg_financial_section_0_column_2",
     "requires_project",
     "requires_cost_center",
     "requires_funding_agreement",
+    "qorg_financial_section_more_1",
     "requires_budget_line",
     "operations_section",
     "requires_milestones",
@@ -65,13 +66,15 @@
     "requires_employee",
     "requires_appointment_letter",
     "requires_work_commencement",
+    "qorg_hr_section_0_column",
     "requires_probation",
     "requires_payroll_activation",
-    "hr_column",
     "requires_external_person",
+    "qorg_hr_section_0_column_2",
     "requires_participation_engagement",
     "requires_supervisor",
     "requires_expected_hours",
+    "qorg_hr_section_more_1",
     "requires_safeguarding_documents",
     "lifecycle_section",
     "initial_lifecycle_status",
@@ -85,7 +88,9 @@
     "allows_termination",
     "allows_supersession",
     "notes_section",
-    "notes"
+    "notes",
+    "qorg_allowed_parties_full_width_section",
+    "allowed_parties"
   ],
   "fields": [
     {
@@ -156,14 +161,6 @@
       "default": "Standard Party",
       "reqd": 1,
       "in_standard_filter": 1
-    },
-    {
-      "fieldname": "allowed_parties",
-      "label": "Allowed Parties",
-      "fieldtype": "Table",
-      "options": "QOrg Contract Allowed Party",
-      "depends_on": "eval:doc.party_model!='No Counterparty'",
-      "mandatory_depends_on": "eval:doc.party_model!='No Counterparty'"
     },
     {
       "fieldname": "require_primary_party",
@@ -296,6 +293,10 @@
       "default": "0"
     },
     {
+      "fieldname": "qorg_financial_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "requires_payment_basis",
       "label": "Requires Payment Basis",
       "fieldtype": "Check",
@@ -308,15 +309,14 @@
       "default": "0"
     },
     {
-      "fieldname": "financial_column",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
       "fieldname": "requires_funding_context",
       "label": "Requires Funding Context",
       "fieldtype": "Check",
       "default": "0"
+    },
+    {
+      "fieldname": "qorg_financial_section_0_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "requires_project",
@@ -335,6 +335,11 @@
       "label": "Requires Funding Agreement",
       "fieldtype": "Check",
       "default": "0"
+    },
+    {
+      "fieldname": "qorg_financial_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "requires_budget_line",
@@ -435,6 +440,10 @@
       "depends_on": "eval:['Employment','Volunteer','Internship','Consultancy'].includes(doc.category)"
     },
     {
+      "fieldname": "qorg_hr_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "requires_probation",
       "label": "Requires Probation",
       "fieldtype": "Check",
@@ -449,17 +458,15 @@
       "depends_on": "eval:['Employment','Volunteer','Internship','Consultancy'].includes(doc.category)"
     },
     {
-      "fieldname": "hr_column",
-      "label": "",
-      "fieldtype": "Column Break",
-      "depends_on": "eval:['Employment','Volunteer','Internship','Consultancy'].includes(doc.category)"
-    },
-    {
       "fieldname": "requires_external_person",
       "label": "Requires External Person",
       "fieldtype": "Check",
       "default": "0",
       "depends_on": "eval:['Employment','Volunteer','Internship','Consultancy'].includes(doc.category)"
+    },
+    {
+      "fieldname": "qorg_hr_section_0_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "requires_participation_engagement",
@@ -481,6 +488,11 @@
       "fieldtype": "Check",
       "default": "0",
       "depends_on": "eval:['Employment','Volunteer','Internship','Consultancy'].includes(doc.category)"
+    },
+    {
+      "fieldname": "qorg_hr_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "requires_safeguarding_documents",
@@ -563,6 +575,19 @@
       "fieldname": "notes",
       "label": "Notes",
       "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "qorg_allowed_parties_full_width_section",
+      "label": "Allowed Parties",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "allowed_parties",
+      "label": "Allowed Parties",
+      "fieldtype": "Table",
+      "options": "QOrg Contract Allowed Party",
+      "depends_on": "eval:doc.party_model!='No Counterparty'",
+      "mandatory_depends_on": "eval:doc.party_model!='No Counterparty'"
     }
   ],
   "permissions": [

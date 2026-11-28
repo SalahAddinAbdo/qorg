@@ -6,21 +6,30 @@
   "autoname": "hash",
   "track_changes": 0,
   "field_order": [
+    "qorg_row_overview_section",
     "activity",
     "category",
     "mandatory",
+    "qorg_qorg_row_overview_section_0_column",
     "assigned_user",
     "due_date",
     "status",
-    "qorg_layout_column",
-    "evidence",
+    "qorg_qorg_row_overview_section_0_column_2",
     "completed_by",
     "completed_on",
     "verified_by",
+    "qorg_qorg_row_overview_section_more_1",
     "verified_on",
+    "qorg_row_details_section",
+    "evidence",
     "remarks"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "activity",
       "label": "Activity",
@@ -47,6 +56,10 @@
       "columns": 1
     },
     {
+      "fieldname": "qorg_qorg_row_overview_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "assigned_user",
       "label": "Assigned User",
       "fieldtype": "Link",
@@ -71,13 +84,8 @@
       "columns": 1
     },
     {
-      "fieldname": "qorg_layout_column",
+      "fieldname": "qorg_qorg_row_overview_section_0_column_2",
       "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "evidence",
-      "label": "Evidence",
-      "fieldtype": "Attach"
     },
     {
       "fieldname": "completed_by",
@@ -100,10 +108,25 @@
       "read_only": 1
     },
     {
+      "fieldname": "qorg_qorg_row_overview_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "verified_on",
       "label": "Verified On",
       "fieldtype": "Datetime",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_row_details_section",
+      "label": "Details and Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "evidence",
+      "label": "Evidence",
+      "fieldtype": "Attach"
     },
     {
       "fieldname": "remarks",

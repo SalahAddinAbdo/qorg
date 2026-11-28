@@ -18,20 +18,29 @@
   "track_changes": 0,
   "name": "Recruitment Decision Log",
   "field_order": [
+    "qorg_row_overview_section",
     "previous_decision",
     "decision",
     "decision_date",
+    "qorg_qorg_row_overview_section_0_column",
     "decision_by",
     "screening_score",
     "assessment_score",
-    "qorg_layout_column",
+    "qorg_qorg_row_overview_section_0_column_2",
     "overall_score",
     "rank",
-    "rationale",
     "reopened",
-    "page_break"
+    "qorg_qorg_row_overview_section_more_1",
+    "page_break",
+    "qorg_row_details_section",
+    "rationale"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "previous_decision",
       "label": "Previous Decision",
@@ -55,6 +64,10 @@
       "columns": 2
     },
     {
+      "fieldname": "qorg_qorg_row_overview_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "decision_by",
       "label": "Decision By",
       "fieldtype": "Link",
@@ -76,7 +89,7 @@
       "read_only": 1
     },
     {
-      "fieldname": "qorg_layout_column",
+      "fieldname": "qorg_qorg_row_overview_section_0_column_2",
       "fieldtype": "Column Break"
     },
     {
@@ -96,16 +109,15 @@
       "columns": 1
     },
     {
-      "fieldname": "rationale",
-      "label": "Evidence-based Rationale",
-      "fieldtype": "Small Text",
-      "read_only": 1
-    },
-    {
       "fieldname": "reopened",
       "label": "Reopened",
       "fieldtype": "Check",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "page_break",
@@ -114,6 +126,17 @@
       "default": "0",
       "allow_on_submit": 1,
       "print_hide": 1
+    },
+    {
+      "fieldname": "qorg_row_details_section",
+      "label": "Details and Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "rationale",
+      "label": "Evidence-based Rationale",
+      "fieldtype": "Small Text",
+      "read_only": 1
     }
   ]
 }

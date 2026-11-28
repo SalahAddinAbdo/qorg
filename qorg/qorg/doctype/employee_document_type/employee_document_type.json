@@ -17,28 +17,34 @@
     "has_issue_date",
     "has_expiry_date",
     "default_validity_months",
+    "qorg_properties_section_0_column",
     "renewal_required",
     "verification_required",
-    "properties_column",
     "storage_reference_required",
+    "qorg_properties_section_0_column_2",
     "signed_copy_required",
     "multiple_active_records_allowed",
     "issuing_authority_required",
+    "qorg_properties_section_more_1",
     "reference_number_required",
     "security_section",
-    "allowed_viewer_roles",
-    "allowed_verifier_roles",
     "mask_reference_number",
     "hide_external_url",
     "exclude_from_general_attachments",
+    "qorg_security_section_0_column",
     "audit_access",
-    "security_column",
     "expiry_warning_days",
     "escalation_role",
+    "qorg_security_section_0_column_2",
     "notify_employee",
     "notify_hr",
     "notify_supervisor",
-    "notify_compliance"
+    "qorg_security_section_more_1",
+    "notify_compliance",
+    "qorg_allowed_viewer_roles_full_width_section",
+    "allowed_viewer_roles",
+    "qorg_allowed_verifier_roles_full_width_section",
+    "allowed_verifier_roles"
   ],
   "fields": [
     {
@@ -124,6 +130,10 @@
       "depends_on": "eval:doc.has_expiry_date"
     },
     {
+      "fieldname": "qorg_properties_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "renewal_required",
       "label": "Renewal Required",
       "fieldtype": "Check",
@@ -136,15 +146,14 @@
       "default": "1"
     },
     {
-      "fieldname": "properties_column",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
       "fieldname": "storage_reference_required",
       "label": "Storage Reference Required",
       "fieldtype": "Check",
       "default": "1"
+    },
+    {
+      "fieldname": "qorg_properties_section_0_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "signed_copy_required",
@@ -165,6 +174,11 @@
       "default": "0"
     },
     {
+      "fieldname": "qorg_properties_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "reference_number_required",
       "label": "Reference Number Required",
       "fieldtype": "Check",
@@ -174,18 +188,6 @@
       "fieldname": "security_section",
       "label": "Security and Notifications",
       "fieldtype": "Section Break"
-    },
-    {
-      "fieldname": "allowed_viewer_roles",
-      "label": "Allowed Viewer Roles",
-      "fieldtype": "Table MultiSelect",
-      "options": "Has Role"
-    },
-    {
-      "fieldname": "allowed_verifier_roles",
-      "label": "Allowed Verifier Roles",
-      "fieldtype": "Table MultiSelect",
-      "options": "Has Role"
     },
     {
       "fieldname": "mask_reference_number",
@@ -206,15 +208,14 @@
       "default": "1"
     },
     {
+      "fieldname": "qorg_security_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "audit_access",
       "label": "Audit Access",
       "fieldtype": "Check",
       "default": "1"
-    },
-    {
-      "fieldname": "security_column",
-      "label": "",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "expiry_warning_days",
@@ -228,6 +229,10 @@
       "label": "Escalation Role",
       "fieldtype": "Link",
       "options": "Role"
+    },
+    {
+      "fieldname": "qorg_security_section_0_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "notify_employee",
@@ -248,10 +253,37 @@
       "default": "0"
     },
     {
+      "fieldname": "qorg_security_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "notify_compliance",
       "label": "Notify Compliance",
       "fieldtype": "Check",
       "default": "0"
+    },
+    {
+      "fieldname": "qorg_allowed_viewer_roles_full_width_section",
+      "label": "Allowed Viewer Roles",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "allowed_viewer_roles",
+      "label": "Allowed Viewer Roles",
+      "fieldtype": "Table MultiSelect",
+      "options": "Has Role"
+    },
+    {
+      "fieldname": "qorg_allowed_verifier_roles_full_width_section",
+      "label": "Allowed Verifier Roles",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "allowed_verifier_roles",
+      "label": "Allowed Verifier Roles",
+      "fieldtype": "Table MultiSelect",
+      "options": "Has Role"
     }
   ],
   "permissions": [

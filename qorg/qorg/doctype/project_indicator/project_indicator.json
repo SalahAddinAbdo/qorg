@@ -89,14 +89,15 @@
     "latest_approved_period_actual",
     "approved_cumulative_actual",
     "latest_cumulative_target",
+    "qorg_latest_section_0_column",
     "achievement_percentage",
-    "ui_col_24",
     "approved_cumulative_numerator",
     "approved_cumulative_denominator",
+    "qorg_latest_section_0_column_2",
     "last_reporting_period",
     "last_reporting_date",
-    "ui_col_25",
     "latest_data_quality_status",
+    "qorg_latest_section_more_1",
     "latest_approved_progress_update",
     "indicator_performance_status",
     "control_section",
@@ -1577,6 +1578,10 @@
       "report_hide": 0
     },
     {
+      "fieldname": "qorg_latest_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "achievement_percentage",
       "fieldtype": "Percent",
       "label": "Achievement %",
@@ -1599,10 +1604,6 @@
       "allow_in_quick_entry": 0,
       "print_hide": 0,
       "report_hide": 0
-    },
-    {
-      "fieldname": "ui_col_24",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "approved_cumulative_numerator",
@@ -1655,6 +1656,10 @@
       "report_hide": 0
     },
     {
+      "fieldname": "qorg_latest_section_0_column_2",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "last_reporting_period",
       "fieldtype": "Data",
       "label": "Last Reporting Period",
@@ -1703,10 +1708,6 @@
       "report_hide": 0
     },
     {
-      "fieldname": "ui_col_25",
-      "fieldtype": "Column Break"
-    },
-    {
       "fieldname": "latest_data_quality_status",
       "fieldtype": "Select",
       "label": "Latest Data Quality Status",
@@ -1730,6 +1731,11 @@
       "allow_in_quick_entry": 0,
       "print_hide": 0,
       "report_hide": 0
+    },
+    {
+      "fieldname": "qorg_latest_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "latest_approved_progress_update",

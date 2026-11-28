@@ -6,17 +6,24 @@
   "istable": 1,
   "editable_grid": 1,
   "field_order": [
+    "qorg_row_overview_section",
     "enabled",
     "reference_doctype",
     "display_label",
     "menu_group",
-    "qorg_layout_column",
+    "qorg_row_overview_column",
     "is_favorite",
-    "description",
     "icon",
-    "sequence"
+    "sequence",
+    "qorg_row_details_section",
+    "description"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "enabled",
       "fieldtype": "Check",
@@ -52,7 +59,7 @@
       "description": "Optional group such as Favorites, Projects, People, Procurement or Finance."
     },
     {
-      "fieldname": "qorg_layout_column",
+      "fieldname": "qorg_row_overview_column",
       "fieldtype": "Column Break"
     },
     {
@@ -60,12 +67,6 @@
       "fieldtype": "Check",
       "label": "Highlight as Favorite",
       "default": "0"
-    },
-    {
-      "fieldname": "description",
-      "fieldtype": "Small Text",
-      "label": "Description",
-      "description": "Optional short description shown in the Create command menu."
     },
     {
       "fieldname": "icon",
@@ -82,6 +83,17 @@
       "default": "10",
       "in_list_view": 1,
       "columns": 1
+    },
+    {
+      "fieldname": "qorg_row_details_section",
+      "label": "Details and Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Small Text",
+      "label": "Description",
+      "description": "Optional short description shown in the Create command menu."
     }
   ],
   "permissions": [],

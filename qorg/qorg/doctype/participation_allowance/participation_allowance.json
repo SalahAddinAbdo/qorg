@@ -6,16 +6,23 @@
   "istable": 1,
   "track_changes": 0,
   "field_order": [
+    "qorg_row_overview_section",
     "allowance_type",
     "amount",
     "currency",
+    "qorg_row_overview_column",
     "frequency",
-    "qorg_layout_column",
     "project",
     "cost_center",
+    "qorg_row_details_section",
     "conditions"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "allowance_type",
       "label": "Allowance Type",
@@ -44,6 +51,10 @@
       "columns": 1
     },
     {
+      "fieldname": "qorg_row_overview_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "frequency",
       "label": "Frequency",
       "fieldtype": "Select",
@@ -51,10 +62,6 @@
       "reqd": 1,
       "in_list_view": 1,
       "columns": 2
-    },
-    {
-      "fieldname": "qorg_layout_column",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "project",
@@ -69,6 +76,11 @@
       "label": "Cost Center",
       "fieldtype": "Link",
       "options": "Cost Center"
+    },
+    {
+      "fieldname": "qorg_row_details_section",
+      "label": "Details and Evidence",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "conditions",

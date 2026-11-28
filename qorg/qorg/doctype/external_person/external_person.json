@@ -1,796 +1,844 @@
 {
- "actions": [],
- "allow_import": 1,
- "allow_rename": 1,
- "autoname": "naming_series:",
- "creation": "2026-10-23 22:45:00.000000",
- "custom": 0,
- "doctype": "DocType",
- "engine": "InnoDB",
- "field_order": [
-  "overview_tab",
-  "identity_section",
-  "naming_series",
-  "full_name",
-  "name_in_arabic",
-  "identity_col_2",
-  "first_name",
-  "middle_name",
-  "last_name",
-  "identity_col_3",
-  "person_status",
-  "image",
-  "contact_section",
-  "primary_email",
-  "secondary_email",
-  "mobile_no",
-  "contact_col_2",
-  "alternative_mobile_no",
-  "current_location",
-  "preferred_contact_method",
-  "contact_col_3",
-  "preferred_language",
-  "contact",
-  "address",
-  "official_section",
-  "identification_type",
-  "identification_number",
-  "identification_country",
-  "official_col_2",
-  "date_of_birth",
-  "nationality",
-  "marital_status",
-  "official_col_3",
-  "gender",
-  "data_retention_until",
-  "profile_tab",
-  "summary_section",
-  "professional_title",
-  "years_of_experience",
-  "summary_col_2",
-  "availability_status",
-  "profile_completion",
-  "last_profile_update",
-  "professional_summary_section",
-  "professional_summary",
-  "career_objective_section",
-  "career_objective",
-  "expertise_section",
-  "sectors_of_expertise",
-  "qorg_layout_section",
-  "key_achievements",
-  "education_section",
-  "education",
-  "experience_section",
-  "experience",
-  "training_section",
-  "training",
-  "language_section",
-  "languages",
-  "skill_section",
-  "skills",
-  "volunteer_experience_section",
-  "volunteer_experience",
-  "reference_section",
-  "references",
-  "documents_section",
-  "resume",
-  "portfolio_url",
-  "documents_col_2",
-  "linkedin_url",
-  "privacy_tab",
-  "privacy_section",
-  "source",
-  "privacy_consent",
-  "privacy_consent_on",
-  "privacy_col_2",
-  "privacy_consent_source",
-  "user",
-  "allow_portal_editing",
-  "portal_edit_lock_reason",
-  "portal_edit_locked_by",
-  "portal_edit_locked_on",
-  "employee",
-  "links_section",
-  "merged_into",
-  "source_reference_doctype",
-  "links_col_2",
-  "source_reference_name",
-  "external_roles_section",
-  "external_roles",
-  "payment_column",
-  "preferred_payment_method",
-  "bank_name",
-  "account_holder_name",
-  "bank_account_iban",
-  "mobile_wallet_provider",
-  "mobile_wallet_number",
-  "payment_currency",
-  "payment_details_verified",
-  "payment_verified_by",
-  "payment_verified_on",
-  "identity_verification_status",
-  "identity_verified_by",
-  "identity_verified_on",
-  "payment_verification_reference",
-  "identity_verification_notes",
-  "identification_expiry_date",
-  "supplier"
- ],
- "fields": [
-  {
-   "fieldname": "overview_tab",
-   "label": "Overview",
-   "fieldtype": "Tab Break"
-  },
-  {
-   "fieldname": "identity_section",
-   "label": "Identity",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "naming_series",
-   "label": "Naming Series",
-   "fieldtype": "Select",
-   "options": "EP-.YYYY.-.#####",
-   "default": "EP-.YYYY.-.#####",
-   "reqd": 1
-  },
-  {
-   "fieldname": "full_name",
-   "label": "Full Name",
-   "fieldtype": "Data",
-   "reqd": 1,
-   "in_global_search": 1
-  },
-  {
-   "fieldname": "name_in_arabic",
-   "label": "Name in Arabic",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "identity_col_2",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "first_name",
-   "label": "First Name",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "middle_name",
-   "label": "Middle Name",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "last_name",
-   "label": "Last Name",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "identity_col_3",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "person_status",
-   "label": "Status",
-   "fieldtype": "Select",
-   "options": "Active\nInactive\nDeceased\nDo Not Contact\nMerged",
-   "default": "Active",
-   "reqd": 1,
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "in_preview": 1
-  },
-  {
-   "fieldname": "image",
-   "label": "Photo",
-   "fieldtype": "Attach Image"
-  },
-  {
-   "fieldname": "contact_section",
-   "label": "Contact",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "primary_email",
-   "label": "Primary Email",
-   "fieldtype": "Data",
-   "options": "Email",
-   "mandatory_depends_on": "eval:!doc.mobile_no",
-   "in_list_view": 1,
-   "in_preview": 1
-  },
-  {
-   "fieldname": "secondary_email",
-   "label": "Secondary Email",
-   "fieldtype": "Data",
-   "options": "Email"
-  },
-  {
-   "fieldname": "mobile_no",
-   "label": "Mobile Number",
-   "fieldtype": "Data",
-   "options": "Phone",
-   "in_list_view": 1,
-   "in_preview": 1
-  },
-  {
-   "fieldname": "contact_col_2",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "alternative_mobile_no",
-   "label": "Alternative Mobile",
-   "fieldtype": "Data",
-   "options": "Phone"
-  },
-  {
-   "fieldname": "current_location",
-   "label": "Current Location",
-   "fieldtype": "Data",
-   "in_global_search": 1
-  },
-  {
-   "fieldname": "preferred_contact_method",
-   "label": "Preferred Contact Method",
-   "fieldtype": "Select",
-   "options": "Email\nMobile\nPortal",
-   "default": "Email"
-  },
-  {
-   "fieldname": "contact_col_3",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "preferred_language",
-   "label": "Preferred Language",
-   "fieldtype": "Link",
-   "options": "Language"
-  },
-  {
-   "fieldname": "contact",
-   "label": "Contact",
-   "fieldtype": "Link",
-   "options": "Contact"
-  },
-  {
-   "fieldname": "address",
-   "label": "Address",
-   "fieldtype": "Link",
-   "options": "Address"
-  },
-  {
-   "fieldname": "official_section",
-   "label": "Official Identity",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "identification_type",
-   "label": "Identification Type",
-   "fieldtype": "Select",
-   "options": "National ID\nPassport\nOther"
-  },
-  {
-   "fieldname": "identification_number",
-   "label": "Identification Number",
-   "fieldtype": "Data",
-   "permlevel": 1
-  },
-  {
-   "fieldname": "identification_country",
-   "label": "Identification Country",
-   "fieldtype": "Link",
-   "options": "Country",
-   "permlevel": 1
-  },
-  {
-   "fieldname": "official_col_2",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "date_of_birth",
-   "label": "Date of Birth",
-   "fieldtype": "Date",
-   "permlevel": 1
-  },
-  {
-   "fieldname": "nationality",
-   "label": "Nationality",
-   "fieldtype": "Link",
-   "options": "Country",
-   "permlevel": 1,
-   "in_standard_filter": 1
-  },
-  {
-   "fieldname": "marital_status",
-   "label": "Marital Status",
-   "fieldtype": "Select",
-   "options": "Single\nMarried\nDivorced\nWidowed",
-   "permlevel": 1
-  },
-  {
-   "fieldname": "official_col_3",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "gender",
-   "label": "Gender",
-   "fieldtype": "Link",
-   "options": "Gender",
-   "permlevel": 1
-  },
-  {
-   "fieldname": "data_retention_until",
-   "label": "Retain Until",
-   "fieldtype": "Date"
-  },
-  {
-   "fieldname": "profile_tab",
-   "label": "Professional Profile",
-   "fieldtype": "Tab Break"
-  },
-  {
-   "fieldname": "summary_section",
-   "label": "Profile Summary",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "professional_title",
-   "label": "Professional Title",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "years_of_experience",
-   "label": "Years of Experience",
-   "fieldtype": "Float",
-   "read_only": 1
-  },
-  {
-   "fieldname": "summary_col_2",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "availability_status",
-   "label": "Availability Status",
-   "fieldtype": "Select",
-   "options": "Available\nOpen to Opportunities\nNot Available",
-   "default": "Open to Opportunities",
-   "in_standard_filter": 1
-  },
-  {
-   "fieldname": "profile_completion",
-   "label": "Profile Completion %",
-   "fieldtype": "Percent",
-   "read_only": 1
-  },
-  {
-   "fieldname": "last_profile_update",
-   "label": "Last Profile Update",
-   "fieldtype": "Datetime",
-   "read_only": 1
-  },
-  {
-   "fieldname": "professional_summary_section",
-   "label": "Professional Summary",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "professional_summary",
-   "label": "Professional Summary",
-   "fieldtype": "Text Editor"
-  },
-  {
-   "fieldname": "career_objective_section",
-   "label": "Career Objective",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "career_objective",
-   "label": "Career Objective",
-   "fieldtype": "Text Editor"
-  },
-  {
-   "fieldname": "expertise_section",
-   "label": "Expertise and Availability",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "sectors_of_expertise",
-   "label": "Sectors / Areas of Expertise",
-   "fieldtype": "Small Text"
-  },
-  {
-   "fieldname": "qorg_layout_section",
-   "fieldtype": "Section Break",
-   "label": "Key Achievements"
-  },
-  {
-   "fieldname": "key_achievements",
-   "label": "Key Achievements",
-   "fieldtype": "Text Editor"
-  },
-  {
-   "fieldname": "education_section",
-   "label": "Education",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "education",
-   "label": "Education",
-   "fieldtype": "Table",
-   "options": "External Person Education"
-  },
-  {
-   "fieldname": "experience_section",
-   "label": "Work Experience",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "experience",
-   "label": "Work Experience",
-   "fieldtype": "Table",
-   "options": "External Person Experience"
-  },
-  {
-   "fieldname": "training_section",
-   "label": "Training and Certifications",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "training",
-   "label": "Training and Certifications",
-   "fieldtype": "Table",
-   "options": "External Person Training"
-  },
-  {
-   "fieldname": "language_section",
-   "label": "Languages",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "languages",
-   "label": "Languages",
-   "fieldtype": "Table",
-   "options": "External Person Language"
-  },
-  {
-   "fieldname": "skill_section",
-   "label": "Skills",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "skills",
-   "label": "Skills",
-   "fieldtype": "Table",
-   "options": "External Person Skill"
-  },
-  {
-   "fieldname": "volunteer_experience_section",
-   "label": "Volunteering Experience",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "volunteer_experience",
-   "label": "Volunteering Experience",
-   "fieldtype": "Table",
-   "options": "External Person Volunteer Experience"
-  },
-  {
-   "fieldname": "reference_section",
-   "label": "Professional References",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "references",
-   "label": "Professional References",
-   "fieldtype": "Table",
-   "options": "External Person Reference"
-  },
-  {
-   "fieldname": "documents_section",
-   "label": "Documents and Links",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "resume",
-   "label": "Existing Resume",
-   "fieldtype": "Attach"
-  },
-  {
-   "fieldname": "portfolio_url",
-   "label": "Portfolio URL",
-   "fieldtype": "Data",
-   "options": "URL"
-  },
-  {
-   "fieldname": "documents_col_2",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "linkedin_url",
-   "label": "LinkedIn URL",
-   "fieldtype": "Data",
-   "options": "URL"
-  },
-  {
-   "fieldname": "privacy_tab",
-   "label": "Privacy and Links",
-   "fieldtype": "Tab Break"
-  },
-  {
-   "fieldname": "privacy_section",
-   "label": "Privacy",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "source",
-   "label": "Source",
-   "fieldtype": "Select",
-   "options": "Job Application\nPortal Registration\nManual Entry\nEmployee Referral\nImport\nMigration\nOther",
-   "default": "Manual Entry",
-   "reqd": 1,
-   "in_standard_filter": 1
-  },
-  {
-   "fieldname": "privacy_consent",
-   "label": "Privacy Consent",
-   "fieldtype": "Check",
-   "reqd": 1
-  },
-  {
-   "fieldname": "privacy_consent_on",
-   "label": "Consent On",
-   "fieldtype": "Datetime",
-   "mandatory_depends_on": "eval:doc.privacy_consent==1"
-  },
-  {
-   "fieldname": "privacy_col_2",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "privacy_consent_source",
-   "label": "Consent Source",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "user",
-   "label": "Portal User",
-   "fieldtype": "Link",
-   "options": "User"
-  },
-  {
-   "fieldname": "allow_portal_editing",
-   "label": "Allow Portal Editing",
-   "fieldtype": "Check",
-   "default": "1"
-  },
-  {
-   "fieldname": "portal_edit_lock_reason",
-   "label": "Portal Edit Lock Reason",
-   "fieldtype": "Small Text",
-   "depends_on": "eval:doc.allow_portal_editing==0"
-  },
-  {
-   "fieldname": "portal_edit_locked_by",
-   "label": "Portal Editing Locked By",
-   "fieldtype": "Link",
-   "options": "User",
-   "read_only": 1,
-   "no_copy": 1
-  },
-  {
-   "fieldname": "portal_edit_locked_on",
-   "label": "Portal Editing Locked On",
-   "fieldtype": "Datetime",
-   "read_only": 1,
-   "no_copy": 1
-  },
-  {
-   "fieldname": "employee",
-   "label": "Employee",
-   "fieldtype": "Link",
-   "options": "Employee",
-   "read_only": 1
-  },
-  {
-   "fieldname": "links_section",
-   "label": "System Links",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "merged_into",
-   "label": "Merged Into",
-   "fieldtype": "Link",
-   "options": "External Person",
-   "read_only": 1
-  },
-  {
-   "fieldname": "source_reference_doctype",
-   "label": "Source Type",
-   "fieldtype": "Link",
-   "options": "DocType",
-   "read_only": 1
-  },
-  {
-   "fieldname": "links_col_2",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "source_reference_name",
-   "label": "Source Reference",
-   "fieldtype": "Dynamic Link",
-   "options": "source_reference_doctype",
-   "read_only": 1
-  },
-  {
-   "fieldname": "external_roles_section",
-   "label": "External Roles and Payment",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "external_roles",
-   "label": "External Roles",
-   "fieldtype": "Table",
-   "options": "External Person Role"
-  },
-  {
-   "fieldname": "payment_column",
-   "label": "",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "preferred_payment_method",
-   "label": "Preferred Payment Method",
-   "fieldtype": "Link",
-   "options": "Mode of Payment"
-  },
-  {
-   "fieldname": "bank_name",
-   "label": "Bank Name",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "account_holder_name",
-   "label": "Account Holder Name",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "bank_account_iban",
-   "label": "Bank Account / IBAN",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "mobile_wallet_provider",
-   "label": "Mobile Wallet Provider",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "mobile_wallet_number",
-   "label": "Mobile Wallet Number",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "payment_currency",
-   "label": "Payment Currency",
-   "fieldtype": "Link",
-   "options": "Currency"
-  },
-  {
-   "fieldname": "payment_details_verified",
-   "label": "Payment Details Verified",
-   "fieldtype": "Check",
-   "default": "0"
-  },
-  {
-   "fieldname": "payment_verified_by",
-   "label": "Payment Verified By",
-   "fieldtype": "Link",
-   "options": "User",
-   "read_only": 1
-  },
-  {
-   "fieldname": "payment_verified_on",
-   "label": "Payment Verified On",
-   "fieldtype": "Datetime",
-   "read_only": 1
-  },
-  {
-   "fieldname": "identity_verification_status",
-   "label": "Identity Verification Status",
-   "fieldtype": "Select",
-   "options": "Not Verified\nPending\nVerified\nRejected\nExpired",
-   "default": "Not Verified"
-  },
-  {
-   "fieldname": "identity_verified_by",
-   "label": "Identity Verified By",
-   "fieldtype": "Link",
-   "options": "User",
-   "read_only": 1
-  },
-  {
-   "fieldname": "identity_verified_on",
-   "label": "Identity Verified On",
-   "fieldtype": "Datetime",
-   "read_only": 1
-  },
-  {
-   "fieldname": "payment_verification_reference",
-   "label": "Payment Verification Reference",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "identity_verification_notes",
-   "label": "Identity Verification Notes",
-   "fieldtype": "Small Text"
-  },
-  {
-   "fieldname": "identification_expiry_date",
-   "label": "Identification Expiry Date",
-   "fieldtype": "Date"
-  },
-  {
-   "fieldname": "supplier",
-   "label": "Supplier",
-   "fieldtype": "Link",
-   "options": "Supplier"
-  }
- ],
- "grid_page_length": 50,
- "index_web_pages_for_search": 0,
- "istable": 0,
- "links": [],
- "modified": "2026-10-23 23:30:00.000000",
- "modified_by": "Administrator",
- "module": "QOrg",
- "name": "External Person",
- "owner": "Administrator",
- "permissions": [
-  {
-   "role": "Opportunity Manager",
-   "read": 1,
-   "write": 1,
-   "create": 1,
-   "delete": 1,
-   "report": 1,
-   "export": 1,
-   "print": 1,
-   "email": 1,
-   "share": 1
-  },
-  {
-   "role": "System Manager",
-   "read": 1,
-   "write": 1,
-   "create": 1,
-   "delete": 1,
-   "report": 1,
-   "export": 1,
-   "print": 1,
-   "email": 1,
-   "share": 1
-  }
- ],
- "row_format": "Dynamic",
- "sort_field": "modified",
- "sort_order": "DESC",
- "states": [],
- "track_changes": 1,
- "quick_entry": 0,
- "show_name_in_global_search": 1,
- "title_field": "full_name",
- "show_title_field_in_link": 1,
- "search_fields": "full_name,name_in_arabic,professional_title,current_location,primary_email,mobile_no",
- "image_field": "image"
+  "actions": [],
+  "allow_import": 1,
+  "allow_rename": 1,
+  "autoname": "naming_series:",
+  "creation": "2026-10-23 22:45:00.000000",
+  "custom": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "overview_tab",
+    "identity_section",
+    "naming_series",
+    "full_name",
+    "name_in_arabic",
+    "identity_col_2",
+    "first_name",
+    "middle_name",
+    "last_name",
+    "identity_col_3",
+    "person_status",
+    "image",
+    "contact_section",
+    "primary_email",
+    "secondary_email",
+    "mobile_no",
+    "contact_col_2",
+    "alternative_mobile_no",
+    "current_location",
+    "preferred_contact_method",
+    "contact_col_3",
+    "preferred_language",
+    "contact",
+    "address",
+    "official_section",
+    "identification_type",
+    "identification_number",
+    "identification_country",
+    "official_col_2",
+    "date_of_birth",
+    "nationality",
+    "marital_status",
+    "official_col_3",
+    "gender",
+    "data_retention_until",
+    "profile_tab",
+    "summary_section",
+    "professional_title",
+    "years_of_experience",
+    "summary_col_2",
+    "availability_status",
+    "profile_completion",
+    "last_profile_update",
+    "professional_summary_section",
+    "professional_summary",
+    "career_objective_section",
+    "career_objective",
+    "expertise_section",
+    "sectors_of_expertise",
+    "qorg_layout_section",
+    "key_achievements",
+    "education_section",
+    "education",
+    "experience_section",
+    "experience",
+    "training_section",
+    "training",
+    "language_section",
+    "languages",
+    "skill_section",
+    "skills",
+    "volunteer_experience_section",
+    "volunteer_experience",
+    "reference_section",
+    "references",
+    "documents_section",
+    "resume",
+    "portfolio_url",
+    "documents_col_2",
+    "linkedin_url",
+    "privacy_tab",
+    "privacy_section",
+    "source",
+    "privacy_consent",
+    "privacy_consent_on",
+    "qorg_privacy_section_0_column",
+    "privacy_consent_source",
+    "user",
+    "allow_portal_editing",
+    "qorg_privacy_section_0_column_2",
+    "portal_edit_locked_by",
+    "portal_edit_locked_on",
+    "employee",
+    "qorg_portal_edit_lock_reason_full_width_section",
+    "portal_edit_lock_reason",
+    "links_section",
+    "merged_into",
+    "source_reference_doctype",
+    "links_col_2",
+    "source_reference_name",
+    "external_roles_section",
+    "qorg_external_roles_full_width_section",
+    "preferred_payment_method",
+    "bank_name",
+    "account_holder_name",
+    "qorg_qorg_external_roles_full_width_section_column",
+    "bank_account_iban",
+    "mobile_wallet_provider",
+    "mobile_wallet_number",
+    "qorg_qorg_external_roles_full_width_section_column_2",
+    "payment_currency",
+    "payment_details_verified",
+    "payment_verified_by",
+    "qorg_qorg_external_roles_full_width_section_more_1",
+    "payment_verified_on",
+    "identity_verification_status",
+    "identity_verified_by",
+    "qorg_qorg_external_roles_full_width_section_column_3",
+    "identity_verified_on",
+    "payment_verification_reference",
+    "qorg_qorg_external_roles_full_width_section_column_4",
+    "identification_expiry_date",
+    "supplier",
+    "qorg_external_roles_section",
+    "external_roles",
+    "qorg_identity_verification_notes_section",
+    "identity_verification_notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "overview_tab",
+      "label": "Overview",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "identity_section",
+      "label": "Identity",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "EP-.YYYY.-.#####",
+      "default": "EP-.YYYY.-.#####",
+      "reqd": 1
+    },
+    {
+      "fieldname": "full_name",
+      "label": "Full Name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_global_search": 1
+    },
+    {
+      "fieldname": "name_in_arabic",
+      "label": "Name in Arabic",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "identity_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "first_name",
+      "label": "First Name",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "middle_name",
+      "label": "Middle Name",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "last_name",
+      "label": "Last Name",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "identity_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "person_status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Active\nInactive\nDeceased\nDo Not Contact\nMerged",
+      "default": "Active",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "image",
+      "label": "Photo",
+      "fieldtype": "Attach Image"
+    },
+    {
+      "fieldname": "contact_section",
+      "label": "Contact",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "primary_email",
+      "label": "Primary Email",
+      "fieldtype": "Data",
+      "options": "Email",
+      "mandatory_depends_on": "eval:!doc.mobile_no",
+      "in_list_view": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "secondary_email",
+      "label": "Secondary Email",
+      "fieldtype": "Data",
+      "options": "Email"
+    },
+    {
+      "fieldname": "mobile_no",
+      "label": "Mobile Number",
+      "fieldtype": "Data",
+      "options": "Phone",
+      "in_list_view": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "contact_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "alternative_mobile_no",
+      "label": "Alternative Mobile",
+      "fieldtype": "Data",
+      "options": "Phone"
+    },
+    {
+      "fieldname": "current_location",
+      "label": "Current Location",
+      "fieldtype": "Data",
+      "in_global_search": 1
+    },
+    {
+      "fieldname": "preferred_contact_method",
+      "label": "Preferred Contact Method",
+      "fieldtype": "Select",
+      "options": "Email\nMobile\nPortal",
+      "default": "Email"
+    },
+    {
+      "fieldname": "contact_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "preferred_language",
+      "label": "Preferred Language",
+      "fieldtype": "Link",
+      "options": "Language"
+    },
+    {
+      "fieldname": "contact",
+      "label": "Contact",
+      "fieldtype": "Link",
+      "options": "Contact"
+    },
+    {
+      "fieldname": "address",
+      "label": "Address",
+      "fieldtype": "Link",
+      "options": "Address"
+    },
+    {
+      "fieldname": "official_section",
+      "label": "Official Identity",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "identification_type",
+      "label": "Identification Type",
+      "fieldtype": "Select",
+      "options": "National ID\nPassport\nOther"
+    },
+    {
+      "fieldname": "identification_number",
+      "label": "Identification Number",
+      "fieldtype": "Data",
+      "permlevel": 1
+    },
+    {
+      "fieldname": "identification_country",
+      "label": "Identification Country",
+      "fieldtype": "Link",
+      "options": "Country",
+      "permlevel": 1
+    },
+    {
+      "fieldname": "official_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "date_of_birth",
+      "label": "Date of Birth",
+      "fieldtype": "Date",
+      "permlevel": 1
+    },
+    {
+      "fieldname": "nationality",
+      "label": "Nationality",
+      "fieldtype": "Link",
+      "options": "Country",
+      "permlevel": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "marital_status",
+      "label": "Marital Status",
+      "fieldtype": "Select",
+      "options": "Single\nMarried\nDivorced\nWidowed",
+      "permlevel": 1
+    },
+    {
+      "fieldname": "official_col_3",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "gender",
+      "label": "Gender",
+      "fieldtype": "Link",
+      "options": "Gender",
+      "permlevel": 1
+    },
+    {
+      "fieldname": "data_retention_until",
+      "label": "Retain Until",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "profile_tab",
+      "label": "Professional Profile",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "summary_section",
+      "label": "Profile Summary",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "professional_title",
+      "label": "Professional Title",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "years_of_experience",
+      "label": "Years of Experience",
+      "fieldtype": "Float",
+      "read_only": 1
+    },
+    {
+      "fieldname": "summary_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "availability_status",
+      "label": "Availability Status",
+      "fieldtype": "Select",
+      "options": "Available\nOpen to Opportunities\nNot Available",
+      "default": "Open to Opportunities",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "profile_completion",
+      "label": "Profile Completion %",
+      "fieldtype": "Percent",
+      "read_only": 1
+    },
+    {
+      "fieldname": "last_profile_update",
+      "label": "Last Profile Update",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "professional_summary_section",
+      "label": "Professional Summary",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "professional_summary",
+      "label": "Professional Summary",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "career_objective_section",
+      "label": "Career Objective",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "career_objective",
+      "label": "Career Objective",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "expertise_section",
+      "label": "Expertise and Availability",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "sectors_of_expertise",
+      "label": "Sectors / Areas of Expertise",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "qorg_layout_section",
+      "fieldtype": "Section Break",
+      "label": "Key Achievements"
+    },
+    {
+      "fieldname": "key_achievements",
+      "label": "Key Achievements",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "education_section",
+      "label": "Education",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "education",
+      "label": "Education",
+      "fieldtype": "Table",
+      "options": "External Person Education"
+    },
+    {
+      "fieldname": "experience_section",
+      "label": "Work Experience",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "experience",
+      "label": "Work Experience",
+      "fieldtype": "Table",
+      "options": "External Person Experience"
+    },
+    {
+      "fieldname": "training_section",
+      "label": "Training and Certifications",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "training",
+      "label": "Training and Certifications",
+      "fieldtype": "Table",
+      "options": "External Person Training"
+    },
+    {
+      "fieldname": "language_section",
+      "label": "Languages",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "languages",
+      "label": "Languages",
+      "fieldtype": "Table",
+      "options": "External Person Language"
+    },
+    {
+      "fieldname": "skill_section",
+      "label": "Skills",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "skills",
+      "label": "Skills",
+      "fieldtype": "Table",
+      "options": "External Person Skill"
+    },
+    {
+      "fieldname": "volunteer_experience_section",
+      "label": "Volunteering Experience",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "volunteer_experience",
+      "label": "Volunteering Experience",
+      "fieldtype": "Table",
+      "options": "External Person Volunteer Experience"
+    },
+    {
+      "fieldname": "reference_section",
+      "label": "Professional References",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "references",
+      "label": "Professional References",
+      "fieldtype": "Table",
+      "options": "External Person Reference"
+    },
+    {
+      "fieldname": "documents_section",
+      "label": "Documents and Links",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "resume",
+      "label": "Existing Resume",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "portfolio_url",
+      "label": "Portfolio URL",
+      "fieldtype": "Data",
+      "options": "URL"
+    },
+    {
+      "fieldname": "documents_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "linkedin_url",
+      "label": "LinkedIn URL",
+      "fieldtype": "Data",
+      "options": "URL"
+    },
+    {
+      "fieldname": "privacy_tab",
+      "label": "Privacy and Links",
+      "fieldtype": "Tab Break"
+    },
+    {
+      "fieldname": "privacy_section",
+      "label": "Privacy",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "source",
+      "label": "Source",
+      "fieldtype": "Select",
+      "options": "Job Application\nPortal Registration\nManual Entry\nEmployee Referral\nImport\nMigration\nOther",
+      "default": "Manual Entry",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "privacy_consent",
+      "label": "Privacy Consent",
+      "fieldtype": "Check",
+      "reqd": 1
+    },
+    {
+      "fieldname": "privacy_consent_on",
+      "label": "Consent On",
+      "fieldtype": "Datetime",
+      "mandatory_depends_on": "eval:doc.privacy_consent==1"
+    },
+    {
+      "fieldname": "qorg_privacy_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "privacy_consent_source",
+      "label": "Consent Source",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "user",
+      "label": "Portal User",
+      "fieldtype": "Link",
+      "options": "User"
+    },
+    {
+      "fieldname": "allow_portal_editing",
+      "label": "Allow Portal Editing",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "qorg_privacy_section_0_column_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "portal_edit_locked_by",
+      "label": "Portal Editing Locked By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "portal_edit_locked_on",
+      "label": "Portal Editing Locked On",
+      "fieldtype": "Datetime",
+      "read_only": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "employee",
+      "label": "Employee",
+      "fieldtype": "Link",
+      "options": "Employee",
+      "read_only": 1
+    },
+    {
+      "fieldname": "qorg_portal_edit_lock_reason_full_width_section",
+      "label": "Portal Edit Lock Reason",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "portal_edit_lock_reason",
+      "label": "Portal Edit Lock Reason",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:doc.allow_portal_editing==0"
+    },
+    {
+      "fieldname": "links_section",
+      "label": "System Links",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "merged_into",
+      "label": "Merged Into",
+      "fieldtype": "Link",
+      "options": "External Person",
+      "read_only": 1
+    },
+    {
+      "fieldname": "source_reference_doctype",
+      "label": "Source Type",
+      "fieldtype": "Link",
+      "options": "DocType",
+      "read_only": 1
+    },
+    {
+      "fieldname": "links_col_2",
+      "label": "",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "source_reference_name",
+      "label": "Source Reference",
+      "fieldtype": "Dynamic Link",
+      "options": "source_reference_doctype",
+      "read_only": 1
+    },
+    {
+      "fieldname": "external_roles_section",
+      "label": "External Roles and Payment",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "qorg_external_roles_full_width_section",
+      "label": "External Roles",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "preferred_payment_method",
+      "label": "Preferred Payment Method",
+      "fieldtype": "Link",
+      "options": "Mode of Payment"
+    },
+    {
+      "fieldname": "bank_name",
+      "label": "Bank Name",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "account_holder_name",
+      "label": "Account Holder Name",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "qorg_qorg_external_roles_full_width_section_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "bank_account_iban",
+      "label": "Bank Account / IBAN",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "mobile_wallet_provider",
+      "label": "Mobile Wallet Provider",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "mobile_wallet_number",
+      "label": "Mobile Wallet Number",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "qorg_qorg_external_roles_full_width_section_column_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "payment_currency",
+      "label": "Payment Currency",
+      "fieldtype": "Link",
+      "options": "Currency"
+    },
+    {
+      "fieldname": "payment_details_verified",
+      "label": "Payment Details Verified",
+      "fieldtype": "Check",
+      "default": "0"
+    },
+    {
+      "fieldname": "payment_verified_by",
+      "label": "Payment Verified By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "qorg_qorg_external_roles_full_width_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "payment_verified_on",
+      "label": "Payment Verified On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "identity_verification_status",
+      "label": "Identity Verification Status",
+      "fieldtype": "Select",
+      "options": "Not Verified\nPending\nVerified\nRejected\nExpired",
+      "default": "Not Verified"
+    },
+    {
+      "fieldname": "identity_verified_by",
+      "label": "Identity Verified By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "qorg_qorg_external_roles_full_width_section_column_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "identity_verified_on",
+      "label": "Identity Verified On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "payment_verification_reference",
+      "label": "Payment Verification Reference",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "qorg_qorg_external_roles_full_width_section_column_4",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "identification_expiry_date",
+      "label": "Identification Expiry Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "supplier",
+      "label": "Supplier",
+      "fieldtype": "Link",
+      "options": "Supplier"
+    },
+    {
+      "fieldname": "qorg_external_roles_section",
+      "label": "External Roles",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "external_roles",
+      "label": "External Roles",
+      "fieldtype": "Table",
+      "options": "External Person Role"
+    },
+    {
+      "fieldname": "qorg_identity_verification_notes_section",
+      "label": "Identity Verification Notes",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "identity_verification_notes",
+      "label": "Identity Verification Notes",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-10-23 23:30:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "External Person",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "Opportunity Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    },
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    }
+  ],
+  "row_format": "Dynamic",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "quick_entry": 0,
+  "show_name_in_global_search": 1,
+  "title_field": "full_name",
+  "show_title_field_in_link": 1,
+  "search_fields": "full_name,name_in_arabic,professional_title,current_location,primary_email,mobile_no",
+  "image_field": "image"
 }

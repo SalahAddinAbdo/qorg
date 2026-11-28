@@ -6,17 +6,24 @@
   "istable": 1,
   "track_changes": 0,
   "field_order": [
+    "qorg_row_overview_section",
     "clearance_type",
     "required",
     "status",
+    "qorg_row_overview_column",
     "due_date",
-    "qorg_layout_column",
-    "evidence",
     "verified_by",
     "verified_on",
+    "qorg_row_details_section",
+    "evidence",
     "remarks"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "clearance_type",
       "label": "Clearance Type",
@@ -44,20 +51,15 @@
       "columns": 1
     },
     {
+      "fieldname": "qorg_row_overview_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "due_date",
       "label": "Due Date",
       "fieldtype": "Date",
       "in_list_view": 1,
       "columns": 1
-    },
-    {
-      "fieldname": "qorg_layout_column",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "evidence",
-      "label": "Evidence",
-      "fieldtype": "Attach"
     },
     {
       "fieldname": "verified_by",
@@ -71,6 +73,16 @@
       "label": "Verified On",
       "fieldtype": "Datetime",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_row_details_section",
+      "label": "Details and Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "evidence",
+      "label": "Evidence",
+      "fieldtype": "Attach"
     },
     {
       "fieldname": "remarks",

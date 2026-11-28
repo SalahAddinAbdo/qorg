@@ -9,25 +9,30 @@
     "naming_series",
     "employee",
     "employee_name",
+    "qorg_overview_section_0_column",
     "company",
     "status",
-    "overview_column",
     "source_type",
+    "qorg_overview_section_0_column_2",
     "source_doctype",
     "source_document",
     "skill",
+    "qorg_development_need_full_width_section",
     "development_need",
     "action_section",
     "action_type",
     "responsible_person",
     "target_date",
-    "success_measure",
-    "action_column",
+    "qorg_action_section_0_column",
     "training_need_request",
     "completion_date",
     "completion_evidence_type",
+    "qorg_action_section_0_column_2",
     "completion_document",
     "completion_url",
+    "qorg_success_measure_full_width_section",
+    "success_measure",
+    "qorg_completion_notes_full_width_section",
     "completion_notes",
     "audit_section",
     "planned_by",
@@ -67,6 +72,10 @@
       "in_list_view": 1
     },
     {
+      "fieldname": "qorg_overview_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "company",
       "label": "Company",
       "fieldtype": "Link",
@@ -86,17 +95,16 @@
       "in_standard_filter": 1
     },
     {
-      "fieldname": "overview_column",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
       "fieldname": "source_type",
       "label": "Source Type",
       "fieldtype": "Select",
       "options": "Appraisal\nSkill Assessment\nPerformance Feedback\nTraining Follow-up\nManager Decision\nCompliance Requirement\nOther",
       "reqd": 1,
       "in_standard_filter": 1
+    },
+    {
+      "fieldname": "qorg_overview_section_0_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "source_doctype",
@@ -117,6 +125,11 @@
       "label": "Skill",
       "fieldtype": "Link",
       "options": "Skill"
+    },
+    {
+      "fieldname": "qorg_development_need_full_width_section",
+      "label": "Development Need",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "development_need",
@@ -152,14 +165,7 @@
       "in_list_view": 1
     },
     {
-      "fieldname": "success_measure",
-      "label": "Success Measure",
-      "fieldtype": "Small Text",
-      "reqd": 1
-    },
-    {
-      "fieldname": "action_column",
-      "label": "",
+      "fieldname": "qorg_action_section_0_column",
       "fieldtype": "Column Break"
     },
     {
@@ -186,6 +192,10 @@
       "mandatory_depends_on": "eval:doc.status=='Completed'"
     },
     {
+      "fieldname": "qorg_action_section_0_column_2",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "completion_document",
       "label": "Completion Document",
       "fieldtype": "Link",
@@ -198,6 +208,22 @@
       "fieldtype": "Data",
       "options": "URL",
       "depends_on": "eval:doc.completion_evidence_type=='External URL'"
+    },
+    {
+      "fieldname": "qorg_success_measure_full_width_section",
+      "label": "Success Measure",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "success_measure",
+      "label": "Success Measure",
+      "fieldtype": "Small Text",
+      "reqd": 1
+    },
+    {
+      "fieldname": "qorg_completion_notes_full_width_section",
+      "label": "Completion Notes",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "completion_notes",

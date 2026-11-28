@@ -9,16 +9,23 @@
   "document_type": "",
   "engine": "InnoDB",
   "field_order": [
+    "qorg_row_overview_section",
     "severity",
     "category",
     "reference_doctype",
+    "qorg_row_overview_column",
     "reference_name",
-    "qorg_layout_column",
+    "detected_on",
+    "qorg_row_details_section",
     "message",
-    "suggested_action",
-    "detected_on"
+    "suggested_action"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "severity",
       "label": "Severity",
@@ -40,14 +47,25 @@
       "options": "DocType"
     },
     {
+      "fieldname": "qorg_row_overview_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "reference_name",
       "label": "Reference Name",
       "fieldtype": "Dynamic Link",
       "options": "reference_doctype"
     },
     {
-      "fieldname": "qorg_layout_column",
-      "fieldtype": "Column Break"
+      "fieldname": "detected_on",
+      "label": "Detected On",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "qorg_row_details_section",
+      "label": "Details and Evidence",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "message",
@@ -60,12 +78,6 @@
       "fieldname": "suggested_action",
       "label": "Suggested Action",
       "fieldtype": "Small Text"
-    },
-    {
-      "fieldname": "detected_on",
-      "label": "Detected On",
-      "fieldtype": "Datetime",
-      "read_only": 1
     }
   ],
   "grid_page_length": 50,

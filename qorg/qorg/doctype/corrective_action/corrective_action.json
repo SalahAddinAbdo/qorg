@@ -46,6 +46,10 @@
       "reqd": 1
     },
     {
+      "fieldname": "qorg_identity_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "accountability_case",
       "label": "Accountability Case",
       "fieldtype": "Link",
@@ -58,17 +62,16 @@
       "options": "Investigation Case"
     },
     {
-      "fieldname": "identity_cb",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
       "fieldname": "company",
       "label": "Company",
       "fieldtype": "Link",
       "options": "Company",
       "reqd": 1,
       "in_standard_filter": 1
+    },
+    {
+      "fieldname": "qorg_identity_section_0_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "project",
@@ -91,6 +94,11 @@
       "read_only": 1,
       "in_list_view": 1,
       "in_standard_filter": 1
+    },
+    {
+      "fieldname": "qorg_identity_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "priority",
@@ -282,13 +290,15 @@
     "subject",
     "source_doctype",
     "source_name",
+    "qorg_identity_section_0_column",
     "accountability_case",
     "investigation_case",
-    "identity_cb",
     "company",
+    "qorg_identity_section_0_column_2",
     "project",
     "department",
     "status",
+    "qorg_identity_section_more_1",
     "priority",
     "problem_section",
     "problem_statement",

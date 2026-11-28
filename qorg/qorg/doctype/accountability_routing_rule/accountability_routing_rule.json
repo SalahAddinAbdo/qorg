@@ -53,6 +53,10 @@
       "options": "Accountability Category"
     },
     {
+      "fieldname": "qorg_criteria_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "stakeholder_type",
       "label": "Stakeholder Type",
       "fieldtype": "Select",
@@ -71,8 +75,7 @@
       "options": "Department"
     },
     {
-      "fieldname": "criteria_cb",
-      "label": "",
+      "fieldname": "qorg_criteria_section_0_column_2",
       "fieldtype": "Column Break"
     },
     {
@@ -92,6 +95,11 @@
       "label": "Confidentiality",
       "fieldtype": "Select",
       "options": "\nStandard\nRestricted\nConfidential\nHighly Confidential"
+    },
+    {
+      "fieldname": "qorg_criteria_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "related_doctype",
@@ -166,13 +174,15 @@
     "company",
     "case_type",
     "category",
+    "qorg_criteria_section_0_column",
     "stakeholder_type",
     "project",
     "department",
-    "criteria_cb",
+    "qorg_criteria_section_0_column_2",
     "channel",
     "severity",
     "confidentiality",
+    "qorg_criteria_section_more_1",
     "related_doctype",
     "outcome_section",
     "receiving_role",

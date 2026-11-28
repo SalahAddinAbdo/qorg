@@ -37,6 +37,10 @@
       "columns": 2
     },
     {
+      "fieldname": "qorg_routing_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "to_department",
       "label": "To Department",
       "fieldtype": "Link",
@@ -51,15 +55,14 @@
       "columns": 1
     },
     {
-      "fieldname": "routing_cb",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
       "fieldname": "referred_on",
       "label": "Referred On",
       "fieldtype": "Datetime",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_routing_section_0_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "accepted_on",
@@ -82,6 +85,11 @@
       "default": "Pending",
       "in_list_view": 1,
       "columns": 1
+    },
+    {
+      "fieldname": "qorg_routing_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "escalated",
@@ -134,13 +142,15 @@
     "from_user",
     "from_department",
     "to_user",
+    "qorg_routing_section_0_column",
     "to_department",
     "to_role",
-    "routing_cb",
     "referred_on",
+    "qorg_routing_section_0_column_2",
     "accepted_on",
     "due_date",
     "status",
+    "qorg_routing_section_more_1",
     "escalated",
     "details_section",
     "referral_reason",

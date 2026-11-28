@@ -1,103 +1,128 @@
 {
- "module": "QOrg",
- "custom": 0,
- "engine": "InnoDB",
- "doctype": "DocType",
- "actions": [],
- "links": [],
- "states": [],
- "permissions": [
-  {
-   "role": "Accounts Manager",
-   "read": 1,
-   "write": 1,
-   "create": 1,
-   "delete": 1,
-   "report": 1,
-   "export": 1,
-   "share": 1
-  },
-  {
-   "role": "Accounts User",
-   "read": 1,
-   "report": 1,
-   "export": 1
-  }
- ],
- "name": "Budget Period Allocation",
- "istable": 1,
- "editable_grid": 1,
- "fields": [
-  {
-   "fieldname": "budget_period",
-   "label": "Budget Period",
-   "fieldtype": "Link",
-   "options": "Budget Period",
-   "reqd": 1,
-   "in_list_view": 1,
-   "columns": 3,
-   "in_standard_filter": 1
-  },
-  {
-   "fieldname": "allocated_amount",
-   "label": "Allocated Amount",
-   "fieldtype": "Currency",
-   "options": "currency",
-   "reqd": 1,
-   "in_list_view": 1,
-   "columns": 2,
-   "non_negative": 1
-  },
-  {
-   "fieldname": "currency",
-   "label": "Currency",
-   "fieldtype": "Link",
-   "options": "Currency",
-   "reqd": 1,
-   "columns": 2,
-   "in_list_view": 1,
-   "read_only": 1
-  },
-  {
-   "fieldname": "effective_from",
-   "label": "Effective From",
-   "fieldtype": "Date",
-   "columns": 1,
-   "in_list_view": 1,
-   "read_only": 1
-  },
-  {
-   "fieldname": "effective_to",
-   "label": "Effective To",
-   "fieldtype": "Date",
-   "columns": 1,
-   "in_list_view": 1,
-   "read_only": 1
-  },
-  {
-   "fieldname": "legacy_source",
-   "label": "Legacy Source",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "hidden": 1,
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "legacy_key",
-   "label": "Legacy Key",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "hidden": 1,
-   "in_list_view": 0
-  }
- ],
- "field_order": [
-  "budget_period",
-  "allocated_amount",
-  "currency",
-  "effective_from",
-  "effective_to",
-  "legacy_source",
-  "legacy_key"
- ]
+  "module": "QOrg",
+  "custom": 0,
+  "engine": "InnoDB",
+  "doctype": "DocType",
+  "actions": [],
+  "links": [],
+  "states": [],
+  "permissions": [
+    {
+      "role": "Accounts Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "share": 1
+    },
+    {
+      "role": "Accounts User",
+      "read": 1,
+      "report": 1,
+      "export": 1
+    }
+  ],
+  "name": "Budget Period Allocation",
+  "istable": 1,
+  "editable_grid": 1,
+  "fields": [
+    {
+      "fieldname": "allocation_identity_section",
+      "label": "Allocation Identity",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "budget_period",
+      "label": "Budget Period",
+      "fieldtype": "Link",
+      "options": "Budget Period",
+      "reqd": 1,
+      "in_standard_filter": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "allocation_col",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "allocation_amount_section",
+      "label": "Period and Amount",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "allocated_amount",
+      "label": "Allocated Amount",
+      "fieldtype": "Currency",
+      "options": "currency",
+      "reqd": 1,
+      "non_negative": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "period_col",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "currency",
+      "label": "Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "reqd": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "allocation_control_section",
+      "label": "Control and Audit",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "control_col",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "effective_from",
+      "label": "Effective From",
+      "fieldtype": "Date",
+      "read_only": 1
+    },
+    {
+      "fieldname": "effective_to",
+      "label": "Effective To",
+      "fieldtype": "Date",
+      "read_only": 1
+    },
+    {
+      "fieldname": "legacy_source",
+      "label": "Legacy Source",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "legacy_key",
+      "label": "Legacy Key",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "hidden": 1
+    }
+  ],
+  "field_order": [
+    "allocation_identity_section",
+    "budget_period",
+    "allocation_col",
+    "allocation_amount_section",
+    "allocated_amount",
+    "period_col",
+    "currency",
+    "allocation_control_section",
+    "control_col",
+    "effective_from",
+    "effective_to",
+    "legacy_source",
+    "legacy_key"
+  ]
 }

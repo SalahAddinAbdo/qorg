@@ -8,14 +8,20 @@
   "doctype": "DocType",
   "engine": "InnoDB",
   "field_order": [
+    "qorg_row_overview_section",
     "language",
     "reading",
     "writing",
-    "qorg_layout_column",
+    "qorg_row_overview_column",
     "speaking",
     "page_break"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "language",
       "label": "Language",
@@ -48,7 +54,7 @@
       "columns": 2
     },
     {
-      "fieldname": "qorg_layout_column",
+      "fieldname": "qorg_row_overview_column",
       "fieldtype": "Column Break"
     },
     {

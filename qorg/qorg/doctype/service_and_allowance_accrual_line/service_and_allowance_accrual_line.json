@@ -1,489 +1,527 @@
 {
- "actions": [],
- "allow_rename": 0,
- "autoname": "",
- "creation": "2026-11-19 00:00:00.000000",
- "doctype": "DocType",
- "engine": "InnoDB",
- "field_order": [
-  "qorg_layout_section_1",
-  "beneficiary_type",
-  "external_person",
-  "employee",
-  "supplier",
-  "beneficiary_name",
-  "qorg_layout_column_1_2",
-  "identity_number",
-  "mobile_number",
-  "site",
-  "site_code",
-  "department",
-  "supervisor",
-  "eligibility_status",
-  "qorg_layout_section_2",
-  "service_item",
-  "service_description",
-  "quantity",
-  "uom",
-  "number_of_days",
-  "qorg_layout_column_2_2",
-  "daily_rate",
-  "period_rate",
-  "rate",
-  "currency",
-  "base_amount",
-  "reference_number",
-  "qorg_layout_section_3",
-  "gross_amount",
-  "deduction",
-  "tax_withheld",
-  "net_payable",
-  "qorg_layout_column_3_2",
-  "expense_account",
-  "payable_account",
-  "allocation_treatment",
-  "donor",
-  "qorg_layout_section_4",
-  "project",
-  "cost_center",
-  "budget_line",
-  "qorg_layout_column_4_2",
-  "funding_agreement",
-  "contract_or_agreement",
-  "procurement_process",
-  "qorg_layout_section_5",
-  "service_acceptance",
-  "attendance_reference",
-  "supporting_document_type",
-  "supporting_document",
-  "qorg_layout_column_5_2",
-  "verification_status",
-  "include",
-  "page_break",
-  "qorg_layout_section_6",
-  "exception_reason",
-  "verification_notes"
- ],
- "fields": [
-  {
-   "fieldname": "qorg_layout_section_1",
-   "fieldtype": "Section Break",
-   "label": "Payee and Eligibility"
-  },
-  {
-   "fieldname": "beneficiary_type",
-   "label": "Beneficiary Type",
-   "fieldtype": "Select",
-   "options": "External Person\nSupplier\nEmployee\nVolunteer",
-   "default": "External Person",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "external_person",
-   "label": "Payee / Beneficiary",
-   "fieldtype": "Link",
-   "options": "External Person",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "employee",
-   "label": "Employee",
-   "fieldtype": "Link",
-   "options": "Employee",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "supplier",
-   "label": "Supplier",
-   "fieldtype": "Link",
-   "options": "Supplier",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "beneficiary_name",
-   "label": "Payee Name",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "in_list_view": 1,
-   "columns": 2
-  },
-  {
-   "fieldname": "qorg_layout_column_1_2",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "identity_number",
-   "label": "Identity Number",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "mobile_number",
-   "label": "Mobile Number",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "site",
-   "label": "Site / Location",
-   "fieldtype": "Data",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "site_code",
-   "label": "Site Code",
-   "fieldtype": "Data",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "department",
-   "label": "Department",
-   "fieldtype": "Link",
-   "options": "Department",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "supervisor",
-   "label": "Supervisor",
-   "fieldtype": "Link",
-   "options": "Employee",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "eligibility_status",
-   "label": "Eligibility Status",
-   "fieldtype": "Select",
-   "options": "Pending\nEligible\nIneligible\nOverride Approved",
-   "default": "Pending",
-   "read_only": 1,
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "qorg_layout_section_2",
-   "fieldtype": "Section Break",
-   "label": "Service and Rate"
-  },
-  {
-   "fieldname": "service_item",
-   "label": "Service Item",
-   "fieldtype": "Link",
-   "options": "Item",
-   "in_list_view": 1,
-   "columns": 2
-  },
-  {
-   "fieldname": "service_description",
-   "label": "Service Description",
-   "fieldtype": "Small Text",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "quantity",
-   "label": "Quantity",
-   "fieldtype": "Float",
-   "default": "1",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "uom",
-   "label": "UOM",
-   "fieldtype": "Link",
-   "options": "UOM",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "number_of_days",
-   "label": "Number of Days",
-   "fieldtype": "Float",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "qorg_layout_column_2_2",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "daily_rate",
-   "label": "Daily Rate",
-   "fieldtype": "Currency",
-   "in_list_view": 0,
-   "options": "currency"
-  },
-  {
-   "fieldname": "period_rate",
-   "label": "Period Rate",
-   "fieldtype": "Currency",
-   "in_list_view": 0,
-   "options": "currency"
-  },
-  {
-   "fieldname": "rate",
-   "label": "Rate",
-   "fieldtype": "Currency",
-   "in_list_view": 0,
-   "options": "currency"
-  },
-  {
-   "fieldname": "currency",
-   "label": "Currency",
-   "fieldtype": "Link",
-   "options": "Currency",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "base_amount",
-   "label": "Base Amount",
-   "fieldtype": "Currency",
-   "read_only": 1,
-   "in_list_view": 0,
-   "options": "currency"
-  },
-  {
-   "fieldname": "reference_number",
-   "label": "Reference Number",
-   "fieldtype": "Data",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "qorg_layout_section_3",
-   "fieldtype": "Section Break",
-   "label": "Amounts and Accounts"
-  },
-  {
-   "fieldname": "gross_amount",
-   "label": "Gross Amount",
-   "fieldtype": "Currency",
-   "read_only": 1,
-   "in_list_view": 1,
-   "options": "currency",
-   "columns": 2
-  },
-  {
-   "fieldname": "deduction",
-   "label": "Other Deduction",
-   "fieldtype": "Currency",
-   "in_list_view": 0,
-   "options": "currency"
-  },
-  {
-   "fieldname": "tax_withheld",
-   "label": "Tax Withheld",
-   "fieldtype": "Currency",
-   "in_list_view": 0,
-   "options": "currency"
-  },
-  {
-   "fieldname": "net_payable",
-   "label": "Net Payable",
-   "fieldtype": "Currency",
-   "read_only": 1,
-   "in_list_view": 1,
-   "options": "currency",
-   "columns": 2
-  },
-  {
-   "fieldname": "qorg_layout_column_3_2",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "expense_account",
-   "label": "Expense Account",
-   "fieldtype": "Link",
-   "options": "Account",
-   "reqd": 1,
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "payable_account",
-   "label": "Payable Account",
-   "fieldtype": "Link",
-   "options": "Account",
-   "reqd": 1,
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "allocation_treatment",
-   "label": "Allocation Treatment",
-   "fieldtype": "Select",
-   "options": "Direct\nSplit Distribution\nShared Pool\nExcluded",
-   "default": "Direct",
-   "reqd": 1,
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "donor",
-   "label": "Donor",
-   "fieldtype": "Link",
-   "options": "Donor",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "qorg_layout_section_4",
-   "fieldtype": "Section Break",
-   "label": "Project and Funding"
-  },
-  {
-   "fieldname": "project",
-   "label": "Project",
-   "fieldtype": "Link",
-   "options": "Project",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "cost_center",
-   "label": "Cost Center",
-   "fieldtype": "Link",
-   "options": "Cost Center",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "budget_line",
-   "label": "Budget Line",
-   "fieldtype": "Link",
-   "options": "Budget Line",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "qorg_layout_column_4_2",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "funding_agreement",
-   "label": "Funding Agreement",
-   "fieldtype": "Link",
-   "options": "Funding Agreement",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "contract_or_agreement",
-   "label": "Contract / Agreement",
-   "fieldtype": "Data",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "procurement_process",
-   "label": "Procurement Process",
-   "fieldtype": "Link",
-   "options": "Procurement Process",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "qorg_layout_section_5",
-   "fieldtype": "Section Break",
-   "label": "Evidence and Verification"
-  },
-  {
-   "fieldname": "service_acceptance",
-   "label": "Procurement Acceptance",
-   "fieldtype": "Link",
-   "options": "Procure Acceptance",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "attendance_reference",
-   "label": "Attendance Reference",
-   "fieldtype": "Data",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "supporting_document_type",
-   "label": "Supporting Document Type",
-   "fieldtype": "Data",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "supporting_document",
-   "label": "Supporting Document",
-   "fieldtype": "Attach",
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "qorg_layout_column_5_2",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "verification_status",
-   "label": "Verification Status",
-   "fieldtype": "Select",
-   "options": "Pending\nVerified\nRejected",
-   "default": "Pending",
-   "in_list_view": 1,
-   "columns": 1
-  },
-  {
-   "fieldname": "include",
-   "label": "Include",
-   "fieldtype": "Check",
-   "default": "1",
-   "in_list_view": 1,
-   "columns": 1
-  },
-  {
-   "fieldname": "page_break",
-   "label": "Page Break After",
-   "fieldtype": "Check",
-   "default": "0",
-   "allow_on_submit": 1,
-   "print_hide": 1,
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "qorg_layout_section_6",
-   "fieldtype": "Section Break",
-   "label": "Exception and Verification Notes",
-   "collapsible": 1
-  },
-  {
-   "fieldname": "exception_reason",
-   "label": "Exception Reason",
-   "fieldtype": "Small Text",
-   "read_only": 1,
-   "in_list_view": 0
-  },
-  {
-   "fieldname": "verification_notes",
-   "label": "Verification Notes",
-   "fieldtype": "Small Text",
-   "in_list_view": 0
-  }
- ],
- "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2026-11-19 00:00:00.000000",
- "modified_by": "Administrator",
- "module": "QOrg",
- "name": "Service and Allowance Accrual Line",
- "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Accounts Manager",
-   "share": 1,
-   "write": 1
-  }
- ],
- "row_format": "Dynamic",
- "sort_field": "modified",
- "sort_order": "DESC",
- "states": [],
- "track_changes": 1,
- "istable": 1
+  "actions": [],
+  "allow_rename": 0,
+  "autoname": "",
+  "creation": "2026-11-19 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "qorg_layout_section_1",
+    "beneficiary_type",
+    "external_person",
+    "employee",
+    "qorg_qorg_layout_section_1_column",
+    "supplier",
+    "beneficiary_name",
+    "identity_number",
+    "qorg_qorg_layout_section_1_column_2",
+    "mobile_number",
+    "site",
+    "site_code",
+    "qorg_qorg_layout_section_1_more_1",
+    "department",
+    "qorg_qorg_layout_section_1_column_3",
+    "supervisor",
+    "qorg_qorg_layout_section_1_column_4",
+    "eligibility_status",
+    "qorg_layout_section_2",
+    "service_item",
+    "quantity",
+    "uom",
+    "qorg_qorg_layout_section_2_0_column",
+    "number_of_days",
+    "daily_rate",
+    "period_rate",
+    "qorg_qorg_layout_section_2_0_column_2",
+    "rate",
+    "currency",
+    "base_amount",
+    "qorg_qorg_layout_section_2_more_1",
+    "reference_number",
+    "qorg_service_description_full_width_section",
+    "service_description",
+    "qorg_layout_section_3",
+    "gross_amount",
+    "deduction",
+    "tax_withheld",
+    "net_payable",
+    "qorg_layout_column_3_2",
+    "expense_account",
+    "payable_account",
+    "allocation_treatment",
+    "donor",
+    "qorg_layout_section_4",
+    "project",
+    "cost_center",
+    "budget_line",
+    "qorg_layout_column_4_2",
+    "funding_agreement",
+    "contract_or_agreement",
+    "procurement_process",
+    "qorg_layout_section_5",
+    "service_acceptance",
+    "attendance_reference",
+    "supporting_document_type",
+    "supporting_document",
+    "qorg_layout_column_5_2",
+    "verification_status",
+    "include",
+    "page_break",
+    "qorg_layout_section_6",
+    "exception_reason",
+    "verification_notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "qorg_layout_section_1",
+      "fieldtype": "Section Break",
+      "label": "Payee and Eligibility"
+    },
+    {
+      "fieldname": "beneficiary_type",
+      "label": "Beneficiary Type",
+      "fieldtype": "Select",
+      "options": "External Person\nSupplier\nEmployee\nVolunteer",
+      "default": "External Person",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "external_person",
+      "label": "Payee / Beneficiary",
+      "fieldtype": "Link",
+      "options": "External Person",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "employee",
+      "label": "Employee",
+      "fieldtype": "Link",
+      "options": "Employee",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "qorg_qorg_layout_section_1_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "supplier",
+      "label": "Supplier",
+      "fieldtype": "Link",
+      "options": "Supplier",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "beneficiary_name",
+      "label": "Payee Name",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "identity_number",
+      "label": "Identity Number",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "qorg_qorg_layout_section_1_column_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "mobile_number",
+      "label": "Mobile Number",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "site",
+      "label": "Site / Location",
+      "fieldtype": "Data",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "site_code",
+      "label": "Site Code",
+      "fieldtype": "Data",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "qorg_qorg_layout_section_1_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "department",
+      "label": "Department",
+      "fieldtype": "Link",
+      "options": "Department",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "qorg_qorg_layout_section_1_column_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "supervisor",
+      "label": "Supervisor",
+      "fieldtype": "Link",
+      "options": "Employee",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "qorg_qorg_layout_section_1_column_4",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "eligibility_status",
+      "label": "Eligibility Status",
+      "fieldtype": "Select",
+      "options": "Pending\nEligible\nIneligible\nOverride Approved",
+      "default": "Pending",
+      "read_only": 1,
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "qorg_layout_section_2",
+      "fieldtype": "Section Break",
+      "label": "Service and Rate"
+    },
+    {
+      "fieldname": "service_item",
+      "label": "Service Item",
+      "fieldtype": "Link",
+      "options": "Item",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "quantity",
+      "label": "Quantity",
+      "fieldtype": "Float",
+      "default": "1",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "uom",
+      "label": "UOM",
+      "fieldtype": "Link",
+      "options": "UOM",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "qorg_qorg_layout_section_2_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "number_of_days",
+      "label": "Number of Days",
+      "fieldtype": "Float",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "daily_rate",
+      "label": "Daily Rate",
+      "fieldtype": "Currency",
+      "in_list_view": 0,
+      "options": "currency"
+    },
+    {
+      "fieldname": "period_rate",
+      "label": "Period Rate",
+      "fieldtype": "Currency",
+      "in_list_view": 0,
+      "options": "currency"
+    },
+    {
+      "fieldname": "qorg_qorg_layout_section_2_0_column_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "rate",
+      "label": "Rate",
+      "fieldtype": "Currency",
+      "in_list_view": 0,
+      "options": "currency"
+    },
+    {
+      "fieldname": "currency",
+      "label": "Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "base_amount",
+      "label": "Base Amount",
+      "fieldtype": "Currency",
+      "read_only": 1,
+      "in_list_view": 0,
+      "options": "currency"
+    },
+    {
+      "fieldname": "qorg_qorg_layout_section_2_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "reference_number",
+      "label": "Reference Number",
+      "fieldtype": "Data",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "qorg_service_description_full_width_section",
+      "label": "Service Description",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "service_description",
+      "label": "Service Description",
+      "fieldtype": "Small Text",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "qorg_layout_section_3",
+      "fieldtype": "Section Break",
+      "label": "Amounts and Accounts"
+    },
+    {
+      "fieldname": "gross_amount",
+      "label": "Gross Amount",
+      "fieldtype": "Currency",
+      "read_only": 1,
+      "in_list_view": 1,
+      "options": "currency",
+      "columns": 2
+    },
+    {
+      "fieldname": "deduction",
+      "label": "Other Deduction",
+      "fieldtype": "Currency",
+      "in_list_view": 0,
+      "options": "currency"
+    },
+    {
+      "fieldname": "tax_withheld",
+      "label": "Tax Withheld",
+      "fieldtype": "Currency",
+      "in_list_view": 0,
+      "options": "currency"
+    },
+    {
+      "fieldname": "net_payable",
+      "label": "Net Payable",
+      "fieldtype": "Currency",
+      "read_only": 1,
+      "in_list_view": 1,
+      "options": "currency",
+      "columns": 2
+    },
+    {
+      "fieldname": "qorg_layout_column_3_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "expense_account",
+      "label": "Expense Account",
+      "fieldtype": "Link",
+      "options": "Account",
+      "reqd": 1,
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "payable_account",
+      "label": "Payable Account",
+      "fieldtype": "Link",
+      "options": "Account",
+      "reqd": 1,
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "allocation_treatment",
+      "label": "Allocation Treatment",
+      "fieldtype": "Select",
+      "options": "Direct\nSplit Distribution\nShared Pool\nExcluded",
+      "default": "Direct",
+      "reqd": 1,
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "donor",
+      "label": "Donor",
+      "fieldtype": "Link",
+      "options": "Donor",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "qorg_layout_section_4",
+      "fieldtype": "Section Break",
+      "label": "Project and Funding"
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "cost_center",
+      "label": "Cost Center",
+      "fieldtype": "Link",
+      "options": "Cost Center",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "budget_line",
+      "label": "Budget Line",
+      "fieldtype": "Link",
+      "options": "Budget Line",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "qorg_layout_column_4_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "funding_agreement",
+      "label": "Funding Agreement",
+      "fieldtype": "Link",
+      "options": "Funding Agreement",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "contract_or_agreement",
+      "label": "Contract / Agreement",
+      "fieldtype": "Data",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "procurement_process",
+      "label": "Procurement Process",
+      "fieldtype": "Link",
+      "options": "Procurement Process",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "qorg_layout_section_5",
+      "fieldtype": "Section Break",
+      "label": "Evidence and Verification"
+    },
+    {
+      "fieldname": "service_acceptance",
+      "label": "Procurement Acceptance",
+      "fieldtype": "Link",
+      "options": "Procure Acceptance",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "attendance_reference",
+      "label": "Attendance Reference",
+      "fieldtype": "Data",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "supporting_document_type",
+      "label": "Supporting Document Type",
+      "fieldtype": "Data",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "supporting_document",
+      "label": "Supporting Document",
+      "fieldtype": "Attach",
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "qorg_layout_column_5_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "verification_status",
+      "label": "Verification Status",
+      "fieldtype": "Select",
+      "options": "Pending\nVerified\nRejected",
+      "default": "Pending",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "include",
+      "label": "Include",
+      "fieldtype": "Check",
+      "default": "1",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "page_break",
+      "label": "Page Break After",
+      "fieldtype": "Check",
+      "default": "0",
+      "allow_on_submit": 1,
+      "print_hide": 1,
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "qorg_layout_section_6",
+      "fieldtype": "Section Break",
+      "label": "Exception and Verification Notes",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "exception_reason",
+      "label": "Exception Reason",
+      "fieldtype": "Small Text",
+      "read_only": 1,
+      "in_list_view": 0
+    },
+    {
+      "fieldname": "verification_notes",
+      "label": "Verification Notes",
+      "fieldtype": "Small Text",
+      "in_list_view": 0
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2026-11-19 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "QOrg",
+  "name": "Service and Allowance Accrual Line",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Accounts Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "row_format": "Dynamic",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "istable": 1
 }

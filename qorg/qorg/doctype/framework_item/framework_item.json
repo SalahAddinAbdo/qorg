@@ -6,16 +6,23 @@
   "istable": 1,
   "editable_grid": 1,
   "field_order": [
+    "qorg_row_overview_section",
     "item_code",
-    "description",
     "uom",
     "rate",
-    "qorg_layout_column",
+    "qorg_row_overview_column",
     "maximum_quantity",
     "region",
-    "page_break"
+    "page_break",
+    "qorg_row_details_section",
+    "description"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "item_code",
       "label": "Item Code",
@@ -23,12 +30,6 @@
       "options": "Item",
       "in_list_view": 1,
       "columns": 2
-    },
-    {
-      "fieldname": "description",
-      "label": "Description",
-      "fieldtype": "Small Text",
-      "in_list_view": 0
     },
     {
       "fieldname": "uom",
@@ -47,7 +48,7 @@
       "options": "currency"
     },
     {
-      "fieldname": "qorg_layout_column",
+      "fieldname": "qorg_row_overview_column",
       "fieldtype": "Column Break"
     },
     {
@@ -72,6 +73,17 @@
       "print_hide": 1,
       "in_list_view": 0,
       "description": "Starts a new printed page after this row in managed print formats."
+    },
+    {
+      "fieldname": "qorg_row_details_section",
+      "label": "Details and Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "description",
+      "label": "Description",
+      "fieldtype": "Small Text",
+      "in_list_view": 0
     }
   ],
   "permissions": []

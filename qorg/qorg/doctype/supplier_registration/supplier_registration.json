@@ -1,476 +1,487 @@
 {
- "doctype": "DocType",
- "name": "Supplier Registration",
- "module": "QOrg",
- "custom": 0,
- "istable": 0,
- "issingle": 0,
- "editable_grid": 0,
- "track_changes": 1,
- "field_order": [
-  "qorg_usage_guidance",
-  "section_1_section",
-  "naming_series",
-  "legal_name",
-  "country",
-  "section_1_column",
-  "registration_number",
-  "tax_id",
-  "email",
-  "section_2_section",
-  "supplier",
-  "section_2_column",
-  "supplier_type",
-  "trade_name",
-  "year_established",
-  "employee_count",
-  "website",
-  "phone",
-  "address_line_1",
-  "address_line_2",
-  "layout_more_1",
-  "city",
-  "contact_person",
-  "contact_designation",
-  "contact_phone",
-  "contact_email",
-  "business_sectors",
-  "geographic_coverage",
-  "qorg_layout_section",
-  "experience_summary",
-  "qorg_layout_section_2",
-  "registration_certificate",
-  "tax_certificate",
-  "licenses_certificates",
-  "company_profile",
-  "references_document",
-  "qorg_layout_column",
-  "conflict_of_interest",
-  "sanctions_declaration",
-  "anti_fraud_declaration",
-  "data_consent",
-  "registration_status",
-  "section_3_section",
-  "documents",
-  "section_4_section",
-  "declarations",
-  "profile_control_section",
-  "profile_locked",
-  "update_requested",
-  "reviewer",
-  "qorg_layout_column_2",
-  "risk_rating",
-  "review_expiry_date",
-  "bank_section",
-  "bank_name",
-  "account_name",
-  "account_number",
-  "iban",
-  "qorg_layout_column_3",
-  "swift_code",
-  "bank_currency",
-  "bank_confirmation"
- ],
- "fields": [
-  {
-   "fieldname": "qorg_usage_guidance",
-   "fieldtype": "HTML",
-   "label": "Usage Guidance",
-   "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Maintains a supplier portal profile and due-diligence status.<br><strong>When and impact:</strong> Approval controls eligibility to participate; portal editing is controlled from Buying Settings.</div>"
-  },
-  {
-   "fieldname": "section_1_section",
-   "fieldtype": "Section Break",
-   "label": "Identity and Reference"
-  },
-  {
-   "fieldname": "naming_series",
-   "label": "Naming Series",
-   "fieldtype": "Select",
-   "options": "SUP-.YYYY.-.#####",
-   "reqd": 1,
-   "in_list_view": 0,
-   "in_standard_filter": 0,
-   "in_preview": 0
-  },
-  {
-   "fieldname": "legal_name",
-   "label": "Legal Name",
-   "fieldtype": "Data",
-   "reqd": 1,
-   "in_list_view": 0,
-   "in_standard_filter": 0,
-   "in_preview": 0
-  },
-  {
-   "fieldname": "country",
-   "label": "Country",
-   "fieldtype": "Link",
-   "options": "Country",
-   "in_list_view": 0,
-   "in_standard_filter": 0,
-   "in_preview": 0
-  },
-  {
-   "fieldname": "section_1_column",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "registration_number",
-   "label": "Registration Number",
-   "fieldtype": "Data",
-   "in_list_view": 0,
-   "in_standard_filter": 0,
-   "in_preview": 0
-  },
-  {
-   "fieldname": "tax_id",
-   "label": "Tax Id",
-   "fieldtype": "Data",
-   "in_list_view": 0,
-   "in_standard_filter": 0,
-   "in_preview": 0
-  },
-  {
-   "fieldname": "email",
-   "label": "Email",
-   "fieldtype": "Data",
-   "reqd": 1,
-   "in_list_view": 0,
-   "in_standard_filter": 0,
-   "in_preview": 0
-  },
-  {
-   "fieldname": "section_2_section",
-   "fieldtype": "Section Break",
-   "label": "Additional Information"
-  },
-  {
-   "fieldname": "supplier",
-   "label": "Supplier",
-   "fieldtype": "Link",
-   "options": "Supplier",
-   "read_only": 1,
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "in_preview": 1
-  },
-  {
-   "fieldname": "section_2_column",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "supplier_type",
-   "label": "Supplier Type",
-   "fieldtype": "Select",
-   "options": "Company\nOrganization\nIndividual\nConsultant",
-   "reqd": 1,
-   "in_list_view": 1,
-   "in_standard_filter": 1
-  },
-  {
-   "fieldname": "trade_name",
-   "label": "Trade Name",
-   "fieldtype": "Data",
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "year_established",
-   "label": "Year Established",
-   "fieldtype": "Int"
-  },
-  {
-   "fieldname": "employee_count",
-   "label": "Number of Employees",
-   "fieldtype": "Int"
-  },
-  {
-   "fieldname": "website",
-   "label": "Website",
-   "fieldtype": "Data",
-   "options": "URL"
-  },
-  {
-   "fieldname": "phone",
-   "label": "Primary Phone",
-   "fieldtype": "Data",
-   "options": "Phone",
-   "reqd": 1
-  },
-  {
-   "fieldname": "address_line_1",
-   "label": "Address Line 1",
-   "fieldtype": "Data",
-   "reqd": 1
-  },
-  {
-   "fieldname": "address_line_2",
-   "label": "Address Line 2",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "layout_more_1",
-   "label": "Additional Details",
-   "fieldtype": "Section Break",
-   "collapsible": 1
-  },
-  {
-   "fieldname": "city",
-   "label": "City",
-   "fieldtype": "Data",
-   "reqd": 1
-  },
-  {
-   "fieldname": "contact_person",
-   "label": "Primary Contact Person",
-   "fieldtype": "Data",
-   "reqd": 1
-  },
-  {
-   "fieldname": "contact_designation",
-   "label": "Contact Designation",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "contact_phone",
-   "label": "Contact Phone",
-   "fieldtype": "Data",
-   "options": "Phone",
-   "reqd": 1
-  },
-  {
-   "fieldname": "contact_email",
-   "label": "Contact Email",
-   "fieldtype": "Data",
-   "options": "Email",
-   "reqd": 1
-  },
-  {
-   "fieldname": "business_sectors",
-   "label": "Goods, Services and Works Offered",
-   "fieldtype": "Small Text",
-   "reqd": 1
-  },
-  {
-   "fieldname": "geographic_coverage",
-   "label": "Geographic Coverage",
-   "fieldtype": "Small Text"
-  },
-  {
-   "fieldname": "qorg_layout_section",
-   "fieldtype": "Section Break",
-   "label": "Relevant Experience and Major Clients"
-  },
-  {
-   "fieldname": "experience_summary",
-   "label": "Relevant Experience and Major Clients",
-   "fieldtype": "Text Editor"
-  },
-  {
-   "fieldname": "qorg_layout_section_2",
-   "fieldtype": "Section Break",
-   "label": "Legal and Contact Information"
-  },
-  {
-   "fieldname": "registration_certificate",
-   "label": "Registration Certificate",
-   "fieldtype": "Attach",
-   "reqd": 1
-  },
-  {
-   "fieldname": "tax_certificate",
-   "label": "Tax Certificate",
-   "fieldtype": "Attach"
-  },
-  {
-   "fieldname": "licenses_certificates",
-   "label": "Licenses and Quality Certificates",
-   "fieldtype": "Attach"
-  },
-  {
-   "fieldname": "company_profile",
-   "label": "Company Profile",
-   "fieldtype": "Attach"
-  },
-  {
-   "fieldname": "references_document",
-   "label": "References and Past Performance",
-   "fieldtype": "Attach"
-  },
-  {
-   "fieldname": "qorg_layout_column",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "conflict_of_interest",
-   "label": "No Conflict of Interest Declaration",
-   "fieldtype": "Check",
-   "reqd": 1
-  },
-  {
-   "fieldname": "sanctions_declaration",
-   "label": "Sanctions and Debarment Declaration",
-   "fieldtype": "Check",
-   "reqd": 1
-  },
-  {
-   "fieldname": "anti_fraud_declaration",
-   "label": "Anti-Fraud and Anti-Corruption Declaration",
-   "fieldtype": "Check",
-   "reqd": 1
-  },
-  {
-   "fieldname": "data_consent",
-   "label": "Data Processing Consent",
-   "fieldtype": "Check",
-   "reqd": 1
-  },
-  {
-   "fieldname": "registration_status",
-   "label": "Registration Status",
-   "fieldtype": "Select",
-   "options": "Draft\nSubmitted\nUnder Due Diligence\nApproved\nRejected",
-   "in_list_view": 0,
-   "in_standard_filter": 0,
-   "in_preview": 0
-  },
-  {
-   "fieldname": "section_3_section",
-   "fieldtype": "Section Break",
-   "label": "Supporting Information"
-  },
-  {
-   "fieldname": "documents",
-   "label": "Documents",
-   "fieldtype": "Attach",
-   "in_list_view": 0,
-   "in_standard_filter": 0,
-   "in_preview": 0
-  },
-  {
-   "fieldname": "section_4_section",
-   "fieldtype": "Section Break",
-   "label": "Dates and Attachments"
-  },
-  {
-   "fieldname": "declarations",
-   "label": "Declarations",
-   "fieldtype": "Small Text",
-   "in_list_view": 0,
-   "in_standard_filter": 0,
-   "in_preview": 0
-  },
-  {
-   "fieldname": "profile_control_section",
-   "fieldtype": "Section Break",
-   "label": "Profile Control"
-  },
-  {
-   "fieldname": "profile_locked",
-   "fieldtype": "Check",
-   "label": "Profile Locked",
-   "read_only": 1
-  },
-  {
-   "fieldname": "update_requested",
-   "fieldtype": "Check",
-   "label": "Update Requested",
-   "read_only": 1
-  },
-  {
-   "fieldname": "reviewer",
-   "fieldtype": "Link",
-   "label": "Reviewer",
-   "options": "User"
-  },
-  {
-   "fieldname": "qorg_layout_column_2",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "risk_rating",
-   "fieldtype": "Select",
-   "label": "Risk Rating",
-   "options": "Low\nMedium\nHigh\nCritical"
-  },
-  {
-   "fieldname": "review_expiry_date",
-   "fieldtype": "Date",
-   "label": "Review Expiry Date"
-  },
-  {
-   "fieldname": "bank_section",
-   "fieldtype": "Section Break",
-   "label": "Bank Information"
-  },
-  {
-   "fieldname": "bank_name",
-   "fieldtype": "Data",
-   "label": "Bank Name"
-  },
-  {
-   "fieldname": "account_name",
-   "fieldtype": "Data",
-   "label": "Account Name"
-  },
-  {
-   "fieldname": "account_number",
-   "fieldtype": "Data",
-   "label": "Account Number"
-  },
-  {
-   "fieldname": "iban",
-   "fieldtype": "Data",
-   "label": "IBAN"
-  },
-  {
-   "fieldname": "qorg_layout_column_3",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "swift_code",
-   "fieldtype": "Data",
-   "label": "SWIFT Code"
-  },
-  {
-   "fieldname": "bank_currency",
-   "fieldtype": "Link",
-   "label": "Bank Currency",
-   "options": "Currency"
-  },
-  {
-   "fieldname": "bank_confirmation",
-   "fieldtype": "Attach",
-   "label": "Bank Confirmation"
-  }
- ],
- "permissions": [
-  {
-   "role": "System Manager",
-   "read": 1,
-   "write": 1,
-   "create": 1,
-   "delete": 1,
-   "submit": 1,
-   "cancel": 1,
-   "amend": 1
-  },
-  {
-   "role": "Procurement Manager",
-   "read": 1,
-   "write": 1,
-   "create": 1,
-   "submit": 1,
-   "cancel": 1,
-   "amend": 1
-  },
-  {
-   "role": "Procurement Officer",
-   "read": 1,
-   "write": 1,
-   "create": 1
-  }
- ],
- "autoname": "naming_series:",
- "is_submittable": 1
+  "doctype": "DocType",
+  "name": "Supplier Registration",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 0,
+  "issingle": 0,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "field_order": [
+    "qorg_usage_guidance",
+    "section_1_section",
+    "naming_series",
+    "legal_name",
+    "country",
+    "section_1_column",
+    "registration_number",
+    "tax_id",
+    "email",
+    "section_2_section",
+    "supplier",
+    "section_2_column",
+    "supplier_type",
+    "trade_name",
+    "year_established",
+    "employee_count",
+    "website",
+    "phone",
+    "address_line_1",
+    "address_line_2",
+    "layout_more_1",
+    "city",
+    "contact_person",
+    "contact_designation",
+    "contact_phone",
+    "contact_email",
+    "business_sectors",
+    "geographic_coverage",
+    "qorg_layout_section",
+    "experience_summary",
+    "qorg_layout_section_2",
+    "registration_certificate",
+    "tax_certificate",
+    "licenses_certificates",
+    "qorg_qorg_layout_section_2_0_column",
+    "company_profile",
+    "references_document",
+    "conflict_of_interest",
+    "qorg_qorg_layout_section_2_0_column_2",
+    "sanctions_declaration",
+    "anti_fraud_declaration",
+    "data_consent",
+    "qorg_qorg_layout_section_2_more_1",
+    "registration_status",
+    "section_3_section",
+    "documents",
+    "section_4_section",
+    "declarations",
+    "profile_control_section",
+    "profile_locked",
+    "update_requested",
+    "reviewer",
+    "qorg_layout_column_2",
+    "risk_rating",
+    "review_expiry_date",
+    "bank_section",
+    "bank_name",
+    "account_name",
+    "account_number",
+    "iban",
+    "qorg_layout_column_3",
+    "swift_code",
+    "bank_currency",
+    "bank_confirmation"
+  ],
+  "fields": [
+    {
+      "fieldname": "qorg_usage_guidance",
+      "fieldtype": "HTML",
+      "label": "Usage Guidance",
+      "options": "<div class=\"alert alert-info\"><strong>Purpose:</strong> Maintains a supplier portal profile and due-diligence status.<br><strong>When and impact:</strong> Approval controls eligibility to participate; portal editing is controlled from Buying Settings.</div>"
+    },
+    {
+      "fieldname": "section_1_section",
+      "fieldtype": "Section Break",
+      "label": "Identity and Reference"
+    },
+    {
+      "fieldname": "naming_series",
+      "label": "Naming Series",
+      "fieldtype": "Select",
+      "options": "SUP-.YYYY.-.#####",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "legal_name",
+      "label": "Legal Name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "country",
+      "label": "Country",
+      "fieldtype": "Link",
+      "options": "Country",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_1_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "registration_number",
+      "label": "Registration Number",
+      "fieldtype": "Data",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "tax_id",
+      "label": "Tax Id",
+      "fieldtype": "Data",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "email",
+      "label": "Email",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_2_section",
+      "fieldtype": "Section Break",
+      "label": "Additional Information"
+    },
+    {
+      "fieldname": "supplier",
+      "label": "Supplier",
+      "fieldtype": "Link",
+      "options": "Supplier",
+      "read_only": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "section_2_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "supplier_type",
+      "label": "Supplier Type",
+      "fieldtype": "Select",
+      "options": "Company\nOrganization\nIndividual\nConsultant",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "trade_name",
+      "label": "Trade Name",
+      "fieldtype": "Data",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "year_established",
+      "label": "Year Established",
+      "fieldtype": "Int"
+    },
+    {
+      "fieldname": "employee_count",
+      "label": "Number of Employees",
+      "fieldtype": "Int"
+    },
+    {
+      "fieldname": "website",
+      "label": "Website",
+      "fieldtype": "Data",
+      "options": "URL"
+    },
+    {
+      "fieldname": "phone",
+      "label": "Primary Phone",
+      "fieldtype": "Data",
+      "options": "Phone",
+      "reqd": 1
+    },
+    {
+      "fieldname": "address_line_1",
+      "label": "Address Line 1",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "address_line_2",
+      "label": "Address Line 2",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "layout_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "city",
+      "label": "City",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "contact_person",
+      "label": "Primary Contact Person",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "contact_designation",
+      "label": "Contact Designation",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "contact_phone",
+      "label": "Contact Phone",
+      "fieldtype": "Data",
+      "options": "Phone",
+      "reqd": 1
+    },
+    {
+      "fieldname": "contact_email",
+      "label": "Contact Email",
+      "fieldtype": "Data",
+      "options": "Email",
+      "reqd": 1
+    },
+    {
+      "fieldname": "business_sectors",
+      "label": "Goods, Services and Works Offered",
+      "fieldtype": "Small Text",
+      "reqd": 1
+    },
+    {
+      "fieldname": "geographic_coverage",
+      "label": "Geographic Coverage",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "qorg_layout_section",
+      "fieldtype": "Section Break",
+      "label": "Relevant Experience and Major Clients"
+    },
+    {
+      "fieldname": "experience_summary",
+      "label": "Relevant Experience and Major Clients",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "qorg_layout_section_2",
+      "fieldtype": "Section Break",
+      "label": "Legal and Contact Information"
+    },
+    {
+      "fieldname": "registration_certificate",
+      "label": "Registration Certificate",
+      "fieldtype": "Attach",
+      "reqd": 1
+    },
+    {
+      "fieldname": "tax_certificate",
+      "label": "Tax Certificate",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "licenses_certificates",
+      "label": "Licenses and Quality Certificates",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "qorg_qorg_layout_section_2_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "company_profile",
+      "label": "Company Profile",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "references_document",
+      "label": "References and Past Performance",
+      "fieldtype": "Attach"
+    },
+    {
+      "fieldname": "conflict_of_interest",
+      "label": "No Conflict of Interest Declaration",
+      "fieldtype": "Check",
+      "reqd": 1
+    },
+    {
+      "fieldname": "qorg_qorg_layout_section_2_0_column_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "sanctions_declaration",
+      "label": "Sanctions and Debarment Declaration",
+      "fieldtype": "Check",
+      "reqd": 1
+    },
+    {
+      "fieldname": "anti_fraud_declaration",
+      "label": "Anti-Fraud and Anti-Corruption Declaration",
+      "fieldtype": "Check",
+      "reqd": 1
+    },
+    {
+      "fieldname": "data_consent",
+      "label": "Data Processing Consent",
+      "fieldtype": "Check",
+      "reqd": 1
+    },
+    {
+      "fieldname": "qorg_qorg_layout_section_2_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "registration_status",
+      "label": "Registration Status",
+      "fieldtype": "Select",
+      "options": "Draft\nSubmitted\nUnder Due Diligence\nApproved\nRejected",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_3_section",
+      "fieldtype": "Section Break",
+      "label": "Supporting Information"
+    },
+    {
+      "fieldname": "documents",
+      "label": "Documents",
+      "fieldtype": "Attach",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "section_4_section",
+      "fieldtype": "Section Break",
+      "label": "Dates and Attachments"
+    },
+    {
+      "fieldname": "declarations",
+      "label": "Declarations",
+      "fieldtype": "Small Text",
+      "in_list_view": 0,
+      "in_standard_filter": 0,
+      "in_preview": 0
+    },
+    {
+      "fieldname": "profile_control_section",
+      "fieldtype": "Section Break",
+      "label": "Profile Control"
+    },
+    {
+      "fieldname": "profile_locked",
+      "fieldtype": "Check",
+      "label": "Profile Locked",
+      "read_only": 1
+    },
+    {
+      "fieldname": "update_requested",
+      "fieldtype": "Check",
+      "label": "Update Requested",
+      "read_only": 1
+    },
+    {
+      "fieldname": "reviewer",
+      "fieldtype": "Link",
+      "label": "Reviewer",
+      "options": "User"
+    },
+    {
+      "fieldname": "qorg_layout_column_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "risk_rating",
+      "fieldtype": "Select",
+      "label": "Risk Rating",
+      "options": "Low\nMedium\nHigh\nCritical"
+    },
+    {
+      "fieldname": "review_expiry_date",
+      "fieldtype": "Date",
+      "label": "Review Expiry Date"
+    },
+    {
+      "fieldname": "bank_section",
+      "fieldtype": "Section Break",
+      "label": "Bank Information"
+    },
+    {
+      "fieldname": "bank_name",
+      "fieldtype": "Data",
+      "label": "Bank Name"
+    },
+    {
+      "fieldname": "account_name",
+      "fieldtype": "Data",
+      "label": "Account Name"
+    },
+    {
+      "fieldname": "account_number",
+      "fieldtype": "Data",
+      "label": "Account Number"
+    },
+    {
+      "fieldname": "iban",
+      "fieldtype": "Data",
+      "label": "IBAN"
+    },
+    {
+      "fieldname": "qorg_layout_column_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "swift_code",
+      "fieldtype": "Data",
+      "label": "SWIFT Code"
+    },
+    {
+      "fieldname": "bank_currency",
+      "fieldtype": "Link",
+      "label": "Bank Currency",
+      "options": "Currency"
+    },
+    {
+      "fieldname": "bank_confirmation",
+      "fieldtype": "Attach",
+      "label": "Bank Confirmation"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "Procurement Officer",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ],
+  "autoname": "naming_series:",
+  "is_submittable": 1
 }

@@ -103,14 +103,15 @@
     "summary_include_operational",
     "summary_include_completed",
     "summary_only_attention",
+    "qorg_summary_filters_section_0_column",
     "summary_progress_warning",
-    "layout_v331_column_break_25",
     "summary_include_main_tasks",
     "summary_include_overdue",
+    "qorg_summary_filters_section_0_column_2",
     "summary_due_soon_days",
     "summary_stale_days",
-    "layout_v331_column_break_26",
     "summary_include_workplan",
+    "qorg_summary_filters_section_more_1",
     "summary_include_due_soon",
     "summary_exclude_zero_hours",
     "layout_v331_section_break_27",
@@ -119,14 +120,15 @@
     "summary_detail_level",
     "summary_show_project",
     "summary_show_due_date",
+    "qorg_summary_display_section_0_column",
     "summary_show_task_type",
-    "layout_v331_column_break_28",
     "summary_max_tasks",
     "summary_show_status",
+    "qorg_summary_display_section_0_column_2",
     "summary_show_expected_hours",
     "summary_show_assigned_by",
-    "layout_v331_column_break_29",
     "summary_show_priority",
+    "qorg_summary_display_section_more_1",
     "summary_show_progress",
     "summary_show_actual_hours",
     "migration_section",
@@ -769,16 +771,16 @@
       "description": "Includes only overdue, due-soon, stale, low-progress, or zero-hour Tasks."
     },
     {
+      "fieldname": "qorg_summary_filters_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "summary_progress_warning",
       "label": "Progress Warning Threshold (%)",
       "fieldtype": "Percent",
       "default": "25",
       "depends_on": "eval:doc.summary_only_attention",
       "description": "Tasks below this progress are marked as requiring attention."
-    },
-    {
-      "fieldname": "layout_v331_column_break_25",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "summary_include_main_tasks",
@@ -793,6 +795,10 @@
       "fieldtype": "Check",
       "default": "1",
       "description": "Includes incomplete Tasks that are past their expected end date."
+    },
+    {
+      "fieldname": "qorg_summary_filters_section_0_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "summary_due_soon_days",
@@ -813,15 +819,16 @@
       "description": "Tasks not modified within this many days are marked as requiring attention."
     },
     {
-      "fieldname": "layout_v331_column_break_26",
-      "fieldtype": "Column Break"
-    },
-    {
       "fieldname": "summary_include_workplan",
       "label": "Include Project Workplan Tasks",
       "fieldtype": "Check",
       "default": "0",
       "description": "Includes Tasks marked as Project Workplan Tasks."
+    },
+    {
+      "fieldname": "qorg_summary_filters_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "summary_include_due_soon",
@@ -876,14 +883,14 @@
       "default": "1"
     },
     {
+      "fieldname": "qorg_summary_display_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "summary_show_task_type",
       "label": "Show Task Type",
       "fieldtype": "Check",
       "default": "1"
-    },
-    {
-      "fieldname": "layout_v331_column_break_28",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "summary_max_tasks",
@@ -900,6 +907,10 @@
       "default": "1"
     },
     {
+      "fieldname": "qorg_summary_display_section_0_column_2",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "summary_show_expected_hours",
       "label": "Show Expected Hours",
       "fieldtype": "Check",
@@ -912,14 +923,15 @@
       "default": "0"
     },
     {
-      "fieldname": "layout_v331_column_break_29",
-      "fieldtype": "Column Break"
-    },
-    {
       "fieldname": "summary_show_priority",
       "label": "Show Priority",
       "fieldtype": "Check",
       "default": "1"
+    },
+    {
+      "fieldname": "qorg_summary_display_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "summary_show_progress",

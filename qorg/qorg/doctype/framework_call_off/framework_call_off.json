@@ -12,13 +12,15 @@
     "naming_series",
     "framework_agreement",
     "supplier",
+    "qorg_section_1_0_column",
     "company",
     "project",
     "material_request",
-    "column_1_5",
+    "qorg_section_1_0_column_2",
     "call_off_date",
     "currency",
     "amount",
+    "qorg_section_1_more_1",
     "purchase_order",
     "status",
     "section_2",
@@ -60,6 +62,10 @@
       "in_list_view": 1
     },
     {
+      "fieldname": "qorg_section_1_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "company",
       "label": "Company",
       "fieldtype": "Link",
@@ -79,8 +85,7 @@
       "options": "Material Request"
     },
     {
-      "fieldname": "column_1_5",
-      "label": "Column 1 5",
+      "fieldname": "qorg_section_1_0_column_2",
       "fieldtype": "Column Break"
     },
     {
@@ -103,6 +108,11 @@
       "reqd": 1,
       "in_list_view": 1,
       "options": "currency"
+    },
+    {
+      "fieldname": "qorg_section_1_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "purchase_order",

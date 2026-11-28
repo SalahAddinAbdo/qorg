@@ -6,22 +6,29 @@
   "doctype": "DocType",
   "engine": "InnoDB",
   "field_order": [
+    "qorg_overview_section",
     "naming_series",
     "company",
     "accrual_type",
+    "qorg_start_column",
     "posting_date",
     "period_start",
     "period_end",
+    "qorg_start_column_2",
     "currency",
     "exchange_rate",
     "operating_unit",
+    "qorg_start_more_1",
     "programme",
     "source_request_doctype",
     "source_request",
+    "qorg_start_column_3",
     "procurement_treatment",
     "payment_status",
+    "qorg_start_column_4",
     "operational_status",
     "workflow_state",
+    "qorg_description_section",
     "description",
     "legacy_lines_section",
     "lines",
@@ -37,6 +44,11 @@
     "remarks"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "naming_series",
       "label": "Series",
@@ -62,6 +74,10 @@
       "in_list_view": 1
     },
     {
+      "fieldname": "qorg_start_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "posting_date",
       "label": "Posting Date",
       "fieldtype": "Date",
@@ -79,6 +95,10 @@
       "label": "Period End",
       "fieldtype": "Date",
       "reqd": 1
+    },
+    {
+      "fieldname": "qorg_start_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "currency",
@@ -100,6 +120,11 @@
       "fieldtype": "Data"
     },
     {
+      "fieldname": "qorg_start_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "programme",
       "label": "Programme",
       "fieldtype": "Data"
@@ -117,6 +142,10 @@
       "options": "source_request_doctype"
     },
     {
+      "fieldname": "qorg_start_column_3",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "procurement_treatment",
       "label": "Procurement Treatment",
       "fieldtype": "Select",
@@ -130,6 +159,10 @@
       "options": "Not Started\nPartially Paid\nPaid\nReversed",
       "default": "Not Started",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_start_column_4",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "operational_status",
@@ -146,6 +179,11 @@
       "fieldtype": "Link",
       "options": "Workflow State",
       "allow_on_submit": 1
+    },
+    {
+      "fieldname": "qorg_description_section",
+      "label": "Description",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "description",

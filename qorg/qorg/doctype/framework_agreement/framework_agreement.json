@@ -12,13 +12,15 @@
     "naming_series",
     "agreement_title",
     "procurement_process",
+    "qorg_section_1_0_column",
     "company",
     "project",
     "currency",
-    "column_1_5",
+    "qorg_section_1_0_column_2",
     "valid_from",
     "valid_to",
     "total_ceiling",
+    "qorg_section_1_more_1",
     "consumed_amount",
     "status",
     "section_2",
@@ -66,6 +68,10 @@
       "reqd": 1
     },
     {
+      "fieldname": "qorg_section_1_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "company",
       "label": "Company",
       "fieldtype": "Link",
@@ -86,8 +92,7 @@
       "reqd": 1
     },
     {
-      "fieldname": "column_1_5",
-      "label": "Column 1 5",
+      "fieldname": "qorg_section_1_0_column_2",
       "fieldtype": "Column Break"
     },
     {
@@ -109,6 +114,11 @@
       "fieldtype": "Currency",
       "reqd": 1,
       "options": "currency"
+    },
+    {
+      "fieldname": "qorg_section_1_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "consumed_amount",

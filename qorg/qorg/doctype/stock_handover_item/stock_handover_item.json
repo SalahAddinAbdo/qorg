@@ -12,16 +12,20 @@
     "stock_entry_detail",
     "item_code",
     "item_name",
+    "qorg_item_section_column",
     "uom",
     "unit_cost",
     "total_cost",
-    "quantity_column",
+    "qorg_item_section_column_2",
     "issued_qty",
     "delivered_qty",
     "received_qty",
+    "qorg_item_section_more_1",
     "accepted_qty",
     "rejected_qty",
+    "qorg_item_section_column_3",
     "short_qty",
+    "qorg_item_section_column_4",
     "damaged_qty",
     "trace_section",
     "batch_no",
@@ -59,6 +63,10 @@
       "columns": 2
     },
     {
+      "fieldname": "qorg_item_section_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "uom",
       "label": "UOM",
       "fieldtype": "Link",
@@ -86,8 +94,7 @@
       "in_list_view": 1
     },
     {
-      "fieldname": "quantity_column",
-      "label": "",
+      "fieldname": "qorg_item_section_column_2",
       "fieldtype": "Column Break"
     },
     {
@@ -115,6 +122,11 @@
       "precision": "stock_precision"
     },
     {
+      "fieldname": "qorg_item_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "accepted_qty",
       "label": "Accepted Quantity",
       "fieldtype": "Float",
@@ -130,12 +142,20 @@
       "in_list_view": 1
     },
     {
+      "fieldname": "qorg_item_section_column_3",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "short_qty",
       "label": "Short Quantity",
       "fieldtype": "Float",
       "read_only": 1,
       "precision": "stock_precision",
       "in_list_view": 1
+    },
+    {
+      "fieldname": "qorg_item_section_column_4",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "damaged_qty",

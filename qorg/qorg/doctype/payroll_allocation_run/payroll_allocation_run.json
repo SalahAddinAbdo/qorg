@@ -46,16 +46,21 @@
     "liability_reconciliation_status",
     "payment_reconciliation_status",
     "reconciliation_detail_section",
-    "reconciliation_details",
     "reconciled_by",
     "reconciled_on",
     "closed_by",
+    "qorg_reconciliation_detail_section_0_column",
     "closed_on",
     "commitment_status",
-    "commitment_references",
     "source_fingerprint",
+    "qorg_reconciliation_detail_section_0_column_2",
     "engine_version",
     "audit_snapshot_hash",
+    "qorg_reconciliation_details_full_width_section",
+    "reconciliation_details",
+    "qorg_commitment_references_full_width_section",
+    "commitment_references",
+    "qorg_audit_snapshot_full_width_section",
     "audit_snapshot",
     "audit_section",
     "notes"
@@ -343,16 +348,6 @@
       "label": "Reconciliation Details"
     },
     {
-      "fieldname": "reconciliation_details",
-      "fieldtype": "Table",
-      "label": "Reconciliation Details",
-      "options": "Payroll Reconciliation Detail",
-      "read_only": 1,
-      "cannot_add_rows": 1,
-      "cannot_delete_rows": 1,
-      "no_copy": 1
-    },
-    {
       "fieldname": "reconciled_by",
       "fieldtype": "Link",
       "label": "Reconciled By",
@@ -376,6 +371,10 @@
       "no_copy": 1
     },
     {
+      "fieldname": "qorg_reconciliation_detail_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "closed_on",
       "fieldtype": "Datetime",
       "label": "Closed On",
@@ -392,14 +391,6 @@
       "no_copy": 1
     },
     {
-      "fieldname": "commitment_references",
-      "fieldtype": "Long Text",
-      "label": "Commitment References",
-      "read_only": 1,
-      "no_copy": 1,
-      "columns": 0
-    },
-    {
       "fieldname": "source_fingerprint",
       "fieldtype": "Data",
       "label": "Source Fingerprint",
@@ -407,6 +398,10 @@
       "hidden": 1,
       "print_hide": 1,
       "no_copy": 1
+    },
+    {
+      "fieldname": "qorg_reconciliation_detail_section_0_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "engine_version",
@@ -424,6 +419,39 @@
       "hidden": 1,
       "print_hide": 1,
       "no_copy": 1
+    },
+    {
+      "fieldname": "qorg_reconciliation_details_full_width_section",
+      "label": "Reconciliation Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "reconciliation_details",
+      "fieldtype": "Table",
+      "label": "Reconciliation Details",
+      "options": "Payroll Reconciliation Detail",
+      "read_only": 1,
+      "cannot_add_rows": 1,
+      "cannot_delete_rows": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "qorg_commitment_references_full_width_section",
+      "label": "Commitment References",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "commitment_references",
+      "fieldtype": "Long Text",
+      "label": "Commitment References",
+      "read_only": 1,
+      "no_copy": 1,
+      "columns": 0
+    },
+    {
+      "fieldname": "qorg_audit_snapshot_full_width_section",
+      "label": "Audit Snapshot",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "audit_snapshot",

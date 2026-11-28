@@ -6,17 +6,20 @@
   "autoname": "naming_series:",
   "track_changes": 1,
   "field_order": [
+    "qorg_overview_section",
     "naming_series",
     "engagement",
     "external_person",
+    "qorg_qorg_overview_section_0_column",
     "service_date",
     "hours",
-    "qorg_layout_column",
-    "activity",
     "location",
+    "qorg_qorg_overview_section_0_column_2",
     "status",
     "evidence",
     "supervisor",
+    "qorg_activity_full_width_section",
+    "activity",
     "verification_section",
     "verified_by",
     "verified_on",
@@ -25,6 +28,11 @@
     "rejection_reason"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "naming_series",
       "label": "Series",
@@ -51,6 +59,10 @@
       "in_list_view": 1
     },
     {
+      "fieldname": "qorg_qorg_overview_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "service_date",
       "label": "Service Date",
       "fieldtype": "Date",
@@ -66,19 +78,13 @@
       "in_list_view": 1
     },
     {
-      "fieldname": "qorg_layout_column",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "activity",
-      "label": "Activity / Assignment",
-      "fieldtype": "Small Text",
-      "reqd": 1
-    },
-    {
       "fieldname": "location",
       "label": "Location",
       "fieldtype": "Data"
+    },
+    {
+      "fieldname": "qorg_qorg_overview_section_0_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "status",
@@ -101,6 +107,17 @@
       "fieldtype": "Link",
       "options": "Employee",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_activity_full_width_section",
+      "label": "Activity / Assignment",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "activity",
+      "label": "Activity / Assignment",
+      "fieldtype": "Small Text",
+      "reqd": 1
     },
     {
       "fieldname": "verification_section",

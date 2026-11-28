@@ -1,532 +1,627 @@
 {
- "doctype": "DocType",
- "name": "Commitment Entry",
- "module": "QOrg",
- "custom": 0,
- "istable": 1,
- "editable_grid": 1,
- "field_order": [
-  "stage",
-  "posting_date",
-  "reference_doctype",
-  "reference_name",
-  "qorg_layout_column",
-  "amount",
-  "direction",
-  "remarks",
-  "page_break",
-  "event_key",
-  "reverses_event_key",
-  "source_row",
-  "source_modified",
-  "budget_line",
-  "project",
-  "company_currency",
-  "base_amount",
-  "source_parent_row",
-  "source_parent_doctype",
-  "commitment_effect",
-  "source_parent_name",
-  "gl_entry",
-  "matched_base_amount",
-  "matching_status",
-  "matching_key",
-  "transaction_currency",
-  "transaction_amount",
-  "conversion_rate",
-  "net_base_amount",
-  "tax_base_amount",
-  "charge_base_amount",
-  "discount_base_amount",
-  "amount_policy",
-  "source_version",
-  "amended_from",
-  "return_against",
-  "adjustment_type",
-  "original_event_key",
-  "remaining_reversible_amount",
-  "adjustment_period",
-  "cost_distribution_row",
-  "cost_distribution_ledger",
-  "funding_agreement",
-  "donor",
-  "allocation_percentage",
-  "distribution_snapshot",
-  "commitment_period",
-  "actual_period",
-  "origin_period",
-  "carry_forward_from",
-  "carry_forward_key",
-  "carry_forward_batch",
-  "control_policy"
- ],
- "fields": [
-  {
-   "fieldname": "stage",
-   "label": "Stage",
-   "fieldtype": "Select",
-   "options": "Planned\nRequested\nReserved\nOrdered\nContracted\nReceived\nAccepted\nInvoiced\nPaid\nReleased\nCancelled",
-   "reqd": 1,
-   "in_list_view": 1,
-   "columns": 2
-  },
-  {
-   "fieldname": "posting_date",
-   "label": "Posting Date",
-   "fieldtype": "Date",
-   "reqd": 1,
-   "in_list_view": 1,
-   "columns": 2
-  },
-  {
-   "fieldname": "reference_doctype",
-   "label": "Reference Doctype",
-   "fieldtype": "Link",
-   "options": "DocType",
-   "reqd": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "reference_name",
-   "label": "Reference Name",
-   "fieldtype": "Dynamic Link",
-   "options": "reference_doctype",
-   "reqd": 1,
-   "in_list_view": 1,
-   "columns": 3
-  },
-  {
-   "fieldname": "qorg_layout_column",
-   "fieldtype": "Column Break",
-   "in_list_view": 0,
-   "read_only": 1
-  },
-  {
-   "fieldname": "amount",
-   "label": "Amount",
-   "fieldtype": "Currency",
-   "reqd": 1,
-   "in_list_view": 0,
-   "columns": 0,
-   "options": "currency",
-   "non_negative": 1
-  },
-  {
-   "fieldname": "direction",
-   "label": "Direction",
-   "fieldtype": "Select",
-   "options": "Increase\nDecrease",
-   "reqd": 1,
-   "in_list_view": 1,
-   "columns": 1
-  },
-  {
-   "fieldname": "remarks",
-   "label": "Remarks",
-   "fieldtype": "Small Text",
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "page_break",
-   "label": "Page Break After This Row",
-   "fieldtype": "Check",
-   "default": "0",
-   "allow_on_submit": 1,
-   "print_hide": 1,
-   "in_list_view": 0,
-   "description": "Starts a new printed page after this row in managed print formats.",
-   "columns": 0,
-   "read_only": 1,
-   "hidden": 1
-  },
-  {
-   "fieldname": "event_key",
-   "label": "Event Key",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0,
-   "hidden": 1
-  },
-  {
-   "fieldname": "reverses_event_key",
-   "label": "Reverses Event Key",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "source_row",
-   "label": "Source Row",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "source_modified",
-   "label": "Source Modified",
-   "fieldtype": "Datetime",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0,
-   "hidden": 1
-  },
-  {
-   "fieldname": "budget_line",
-   "label": "Budget Line",
-   "fieldtype": "Link",
-   "options": "Budget Line",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "project",
-   "label": "Project",
-   "fieldtype": "Link",
-   "options": "Project",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "company_currency",
-   "label": "Company Currency",
-   "fieldtype": "Link",
-   "options": "Currency",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "base_amount",
-   "label": "Base Amount",
-   "fieldtype": "Currency",
-   "options": "company_currency",
-   "read_only": 1,
-   "in_list_view": 1,
-   "columns": 2
-  },
-  {
-   "fieldname": "source_parent_row",
-   "label": "Upstream Row",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "source_parent_doctype",
-   "label": "Upstream Row Type",
-   "fieldtype": "Link",
-   "options": "DocType",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "commitment_effect",
-   "label": "Commitment Effect",
-   "fieldtype": "Select",
-   "options": "Increase Open Commitment\nDecrease Open Commitment\nInformation Only",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "source_parent_name",
-   "label": "Upstream Document",
-   "fieldtype": "Dynamic Link",
-   "options": "source_parent_doctype",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "gl_entry",
-   "label": "Matched GL Entry",
-   "fieldtype": "Link",
-   "options": "GL Entry",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "matched_base_amount",
-   "label": "Matched Base Amount",
-   "fieldtype": "Currency",
-   "options": "company_currency",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "matching_status",
-   "label": "Matching Status",
-   "fieldtype": "Select",
-   "options": "Not Applicable\nPending GL\nPartially Matched\nFully Matched\nException",
-   "default": "Not Applicable",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "matching_key",
-   "label": "GL Matching Key",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0,
-   "hidden": 1
-  },
-  {
-   "fieldname": "transaction_currency",
-   "label": "Transaction Currency",
-   "fieldtype": "Link",
-   "options": "Currency",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "transaction_amount",
-   "label": "Transaction Amount",
-   "fieldtype": "Currency",
-   "options": "transaction_currency",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "conversion_rate",
-   "label": "Conversion Rate",
-   "fieldtype": "Float",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "net_base_amount",
-   "label": "Net Base Amount",
-   "fieldtype": "Currency",
-   "options": "company_currency",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "tax_base_amount",
-   "label": "Eligible Tax Base Amount",
-   "fieldtype": "Currency",
-   "options": "company_currency",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "charge_base_amount",
-   "label": "Allocated Charge Base Amount",
-   "fieldtype": "Currency",
-   "options": "company_currency",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "discount_base_amount",
-   "label": "Allocated Discount Base Amount",
-   "fieldtype": "Currency",
-   "options": "company_currency",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "amount_policy",
-   "label": "Amount Policy",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "source_version",
-   "label": "Source Version",
-   "fieldtype": "Int",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "amended_from",
-   "label": "Amended From",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "return_against",
-   "label": "Return Against",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "adjustment_type",
-   "label": "Adjustment Type",
-   "fieldtype": "Select",
-   "options": "Original\nCancellation\nAmendment\nPurchase Return\nDebit Note\nCredit Note\nClosure Release",
-   "default": "Original",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "original_event_key",
-   "label": "Original Event Key",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "remaining_reversible_amount",
-   "label": "Remaining Reversible Amount",
-   "fieldtype": "Currency",
-   "options": "company_currency",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "adjustment_period",
-   "label": "Adjustment Period",
-   "fieldtype": "Link",
-   "options": "Budget Period",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "cost_distribution_row",
-   "label": "Cost Distribution Row",
-   "fieldtype": "Link",
-   "options": "Cost Distribution Row",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "cost_distribution_ledger",
-   "label": "Cost Distribution Ledger",
-   "fieldtype": "Link",
-   "options": "Cost Distribution Ledger",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "funding_agreement",
-   "label": "Funding Agreement",
-   "fieldtype": "Link",
-   "options": "Funding Agreement",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "donor",
-   "label": "Donor",
-   "fieldtype": "Link",
-   "options": "Donor",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "allocation_percentage",
-   "label": "Allocation %",
-   "fieldtype": "Percent",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "distribution_snapshot",
-   "label": "Distribution Snapshot",
-   "fieldtype": "Long Text",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0,
-   "hidden": 1
-  },
-  {
-   "fieldname": "commitment_period",
-   "label": "Commitment Period",
-   "fieldtype": "Link",
-   "options": "Budget Period",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "actual_period",
-   "label": "Actual Period",
-   "fieldtype": "Link",
-   "options": "Budget Period",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "origin_period",
-   "label": "Origin Period",
-   "fieldtype": "Link",
-   "options": "Budget Period",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "carry_forward_from",
-   "label": "Carry Forward From",
-   "fieldtype": "Link",
-   "options": "Budget Period",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "carry_forward_key",
-   "label": "Carry Forward Key",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0,
-   "hidden": 1
-  },
-  {
-   "fieldname": "carry_forward_batch",
-   "label": "Carry Forward Batch",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  },
-  {
-   "fieldname": "control_policy",
-   "label": "Control Policy",
-   "fieldtype": "Data",
-   "read_only": 1,
-   "in_list_view": 0,
-   "columns": 0
-  }
- ],
- "permissions": []
+  "doctype": "DocType",
+  "name": "Commitment Entry",
+  "module": "QOrg",
+  "custom": 0,
+  "istable": 1,
+  "editable_grid": 1,
+  "field_order": [
+    "qorg_row_overview_section",
+    "stage",
+    "posting_date",
+    "reference_doctype",
+    "qorg_qorg_row_overview_section_column",
+    "reference_name",
+    "amount",
+    "direction",
+    "qorg_qorg_row_overview_section_column_2",
+    "page_break",
+    "event_key",
+    "reverses_event_key",
+    "qorg_qorg_row_overview_section_more_1",
+    "source_row",
+    "source_modified",
+    "budget_line",
+    "qorg_qorg_row_overview_section_column_3",
+    "project",
+    "company_currency",
+    "base_amount",
+    "qorg_qorg_row_overview_section_column_4",
+    "source_parent_row",
+    "source_parent_doctype",
+    "commitment_effect",
+    "qorg_qorg_row_overview_section_more_2",
+    "source_parent_name",
+    "gl_entry",
+    "matched_base_amount",
+    "qorg_qorg_row_overview_section_column_5",
+    "matching_status",
+    "matching_key",
+    "transaction_currency",
+    "qorg_qorg_row_overview_section_column_6",
+    "transaction_amount",
+    "conversion_rate",
+    "net_base_amount",
+    "qorg_qorg_row_overview_section_more_3",
+    "tax_base_amount",
+    "charge_base_amount",
+    "discount_base_amount",
+    "qorg_qorg_row_overview_section_column_7",
+    "amount_policy",
+    "source_version",
+    "amended_from",
+    "qorg_qorg_row_overview_section_column_8",
+    "return_against",
+    "adjustment_type",
+    "original_event_key",
+    "qorg_qorg_row_overview_section_more_4",
+    "remaining_reversible_amount",
+    "adjustment_period",
+    "cost_distribution_row",
+    "qorg_qorg_row_overview_section_column_9",
+    "cost_distribution_ledger",
+    "funding_agreement",
+    "donor",
+    "qorg_qorg_row_overview_section_column_10",
+    "allocation_percentage",
+    "commitment_period",
+    "actual_period",
+    "qorg_qorg_row_overview_section_more_5",
+    "origin_period",
+    "carry_forward_from",
+    "qorg_qorg_row_overview_section_column_11",
+    "carry_forward_key",
+    "carry_forward_batch",
+    "qorg_qorg_row_overview_section_column_12",
+    "control_policy",
+    "qorg_row_details_section",
+    "remarks",
+    "distribution_snapshot"
+  ],
+  "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "stage",
+      "label": "Stage",
+      "fieldtype": "Select",
+      "options": "Planned\nRequested\nReserved\nOrdered\nContracted\nReceived\nAccepted\nInvoiced\nPaid\nReleased\nCancelled",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "posting_date",
+      "label": "Posting Date",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "reference_doctype",
+      "label": "Reference Doctype",
+      "fieldtype": "Link",
+      "options": "DocType",
+      "reqd": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "reference_name",
+      "label": "Reference Name",
+      "fieldtype": "Dynamic Link",
+      "options": "reference_doctype",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 3
+    },
+    {
+      "fieldname": "amount",
+      "label": "Amount",
+      "fieldtype": "Currency",
+      "reqd": 1,
+      "in_list_view": 0,
+      "columns": 0,
+      "options": "currency",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "direction",
+      "label": "Direction",
+      "fieldtype": "Select",
+      "options": "Increase\nDecrease",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_column_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "page_break",
+      "label": "Page Break After This Row",
+      "fieldtype": "Check",
+      "default": "0",
+      "allow_on_submit": 1,
+      "print_hide": 1,
+      "in_list_view": 0,
+      "description": "Starts a new printed page after this row in managed print formats.",
+      "columns": 0,
+      "read_only": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "event_key",
+      "label": "Event Key",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0,
+      "hidden": 1
+    },
+    {
+      "fieldname": "reverses_event_key",
+      "label": "Reverses Event Key",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "source_row",
+      "label": "Source Row",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "source_modified",
+      "label": "Source Modified",
+      "fieldtype": "Datetime",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0,
+      "hidden": 1
+    },
+    {
+      "fieldname": "budget_line",
+      "label": "Budget Line",
+      "fieldtype": "Link",
+      "options": "Budget Line",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_column_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "project",
+      "label": "Project",
+      "fieldtype": "Link",
+      "options": "Project",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "company_currency",
+      "label": "Company Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "base_amount",
+      "label": "Base Amount",
+      "fieldtype": "Currency",
+      "options": "company_currency",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_column_4",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "source_parent_row",
+      "label": "Upstream Row",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "source_parent_doctype",
+      "label": "Upstream Row Type",
+      "fieldtype": "Link",
+      "options": "DocType",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "commitment_effect",
+      "label": "Commitment Effect",
+      "fieldtype": "Select",
+      "options": "Increase Open Commitment\nDecrease Open Commitment\nInformation Only",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_more_2",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "source_parent_name",
+      "label": "Upstream Document",
+      "fieldtype": "Dynamic Link",
+      "options": "source_parent_doctype",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "gl_entry",
+      "label": "Matched GL Entry",
+      "fieldtype": "Link",
+      "options": "GL Entry",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "matched_base_amount",
+      "label": "Matched Base Amount",
+      "fieldtype": "Currency",
+      "options": "company_currency",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_column_5",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "matching_status",
+      "label": "Matching Status",
+      "fieldtype": "Select",
+      "options": "Not Applicable\nPending GL\nPartially Matched\nFully Matched\nException",
+      "default": "Not Applicable",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "matching_key",
+      "label": "GL Matching Key",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0,
+      "hidden": 1
+    },
+    {
+      "fieldname": "transaction_currency",
+      "label": "Transaction Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_column_6",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "transaction_amount",
+      "label": "Transaction Amount",
+      "fieldtype": "Currency",
+      "options": "transaction_currency",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "conversion_rate",
+      "label": "Conversion Rate",
+      "fieldtype": "Float",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "net_base_amount",
+      "label": "Net Base Amount",
+      "fieldtype": "Currency",
+      "options": "company_currency",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_more_3",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "tax_base_amount",
+      "label": "Eligible Tax Base Amount",
+      "fieldtype": "Currency",
+      "options": "company_currency",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "charge_base_amount",
+      "label": "Allocated Charge Base Amount",
+      "fieldtype": "Currency",
+      "options": "company_currency",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "discount_base_amount",
+      "label": "Allocated Discount Base Amount",
+      "fieldtype": "Currency",
+      "options": "company_currency",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_column_7",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "amount_policy",
+      "label": "Amount Policy",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "source_version",
+      "label": "Source Version",
+      "fieldtype": "Int",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "amended_from",
+      "label": "Amended From",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_column_8",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "return_against",
+      "label": "Return Against",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "adjustment_type",
+      "label": "Adjustment Type",
+      "fieldtype": "Select",
+      "options": "Original\nCancellation\nAmendment\nPurchase Return\nDebit Note\nCredit Note\nClosure Release",
+      "default": "Original",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "original_event_key",
+      "label": "Original Event Key",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_more_4",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "remaining_reversible_amount",
+      "label": "Remaining Reversible Amount",
+      "fieldtype": "Currency",
+      "options": "company_currency",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "adjustment_period",
+      "label": "Adjustment Period",
+      "fieldtype": "Link",
+      "options": "Budget Period",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "cost_distribution_row",
+      "label": "Cost Distribution Row",
+      "fieldtype": "Link",
+      "options": "Cost Distribution Row",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_column_9",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "cost_distribution_ledger",
+      "label": "Cost Distribution Ledger",
+      "fieldtype": "Link",
+      "options": "Cost Distribution Ledger",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "funding_agreement",
+      "label": "Funding Agreement",
+      "fieldtype": "Link",
+      "options": "Funding Agreement",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "donor",
+      "label": "Donor",
+      "fieldtype": "Link",
+      "options": "Donor",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_column_10",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "allocation_percentage",
+      "label": "Allocation %",
+      "fieldtype": "Percent",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "commitment_period",
+      "label": "Commitment Period",
+      "fieldtype": "Link",
+      "options": "Budget Period",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "actual_period",
+      "label": "Actual Period",
+      "fieldtype": "Link",
+      "options": "Budget Period",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_more_5",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "origin_period",
+      "label": "Origin Period",
+      "fieldtype": "Link",
+      "options": "Budget Period",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "carry_forward_from",
+      "label": "Carry Forward From",
+      "fieldtype": "Link",
+      "options": "Budget Period",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_column_11",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "carry_forward_key",
+      "label": "Carry Forward Key",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0,
+      "hidden": 1
+    },
+    {
+      "fieldname": "carry_forward_batch",
+      "label": "Carry Forward Batch",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_column_12",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "control_policy",
+      "label": "Control Policy",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "qorg_row_details_section",
+      "label": "Details and Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "remarks",
+      "label": "Remarks",
+      "fieldtype": "Small Text",
+      "in_list_view": 0,
+      "columns": 0
+    },
+    {
+      "fieldname": "distribution_snapshot",
+      "label": "Distribution Snapshot",
+      "fieldtype": "Long Text",
+      "read_only": 1,
+      "in_list_view": 0,
+      "columns": 0,
+      "hidden": 1
+    }
+  ],
+  "permissions": []
 }

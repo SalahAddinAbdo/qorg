@@ -1,78 +1,95 @@
 {
- "actions": [],
- "allow_import": 1,
- "autoname": "hash",
- "doctype": "DocType",
- "editable_grid": 1,
- "engine": "InnoDB",
- "field_order": [
-  "effective_from",
-  "effective_to",
-  "indirect_cost_rate",
-  "period_cap",
-  "eligible_base_method",
-  "donor_approval_reference",
-  "approval_date",
-  "change_reason"
- ],
- "fields": [
-  {
-   "fieldname": "effective_from",
-   "label": "Effective From",
-   "fieldtype": "Date",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "effective_to",
-   "label": "Effective To",
-   "fieldtype": "Date",
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "indirect_cost_rate",
-   "label": "Indirect Cost Rate",
-   "fieldtype": "Percent",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "period_cap",
-   "label": "Period Cap",
-   "fieldtype": "Currency",
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "eligible_base_method",
-   "label": "Eligible Base Method",
-   "fieldtype": "Select",
-   "options": "Eligible Direct Expense\nModified Total Direct Cost\nSelected Accounts and Budget Lines",
-   "default": "Eligible Direct Expense",
-   "reqd": 1
-  },
-  {
-   "fieldname": "donor_approval_reference",
-   "label": "Donor Approval Reference",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "approval_date",
-   "label": "Approval Date",
-   "fieldtype": "Date"
-  },
-  {
-   "fieldname": "change_reason",
-   "label": "Change Reason",
-   "fieldtype": "Small Text",
-   "reqd": 1
-  }
- ],
- "index_web_pages_for_search": 1,
- "istable": 1,
- "links": [],
- "module": "QOrg",
- "name": "Indirect Cost Rate Period",
- "permissions": [],
- "sort_field": "modified",
- "sort_order": "DESC"
+  "actions": [],
+  "allow_import": 1,
+  "autoname": "hash",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "qorg_row_overview_section",
+    "effective_from",
+    "effective_to",
+    "indirect_cost_rate",
+    "period_cap",
+    "qorg_row_overview_column",
+    "eligible_base_method",
+    "donor_approval_reference",
+    "approval_date",
+    "qorg_row_details_section",
+    "change_reason"
+  ],
+  "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "effective_from",
+      "label": "Effective From",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "effective_to",
+      "label": "Effective To",
+      "fieldtype": "Date",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "indirect_cost_rate",
+      "label": "Indirect Cost Rate",
+      "fieldtype": "Percent",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "period_cap",
+      "label": "Period Cap",
+      "fieldtype": "Currency",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "qorg_row_overview_column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "eligible_base_method",
+      "label": "Eligible Base Method",
+      "fieldtype": "Select",
+      "options": "Eligible Direct Expense\nModified Total Direct Cost\nSelected Accounts and Budget Lines",
+      "default": "Eligible Direct Expense",
+      "reqd": 1
+    },
+    {
+      "fieldname": "donor_approval_reference",
+      "label": "Donor Approval Reference",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "approval_date",
+      "label": "Approval Date",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "qorg_row_details_section",
+      "label": "Details and Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "change_reason",
+      "label": "Change Reason",
+      "fieldtype": "Small Text",
+      "reqd": 1
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "istable": 1,
+  "links": [],
+  "module": "QOrg",
+  "name": "Indirect Cost Rate Period",
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC"
 }

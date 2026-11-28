@@ -6,18 +6,25 @@
   "istable": 1,
   "editable_grid": 1,
   "field_order": [
+    "qorg_row_overview_section",
     "guarantee_type",
     "issuer",
     "amount",
     "currency",
+    "qorg_row_overview_column",
     "valid_from",
-    "qorg_layout_column",
     "valid_to",
     "status",
-    "document",
-    "page_break"
+    "page_break",
+    "qorg_row_details_section",
+    "document"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "guarantee_type",
       "label": "Guarantee Type",
@@ -53,14 +60,14 @@
       "in_list_view": 0
     },
     {
+      "fieldname": "qorg_row_overview_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "valid_from",
       "label": "Valid From",
       "fieldtype": "Date",
       "in_list_view": 0
-    },
-    {
-      "fieldname": "qorg_layout_column",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "valid_to",
@@ -79,12 +86,6 @@
       "columns": 1
     },
     {
-      "fieldname": "document",
-      "label": "Document",
-      "fieldtype": "Attach",
-      "in_list_view": 0
-    },
-    {
       "fieldname": "page_break",
       "label": "Page Break After This Row",
       "fieldtype": "Check",
@@ -93,6 +94,17 @@
       "print_hide": 1,
       "in_list_view": 0,
       "description": "Starts a new printed page after this row in managed print formats."
+    },
+    {
+      "fieldname": "qorg_row_details_section",
+      "label": "Details and Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "document",
+      "label": "Document",
+      "fieldtype": "Attach",
+      "in_list_view": 0
     }
   ],
   "permissions": []

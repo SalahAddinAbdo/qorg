@@ -42,7 +42,7 @@
       "label": "Layer",
       "options": "Source\nAllocation\nJournal Entry\nGL Entry\nCommitment\nLiability\nPayment\nReversal",
       "in_list_view": 1,
-      "columns": 2
+      "columns": 1
     },
     {
       "fieldname": "reference_type",
@@ -50,7 +50,7 @@
       "label": "Reference Type",
       "options": "DocType",
       "in_list_view": 1,
-      "columns": 2
+      "columns": 3
     },
     {
       "fieldname": "reference_name",
@@ -58,7 +58,7 @@
       "label": "Reference",
       "options": "reference_type",
       "in_list_view": 1,
-      "columns": 2
+      "columns": 1
     },
     {
       "fieldname": "reference_column",
@@ -70,7 +70,8 @@
       "fieldtype": "Select",
       "label": "Status",
       "options": "Pending\nMatched\nPartially Matched\nDifference\nReversed",
-      "in_list_view": 1
+      "in_list_view": 1,
+      "columns": 1
     },
     {
       "fieldname": "exception_code",
@@ -94,7 +95,7 @@
       "label": "Account",
       "options": "Account",
       "in_list_view": 1,
-      "columns": 2
+      "columns": 1
     },
     {
       "fieldname": "project",
@@ -144,21 +145,21 @@
       "fieldtype": "Currency",
       "label": "Expected Amount",
       "in_list_view": 1,
-      "columns": 2
+      "columns": 1
     },
     {
       "fieldname": "actual_amount",
       "fieldtype": "Currency",
       "label": "Actual Amount",
       "in_list_view": 1,
-      "columns": 2
+      "columns": 1
     },
     {
       "fieldname": "difference",
       "fieldtype": "Currency",
       "label": "Difference",
       "in_list_view": 1,
-      "columns": 2
+      "columns": 1
     },
     {
       "fieldname": "amounts_column",

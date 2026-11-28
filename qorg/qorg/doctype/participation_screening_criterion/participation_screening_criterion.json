@@ -6,17 +6,24 @@
   "autoname": "hash",
   "track_changes": 0,
   "field_order": [
+    "qorg_row_overview_section",
     "sequence",
     "criterion",
     "criterion_type",
     "weight",
-    "qorg_layout_column",
+    "qorg_row_overview_column",
     "passing_score",
     "mandatory",
-    "instructions",
-    "page_break"
+    "page_break",
+    "qorg_row_details_section",
+    "instructions"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "sequence",
       "label": "Sequence",
@@ -52,7 +59,7 @@
       "columns": 1
     },
     {
-      "fieldname": "qorg_layout_column",
+      "fieldname": "qorg_row_overview_column",
       "fieldtype": "Column Break"
     },
     {
@@ -72,17 +79,22 @@
       "columns": 1
     },
     {
-      "fieldname": "instructions",
-      "label": "Instructions",
-      "fieldtype": "Small Text"
-    },
-    {
       "fieldname": "page_break",
       "label": "Page Break",
       "fieldtype": "Check",
       "default": "0",
       "allow_on_submit": 1,
       "print_hide": 1
+    },
+    {
+      "fieldname": "qorg_row_details_section",
+      "label": "Details and Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "instructions",
+      "label": "Instructions",
+      "fieldtype": "Small Text"
     }
   ],
   "permissions": [],

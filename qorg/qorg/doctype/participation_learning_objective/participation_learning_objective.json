@@ -6,17 +6,24 @@
   "istable": 1,
   "track_changes": 0,
   "field_order": [
+    "qorg_row_overview_section",
     "objective",
-    "expected_outcome",
     "target_skill",
     "weight",
-    "qorg_layout_column",
+    "qorg_row_overview_column",
     "midterm_rating",
     "final_rating",
+    "qorg_row_details_section",
+    "expected_outcome",
     "supervisor_remarks",
     "participant_reflection"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "objective",
       "label": "Learning Objective",
@@ -24,11 +31,6 @@
       "reqd": 1,
       "in_list_view": 1,
       "columns": 3
-    },
-    {
-      "fieldname": "expected_outcome",
-      "label": "Expected Outcome",
-      "fieldtype": "Small Text"
     },
     {
       "fieldname": "target_skill",
@@ -47,7 +49,7 @@
       "columns": 1
     },
     {
-      "fieldname": "qorg_layout_column",
+      "fieldname": "qorg_row_overview_column",
       "fieldtype": "Column Break"
     },
     {
@@ -63,6 +65,16 @@
       "fieldtype": "Percent",
       "in_list_view": 1,
       "columns": 1
+    },
+    {
+      "fieldname": "qorg_row_details_section",
+      "label": "Details and Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "expected_outcome",
+      "label": "Expected Outcome",
+      "fieldtype": "Small Text"
     },
     {
       "fieldname": "supervisor_remarks",

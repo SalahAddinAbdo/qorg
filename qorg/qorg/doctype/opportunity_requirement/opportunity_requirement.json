@@ -8,31 +8,28 @@
   "doctype": "DocType",
   "engine": "InnoDB",
   "field_order": [
+    "qorg_row_overview_section",
     "requirement_type",
-    "requirement",
     "is_mandatory",
     "minimum_value",
-    "qorg_layout_column",
+    "qorg_row_overview_column",
     "maximum_value",
-    "notes",
-    "page_break"
+    "page_break",
+    "qorg_row_details_section",
+    "requirement",
+    "notes"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "requirement_type",
       "label": "Type",
       "fieldtype": "Select",
       "options": "Education\nExperience\nSkill\nLanguage\nCertification\nAvailability\nOther",
-      "reqd": 1,
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 1,
-      "columns": 2
-    },
-    {
-      "fieldname": "requirement",
-      "label": "Requirement",
-      "fieldtype": "Small Text",
       "reqd": 1,
       "allow_on_submit": 1,
       "print_hide": 0,
@@ -57,7 +54,7 @@
       "in_list_view": 1
     },
     {
-      "fieldname": "qorg_layout_column",
+      "fieldname": "qorg_row_overview_column",
       "fieldtype": "Column Break"
     },
     {
@@ -69,14 +66,6 @@
       "in_list_view": 1
     },
     {
-      "fieldname": "notes",
-      "label": "Notes",
-      "fieldtype": "Small Text",
-      "allow_on_submit": 1,
-      "print_hide": 0,
-      "in_list_view": 0
-    },
-    {
       "fieldname": "page_break",
       "label": "Page Break",
       "fieldtype": "Check",
@@ -85,6 +74,29 @@
       "allow_on_submit": 1,
       "print_hide": 1,
       "columns": 1
+    },
+    {
+      "fieldname": "qorg_row_details_section",
+      "label": "Details and Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "requirement",
+      "label": "Requirement",
+      "fieldtype": "Small Text",
+      "reqd": 1,
+      "allow_on_submit": 1,
+      "print_hide": 0,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "notes",
+      "label": "Notes",
+      "fieldtype": "Small Text",
+      "allow_on_submit": 1,
+      "print_hide": 0,
+      "in_list_view": 0
     }
   ],
   "grid_page_length": 50,

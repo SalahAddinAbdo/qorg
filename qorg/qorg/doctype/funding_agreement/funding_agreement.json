@@ -30,7 +30,6 @@
     "exchange_rate_locked",
     "manual_rate_approval_reference",
     "exchange_rate_audit_section",
-    "exchange_rate_audit",
     "base_amount",
     "column_2",
     "indirect_cost_percent",
@@ -52,7 +51,9 @@
     "final_report_due_date",
     "refundable_balance",
     "closeout_completed",
-    "amended_from"
+    "amended_from",
+    "qorg_exchange_rate_audit_full_width_section",
+    "exchange_rate_audit"
   ],
   "fields": [
     {
@@ -220,13 +221,6 @@
       "label": "Exchange Rate Audit"
     },
     {
-      "fieldname": "exchange_rate_audit",
-      "label": "Exchange Rate Audit",
-      "fieldtype": "Table",
-      "options": "Currency Exchange Audit",
-      "read_only": 1
-    },
-    {
       "fieldname": "base_amount",
       "fieldtype": "Currency",
       "label": "Base Amount",
@@ -353,6 +347,18 @@
       "options": "Funding Agreement",
       "read_only": 1,
       "no_copy": 1
+    },
+    {
+      "fieldname": "qorg_exchange_rate_audit_full_width_section",
+      "label": "Exchange Rate Audit",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "exchange_rate_audit",
+      "label": "Exchange Rate Audit",
+      "fieldtype": "Table",
+      "options": "Currency Exchange Audit",
+      "read_only": 1
     }
   ],
   "index_web_pages_for_search": 0,

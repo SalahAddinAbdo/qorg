@@ -6,18 +6,25 @@
   "istable": 1,
   "track_changes": 0,
   "field_order": [
+    "qorg_row_overview_section",
     "criterion",
     "criterion_type",
     "weight",
     "mandatory",
+    "qorg_row_overview_column",
     "result",
-    "qorg_layout_column",
     "score",
-    "evidence",
     "reviewed_by",
-    "reviewed_on"
+    "reviewed_on",
+    "qorg_row_details_section",
+    "evidence"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "criterion",
       "label": "Criterion",
@@ -52,6 +59,10 @@
       "columns": 1
     },
     {
+      "fieldname": "qorg_row_overview_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "result",
       "label": "Result",
       "fieldtype": "Select",
@@ -61,20 +72,11 @@
       "columns": 1
     },
     {
-      "fieldname": "qorg_layout_column",
-      "fieldtype": "Column Break"
-    },
-    {
       "fieldname": "score",
       "label": "Score %",
       "fieldtype": "Percent",
       "in_list_view": 1,
       "columns": 1
-    },
-    {
-      "fieldname": "evidence",
-      "label": "Evidence / Remarks",
-      "fieldtype": "Small Text"
     },
     {
       "fieldname": "reviewed_by",
@@ -88,6 +90,16 @@
       "label": "Reviewed On",
       "fieldtype": "Datetime",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_row_details_section",
+      "label": "Details and Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "evidence",
+      "label": "Evidence / Remarks",
+      "fieldtype": "Small Text"
     }
   ],
   "permissions": [],

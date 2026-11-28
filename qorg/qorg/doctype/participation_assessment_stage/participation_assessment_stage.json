@@ -6,20 +6,29 @@
   "autoname": "hash",
   "track_changes": 0,
   "field_order": [
+    "qorg_row_overview_section",
     "sequence",
     "stage_name",
     "assessment_method",
+    "qorg_qorg_row_overview_section_0_column",
     "weight",
     "passing_score",
     "mandatory",
-    "qorg_layout_column",
+    "qorg_qorg_row_overview_section_0_column_2",
     "allow_retry",
     "maximum_attempts",
     "retry_requires_approval",
-    "instructions",
-    "page_break"
+    "qorg_qorg_row_overview_section_more_1",
+    "page_break",
+    "qorg_row_details_section",
+    "instructions"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "sequence",
       "label": "Sequence",
@@ -44,6 +53,10 @@
       "reqd": 1,
       "in_list_view": 1,
       "columns": 2
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_0_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "weight",
@@ -71,7 +84,7 @@
       "columns": 1
     },
     {
-      "fieldname": "qorg_layout_column",
+      "fieldname": "qorg_qorg_row_overview_section_0_column_2",
       "fieldtype": "Column Break"
     },
     {
@@ -97,9 +110,9 @@
       "depends_on": "eval:doc.allow_retry"
     },
     {
-      "fieldname": "instructions",
-      "label": "Instructions",
-      "fieldtype": "Small Text"
+      "fieldname": "qorg_qorg_row_overview_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "page_break",
@@ -108,6 +121,16 @@
       "default": "0",
       "allow_on_submit": 1,
       "print_hide": 1
+    },
+    {
+      "fieldname": "qorg_row_details_section",
+      "label": "Details and Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "instructions",
+      "label": "Instructions",
+      "fieldtype": "Small Text"
     }
   ],
   "permissions": [],

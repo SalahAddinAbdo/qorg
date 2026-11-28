@@ -4,18 +4,24 @@
   "editable_grid": 1,
   "engine": "InnoDB",
   "field_order": [
+    "qorg_row_overview_section",
     "document_type",
     "enabled",
     "print_profile",
     "set_as_default",
     "include_letter_head",
-    "qorg_layout_column",
+    "qorg_row_overview_column",
     "include_workflow_status",
     "include_signatures",
     "include_audit_information",
     "include_attachments"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "document_type",
       "fieldtype": "Link",
@@ -61,7 +67,7 @@
       "columns": 1
     },
     {
-      "fieldname": "qorg_layout_column",
+      "fieldname": "qorg_row_overview_column",
       "fieldtype": "Column Break"
     },
     {

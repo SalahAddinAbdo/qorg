@@ -3,14 +3,20 @@
   "doctype": "DocType",
   "engine": "InnoDB",
   "field_order": [
+    "qorg_row_overview_section",
     "notification_key",
     "enabled",
     "due_soon_days",
-    "qorg_layout_column",
+    "qorg_row_overview_column",
     "recipient_role",
     "recipient_employee_field"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "notification_key",
       "fieldtype": "Data",
@@ -38,7 +44,7 @@
       "columns": 1
     },
     {
-      "fieldname": "qorg_layout_column",
+      "fieldname": "qorg_row_overview_column",
       "fieldtype": "Column Break"
     },
     {

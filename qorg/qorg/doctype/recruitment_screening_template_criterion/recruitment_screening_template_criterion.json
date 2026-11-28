@@ -18,16 +18,23 @@
   "track_changes": 0,
   "name": "Recruitment Screening Template Criterion",
   "field_order": [
+    "qorg_row_overview_section",
     "sequence",
     "criterion",
     "criterion_type",
+    "qorg_row_overview_column",
     "is_mandatory",
-    "qorg_layout_column",
     "maximum_score",
-    "expected_evidence",
-    "page_break"
+    "page_break",
+    "qorg_row_details_section",
+    "expected_evidence"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "sequence",
       "label": "Sequence",
@@ -54,16 +61,16 @@
       "columns": 2
     },
     {
+      "fieldname": "qorg_row_overview_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "is_mandatory",
       "label": "Mandatory",
       "fieldtype": "Check",
       "default": "1",
       "in_list_view": 1,
       "columns": 1
-    },
-    {
-      "fieldname": "qorg_layout_column",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "maximum_score",
@@ -74,17 +81,22 @@
       "columns": 1
     },
     {
-      "fieldname": "expected_evidence",
-      "label": "Expected Evidence",
-      "fieldtype": "Small Text"
-    },
-    {
       "fieldname": "page_break",
       "label": "Page Break",
       "fieldtype": "Check",
       "default": "0",
       "allow_on_submit": 1,
       "print_hide": 1
+    },
+    {
+      "fieldname": "qorg_row_details_section",
+      "label": "Details and Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "expected_evidence",
+      "label": "Expected Evidence",
+      "fieldtype": "Small Text"
     }
   ]
 }

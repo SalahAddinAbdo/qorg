@@ -6,20 +6,29 @@
   "istable": 1,
   "editable_grid": 1,
   "field_order": [
+    "qorg_row_overview_section",
     "enabled",
     "resource_type",
     "page",
+    "qorg_qorg_row_overview_section_0_column",
     "report",
     "reference_doctype",
     "display_label",
-    "qorg_layout_column",
+    "qorg_qorg_row_overview_section_0_column_2",
     "menu_group",
     "is_favorite",
-    "description",
     "icon",
-    "sequence"
+    "qorg_qorg_row_overview_section_more_1",
+    "sequence",
+    "qorg_row_details_section",
+    "description"
   ],
   "fields": [
+    {
+      "fieldname": "qorg_row_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
     {
       "fieldname": "enabled",
       "fieldtype": "Check",
@@ -36,7 +45,7 @@
       "default": "Page",
       "reqd": 1,
       "in_list_view": 1,
-      "columns": 2
+      "columns": 3
     },
     {
       "fieldname": "page",
@@ -46,7 +55,11 @@
       "depends_on": "eval:doc.resource_type == 'Page'",
       "mandatory_depends_on": "eval:doc.resource_type == 'Page'",
       "in_list_view": 1,
-      "columns": 3
+      "columns": 1
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_0_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "report",
@@ -56,7 +69,7 @@
       "depends_on": "eval:doc.resource_type == 'Report'",
       "mandatory_depends_on": "eval:doc.resource_type == 'Report'",
       "in_list_view": 1,
-      "columns": 3
+      "columns": 1
     },
     {
       "fieldname": "reference_doctype",
@@ -66,27 +79,27 @@
       "depends_on": "eval:doc.resource_type == 'DocType'",
       "mandatory_depends_on": "eval:doc.resource_type == 'DocType'",
       "in_list_view": 1,
-      "columns": 3
+      "columns": 1
     },
     {
       "fieldname": "display_label",
       "fieldtype": "Data",
       "label": "Display Label",
+      "description": "Optional translated label. Leave blank to use the standard Page, Report or DocType label.",
       "in_list_view": 1,
-      "columns": 2,
-      "description": "Optional translated label. Leave blank to use the standard Page, Report or DocType label."
+      "columns": 1
     },
     {
-      "fieldname": "qorg_layout_column",
+      "fieldname": "qorg_qorg_row_overview_section_0_column_2",
       "fieldtype": "Column Break"
     },
     {
       "fieldname": "menu_group",
       "fieldtype": "Data",
       "label": "Group",
+      "description": "Optional group such as Favorites, Operations, Finance, Projects or Reports.",
       "in_list_view": 1,
-      "columns": 1,
-      "description": "Optional group such as Favorites, Operations, Finance, Projects or Reports."
+      "columns": 1
     },
     {
       "fieldname": "is_favorite",
@@ -95,18 +108,15 @@
       "default": "0"
     },
     {
-      "fieldname": "description",
-      "fieldtype": "Small Text",
-      "label": "Description",
-      "description": "Optional short description shown in the Open dialog."
-    },
-    {
       "fieldname": "icon",
       "fieldtype": "Icon",
       "label": "Icon",
-      "description": "Choose an icon from the Frappe icon picker. Leave blank to use the default icon.",
-      "in_list_view": 0,
-      "columns": 0
+      "description": "Choose an icon from the Frappe icon picker. Leave blank to use the default icon."
+    },
+    {
+      "fieldname": "qorg_qorg_row_overview_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "sequence",
@@ -115,6 +125,17 @@
       "default": "10",
       "in_list_view": 1,
       "columns": 1
+    },
+    {
+      "fieldname": "qorg_row_details_section",
+      "label": "Details and Evidence",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Small Text",
+      "label": "Description",
+      "description": "Optional short description shown in the Open dialog."
     }
   ],
   "permissions": [],

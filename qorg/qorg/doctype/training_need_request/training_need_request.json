@@ -9,13 +9,15 @@
     "naming_series",
     "training_need_title",
     "request_date",
+    "qorg_overview_section_0_column",
     "requested_by",
     "requested_for_employee",
-    "overview_column",
     "status",
+    "qorg_overview_section_0_column_2",
     "priority",
     "mandatory_training",
     "need_source",
+    "qorg_overview_section_more_1",
     "source_doctype",
     "source_document",
     "organization_section",
@@ -35,8 +37,8 @@
     "objectives_section",
     "training_objectives",
     "outcomes_section",
+    "qorg_expected_outcomes_full_width_section",
     "expected_outcomes",
-    "delivery_column",
     "preferred_delivery_method",
     "preferred_start_date",
     "preferred_end_date",
@@ -57,14 +59,17 @@
     "hr_reviewed_by",
     "hr_reviewed_on",
     "approved_by",
+    "qorg_review_section_0_column",
     "approved_on",
-    "return_or_rejection_reason",
-    "review_column",
     "conversion_mode",
     "training_program",
+    "qorg_review_section_0_column_2",
     "training_event",
     "converted_by",
     "converted_on",
+    "qorg_return_or_rejection_reason_full_width_section",
+    "return_or_rejection_reason",
+    "qorg_conversion_snapshot_full_width_section",
     "conversion_snapshot"
   ],
   "fields": [
@@ -98,6 +103,10 @@
       "in_list_view": 1
     },
     {
+      "fieldname": "qorg_overview_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "requested_by",
       "label": "Requested By",
       "fieldtype": "Link",
@@ -115,11 +124,6 @@
       "mandatory_depends_on": "eval:doc.request_scope=='Individual Employee'"
     },
     {
-      "fieldname": "overview_column",
-      "label": "",
-      "fieldtype": "Column Break"
-    },
-    {
       "fieldname": "status",
       "label": "Status",
       "fieldtype": "Select",
@@ -129,6 +133,10 @@
       "in_list_view": 1,
       "in_standard_filter": 1,
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_overview_section_0_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "priority",
@@ -152,6 +160,11 @@
       "options": "Appraisal Recommendation\nCompetency Gap\nEmployee Request\nManager Request\nHR Requirement\nPolicy or Compliance Requirement\nProject Requirement\nAnnual Training Plan\nContract Requirement\nOther",
       "reqd": 1,
       "in_standard_filter": 1
+    },
+    {
+      "fieldname": "qorg_overview_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "source_doctype",
@@ -273,14 +286,15 @@
       "fieldtype": "Section Break"
     },
     {
+      "fieldname": "qorg_expected_outcomes_full_width_section",
+      "label": "Expected Outcomes",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "expected_outcomes",
       "label": "Expected Outcomes",
       "fieldtype": "Text Editor",
       "reqd": 1
-    },
-    {
-      "fieldname": "delivery_column",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "preferred_delivery_method",
@@ -413,21 +427,14 @@
       "read_only": 1
     },
     {
+      "fieldname": "qorg_review_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "approved_on",
       "label": "Approved On",
       "fieldtype": "Datetime",
       "read_only": 1
-    },
-    {
-      "fieldname": "return_or_rejection_reason",
-      "label": "Return / Rejection Reason",
-      "fieldtype": "Small Text",
-      "depends_on": "eval:['Returned','Rejected'].includes(doc.status)"
-    },
-    {
-      "fieldname": "review_column",
-      "label": "",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "conversion_mode",
@@ -442,6 +449,10 @@
       "fieldtype": "Link",
       "options": "Training Program",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_review_section_0_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "training_event",
@@ -462,6 +473,22 @@
       "label": "Converted On",
       "fieldtype": "Datetime",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_return_or_rejection_reason_full_width_section",
+      "label": "Return / Rejection Reason",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "return_or_rejection_reason",
+      "label": "Return / Rejection Reason",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:['Returned','Rejected'].includes(doc.status)"
+    },
+    {
+      "fieldname": "qorg_conversion_snapshot_full_width_section",
+      "label": "Conversion Snapshot",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "conversion_snapshot",

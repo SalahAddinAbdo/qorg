@@ -7,19 +7,25 @@
   "field_order": [
     "source_section",
     "source_item",
-    "source_description",
     "source_quantity",
     "source_amount",
+    "qorg_source_section_column",
     "source_doctype",
     "source_child_doctype",
     "source_row",
+    "qorg_source_section_column_2",
     "source_key",
     "upstream_source_doctype",
     "upstream_source_document",
+    "qorg_source_section_more_1",
     "upstream_source_row",
     "source_row_idx",
+    "qorg_source_section_column_3",
     "source_account",
+    "qorg_source_section_column_4",
     "source_base_amount",
+    "qorg_source_description_section",
+    "source_description",
     "source_snapshot_section",
     "source_snapshot",
     "profile_section",
@@ -69,13 +75,6 @@
       "in_list_view": 1
     },
     {
-      "fieldname": "source_description",
-      "label": "Source Description",
-      "fieldtype": "Small Text",
-      "read_only": 1,
-      "in_list_view": 0
-    },
-    {
       "fieldname": "source_quantity",
       "label": "Source Quantity",
       "fieldtype": "Float",
@@ -89,6 +88,10 @@
       "read_only": 1,
       "in_list_view": 1,
       "options": "currency"
+    },
+    {
+      "fieldname": "qorg_source_section_column",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "source_doctype",
@@ -117,6 +120,10 @@
       "hidden": 1
     },
     {
+      "fieldname": "qorg_source_section_column_2",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "source_key",
       "label": "Source Key",
       "fieldtype": "Data",
@@ -143,6 +150,11 @@
       "hidden": 1
     },
     {
+      "fieldname": "qorg_source_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "upstream_source_row",
       "label": "Upstream Source Row",
       "fieldtype": "Data",
@@ -159,6 +171,10 @@
       "hidden": 1
     },
     {
+      "fieldname": "qorg_source_section_column_3",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "source_account",
       "label": "Source Account",
       "fieldtype": "Link",
@@ -168,6 +184,10 @@
       "hidden": 1
     },
     {
+      "fieldname": "qorg_source_section_column_4",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "source_base_amount",
       "label": "Source Base Amount",
       "fieldtype": "Currency",
@@ -175,6 +195,18 @@
       "in_list_view": 0,
       "hidden": 1,
       "options": "currency"
+    },
+    {
+      "fieldname": "qorg_source_description_section",
+      "label": "Source Description",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "source_description",
+      "label": "Source Description",
+      "fieldtype": "Small Text",
+      "read_only": 1,
+      "in_list_view": 0
     },
     {
       "fieldname": "source_snapshot_section",

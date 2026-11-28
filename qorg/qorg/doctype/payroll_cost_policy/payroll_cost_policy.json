@@ -11,13 +11,15 @@
     "policy_name",
     "company",
     "donor",
+    "qorg_scope_section_0_column",
     "funding_agreement",
-    "scope_column",
     "effective_from",
     "effective_to",
+    "qorg_scope_section_0_column_2",
     "priority",
     "status",
     "supersedes_policy",
+    "qorg_scope_section_more_1",
     "fingerprint",
     "rules_tab",
     "rules_section",
@@ -72,15 +74,14 @@
       "options": "Donor"
     },
     {
+      "fieldname": "qorg_scope_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "funding_agreement",
       "fieldtype": "Link",
       "label": "Funding Agreement",
       "options": "Funding Agreement"
-    },
-    {
-      "fieldname": "scope_column",
-      "fieldtype": "Column Break",
-      "label": ""
     },
     {
       "fieldname": "effective_from",
@@ -92,6 +93,10 @@
       "fieldname": "effective_to",
       "fieldtype": "Date",
       "label": "Effective To"
+    },
+    {
+      "fieldname": "qorg_scope_section_0_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "priority",
@@ -114,6 +119,11 @@
       "fieldtype": "Link",
       "label": "Supersedes Policy",
       "options": "Payroll Cost Policy"
+    },
+    {
+      "fieldname": "qorg_scope_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "fingerprint",

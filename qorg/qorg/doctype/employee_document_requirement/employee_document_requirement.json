@@ -9,29 +9,35 @@
     "naming_series",
     "document_type",
     "company",
+    "qorg_scope_section_column",
     "branch",
     "department",
     "designation",
-    "scope_column",
+    "qorg_scope_section_column_2",
     "employee_grade",
     "employment_type",
     "contract_type",
+    "qorg_scope_section_more_1",
     "participation_type",
     "project",
+    "qorg_scope_section_column_3",
     "effective_from",
     "effective_to",
+    "qorg_scope_section_column_4",
     "is_active",
     "rules_section",
     "requirement_level",
     "renewal_required",
     "verification_required",
+    "qorg_rules_section_0_column",
     "valid_access_reference_required",
-    "rules_column",
     "blocks_employment",
     "blocks_payroll",
+    "qorg_rules_section_0_column_2",
     "blocks_attendance",
     "blocks_leave",
     "blocks_onboarding",
+    "qorg_rules_section_more_1",
     "blocks_contract",
     "warning_only",
     "timing_section",
@@ -73,6 +79,10 @@
       "in_standard_filter": 1
     },
     {
+      "fieldname": "qorg_scope_section_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "branch",
       "label": "Branch",
       "fieldtype": "Link",
@@ -91,8 +101,7 @@
       "options": "Designation"
     },
     {
-      "fieldname": "scope_column",
-      "label": "",
+      "fieldname": "qorg_scope_section_column_2",
       "fieldtype": "Column Break"
     },
     {
@@ -114,6 +123,11 @@
       "options": "QOrg Contract Type"
     },
     {
+      "fieldname": "qorg_scope_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "participation_type",
       "label": "Participation Type",
       "fieldtype": "Link",
@@ -126,6 +140,10 @@
       "options": "Project"
     },
     {
+      "fieldname": "qorg_scope_section_column_3",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "effective_from",
       "label": "Effective From",
       "fieldtype": "Date"
@@ -134,6 +152,10 @@
       "fieldname": "effective_to",
       "label": "Effective To",
       "fieldtype": "Date"
+    },
+    {
+      "fieldname": "qorg_scope_section_column_4",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "is_active",
@@ -168,15 +190,14 @@
       "default": "1"
     },
     {
+      "fieldname": "qorg_rules_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "valid_access_reference_required",
       "label": "Valid Access Reference Required",
       "fieldtype": "Check",
       "default": "1"
-    },
-    {
-      "fieldname": "rules_column",
-      "label": "",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "blocks_employment",
@@ -189,6 +210,10 @@
       "label": "Blocks Payroll Activation",
       "fieldtype": "Check",
       "default": "0"
+    },
+    {
+      "fieldname": "qorg_rules_section_0_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "blocks_attendance",
@@ -207,6 +232,11 @@
       "label": "Blocks Onboarding Completion",
       "fieldtype": "Check",
       "default": "0"
+    },
+    {
+      "fieldname": "qorg_rules_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "blocks_contract",

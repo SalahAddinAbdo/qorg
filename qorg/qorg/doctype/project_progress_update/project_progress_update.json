@@ -4,17 +4,19 @@
   "doctype": "DocType",
   "engine": "InnoDB",
   "field_order": [
+    "qorg_overview_section",
     "naming_series",
     "project",
     "update_sequence",
+    "qorg_qorg_overview_section_0_column",
     "update_type",
-    "ui_col_1",
     "reporting_period_label",
     "custom_period_title",
+    "qorg_qorg_overview_section_0_column_2",
     "period_start_date",
     "period_end_date",
-    "ui_col_2",
     "cutoff_date",
+    "qorg_qorg_overview_section_more_1",
     "status",
     "summary_section",
     "layout_full_3",
@@ -83,6 +85,11 @@
   ],
   "fields": [
     {
+      "fieldname": "qorg_overview_section",
+      "label": "Overview",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "naming_series",
       "fieldtype": "Select",
       "label": "Series",
@@ -142,6 +149,10 @@
       "report_hide": 0
     },
     {
+      "fieldname": "qorg_qorg_overview_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "update_type",
       "fieldtype": "Select",
       "label": "Update Type",
@@ -166,10 +177,6 @@
       "allow_in_quick_entry": 0,
       "print_hide": 0,
       "report_hide": 0
-    },
-    {
-      "fieldname": "ui_col_1",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "reporting_period_label",
@@ -222,6 +229,10 @@
       "report_hide": 0
     },
     {
+      "fieldname": "qorg_qorg_overview_section_0_column_2",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "period_start_date",
       "fieldtype": "Date",
       "label": "Period Start Date",
@@ -270,10 +281,6 @@
       "report_hide": 0
     },
     {
-      "fieldname": "ui_col_2",
-      "fieldtype": "Column Break"
-    },
-    {
       "fieldname": "cutoff_date",
       "fieldtype": "Date",
       "label": "Data Cut-off Date",
@@ -296,6 +303,11 @@
       "allow_in_quick_entry": 0,
       "print_hide": 0,
       "report_hide": 0
+    },
+    {
+      "fieldname": "qorg_qorg_overview_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "status",

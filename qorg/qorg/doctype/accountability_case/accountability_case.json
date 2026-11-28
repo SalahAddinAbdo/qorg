@@ -127,15 +127,14 @@
       "depends_on": "eval:!doc.anonymous"
     },
     {
+      "fieldname": "qorg_stakeholder_section_0_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "preferred_language",
       "label": "Preferred Language",
       "fieldtype": "Select",
       "options": "\nArabic\nEnglish\nOther"
-    },
-    {
-      "fieldname": "stakeholder_cb",
-      "label": "",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "employee",
@@ -150,6 +149,10 @@
       "label": "External Person",
       "fieldtype": "Link",
       "options": "External Person"
+    },
+    {
+      "fieldname": "qorg_stakeholder_section_0_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "supplier",
@@ -170,6 +173,11 @@
       "fieldtype": "Data",
       "options": "Email",
       "depends_on": "eval:!doc.anonymous"
+    },
+    {
+      "fieldname": "qorg_stakeholder_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
     },
     {
       "fieldname": "mobile_no",
@@ -341,16 +349,15 @@
       "options": "User"
     },
     {
+      "fieldname": "qorg_routing_section_column",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "custom_previous_responsible_user",
       "label": "Previous Responsible User",
       "fieldtype": "Link",
       "options": "User",
       "read_only": 1
-    },
-    {
-      "fieldname": "routing_cb",
-      "label": "",
-      "fieldtype": "Column Break"
     },
     {
       "fieldname": "acknowledgement_due_on",
@@ -363,6 +370,10 @@
       "label": "Triage Due On",
       "fieldtype": "Datetime",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_routing_section_column_2",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "response_due_on",
@@ -383,16 +394,29 @@
       "read_only": 1
     },
     {
+      "fieldname": "qorg_routing_section_more_1",
+      "label": "Additional Details",
+      "fieldtype": "Section Break"
+    },
+    {
       "fieldname": "next_reporter_update_due_on",
       "label": "Next Reporter Update Due On",
       "fieldtype": "Datetime",
       "read_only": 1
     },
     {
+      "fieldname": "qorg_routing_section_column_3",
+      "fieldtype": "Column Break"
+    },
+    {
       "fieldname": "reporter_update_overdue",
       "label": "Reporter Update Overdue",
       "fieldtype": "Check",
       "read_only": 1
+    },
+    {
+      "fieldname": "qorg_routing_section_column_4",
+      "fieldtype": "Column Break"
     },
     {
       "fieldname": "overdue",
@@ -596,13 +620,15 @@
     "anonymous",
     "stakeholder_type",
     "reporter_name",
+    "qorg_stakeholder_section_0_column",
     "preferred_language",
-    "stakeholder_cb",
     "employee",
     "external_person",
+    "qorg_stakeholder_section_0_column_2",
     "supplier",
     "contact",
     "email",
+    "qorg_stakeholder_section_more_1",
     "mobile_no",
     "consent_to_contact",
     "context_section",
@@ -632,15 +658,19 @@
     "receiving_role",
     "receiving_department",
     "custom_current_responsible_user",
+    "qorg_routing_section_column",
     "custom_previous_responsible_user",
-    "routing_cb",
     "acknowledgement_due_on",
     "triage_due_on",
+    "qorg_routing_section_column_2",
     "response_due_on",
     "acknowledged_on",
     "last_update_to_reporter_on",
+    "qorg_routing_section_more_1",
     "next_reporter_update_due_on",
+    "qorg_routing_section_column_3",
     "reporter_update_overdue",
+    "qorg_routing_section_column_4",
     "overdue",
     "referrals_section",
     "referrals",
